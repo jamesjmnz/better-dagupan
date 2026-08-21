@@ -110,5 +110,10 @@
     "noticeTitle": "Malayang proyekto ng komunidad",
     "noticeBody": "Ang {{portal}} ay binuo at pinapanatili ng mga boluntaryo. Hindi ito ang opisyal na website ng Pamahalaang Lungsod ng {{lgu}}, at walang kaugnayan o pag-endorso mula sa alinmang ahensya ng pamahalaan.",
     "officialSiteLabel": "Bisitahin ang opisyal na website ng Pamahalaang Lungsod ng {{lgu}}"
+  },
+  "emptyState": {
+    "title": "Wala pa sa ngayon",
+    "body": "Wala pang naidadagdag na beripikadong impormasyon tungkol sa {{lgu}}. Bahagi ng balangkas ng portal ang seksyong ito at pupunan kapag nakakuha na ng mga tala mula sa Pamahalaang Lungsod ng {{lgu}} at naberipika na ang mga ito.",
+    "contribute": "Magmungkahi ng pinagkunan"
   }
 }

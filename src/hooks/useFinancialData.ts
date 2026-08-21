@@ -29,9 +29,11 @@ export function useFinancialData() {
 
   // 4. Selected Quarter State
   // Initialize with the last available quarter of the latest year
-  const [selectedQuarter, setSelectedQuarter] = useState<FinancialQuarter>(
-    quartersInYear[quartersInYear.length - 1] || budgetData[0]
-  );
+  // Undefined while no verified quarters are published: the inherited Los
+  // Banos statements were removed and Dagupan's are not sourced yet.
+  const [selectedQuarter, setSelectedQuarter] = useState<
+    FinancialQuarter | undefined
+  >(quartersInYear[quartersInYear.length - 1] ?? budgetData[0]);
 
   /**
    * Smart Year Change Handler
@@ -45,12 +47,14 @@ export function useFinancialData() {
     const newYearData = budgetData.filter(q => getYear(q.period) === newYear);
 
     // Get the currently selected quarter string (e.g., "Q2")
-    const currentQStr = getQuarter(selectedQuarter.period);
+    const currentQStr = selectedQuarter
+      ? getQuarter(selectedQuarter.period)
+      : undefined;
 
     // Try to find "Q2" in the new year
-    const matchingQuarter = newYearData.find(
-      q => getQuarter(q.period) === currentQStr
-    );
+    const matchingQuarter = currentQStr
+      ? newYearData.find(q => getQuarter(q.period) === currentQStr)
+      : undefined;
 
     if (matchingQuarter) {
       setSelectedQuarter(matchingQuarter);
@@ -65,7 +69,7 @@ export function useFinancialData() {
     () =>
       viewMode === 'year'
         ? aggregateIncome(quartersInYear.map(q => q.current_operating_income))
-        : selectedQuarter.current_operating_income,
+        : selectedQuarter?.current_operating_income,
     [viewMode, quartersInYear, selectedQuarter]
   );
 
@@ -75,12 +79,12 @@ export function useFinancialData() {
         ? aggregateExpenditures(
             quartersInYear.map(q => q.current_operating_expenditures)
           )
-        : selectedQuarter.current_operating_expenditures,
+        : selectedQuarter?.current_operating_expenditures,
     [viewMode, quartersInYear, selectedQuarter]
   );
 
   const displayedFundSummary = useMemo(() => {
-    if (viewMode === 'quarter') return selectedQuarter.fund_summary;
+    if (viewMode === 'quarter') return selectedQuarter?.fund_summary;
     const lastQ = quartersInYear[quartersInYear.length - 1];
     return lastQ?.fund_summary;
   }, [viewMode, selectedQuarter, quartersInYear]);
@@ -98,6 +102,7 @@ export function useFinancialData() {
     let targetFundEnd = 0;
 
     if (viewMode === 'quarter') {
+      if (!selectedQuarter) return undefined;
       const qStr = getQuarter(selectedQuarter.period);
       const match = prevYearData.find(q => getQuarter(q.period) === qStr);
       // Comparison: If Q3 2025 is selected but Q3 2024 doesn't exist, comparison is undefined
@@ -140,6 +145,8 @@ export function useFinancialData() {
   }, [selectedYear, viewMode, selectedQuarter]);
 
   return {
+    /** False while no verified financial statements are published. */
+    hasData: budgetData.length > 0,
     years,
     selectedYear,
     setSelectedYear: changeYear, // Return our smart handler instead of the raw setter

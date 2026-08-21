@@ -11,7 +11,11 @@ import SearchInput from '@/components/ui/SearchInput';
 import { toTitleCase } from '@/lib/stringUtils';
 import { lguLabels } from '@/lib/lguLabels';
 
-import barangaysData from '@/data/directory/barangays.json';
+import barangaysDataRaw from '@/data/directory/barangays.json';
+
+import type { Barangay } from '@/types/directoryTypes';
+
+const barangaysData = barangaysDataRaw as Barangay[];
 
 export default function BarangaysIndex() {
   const [search, setSearch] = useState('');

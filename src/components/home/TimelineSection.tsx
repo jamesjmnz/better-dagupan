@@ -15,10 +15,17 @@ import {
 
 import { Card, CardContent } from '@/components/ui/Card';
 
+import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
+
 import { config } from '@/lib/lguConfig';
 
-import highlightsData from '@/data/about/highlights.json';
-import historyData from '@/data/about/history.json';
+import highlightsRaw from '@/data/about/highlights.json';
+import historyRaw from '@/data/about/history.json';
+
+import type { HistoryHighlight, HistoryMilestone } from '@/types/aboutTypes';
+
+const highlightsData = highlightsRaw as HistoryHighlight[];
+const historyData = historyRaw as HistoryMilestone[];
 
 const ICON_MAP: Record<string, LucideIcon> = {
   Waves,
@@ -40,6 +47,23 @@ export default function TimelineSection() {
   const visibleHighlights = showAll
     ? highlightsData
     : highlightsData.slice(0, COLLAPSE_LIMIT);
+
+  // A bare heading over an empty timeline reads as broken rather than honest,
+  // so say plainly that no verified history has been added yet.
+  if (historyData.length === 0 && highlightsData.length === 0) {
+    return (
+      <section className='border-kapwa-border-weak border-t bg-kapwa-bg-surface-raised py-12'>
+        <div className='container mx-auto px-4'>
+          <div className='mb-4 text-center'>
+            <h2 className='text-kapwa-text-strong text-2xl font-bold md:text-3xl'>
+              History of {config.lgu.name}
+            </h2>
+          </div>
+          <NotYetAvailable />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className='border-kapwa-border-weak border-t py-12 bg-kapwa-bg-surface-raised'>

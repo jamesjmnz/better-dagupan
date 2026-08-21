@@ -24,7 +24,13 @@ import { PageHero } from '@/components/layout/PageLayouts';
 import { cn } from '@/lib/utils';
 
 // Data Import
-import populationData from '@/data/statistics/population.json';
+import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
+
+import populationRaw from '@/data/statistics/population.json';
+
+import type { PopulationData } from '@/types/populationTypes';
+
+const populationData = populationRaw as PopulationData;
 
 // 14 Highly Distinct Colors (Top 3 mapped to Brand Primaries)
 const BRGY_COLORS = [
@@ -56,6 +62,7 @@ export default function PopulationPage() {
   );
   const { municipality, barangays, meta } = populationData;
 
+  const hasCensus = municipality.history.length > 0;
   const latestMuni = municipality.history[municipality.history.length - 1];
   const growth = municipality.growthRates.find(
     r => r.period === '2020-2024'
@@ -81,6 +88,20 @@ export default function PopulationPage() {
       return point;
     });
   }, [barangays]);
+
+  // Hooks above run unconditionally; the bail-out sits below them so hook order
+  // is stable whether or not verified census figures exist.
+  if (!hasCensus) {
+    return (
+      <>
+        <PageHero
+          title='Population Profile'
+          description='Demographic analysis tracking growth from the citywide level down to individual barangays.'
+        />
+        <NotYetAvailable />
+      </>
+    );
+  }
 
   return (
     <>

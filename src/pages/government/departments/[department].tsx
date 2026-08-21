@@ -25,8 +25,16 @@ import { toTitleCase } from '@/lib/stringUtils';
 import { toTelUri } from '@/lib/utils';
 import { lguLabels } from '@/lib/lguLabels';
 
-import departmentsData from '@/data/directory/departments.json';
-import mergedServicesData from '@/data/citizens-charter/merged-services.json';
+import departmentsDataRaw from '@/data/directory/departments.json';
+
+import type { Department } from '@/types/directoryTypes';
+
+const departmentsData = departmentsDataRaw as Department[];
+import mergedServicesRaw from '@/data/citizens-charter/merged-services.json';
+
+import type { Service } from '@/types/servicesTypes';
+
+const mergedServicesData = mergedServicesRaw as Service[];
 
 export default function DepartmentDetail() {
   const { department: slug } = useParams();

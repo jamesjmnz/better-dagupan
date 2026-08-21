@@ -110,5 +110,10 @@
     "noticeTitle": "Independent community project",
     "noticeBody": "{{portal}} is built and maintained by volunteers. It is not the official website of the City Government of {{lgu}}, and it is not affiliated with or endorsed by any government agency.",
     "officialSiteLabel": "Visit the official {{lgu}} City Government website"
+  },
+  "emptyState": {
+    "title": "Not yet available",
+    "body": "Verified {{lgu}} information has not been added yet. This section is part of the portal's structure and will be filled once records are sourced from the City Government of {{lgu}} and verified.",
+    "contribute": "Suggest a source"
   }
 }

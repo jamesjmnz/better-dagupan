@@ -19,7 +19,11 @@ import {
 
 import { toTitleCase } from '@/lib/stringUtils';
 
-import barangaysData from '@/data/directory/barangays.json';
+import barangaysDataRaw from '@/data/directory/barangays.json';
+
+import type { Barangay } from '@/types/directoryTypes';
+
+const barangaysData = barangaysDataRaw as Barangay[];
 
 export default function BarangayDetail() {
   const { barangay: slug } = useParams();
