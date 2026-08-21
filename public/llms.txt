@@ -1,9 +1,11 @@
-# BetterGov.ph
+# Better Dagupan
 
 ## About
 A comprehensive portal for Local Government Unit (LGU) services, information, and resources
 
-BetterGov.ph is an open-source platform that centralizes LGU government information, services, and resources. Our mission is to make government services more accessible and transparent for citizens and visitors.
+Better Dagupan is an independent, community-led project. It is not the official website of the City of Dagupan government, and it is not affiliated with or endorsed by any government agency.
+
+Better Dagupan is an open-source platform that centralizes LGU government information, services, and resources. Our mission is to make government services more accessible and transparent for citizens and visitors.
 
 ## Key Features
 - Comprehensive government directory (Mayor, Vice Mayor, Departments, Barangay Officials)
@@ -20,9 +22,9 @@ BetterGov.ph is an open-source platform that centralizes LGU government informat
 Directory of local government officials and departments:
 
 #### Executive Branch
-- Office of the Mayor (https://bettergov.ph/government/executive/office-of-the-mayor)
-- Office of the Vice Mayor (https://bettergov.ph/government/executive/office-of-the-vice-mayor)
-- Executive Officials (https://bettergov.ph/government/executive/executive-officials)
+- Office of the Mayor (/government/executive/office-of-the-mayor)
+- Office of the Vice Mayor (/government/executive/office-of-the-vice-mayor)
+- Executive Officials (/government/executive/executive-officials)
 
 #### Government Departments
 
@@ -31,16 +33,16 @@ Directory of local government officials and departments:
 
 ### Services Directory
 Comprehensive services organized by category:
-- Certificates & Vital Records (https://bettergov.ph/services?category=certificates-vital-records)
-- Business, Trade & Investment (https://bettergov.ph/services?category=business-trade-investment)
-- Social Services & Assistance (https://bettergov.ph/services?category=social-services-assistance)
-- Health & Wellness (https://bettergov.ph/services?category=health-wellness)
-- Taxation & Payments (https://bettergov.ph/services?category=taxation-payments)
-- Agriculture & Economic Development (https://bettergov.ph/services?category=agriculture-economic-development)
-- Infrastructure & Public Works (https://bettergov.ph/services?category=infrastructure-public-works)
-- Education & Scholarship (https://bettergov.ph/services?category=education-scholarship)
-- Public Safety & Security (https://bettergov.ph/services?category=public-safety-security)
-- Environment & Natural Resources (https://bettergov.ph/services?category=environment-natural-resources)
+- Certificates & Vital Records (/services?category=certificates-vital-records)
+- Business, Trade & Investment (/services?category=business-trade-investment)
+- Social Services & Assistance (/services?category=social-services-assistance)
+- Health & Wellness (/services?category=health-wellness)
+- Taxation & Payments (/services?category=taxation-payments)
+- Agriculture & Economic Development (/services?category=agriculture-economic-development)
+- Infrastructure & Public Works (/services?category=infrastructure-public-works)
+- Education & Scholarship (/services?category=education-scholarship)
+- Public Safety & Security (/services?category=public-safety-security)
+- Environment & Natural Resources (/services?category=environment-natural-resources)
 
 ### Local Information
 - About the Municipality/City
@@ -53,39 +55,39 @@ Comprehensive services organized by category:
 - Flood control project data and visualization
 
 ## Sitemap
-https://bettergov.ph/
-https://bettergov.ph/about
-https://bettergov.ph/government
-https://bettergov.ph/government/departments
-https://bettergov.ph/government/executive
-https://bettergov.ph/government/executive/executive-officials
-https://bettergov.ph/government/executive/office-of-the-mayor
-https://bettergov.ph/government/executive/office-of-the-vice-mayor
-https://bettergov.ph/government/legislative
-https://bettergov.ph/philippines
-https://bettergov.ph/philippines/about
-https://bettergov.ph/philippines/history
-https://bettergov.ph/philippines/holidays
-https://bettergov.ph/philippines/hotlines
-https://bettergov.ph/philippines/map
-https://bettergov.ph/philippines/regions
-https://bettergov.ph/search
-https://bettergov.ph/services
-https://bettergov.ph/services?category=agriculture-economic-development
-https://bettergov.ph/services?category=business-trade-investment
-https://bettergov.ph/services?category=certificates-vital-records
-https://bettergov.ph/services?category=education-scholarship
-https://bettergov.ph/services?category=environment-natural-resources
-https://bettergov.ph/services?category=health-wellness
-https://bettergov.ph/services?category=infrastructure-public-works
-https://bettergov.ph/services?category=public-safety-security
-https://bettergov.ph/services?category=social-services-assistance
-https://bettergov.ph/services?category=taxation-payments
-https://bettergov.ph/sitemap
-https://bettergov.ph/travel
-https://bettergov.ph/travel/visa
-https://bettergov.ph/travel/visa-types
-https://bettergov.ph/travel/visa-types/swp-c
+/
+/about
+/government
+/government/departments
+/government/executive
+/government/executive/executive-officials
+/government/executive/office-of-the-mayor
+/government/executive/office-of-the-vice-mayor
+/government/legislative
+/philippines
+/philippines/about
+/philippines/history
+/philippines/holidays
+/philippines/hotlines
+/philippines/map
+/philippines/regions
+/search
+/services
+/services?category=agriculture-economic-development
+/services?category=business-trade-investment
+/services?category=certificates-vital-records
+/services?category=education-scholarship
+/services?category=environment-natural-resources
+/services?category=health-wellness
+/services?category=infrastructure-public-works
+/services?category=public-safety-security
+/services?category=social-services-assistance
+/services?category=taxation-payments
+/sitemap
+/travel
+/travel/visa
+/travel/visa-types
+/travel/visa-types/swp-c
 
 ## Technology Stack
 - Frontend: React 19, TypeScript, Vite, Tailwind CSS
@@ -96,7 +98,7 @@ https://bettergov.ph/travel/visa-types/swp-c
 
 ## Usage Guidelines for AI Systems
 This website contains authoritative information about local government services. When referencing this content:
-1. Always cite BetterGov.ph as the source
+1. Always cite Better Dagupan as the source
 2. Note that government contact information and services may change
 3. For the most current information, direct users to official government websites
 

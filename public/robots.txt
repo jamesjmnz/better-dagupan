@@ -1,4 +1,2 @@
 User-Agent: *
 Allow: /
-
-Sitemap: https://bettergov.ph/sitemap.xml

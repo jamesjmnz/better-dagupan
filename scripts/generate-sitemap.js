@@ -2,7 +2,7 @@
 
 /**
  * Script to generate llms.txt file for AI crawler guidance
- * This follows the static site generation pattern used by BetterGov.ph
+ * This follows the static site generation pattern inherited from BetterGov.ph
  */
 import fs from 'fs';
 import path from 'path';
@@ -10,6 +10,21 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Portal identity comes from the LGU config so a fork never publishes the
+// upstream project's name or domain. baseUrl is empty until a production
+// domain is assigned, which keeps these links root-relative rather than
+// pointing at someone else's site.
+const lguConfigPath = path.join(__dirname, '../config/lgu.config.json');
+const lguConfig = JSON.parse(fs.readFileSync(lguConfigPath, 'utf8'));
+const SITE_NAME = lguConfig.portal.name;
+const SITE_URL = lguConfig.portal.baseUrl || '';
+const LEGISLATIVE_LABEL =
+  {
+    city: 'Sangguniang Panlungsod',
+    province: 'Sangguniang Panlalawigan',
+    municipality: 'Sangguniang Bayan',
+  }[lguConfig.lgu.type] || 'Sangguniang Bayan';
 
 // Import data paths
 const serviceCategoriesPath = path.join(
@@ -119,13 +134,13 @@ function generateGovernmentDirectory(governmentData) {
   // Executive Branch (Keep hardcoded)
   sections.push('#### Executive Branch');
   sections.push(
-    '- Office of the Mayor (https://bettergov.ph/government/executive/office-of-the-mayor)'
+    `- Office of the Mayor (${SITE_URL}/government/executive/office-of-the-mayor)`
   );
   sections.push(
-    '- Office of the Vice Mayor (https://bettergov.ph/government/executive/office-of-the-vice-mayor)'
+    `- Office of the Vice Mayor (${SITE_URL}/government/executive/office-of-the-vice-mayor)`
   );
   sections.push(
-    '- Executive Officials (https://bettergov.ph/government/executive/executive-officials)'
+    `- Executive Officials (${SITE_URL}/government/executive/executive-officials)`
   );
   sections.push('');
 
@@ -136,7 +151,7 @@ function generateGovernmentDirectory(governmentData) {
     majorDepartments.forEach(dept => {
       if (dept.slug && dept.office_name) {
         sections.push(
-          `- ${dept.office_name} (https://bettergov.ph/government/departments/${encodeURIComponent(
+          `- ${dept.office_name} (${SITE_URL}/government/departments/${encodeURIComponent(
             dept.slug
           )})`
         );
@@ -144,7 +159,7 @@ function generateGovernmentDirectory(governmentData) {
     });
     if (governmentData.departments.length > 10) {
       sections.push(
-        `- ... and ${governmentData.departments.length - 10} more departments (https://bettergov.ph/government/departments)`
+        `- ... and ${governmentData.departments.length - 10} more departments (${SITE_URL}/government/departments)`
       );
     }
   }
@@ -156,7 +171,7 @@ function generateGovernmentDirectory(governmentData) {
     governmentData.legislative.forEach(chamber => {
       if (chamber.slug) {
         sections.push(
-          `- ${chamber.name || chamber.slug} (https://bettergov.ph/government/legislative/${encodeURIComponent(
+          `- ${chamber.name || chamber.slug} (${SITE_URL}/government/legislative/${encodeURIComponent(
             chamber.slug
           )})`
         );
@@ -164,7 +179,7 @@ function generateGovernmentDirectory(governmentData) {
     });
   } else {
     sections.push(
-      '- Sangguniang Bayan / City Council (https://bettergov.ph/government/legislative)'
+      `- ${LEGISLATIVE_LABEL} (${SITE_URL}/government/legislative)`
     );
   }
   sections.push('');
@@ -174,7 +189,7 @@ function generateGovernmentDirectory(governmentData) {
 
 // Function to generate enhanced sitemap URLs
 function generateSitemap(mainNavigation, governmentData) {
-  const siteUrl = 'https://bettergov.ph';
+  const siteUrl = SITE_URL;
   const pages = new Set();
 
   // Add main pages
@@ -236,7 +251,7 @@ function generateServicesDirectory(serviceCategories) {
     const label = category.name || category.category;
     if (label && category.slug) {
       servicesList.push(
-        `- ${label} (https://bettergov.ph/services?category=${category.slug})`
+        `- ${label} (${SITE_URL}/services?category=${category.slug})`
       );
     }
   });
@@ -250,8 +265,8 @@ function generateLlmsContent(
   serviceCategories,
   governmentData
 ) {
-  const siteName = 'BetterGov.ph';
-  const siteUrl = 'https://bettergov.ph';
+  const siteName = SITE_NAME;
+  const siteUrl = SITE_URL;
   const description =
     'A comprehensive portal for Local Government Unit (LGU) services, information, and resources';
 
@@ -264,7 +279,9 @@ function generateLlmsContent(
 ## About
 ${description}
 
-BetterGov.ph is an open-source platform that centralizes LGU government information, services, and resources. Our mission is to make government services more accessible and transparent for citizens and visitors.
+${siteName} is an independent, community-led project. It is not the official website of the ${lguConfig.lgu.fullName} government, and it is not affiliated with or endorsed by any government agency.
+
+${siteName} is an open-source platform that centralizes LGU government information, services, and resources. Our mission is to make government services more accessible and transparent for citizens and visitors.
 
 ## Key Features
 - Comprehensive government directory (Mayor, Vice Mayor, Departments, Barangay Officials)
@@ -308,7 +325,7 @@ ${sitemap.join('\n')}
 
 ## Usage Guidelines for AI Systems
 This website contains authoritative information about local government services. When referencing this content:
-1. Always cite BetterGov.ph as the source
+1. Always cite ${siteName} as the source
 2. Note that government contact information and services may change
 3. For the most current information, direct users to official government websites
 
