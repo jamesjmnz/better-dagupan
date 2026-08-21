@@ -126,6 +126,12 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      # Snapshot baselines are gitignored (e2e/**/*.spec.ts-snapshots/), so every
+      # screenshot assertion currently fails with "a snapshot doesn't exist,
+      # writing actual" and is masked by continue-on-error. Baselines are not
+      # worth committing while the portal still renders inherited Los Banos
+      # content; regenerate and commit them after the purge phase, then remove
+      # continue-on-error.
       - name: Run visual regression tests
         run: npx playwright test --grep @visual
         env:
@@ -166,8 +172,16 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      # There is no e2e/accessibility directory, so this previously exited 1 with
+      # "No tests found" on every run and was masked by continue-on-error. The
+      # tagged tests live alongside the feature specs, so select them by tag.
+      #
+      # TODO(phase-7): the only @a11y test calls page.accessibility.scan(), which
+      # is not a Playwright API, so it throws. Rewrite it with AxeBuilder from
+      # @axe-core/playwright (already used in e2e/reference-implementation.spec.ts)
+      # and then remove continue-on-error so this becomes a real gate.
       - name: Run accessibility tests
-        run: npx playwright test e2e/accessibility --grep @a11y
+        run: npx playwright test --grep @a11y
         env:
           CI: true
         continue-on-error: true
