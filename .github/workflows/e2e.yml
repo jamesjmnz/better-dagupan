@@ -1,11 +1,22 @@
-name: E2E Tests
+# Full cross-browser end-to-end suite.
+#
+# This workflow does not run on pull requests. The suite is 1135 tests across 5
+# browser projects; on GitHub-hosted runners with 2 workers even a quarter of it
+# takes ~30 minutes, and the run on PR #2 was cancelled with "The job has
+# exceeded the maximum execution time of 30m0s". It also fails in bulk today
+# because its assertions encode inherited template content, so it produces no
+# usable signal for an adaptation change.
+#
+# Pull requests are gated by lint, unit tests, the production build, and the
+# chromium smoke suite in e2e-smoke.yml. This workflow is the deep sweep: it
+# runs weekly and on demand, and it is where the suite gets repaired.
+name: E2E Full Suite
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+  schedule:
+    # 18:00 UTC Sunday — 02:00 Monday in Philippine Standard Time.
+    - cron: '0 18 * * 0'
 
 permissions:
   contents: read
@@ -14,7 +25,14 @@ jobs:
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    # Generous because nothing waits on this run; two shards were cut off at 30.
+    timeout-minutes: 60
+
+    # Split into shards that run in parallel and are recombined by e2e-report.
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
 
     steps:
       - name: Checkout repository
@@ -38,11 +56,51 @@ jobs:
         run: npx playwright install --with-deps
 
       - name: Run E2E tests
-        run: npm run test:e2e
+        run: npx playwright test --shard=${{ matrix.shard }}/4
         env:
           CI: true
 
-      - name: Upload Playwright Report
+      - name: Upload Playwright Blob Report
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: playwright-blob-report-${{ matrix.shard }}
+          path: blob-report/
+          retention-days: 7
+
+  e2e-report:
+    name: E2E Report
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [e2e]
+    if: always()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Download blob reports
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          path: all-blob-reports
+          pattern: playwright-blob-report-*
+          merge-multiple: true
+
+      - name: Merge shard reports
+        run: npx playwright merge-reports --reporter html ./all-blob-reports
+
+      - name: Upload merged HTML report
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
@@ -50,19 +108,10 @@ jobs:
           path: playwright-report/
           retention-days: 7
 
-      - name: Upload Playwright Blob Report
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        if: always()
-        with:
-          name: playwright-blob-report
-          path: blob-report/
-          retention-days: 7
-
   e2e-visual:
     name: E2E Visual Regression Tests
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    if: github.event_name == 'pull_request'
 
     steps:
       - name: Checkout repository
@@ -86,6 +135,13 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      # Snapshot baselines are gitignored (e2e/**/*.spec.ts-snapshots/), so every
+      # screenshot assertion currently fails with "a snapshot doesn't exist,
+      # writing actual" and is masked by continue-on-error. Baselines are not
+      # worth committing while the portal still renders inherited Los Banos
+      # content; regenerate and commit them after the purge phase, then remove
+      # continue-on-error. This job never gated a pull request even before the
+      # workflow moved to a schedule, because of that masking.
       - name: Run visual regression tests
         run: npx playwright test --grep @visual
         env:
@@ -126,8 +182,16 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      # There is no e2e/accessibility directory, so this previously exited 1 with
+      # "No tests found" on every run and was masked by continue-on-error. The
+      # tagged tests live alongside the feature specs, so select them by tag.
+      #
+      # TODO(phase-7): the only @a11y test calls page.accessibility.scan(), which
+      # is not a Playwright API, so it throws. Rewrite it with AxeBuilder from
+      # @axe-core/playwright (already used in e2e/reference-implementation.spec.ts)
+      # and then remove continue-on-error so this becomes a real gate.
       - name: Run accessibility tests
-        run: npx playwright test e2e/accessibility --grep @a11y
+        run: npx playwright test --grep @a11y
         env:
           CI: true
         continue-on-error: true

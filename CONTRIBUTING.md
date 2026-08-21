@@ -108,7 +108,10 @@ npm run dev
 ### Testing
 
 ```bash
-# Run E2E tests
+# Run the smoke suite a pull request has to pass
+npx playwright test --project=chromium --grep @smoke
+
+# Run the full cross-browser E2E suite (slow — 1135 tests across 5 browsers)
 npm run test:e2e
 
 # Run specific test file
@@ -116,6 +119,9 @@ npx playwright test services.spec.ts
 
 # Run with debug mode
 npx playwright test --debug
+
+# Run unit tests
+npm run test -- --run
 
 # Check linting
 npm run lint
@@ -125,6 +131,27 @@ npm run format
 ```
 
 **Note:** E2E tests use Playwright with shared utilities in `e2e/utils/` for common testing patterns like semantic token validation.
+
+### What CI runs on a pull request
+
+Pull requests are gated by four checks:
+
+| Check | Command |
+|---|---|
+| Code Quality Checks | `npm run lint` (plus `tsc --noEmit` and a Prettier check) |
+| Unit Tests | `npm run test -- --run` |
+| Production Build Check | `npm run build` |
+| E2E Smoke Tests | `npx playwright test --project=chromium --grep @smoke` |
+
+The full cross-browser Playwright suite (`.github/workflows/e2e.yml`) does
+**not** run on pull requests. It takes longer than the job timeout allows and
+still fails in bulk on inherited Los Baños expectations, so it runs weekly and
+on demand via `workflow_dispatch` while it is being repaired. Trigger it from
+the Actions tab before merging anything that touches rendering broadly.
+
+Tag a test `@smoke` only if it must hold for any LGU — the smoke suite has to
+survive the Dagupan adaptation without edits. Assertions about specific
+officials, departments, or services belong in the full suite.
 
 ### Pre-commit Hooks
 
@@ -216,7 +243,8 @@ Edit `config/lgu.config.json` - changes apply automatically.
 
 ### Before Submitting
 
-- [ ] Tests pass locally (`npm run test:e2e`)
+- [ ] Smoke tests pass locally (`npx playwright test --project=chromium --grep @smoke`)
+- [ ] Unit tests pass locally (`npm run test -- --run`)
 - [ ] No linting errors (`npm run lint`)
 - [ ] Code is formatted (`npm run format`)
 - [ ] Commits follow conventional format
