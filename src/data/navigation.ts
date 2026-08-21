@@ -171,6 +171,8 @@ export const footerNavigation = {
       ],
     },
   ],
+  // Networks the portal has not set up yet are left blank in lgu.config.json;
+  // drop them here so the footer never renders a link that goes nowhere.
   socialLinks: [
     {
       label: 'Facebook',
@@ -187,5 +189,5 @@ export const footerNavigation = {
       href: config.portal.githubUrl,
       target: '_blank',
     },
-  ],
+  ].filter(link => Boolean(link.href)),
 };
