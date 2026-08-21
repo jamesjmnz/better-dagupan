@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '../test-config';
 
-test.describe('Better LB Sanity Suite', () => {
+test.describe('Better Dagupan Sanity Suite', () => {
   // RULE 1: Accessibility (The most important for a government portal)
   test('should pass WCAG 2.1 Level AA checks', async ({ page }) => {
     await page.goto('/');

@@ -29,9 +29,9 @@ export const test = base.extend({
           status: 200,
           contentType: 'application/json',
           body: JSON.stringify({
-            los_ba_os: {
-              name: 'Los Baños',
-              coordinates: { lat: 14.1763, lon: 121.2219 },
+            dagupan: {
+              name: 'Dagupan',
+              coordinates: { lat: 16.0433, lon: 120.3333 },
               weather: [{ icon: '01d', description: 'partly cloudy' }],
               main: {
                 temp: 28,
@@ -47,7 +47,7 @@ export const test = base.extend({
               dt: Math.floor(Date.now() / 1000),
               sys: {},
               timezone: 28800,
-              id: 1706511,
+              id: 1714746,
               timestamp: new Date().toISOString(),
               hourly: [],
             },
@@ -68,20 +68,6 @@ export const test = base.extend({
           status: 200,
           contentType: 'application/json',
           body: JSON.stringify({ authenticated: false, offline: true }),
-        });
-      });
-
-      await page.route('**/api/weather**', route => {
-        route.fulfill({
-          status: 200,
-          contentType: 'application/json',
-          body: JSON.stringify({
-            los_ba_os: {
-              name: 'Los Baños',
-              temperature: 28,
-              description: 'partly cloudy',
-            },
-          }),
         });
       });
 
