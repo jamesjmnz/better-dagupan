@@ -48,9 +48,11 @@
     }
   },
   "dataPaths": {
-    "departments": "src/data/lgu/losbanos/directory/departments.json",
-    "barangays": "src/data/lgu/losbanos/directory/barangays.json",
-    "services": "src/data/lgu/losbanos/services/categories"
+    "departments": "src/data/directory/departments.json",
+    "barangays": "src/data/directory/barangays.json",
+    "executive": "src/data/directory/executive.json",
+    "legislative": "src/data/directory/legislative.json",
+    "services": "src/data/services"
   },
   "features": {
     "openLGU": true,
