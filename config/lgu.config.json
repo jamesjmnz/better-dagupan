@@ -39,12 +39,12 @@
   },
   "transparency": {
     "procurement": {
-      "organizationName": "MUNICIPALITY OF LOS BA\u00d1OS, LAGUNA",
+      "organizationName": "CITY OF DAGUPAN, PANGASINAN",
       "externalDashboard": "https://transparency.bettergov.ph/organizations/"
     },
     "infrastructure": {
-      "searchString": "Los Ba\u00f1os",
-      "exactMatchTargets": ["los ba\u00f1os", "los banos"]
+      "searchString": "Dagupan",
+      "exactMatchTargets": ["dagupan", "dagupan city"]
     }
   },
   "dataPaths": {
