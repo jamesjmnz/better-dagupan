@@ -10,6 +10,7 @@ import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
 import TimelineSection from '@/components/home/TimelineSection';
 import WeatherMapSection from '@/components/home/WeatherMapSection';
+import { DisclaimerNotice } from '@/components/layout/Disclaimer';
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
 
 const Home: FC = () => {
@@ -20,6 +21,10 @@ const Home: FC = () => {
         <ErrorBoundary name='Hero'>
           <Hero />
         </ErrorBoundary>
+
+        <div className='pt-8'>
+          <DisclaimerNotice />
+        </div>
 
         {/* Using space-y-16 for consistent section spacing per design system */}
         <div className='space-y-16 py-12'>

@@ -97,12 +97,18 @@
     "barangaysTitle": "Barangays",
     "barangaysDescription": "Local government units within the municipality, led by elected officials who manage community-level services and programs.",
     "departmentsTitle": "Municipal Departments",
-    "departmentsDescription" : "Municipal departments and agencies responsible for specific areas of governance.",
+    "departmentsDescription": "Municipal departments and agencies responsible for specific areas of governance.",
     "electedofficialsTitle": "Elected Officials",
     "electedofficialsDescription": "The elected leadership of the Executive and Legislative branches, responsible for policy implementation and law-making.",
     "learnMore": "Learn More",
     "directoryTitle": "Official Directory",
     "directoryDescription": "Find contact information for government officials, agencies, and offices at national and local levels.",
     "viewDirectory": "View Directory"
+  },
+  "disclaimer": {
+    "short": "{{portal}} is an independent, community-led project. It is not the official website of the City Government of {{lgu}}.",
+    "noticeTitle": "Independent community project",
+    "noticeBody": "{{portal}} is built and maintained by volunteers. It is not the official website of the City Government of {{lgu}}, and it is not affiliated with or endorsed by any government agency.",
+    "officialSiteLabel": "Visit the official {{lgu}} City Government website"
   }
 }

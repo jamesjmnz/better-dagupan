@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 import {
   ChevronRight,
   ExternalLink,
@@ -18,6 +20,9 @@ import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent, CardGrid } from '@/components/ui/Card';
 
 export default function TransparencyIndex() {
+  const { t } = useTranslation('common');
+  const disclaimer = { portal: config.portal.name, lgu: config.lgu.name };
+
   const sections = [
     {
       title: 'Public Funds',
@@ -58,13 +63,10 @@ export default function TransparencyIndex() {
           </div>
           <div className='flex-1 space-y-2 text-center md:text-left'>
             <h3 className='text-[10px] font-bold tracking-widest text-kapwa-orange-600 uppercase'>
-              Independent Grassroots Initiative
+              {t('disclaimer.noticeTitle', disclaimer)}
             </h3>
             <p className='text-sm leading-relaxed text-kapwa-orange-600'>
-              Better LB is <strong>not an official government portal</strong>.
-              We are a volunteer movement mirroring public records to empower
-              citizens with the information they need to engage in local
-              governance.
+              {t('disclaimer.noticeBody', disclaimer)}
             </p>
           </div>
         </div>
