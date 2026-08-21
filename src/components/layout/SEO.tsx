@@ -146,16 +146,21 @@ export function SEO({
   const siteTitle = config.portal.name;
   const fullTitle = title ? `${title} | ${siteTitle}` : finalTitle;
   const baseUrl = config.portal.baseUrl;
-  const fullCanonical = defaultCanonical
-    ? `${baseUrl}${defaultCanonical}`
-    : undefined;
-  // No production domain is configured yet, so an absolute OG image URL cannot be
-  // built. Emit no image tag at all rather than a broken relative one.
-  const fullOgImage = ogImage
-    ? ogImage.startsWith('http')
+  // No production domain is configured yet. A canonical or og:url built on an
+  // empty base is a bare path, which crawlers cannot resolve and which can be
+  // read as a canonical pointing at whatever host served the page. Emit
+  // neither until there is a real absolute URL to give.
+  const fullCanonical =
+    baseUrl && defaultCanonical ? `${baseUrl}${defaultCanonical}` : undefined;
+  // Same for the OG image: a relative path is not fetchable by a scraper, so
+  // an image is only advertised when it is already absolute or can be made so.
+  const fullOgImage = !ogImage
+    ? undefined
+    : ogImage.startsWith('http')
       ? ogImage
-      : `${baseUrl}${ogImage}`
-    : undefined;
+      : baseUrl
+        ? `${baseUrl}${ogImage}`
+        : undefined;
 
   // Generate breadcrumb structured data
   const breadcrumbJsonLd = breadcrumbs
