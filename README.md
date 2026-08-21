@@ -1,8 +1,33 @@
-# 🏛️ Better LB (Los Baños)
+# 🏛️ Better Dagupan
 
-A community-led, open-source portal designed to make the government of the **Municipality of Los Baños** accessible, transparent, and user-friendly.
+A community-led, open-source portal that makes public information about the
+**City of Dagupan**, Pangasinan easier to find, read, and verify.
 
-This project is a municipal-focused fork of [BetterGov.ph](https://bettergov.ph), adapted to meet the specific needs of Los Bañenses.
+> **Better Dagupan is an independent, community-led project. It is not the
+> official website of the City Government of Dagupan, and it is not affiliated
+> with or endorsed by any government agency.** The official city website is
+> [dagupan.gov.ph](https://www.dagupan.gov.ph).
+
+### Provenance
+
+Better Dagupan is derived from the [BetterLB](https://github.com/BetterLosBanos/betterlb)
+(Los Baños) template by BetterLosBanos, itself a fork of
+[BetterGov.ph](https://bettergov.ph). The template's architecture, design system
+integration, and much of its supporting tooling are retained here, and that
+attribution stands regardless of the repository's fork status. Commits at and
+below `5f3f25c` are the work of the upstream BetterLB contributors; see
+[`docs/project-history/`](./docs/project-history/) for the full record.
+
+### Current status
+
+The Dagupan adaptation is in progress. Branding, localisation, and the
+independent-project disclaimer are in place, and the inherited Los Baños civic
+records have been removed rather than shown under a Dagupan heading.
+
+**No verified Dagupan civic data has been added yet.** The directory,
+statistics, services, and financial sections render honest empty states until
+records are sourced from primary government sources and verified. Nothing in
+the portal should be read as official Dagupan government information.
 
 ---
 ### Inspirations
@@ -12,18 +37,20 @@ BetterSolano.org https://github.com/BetterSolano/bettersolano
 Betterlocalgov https://github.com/iyanski/betterlocalgov
 
 ### Portal Features
-BetterLB provides Los Baños with:
-- **Public Services Directory**: Comprehensive guide to municipal services with requirements, fees, and step-by-step processes
-- **Legislative Portal**: Access to ordinances, resolutions, and executive orders from the Sangguniang Bayan
+Better Dagupan is being built to provide:
+- **Public Services Directory**: Guide to city services with requirements, fees, and step-by-step processes
+- **Legislative Portal**: Ordinances, resolutions, and executive orders from the Sangguniang Panlungsod
 - **Transparency Dashboard**: Financial data, procurement bids, and infrastructure projects
-- **Government Directory**: Contact information for all municipal departments and officials
+- **Government Directory**: Contact information for city departments and officials
 - **Multi-language Support**: English and Filipino translations
+
+Sections are present in the interface but empty until verified records exist.
 
 ---
 
 ## 🔄 Forking for Your LGU
 
-BetterLB is designed to be easily adapted for any Local Government Unit (LGU) in the Philippines.
+This portal, like the BetterLB template it comes from, is designed to be adapted for any Local Government Unit (LGU) in the Philippines.
 
 ## Quick Start for Other LGUs
 
@@ -44,18 +71,21 @@ BetterLB is designed to be easily adapted for any Local Government Unit (LGU) in
 
 ### Key Configuration Fields
 
-| Field | Description | Example (Los Baños) |
-|-------|-------------|---------------------|
-| `lgu.name` | Short municipality name | "Los Baños" |
-| `lgu.fullName` | Full official name | "Municipality of Los Baños" |
-| `lgu.province` | Province name | "Laguna" |
-| `lgu.region` | Region name | "Region IV-A" |
-| `lgu.regionCode` | Region code | "CALABARZON" |
-| `lgu.type` | LGU type | "municipality" or "city" |
-| `lgu.officialWebsite` | Official LGU website | "https://losbanos.gov.ph" |
-| `portal.name` | Portal name | "BetterLB" |
-| `portal.baseUrl` | Portal base URL | "https://betterlb.org" |
-| `portal.tagline` | Portal tagline | "Community Powered Los Baños Portal" |
+| Field | Description | Value in this repository |
+|-------|-------------|--------------------------|
+| `lgu.name` | Short LGU name | "Dagupan" |
+| `lgu.fullName` | Full official name | "City of Dagupan" |
+| `lgu.province` | Province name | "Pangasinan" |
+| `lgu.region` | Region name | "Region I" |
+| `lgu.regionCode` | Region name paired with `region` | "Ilocos Region" |
+| `lgu.type` | LGU type, drives Mayor/Sanggunian labels | "city" |
+| `lgu.officialWebsite` | Official LGU website | "https://www.dagupan.gov.ph" |
+| `portal.name` | Portal name | "Better Dagupan" |
+| `portal.baseUrl` | Portal base URL | "" — unset until a domain is assigned |
+
+`portal.domain`, `portal.baseUrl`, and the social URLs are deliberately empty.
+Leaving them unset keeps SEO canonicals root-relative and stops the portal
+advertising a domain or account that does not exist.
 
 **Note:** See [`FORKING.md`](./FORKING.md) for comprehensive forking instructions including database setup for legislative data.
 
@@ -79,7 +109,7 @@ BetterLB is designed to be easily adapted for any Local Government Unit (LGU) in
 ## Project Structure
 
 ```
-betterlb/
+better-dagupan/
 ├── e2e/                         # End-to-end tests
 │   └── utils/                   # Test helpers and shared testing logic
 ├── functions/                   # Serverless / backend functions (Cloudflare Pages)
@@ -161,22 +191,28 @@ betterlb/
 - **Search Integration**: Meilisearch-powered search with real-time indexing
 - **Internationalization**: Multi-language support with i18next
 
-### Los Baños-Specific Data
+### LGU-Specific Data
 
-BetterLB includes structured data for Los Baños:
+These datasets are **currently empty**. The inherited Los Baños records were
+removed, and verified Dagupan records have not been added yet. The JSON Schemas
+and the types in `src/types/` document the shape each one must take.
 
 | Data Type | Location | Description |
 |-----------|----------|-------------|
-| **Departments** | `/src/data/directory/departments.json` | Municipal departments and offices with contact info |
-| **Barangays** | `/src/data/directory/barangays.json` | 14 barangay profiles and officials |
-| **Services** | `/src/data/services/categories/*.json` | Public services by category (BPLO, Assessor, Engineering, etc.) |
+| **Departments** | `/src/data/directory/departments.json` | City departments and offices with contact info |
+| **Barangays** | `/src/data/directory/barangays.json` | Barangay profiles and officials |
+| **Services** | `/src/data/services/categories/*.json` | Public services by category |
 | **Citizens Charter** | `/src/data/citizens-charter/citizens-charter.json` | Service requirements, fees, and client steps |
 | **Legislation** | Cloudflare D1 Database | Ordinances, resolutions, executive orders |
-| **Statistics** | `/src/data/statistics/` | Municipal demographics and indicators |
+| **Statistics** | `/src/data/statistics/` | City demographics and indicators |
+
+`services.json` and `merged-services.json` are generated by
+`npm run merge:services`; edit the category files and the citizens charter
+rather than the generated output.
 
 #### Data Pipeline for Legislative Documents
 
-Los Baños legislative documents are processed through a Python pipeline:
+Legislative documents are processed through a Python pipeline:
 
 1. **Scrape** (`pipeline/1_scrape.py`) - Download PDFs from official sources
 2. **Normalize** (`pipeline/1.5_normalize.py`) - Standardize filenames and metadata
@@ -191,8 +227,8 @@ See [`pipeline/README.md`](./pipeline/README.md) for complete documentation.
 
 ### 1. Clone and Install
 ```bash
-git clone https://github.com/BetterLosBanos/betterlb
-cd betterlb
+git clone https://github.com/jamesjmnz/better-dagupan
+cd better-dagupan
 npm install
 ```
 
@@ -224,39 +260,33 @@ npm run build           # Combines merge_services, TypeScript, and Vite build
 
 ---
 
-## 🏛️ Los Baños Government Structure
+## 🏛️ City Government Structure
 
 ### Executive Branch
-- **Mayor**: Chief executive officer of the municipality
-- **Vice Mayor**: Presiding officer of the Sangguniang Bayan and mayoral successor
-- **Municipal Departments**: Administrative offices implementing municipal programs
+- **Mayor**: Chief executive officer of the city
+- **Vice Mayor**: Presiding officer of the Sangguniang Panlungsod and mayoral successor
+- **City Departments**: Administrative offices implementing city programs
 
-### Legislative Branch (Sangguniang Bayan)
-The Sangguniang Bayan is the legislative body of Los Baños, composed of:
-- **Vice Mayor** (Presiding Officer)
-- **8 Regular Councilors** (District representatives)
-- **2 Ex-Officio Councilors** (ABC President and SK Federation President)
+### Legislative Branch (Sangguniang Panlungsod)
+The Sangguniang Panlungsod is the legislative body of the City of Dagupan. Its
+composition, membership, and committee structure are not documented here until
+they have been verified against primary sources.
 
 ### Key Departments
-- **BPLO**: Business Permit and Licensing Office
-- **MTO**: Municipal Treasurer's Office
-- **Assessor's Office**: Property assessment and taxation
-- **Engineering Office**: Infrastructure and public works
-- **MPDC**: Municipal Planning and Development Coordinator
-- **LCR**: Local Civil Registry
-- **Municipal Health Office**: Public health services
-- **Municipal Agriculture Office**: Agricultural programs
 
-See the [Government Directory](https://betterlb.org/government) on the live site for complete department listings and contact information.
+The department roster is not documented here yet, for the same reason. Dagupan's
+offices differ from the inherited template's, and listing them from memory would
+be exactly the kind of unverified civic information this project must not
+publish.
 
 ---
 
 ## Join the Grassroots Movement
-We are looking for volunteers passionate individuals who want to make Los Baños a better place. You don't need to be a developer to help!
+We are looking for volunteers passionate about making Dagupan a better place. You don't need to be a developer to help!
 
 ### How You Can Contribute:
 1.  **Non-Developers**: Visit the `/contribute` page on the live site to suggest new services or fix outdated information via GitHub Issues (requires a free GitHub account).
-2.  **Developers**: Check the [Issues](https://github.com/BetterLosBanos/betterlb/issues) tab for "Help Wanted" or "Good First Issue" labels.
+2.  **Developers**: Check the [Issues](https://github.com/jamesjmnz/better-dagupan/issues) tab for "Help Wanted" or "Good First Issue" labels.
 3.  **Data Auditors**: Help us verify community submissions on GitHub to ensure the portal remains an authoritative source of information.
 4.  **Translators**: Help translate the portal to Filipino and other Philippine languages by working on `public/locales/` files.
 
@@ -269,12 +299,13 @@ We are looking for volunteers passionate individuals who want to make Los Baños
 
 ## 🚢 Deployment
 
-### Production Deployment (BetterLB)
+### Production Deployment
 
-BetterLB is deployed on **Cloudflare Pages** with:
+Better Dagupan is not yet deployed; no production domain is assigned. The
+template's deployment setup is retained and targets **Cloudflare Pages** with:
 - **Frontend**: Vite build automatically deployed on push to `main` branch
 - **Backend**: Cloudflare Pages Functions for API endpoints
-- **Database**: Cloudflare D1 (`betterlb_openlgu`) for legislative data
+- **Database**: Cloudflare D1 for legislative data
 - **Search**: Meilisearch instance for fuzzy search
 - **KV Storage**: Weather data caching with automatic updates
 - **Wrangler**: Version 4.70.0 (pinned for compatibility)
@@ -299,11 +330,12 @@ See [`ARCHITECTURE.md`](./ARCHITECTURE.md#deployment) for detailed deployment st
 This project is released under the [Creative Commons CC0](https://creativecommons.org/publicdomain/zero/1.0/) dedication. The work is dedicated to the public domain and can be freely used, modified, and distributed without restriction.
 
 ### Data Attribution
-BetterLB aggregates data from multiple sources:
+Better Dagupan will aggregate data from multiple sources. Each dataset records
+its own source agency and retrieval date where the schema supports it:
 
 | Data Source | Type | Attribution |
 |-------------|------|-------------|
-| **Municipality of Los Baños** | Official government data, services directory | Public domain |
+| **City Government of Dagupan** | Official government data, services directory | Public domain |
 | **Philippine Government Procurement Portal (PhilGEPS)** | Procurement bids and awards | Republic of the Philippines |
 | **Department of Budget and Management (DBM)** | Financial releases | Republic of the Philippines |
 | **Department of Public Works and Highways (DPWH)** | Infrastructure projects | Republic of the Philippines |
@@ -315,9 +347,9 @@ BetterLB aggregates data from multiple sources:
 
 ## 📞 Contact and Support
 
-### For Los Baños Residents
-- **Website**: https://betterlb.org
-- **GitHub Issues**: Report bugs or suggest features at [github.com/BetterLosBanos/betterlb/issues](https://github.com/BetterLosBanos/betterlb/issues)
+### For Dagupan Residents
+- **Website**: not yet deployed
+- **GitHub Issues**: Report bugs or suggest features at [github.com/jamesjmnz/better-dagupan/issues](https://github.com/jamesjmnz/better-dagupan/issues)
 - **Community**: Join our community contributions via the "Contribute" page on the portal
 
 ### For Other LGUs
