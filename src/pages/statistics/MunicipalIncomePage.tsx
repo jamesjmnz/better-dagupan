@@ -10,8 +10,13 @@ import { PageHero } from '@/components/layout/PageLayouts';
 import FinancialPieChart from '@/pages/transparency/components/FinancialPieChart';
 
 import { formatPesoAdaptive } from '@/lib/format';
+import { lguLabels } from '@/lib/lguLabels';
+
+import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
 
 import ariData from '@/data/statistics/ari.json';
+
+import type { AnnualRegularIncome } from '@/types/statisticsTypes';
 
 const COLORS = {
   national: '#0066eb',
@@ -21,52 +26,69 @@ const COLORS = {
 };
 
 export default function MunicipalIncomePage() {
-  const data = ariData[0];
+  const records = ariData as AnnualRegularIncome[];
+  const data = records[0] as AnnualRegularIncome | undefined;
 
   const drillDownIncomeData = useMemo(
     () => [
       {
         name: 'National Tax Allotment',
-        value: data.other_income_sources.national_tax_allotment,
+        value: data?.other_income_sources.national_tax_allotment ?? 0,
         color: COLORS.national,
       },
       {
         name: 'Locally Sourced Revenue',
-        value: data.locally_sourced_revenue.total_locally_sourced_revenue,
+        value: data?.locally_sourced_revenue.total_locally_sourced_revenue ?? 0,
         color: COLORS.local,
         details: [
           {
             name: 'Tax Revenue',
-            value: data.locally_sourced_revenue.tax_revenue.total_tax_revenue,
+            value:
+              data?.locally_sourced_revenue.tax_revenue.total_tax_revenue ?? 0,
           },
           {
             name: 'Non-Tax Revenue',
             value:
-              data.locally_sourced_revenue.non_tax_revenue
-                .total_non_tax_revenue,
+              data?.locally_sourced_revenue.non_tax_revenue
+                .total_non_tax_revenue ?? 0,
           },
         ],
       },
       {
         name: 'Other National Shares',
         value:
-          data.other_shares_from_national_tax_collection.total_other_shares,
+          data?.other_shares_from_national_tax_collection.total_other_shares ??
+          0,
         color: COLORS.special,
       },
       {
         name: 'Interest Income',
-        value: data.other_income_sources.interest_income,
+        value: data?.other_income_sources.interest_income ?? 0,
         color: COLORS.other,
       },
     ],
     [data]
   );
 
+  // Hooks above run unconditionally; the bail-out sits below them so hook order
+  // is stable whether or not a verified income record exists.
+  if (!data) {
+    return (
+      <>
+        <PageHero
+          title={`${lguLabels.adjective} Income`}
+          description='Revenue sources, fiscal autonomy, and national tax dependency.'
+        />
+        <NotYetAvailable />
+      </>
+    );
+  }
+
   return (
     <>
       {/* PageHero - documented pattern for layout headers */}
       <PageHero
-        title='Municipal Income'
+        title={`${lguLabels.adjective} Income`}
         description='Detailed analysis of revenue sources, fiscal autonomy, and national tax dependency.'
       >
         <div className='flex flex-wrap justify-center gap-2'>

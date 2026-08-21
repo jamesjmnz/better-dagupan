@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import { CHART_THEME, standardAxisProps } from '@/constants/charts';
-import { ArrowUp, BarChart3, Target, TrendingUp, Trophy } from 'lucide-react';
+import { BarChart3, Target, TrendingUp, Trophy } from 'lucide-react';
 import {
   CartesianGrid,
   Legend,
@@ -23,7 +23,11 @@ import { PageHero } from '@/components/layout/PageLayouts';
 
 import { cn } from '@/lib/utils';
 
+import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
+
 import cmciData from '@/data/statistics/cmci.json';
+
+import type { CMCIData } from '@/types/statisticsTypes';
 
 const PILLAR_COLORS: Record<string, string> = {
   Overall: '#0066eb',
@@ -41,24 +45,27 @@ interface TrendPoint {
   [key: string]: number | null; // For the 5 pillars
 }
 
+const cmci = cmciData as CMCIData;
+
 export default function CompetitivenessPage() {
   const [activeTab, setActiveTab] = useState<'trends' | 'pillars'>('trends');
   const [selectedPillar, setSelectedPillar] = useState(
-    cmciData.pillars[0].name
+    cmci.pillars[0]?.name ?? ''
   );
 
-  const latestIdx = cmciData.meta.years.length - 1;
-  const latestYear = cmciData.meta.years[latestIdx];
+  const hasScores = cmci.meta.years.length > 0 && cmci.pillars.length > 0;
+  const latestIdx = cmci.meta.years.length - 1;
+  const latestYear = cmci.meta.years[latestIdx];
 
   // 2. Strictly Typed Trend Logic
   const trendData = useMemo<TrendPoint[]>(() => {
-    return cmciData.meta.years
+    return cmci.meta.years
       .map((year, idx) => {
         const dp: TrendPoint = {
           year,
-          Overall: cmciData.overall_score[idx] ?? null,
+          Overall: cmci.overall_score[idx] ?? null,
         };
-        cmciData.pillars.forEach(p => {
+        cmci.pillars.forEach(p => {
           dp[p.name] = p.scores[idx] ?? null;
         });
         return dp;
@@ -68,16 +75,30 @@ export default function CompetitivenessPage() {
 
   // 3. Find current pillar safely
   const currentPillar = useMemo(
-    () => cmciData.pillars.find(p => p.name === selectedPillar),
+    () => cmci.pillars.find(p => p.name === selectedPillar),
     [selectedPillar]
   );
+
+  // Hooks above run unconditionally; the bail-out sits below them so hook order
+  // is stable whether or not verified CMCI scores exist.
+  if (!hasScores) {
+    return (
+      <>
+        <PageHero
+          title='Competitiveness'
+          description='National evaluation of local government progress across pillars of governance and development.'
+        />
+        <NotYetAvailable />
+      </>
+    );
+  }
 
   return (
     <>
       {/* PageHero - documented pattern for layout headers */}
       <PageHero
         title='Competitiveness'
-        description='National evaluation of municipal progress across pillars of governance and development.'
+        description='National evaluation of local government progress across pillars of governance and development.'
       >
         <div className='flex flex-wrap gap-2 justify-center'>
           <Badge variant='primary' dot>
@@ -88,27 +109,16 @@ export default function CompetitivenessPage() {
       </PageHero>
 
       {/* KPI Cards - using new StatCard component */}
-      <div className='grid grid-cols-1 gap-4 items-stretch md:grid-cols-3 mb-kapwa-lg'>
+      <div className='grid grid-cols-1 gap-4 items-stretch md:grid-cols-2 mb-kapwa-lg'>
         <StatCard
           label='Overall Score'
-          value={cmciData.overall_score[latestIdx].toFixed(2)}
+          value={(cmci.overall_score[latestIdx] ?? 0).toFixed(2)}
           subtext='CMCI Index'
           variant='primary'
         />
         <StatCard
-          label='Official Rank'
-          value='33'
-          subtext='1st Class Municipality'
-          variant='secondary'
-        >
-          <div className='flex items-center gap-0.5 rounded-full border border-kapwa-border-success bg-kapwa-bg-success-weak px-2 py-0.5 text-kapwa-text-success'>
-            <ArrowUp className='w-3 h-3 stroke-3' />
-            <span className='text-[10px] font-black uppercase'>Up</span>
-          </div>
-        </StatCard>
-        <StatCard
           label='Pillars Tracked'
-          value={cmciData.pillars.length}
+          value={cmci.pillars.length}
           subtext='DTI Standards'
           variant='slate'
           icon={Trophy}
@@ -172,7 +182,7 @@ export default function CompetitivenessPage() {
                 dot={{ r: 4 }}
                 activeDot={{ r: 8 }}
               />
-              {cmciData.pillars.map(p => (
+              {cmci.pillars.map(p => (
                 <Line
                   key={p.name}
                   type='monotone'
@@ -188,7 +198,7 @@ export default function CompetitivenessPage() {
       ) : (
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
           <div className='space-y-3 lg:col-span-5'>
-            {cmciData.pillars.map(p => (
+            {cmci.pillars.map(p => (
               <button
                 key={p.name}
                 onClick={() => setSelectedPillar(p.name)}
@@ -270,7 +280,7 @@ export default function CompetitivenessPage() {
               rel='noreferrer'
               className='underline hover:text-kapwa-text-brand'
             >
-              {cmciData.meta.source}
+              {cmci.meta.source}
             </a>
           </p>
         </div>

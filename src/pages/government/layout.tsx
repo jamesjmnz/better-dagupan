@@ -52,7 +52,7 @@ export default function GovernmentRootLayout() {
       <PageHeader
         variant='centered'
         title='Government'
-        description={`Access information on elected leaders, ${lguLabels.adjective.toLowerCase()} departments, and the 14 component barangays of ${lguLabels.name}.`}
+        description={`Access information on elected leaders, ${lguLabels.adjective.toLowerCase()} departments, and the component barangays of ${lguLabels.name}.`}
       />
 
       <SectionBlock className='pb-kapwa-xs md:pb-kapwa-sm'>

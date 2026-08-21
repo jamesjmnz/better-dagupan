@@ -24,9 +24,12 @@ import FinancialPieChart, {
 import QuarterToggle from '@/pages/transparency/components/QuarterToggle';
 import SummaryCards from '@/pages/transparency/components/SummaryCards';
 
+import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
+
 import { useFinancialData } from '@/hooks/useFinancialData';
 
 import { formatLabel } from '@/lib/budgetUtils';
+import { lguLabels } from '@/lib/lguLabels';
 
 export default function FinancialPage() {
   const {
@@ -44,6 +47,21 @@ export default function FinancialPage() {
     comparisonBaseline,
     getQuarter,
   } = useFinancialData();
+
+  // The inherited Los Banos statements were removed and Dagupan's are not
+  // sourced yet, so there may be no quarter to render. Bail out before the
+  // chart transforms rather than reading fields off an absent record.
+  if (!selectedQuarter || !displayedIncome || !displayedExpenditure) {
+    return (
+      <div className='space-y-6'>
+        <h1 className='text-kapwa-text-strong kapwa-heading-xl flex items-center gap-3 font-extrabold'>
+          <BarChart2Icon className='text-kapwa-text-success h-8 w-8' />
+          Financial Performance
+        </h1>
+        <NotYetAvailable />
+      </div>
+    );
+  }
 
   // --- Transform Data for Charts ---
   const calcPct = (val: number, total: number) => (total > 0 ? val / total : 0);
@@ -238,8 +256,8 @@ export default function FinancialPage() {
             Financial Performance
           </h1>
           <p className='text-kapwa-text-disabled max-w-xl text-sm leading-relaxed font-medium'>
-            Independent visualization of the municipal budget, including current
-            operating income and expenditures.
+            Independent visualization of the {lguLabels.adjective.toLowerCase()}{' '}
+            budget, including current operating income and expenditures.
           </p>
         </div>
 

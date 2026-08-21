@@ -11,7 +11,11 @@ import SearchInput from '@/components/ui/SearchInput';
 
 import { toTitleCase } from '@/lib/stringUtils';
 
-import legislativeData from '@/data/directory/legislative.json';
+import legislativeDataRaw from '@/data/directory/legislative.json';
+
+import type { LegislativeChamber } from '@/types/directoryTypes';
+
+const legislativeData = legislativeDataRaw as LegislativeChamber[];
 
 interface CommitteeMember {
   name: string;

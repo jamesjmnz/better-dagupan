@@ -30,6 +30,7 @@ export {
   DialogDescription,
 } from './Dialog';
 export { EmptyState } from './EmptyState';
+export { NotYetAvailable } from './NotYetAvailable';
 export { PaginationControls } from './Pagination';
 export { ScrollArea } from './ScrollArea';
 export { Timeline } from './Timeline';

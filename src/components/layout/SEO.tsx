@@ -146,12 +146,21 @@ export function SEO({
   const siteTitle = config.portal.name;
   const fullTitle = title ? `${title} | ${siteTitle}` : finalTitle;
   const baseUrl = config.portal.baseUrl;
-  const fullCanonical = defaultCanonical
-    ? `${baseUrl}${defaultCanonical}`
-    : undefined;
-  const fullOgImage = ogImage.startsWith('http')
-    ? ogImage
-    : `${baseUrl}${ogImage}`;
+  // No production domain is configured yet. A canonical or og:url built on an
+  // empty base is a bare path, which crawlers cannot resolve and which can be
+  // read as a canonical pointing at whatever host served the page. Emit
+  // neither until there is a real absolute URL to give.
+  const fullCanonical =
+    baseUrl && defaultCanonical ? `${baseUrl}${defaultCanonical}` : undefined;
+  // Same for the OG image: a relative path is not fetchable by a scraper, so
+  // an image is only advertised when it is already absolute or can be made so.
+  const fullOgImage = !ogImage
+    ? undefined
+    : ogImage.startsWith('http')
+      ? ogImage
+      : baseUrl
+        ? `${baseUrl}${ogImage}`
+        : undefined;
 
   // Generate breadcrumb structured data
   const breadcrumbJsonLd = breadcrumbs
@@ -186,15 +195,18 @@ export function SEO({
       <meta property='og:title' content={fullTitle} />
       <meta property='og:description' content={finalDescription} />
       <meta property='og:type' content={ogType} />
-      <meta property='og:image' content={fullOgImage} />
+      {fullOgImage && <meta property='og:image' content={fullOgImage} />}
       <meta property='og:site_name' content={siteTitle} />
       {fullCanonical && <meta property='og:url' content={fullCanonical} />}
 
       {/* Twitter Card */}
-      <meta name='twitter:card' content='summary_large_image' />
+      <meta
+        name='twitter:card'
+        content={fullOgImage ? 'summary_large_image' : 'summary'}
+      />
       <meta name='twitter:title' content={fullTitle} />
       <meta name='twitter:description' content={finalDescription} />
-      <meta name='twitter:image' content={fullOgImage} />
+      {fullOgImage && <meta name='twitter:image' content={fullOgImage} />}
 
       {/* Government Specific Meta Tags */}
       <meta name='geo.country' content='PH' />

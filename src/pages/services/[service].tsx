@@ -43,9 +43,19 @@ import { getServiceBySlug } from '@/lib/services';
 import { config } from '@/lib/lguConfig';
 import { toTitleCase } from '@/lib/stringUtils';
 
-import departmentsData from '@/data/directory/departments.json';
-import executiveData from '@/data/directory/executive.json';
-import legislativeData from '@/data/directory/legislative.json';
+import departmentsDataRaw from '@/data/directory/departments.json';
+import executiveDataRaw from '@/data/directory/executive.json';
+import legislativeDataRaw from '@/data/directory/legislative.json';
+
+import type {
+  Department,
+  ExecutiveOfficial,
+  LegislativeChamber,
+} from '@/types/directoryTypes';
+
+const departmentsData = departmentsDataRaw as Department[];
+const executiveData = executiveDataRaw as ExecutiveOfficial[];
+const legislativeData = legislativeDataRaw as LegislativeChamber[];
 
 import type { QuickInfo, Source } from '@/types/servicesTypes';
 

@@ -10,7 +10,11 @@ import {
 import { officeIcons } from '@/lib/officeIcons';
 import { formatGovName } from '@/lib/stringUtils';
 
-import departmentsData from '@/data/directory/departments.json';
+import departmentsDataRaw from '@/data/directory/departments.json';
+
+import type { Department } from '@/types/directoryTypes';
+
+const departmentsData = departmentsDataRaw as Department[];
 
 export default function DepartmentsSidebar() {
   const { department: activeSlug } = useParams();

@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "Maligayang Pagdating sa BetterLB",
-    "subtitle": "Ang volunteer-run portal ng Munisipalidad ng Los Baños. Maghanap ng impormasyon, i-access ang mga serbisyo ng pamahalaan, manatiling updated sa pinakabagong balita tungkol sa Los Baños.",
+    "title": "Maligayang Pagdating sa Better Dagupan",
+    "subtitle": "Ang volunteer-run na portal ng komunidad para sa Lungsod ng Dagupan. Maghanap ng impormasyon, i-access ang mga serbisyo ng pamahalaan, at subaybayan ang mga inilalathala ng pamahalaang lungsod.",
     "quickAccess": "Mabilisang Puntahan",
     "nationalId": "National ID",
     "birthCertificate": "Sertipiko ng Kapanganakan",
@@ -12,7 +12,7 @@
     "financialReports": "Mga Ulat Pinansyal",
     "financialReportsDesc": "Badyet at pahayag ng kita",
     "infrastructure": "Imprastraktura",
-    "infrastructureDesc": "Subaybayan ang mga proyektong munisipal",
+    "infrastructureDesc": "Subaybayan ang mga proyekto ng lungsod",
     "legislation": "Lehislasyon",
     "legislationDesc": "Mga ordinansa at resolusyon",
     "government": "Pamahalaan",
@@ -37,7 +37,7 @@
     "title": "Pinakabagong Balita at Updates"
   },
   "footer": {
-    "copyright": "2025 BetterLB.org - Lahat ng nilalaman ay public domain maliban kung iba ang nakasaad."
+    "copyright": "Better Dagupan - Ang source code ay sakop ng lisensya ng repositoryo. Ang mga indibidwal na tala at pinagkunang materyal ay nananatiling saklaw ng mga tuntunin ng institusyong naglathala ng mga ito."
   },
   "navbar": {
     "home": "Home",
@@ -48,10 +48,7 @@
     "transparency": "Transparency",
     "contact": "Makipag-ugnayan",
     "legislation": "Lehislasyon",
-    "openlgu": "OpenLGU",
-    "philippines": "Pilipinas",
-    "travel": "Paglalakbay",
-    "flood control projects": "Mga Proyekto sa Pagkontrol ng Baha"
+    "openlgu": "OpenLGU"
   },
   "joinUs": {
     "stripTitle": "🚀 Sumali sa #CivicTech Revolution",
@@ -91,21 +88,32 @@
     "registerNow": "Magparehistro Ngayon"
   },
   "government": {
-    "title": "Lokal na Pamahalaan ng Munisipalidad ng Los Baños",
-    "description": "Alamin ang mga pangunahing opisina, konseho, at lokal na yunit na bumubuo sa Munisipal na Pamahalaan ng Los Baños.",
+    "title": "Lokal na Pamahalaan ng Lungsod ng Dagupan",
+    "description": "Alamin ang mga pangunahing opisina, konseho, at lokal na yunit na bumubuo sa Pamahalaang Lungsod ng Dagupan.",
     "executiveTitle": "Sangay na Tagapagpaganap",
-    "executiveDescription": "Pinangungunahan ng Alkalde, responsable sa pagpapatupad ng mga patakaran, programa, at ordinansa ng munisipyo.",
+    "executiveDescription": "Pinangungunahan ng Alkalde, responsable sa pagpapatupad ng mga patakaran, programa, at ordinansa ng lungsod.",
     "legislativeTitle": "Sangay na Tagapagbatas",
-    "legislativeDescription": "Binubuo ng Sangguniang Bayan, responsable sa paggawa ng mga lokal na batas.",
+    "legislativeDescription": "Binubuo ng Sangguniang Panlungsod, responsable sa paggawa ng mga lokal na batas.",
     "barangaysTitle": "Mga Barangay",
-    "barangaysDescription": "Mga lokal na yunit ng pamahalaan sa loob ng munisipyo, pinangungunahan ng mga nahalal na opisyal na namamahala sa mga serbisyo sa komunidad.",
-    "departmentsTitle": "Mga Kagawaran ng Munisipyo",
-    "departmentsDescription": "Mga kagawaran at ahensya ng munisipyo na responsable sa mga partikular na larangan ng pamamahala.",
+    "barangaysDescription": "Mga lokal na yunit ng pamahalaan sa loob ng lungsod, pinangungunahan ng mga nahalal na opisyal na namamahala sa mga serbisyo sa komunidad.",
+    "departmentsTitle": "Mga Kagawaran ng Lungsod",
+    "departmentsDescription": "Mga kagawaran at ahensya ng lungsod na responsable sa mga partikular na larangan ng pamamahala.",
     "electedofficialsTitle": "Mga Nahalal na Opisyal",
     "electedofficialsDescription": "Ang nahalal na pamumuno ng Sangay na Tagapagpaganap at Tagapagbatas, responsable sa pagpapatupad ng patakaran at paggawa ng batas.",
     "learnMore": "Alamin pa",
     "directoryTitle": "Opisyal na Direktoryo",
     "directoryDescription": "Maghanap ng impormasyon ng kontak para sa mga opisyal ng pamahalaan, ahensya, at opisina sa pambansa at lokal na antas.",
     "viewDirectory": "Tingnan ang Direktoryo"
+  },
+  "disclaimer": {
+    "short": "Ang {{portal}} ay isang malaya at pinamumunuan ng komunidad na proyekto. Hindi ito ang opisyal na website ng Pamahalaang Lungsod ng {{lgu}}.",
+    "noticeTitle": "Malayang proyekto ng komunidad",
+    "noticeBody": "Ang {{portal}} ay binuo at pinapanatili ng mga boluntaryo. Hindi ito ang opisyal na website ng Pamahalaang Lungsod ng {{lgu}}, at walang kaugnayan o pag-endorso mula sa alinmang ahensya ng pamahalaan.",
+    "officialSiteLabel": "Bisitahin ang opisyal na website ng Pamahalaang Lungsod ng {{lgu}}"
+  },
+  "emptyState": {
+    "title": "Wala pa sa ngayon",
+    "body": "Wala pang naidadagdag na beripikadong impormasyon tungkol sa {{lgu}}. Bahagi ng balangkas ng portal ang seksyong ito at pupunan kapag nakakuha na ng mga tala mula sa Pamahalaang Lungsod ng {{lgu}} at naberipika na ang mga ito.",
+    "contribute": "Magmungkahi ng pinagkunan"
   }
 }

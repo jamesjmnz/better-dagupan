@@ -117,7 +117,7 @@ export const Navbar: FC = () => {
                 {config.portal.name}
               </div>
               <div className='line-clamp-2 text-[9px] leading-tight font-medium text-kapwa-text-support md:line-clamp-1 md:text-xs md:leading-normal'>
-                Community Portal for {config.lgu.fullName}
+                Community Portal for the {config.lgu.fullName}
               </div>
             </div>
           </Link>
@@ -287,7 +287,7 @@ export const Navbar: FC = () => {
                 onClick={closeMenu}
                 className='block p-4 text-xs font-bold tracking-widest uppercase text-kapwa-text-support'
               >
-                About Better LB
+                About {config.portal.name}
               </Link>
               <Link
                 to='/contact'

@@ -71,7 +71,7 @@ export const footerNavigation = {
   // Brand Section (Matches the Solano/Bacolod mission-style text)
   brand: {
     title: config.portal.name,
-    description: `An open-source civic tech initiative making government information and municipal services accessible for the people of ${config.lgu.name}.`,
+    description: `An open-source civic tech initiative making government information and ${lguLabels.adjective.toLowerCase()} services accessible for the people of ${config.lgu.name}.`,
     cost: `Cost to the People of ${config.lgu.name} = ₱0`,
   },
 

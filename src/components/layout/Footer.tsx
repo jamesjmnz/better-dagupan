@@ -12,8 +12,10 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { config } from '@/lib/lguConfig';
+import { lguLabels } from '@/lib/lguLabels';
 
 import { footerNavigation } from '../../data/navigation';
+import { DisclaimerLine } from './Disclaimer';
 
 export const Footer: FC = () => {
   const { t } = useTranslation('common');
@@ -57,9 +59,9 @@ export const Footer: FC = () => {
               </div>
             </div>
             <p className='max-w-sm text-sm leading-relaxed text-kapwa-text-disabled'>
-              An open-source initiative providing transparent access to
-              municipal services, local legislation, and public data for the
-              people of {config.lgu.name}.
+              An open-source initiative providing transparent access to{' '}
+              {lguLabels.adjective.toLowerCase()} services, local legislation,
+              and public data for the people of {config.lgu.name}.
             </p>
             <div className='flex space-x-4'>
               {footerNavigation.socialLinks.map(link => (
@@ -125,9 +127,12 @@ export const Footer: FC = () => {
 
         {/* Bottom Bar */}
         <div className='flex flex-col gap-6 justify-between items-center pt-8 mt-16 border-t border-kapwa-border-strong md:flex-row'>
-          <p className='text-[10px] font-bold tracking-widest text-kapwa-text-disabled uppercase'>
-            {t('footer.copyright')}
-          </p>
+          <div className='space-y-3 text-center md:text-left'>
+            <DisclaimerLine />
+            <p className='text-[10px] font-bold tracking-widest text-kapwa-text-disabled uppercase'>
+              {t('footer.copyright')}
+            </p>
+          </div>
           <div className='flex gap-6'>
             <a
               href={config.portal.githubUrl}

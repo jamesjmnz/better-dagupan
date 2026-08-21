@@ -10,7 +10,11 @@ import {
 
 import { formatGovName } from '@/lib/stringUtils';
 
-import barangaysData from '@/data/directory/barangays.json';
+import barangaysDataRaw from '@/data/directory/barangays.json';
+
+import type { Barangay } from '@/types/directoryTypes';
+
+const barangaysData = barangaysDataRaw as Barangay[];
 
 export default function BarangaysSidebar() {
   const { barangay: activeSlug } = useParams(); // URL param: /barangays/:barangay

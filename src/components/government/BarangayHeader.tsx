@@ -10,7 +10,7 @@ interface BarangayHeaderProps {
     barangay_name: string;
     address?: string;
     trunkline?: string[];
-    website?: string;
+    website?: string | null;
   };
 }
 

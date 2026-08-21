@@ -27,23 +27,18 @@ import { Card, CardContent } from '@/components/ui/Card';
 
 import { toTitleCase } from '@/lib/stringUtils';
 
-import executiveData from '@/data/directory/executive.json';
-import legislativeData from '@/data/directory/legislative.json';
+import executiveDataRaw from '@/data/directory/executive.json';
+import legislativeDataRaw from '@/data/directory/legislative.json';
+
+import type {
+  ExecutiveOfficial,
+  LegislativeChamber,
+} from '@/types/directoryTypes';
+
+const executiveData = executiveDataRaw as ExecutiveOfficial[];
+const legislativeData = legislativeDataRaw as LegislativeChamber[];
 
 // --- Types ---
-interface ExecutiveOfficial {
-  slug: string;
-  name: string;
-  role: string;
-  office?: string;
-  address?: string;
-  phone?: string;
-  email?: string;
-  website?: string;
-  isElected: boolean;
-  personId?: string;
-}
-
 interface Committee {
   committee: string;
   chairperson: string;
@@ -237,7 +232,7 @@ function CouncilMemberCard({
 // --- Page ---
 
 export default function ElectedOfficialsPage() {
-  const allExecutive = executiveData as ExecutiveOfficial[];
+  const allExecutive = executiveData;
 
   const electedLeaders = useMemo(
     () => allExecutive.filter(o => o.isElected),

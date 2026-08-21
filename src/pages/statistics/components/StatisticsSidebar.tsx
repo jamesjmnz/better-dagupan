@@ -1,5 +1,7 @@
 import { Trophy, Users, Wallet } from 'lucide-react';
 
+import { lguLabels } from '@/lib/lguLabels';
+
 import {
   SidebarContainer,
   SidebarItem,
@@ -21,7 +23,7 @@ export default function StatisticsSidebar() {
     },
     {
       path: '/statistics/municipal-income',
-      label: 'Municipal Income',
+      label: `${lguLabels.adjective} Income`,
       icon: Wallet,
       description: 'Revenue sources',
     },
