@@ -1,14 +1,14 @@
 {
   "lgu": {
-    "name": "Los Ba\u00f1os",
-    "fullName": "Municipality of Los Ba\u00f1os",
-    "province": "Laguna",
-    "districtEngineeringOffice": "Laguna 2nd DEO",
-    "region": "Region IV-A",
-    "regionCode": "CALABARZON",
-    "type": "municipality",
-    "officialWebsite": "https://losbanos.gov.ph",
-    "provinceWebsite": "https://laguna.gov.ph"
+    "name": "Dagupan",
+    "fullName": "City of Dagupan",
+    "province": "Pangasinan",
+    "districtEngineeringOffice": "Pangasinan 2nd DEO",
+    "region": "Region I",
+    "regionCode": "Ilocos Region",
+    "type": "city",
+    "officialWebsite": "https://www.dagupan.gov.ph",
+    "provinceWebsite": "https://www.pangasinan.gov.ph"
   },
   "portal": {
     "name": "BetterLB",
@@ -30,11 +30,11 @@
   },
   "location": {
     "coordinates": {
-      "lat": 14.1763,
-      "lon": 121.2219
+      "lat": 16.0433,
+      "lon": 120.3333
     },
     "weather": {
-      "defaultCity": "Los Ba\u00f1os"
+      "defaultCity": "Dagupan"
     }
   },
   "transparency": {
