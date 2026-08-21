@@ -7,7 +7,7 @@ export interface LGUConfig {
     province: string;
     districtEngineeringOffice?: string;
     region: string;
-    /** ISO-like region code (e.g. "040000000") */
+    /** Region name that pairs with `region` (e.g. "Ilocos Region") */
     regionCode: string;
     type: 'municipality' | 'city' | 'province';
     officialWebsite: string;

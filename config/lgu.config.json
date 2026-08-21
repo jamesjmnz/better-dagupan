@@ -1,56 +1,58 @@
 {
   "lgu": {
-    "name": "Los Ba\u00f1os",
-    "fullName": "Municipality of Los Ba\u00f1os",
-    "province": "Laguna",
-    "districtEngineeringOffice": "Laguna 2nd DEO",
-    "region": "Region IV-A",
-    "regionCode": "CALABARZON",
-    "type": "municipality",
-    "officialWebsite": "https://losbanos.gov.ph",
-    "provinceWebsite": "https://laguna.gov.ph"
+    "name": "Dagupan",
+    "fullName": "City of Dagupan",
+    "province": "Pangasinan",
+    "districtEngineeringOffice": "Pangasinan 2nd DEO",
+    "region": "Region I",
+    "regionCode": "Ilocos Region",
+    "type": "city",
+    "officialWebsite": "https://www.dagupan.gov.ph",
+    "provinceWebsite": "https://www.pangasinan.gov.ph"
   },
   "portal": {
-    "name": "BetterLB",
-    "domain": "betterlb.org",
-    "baseUrl": "https://betterlb.org",
-    "description": "Community-powered portal of the Municipality of Los Ba\u00f1os.",
+    "name": "Better Dagupan",
+    "domain": "",
+    "baseUrl": "",
+    "description": "Community-powered portal of the City of Dagupan.",
     "brandColor": "#0066eb",
-    "footerBrandName": "Better Los Ba\u00f1os",
+    "footerBrandName": "Better Dagupan",
     "logoWhitePath": "/logos/svg/betterlb-icon-white.svg",
     "navbarLogoPath": "/logos/svg/betterlb-icon-colored.svg",
     "defaultOgImagePath": "/logos/svg/betterlb-icon-colored.svg",
     "faviconPath": "/logos/png/betterlb-banner-colored.png",
     "faviconSvgPath": "/logos/svg/betterlb-logo-primary.svg",
     "appleTouchIconPath": "/logos/png/betterlb-banner-inverted.png",
-    "githubUrl": "https://github.com/BetterLosBanos/betterlb",
-    "discordUrl": "https://discord.gg/dA6tkU4FYS",
-    "facebookUrl": "https://facebook.com/betterlb.org",
+    "githubUrl": "https://github.com/jamesjmnz/better-dagupan",
+    "discordUrl": "",
+    "facebookUrl": "",
     "contactEmail": "volunteers@bettergov.ph"
   },
   "location": {
     "coordinates": {
-      "lat": 14.1763,
-      "lon": 121.2219
+      "lat": 16.0433,
+      "lon": 120.3333
     },
     "weather": {
-      "defaultCity": "Los Ba\u00f1os"
+      "defaultCity": "Dagupan"
     }
   },
   "transparency": {
     "procurement": {
-      "organizationName": "MUNICIPALITY OF LOS BA\u00d1OS, LAGUNA",
+      "organizationName": "",
       "externalDashboard": "https://transparency.bettergov.ph/organizations/"
     },
     "infrastructure": {
-      "searchString": "Los Ba\u00f1os",
-      "exactMatchTargets": ["los ba\u00f1os", "los banos"]
+      "searchString": "Dagupan",
+      "exactMatchTargets": ["dagupan", "dagupan city"]
     }
   },
   "dataPaths": {
-    "departments": "src/data/lgu/losbanos/directory/departments.json",
-    "barangays": "src/data/lgu/losbanos/directory/barangays.json",
-    "services": "src/data/lgu/losbanos/services/categories"
+    "departments": "src/data/directory/departments.json",
+    "barangays": "src/data/directory/barangays.json",
+    "executive": "src/data/directory/executive.json",
+    "legislative": "src/data/directory/legislative.json",
+    "services": "src/data/services"
   },
   "features": {
     "openLGU": true,
