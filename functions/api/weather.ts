@@ -13,12 +13,11 @@ import type {
 /**
  * CORS Configuration
  * Restricts API access to trusted origins only (security fix for T-059)
- * Production: betterlb.pages.dev and custom domain
+ * Production: no domain assigned yet
  * Development: localhost for local development
  */
 const ALLOWED_ORIGINS = [
-  'https://betterlb.pages.dev',
-  'https://betterlb.gov.ph', // Custom domain if configured
+  // Better Dagupan has no production domain yet; add it here once assigned.
   'http://localhost:5173', // Vite dev server
   'http://localhost:8788', // Wrangler dev server
 ];
@@ -49,15 +48,14 @@ function getCorsHeaders(origin: string | null): Record<string, string> {
 
 // CONFIGURATION - Easy to change for other municipalities
 const DEFAULT_CITY: CityCoordinates = {
-  name: 'Los Baños',
-  lat: 14.1763,
-  lon: 121.2219,
+  name: 'Dagupan',
+  lat: 16.0433,
+  lon: 120.3333,
 };
 
 // Optional: Add more cities if needed
 const ADDITIONAL_CITIES: CityCoordinates[] = [
-  // { name: 'Bay', lat: 14.1833, lon: 121.2833 },
-  // { name: 'Calamba', lat: 14.2167, lon: 121.1667 },
+  // { name: 'Neighbouring LGU', lat: 0, lon: 0 },
 ];
 
 const ALL_CITIES = [DEFAULT_CITY, ...ADDITIONAL_CITIES];
