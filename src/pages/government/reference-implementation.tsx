@@ -5,7 +5,7 @@ import { Card, CardHeader, CardContent } from '@/components/ui/Card';
  * Reference Implementation Page
  *
  * This page demonstrates proper design system patterns and serves as a reference
- * for implementing other pages in BetterLB. It showcases:
+ * for implementing other pages in Better Dagupan. It showcases:
  * - Kapwa semantic token usage
  * - Proper component composition
  * - Responsive layout patterns

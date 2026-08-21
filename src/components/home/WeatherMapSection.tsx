@@ -26,6 +26,7 @@ import {
 import { Card, CardContent } from '@/components/ui/Card';
 
 import { config } from '@/lib/lguConfig';
+import { lguLabels } from '@/lib/lguLabels';
 import { fetchWeatherData } from '@/lib/weather';
 
 const DefaultIcon = L.icon({
@@ -137,7 +138,7 @@ export default function WeatherMapSection() {
         config.location.coordinates.lon,
       ]).addTo(mapInstance);
       const popupContent = document.createElement('div');
-      popupContent.textContent = `${config.lgu.fullName} Municipal Hall`;
+      popupContent.textContent = `${config.lgu.fullName} ${lguLabels.adjective} Hall`;
       const popupSub = document.createElement('div');
       popupSub.textContent = `${config.lgu.province}, Philippines`;
       popupContent.appendChild(popupSub);
@@ -275,7 +276,7 @@ export default function WeatherMapSection() {
               id='map-container'
               className='h-64 w-full md:flex-1'
               role='application'
-              aria-label={`Interactive map of ${config.lgu.fullName} Municipal Hall`}
+              aria-label={`Interactive map of ${config.lgu.fullName} ${lguLabels.adjective} Hall`}
             >
               <noscript>
                 <div className='text-kapwa-text-disabled p-4 text-sm'>
@@ -286,7 +287,8 @@ export default function WeatherMapSection() {
                     rel='noopener noreferrer'
                     className='text-kapwa-text-brand ml-1 underline'
                   >
-                    View {config.lgu.fullName} Municipal Hall on OpenStreetMap
+                    View {config.lgu.fullName} {lguLabels.adjective} Hall on
+                    OpenStreetMap
                   </a>
                 </div>
               </noscript>
@@ -294,7 +296,7 @@ export default function WeatherMapSection() {
             <div className='border-kapwa-border-weak bg-kapwa-bg-surface flex items-center gap-2 border-t p-3'>
               <MapPin className='text-kapwa-text-brand h-5 w-5' />
               <span className='text-kapwa-text-support text-sm font-medium'>
-                {config.lgu.fullName} Municipal Hall
+                {config.lgu.fullName} {lguLabels.adjective} Hall
               </span>
             </div>
           </div>

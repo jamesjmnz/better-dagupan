@@ -1,7 +1,7 @@
 {
   "hero": {
-    "title": "Welcome to BetterLB",
-    "subtitle": "The volunteer run portal of the Municipality of Los Baños. Find information, access government services, stay updated with the latest news about Los Baños.",
+    "title": "Welcome to Better Dagupan",
+    "subtitle": "The volunteer-run community portal for the City of Dagupan. Find information, access government services, and follow what the city government publishes.",
     "quickAccess": "Quick Access",
     "nationalId": "National ID",
     "birthCertificate": "Birth Certificate",
@@ -12,7 +12,7 @@
     "financialReports": "Financial Reports",
     "financialReportsDesc": "Budget & income statements",
     "infrastructure": "Infrastructure",
-    "infrastructureDesc": "Track municipal projects",
+    "infrastructureDesc": "Track city projects",
     "legislation": "Legislation",
     "legislationDesc": "Ordinances & resolutions",
     "government": "Government",
@@ -37,7 +37,7 @@
     "title": "Latest News & Updates"
   },
   "footer": {
-    "copyright": "2025 BetterLB.org - All content is public domain unless otherwise specified."
+    "copyright": "Better Dagupan - Government information reproduced here is public domain unless otherwise specified."
   },
   "navbar": {
     "home": "Home",
@@ -88,16 +88,16 @@
     "registerNow": "Register Now"
   },
   "government": {
-    "title": "Local Government of the Municipality of Los Baños",
-    "description": "Learn about the key offices, councils, and local units that make up the Municipal Government of Los Baños.",
+    "title": "Local Government of the City of Dagupan",
+    "description": "Learn about the key offices, councils, and local units that make up the City Government of Dagupan.",
     "executiveTitle": "Executive Branch",
-    "executiveDescription": "Led by the Mayor, responsible for implementing municipal policies, programs, and ordinances.",
+    "executiveDescription": "Led by the Mayor, responsible for implementing city policies, programs, and ordinances.",
     "legislativeTitle": "Legislative Branch",
-    "legislativeDescription": "Composed of the Sangguniang Bayan, responsible for making local laws.",
+    "legislativeDescription": "Composed of the Sangguniang Panlungsod, responsible for making local laws.",
     "barangaysTitle": "Barangays",
-    "barangaysDescription": "Local government units within the municipality, led by elected officials who manage community-level services and programs.",
-    "departmentsTitle": "Municipal Departments",
-    "departmentsDescription": "Municipal departments and agencies responsible for specific areas of governance.",
+    "barangaysDescription": "Local government units within the city, led by elected officials who manage community-level services and programs.",
+    "departmentsTitle": "City Departments",
+    "departmentsDescription": "City departments and agencies responsible for specific areas of governance.",
     "electedofficialsTitle": "Elected Officials",
     "electedofficialsDescription": "The elected leadership of the Executive and Legislative branches, responsible for policy implementation and law-making.",
     "learnMore": "Learn More",

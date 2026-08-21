@@ -87,7 +87,7 @@ export default function PopulationPage() {
       {/* PageHero - documented pattern for layout headers */}
       <PageHero
         title='Population Profile'
-        description='Detailed demographic analysis tracking growth from the municipal level down to individual barangays.'
+        description='Detailed demographic analysis tracking growth from the citywide level down to individual barangays.'
       >
         <div className='flex flex-wrap gap-2 justify-center'>
           <Badge variant='primary' dot>
@@ -132,7 +132,7 @@ export default function PopulationPage() {
               : 'hover:text-kapwa-text-support text-kapwa-text-strong0'
           )}
         >
-          <TrendingUp className='w-4 h-4' /> Municipal Growth
+          <TrendingUp className='w-4 h-4' /> Citywide Growth
         </button>
         <button
           onClick={() => setActiveTab('barangays')}

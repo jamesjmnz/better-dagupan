@@ -77,7 +77,7 @@ export default function CompetitivenessPage() {
       {/* PageHero - documented pattern for layout headers */}
       <PageHero
         title='Competitiveness'
-        description='National evaluation of municipal progress across pillars of governance and development.'
+        description='National evaluation of local government progress across pillars of governance and development.'
       >
         <div className='flex flex-wrap gap-2 justify-center'>
           <Badge variant='primary' dot>
