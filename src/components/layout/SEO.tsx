@@ -149,9 +149,13 @@ export function SEO({
   const fullCanonical = defaultCanonical
     ? `${baseUrl}${defaultCanonical}`
     : undefined;
-  const fullOgImage = ogImage.startsWith('http')
-    ? ogImage
-    : `${baseUrl}${ogImage}`;
+  // No production domain is configured yet, so an absolute OG image URL cannot be
+  // built. Emit no image tag at all rather than a broken relative one.
+  const fullOgImage = ogImage
+    ? ogImage.startsWith('http')
+      ? ogImage
+      : `${baseUrl}${ogImage}`
+    : undefined;
 
   // Generate breadcrumb structured data
   const breadcrumbJsonLd = breadcrumbs
@@ -186,15 +190,18 @@ export function SEO({
       <meta property='og:title' content={fullTitle} />
       <meta property='og:description' content={finalDescription} />
       <meta property='og:type' content={ogType} />
-      <meta property='og:image' content={fullOgImage} />
+      {fullOgImage && <meta property='og:image' content={fullOgImage} />}
       <meta property='og:site_name' content={siteTitle} />
       {fullCanonical && <meta property='og:url' content={fullCanonical} />}
 
       {/* Twitter Card */}
-      <meta name='twitter:card' content='summary_large_image' />
+      <meta
+        name='twitter:card'
+        content={fullOgImage ? 'summary_large_image' : 'summary'}
+      />
       <meta name='twitter:title' content={fullTitle} />
       <meta name='twitter:description' content={finalDescription} />
-      <meta name='twitter:image' content={fullOgImage} />
+      {fullOgImage && <meta name='twitter:image' content={fullOgImage} />}
 
       {/* Government Specific Meta Tags */}
       <meta name='geo.country' content='PH' />
