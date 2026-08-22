@@ -115,5 +115,36 @@
     "title": "Not yet available",
     "body": "Verified {{lgu}} information has not been added yet. This section is part of the portal's structure and will be filled once records are sourced from the City Government of {{lgu}} and verified.",
     "contribute": "Suggest a source"
+  },
+  "civic": {
+    "sourceLabel": "Source",
+    "sourcesLabel": "Sources",
+    "lastVerified": "Last verified {{date}}",
+    "retrieved": "Retrieved {{date}}",
+    "historicalSpelling": "Historical city-page spelling ({{period}}): {{name}}",
+    "historicalSpellingNote": "Recorded from a superseded page and shown for searchability. It is not evidence of the current official name.",
+    "derivativeSource": "Redistributes {{source}}",
+    "notVerified": "Not yet verified",
+    "notVerifiedHint": "Better Dagupan has not found an authoritative source for this detail yet. It is not a statement that the information does not exist."
+  },
+  "barangays": {
+    "title": "Barangays",
+    "count": "{{count}} barangays of the {{lgu}}, as published by the Philippine Statistics Authority.",
+    "searchPlaceholder": "Search by name (e.g. Bonuan Gueset)…",
+    "noMatches": "No barangay name matches that search.",
+    "psgcCode": "PSGC code",
+    "classification": "Classification",
+    "urban": "Urban",
+    "rural": "Rural",
+    "population": "Population",
+    "populationNote": "2024 Census of Population (PSA)",
+    "officialsTitle": "Barangay officials",
+    "officialsNotVerified": "The officials of this barangay are not published here yet.",
+    "officialsNotVerifiedWhy": "The only city-government roster found covers the 2018–2020 term, so publishing it would present former officials as current ones. Names will be added once a current source is verified.",
+    "contactNotVerified": "No verified contact number",
+    "addressNotVerified": "No verified address",
+    "punongBarangay": "Punong Barangay",
+    "viewProfile": "View profile",
+    "profileOf": "View the profile of Barangay {{name}}"
   }
 }
