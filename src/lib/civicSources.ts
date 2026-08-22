@@ -47,29 +47,76 @@ export function hasCivicSource(id: string): boolean {
 }
 
 /**
- * The most recent verification date across a record's citations, which is the
- * honest "last verified" figure for that record: it is only as current as its
- * least recently checked source, but the record as a whole was reviewed when
- * the newest of them was.
+ * The verification date a record as a whole can honestly claim: the OLDEST
+ * verification date among its citations.
+ *
+ * A record is only as current as its least recently checked source. Reporting
+ * the newest date would overstate freshness - a record citing one source
+ * checked in June and another in August would advertise August while part of
+ * its evidence had gone unchecked for two months. Understating freshness is
+ * the safe direction to be wrong in.
+ *
+ * Per-source dates are shown alongside each source in SourceNote, so nothing
+ * is hidden by taking the minimum here.
  */
-export function latestVerifiedDate(ids: readonly string[]): string | null {
+export function earliestVerificationDate(
+  ids: readonly string[]
+): string | null {
+  // ISO-8601 dates sort lexicographically, so plain string comparison is
+  // enough and avoids constructing Date objects just to order them.
   const dates = resolveCivicSources(ids)
     .map(source => source.verified)
     .sort();
 
-  return dates.length > 0 ? dates[dates.length - 1] : null;
+  return dates.length > 0 ? dates[0] : null;
 }
 
-/** Render an ISO date as e.g. "22 August 2026". */
-export function formatVerificationDate(isoDate: string): string {
+/**
+ * Map an i18next language tag onto the locale used to format dates.
+ *
+ * i18next may hand back "en", "en-US", "fil" or "fil-PH" depending on how the
+ * language was detected, so match on the primary subtag rather than the whole
+ * tag. Anything unrecognised falls back to English rather than to the host's
+ * locale, so the output cannot vary with the reader's machine settings.
+ */
+export function verificationDateLocale(language?: string): string {
+  const primary = (language ?? '').toLowerCase().split('-')[0];
+
+  if (primary === 'fil' || primary === 'tl') return 'fil-PH';
+
+  return 'en-PH';
+}
+
+/**
+ * Render an ISO date for display, e.g. "August 22, 2026" / "Agosto 22, 2026".
+ *
+ * Parsed as UTC and formatted in UTC so the calendar day cannot shift: a date
+ * recorded as 2026-08-22 must never render as the 21st for a reader west of
+ * the meridian.
+ */
+export function formatVerificationDate(
+  isoDate: string,
+  language?: string
+): string {
   const parsed = new Date(`${isoDate}T00:00:00Z`);
 
   if (Number.isNaN(parsed.getTime())) return isoDate;
 
-  return new Intl.DateTimeFormat('en-PH', {
+  const options: Intl.DateTimeFormatOptions = {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
     timeZone: 'UTC',
-  }).format(parsed);
+  };
+
+  try {
+    return new Intl.DateTimeFormat(
+      verificationDateLocale(language),
+      options
+    ).format(parsed);
+  } catch {
+    // A structurally invalid tag makes Intl throw. A citation must still
+    // render its date rather than take the page down with it.
+    return new Intl.DateTimeFormat('en-PH', options).format(parsed);
+  }
 }

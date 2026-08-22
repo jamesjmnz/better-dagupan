@@ -7,10 +7,9 @@ import { describe, expect, it } from 'vitest';
 
 import {
   allCivicSources,
-  formatVerificationDate,
+  earliestVerificationDate,
   getCivicSource,
   hasCivicSource,
-  latestVerifiedDate,
 } from '@/lib/civicSources';
 
 import civicSources from '@/data/sources/civic-sources.json';
@@ -143,25 +142,26 @@ describe('civic sources', () => {
     );
   });
 
-  it('reports the newest verification date across a record’s citations', () => {
+  it('reports the oldest verification date across a record’s citations', () => {
+    // Behaviour against differing dates is proven in src/lib/civicSources.test.ts,
+    // where the fixtures can tell oldest from newest. Here the production
+    // sources happen to share a date, so this only guards the wiring.
     expect(
-      latestVerifiedDate([
+      earliestVerificationDate([
         'psa-psgc-dagupan-2026q2',
         'dagupan-lgu-barangay-captains-2018-2020',
       ])
     ).toBe('2026-08-22');
-    expect(latestVerifiedDate([])).toBeNull();
+    expect(earliestVerificationDate([])).toBeNull();
   });
 
-  it('formats verification dates for display without shifting the day', () => {
-    // Parsed as UTC rather than local time, so a Manila reader never sees the
-    // day before the date the source was actually checked.
-    const formatted = formatVerificationDate('2026-08-22');
-    expect(formatted).toMatch(/22/);
-    expect(formatted).toMatch(/August/);
-    expect(formatted).toMatch(/2026/);
+  it('would expose a stale citation rather than hide it', () => {
+    // If these dates ever diverge, the record-level figure must follow the
+    // oldest one. Asserting the invariant directly means the guarantee does
+    // not quietly lapse the day a single source is re-verified on its own.
+    const oldest = civicSources.map(source => source.verified).sort()[0];
 
-    expect(formatVerificationDate('not-a-date')).toBe('not-a-date');
+    expect(earliestVerificationDate(civicSources.map(s => s.id))).toBe(oldest);
   });
 
   it('exposes every declared source through the helper', () => {

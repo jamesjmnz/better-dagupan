@@ -120,6 +120,7 @@
     "sourceLabel": "Pinagkunan",
     "sourcesLabel": "Mga pinagkunan",
     "lastVerified": "Huling beripika noong {{date}}",
+    "recordVerified": "Pinakalumang beripikasyon ng pinagkunan: {{date}}",
     "retrieved": "Kinuha noong {{date}}",
     "historicalSpelling": "Makasaysayang baybay mula sa pahina ng lungsod ({{period}}): {{name}}",
     "historicalSpellingNote": "Nakuha mula sa lumang pahina at ipinapakita upang matagpuan sa paghahanap. Hindi ito patunay ng kasalukuyang opisyal na pangalan.",

@@ -120,6 +120,7 @@
     "sourceLabel": "Source",
     "sourcesLabel": "Sources",
     "lastVerified": "Last verified {{date}}",
+    "recordVerified": "Oldest source verification: {{date}}",
     "retrieved": "Retrieved {{date}}",
     "historicalSpelling": "Historical city-page spelling ({{period}}): {{name}}",
     "historicalSpellingNote": "Recorded from a superseded page and shown for searchability. It is not evidence of the current official name.",
