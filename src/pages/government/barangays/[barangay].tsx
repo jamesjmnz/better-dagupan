@@ -31,14 +31,6 @@ export default function BarangayDetail() {
 
   return (
     <div className='animate-in fade-in space-y-6 pb-20 duration-500'>
-      {/* Skip Link for Accessibility */}
-      <a
-        href='#main-content'
-        className='focus:bg-kapwa-bg-surface focus:text-kapwa-text-strong focus:ring-kapwa-border-focus sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:ring-2'
-      >
-        Skip to main content
-      </a>
-
       {/* --- BREADCRUMBS --- */}
       <Breadcrumb>
         <BreadcrumbList>
@@ -64,7 +56,12 @@ export default function BarangayDetail() {
       {/* Where every figure above came from, and when it was last checked. */}
       <SourceNote sources={barangay.sources} />
 
-      <main id='main-content' className='space-y-6'>
+      {/*
+        A plain wrapper, not a <main id='main-content'>: the app shell in
+        src/App.tsx already provides that landmark and the skip link that
+        targets it, and repeating the id here made it a duplicate.
+      */}
+      <div className='space-y-6'>
         {/* --- OFFICIALS --- */}
         <section className='space-y-3' aria-labelledby='officials-heading'>
           <div className='border-kapwa-border-weak flex items-center gap-2 border-b pb-3'>
@@ -119,7 +116,7 @@ export default function BarangayDetail() {
             )}
           </div>
         </section>
-      </main>
+      </div>
     </div>
   );
 }
