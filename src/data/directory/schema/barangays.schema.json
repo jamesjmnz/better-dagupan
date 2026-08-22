@@ -1,24 +1,78 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Barangay Directory",
-  "description": "Schema for component barangay unit data",
+  "description": "Schema for component barangay unit data. Fields that have not been verified against a civic source are null or empty, never invented or filled with placeholder text.",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["slug", "barangay_name"],
+    "additionalProperties": false,
+    "required": [
+      "slug",
+      "barangay_name",
+      "psgc_10_digit_code",
+      "psgc_correspondence_code",
+      "urban_rural",
+      "population_2024_popcen",
+      "sources"
+    ],
     "properties": {
-      "slug": { "type": "string" },
-      "barangay_name": { "type": "string" },
-      "address": { "type": "string" },
+      "slug": {
+        "description": "URL segment. Lowercase, hyphen-separated, derived from the PSGC name.",
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "barangay_name": {
+        "description": "Official name as published in the PSGC, cased ready to render.",
+        "type": "string",
+        "minLength": 1
+      },
+      "name_variants": {
+        "description": "Alternative spellings observed on other authoritative sources.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "source"],
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "source": { "type": "string", "minLength": 1 }
+          }
+        }
+      },
+      "psgc_10_digit_code": {
+        "type": "string",
+        "pattern": "^[0-9]{10}$"
+      },
+      "psgc_correspondence_code": {
+        "type": "string",
+        "pattern": "^[0-9]{9}$"
+      },
+      "urban_rural": {
+        "description": "PSA urban/rural classification.",
+        "type": "string",
+        "enum": ["urban", "rural"]
+      },
+      "population_2024_popcen": {
+        "description": "2024 Census of Population count published by the PSA.",
+        "type": "integer",
+        "minimum": 0
+      },
+      "address": {
+        "description": "Null until an authoritative address is sourced.",
+        "type": ["string", "null"]
+      },
       "trunkline": {
+        "description": "Empty until an authoritative contact number is sourced.",
         "type": "array",
         "items": { "type": "string" }
       },
       "website": {
+        "description": "Null until an authoritative page is sourced.",
         "type": ["string", "null"],
         "format": "uri"
       },
       "officials": {
+        "description": "Empty until a current roster is sourced. Never filled from a superseded term.",
         "type": "array",
         "items": {
           "type": "object",
@@ -28,6 +82,13 @@
             "name": { "type": "string" }
           }
         }
+      },
+      "sources": {
+        "description": "Civic-source ids from src/data/sources/civic-sources.json.",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": { "type": "string", "minLength": 1 }
       }
     }
   }

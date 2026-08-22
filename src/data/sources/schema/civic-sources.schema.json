@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Civic Data Sources",
+  "description": "Citations for the published government documents and pages that every Better Dagupan civic record is verified against.",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "agency",
+      "title",
+      "url",
+      "published",
+      "data_as_of",
+      "coverage",
+      "retrieved",
+      "verified",
+      "licence",
+      "derives_from"
+    ],
+    "properties": {
+      "id": {
+        "description": "Stable identifier referenced by civic records. Never reused for a different document.",
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "agency": {
+        "description": "Government body that published the document.",
+        "type": "string",
+        "minLength": 1
+      },
+      "title": {
+        "description": "Title of the document or page as published.",
+        "type": "string",
+        "minLength": 1
+      },
+      "url": {
+        "description": "Exact URL the data was read from.",
+        "type": "string",
+        "format": "uri",
+        "pattern": "^https://"
+      },
+      "published": {
+        "description": "Date the publisher released this edition of the document. Null when the publisher states none. Not the same as data_as_of.",
+        "type": ["string", "null"],
+        "format": "date"
+      },
+      "data_as_of": {
+        "description": "Reference date the content describes, as stated by the publisher. A dataset released on one date commonly describes an earlier one, so this is recorded separately from published.",
+        "type": ["string", "null"],
+        "format": "date"
+      },
+      "coverage": {
+        "description": "Human-readable period the content covers, for documents that describe a span rather than a single date (e.g. a term of office). Used to label historical content as historical.",
+        "type": ["string", "null"]
+      },
+      "retrieved": {
+        "description": "Date this source was read.",
+        "type": "string",
+        "format": "date"
+      },
+      "verified": {
+        "description": "Date the records citing this source were last checked against it.",
+        "type": "string",
+        "format": "date"
+      },
+      "licence": {
+        "description": "Reuse terms stated by the publisher. Null means the publisher states none.",
+        "type": ["string", "null"]
+      },
+      "notes": {
+        "description": "What this source establishes, and any limits on it. The only optional field: omit it when there is nothing to qualify.",
+        "type": "string"
+      },
+      "derives_from": {
+        "description": "Id of the authoritative source this document redistributes. A derivative source corroborates availability, not the facts themselves, and must not be the sole citation for a published field.",
+        "type": ["string", "null"]
+      }
+    },
+    "description": "A citation. Every field except `notes` is required, including the ones whose value is often null: a citation must state that a publisher gives no publication date, rather than leave the reader unable to tell an absent date from an unrecorded one. `notes` is the sole optional field, because a source with no caveat needs none and an empty string would say nothing. Mirrors the CivicSource interface in src/types/civicSourceTypes.ts."
+  }
+}

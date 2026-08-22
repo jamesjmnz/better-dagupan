@@ -1,7 +1,59 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Test code uses any for mock data which is acceptable in test context
 import { describe, it, expect } from 'vitest';
-import { formatGovName, toTitleCase } from './stringUtils';
+import { barangayHeading, formatGovName, toTitleCase } from './stringUtils';
+
+/**
+ * Four of Dagupan's barangays are named with Roman numerals ("Barangay I",
+ * "Barangay II", "Barangay IV") and these helpers cannot render them. Both
+ * lowercase the whole word before re-capitalising the first letter, so "II"
+ * becomes "Ii". The barangay pages therefore render the PSGC name verbatim
+ * instead of formatting it, and these tests pin the reason down so nobody
+ * reintroduces the call and ships "Barangay Ii" to a resident.
+ */
+describe('barangayHeading()', () => {
+  it('prefixes an ordinary barangay name', () => {
+    expect(barangayHeading('Bonuan Gueset')).toBe('Barangay Bonuan Gueset');
+    expect(barangayHeading('Pugaro Suit')).toBe('Barangay Pugaro Suit');
+  });
+
+  it('does not repeat a name that already begins with "Barangay"', () => {
+    expect(barangayHeading('Barangay II')).toBe('Barangay II');
+    expect(barangayHeading('Barangay I')).toBe('Barangay I');
+    expect(barangayHeading('Barangay IV')).toBe('Barangay IV');
+  });
+
+  it('preserves the case of Roman numerals', () => {
+    expect(barangayHeading('Barangay II')).not.toBe('Barangay Ii');
+  });
+
+  it('matches the word, not a prefix of another word', () => {
+    expect(barangayHeading('Barangayan')).toBe('Barangay Barangayan');
+  });
+});
+
+describe('Roman-numeral names these formatters cannot handle', () => {
+  it('toTitleCase() mangles Roman numerals', () => {
+    expect(toTitleCase('Barangay II')).toBe('Barangay Ii');
+    expect(toTitleCase('Barangay IV')).toBe('Barangay Iv');
+  });
+
+  it('formatGovName() mangles Roman numerals too', () => {
+    expect(formatGovName('Barangay III', 'barangay')).toBe('Iii');
+  });
+
+  it('does not strip a mixed-case "Barangay " prefix the way callers assume', () => {
+    // The page code used barangay_name.replace('BARANGAY ', ''), which only
+    // matches the uppercase form the inherited dataset happened to use.
+    expect('Barangay II'.replace('BARANGAY ', '')).toBe('Barangay II');
+  });
+
+  it('leaves ordinary PSGC names unchanged, which is why verbatim is safe', () => {
+    for (const name of ['Bonuan Gueset', 'Pugaro Suit', 'Poblacion Oeste']) {
+      expect(toTitleCase(name)).toBe(name);
+    }
+  });
+});
 
 describe('formatGovName() - government name formatter', () => {
   describe('department type', () => {

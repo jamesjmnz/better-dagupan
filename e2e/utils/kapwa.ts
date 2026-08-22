@@ -5,10 +5,17 @@ import { expect, type Page } from '@playwright/test';
  * and does not contain raw Tailwind color classes.
  *
  * Note: Checks main content area only, excluding Navbar/Footer and code examples (<pre> tags).
+ *
+ * `scope` defaults to 'main', which is what every caller relied on before it
+ * existed. Pages inside the sidebar layout nest a second <main>, so 'main'
+ * is ambiguous there and those callers pass '#main-content' instead.
  */
-export async function assertKapwaTokens(page: Page): Promise<void> {
+export async function assertKapwaTokens(
+  page: Page,
+  scope = 'main'
+): Promise<void> {
   // Check main content area instead of entire body to avoid Navbar/Footer legacy classes
-  let mainHTML = await page.locator('main').innerHTML();
+  let mainHTML = await page.locator(scope).innerHTML();
 
   // Remove <pre> tag contents (code examples that may show "wrong" usage as examples)
   mainHTML = mainHTML.replace(/<pre[^>]*>[\s\S]*?<\/pre>/gi, '');

@@ -1,201 +1,259 @@
 import { test, expect } from '../test-config';
 import { assertKapwaTokens } from '../utils/kapwa';
 
+/**
+ * The barangay index is the first dataset published under the Better Dagupan
+ * name, so these tests cover two things at once: that the 31 verified records
+ * reach the screen intact, and that everything the portal has NOT verified is
+ * presented honestly rather than left blank or filled in.
+ */
+
+/** PSA PSGC, City of Dagupan (0105518000). */
+const BARANGAY_COUNT = 31;
+
+/**
+ * Routes are lazy-loaded, so a bare goto() can leave assertions running
+ * against the "Loading…" placeholder. These helpers wait for the real content.
+ */
+async function gotoIndex(page: import('@playwright/test').Page) {
+  await page.goto('/government/barangays');
+  await expect(
+    page.locator('a[href*="/government/barangays/"]').first()
+  ).toBeVisible();
+}
+
+async function gotoDetail(page: import('@playwright/test').Page, slug: string) {
+  await page.goto(`/government/barangays/${slug}`);
+  await expect(page.locator('header[role="banner"]')).toBeVisible();
+}
+
 test.describe('Barangays Pages', () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to barangays index before each test
-    await page.goto('/government/barangays');
+    await gotoIndex(page);
   });
 
   test('barangays index page uses Kapwa semantic tokens', async ({ page }) => {
-    await assertKapwaTokens(page);
+    await assertKapwaTokens(page, '#main-content');
   });
 
-  test('barangays index displays all barangay cards', async ({ page }) => {
-    // Check that barangay cards are displayed
+  test('barangays index displays every verified barangay', async ({ page }) => {
     const cards = page.locator('a[href*="/government/barangays/"]');
-    const count = await cards.count();
+    await expect(cards).toHaveCount(BARANGAY_COUNT);
 
-    // Barangay records are not sourced yet, so the list may legitimately be empty
-    expect(count).toBeGreaterThan(10);
-
-    // Check first card has proper structure
     const firstCard = cards.first();
     await expect(firstCard).toBeVisible();
-    await expect(firstCard.locator('[aria-label*="View profile"]')).toHaveCount(
-      count
+    await expect(firstCard).toHaveAttribute(
+      'aria-label',
+      /View the profile of/
     );
   });
 
-  test('barangays search functionality works', async ({ page }) => {
-    // Get initial count of all cards
+  test('barangays index names its source and when it was verified', async ({
+    page,
+  }) => {
+    const source = page.getByRole('link', {
+      name: /PSGC — Barangays in the City of Dagupan/,
+    });
+    await expect(source).toBeVisible();
+    await expect(source).toHaveAttribute('href', /psa\.gov\.ph/);
+
+    await expect(page.getByText(/Last verified/).first()).toBeVisible();
+  });
+
+  test('Roman-numeral barangay names are not mangled', async ({ page }) => {
+    // toTitleCase() would render these as "Barangay Ii" / "Barangay Iv".
+    for (const name of ['Barangay I', 'Barangay II', 'Barangay IV']) {
+      await expect(
+        page.getByRole('heading', { name, exact: true }).first()
+      ).toBeVisible();
+    }
+
+    const body = await page.locator('body').innerText();
+    expect(body).not.toMatch(/Barangay Ii\b/);
+    expect(body).not.toMatch(/Barangay Iv\b/);
+  });
+
+  test('barangays search works and matches other official spellings', async ({
+    page,
+  }) => {
     const allCards = page.locator('a[href*="/government/barangays/"]');
-    const initialCount = await allCards.count();
+    await expect(allCards).toHaveCount(BARANGAY_COUNT);
 
-    // Search for a specific barangay
     const searchInput = page.locator('input[placeholder*="Search"]');
-    await searchInput.fill('Anos');
 
-    // Wait for filtering to apply
-    await page.waitForTimeout(300);
+    // A PSGC name.
+    await searchInput.fill('Bonuan');
+    await expect(allCards).toHaveCount(3);
 
-    // Should have fewer results
-    const filteredCards = page.locator('a[href*="/government/barangays/"]');
-    const filteredCount = await filteredCards.count();
-    expect(filteredCount).toBeLessThan(initialCount);
-    expect(filteredCount).toBeGreaterThan(0);
+    // The spelling the city government uses for the barangay PSGC calls
+    // "Herrero" still has to find it.
+    await searchInput.fill('Herrero-Perez');
+    await expect(allCards).toHaveCount(1);
+    await expect(
+      page.getByRole('heading', { name: 'Herrero', exact: true })
+    ).toBeVisible();
 
-    // Clear search
     await searchInput.fill('');
-    await page.waitForTimeout(300);
-
-    // Should show all cards again
-    const resetCards = page.locator('a[href*="/government/barangays/"]');
-    const resetCount = await resetCards.count();
-    expect(resetCount).toBe(initialCount);
+    await expect(allCards).toHaveCount(BARANGAY_COUNT);
   });
 
   test('barangay detail page uses semantic tokens', async ({ page }) => {
-    // Navigate to first barangay
-    const firstCard = page.locator('a[href*="/government/barangays/"]').first();
-    await firstCard.click();
+    await gotoDetail(page, 'bonuan-gueset');
 
-    // Wait for navigation
-    await page.waitForURL(/\/government\/barangays\/.+/);
-
-    // Check barangay header is visible
     const header = page.locator('header[role="banner"]');
     await expect(header).toBeVisible();
 
-    await assertKapwaTokens(page);
+    await assertKapwaTokens(page, '#main-content');
   });
 
-  test('barangay detail page displays officials section', async ({ page }) => {
-    // Navigate to first barangay
-    const firstCard = page.locator('a[href*="/government/barangays/"]').first();
-    await firstCard.click();
+  test('barangay detail page shows the verified PSGC record', async ({
+    page,
+  }) => {
+    await gotoDetail(page, 'bonuan-gueset');
 
-    // Wait for navigation
-    await page.waitForURL(/\/government\/barangays\/.+/);
+    const header = page.locator('header[role="banner"]');
+    await expect(header.getByRole('heading', { level: 1 })).toHaveText(
+      'Barangay Bonuan Gueset'
+    );
+    await expect(header).toContainText('0105518009');
+    await expect(header).toContainText('24,943');
+  });
 
-    // Check officials heading
-    const officialsHeading = page
-      .locator('h2')
-      .filter({ hasText: 'Barangay Officials' });
-    await expect(officialsHeading).toBeVisible();
+  test('barangay detail page cites its source and verification date', async ({
+    page,
+  }) => {
+    await gotoDetail(page, 'bonuan-gueset');
 
-    // Check for official cards
-    const officialCards = page.locator('[role="group"]');
-    await expect(officialCards.first()).toBeVisible();
+    await expect(
+      page.getByText('Philippine Statistics Authority')
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', {
+        name: /PSGC — Barangays in the City of Dagupan/,
+      })
+    ).toHaveAttribute('href', /^https:\/\/psa\.gov\.ph\//);
+    await expect(page.getByText(/Last verified/)).toBeVisible();
+  });
 
-    // Check for Punong Barangay section
-    const punongSection = page
-      .locator('p')
-      .filter({ hasText: 'Chief Executive' });
-    await expect(punongSection).toBeVisible();
+  test('barangay detail page states that officials are not verified', async ({
+    page,
+  }) => {
+    await gotoDetail(page, 'bonuan-gueset');
+
+    await expect(
+      page.getByText(/officials of this barangay are not published here yet/i)
+    ).toBeVisible();
+    // The reason is given, so an empty section does not read as neglect.
+    await expect(page.getByText(/2018–2020 term/)).toBeVisible();
+  });
+
+  test('unknown details are not presented as established absences', async ({
+    page,
+  }) => {
+    await gotoDetail(page, 'bonuan-gueset');
+
+    await expect(page.getByText('No verified address')).toBeVisible();
+    await expect(page.getByText('No verified contact number')).toBeVisible();
+
+    const body = await page.locator('body').innerText();
+    // The inherited wording claimed the barangay had no contact at all.
+    expect(body).not.toMatch(/no contact listed/i);
+    expect(body).not.toMatch(/awaiting data/i);
+  });
+
+  test('a differing spelling is labelled historical, not merely alternative', async ({
+    page,
+  }) => {
+    await gotoDetail(page, 'barangay-ii');
+
+    const header = page.locator('header[role="banner"]');
+    await expect(header.getByRole('heading', { level: 1 })).toHaveText(
+      'Barangay II'
+    );
+
+    // The period and the publisher must both be on screen, so the spelling
+    // cannot be read as the current official name.
+    await expect(header).toContainText(
+      'Historical city-page spelling (2018–2020): Barangay II & III'
+    );
+    await expect(header).toContainText('City Government of Dagupan');
+    await expect(header).toContainText(
+      /not evidence of the current official name/i
+    );
+
+    // The superseded wording must not come back.
+    await expect(header).not.toContainText(/also written as/i);
+  });
+
+  test('the historical city page is not cited as a source of the record', async ({
+    page,
+  }) => {
+    await gotoDetail(page, 'barangay-ii');
+
+    // Only the PSA backs the published fields. Listing the 2018-2020 page
+    // among the sources would imply a superseded document supports the data.
+    const sources = page.getByRole('region', { name: 'Source' });
+    await expect(sources).toContainText('Philippine Statistics Authority');
+    await expect(sources).not.toContainText('Barangay Captains');
+  });
+
+  test('the independent-project disclaimer stays visible', async ({ page }) => {
+    await expect(
+      page.getByText(/not the official website of the City Government/i).first()
+    ).toBeVisible();
   });
 
   test('barangay detail page has breadcrumbs', async ({ page }) => {
-    // Navigate to first barangay
-    const firstCard = page.locator('a[href*="/government/barangays/"]').first();
-    await firstCard.click();
+    await gotoDetail(page, 'bonuan-gueset');
 
-    // Wait for navigation
-    await page.waitForURL(/\/government\/barangays\/.+/);
-
-    // Check breadcrumb navigation
-    const breadcrumb = page.locator('nav[aria-label="Breadcrumb"]');
+    const breadcrumb = page.locator('nav[aria-label="breadcrumb"]');
     await expect(breadcrumb).toBeVisible();
-
-    // Check breadcrumb links
-    await expect(
-      breadcrumb.locator('a[href="/"]').filter({ hasText: 'Home' })
-    ).toBeVisible();
+    // BreadcrumbHome renders an icon with no text, so match on the href.
+    await expect(breadcrumb.locator('a[href="/"]')).toBeVisible();
     await expect(
       breadcrumb.locator('a[href="/government/barangays"]')
     ).toBeVisible();
+    await expect(breadcrumb).toContainText('Bonuan Gueset');
   });
 
-  test('barangay detail page has accessible skip link', async ({ page }) => {
-    // Navigate to first barangay
-    const firstCard = page.locator('a[href*="/government/barangays/"]').first();
-    await firstCard.click();
+  test('the detail page does not duplicate the shell landmark', async ({
+    page,
+  }) => {
+    await gotoDetail(page, 'bonuan-gueset');
 
-    // Wait for navigation
-    await page.waitForURL(/\/government\/barangays\/.+/);
-
-    // Check for skip link (should be hidden until focused)
-    const skipLink = page.locator('a[href="#main-content"]');
-    await expect(skipLink).toHaveAttribute('class', /sr-only/);
+    // The app shell owns #main-content and the skip link that targets it.
+    // A second element with the same id makes the skip link ambiguous.
+    await expect(page.locator('#main-content')).toHaveCount(1);
+    await expect(page.locator('a[href="#main-content"]')).toHaveCount(1);
   });
 
   test('barangay card hover states work correctly', async ({ page }) => {
     const firstCard = page.locator('a[href*="/government/barangays/"]').first();
 
-    // Check card has hover class
     await expect(firstCard).toHaveClass(/group/);
-
-    // Check for arrow icon that shows on hover
-    const arrowIcon = firstCard.locator('svg').last();
-    await expect(arrowIcon).toBeVisible();
-
-    // Verify card has proper aria-label
+    await expect(firstCard.locator('svg').last()).toBeVisible();
     await expect(firstCard).toHaveAttribute(
       'aria-label',
-      /View profile of Barangay/
+      /View the profile of Barangay/
     );
   });
 
-  test('barangay detail page displays contact information', async ({
-    page,
-  }) => {
-    // Navigate to first barangay
-    const firstCard = page.locator('a[href*="/government/barangays/"]').first();
-    await firstCard.click();
-
-    // Wait for navigation
-    await page.waitForURL(/\/government\/barangays\/.+/);
-
-    // Check for contact section in header
-    const header = page.locator('header[role="banner"]');
-
-    // Check for phone icon/link
-    const phoneLink = header.locator('a[href^="tel:"]').first();
-    const hasPhone = (await phoneLink.count()) > 0;
-
-    // Some barangays may not have phone numbers, that's okay
-    if (hasPhone) {
-      await expect(phoneLink).toBeVisible();
-      await expect(phoneLink).toHaveAttribute('href', /tel:/);
-    }
-  });
-
   test('sidebar navigation works on detail pages', async ({ page }) => {
-    // Navigate to first barangay
-    const firstCard = page.locator('a[href*="/government/barangays/"]').first();
-    await firstCard.click();
+    await gotoDetail(page, 'bonuan-gueset');
 
-    // Wait for navigation
-    await page.waitForURL(/\/government\/barangays\/.+/);
+    // The layout collapses the sidebar on detail pages by design, so it is
+    // present but hidden until the toggle is used.
+    const sidebar = page.locator('aside').first();
+    await expect(sidebar).toHaveCount(1);
+    await expect(sidebar).toContainText('Bonuan Gueset');
 
-    // Check sidebar exists on mobile (should be collapsed)
-    const sidebar = page.locator('aside');
+    await page.getByRole('button', { name: /menu/i }).first().click();
     await expect(sidebar).toBeVisible();
-
-    // On mobile, sidebar should have mobile menu button
-    const mobileMenuButton = page.locator('button').filter({ hasText: 'Menu' });
-    const hasMobileMenu = (await mobileMenuButton.count()) > 0;
-
-    if (hasMobileMenu) {
-      await expect(mobileMenuButton).toBeVisible();
-    }
   });
 
   test('barangays index page visual snapshot @visual', async ({ page }) => {
-    // Wait for page to fully load
     await page.waitForLoadState('networkidle');
 
-    // Take full page screenshot
     await expect(page).toHaveScreenshot('barangays-index.png', {
       maxDiffPixels: 150,
     });
@@ -204,10 +262,8 @@ test.describe('Barangays Pages', () => {
   test('barangays index page hero section visual snapshot @visual', async ({
     page,
   }) => {
-    // Wait for page to fully load
     await page.waitForLoadState('networkidle');
 
-    // Take snapshot of hero section
     const heroSection = page.locator('main').first();
     await expect(heroSection).toHaveScreenshot('barangays-hero.png', {
       maxDiffPixels: 100,
@@ -215,15 +271,9 @@ test.describe('Barangays Pages', () => {
   });
 
   test('barangay detail page visual snapshot @visual', async ({ page }) => {
-    // Navigate to first barangay
-    const firstCard = page.locator('a[href*="/government/barangays/"]').first();
-    await firstCard.click();
-
-    // Wait for navigation and load
-    await page.waitForURL(/\/government\/barangays\/.+/);
+    await gotoDetail(page, 'bonuan-gueset');
     await page.waitForLoadState('networkidle');
 
-    // Take full page screenshot
     await expect(page).toHaveScreenshot('barangay-detail.png', {
       maxDiffPixels: 150,
     });

@@ -115,5 +115,38 @@
     "title": "Wala pa sa ngayon",
     "body": "Wala pang naidadagdag na beripikadong impormasyon tungkol sa {{lgu}}. Bahagi ng balangkas ng portal ang seksyong ito at pupunan kapag nakakuha na ng mga tala mula sa Pamahalaang Lungsod ng {{lgu}} at naberipika na ang mga ito.",
     "contribute": "Magmungkahi ng pinagkunan"
+  },
+  "civic": {
+    "sourceLabel": "Pinagkunan",
+    "sourcesLabel": "Mga pinagkunan",
+    "lastVerified": "Huling beripika noong {{date}}",
+    "recordVerified": "Pinakalumang beripikasyon ng pinagkunan: {{date}}",
+    "retrieved": "Kinuha noong {{date}}",
+    "historicalSpelling": "Makasaysayang baybay mula sa pahina ng lungsod ({{period}}): {{name}}",
+    "historicalSpellingNote": "Nakuha mula sa lumang pahina at ipinapakita upang matagpuan sa paghahanap. Hindi ito patunay ng kasalukuyang opisyal na pangalan.",
+    "derivativeSource": "Muling naglalathala ng {{source}}",
+    "notVerified": "Hindi pa naberipika",
+    "notVerifiedHint": "Wala pang natagpuang opisyal na pinagkunan ang Better Dagupan para sa detalyeng ito. Hindi ito nangangahulugang wala ang impormasyon."
+  },
+  "barangays": {
+    "title": "Mga Barangay",
+    "count": "{{count}} barangay ng {{lgu}}, ayon sa inilathala ng Philippine Statistics Authority.",
+    "searchPlaceholder": "Maghanap ayon sa pangalan (hal. Bonuan Gueset)…",
+    "noMatches": "Walang pangalan ng barangay na tumutugma sa paghahanap.",
+    "psgcCode": "Kodigong PSGC",
+    "classification": "Klasipikasyon",
+    "urban": "Urban",
+    "rural": "Rural",
+    "population": "Populasyon",
+    "populationNote": "2024 Census of Population (PSA)",
+    "officialsTitle": "Mga opisyal ng barangay",
+    "officialsNotVerified": "Hindi pa inilalathala rito ang mga opisyal ng barangay na ito.",
+    "officialsNotVerifiedWhy": "Ang tanging listahan ng pamahalaang lungsod na natagpuan ay para sa termino ng 2018–2020, kaya ipapakita nito ang mga dating opisyal bilang kasalukuyan. Idadagdag ang mga pangalan kapag naberipika na ang kasalukuyang pinagkunan.",
+    "contactTitle": "Kontak",
+    "contactNotVerified": "Walang beripikadong numero ng kontak",
+    "addressNotVerified": "Walang beripikadong address",
+    "punongBarangay": "Punong Barangay",
+    "viewProfile": "Tingnan ang profile",
+    "profileOf": "Tingnan ang profile ng {{name}}"
   }
 }

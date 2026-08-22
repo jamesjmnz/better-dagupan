@@ -30,8 +30,13 @@ import citizensCharter from '@/data/citizens-charter/citizens-charter.json';
 const INHERITED =
   /los ba(ñ|n)os|losbanos\.gov\.ph|sangguniang bayan|betterlb|municipality of/i;
 
+/**
+ * Datasets that are still empty. directory/barangays has left this list: it now
+ * holds the 31 verified PSGC barangays, checked by
+ * src/data/__tests__/barangayProvenance.test.ts. It is still asserted below to
+ * be free of inherited content.
+ */
 const recordSets: [string, unknown[]][] = [
-  ['directory/barangays', barangays],
   ['directory/departments', departments],
   ['directory/executive', executive],
   ['directory/legislative', legislative],
@@ -58,6 +63,15 @@ describe('inherited civic records', () => {
 
   it.each(recordSets)('%s mentions no inherited LGU', (_name, records) => {
     expect(JSON.stringify(records)).not.toMatch(INHERITED);
+  });
+
+  it('directory/barangays holds verified Dagupan records, not inherited ones', () => {
+    // The first dataset to be repopulated under the Better Dagupan name. The
+    // guarantee changes shape here: no longer "must be empty" but "must be
+    // Dagupan". Emptiness would now be a regression, not safety.
+    expect(Array.isArray(barangays)).toBe(true);
+    expect(barangays.length).toBeGreaterThan(0);
+    expect(JSON.stringify(barangays)).not.toMatch(INHERITED);
   });
 
   it('keeps the nationwide datasets that are not LGU-specific', () => {
