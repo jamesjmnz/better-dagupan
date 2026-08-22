@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Test code uses any for mock data which is acceptable in test context
 import { describe, it, expect } from 'vitest';
-import { formatGovName, toTitleCase } from './stringUtils';
+import { barangayHeading, formatGovName, toTitleCase } from './stringUtils';
 
 /**
  * Four of Dagupan's barangays are named with Roman numerals ("Barangay I",
@@ -11,6 +11,27 @@ import { formatGovName, toTitleCase } from './stringUtils';
  * instead of formatting it, and these tests pin the reason down so nobody
  * reintroduces the call and ships "Barangay Ii" to a resident.
  */
+describe('barangayHeading()', () => {
+  it('prefixes an ordinary barangay name', () => {
+    expect(barangayHeading('Bonuan Gueset')).toBe('Barangay Bonuan Gueset');
+    expect(barangayHeading('Pugaro Suit')).toBe('Barangay Pugaro Suit');
+  });
+
+  it('does not repeat a name that already begins with "Barangay"', () => {
+    expect(barangayHeading('Barangay II')).toBe('Barangay II');
+    expect(barangayHeading('Barangay I')).toBe('Barangay I');
+    expect(barangayHeading('Barangay IV')).toBe('Barangay IV');
+  });
+
+  it('preserves the case of Roman numerals', () => {
+    expect(barangayHeading('Barangay II')).not.toBe('Barangay Ii');
+  });
+
+  it('matches the word, not a prefix of another word', () => {
+    expect(barangayHeading('Barangayan')).toBe('Barangay Barangayan');
+  });
+});
+
 describe('Roman-numeral names these formatters cannot handle', () => {
   it('toTitleCase() mangles Roman numerals', () => {
     expect(toTitleCase('Barangay II')).toBe('Barangay Ii');

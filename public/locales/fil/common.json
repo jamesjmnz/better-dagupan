@@ -141,10 +141,11 @@
     "officialsTitle": "Mga opisyal ng barangay",
     "officialsNotVerified": "Hindi pa inilalathala rito ang mga opisyal ng barangay na ito.",
     "officialsNotVerifiedWhy": "Ang tanging listahan ng pamahalaang lungsod na natagpuan ay para sa termino ng 2018–2020, kaya ipapakita nito ang mga dating opisyal bilang kasalukuyan. Idadagdag ang mga pangalan kapag naberipika na ang kasalukuyang pinagkunan.",
+    "contactTitle": "Kontak",
     "contactNotVerified": "Walang beripikadong numero ng kontak",
     "addressNotVerified": "Walang beripikadong address",
     "punongBarangay": "Punong Barangay",
     "viewProfile": "Tingnan ang profile",
-    "profileOf": "Tingnan ang profile ng Barangay {{name}}"
+    "profileOf": "Tingnan ang profile ng {{name}}"
   }
 }

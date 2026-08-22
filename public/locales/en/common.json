@@ -141,10 +141,11 @@
     "officialsTitle": "Barangay officials",
     "officialsNotVerified": "The officials of this barangay are not published here yet.",
     "officialsNotVerifiedWhy": "The only city-government roster found covers the 2018–2020 term, so publishing it would present former officials as current ones. Names will be added once a current source is verified.",
+    "contactTitle": "Contact",
     "contactNotVerified": "No verified contact number",
     "addressNotVerified": "No verified address",
     "punongBarangay": "Punong Barangay",
     "viewProfile": "View profile",
-    "profileOf": "View the profile of Barangay {{name}}"
+    "profileOf": "View the profile of {{name}}"
   }
 }

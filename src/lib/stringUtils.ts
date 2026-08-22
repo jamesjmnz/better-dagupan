@@ -68,3 +68,17 @@ export function toTitleCase(text: string) {
     })
     .join(' ');
 }
+
+/**
+ * Prefix a barangay name with the word "Barangay" for display, unless it
+ * already starts with it.
+ *
+ * Four PSGC names for Dagupan are literally "Barangay I", "Barangay II" and
+ * "Barangay IV", so an unconditional prefix printed "Barangay Barangay II".
+ *
+ * Note this deliberately does no case conversion: toTitleCase() lowercases a
+ * whole word before recapitalising it and would render "II" as "Ii".
+ */
+export function barangayHeading(name: string): string {
+  return /^barangay\b/i.test(name.trim()) ? name : `Barangay ${name}`;
+}
