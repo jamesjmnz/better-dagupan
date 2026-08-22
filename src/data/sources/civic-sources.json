@@ -1,0 +1,44 @@
+[
+  {
+    "id": "psa-psgc-dagupan-2026q2",
+    "agency": "Philippine Statistics Authority",
+    "title": "PSGC — Barangays in the City of Dagupan (0105518000)",
+    "url": "https://psa.gov.ph/classification/psgc/barangays/0105518000",
+    "published": "2026-07-13",
+    "data_as_of": "2026-06-30",
+    "coverage": null,
+    "retrieved": "2026-08-22",
+    "verified": "2026-08-22",
+    "licence": "CC BY 4.0",
+    "notes": "Release date 13 July 2026, announced as \"Second Quarter 2026 PSGC Updates\". The dataset itself is stated as \"Philippine Standard Geographic Code as of 30 June 2026\", which is why the release date and the reference date are recorded separately. The page separately states \"There are 31 barangays as of 31 July 2025\"; that is a third date and applies to the count, not to the codes or population figures. Authoritative for the current barangay names, PSGC codes, urban/rural classification and 2024 POPCEN population. The equivalent bulk file is PSGC-2Q-2026-Publication-Datafile.xlsx.",
+    "derives_from": null
+  },
+  {
+    "id": "dagupan-lgu-barangay-captains-2018-2020",
+    "agency": "City Government of Dagupan",
+    "title": "Barangay Captains (2018–2020)",
+    "url": "https://www.dagupan.gov.ph/the-city/barangay-captains/",
+    "published": null,
+    "data_as_of": null,
+    "coverage": "2018–2020",
+    "retrieved": "2026-08-22",
+    "verified": "2026-08-22",
+    "licence": "Public domain unless otherwise stated (site footer)",
+    "notes": "A historical page: its table is explicitly headed \"2018– 2020\". It is cited only as the origin of four barangay-name spellings observed there, and those spellings are labelled historical wherever they appear. It is not evidence that any spelling is current, and no official named on it is published anywhere in this repository.",
+    "derives_from": null
+  },
+  {
+    "id": "dilg-masterlist-of-barangays",
+    "agency": "Department of the Interior and Local Government",
+    "title": "Masterlist of Barangays",
+    "url": "https://www.dilg.gov.ph/page/Masterlist-of-Barangays/77",
+    "published": null,
+    "data_as_of": null,
+    "coverage": null,
+    "retrieved": "2026-08-22",
+    "verified": "2026-08-22",
+    "licence": null,
+    "notes": "Catalogued as a derivative source only. DILG redistributes the PSA PSGC publication rather than maintaining an independent roster, so it is not independent corroboration of the names, codes, classifications or population figures. The PSA dataset remains authoritative for all of those. No field is taken from here and no record cites it.",
+    "derives_from": "psa-psgc-dagupan-2026q2"
+  }
+]
