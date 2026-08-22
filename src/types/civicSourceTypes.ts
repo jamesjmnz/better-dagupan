@@ -38,15 +38,24 @@ export interface CivicSource {
   retrieved: string;
   /** ISO date the citing records were last checked against it. */
   verified: string;
-  /** Reuse terms stated by the publisher, when stated. */
-  licence?: string | null;
-  /** What this source establishes, and any limits on it. */
+  /** Reuse terms stated by the publisher. Null when it states none. */
+  licence: string | null;
+  /**
+   * What this source establishes, and any limits on it.
+   *
+   * The only optional field on this interface, and the only one the JSON
+   * schema does not require: a source with nothing to qualify needs no note,
+   * whereas every other field must be stated even when the answer is null.
+   */
   notes?: string;
   /**
    * Id of the authoritative source this document redistributes.
    *
    * A derivative source corroborates that data is being published, not the
    * facts themselves, so it must never be the sole citation for a field.
+   *
+   * Required, not optional: a missing key would be indistinguishable from an
+   * unreviewed one, so an authoritative source states null explicitly.
    */
-  derives_from?: string | null;
+  derives_from: string | null;
 }

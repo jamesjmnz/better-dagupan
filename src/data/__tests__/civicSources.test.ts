@@ -40,6 +40,88 @@ describe('civic sources', () => {
     expect(valid).toBe(true);
   });
 
+  it('requires every contract field, so a missing one is rejected', () => {
+    // The schema and the CivicSource interface have to agree. They drifted
+    // once already: the interface required published, data_as_of and coverage
+    // while the schema listed only retrieved and verified, so a source could
+    // omit a date entirely and still validate.
+    const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
+    addFormats(ajv);
+    const validate = ajv.compile(schema);
+
+    const complete = {
+      id: 'fixture-source',
+      agency: 'Agency',
+      title: 'Title',
+      url: 'https://example.gov.ph/doc',
+      published: null,
+      data_as_of: null,
+      coverage: null,
+      retrieved: '2026-08-22',
+      verified: '2026-08-22',
+      licence: null,
+      derives_from: null,
+    };
+
+    // The fixture itself must be valid, or the deletions below prove nothing.
+    expect(validate([complete])).toBe(true);
+
+    const REQUIRED = [
+      'id',
+      'agency',
+      'title',
+      'url',
+      'published',
+      'data_as_of',
+      'coverage',
+      'retrieved',
+      'verified',
+      'licence',
+      'derives_from',
+    ] as const;
+
+    for (const field of REQUIRED) {
+      const missing: Record<string, unknown> = { ...complete };
+      delete missing[field];
+
+      expect(
+        validate([missing]),
+        `a source missing "${field}" should fail validation`
+      ).toBe(false);
+    }
+
+    // notes is the single intentional exception: a source with nothing to
+    // qualify needs no note.
+    expect(validate([complete])).toBe(true);
+    expect(validate([{ ...complete, notes: 'a caveat' }])).toBe(true);
+  });
+
+  it('rejects a field the contract does not define', () => {
+    const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
+    addFormats(ajv);
+    const validate = ajv.compile(schema);
+
+    expect(
+      validate([
+        {
+          id: 'fixture-source',
+          agency: 'Agency',
+          title: 'Title',
+          url: 'https://example.gov.ph/doc',
+          published: null,
+          data_as_of: null,
+          coverage: null,
+          retrieved: '2026-08-22',
+          verified: '2026-08-22',
+          licence: null,
+          derives_from: null,
+          // A typo for an existing field must not slip through unnoticed.
+          verifed: '2026-08-22',
+        },
+      ])
+    ).toBe(false);
+  });
+
   it('gives every source a unique id', () => {
     const ids = civicSources.map(source => source.id);
 

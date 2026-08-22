@@ -7,7 +7,19 @@
   "items": {
     "type": "object",
     "additionalProperties": false,
-    "required": ["id", "agency", "title", "url", "retrieved", "verified"],
+    "required": [
+      "id",
+      "agency",
+      "title",
+      "url",
+      "published",
+      "data_as_of",
+      "coverage",
+      "retrieved",
+      "verified",
+      "licence",
+      "derives_from"
+    ],
     "properties": {
       "id": {
         "description": "Stable identifier referenced by civic records. Never reused for a different document.",
@@ -55,17 +67,18 @@
         "format": "date"
       },
       "licence": {
-        "description": "Reuse terms stated by the publisher, when stated.",
+        "description": "Reuse terms stated by the publisher. Null means the publisher states none.",
         "type": ["string", "null"]
       },
       "notes": {
-        "description": "What this source establishes, and any limits on it.",
+        "description": "What this source establishes, and any limits on it. The only optional field: omit it when there is nothing to qualify.",
         "type": "string"
       },
       "derives_from": {
         "description": "Id of the authoritative source this document redistributes. A derivative source corroborates availability, not the facts themselves, and must not be the sole citation for a published field.",
         "type": ["string", "null"]
       }
-    }
+    },
+    "description": "A citation. Every field except `notes` is required, including the ones whose value is often null: a citation must state that a publisher gives no publication date, rather than leave the reader unable to tell an absent date from an unrecorded one. `notes` is the sole optional field, because a source with no caveat needs none and an empty string would say nothing. Mirrors the CivicSource interface in src/types/civicSourceTypes.ts."
   }
 }
