@@ -8,7 +8,7 @@ import { lguLabels } from '@/lib/lguLabels';
 interface BarangayHeaderProps {
   barangay: {
     barangay_name: string;
-    address?: string;
+    address?: string | null;
     trunkline?: string[];
     website?: string | null;
   };
