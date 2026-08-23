@@ -21,6 +21,8 @@ import {
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent } from '@/components/ui/Card';
 
+import { NotVerified, SourceNote } from '@/components/civic';
+
 import { toTitleCase } from '@/lib/stringUtils';
 import { toTelUri } from '@/lib/utils';
 import { lguLabels } from '@/lib/lguLabels';
@@ -63,10 +65,6 @@ export default function DepartmentDetail() {
       </div>
     );
 
-  const contactValue = Array.isArray(dept.trunkline)
-    ? dept.trunkline[0]
-    : dept.trunkline;
-
   return (
     <div className='animate-in fade-in space-y-6 pb-20 duration-500'>
       {/* --- BREADCRUMBS --- */}
@@ -102,8 +100,13 @@ export default function DepartmentDetail() {
               aria-hidden='true'
               className='text-kapwa-text-brand h-5 w-5'
             />
+            {/*
+              Rendered verbatim, like the barangay names: the city cases these
+              for display and toTitleCase() lowercases a whole word before
+              recapitalising it, which mangles the acronyms they carry.
+            */}
             <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold'>
-              {toTitleCase(dept.office_name)}
+              {dept.office_name}
             </h1>
           </div>
           <Badge variant='secondary' dot>
@@ -112,22 +115,29 @@ export default function DepartmentDetail() {
         </div>
 
         {/* Middle: Address */}
-        {dept.address && (
+        {dept.address ? (
           <p className='text-kapwa-text-support mb-4 text-sm'>
             {dept.address}, {lguLabels.location}
           </p>
+        ) : (
+          <NotVerified label='No verified address' className='mb-4' />
         )}
 
         {/* Bottom: Contact Row */}
         <div className='flex flex-col gap-4 text-sm md:flex-row md:gap-6'>
-          {contactValue && (
-            <a
-              href={toTelUri(contactValue) || '#'}
-              className='text-kapwa-text-support hover:text-kapwa-text-brand flex items-center gap-2 transition-colors'
-            >
-              <PhoneIcon aria-hidden='true' className='h-4 w-4' />
-              <span>{contactValue}</span>
-            </a>
+          {dept.trunkline.length > 0 ? (
+            dept.trunkline.map(number => (
+              <a
+                key={number}
+                href={toTelUri(number) || '#'}
+                className='text-kapwa-text-support hover:text-kapwa-text-brand flex items-center gap-2 transition-colors'
+              >
+                <PhoneIcon aria-hidden='true' className='h-4 w-4' />
+                <span>{number}</span>
+              </a>
+            ))
+          ) : (
+            <NotVerified label='No verified contact number' />
           )}
           {dept.website && (
             <a
@@ -152,23 +162,26 @@ export default function DepartmentDetail() {
         </div>
       </Card>
 
+      {/* Where the office and its contact details came from. */}
+      <SourceNote sources={dept.sources} />
+
       {/*
         A plain wrapper, not a <main id='main-content'>: the app shell in
         src/App.tsx already provides that landmark and the skip link that
         targets it, and repeating them here made both duplicates.
       */}
       <div className='space-y-6'>
-        {/* Office Leadership */}
-        {dept.department_head?.name && (
-          <div
-            className='space-y-2'
-            role='group'
-            aria-label='Office Leadership'
-          >
-            <p className='sr-only'>Office Leadership</p>
-            <p className='text-kapwa-text-disabled pl-1 text-[10px] font-bold tracking-widest uppercase'>
-              Office Leadership
-            </p>
+        {/*
+          The section header renders whichever way this falls. An office with
+          no published head must say so: rendering nothing would read as though
+          the office has no head, which is never what a missing name means.
+        */}
+        <div className='space-y-2' role='group' aria-label='Office Leadership'>
+          <p className='sr-only'>Office Leadership</p>
+          <p className='text-kapwa-text-disabled pl-1 text-[10px] font-bold tracking-widest uppercase'>
+            Office Leadership
+          </p>
+          {dept.department_head ? (
             <Card hover={false} className='rounded-xl'>
               <div className='flex flex-col gap-4 md:flex-row md:items-center md:gap-6'>
                 <div className='border-kapwa-border-brand text-kapwa-text-brand bg-kapwa-bg-surface flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2'>
@@ -179,7 +192,7 @@ export default function DepartmentDetail() {
                     {dept.department_head.name}
                   </h3>
                   <Badge variant='secondary' className='mt-1'>
-                    Department Head
+                    {dept.department_head.title}
                   </Badge>
                   {dept.department_head.email && (
                     <a
@@ -190,11 +203,25 @@ export default function DepartmentDetail() {
                       {dept.department_head.email}
                     </a>
                   )}
+                  {/* Who says so. The head is a separate claim from the office. */}
+                  <SourceNote
+                    sources={dept.department_head.sources}
+                    className='mt-3'
+                  />
                 </div>
               </div>
             </Card>
-          </div>
-        )}
+          ) : (
+            <NotVerified
+              label='The head of this office is not published here yet.'
+              detail={
+                dept.department_head_status === 'conflicting_sources'
+                  ? 'The city government names a different person for this office on different official pages, and none of them is dated, so there is no basis for choosing between them. A name will appear once a current source settles it.'
+                  : 'Only one official city page names anyone for this office, which is not enough to establish that the appointment is current. A name will appear once a second source confirms it.'
+              }
+            />
+          )}
+        </div>
 
         {/* Department Services */}
         {associatedServices.length > 0 && (

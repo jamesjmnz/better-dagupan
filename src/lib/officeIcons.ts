@@ -1,5 +1,6 @@
 import {
   Apple,
+  BookOpen,
   Briefcase,
   Building2,
   Calculator,
@@ -17,8 +18,10 @@ import {
   Monitor,
   Package,
   Palmtree,
+  PawPrint,
   PieChart,
   Radio,
+  Recycle,
   Scale,
   Shield,
   ShieldAlert,
@@ -30,6 +33,7 @@ import {
   TreePine,
   User,
   UserCheck,
+  Users,
   Utensils,
   Wallet,
 } from 'lucide-react';
@@ -73,4 +77,40 @@ export const officeIcons: Record<string, LucideIcon> = {
   'public-order-and-safety-office': Shield,
   // Committees
   'bids-and-awards-committee': Scale,
+
+  // City of Dagupan offices (src/data/directory/departments.json)
+  // bids-and-awards-committee, public-employment-service-office and
+  // public-order-and-safety-office are Dagupan offices too, and are
+  // already mapped above: the inherited LGU used the same slugs.
+  'office-of-the-city-mayor': Landmark,
+  'office-of-the-city-vice-mayor': Landmark,
+  'city-administrators-office': Briefcase,
+  'sangguniang-panlungsod': Scale,
+  'city-legal-office': Scale,
+  'city-accounting-office': Calculator,
+  'city-budget-office': PieChart,
+  'city-treasury-office': Wallet,
+  'city-assessors-office': LandPlot,
+  'city-engineers-office': HardHat,
+  'city-planning-and-development-office': Compass,
+  'city-health-office': Stethoscope,
+  'city-nutrition-office': Apple,
+  'city-social-welfare-and-development-office': HandHelping,
+  'city-population-and-development-office': Users,
+  'city-veterinary-office': PawPrint,
+  'city-agriculture-office': Sprout,
+  'city-tourism-office': Palmtree,
+  'city-information-office': Megaphone,
+  'city-management-information-system-office': Monitor,
+  'city-human-resource-management-office': UserCheck,
+  'general-services-office': Package,
+  'civil-registry': FileBadge,
+  'one-stop-business-center': Briefcase,
+  'market-division': Store,
+  'waste-management-division': Recycle,
+  'city-disaster-risk-reduction-and-management-office': Siren,
+  'public-alert-response-management-center': Radio,
+  'office-of-senior-citizens-affairs': User,
+  'dagupan-city-public-library-and-information-center': BookOpen,
+  'youth-and-sports-development-program': Smile,
 };
