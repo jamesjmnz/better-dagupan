@@ -1,244 +1,247 @@
 import { test, expect } from '../test-config';
 import { assertKapwaTokens } from '../utils/kapwa';
 
-test.describe('Departments Pages', () => {
-  test.beforeEach(async ({ page }) => {
-    // Navigate to departments index before each test
-    await page.goto('/government/departments');
-  });
+/**
+ * The office directory is published from three official city rosters that
+ * contradict each other, so these tests cover two things at once: that the 34
+ * verified offices reach the screen intact, and that the eleven heads the
+ * portal deliberately withholds are presented as withheld rather than as
+ * offices that simply have no leader.
+ *
+ * Every assertion here is unconditional. The previous version of this file
+ * guarded each content check behind an `if (hasContact)`, which meant it went
+ * on passing for as long as the dataset was empty.
+ */
+const DEPARTMENT_COUNT = 34;
 
+/** Official pages name a different person for this office, so none is shown. */
+const CONFLICTING_HEAD_SLUG = 'city-health-office';
+/** Only one page family names anyone here. */
+const UNCORROBORATED_HEAD_SLUG = 'bids-and-awards-committee';
+/** Both page families agree on this one, so the name is published. */
+const PUBLISHED_HEAD_SLUG = 'city-legal-office';
+
+/**
+ * Routes are lazy-loaded, so a bare goto() can leave assertions running
+ * against the "Loading…" placeholder. These helpers wait for the real content.
+ */
+async function gotoIndex(page: import('@playwright/test').Page) {
+  await page.goto('/government/departments');
+  await expect(
+    page.locator('a[href*="/government/departments/"]').first()
+  ).toBeVisible();
+}
+
+async function gotoDetail(page: import('@playwright/test').Page, slug: string) {
+  await page.goto(`/government/departments/${slug}`);
+  // The identity header is a Card with role="banner", not a <header> element,
+  // so match on the role rather than the tag.
+  await expect(
+    page.locator('[role="banner"][aria-label]').first()
+  ).toBeVisible();
+}
+
+test.describe('Departments Pages', () => {
   test('departments index page uses Kapwa semantic tokens', async ({
     page,
   }) => {
-    await assertKapwaTokens(page);
+    await gotoIndex(page);
+    await assertKapwaTokens(page, '#main-content');
   });
 
-  test('departments index displays all department cards', async ({ page }) => {
-    // Check that department cards are displayed
+  test('departments index displays every verified office', async ({ page }) => {
+    await gotoIndex(page);
+
     const cards = page.locator('a[href*="/government/departments/"]');
-    const count = await cards.count();
+    await expect(cards).toHaveCount(DEPARTMENT_COUNT);
 
-    // Should have multiple departments
-    expect(count).toBeGreaterThan(5);
-
-    // Check first card has proper structure
     const firstCard = cards.first();
     await expect(firstCard).toBeVisible();
     await expect(firstCard).toHaveAttribute('aria-label', /View details for/);
   });
 
-  test('departments search functionality works', async ({ page }) => {
-    // Get initial count of all cards
-    const allCards = page.locator('a[href*="/government/departments/"]');
-    const initialCount = await allCards.count();
-
-    // Search for a specific department
-    const searchInput = page.locator('input[placeholder*="Search"]');
-    await searchInput.fill('Health');
-
-    // Wait for filtering to apply
-    await page.waitForTimeout(300);
-
-    // Should have fewer results
-    const filteredCards = page.locator('a[href*="/government/departments/"]');
-    const filteredCount = await filteredCards.count();
-    expect(filteredCount).toBeLessThan(initialCount);
-
-    // Clear search
-    await searchInput.fill('');
-    await page.waitForTimeout(300);
-
-    // Should show all cards again
-    const resetCards = page.locator('a[href*="/government/departments/"]');
-    const resetCount = await resetCards.count();
-    expect(resetCount).toBe(initialCount);
-  });
-
-  test('department detail page uses semantic tokens', async ({ page }) => {
-    // Navigate to first department
-    const firstCard = page
-      .locator('a[href*="/government/departments/"]')
-      .first();
-    await firstCard.click();
-
-    // Wait for navigation
-    await page.waitForURL(/\/government\/departments\/.+/);
-
-    // Check department header/heading is visible
-    const heading = page.locator('h1, h2').first();
-    await expect(heading).toBeVisible();
-
-    await assertKapwaTokens(page);
-  });
-
-  test('department detail page has breadcrumbs', async ({ page }) => {
-    // Navigate to first department
-    const firstCard = page
-      .locator('a[href*="/government/departments/"]')
-      .first();
-    await firstCard.click();
-
-    // Wait for navigation
-    await page.waitForURL(/\/government\/departments\/.+/);
-
-    // Check breadcrumb navigation
-    const breadcrumb = page.locator('nav[aria-label="Breadcrumb"]');
-    await expect(breadcrumb).toBeVisible();
-
-    // Check breadcrumb links
-    await expect(
-      breadcrumb.locator('a[href="/"]').filter({ hasText: 'Home' })
-    ).toBeVisible();
-    await expect(
-      breadcrumb.locator('a[href="/government/departments"]')
-    ).toBeVisible();
-  });
-
-  test('department detail page displays contact information', async ({
+  test('departments index names its sources and when they were verified', async ({
     page,
   }) => {
-    // Navigate to first department
-    const firstCard = page
-      .locator('a[href*="/government/departments/"]')
-      .first();
-    await firstCard.click();
+    await gotoIndex(page);
 
-    // Wait for navigation
-    await page.waitForURL(/\/government\/departments\/.+/);
+    const citation = page.getByRole('region', { name: /Sources|Source/ });
+    await expect(citation).toBeVisible();
 
-    // Check for contact section
-    const contactSection = page.locator('text=Contact').first();
-    const hasContact = (await contactSection.count()) > 0;
-
-    if (hasContact) {
-      await expect(contactSection).toBeVisible();
-
-      // Check for phone links
-      const phoneLinks = page.locator('a[href^="tel:"]');
-      const hasPhone = (await phoneLinks.count()) > 0;
-
-      if (hasPhone) {
-        await expect(phoneLinks.first()).toBeVisible();
-        await expect(phoneLinks.first()).toHaveAttribute('href', /tel:/);
-      }
-
-      // Check for email links
-      const emailLinks = page.locator('a[href^="mailto:"]');
-      const hasEmail = (await emailLinks.count()) > 0;
-
-      if (hasEmail) {
-        await expect(emailLinks.first()).toBeVisible();
-        await expect(emailLinks.first()).toHaveAttribute('href', /mailto:/);
-      }
-    }
+    // The city's own pages are the authority for its offices.
+    await expect(
+      citation.getByRole('link', { name: /Directory/ }).first()
+    ).toHaveAttribute('href', /dagupan\.gov\.ph/);
+    await expect(page.getByText(/Last verified/).first()).toBeVisible();
   });
 
-  test('department detail page has accessible skip link', async ({ page }) => {
-    // Navigate to first department
-    const firstCard = page
-      .locator('a[href*="/government/departments/"]')
-      .first();
-    await firstCard.click();
-
-    // Wait for navigation
-    await page.waitForURL(/\/government\/departments\/.+/);
-
-    // Check for skip link (should be hidden until focused)
-    const skipLink = page.locator('a[href="#main-content"]');
-    await expect(skipLink).toHaveAttribute('class', /sr-only/);
-  });
-
-  test('department card shows department head when available', async ({
+  test('departments search matches the alternate office names', async ({
     page,
   }) => {
-    // Get all department cards
+    await gotoIndex(page);
+
     const cards = page.locator('a[href*="/government/departments/"]');
-
-    // Check if any card has department head info
-    for (let i = 0; i < Math.min(3, await cards.count()); i++) {
-      const card = cards.nth(i);
-      const hasHeadInfo =
-        (await card.locator('text=Department Head').count()) > 0 ||
-        (await card.locator('[aria-label*="head"]').count()) > 0;
-
-      if (hasHeadInfo) {
-        await expect(card.locator('svg').first()).toBeVisible();
-        break;
-      }
-    }
-  });
-
-  test('department detail page may show associated services', async ({
-    page,
-  }) => {
-    // Navigate to a department (try BPLO as it likely has services)
     const searchInput = page.locator('input[placeholder*="Search"]');
-    await searchInput.fill('BPLO');
-    await page.waitForTimeout(300);
 
-    const bploCard = page
-      .locator('a[href*="/government/departments/"]')
-      .first();
-    const hasCard = (await bploCard.count()) > 0;
+    await searchInput.fill('Treasury');
+    await expect(cards).toHaveCount(1);
 
-    if (hasCard) {
-      await bploCard.click();
-      await page.waitForURL(/\/government\/departments\/.+/);
+    // "City Engineering Office" is the name the older roster uses; the record
+    // is published as "City Engineer's Office" and must still be findable.
+    await searchInput.fill('City Engineering Office');
+    await expect(cards).toHaveCount(1);
+    await expect(cards.first()).toHaveAttribute(
+      'href',
+      /city-engineers-office/
+    );
 
-      // Check if services section exists (some departments may not have services)
-      const servicesSection = page.locator('text=Services').first();
-      const hasServices = (await servicesSection.count()) > 0;
-
-      if (hasServices) {
-        await expect(servicesSection).toBeVisible();
-      }
-    }
+    await searchInput.fill('nothing matches this');
+    await expect(cards).toHaveCount(0);
+    await expect(page.getByText(/No office name matches/)).toBeVisible();
   });
 
-  test('department card hover states work correctly', async ({ page }) => {
-    const firstCard = page
-      .locator('a[href*="/government/departments/"]')
-      .first();
-
-    // Check card has hover class
-    await expect(firstCard).toHaveClass(/group/);
-
-    // Check for arrow icon
-    const arrowIcon = firstCard.locator('svg[data-lucide="arrow-right"]');
-    await expect(arrowIcon).toBeVisible();
-
-    // Verify card has proper aria-label
-    await expect(firstCard).toHaveAttribute('aria-label', /View details for/);
-  });
-
-  test('department detail page displays leadership section', async ({
+  test('an office with an agreed head shows the name and its citation', async ({
     page,
   }) => {
-    // Navigate to first department
-    const firstCard = page
-      .locator('a[href*="/government/departments/"]')
-      .first();
-    await firstCard.click();
+    await gotoDetail(page, PUBLISHED_HEAD_SLUG);
 
-    // Wait for navigation
-    await page.waitForURL(/\/government\/departments\/.+/);
+    await expect(
+      page.getByRole('heading', { name: 'Aurora E. Valle' })
+    ).toBeVisible();
 
-    // Check for leadership section (may vary by department)
-    const leadershipSection = page
-      .locator('text=Leadership')
-      .or(page.locator('text=Department Head'));
-    const hasLeadership = (await leadershipSection.count()) > 0;
+    // The head is a separate claim from the office, so it carries its own
+    // citation rather than sheltering under the office's.
+    const citations = page.getByRole('region', { name: /Sources|Source/ });
+    await expect(citations).toHaveCount(2);
+  });
 
-    if (hasLeadership) {
-      await expect(leadershipSection.first()).toBeVisible();
-    }
+  test('an office whose sources disagree says so instead of naming a head', async ({
+    page,
+  }) => {
+    await gotoDetail(page, CONFLICTING_HEAD_SLUG);
+
+    await expect(
+      page.getByText(/head of this office is not published here yet/)
+    ).toBeVisible();
+    await expect(
+      page.getByText(/names a different person for this office/)
+    ).toBeVisible();
+
+    // Neither contested name may appear anywhere on the page.
+    await expect(page.getByText(/De Venecia/)).toHaveCount(0);
+    await expect(page.getByText(/Ophelia/)).toHaveCount(0);
+
+    // The office itself is still published, with its corroborated numbers.
+    await expect(
+      page.getByRole('heading', { name: 'City Health Office' })
+    ).toBeVisible();
+    await expect(page.getByText('(075) 522-8206')).toBeVisible();
+  });
+
+  test('an office named by only one source says why the head is withheld', async ({
+    page,
+  }) => {
+    await gotoDetail(page, UNCORROBORATED_HEAD_SLUG);
+
+    await expect(
+      page.getByText(/Only one official city page names anyone/)
+    ).toBeVisible();
+    await expect(page.getByText(/Arenas/)).toHaveCount(0);
+  });
+
+  test('an office with no verified contact says so rather than showing a blank', async ({
+    page,
+  }) => {
+    // The General Services Office has an email on one page and a phone on
+    // another, so the corroboration rule leaves it with neither.
+    await gotoDetail(page, 'general-services-office');
+
+    await expect(
+      page.getByText('No verified contact number').first()
+    ).toBeVisible();
+    await expect(page.getByText('No verified address').first()).toBeVisible();
+    // Never the bare "No contact", which would assert the office has none.
+    await expect(page.getByText(/^No contact$/)).toHaveCount(0);
+  });
+
+  test('the detail page claims no mandate the sources do not support', async ({
+    page,
+  }) => {
+    await gotoDetail(page, PUBLISHED_HEAD_SLUG);
+
+    // A fabricated "Office Mandate" paragraph used to render for every office,
+    // carrying the inherited LGU's slogan.
+    await expect(page.getByText(/Office Mandate/)).toHaveCount(0);
+    await expect(page.getByText(/Science and Nature City/)).toHaveCount(0);
+    await expect(page.getByText(/frontline office/)).toHaveCount(0);
+  });
+
+  test('the detail page has breadcrumbs back to the index', async ({
+    page,
+  }) => {
+    await gotoDetail(page, PUBLISHED_HEAD_SLUG);
+
+    const breadcrumb = page.locator('nav[aria-label="breadcrumb"]');
+    await expect(breadcrumb).toBeVisible();
+    // BreadcrumbHome renders an icon with no text, so match on the href.
+    await expect(breadcrumb.locator('a[href="/"]')).toBeVisible();
+    await expect(breadcrumb).toContainText('City Legal Office');
+
+    await breadcrumb.locator('a[href="/government/departments"]').click();
+    await expect(page).toHaveURL(/\/government\/departments$/);
+  });
+
+  test('the detail page declares exactly one main landmark', async ({
+    page,
+  }) => {
+    await gotoDetail(page, PUBLISHED_HEAD_SLUG);
+
+    // The page used to declare its own <main id='main-content'> and skip link
+    // on top of the ones the app shell already provides.
+    await expect(page.locator('#main-content')).toHaveCount(1);
+    await expect(page.locator('a[href="#main-content"]')).toHaveCount(1);
+  });
+
+  test('an unknown office slug reports that it was not found', async ({
+    page,
+  }) => {
+    await page.goto('/government/departments/not-a-real-office');
+    await expect(page.getByRole('alert')).toContainText(/not found/i);
+  });
+
+  test('the index renders in Filipino when the language is switched', async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('i18nextLng', 'fil');
+    });
+    await gotoIndex(page);
+
+    // The title also appears in the nav and the sidebar, so scope to the page.
+    await expect(
+      page
+        .locator('#layout-content')
+        .getByRole('heading', { name: 'Mga Kagawaran ng Lungsod', level: 1 })
+    ).toBeVisible();
+    await expect(page.getByText(/opisina ng/).first()).toBeVisible();
+  });
+
+  test('a withheld head is explained in Filipino too', async ({ page }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('i18nextLng', 'fil');
+    });
+    await gotoDetail(page, CONFLICTING_HEAD_SLUG);
+
+    await expect(
+      page.getByText(/Hindi pa inilalathala rito ang pinuno/)
+    ).toBeVisible();
+    await expect(page.getByText(/De Venecia/)).toHaveCount(0);
   });
 
   test('departments index page visual snapshot @visual', async ({ page }) => {
-    // Wait for page to fully load
+    await gotoIndex(page);
     await page.waitForLoadState('networkidle');
 
-    // Take full page screenshot
     await expect(page).toHaveScreenshot('departments-index.png', {
       maxDiffPixels: 150,
     });
@@ -247,10 +250,9 @@ test.describe('Departments Pages', () => {
   test('departments index page hero section visual snapshot @visual', async ({
     page,
   }) => {
-    // Wait for page to fully load
+    await gotoIndex(page);
     await page.waitForLoadState('networkidle');
 
-    // Take snapshot of hero section
     const heroSection = page.locator('main').first();
     await expect(heroSection).toHaveScreenshot('departments-hero.png', {
       maxDiffPixels: 100,
@@ -258,17 +260,9 @@ test.describe('Departments Pages', () => {
   });
 
   test('department detail page visual snapshot @visual', async ({ page }) => {
-    // Navigate to first department
-    const firstCard = page
-      .locator('a[href*="/government/departments/"]')
-      .first();
-    await firstCard.click();
-
-    // Wait for navigation and load
-    await page.waitForURL(/\/government\/departments\/.+/);
+    await gotoDetail(page, PUBLISHED_HEAD_SLUG);
     await page.waitForLoadState('networkidle');
 
-    // Take full page screenshot
     await expect(page).toHaveScreenshot('department-detail.png', {
       maxDiffPixels: 150,
     });

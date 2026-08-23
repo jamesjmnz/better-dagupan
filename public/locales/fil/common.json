@@ -148,5 +148,27 @@
     "punongBarangay": "Punong Barangay",
     "viewProfile": "Tingnan ang profile",
     "profileOf": "Tingnan ang profile ng {{name}}"
+  },
+  "departments": {
+    "title": "Mga Kagawaran ng Lungsod",
+    "count": "{{count}} opisina ng {{lgu}}, ayon sa inilathala ng pamahalaang lungsod.",
+    "searchPlaceholder": "Maghanap ayon sa pangalan ng opisina (hal. City Treasury)…",
+    "noMatches": "Walang pangalan ng opisina na tumutugma sa paghahanap.",
+    "notFound": "Hindi natagpuan ang opisina",
+    "officialProfile": "Opisyal na Profile",
+    "headerLabel": "Panimulang impormasyon ng opisina",
+    "headLabel": "Pinuno ng kagawaran",
+    "leadershipTitle": "Pamunuan ng opisina",
+    "servicesTitle": "Mga serbisyo ng opisina",
+    "serviceLabel": "Serbisyo",
+    "headNotVerified": "Hindi pa inilalathala rito ang pinuno ng opisinang ito.",
+    "headNotVerifiedConflict": "Magkaiba ang pangalang ibinibigay ng pamahalaang lungsod para sa opisinang ito sa iba't ibang opisyal na pahina, at wala ni isa sa mga ito ang may petsa, kaya walang batayan sa pagpili sa pagitan ng mga ito. Lalabas ang pangalan kapag may kasalukuyang pinagkunan na nagpapatunay nito.",
+    "headNotVerifiedUncorroborated": "Iisang opisyal na pahina ng lungsod lamang ang nagbibigay ng pangalan para sa opisinang ito, na hindi sapat upang matiyak na kasalukuyan ang paghirang. Lalabas ang pangalan kapag may pangalawang pinagkunan na nagpapatunay nito.",
+    "contactNotVerified": "Walang beripikadong numero ng kontak",
+    "addressNotVerified": "Walang beripikadong address",
+    "website": "Website",
+    "websiteAvailable": "May website",
+    "viewProfile": "Tingnan ang profile",
+    "profileOf": "Tingnan ang detalye ng {{name}}"
   }
 }

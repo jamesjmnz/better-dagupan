@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Building2Icon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import {
   SidebarContainer,
@@ -8,7 +9,6 @@ import {
 } from '@/components/navigation/SidebarNavigation';
 
 import { officeIcons } from '@/lib/officeIcons';
-import { formatGovName } from '@/lib/stringUtils';
 
 import departmentsDataRaw from '@/data/directory/departments.json';
 
@@ -17,23 +17,24 @@ import type { Department } from '@/types/directoryTypes';
 const departmentsData = departmentsDataRaw as Department[];
 
 export default function DepartmentsSidebar() {
+  const { t } = useTranslation('common');
   const { department: activeSlug } = useParams();
   const navigate = useNavigate();
 
-  const sortedDepartments = [...departmentsData].sort((a, b) => {
-    const cleanA = a.office_name.replace(
-      /MUNICIPAL |LOCAL |DEPARTMENT OF /g,
-      ''
-    );
-    const cleanB = b.office_name.replace(
-      /MUNICIPAL |LOCAL |DEPARTMENT OF /g,
-      ''
-    );
-    return cleanA.localeCompare(cleanB);
-  });
+  /*
+   * The list is copied before sorting: .sort() mutates in place, and this array
+   * is the same module-level import the index page renders from.
+   *
+   * The old comparator stripped "MUNICIPAL " and "DEPARTMENT OF " prefixes that
+   * no Dagupan office name carries, and did so case-sensitively in upper case,
+   * so it never matched anything here.
+   */
+  const sortedDepartments = [...departmentsData].sort((a, b) =>
+    a.office_name.localeCompare(b.office_name)
+  );
 
   return (
-    <SidebarContainer title='Municipal Departments'>
+    <SidebarContainer title={t('departments.title')}>
       {sortedDepartments.map(dept => {
         // 2. Get the specific icon or fallback to a default building icon
         const IconComponent = officeIcons[dept.slug] || Building2Icon;
@@ -41,7 +42,12 @@ export default function DepartmentsSidebar() {
         return (
           <SidebarItem
             key={dept.slug}
-            label={formatGovName(dept.office_name, 'department')}
+            /*
+              Rendered verbatim. formatGovName() lowercases a whole word before
+              recapitalising it, which turned acronyms in these names to
+              sentence case in this sidebar.
+            */
+            label={dept.office_name}
             tooltip={dept.office_name}
             icon={IconComponent} // Use the specific icon
             isActive={activeSlug === dept.slug}
