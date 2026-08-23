@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ArrowRight, Building2Icon, Globe, Phone, User2 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { NotVerified, SourceNote } from '@/components/civic';
 import { PageHero } from '@/components/layout/PageLayouts';
@@ -44,6 +45,7 @@ function matchesSearch(department: Department, search: string): boolean {
 }
 
 export default function DepartmentsIndex() {
+  const { t } = useTranslation('common');
   const [search, setSearch] = useState('');
 
   const filtered = departmentsData
@@ -53,13 +55,16 @@ export default function DepartmentsIndex() {
   return (
     <>
       <PageHero
-        title={`${lguLabels.adjective} Departments`}
-        description={`${departmentsData.length} offices of the ${lguLabels.fullName}, as published by the city government.`}
+        title={t('departments.title')}
+        description={t('departments.count', {
+          count: departmentsData.length,
+          lgu: lguLabels.fullName,
+        })}
       >
         <SearchInput
           value={search}
           onChangeValue={setSearch}
-          placeholder='Search by office name (e.g. City Treasury)…'
+          placeholder={t('departments.searchPlaceholder')}
           className='md:w-72'
         />
       </PageHero>
@@ -68,7 +73,7 @@ export default function DepartmentsIndex() {
       <SourceNote sources={indexSources} className='mb-6' />
 
       {filtered.length === 0 ? (
-        <EmptyState title='No office name matches that search.' message='' />
+        <EmptyState title={t('departments.noMatches')} message='' />
       ) : (
         <div className='grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3'>
           {filtered.map(dept => {
@@ -80,7 +85,9 @@ export default function DepartmentsIndex() {
                 key={dept.slug}
                 to={dept.slug}
                 className='group block h-full'
-                aria-label={`View details for ${dept.office_name}`}
+                aria-label={t('departments.profileOf', {
+                  name: dept.office_name,
+                })}
               >
                 <Card
                   hover
@@ -114,7 +121,7 @@ export default function DepartmentsIndex() {
                         </div>
                         <div className='min-w-0'>
                           <p className='text-kapwa-text-disabled mb-0.5 text-[9px] leading-none font-bold tracking-tighter uppercase'>
-                            Department Head
+                            {t('departments.headLabel')}
                           </p>
                           <p className='text-kapwa-text-support truncate text-xs leading-tight font-bold'>
                             {dept.department_head.name}
@@ -127,7 +134,10 @@ export default function DepartmentsIndex() {
                         nothing. A withheld head is a fact about this portal,
                         not about the office, so it is stated.
                       */
-                      <NotVerified label='Head not published' detail='' />
+                      <NotVerified
+                        label={t('departments.headNotVerified')}
+                        detail=''
+                      />
                     )}
 
                     {/* Bottom Row: Contact & Website */}
@@ -146,7 +156,7 @@ export default function DepartmentsIndex() {
                           has no phone number, which is not something we know.
                         */
                         <div className='text-kapwa-text-support text-[10px] italic'>
-                          No verified contact number
+                          {t('departments.contactNotVerified')}
                         </div>
                       )}
 
@@ -154,13 +164,13 @@ export default function DepartmentsIndex() {
                         {dept.website && (
                           <div
                             className='bg-kapwa-bg-surface text-kapwa-text-brand rounded-md p-1.5'
-                            title='Website Available'
+                            title={t('departments.websiteAvailable')}
                           >
                             <Globe className='h-3.5 w-3.5' />
                           </div>
                         )}
                         <span className='text-kapwa-text-brand text-[10px] font-black tracking-tighter uppercase opacity-0 transition-opacity group-hover:opacity-100'>
-                          View Profile
+                          {t('departments.viewProfile')}
                         </span>
                       </div>
                     </div>

@@ -21,6 +21,8 @@ import {
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent } from '@/components/ui/Card';
 
+import { useTranslation } from 'react-i18next';
+
 import { NotVerified, SourceNote } from '@/components/civic';
 
 import { toTitleCase } from '@/lib/stringUtils';
@@ -39,6 +41,7 @@ import type { Service } from '@/types/servicesTypes';
 const mergedServicesData = mergedServicesRaw as Service[];
 
 export default function DepartmentDetail() {
+  const { t } = useTranslation('common');
   const { department: slug } = useParams();
 
   // 1. Data Lookup
@@ -61,7 +64,7 @@ export default function DepartmentDetail() {
         className='text-kapwa-text-disabled p-20 text-center font-bold tracking-widest uppercase'
         role='alert'
       >
-        Office Not Found
+        {t('departments.notFound')}
       </div>
     );
 
@@ -76,7 +79,7 @@ export default function DepartmentDetail() {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink href='/government/departments'>
-              Departments
+              {t('departments.title')}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -91,7 +94,7 @@ export default function DepartmentDetail() {
         hover={false}
         className='rounded-xl p-6'
         role='banner'
-        aria-label='Department information header'
+        aria-label={t('departments.headerLabel')}
       >
         {/* Top Row: Name + Badge */}
         <div className='mb-4 flex items-center justify-between gap-4'>
@@ -110,7 +113,7 @@ export default function DepartmentDetail() {
             </h1>
           </div>
           <Badge variant='secondary' dot>
-            Official Profile
+            {t('departments.officialProfile')}
           </Badge>
         </div>
 
@@ -120,7 +123,10 @@ export default function DepartmentDetail() {
             {dept.address}, {lguLabels.location}
           </p>
         ) : (
-          <NotVerified label='No verified address' className='mb-4' />
+          <NotVerified
+            label={t('departments.addressNotVerified')}
+            className='mb-4'
+          />
         )}
 
         {/* Bottom: Contact Row */}
@@ -137,7 +143,7 @@ export default function DepartmentDetail() {
               </a>
             ))
           ) : (
-            <NotVerified label='No verified contact number' />
+            <NotVerified label={t('departments.contactNotVerified')} />
           )}
           {dept.website && (
             <a
@@ -147,7 +153,7 @@ export default function DepartmentDetail() {
               className='text-kapwa-text-support hover:text-kapwa-text-brand flex items-center gap-2 transition-colors'
             >
               <GlobeIcon aria-hidden='true' className='h-4 w-4' />
-              <span>Website</span>
+              <span>{t('departments.website')}</span>
             </a>
           )}
           {dept.email && (
@@ -176,10 +182,14 @@ export default function DepartmentDetail() {
           no published head must say so: rendering nothing would read as though
           the office has no head, which is never what a missing name means.
         */}
-        <div className='space-y-2' role='group' aria-label='Office Leadership'>
-          <p className='sr-only'>Office Leadership</p>
+        <div
+          className='space-y-2'
+          role='group'
+          aria-label={t('departments.leadershipTitle')}
+        >
+          <p className='sr-only'>{t('departments.leadershipTitle')}</p>
           <p className='text-kapwa-text-disabled pl-1 text-[10px] font-bold tracking-widest uppercase'>
-            Office Leadership
+            {t('departments.leadershipTitle')}
           </p>
           {dept.department_head ? (
             <Card hover={false} className='rounded-xl'>
@@ -191,6 +201,7 @@ export default function DepartmentDetail() {
                   <h3 className='text-kapwa-text-strong text-xl font-bold'>
                     {dept.department_head.name}
                   </h3>
+                  {/* The position exactly as the city publishes it. */}
                   <Badge variant='secondary' className='mt-1'>
                     {dept.department_head.title}
                   </Badge>
@@ -213,12 +224,12 @@ export default function DepartmentDetail() {
             </Card>
           ) : (
             <NotVerified
-              label='The head of this office is not published here yet.'
-              detail={
+              label={t('departments.headNotVerified')}
+              detail={t(
                 dept.department_head_status === 'conflicting_sources'
-                  ? 'The city government names a different person for this office on different official pages, and none of them is dated, so there is no basis for choosing between them. A name will appear once a current source settles it.'
-                  : 'Only one official city page names anyone for this office, which is not enough to establish that the appointment is current. A name will appear once a second source confirms it.'
-              }
+                  ? 'departments.headNotVerifiedConflict'
+                  : 'departments.headNotVerifiedUncorroborated'
+              )}
             />
           )}
         </div>
@@ -228,11 +239,11 @@ export default function DepartmentDetail() {
           <div
             className='space-y-2'
             role='group'
-            aria-label='Department Services'
+            aria-label={t('departments.servicesTitle')}
           >
-            <p className='sr-only'>Department Services</p>
+            <p className='sr-only'>{t('departments.servicesTitle')}</p>
             <p className='text-kapwa-text-disabled pl-1 text-[10px] font-bold tracking-widest uppercase'>
-              Department Services
+              {t('departments.servicesTitle')}
             </p>
             <div className='grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3'>
               {associatedServices.map(service => (
@@ -252,7 +263,7 @@ export default function DepartmentDetail() {
                         </div>
                         <div className='min-w-0'>
                           <p className='text-kapwa-text-brand mb-0.5 truncate text-[10px] font-bold tracking-widest uppercase'>
-                            Service
+                            {t('departments.serviceLabel')}
                           </p>
                           <p className='group-hover:text-kapwa-text-brand-bold text-kapwa-text-support text-sm leading-tight font-bold transition-colors'>
                             {service.plainLanguageName || service.service}

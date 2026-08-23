@@ -148,5 +148,27 @@
     "punongBarangay": "Punong Barangay",
     "viewProfile": "View profile",
     "profileOf": "View the profile of {{name}}"
+  },
+  "departments": {
+    "title": "City Departments",
+    "count": "{{count}} offices of the {{lgu}}, as published by the city government.",
+    "searchPlaceholder": "Search by office name (e.g. City Treasury)…",
+    "noMatches": "No office name matches that search.",
+    "notFound": "Office not found",
+    "officialProfile": "Official Profile",
+    "headerLabel": "Office information header",
+    "headLabel": "Department head",
+    "leadershipTitle": "Office leadership",
+    "servicesTitle": "Office services",
+    "serviceLabel": "Service",
+    "headNotVerified": "The head of this office is not published here yet.",
+    "headNotVerifiedConflict": "The city government names a different person for this office on different official pages, and none of them is dated, so there is no basis for choosing between them. A name will appear once a current source settles it.",
+    "headNotVerifiedUncorroborated": "Only one official city page names anyone for this office, which is not enough to establish that the appointment is current. A name will appear once a second source confirms it.",
+    "contactNotVerified": "No verified contact number",
+    "addressNotVerified": "No verified address",
+    "website": "Website",
+    "websiteAvailable": "Website available",
+    "viewProfile": "View profile",
+    "profileOf": "View details for {{name}}"
   }
 }

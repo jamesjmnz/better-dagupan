@@ -1,13 +1,13 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { Building2Icon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import {
   SidebarContainer,
   SidebarItem,
 } from '@/components/navigation/SidebarNavigation';
 
-import { lguLabels } from '@/lib/lguLabels';
 import { officeIcons } from '@/lib/officeIcons';
 
 import departmentsDataRaw from '@/data/directory/departments.json';
@@ -17,6 +17,7 @@ import type { Department } from '@/types/directoryTypes';
 const departmentsData = departmentsDataRaw as Department[];
 
 export default function DepartmentsSidebar() {
+  const { t } = useTranslation('common');
   const { department: activeSlug } = useParams();
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ export default function DepartmentsSidebar() {
   );
 
   return (
-    <SidebarContainer title={`${lguLabels.adjective} Departments`}>
+    <SidebarContainer title={t('departments.title')}>
       {sortedDepartments.map(dept => {
         // 2. Get the specific icon or fallback to a default building icon
         const IconComponent = officeIcons[dept.slug] || Building2Icon;
