@@ -185,7 +185,99 @@ document establishing a merger, deletion or renaming was found, so none is
 stated. The city page listing "Barangay II & III" as one row is suggestive but
 is a historical page and proves nothing about why the code is unused.
 
+## Worked example: the office directory (August 2026)
+
+The barangay index had one authoritative, dated source. The office directory
+had the opposite problem, and it is the more common one.
+
+### Three live rosters, none of them dated
+
+| | Roster A | Roster A′ | Roster B |
+|---|---|---|---|
+| URL | `/directories/` | `/officials/department-heads/` | `/the-city/department-heads/` |
+| Offices | 33 city + 6 others | 34 city | 32 city |
+| Released (`published`) | none stated | none stated | none stated |
+| CMS `article:modified_time` | 2026-07-14 06:16Z | 2026-07-14 05:27Z | 2026-07-14 06:35Z |
+
+All three are live and return HTTP 200. They name a **different person** at
+seven offices.
+
+**The timestamps cannot rank them.** Every department page on the site was
+re-saved inside the same 70 minutes, and the *newest* stamp belongs to Roster B,
+which is also the one whose content looks most superseded. That is a bulk
+re-save, not editorial currency. The timestamps are recorded in each source's
+`notes` and deliberately **not** used as `published`.
+
+Roster B is **not** given a `coverage` period either. The only evidence that it
+is historical is inferential, and a `coverage` value both labels it historical
+and bars records from citing it — which would throw away the corroboration it
+genuinely provides at the 23 offices where all three agree.
+
+### Corroboration is counted in families, not pages
+
+Rosters A and A′ are near-clones: same table markup, same wording, same
+honorifics, differing at two offices. Two of them agreeing is **one editorial
+act repeated**, not two independent statements. So sources are grouped into
+families, and a head is published only when two *families* name the same
+person. That single distinction is why the Public Library head is withheld
+despite appearing on two pages.
+
+Names are matched on surname **and** an overlapping given name. A shared
+surname alone is not agreement: "Angelinda M. Ngilay" and "Helen Ngilay" are
+not established to be the same person.
+
+### What was published
+
+**23 heads**, each named identically by both families, with the position as
+published and its own `sources` list — the head is a separate claim from the
+office and carries its own citation.
+
+**Contacts**, but only where **two of the four pages** state the value. The
+pages are demonstrably unreliable in detail: one transposes the City Nutrition
+Office number as `636-9483` for `636-9843`, and another lists the City Planning
+Office's own `615-1416` under the Office of Senior Citizens Affairs. The rule
+drops both without anyone having to spot them. It also drops 16 other
+single-page values, which is why the General Services Office is published with
+no contact at all rather than with an uncorroborated one.
+
+### What was withheld, and why the office stayed
+
+| Withheld | Count | `department_head_status` |
+|---|---|---|
+| Sources name different people | 7 | `conflicting_sources` |
+| Only one family names anyone | 4 | `uncorroborated` |
+
+In all 11 cases **the office is still published**. Withholding a name is a fact
+about this portal, not about the office, and `department_head_status` exists so
+the interface can say *which* of the two reasons applies rather than rendering
+one vague blank. A reader looking for the City Health Office finds it, finds its
+four corroborated numbers, and finds out why no head is named.
+
+`null` would have said only "no head". That is not what we know.
+
+### Intentionally omitted
+
+Office hours: published for city hall as a whole and for the Mayor's Office
+only, so applying them per office would be inference. Addresses for 33 of the
+34 offices: the city publishes one that two pages corroborate. Websites: none
+published anywhere.
+
+PNP, BFP, the Philippine Red Cross, DECORP, PAMANA and the 14-row emergency
+hotline table are excluded as not city government, and asserted absent by name
+in `departmentProvenance.test.ts`.
+
+### Noted, not asserted
+
+Roster B names an "Engr. Karlos Reyna IV" as City Tourism Office head, while a
+dated city article lists a "Karlos Reyna" among the councillors elected in May
+2025. That is *suggestive* that Roster B is stale, and it is why the entry is
+not treated as corroborating. **No claim is made that they are the same person**,
+and no document establishing it was found.
+
 ## Note on retrieval
+
+The city pages were read directly from their HTML rather than through a
+summariser, because the reconciliation turns on exact digits and spellings.
 
 `psa.gov.ph` returns HTTP 403 to plain command-line fetchers. The PSGC page was
 read in an ordinary browser, where it serves normally. Nothing was bypassed and

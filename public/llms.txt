@@ -8,7 +8,9 @@ Better Dagupan is an independent, community-led project. It is not the official 
 Better Dagupan is a secondary source. It does not originate government records. It organizes and points to information published by government bodies, and those bodies remain the primary source for anything reproduced here.
 
 ## Current status
-Verified Dagupan records have not been added yet. The sections below describe the structure of the portal, not a body of data it currently holds. Where a section lists no entries, the portal holds no records for it; that says nothing about whether the underlying government information exists.
+Two datasets are published and verified: the 31 barangays of the city, from the PSA PSGC, and the 34 city offices below, from the city government's own published directory. Every other section describes the structure of the portal, not a body of data it currently holds. Where a section lists no entries, the portal holds no records for it; that says nothing about whether the underlying government information exists.
+
+Within a published record, an absent value means the same thing: not verified yet, never that the information does not exist. Eleven of the offices below are published without a named head because the city's own pages disagree about who holds the post, or because only one page names anyone.
 
 ## What the portal covers
 - Public services, organized by category
@@ -28,7 +30,41 @@ Directory of local government officials and departments:
 - No verified records published yet (/government/elected-officials)
 
 #### Departments
-- No verified records published yet (/government/departments)
+34 city offices, verified against the city government's published directory:
+- Bids and Awards Committee (/government/departments/bids-and-awards-committee)
+- City Accounting Office (/government/departments/city-accounting-office)
+- City Administrator's Office (/government/departments/city-administrators-office)
+- City Agriculture Office (/government/departments/city-agriculture-office)
+- City Assessor's Office (/government/departments/city-assessors-office)
+- City Budget Office (/government/departments/city-budget-office)
+- City Disaster Risk Reduction & Management Office (/government/departments/city-disaster-risk-reduction-and-management-office)
+- City Engineer's Office (/government/departments/city-engineers-office)
+- City Health Office (/government/departments/city-health-office)
+- City Human Resource Management Office (/government/departments/city-human-resource-management-office)
+- City Information Office (/government/departments/city-information-office)
+- City Legal Office (/government/departments/city-legal-office)
+- City Management Information System Office (/government/departments/city-management-information-system-office)
+- City Nutrition Office (/government/departments/city-nutrition-office)
+- City Planning and Development Office (/government/departments/city-planning-and-development-office)
+- City Population and Development Office (/government/departments/city-population-and-development-office)
+- City Social Welfare and Development Office (/government/departments/city-social-welfare-and-development-office)
+- City Tourism Office (/government/departments/city-tourism-office)
+- City Treasury Office (/government/departments/city-treasury-office)
+- City Veterinary Office (/government/departments/city-veterinary-office)
+- Civil Registry (/government/departments/civil-registry)
+- Dagupan City Public Library & Information Center (/government/departments/dagupan-city-public-library-and-information-center)
+- General Services Office (/government/departments/general-services-office)
+- Market Division (/government/departments/market-division)
+- Office of Senior Citizens Affairs (/government/departments/office-of-senior-citizens-affairs)
+- Office of the City Mayor (/government/departments/office-of-the-city-mayor)
+- Office of the City Vice Mayor (/government/departments/office-of-the-city-vice-mayor)
+- One-Stop Business Center (/government/departments/one-stop-business-center)
+- Public Alert Response Management Center (/government/departments/public-alert-response-management-center)
+- Public Employment Service Office (/government/departments/public-employment-service-office)
+- Public Order & Safety Office (/government/departments/public-order-and-safety-office)
+- Sangguniang Panlungsod (/government/departments/sangguniang-panlungsod)
+- Waste Management Division (/government/departments/waste-management-division)
+- Youth and Sports Development Program (/government/departments/youth-and-sports-development-program)
 
 #### Sangguniang Panlungsod
 - No verified records published yet (/government/elected-officials)
