@@ -63,20 +63,69 @@ export interface Barangay {
   sources: string[];
 }
 
+/**
+ * An alternative name the city uses for the same office on its own pages, kept
+ * with the id of the source that uses it so a reader searching the name they
+ * saw elsewhere still finds the office.
+ */
+export interface OfficeNameVariant {
+  name: string;
+  source: string;
+}
+
+/**
+ * Why an office has no published head.
+ *
+ * The absence of a name never means the office has no head, so the reason is
+ * recorded rather than left to be inferred from a null. `conflicting_sources`
+ * means official pages name different people and nothing establishes which is
+ * current; `uncorroborated` means fewer than two independent page families
+ * name anyone at all.
+ */
+export type DepartmentHeadStatus =
+  | 'published'
+  | 'conflicting_sources'
+  | 'uncorroborated';
+
 export interface DepartmentHead {
-  name: string | null;
+  name: string;
+  /** The position as published, e.g. "City Legal Officer", "Officer-in-charge". */
+  title: string;
   contact: string | null;
   email: string | null;
+  /**
+   * Civic-source ids naming this person in this post. At least two, from at
+   * least two independent page families: a single page is not enough to
+   * establish that a head is current, and the city's Directory and
+   * Officials-section rosters are near-clones of each other rather than
+   * independent statements. The schema enforces the count; the provenance
+   * test enforces the independence.
+   */
+  sources: string[];
 }
 
 export interface Department {
   slug: string;
+  /**
+   * The office name as published, stored ready to render. Do not pass this
+   * through toTitleCase() or formatGovName(): both lowercase a whole word
+   * before recapitalising it, which mangles the acronyms these names carry.
+   */
   office_name: string;
+  name_variants: OfficeNameVariant[];
+  /** null until an authoritative address is sourced. */
   address: string | null;
+  /** Empty until an authoritative contact number is sourced. */
   trunkline: string[];
+  /** null until an authoritative page is sourced. */
   website: string | null;
+  /** null until an authoritative address is sourced. */
   email: string | null;
-  department_head: DepartmentHead;
+  department_head_status: DepartmentHeadStatus;
+  /** null unless the head is established. Never filled from one page alone. */
+  department_head: DepartmentHead | null;
+  /** Civic-source ids backing the office. At least one, enforced by tests. */
+  sources: string[];
 }
 
 export interface ExecutiveOfficial {

@@ -1,57 +1,105 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Municipal Departments",
-  "description": "Schema for local government administrative offices",
+  "title": "City Office Directory",
+  "description": "Schema for the administrative offices of the city government. Fields that have not been verified against a civic source are null or empty, never invented or filled with placeholder text. An office is published on the strength of its own citations; its head is a separate claim with its own citations, because the two are corroborated by different sources.",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["slug", "office_name"],
+    "additionalProperties": false,
+    "required": [
+      "slug",
+      "office_name",
+      "name_variants",
+      "address",
+      "trunkline",
+      "website",
+      "email",
+      "department_head_status",
+      "department_head",
+      "sources"
+    ],
     "properties": {
       "slug": {
+        "description": "URL segment. Lowercase, hyphen-separated, derived from the office name.",
         "type": "string",
-        "description": "URL-friendly identifier"
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
       },
       "office_name": {
+        "description": "Official name of the office as published, cased ready to render.",
         "type": "string",
-        "description": "Official name of the office"
+        "minLength": 1
+      },
+      "name_variants": {
+        "description": "Other names the city uses for the same office on its own pages. Kept so a reader searching the name they saw elsewhere still finds the office.",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "source"],
+          "properties": {
+            "name": { "type": "string", "minLength": 1 },
+            "source": { "type": "string", "minLength": 1 }
+          }
+        }
       },
       "address": {
+        "description": "Null until an authoritative address is sourced. The city publishes an address for only two of its offices.",
         "type": ["string", "null"]
       },
       "trunkline": {
-        "oneOf": [
-          {
-            "type": "array",
-            "items": { "type": ["string", "null"] }
-          },
-          { "type": "null" }
-        ],
-        "description": "Array of phone numbers (items can be null) or null"
+        "description": "Published contact numbers. Empty until an authoritative number is sourced.",
+        "type": "array",
+        "items": { "type": "string", "minLength": 1 }
       },
       "website": {
+        "description": "Null until an authoritative page is sourced.",
         "type": ["string", "null"],
         "format": "uri"
       },
       "email": {
+        "description": "Null until an authoritative address is sourced.",
         "type": ["string", "null"],
-        "format": "email",
-        "description": "Official office email address"
+        "format": "email"
+      },
+      "department_head_status": {
+        "description": "Why the head is or is not published. Distinguishes a detail this portal has not established from an office that has no head, which is never something the absence of a name tells us. `conflicting_sources`: official pages name different people, and nothing establishes which is current. `uncorroborated`: fewer than two independent page families name anyone. `published` requires department_head to be present; both withheld states require it to be null.",
+        "type": "string",
+        "enum": ["published", "conflicting_sources", "uncorroborated"]
       },
       "department_head": {
+        "description": "Null unless the head is established. Never filled from a single uncorroborated page, and never chosen between sources that disagree.",
         "oneOf": [
           {
             "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "title", "contact", "email", "sources"],
             "properties": {
-              "name": { "type": ["string", "null"] },
+              "name": { "type": "string", "minLength": 1 },
+              "title": {
+                "description": "The position as published, e.g. \"City Legal Officer\" or \"Officer-in-charge\".",
+                "type": "string",
+                "minLength": 1
+              },
               "contact": { "type": ["string", "null"] },
-              "email": {
-                "type": ["string", "null"],
-                "format": "email"
+              "email": { "type": ["string", "null"], "format": "email" },
+              "sources": {
+                "description": "Civic-source ids naming this person in this post. At least two, because a single page is not enough to establish that a head is current. The tests additionally require the two to come from independent page families: the Directory and the Officials-section roster are near-clones, so agreement between only those two is one editorial act repeated rather than two statements.",
+                "type": "array",
+                "minItems": 2,
+                "uniqueItems": true,
+                "items": { "type": "string", "minLength": 1 }
               }
             }
           },
           { "type": "null" }
         ]
+      },
+      "sources": {
+        "description": "Civic-source ids from src/data/sources/civic-sources.json backing the office itself.",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": { "type": "string", "minLength": 1 }
       }
     }
   }
