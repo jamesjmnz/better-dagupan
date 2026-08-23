@@ -31,13 +31,13 @@ const INHERITED =
   /los ba(ñ|n)os|losbanos\.gov\.ph|sangguniang bayan|betterlb|municipality of/i;
 
 /**
- * Datasets that are still empty. directory/barangays has left this list: it now
- * holds the 31 verified PSGC barangays, checked by
- * src/data/__tests__/barangayProvenance.test.ts. It is still asserted below to
- * be free of inherited content.
+ * Datasets that are still empty. directory/barangays and directory/departments
+ * have left this list: they now hold verified Dagupan records, checked by
+ * src/data/__tests__/barangayProvenance.test.ts and
+ * src/data/__tests__/departmentProvenance.test.ts. Both are still asserted
+ * below to be free of inherited content.
  */
 const recordSets: [string, unknown[]][] = [
-  ['directory/departments', departments],
   ['directory/executive', executive],
   ['directory/legislative', legislative],
   ['about/highlights', highlights],
@@ -72,6 +72,17 @@ describe('inherited civic records', () => {
     expect(Array.isArray(barangays)).toBe(true);
     expect(barangays.length).toBeGreaterThan(0);
     expect(JSON.stringify(barangays)).not.toMatch(INHERITED);
+  });
+
+  it('directory/departments holds verified Dagupan records, not inherited ones', () => {
+    // The second dataset to make that move. This one is the reason the string
+    // check above is not sufficient on its own: the file previously held 33
+    // Los Banos offices that never spelled the name, so the guarantee that
+    // matters here is that the records are positively Dagupan's, which
+    // departmentProvenance.test.ts checks field by field against the sources.
+    expect(Array.isArray(departments)).toBe(true);
+    expect(departments.length).toBeGreaterThan(0);
+    expect(JSON.stringify(departments)).not.toMatch(INHERITED);
   });
 
   it('keeps the nationwide datasets that are not LGU-specific', () => {

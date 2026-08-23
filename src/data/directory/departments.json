@@ -1,1 +1,860 @@
-[]
+[
+  {
+    "slug": "bids-and-awards-committee",
+    "office_name": "Bids and Awards Committee",
+    "name_variants": [],
+    "address": null,
+    "trunkline": [],
+    "website": null,
+    "email": null,
+    "department_head_status": "uncorroborated",
+    "department_head": null,
+    "sources": ["dagupan-lgu-department-heads-officials"]
+  },
+  {
+    "slug": "city-accounting-office",
+    "office_name": "City Accounting Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 522-2561"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Rosario G. Catugas",
+      "title": "City Accountant",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-administrators-office",
+    "office_name": "City Administrator's Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": [],
+    "website": null,
+    "email": null,
+    "department_head_status": "uncorroborated",
+    "department_head": null,
+    "sources": ["dagupan-lgu-department-heads-the-city"]
+  },
+  {
+    "slug": "city-agriculture-office",
+    "office_name": "City Agriculture Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 523-1228"],
+    "website": null,
+    "email": null,
+    "department_head_status": "conflicting_sources",
+    "department_head": null,
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-assessors-office",
+    "office_name": "City Assessor's Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": [],
+    "website": null,
+    "email": "dagupanassessor@gmail.com",
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Roland L. Suni",
+      "title": "Officer-in-charge",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-budget-office",
+    "office_name": "City Budget Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 523-4736"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Jessa Joy C. Royupa",
+      "title": "City Budget Officer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-disaster-risk-reduction-and-management-office",
+    "office_name": "City Disaster Risk Reduction & Management Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 540-0363", "0968-444-9598"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Ronaldo R. De Guzman",
+      "title": "Local DRRM Officer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city",
+      "dagupan-lgu-contact-us"
+    ]
+  },
+  {
+    "slug": "city-engineers-office",
+    "office_name": "City Engineer's Office",
+    "name_variants": [
+      {
+        "name": "City Engineering Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 522-1048"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Josephine M. Corpuz",
+      "title": "City Engineer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-health-office",
+    "office_name": "City Health Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": [
+      "(075) 522-8206",
+      "(075) 529-9317",
+      "0933-861-6088",
+      "0997-840-1377"
+    ],
+    "website": null,
+    "email": null,
+    "department_head_status": "conflicting_sources",
+    "department_head": null,
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city",
+      "dagupan-lgu-contact-us"
+    ]
+  },
+  {
+    "slug": "city-human-resource-management-office",
+    "office_name": "City Human Resource Management Office",
+    "name_variants": [
+      {
+        "name": "Human Resources Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 600-5644"],
+    "website": null,
+    "email": null,
+    "department_head_status": "conflicting_sources",
+    "department_head": null,
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-information-office",
+    "office_name": "City Information Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 510-5749"],
+    "website": null,
+    "email": null,
+    "department_head_status": "conflicting_sources",
+    "department_head": null,
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-legal-office",
+    "office_name": "City Legal Office",
+    "name_variants": [
+      {
+        "name": "City Legal Officer",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 515-2458"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Aurora E. Valle",
+      "title": "City Legal Officer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-management-information-system-office",
+    "office_name": "City Management Information System Office",
+    "name_variants": [
+      {
+        "name": "Management Information System Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": [],
+    "website": null,
+    "email": "miso@dagupan.gov.ph",
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Ryan DV. Castañeda",
+      "title": "Officer-in-charge",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-nutrition-office",
+    "office_name": "City Nutrition Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 636-9843"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Ana Mariel L. Visperas",
+      "title": "Nutrition Officer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-planning-and-development-office",
+    "office_name": "City Planning and Development Office",
+    "name_variants": [
+      {
+        "name": "City Planning & Development Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 615-1416"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "James Louell M. Fernandez",
+      "title": "City Planning and Development Coordinator",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-population-and-development-office",
+    "office_name": "City Population and Development Office",
+    "name_variants": [
+      {
+        "name": "City Population Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 540-6020"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Malen Bernadette B. Pilon",
+      "title": "City Population Officer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-social-welfare-and-development-office",
+    "office_name": "City Social Welfare and Development Office",
+    "name_variants": [
+      {
+        "name": "City Social Welfare & Development Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 515-3140", "(075) 632-2566"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Irene L. Ferrer",
+      "title": "Officer-in-charge",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city",
+      "dagupan-lgu-contact-us"
+    ]
+  },
+  {
+    "slug": "city-tourism-office",
+    "office_name": "City Tourism Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 656-5056"],
+    "website": null,
+    "email": null,
+    "department_head_status": "conflicting_sources",
+    "department_head": null,
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city",
+      "dagupan-lgu-contact-us"
+    ]
+  },
+  {
+    "slug": "city-treasury-office",
+    "office_name": "City Treasury Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 522-8276"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Randolf P. Ubando",
+      "title": "City Treasurer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "city-veterinary-office",
+    "office_name": "City Veterinary Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 615-8088"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Daniel Paolo Q. Garcia",
+      "title": "Officer-in-charge",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "civil-registry",
+    "office_name": "Civil Registry",
+    "name_variants": [
+      {
+        "name": "City Civil Registry Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 522-7384"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Crisanto Ambrosio Q. Estrada",
+      "title": "City Civil Registrar",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "dagupan-city-public-library-and-information-center",
+    "office_name": "Dagupan City Public Library & Information Center",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 505-5137"],
+    "website": null,
+    "email": null,
+    "department_head_status": "uncorroborated",
+    "department_head": null,
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials"
+    ]
+  },
+  {
+    "slug": "general-services-office",
+    "office_name": "General Services Office",
+    "name_variants": [
+      {
+        "name": "City General Services Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": [],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Camilo DV. Cayabyab",
+      "title": "City General Services Officer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "market-division",
+    "office_name": "Market Division",
+    "name_variants": [
+      {
+        "name": "City Market Division",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 529-9963"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Jovita J. Narvasa",
+      "title": "Officer-in-charge",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "office-of-senior-citizens-affairs",
+    "office_name": "Office of Senior Citizens Affairs",
+    "name_variants": [
+      {
+        "name": "Office for Senior Citizen's Affairs",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["0961-770-3839"],
+    "website": null,
+    "email": null,
+    "department_head_status": "conflicting_sources",
+    "department_head": null,
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "office-of-the-city-mayor",
+    "office_name": "Office of the City Mayor",
+    "name_variants": [
+      {
+        "name": "City Mayor's Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": "2F Dagupan City Hall Complex, AB Fernandez Ave., Dagupan City",
+    "trunkline": ["(075) 600-5644"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Belen T. Fernandez",
+      "title": "City Mayor",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city",
+        "dagupan-lgu-2025-local-election-results"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city",
+      "dagupan-lgu-contact-us"
+    ]
+  },
+  {
+    "slug": "office-of-the-city-vice-mayor",
+    "office_name": "Office of the City Vice Mayor",
+    "name_variants": [
+      {
+        "name": "Office of the Vice Mayor",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 529-6320"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Dean Bryan L. Kua",
+      "title": "City Vice Mayor",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city",
+        "dagupan-lgu-2025-local-election-results"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "one-stop-business-center",
+    "office_name": "One-Stop Business Center",
+    "name_variants": [
+      {
+        "name": "One Stop Business Center",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 649-6951", "(075) 653-6897"],
+    "website": null,
+    "email": null,
+    "department_head_status": "conflicting_sources",
+    "department_head": null,
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "public-alert-response-management-center",
+    "office_name": "Public Alert Response Management Center",
+    "name_variants": [
+      {
+        "name": "Public Alert Response & Management Center",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["0985-187-3333"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Melykhen R. Bauzon",
+      "title": "Officer-in-charge",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "public-employment-service-office",
+    "office_name": "Public Employment Service Office",
+    "name_variants": [
+      {
+        "name": "Public Employment Office",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 505-6256", "0915-421-6885"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Jocelyn Z. Siapno",
+      "title": "PESO Manager",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city",
+      "dagupan-lgu-contact-us"
+    ]
+  },
+  {
+    "slug": "public-order-and-safety-office",
+    "office_name": "Public Order & Safety Office",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 529-9890", "0919-248-2531", "0967-435-7097"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Arvin B. Decano",
+      "title": "POSO Chief",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city",
+      "dagupan-lgu-contact-us"
+    ]
+  },
+  {
+    "slug": "sangguniang-panlungsod",
+    "office_name": "Sangguniang Panlungsod",
+    "name_variants": [
+      {
+        "name": "Office of the SP Secretary",
+        "source": "dagupan-lgu-department-heads-the-city"
+      }
+    ],
+    "address": null,
+    "trunkline": ["(075) 529-6184"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Ryan C. Ravanzo",
+      "title": "City Secretary",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "waste-management-division",
+    "office_name": "Waste Management Division",
+    "name_variants": [],
+    "address": null,
+    "trunkline": ["(075) 202-0480", "0946-891-6991"],
+    "website": null,
+    "email": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Bernard L. Cabison",
+      "title": "Sanitation Inspector",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-department-heads-the-city"
+      ]
+    },
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "youth-and-sports-development-program",
+    "office_name": "Youth and Sports Development Program",
+    "name_variants": [],
+    "address": null,
+    "trunkline": [],
+    "website": null,
+    "email": null,
+    "department_head_status": "uncorroborated",
+    "department_head": null,
+    "sources": ["dagupan-lgu-department-heads-officials"]
+  }
+]
