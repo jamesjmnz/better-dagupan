@@ -69,14 +69,6 @@ export default function DepartmentDetail() {
 
   return (
     <div className='animate-in fade-in space-y-6 pb-20 duration-500'>
-      {/* Skip Link for Accessibility */}
-      <a
-        href='#main-content'
-        className='focus:bg-kapwa-bg-surface focus:text-kapwa-text-strong focus:ring-kapwa-border-focus sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:ring-2'
-      >
-        Skip to main content
-      </a>
-
       {/* --- BREADCRUMBS --- */}
       <Breadcrumb>
         <BreadcrumbList>
@@ -160,8 +152,12 @@ export default function DepartmentDetail() {
         </div>
       </Card>
 
-      {/* --- MAIN CONTENT --- */}
-      <main id='main-content' className='space-y-6'>
+      {/*
+        A plain wrapper, not a <main id='main-content'>: the app shell in
+        src/App.tsx already provides that landmark and the skip link that
+        targets it, and repeating them here made both duplicates.
+      */}
+      <div className='space-y-6'>
         {/* Office Leadership */}
         {dept.department_head?.name && (
           <div
@@ -244,26 +240,7 @@ export default function DepartmentDetail() {
             </div>
           </div>
         )}
-
-        {/* Office Mandate */}
-        <div className='space-y-2' role='group' aria-label='Office Mandate'>
-          <p className='sr-only'>Office Mandate</p>
-          <p className='text-kapwa-text-disabled pl-1 text-[10px] font-bold tracking-widest uppercase'>
-            Office Mandate
-          </p>
-          <Card variant='default' hover={false} className='bg-kapwa-bg-surface'>
-            <CardContent className='p-6'>
-              <p className='text-kapwa-text-support text-sm leading-relaxed'>
-                The {toTitleCase(dept.office_name)} is a frontline office of the
-                {lguLabels.fullName}. It is responsible for executing
-                administrative mandates and technical functions to ensure the
-                delivery of high-quality public services within the Science and
-                Nature City.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
