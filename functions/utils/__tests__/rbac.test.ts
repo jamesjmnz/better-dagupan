@@ -177,7 +177,7 @@ describe('requireRole', () => {
   it('should throw with correct HTTP status code 403', () => {
     try {
       requireRole(UserRole.VIEWER, UserRole.ADMIN);
-      fail('Expected an error to be thrown');
+      expect.unreachable('Expected an error to be thrown');
     } catch (error) {
       expect((error as Error).message).toBe('Insufficient permissions');
     }

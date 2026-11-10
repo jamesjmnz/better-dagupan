@@ -12,6 +12,14 @@ import { withAuth, AuthContext } from '../admin-auth';
 import { MockKVNamespace } from '../../test/test-utils';
 import { generateCSRFToken } from '../csrf';
 
+/** The JSON bodies these handlers and the auth wrapper respond with. */
+type JsonBody = {
+  success?: boolean;
+  user?: string;
+  error?: string;
+  authenticated?: boolean;
+};
+
 describe('withAuth with CSRF Protection', () => {
   let mockKV: MockKVNamespace;
   let mockEnv: any;
@@ -92,7 +100,7 @@ describe('withAuth with CSRF Protection', () => {
 
       const wrappedHandler = withAuth(handler);
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(200);
       expect(data.success).toBe(true);
@@ -139,7 +147,7 @@ describe('withAuth with CSRF Protection', () => {
 
       const wrappedHandler = withAuth(handler, { requireCSRF: true });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(403);
       expect(data.error).toBe('Invalid CSRF token');
@@ -163,7 +171,7 @@ describe('withAuth with CSRF Protection', () => {
 
       const wrappedHandler = withAuth(handler, { requireCSRF: true });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(200);
       expect(data.success).toBe(true);
@@ -187,7 +195,7 @@ describe('withAuth with CSRF Protection', () => {
 
       const wrappedHandler = withAuth(handler, { requireCSRF: true });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(403);
       expect(data.error).toBe('Invalid CSRF token');
@@ -233,7 +241,7 @@ describe('withAuth with CSRF Protection', () => {
         request: request2,
         env: mockEnv,
       });
-      const data2 = await response2.json();
+      const data2 = await response2.json<JsonBody>();
 
       expect(response2.status).toBe(403);
       expect(data2.error).toBe('Invalid CSRF token');
@@ -319,7 +327,7 @@ describe('withAuth with CSRF Protection', () => {
 
       const wrappedHandler = withAuth(handler, { requireCSRF: true });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(403);
       expect(data.error).toBe('Invalid CSRF token');
@@ -342,7 +350,7 @@ describe('withAuth with CSRF Protection', () => {
 
       const wrappedHandler = withAuth(handler, { requireCSRF: true });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(403);
       expect(data.error).toBe('Invalid CSRF token');
@@ -365,7 +373,7 @@ describe('withAuth with CSRF Protection', () => {
 
       const wrappedHandler = withAuth(handler, { requireCSRF: true });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(403);
       expect(data.error).toBe('Invalid CSRF token');
@@ -389,7 +397,7 @@ describe('withAuth with CSRF Protection', () => {
 
       const wrappedHandler = withAuth(handler, { requireCSRF: true });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(401);
       expect(data.authenticated).toBe(false);

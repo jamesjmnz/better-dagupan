@@ -64,8 +64,29 @@ export class MockD1Database implements D1Database {
   /**
    * Execute a batch of statements
    */
-  batch(statements: D1PreparedStatement[]): Promise<D1Result[]> {
-    return Promise.all(statements.map(stmt => stmt.all()));
+  batch<T = unknown>(
+    statements: D1PreparedStatement[]
+  ): Promise<D1Result<T>[]> {
+    return Promise.all(statements.map(stmt => stmt.all<T>()));
+  }
+
+  /**
+   * Raw SQL execution (not supported by the mock parser)
+   */
+  exec(): Promise<D1ExecResult> {
+    return Promise.reject(new Error('MockD1Database does not support exec()'));
+  }
+
+  /**
+   * Sessions are not modelled; queries run against the same in-memory data
+   */
+  withSession(): D1DatabaseSession {
+    return {
+      prepare: (sql: string) => this.prepare(sql),
+      batch: <T = unknown>(statements: D1PreparedStatement[]) =>
+        this.batch<T>(statements),
+      getBookmark: () => null,
+    };
   }
 
   /**
@@ -121,10 +142,10 @@ class MockD1PreparedStatement implements D1PreparedStatement {
         duration: 0,
         rows_read: results.length,
         rows_written: 0,
-        last_row_id: null,
+        last_row_id: 0,
         changed_db: false,
+        changes: 0,
         size_after: 0,
-        serve_replicas: [],
       },
     };
   }
@@ -140,21 +161,34 @@ class MockD1PreparedStatement implements D1PreparedStatement {
   /**
    * Execute query and return results
    */
-  async run(): Promise<D1Result> {
+  async run<T = any>(): Promise<D1Result<T>> {
     const results = this.executeQuery();
     return {
-      results,
+      results: results as T[],
       success: true,
       meta: {
         duration: 0,
         rows_read: results.length,
         rows_written: 0,
-        last_row_id: null,
+        last_row_id: 0,
         changed_db: false,
+        changes: 0,
         size_after: 0,
-        serve_replicas: [],
       },
     };
+  }
+
+  /**
+   * Execute query and return rows as value arrays, optionally headed by the
+   * column names
+   */
+  async raw(options?: { columnNames?: boolean }): Promise<any> {
+    const results = this.executeQuery();
+    const rows = results.map(row => Object.values(row));
+    if (options?.columnNames) {
+      return [Object.keys(results[0] ?? {}), ...rows];
+    }
+    return rows;
   }
 
   /**
@@ -306,7 +340,7 @@ class MockD1PreparedStatement implements D1PreparedStatement {
                 const joinedKeyValue = joinedRow[joinedTableCol];
                 if (joinedKeyValue === baseKeyValue) {
                   // Create merged row - spread baseRow last so it takes precedence
-                  const mergedRow: any = { ...matchedRow, ...baseRow };
+                  const mergedRow: any = { ...joinedRow, ...baseRow };
                   newRows.push(mergedRow);
                 }
               }
@@ -507,6 +541,9 @@ class MockD1PreparedStatement implements D1PreparedStatement {
  *   because all reads happen before any writes
  * - Expiration is checked on read but doesn't auto-clean
  */
+type KVValueType = 'text' | 'json' | 'arrayBuffer' | 'stream';
+type KVGetArgument = KVValueType | { type?: KVValueType; cacheTtl?: number };
+
 export class MockKVNamespace implements KVNamespace {
   private store: Map<
     string,
@@ -514,41 +551,18 @@ export class MockKVNamespace implements KVNamespace {
   > = new Map();
 
   /**
-   * Get a value from KV
+   * Get a value from KV. Like the real binding it reads text unless a type is
+   * given, and accepts either a type string or an options object.
    */
   async get(
-    key: string,
-    type: 'text' | 'arrayBuffer' | 'stream' | 'json'
+    key: string | string[],
+    typeOrOptions?: KVGetArgument
   ): Promise<any> {
-    const entry = this.store.get(key);
-
-    if (!entry) {
-      return null;
+    const type = MockKVNamespace.valueType(typeOrOptions);
+    if (Array.isArray(key)) {
+      return new Map(key.map(k => [k, this.read(k, type)?.value ?? null]));
     }
-
-    // Check expiration
-    if (entry.expiration && entry.expiration < Date.now()) {
-      this.store.delete(key);
-      return null;
-    }
-
-    switch (type) {
-      case 'text':
-        return entry.value;
-      case 'json':
-        return JSON.parse(entry.value);
-      case 'arrayBuffer':
-        return new TextEncoder().encode(entry.value).buffer;
-      case 'stream':
-        return new ReadableStream({
-          start(controller) {
-            controller.enqueue(new TextEncoder().encode(entry.value));
-            controller.close();
-          },
-        });
-      default:
-        return entry.value;
-    }
+    return this.read(key, type)?.value ?? null;
   }
 
   /**
@@ -556,7 +570,7 @@ export class MockKVNamespace implements KVNamespace {
    */
   async put(
     key: string,
-    value: string | ReadableStream | ArrayBuffer,
+    value: string | ArrayBuffer | ArrayBufferView | ReadableStream,
     options?: KVNamespacePutOptions
   ): Promise<void> {
     let stringValue: string;
@@ -585,7 +599,7 @@ export class MockKVNamespace implements KVNamespace {
 
       stringValue = new TextDecoder().decode(combined);
     } else {
-      stringValue = new TextDecoder().decode(new Uint8Array(value));
+      stringValue = new TextDecoder().decode(value);
     }
 
     const expiration = options?.expirationTtl
@@ -609,53 +623,77 @@ export class MockKVNamespace implements KVNamespace {
   /**
    * List keys with prefix
    */
-  async list(options?: {
-    limit?: number;
-    cursor?: string;
-    prefix?: string;
-  }): Promise<{
-    keys: Array<{ name: string }>;
-    list_complete: boolean;
-    cursor?: string;
-  }> {
+  async list<Metadata = unknown>(
+    options?: KVNamespaceListOptions
+  ): Promise<KVNamespaceListResult<Metadata>> {
     let keys = Array.from(this.store.keys());
 
     if (options?.prefix) {
-      keys = keys.filter(key => key.startsWith(options.prefix!));
+      const prefix = options.prefix;
+      keys = keys.filter(key => key.startsWith(prefix));
     }
 
     const limit = options?.limit || keys.length;
-    const paginatedKeys = keys.slice(0, limit);
+    const paginatedKeys = keys.slice(0, limit).map(name => ({ name }));
 
-    return {
-      keys: paginatedKeys.map(name => ({ name })),
-      list_complete: paginatedKeys.length >= keys.length,
-    };
+    return paginatedKeys.length >= keys.length
+      ? { keys: paginatedKeys, list_complete: true, cacheStatus: null }
+      : {
+          keys: paginatedKeys,
+          list_complete: false,
+          cursor: String(limit),
+          cacheStatus: null,
+        };
   }
 
   /**
    * Get with metadata
    */
-  async getWithMetadata<CF = unknown>(
+  async getWithMetadata(
+    key: string | string[],
+    typeOrOptions?: KVGetArgument
+  ): Promise<any> {
+    const type = MockKVNamespace.valueType(typeOrOptions);
+    const withMetadata = (k: string) => {
+      const entry = this.read(k, type);
+      return {
+        value: entry?.value ?? null,
+        metadata: entry?.metadata ?? null,
+        cacheStatus: null,
+      };
+    };
+    if (Array.isArray(key)) {
+      return new Map(key.map(k => [k, withMetadata(k)]));
+    }
+    return withMetadata(key);
+  }
+
+  private static valueType(typeOrOptions?: KVGetArgument): KVValueType {
+    if (typeof typeOrOptions === 'string') return typeOrOptions;
+    return typeOrOptions?.type ?? 'text';
+  }
+
+  /**
+   * Read one live entry, decoded as the given type
+   */
+  private read(
     key: string,
-    type: 'text' | 'arrayBuffer' | 'stream' | 'json'
-  ): Promise<{ value: any; metadata: CF | null } | null> {
+    type: KVValueType
+  ): { value: unknown; metadata: unknown } | null {
     const entry = this.store.get(key);
 
     if (!entry) {
       return null;
     }
 
+    // Check expiration
     if (entry.expiration && entry.expiration < Date.now()) {
       this.store.delete(key);
       return null;
     }
 
-    let value: any;
+    let value: unknown;
     switch (type) {
-      case 'text':
-        value = entry.value;
-        break;
       case 'json':
         value = JSON.parse(entry.value);
         break;
@@ -670,12 +708,11 @@ export class MockKVNamespace implements KVNamespace {
           },
         });
         break;
+      default:
+        value = entry.value;
     }
 
-    return {
-      value,
-      metadata: (entry.metadata as CF) || null,
-    };
+    return { value, metadata: entry.metadata };
   }
 }
 
