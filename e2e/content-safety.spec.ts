@@ -45,14 +45,11 @@ test.describe('Inherited civic records', () => {
 });
 
 test.describe('Honest empty states', () => {
-  // /statistics (population) and /transparency/financial are no longer
-  // empty: PSA census figures and BLGF statements are published, and
-  // e2e/statistics/population.spec.ts and e2e/transparency/financial.spec.ts
-  // cover them.
-  const emptyRoutes = [
-    '/statistics/competitiveness',
-    '/statistics/municipal-income',
-  ];
+  // /statistics (population), /statistics/municipal-income and
+  // /transparency/financial are no longer empty: PSA census figures and BLGF
+  // statements are published, and e2e/statistics and
+  // e2e/transparency/financial.spec.ts cover them.
+  const emptyRoutes = ['/statistics/competitiveness'];
 
   for (const path of emptyRoutes) {
     test(`${path} says the records are not available yet`, async ({ page }) => {
@@ -67,7 +64,9 @@ test.describe('Honest empty states', () => {
   test('the empty state does not claim a search came up empty', async ({
     page,
   }) => {
-    await page.goto('/statistics/municipal-income');
+    // Any page still waiting for verified records will do; the services
+    // directory is one.
+    await page.goto('/services');
 
     // Routes are lazy-loaded, so wait for the empty state to mount before
     // reading the document text.
