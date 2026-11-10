@@ -1,6 +1,7 @@
 import { test, expect } from '../test-config';
 import { readData } from '../utils/data';
 import { assertKapwaTokens } from '../utils/kapwa';
+import { openSidebar } from '../utils/layout';
 
 /**
  * The financial page renders the city's Statements of Receipts and
@@ -39,6 +40,7 @@ test.describe('Financial Transparency Page', () => {
   });
 
   test('the sidebar links every transparency section', async ({ page }) => {
+    await openSidebar(page);
     const nav = page.getByRole('navigation', { name: 'Transparency' });
 
     for (const href of [

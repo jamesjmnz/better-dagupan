@@ -1,6 +1,7 @@
 import { test, expect } from '../test-config';
 import { readData } from '../utils/data';
 import { assertKapwaTokens } from '../utils/kapwa';
+import { openSidebar } from '../utils/layout';
 
 const incomeRecords = readData<unknown[]>('statistics/ari.json');
 const cmci = readData<{ overall_score: unknown[] }>('statistics/cmci.json');
@@ -40,13 +41,12 @@ test.describe('Statistics Pages', () => {
       page.locator('p:has-text("Data-driven insights")')
     ).toBeVisible();
 
-    // Check StatisticsSidebar is present (the layout renders more than one
-    // <aside>, so take the first).
-    const sidebar = page
-      .locator('aside')
-      .or(page.locator('[data-testid="sidebar"]'))
-      .first();
-    await expect(sidebar).toBeVisible();
+    // Check StatisticsSidebar is present, opening it first on viewports that
+    // fold it behind the Menu disclosure.
+    const sidebar = await openSidebar(page);
+    await expect(
+      sidebar.getByRole('navigation', { name: 'City Statistics' })
+    ).toBeVisible();
   });
 
   test('population page displays KPI cards', async ({ page }) => {
@@ -221,10 +221,7 @@ test.describe('Statistics Pages', () => {
     await page.waitForLoadState('networkidle');
 
     // Check sidebar is visible
-    const sidebar = page
-      .locator('aside')
-      .or(page.locator('[data-testid="sidebar"]'));
-    await expect(sidebar).toBeVisible();
+    await openSidebar(page);
 
     // Look for collapse button
     const collapseButton = page.locator('button').filter({
