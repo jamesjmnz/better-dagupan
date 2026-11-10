@@ -34,15 +34,15 @@ const INHERITED =
 /**
  * Datasets that are still empty. directory/barangays, directory/departments,
  * directory/executive, directory/legislative, the two statistics/population
- * series, about/history and about/highlights have left this list: they now
- * hold verified Dagupan records, checked by barangayProvenance.test.ts,
- * departmentProvenance.test.ts, electedOfficialsProvenance.test.ts,
- * populationProvenance.test.ts and aboutProvenance.test.ts in this directory.
+ * series, about/history, about/highlights and transparency/sre have left this
+ * list: they now hold verified Dagupan records, checked by
+ * barangayProvenance.test.ts, departmentProvenance.test.ts,
+ * electedOfficialsProvenance.test.ts, populationProvenance.test.ts,
+ * aboutProvenance.test.ts and sreProvenance.test.ts in this directory.
  * All are still asserted below to be free of inherited content.
  */
 const recordSets: [string, unknown[]][] = [
   ['statistics/ari', ari],
-  ['transparency/sre', sre],
   ['services/services', services],
   ['citizens-charter/merged-services', mergedServices],
   ['citizens-charter/citizens-charter', citizensCharter.services],
@@ -150,6 +150,23 @@ describe('inherited civic records', () => {
     expect(cityHotlines.length).toBeGreaterThan(0);
     expect(JSON.stringify(cityHotlines)).not.toMatch(INHERITED);
     expect(JSON.stringify(cityHotlines)).not.toMatch(/\(049\)/);
+  });
+
+  it('transparency/sre holds Dagupan statements, not inherited ones', () => {
+    // The inherited file held another LGU's quarterly statements in millions.
+    // The guarantee now is that every statement is BLGF's row for Dagupan
+    // City, which sreProvenance.test.ts checks total by total.
+    expect(Array.isArray(sre)).toBe(true);
+    expect(sre.length).toBeGreaterThan(0);
+    expect(JSON.stringify(sre)).not.toMatch(INHERITED);
+    for (const statement of sre) {
+      expect(statement.location_info).toEqual({
+        region: 'Region I',
+        province: 'Pangasinan',
+        lgu_name: 'Dagupan City',
+        lgu_type: 'City',
+      });
+    }
   });
 
   it('keeps the nationwide datasets that are not LGU-specific', () => {

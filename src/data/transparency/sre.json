@@ -1,1 +1,2117 @@
-[]
+[
+  {
+    "period": "Q1-2022",
+    "fiscal_year": 2022,
+    "quarter": 1,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2022 - Q1",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 44096534.9,
+            "special_education_fund": 31503275.38,
+            "total": 75599810.28
+          },
+          "tax_on_business": 141307412.2,
+          "other_taxes": 9127717.37,
+          "total_tax_revenue": 226034939.85
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 33278191.27,
+          "service_user_charges": 13939164.52,
+          "receipts_from_economic_enterprises": 18604863.74,
+          "other_receipts": 446298.87,
+          "total_non_tax_revenue": 66268518.4
+        },
+        "total_local_sources": 292303458.25
+      },
+      "external_sources": {
+        "national_tax_allotment": 215257245.99,
+        "other_shares_from_national_tax_collection": 362476.72,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 215619722.71
+      },
+      "total_current_operating_income": 507923180.96
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 67137792.79,
+      "social_services": {
+        "education_culture_sports_manpower_development": 2299125.37,
+        "health_nutrition_population_control": 11223929.13,
+        "labor_and_employment": 501635.0,
+        "housing_and_community_development": 9917934.88,
+        "social_services_and_social_welfare": 64223534.63,
+        "total_social_services": 88166159.01
+      },
+      "economic_services": 18545914.92,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 173849866.72
+    },
+    "net_operating_income_loss_from_current_operations": 334073314.24,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 0.0,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 0.0
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 0.0
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 334073314.24,
+      "add_cash_balance_beginning": 1010727534.19,
+      "fund_cash_available": 1344800848.43,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1344800848.43
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2022"]
+  },
+  {
+    "period": "Q2-2022",
+    "fiscal_year": 2022,
+    "quarter": 2,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2022 - Q2",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 50241145.35,
+            "special_education_fund": 35897260.44,
+            "total": 86138405.79
+          },
+          "tax_on_business": 170362538.29,
+          "other_taxes": 12674361.92,
+          "total_tax_revenue": 269175306.0
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 39965196.59,
+          "service_user_charges": 15755104.43,
+          "receipts_from_economic_enterprises": 37661653.78,
+          "other_receipts": 1745949.57,
+          "total_non_tax_revenue": 95127904.37
+        },
+        "total_local_sources": 364303210.37
+      },
+      "external_sources": {
+        "national_tax_allotment": 430514491.98,
+        "other_shares_from_national_tax_collection": 362476.72,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 430876968.7
+      },
+      "total_current_operating_income": 795180179.07
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 190137473.11,
+      "social_services": {
+        "education_culture_sports_manpower_development": 2561538.96,
+        "health_nutrition_population_control": 32510019.17,
+        "labor_and_employment": 1614861.14,
+        "housing_and_community_development": 25857500.49,
+        "social_services_and_social_welfare": 101336759.76,
+        "total_social_services": 163880679.52
+      },
+      "economic_services": 45732015.7,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 399750168.33
+    },
+    "net_operating_income_loss_from_current_operations": 395430010.74,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 0.0,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 0.0
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 0.0
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 395430010.74,
+      "add_cash_balance_beginning": 1010727534.19,
+      "fund_cash_available": 1406157544.93,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1406157544.93
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2022"]
+  },
+  {
+    "period": "Q3-2022",
+    "fiscal_year": 2022,
+    "quarter": 3,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2022 - Q3",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 59239547.27,
+            "special_education_fund": 42328691.66,
+            "total": 101568238.93
+          },
+          "tax_on_business": 203142906.74,
+          "other_taxes": 16920370.24,
+          "total_tax_revenue": 321631515.91
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 46245545.42,
+          "service_user_charges": 17522944.04,
+          "receipts_from_economic_enterprises": 58241188.47,
+          "other_receipts": 3711890.26,
+          "total_non_tax_revenue": 125721568.19
+        },
+        "total_local_sources": 447353084.1
+      },
+      "external_sources": {
+        "national_tax_allotment": 645771737.97,
+        "other_shares_from_national_tax_collection": 770023.38,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 646541761.35
+      },
+      "total_current_operating_income": 1093894845.45
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 280863552.88,
+      "social_services": {
+        "education_culture_sports_manpower_development": 2865133.48,
+        "health_nutrition_population_control": 44647522.65,
+        "labor_and_employment": 2526915.57,
+        "housing_and_community_development": 34458349.57,
+        "social_services_and_social_welfare": 115251874.38,
+        "total_social_services": 199749795.65
+      },
+      "economic_services": 64787862.08,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 545401210.61
+    },
+    "net_operating_income_loss_from_current_operations": 548493634.84,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 1443475.0,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 1443475.0
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 1443475.0
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 547050159.84,
+      "add_cash_balance_beginning": 1010727534.19,
+      "fund_cash_available": 1557777694.03,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1557777694.03
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2022"]
+  },
+  {
+    "period": "Q4-2022",
+    "fiscal_year": 2022,
+    "quarter": 4,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2022 Q4",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 73930890.4,
+            "special_education_fund": 52825754.67,
+            "total": 126756645.07
+          },
+          "tax_on_business": 234910325.05,
+          "other_taxes": 22470092.94,
+          "total_tax_revenue": 384137063.06
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 52772700.42,
+          "service_user_charges": 19075402.81,
+          "receipts_from_economic_enterprises": 82944989.23,
+          "other_receipts": 6257345.78,
+          "total_non_tax_revenue": 161050438.24
+        },
+        "total_local_sources": 545187501.3
+      },
+      "external_sources": {
+        "national_tax_allotment": 861028983.96,
+        "other_shares_from_national_tax_collection": 1711158.25,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 862740142.21
+      },
+      "total_current_operating_income": 1407927643.51
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 436752796.01,
+      "social_services": {
+        "education_culture_sports_manpower_development": 11231645.28,
+        "health_nutrition_population_control": 78495140.32,
+        "labor_and_employment": 3873960.56,
+        "housing_and_community_development": 54470677.44,
+        "social_services_and_social_welfare": 248638503.63,
+        "total_social_services": 396709927.23
+      },
+      "economic_services": 105425039.15,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 938887762.39
+    },
+    "net_operating_income_loss_from_current_operations": 469039881.12,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 17350875.57,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 17350875.57
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 17350875.57
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 451689005.55,
+      "add_cash_balance_beginning": 1010727534.19,
+      "fund_cash_available": 1462416539.74,
+      "less_payment_of_prior_years_accounts_payable": 23340350.36,
+      "continuing_appropriation": 160954617.27,
+      "fund_cash_balance_end": 1278121572.11
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2022"]
+  },
+  {
+    "period": "FY-2022",
+    "fiscal_year": 2022,
+    "quarter": null,
+    "basis": "annual",
+    "blgf_label": "FY 2022",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 73930890.4,
+            "special_education_fund": 52825754.67,
+            "total": 126756645.07
+          },
+          "tax_on_business": 234910325.05,
+          "other_taxes": 22470092.94,
+          "total_tax_revenue": 384137063.06
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 52772700.42,
+          "service_user_charges": 19075402.81,
+          "receipts_from_economic_enterprises": 82944989.23,
+          "other_receipts": 6257345.78,
+          "total_non_tax_revenue": 161050438.24
+        },
+        "total_local_sources": 545187501.3
+      },
+      "external_sources": {
+        "national_tax_allotment": 861028983.96,
+        "other_shares_from_national_tax_collection": 1711158.25,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 862740142.21
+      },
+      "total_current_operating_income": 1407927643.51
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 436752796.01,
+      "social_services": {
+        "education_culture_sports_manpower_development": 11231645.28,
+        "health_nutrition_population_control": 78495140.32,
+        "labor_and_employment": 3873960.56,
+        "housing_and_community_development": 54470677.44,
+        "social_services_and_social_welfare": 248638503.63,
+        "total_social_services": 396709927.23
+      },
+      "economic_services": 105425039.15,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 938887762.39
+    },
+    "net_operating_income_loss_from_current_operations": 469039881.12,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 17350875.57,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 17350875.57
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 17350875.57
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 451689005.55,
+      "add_cash_balance_beginning": 1010727534.19,
+      "fund_cash_available": 1462416539.74,
+      "less_payment_of_prior_years_accounts_payable": 23340350.36,
+      "continuing_appropriation": 160954617.27,
+      "fund_cash_balance_end": 1278121572.11
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-by-lgu-fy2022"]
+  },
+  {
+    "period": "Q1-2023",
+    "fiscal_year": 2023,
+    "quarter": 1,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2023 Q1",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 42842699.24,
+            "special_education_fund": 30604601.91,
+            "total": 73447301.15
+          },
+          "tax_on_business": 167135047.29,
+          "other_taxes": 11314125.09,
+          "total_tax_revenue": 251896473.53
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 38858804.39,
+          "service_user_charges": 15972931.96,
+          "receipts_from_economic_enterprises": 24862231.55,
+          "other_receipts": 214097.57,
+          "total_non_tax_revenue": 79908065.47
+        },
+        "total_local_sources": 331804539.0
+      },
+      "external_sources": {
+        "national_tax_allotment": 183221532.99,
+        "other_shares_from_national_tax_collection": 1136059.96,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 184357592.95
+      },
+      "total_current_operating_income": 516162131.95
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 80367174.18,
+      "social_services": {
+        "education_culture_sports_manpower_development": 2254953.57,
+        "health_nutrition_population_control": 11011226.59,
+        "labor_and_employment": 789048.69,
+        "housing_and_community_development": 9957080.91,
+        "social_services_and_social_welfare": 13016461.94,
+        "total_social_services": 37028771.7
+      },
+      "economic_services": 18703373.8,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 136099319.68
+    },
+    "net_operating_income_loss_from_current_operations": 380062812.27,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 0.0,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 0.0
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 0.0
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 380062812.27,
+      "add_cash_balance_beginning": 1278121572.11,
+      "fund_cash_available": 1658184384.38,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1658184384.38
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2023"]
+  },
+  {
+    "period": "Q2-2023",
+    "fiscal_year": 2023,
+    "quarter": 2,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2023 Q2",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 49538697.19,
+            "special_education_fund": 35392515.09,
+            "total": 84931212.28
+          },
+          "tax_on_business": 193210031.87,
+          "other_taxes": 14936455.15,
+          "total_tax_revenue": 293077699.3
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 45948621.66,
+          "service_user_charges": 18337738.62,
+          "receipts_from_economic_enterprises": 49019954.53,
+          "other_receipts": 1919969.31,
+          "total_non_tax_revenue": 115226284.12
+        },
+        "total_local_sources": 408303983.42
+      },
+      "external_sources": {
+        "national_tax_allotment": 366443065.98,
+        "other_shares_from_national_tax_collection": 1136059.96,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 367579125.94
+      },
+      "total_current_operating_income": 775883109.36
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 179573770.75,
+      "social_services": {
+        "education_culture_sports_manpower_development": 4943107.04,
+        "health_nutrition_population_control": 26500475.86,
+        "labor_and_employment": 1584492.29,
+        "housing_and_community_development": 20896596.11,
+        "social_services_and_social_welfare": 72183079.65,
+        "total_social_services": 126107750.95
+      },
+      "economic_services": 41328790.96,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 347010312.66
+    },
+    "net_operating_income_loss_from_current_operations": 428872796.7,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 0.0,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 0.0
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 0.0
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 428872796.7,
+      "add_cash_balance_beginning": 1278121572.11,
+      "fund_cash_available": 1706994368.81,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1706994368.81
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2023"]
+  },
+  {
+    "period": "Q3-2023",
+    "fiscal_year": 2023,
+    "quarter": 3,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2023 Q3",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 53716245.43,
+            "special_education_fund": 38249621.58,
+            "total": 91965867.01
+          },
+          "tax_on_business": 228945989.48,
+          "other_taxes": 20553414.99,
+          "total_tax_revenue": 341465271.48
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 51465213.61,
+          "service_user_charges": 20175113.21,
+          "receipts_from_economic_enterprises": 70885185.81,
+          "other_receipts": 3256423.94,
+          "total_non_tax_revenue": 145781936.57
+        },
+        "total_local_sources": 487247208.05
+      },
+      "external_sources": {
+        "national_tax_allotment": 549664598.97,
+        "other_shares_from_national_tax_collection": 1596596.26,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 551261195.23
+      },
+      "total_current_operating_income": 1038508403.28
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 261268767.28,
+      "social_services": {
+        "education_culture_sports_manpower_development": 10146946.68,
+        "health_nutrition_population_control": 38540082.0,
+        "labor_and_employment": 2466022.71,
+        "housing_and_community_development": 30982394.2,
+        "social_services_and_social_welfare": 115223213.85,
+        "total_social_services": 197358659.44
+      },
+      "economic_services": 60505476.82,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 519132903.54
+    },
+    "net_operating_income_loss_from_current_operations": 519375499.74,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 1933562.28,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 1933562.28
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 1933562.28
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 517441937.46,
+      "add_cash_balance_beginning": 1278121572.11,
+      "fund_cash_available": 1795563509.57,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1795563509.57
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2023"]
+  },
+  {
+    "period": "Q4-2023",
+    "fiscal_year": 2023,
+    "quarter": 4,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2023 Q4",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 71109184.24,
+            "special_education_fund": 50806081.25,
+            "total": 121915265.49
+          },
+          "tax_on_business": 258037762.22,
+          "other_taxes": 25767386.72,
+          "total_tax_revenue": 405720414.43
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 56859084.5,
+          "service_user_charges": 21545507.76,
+          "receipts_from_economic_enterprises": 94407363.35,
+          "other_receipts": 6680764.51,
+          "total_non_tax_revenue": 179492720.12
+        },
+        "total_local_sources": 585213134.55
+      },
+      "external_sources": {
+        "national_tax_allotment": 732886131.96,
+        "other_shares_from_national_tax_collection": 2852440.79,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 735738572.75
+      },
+      "total_current_operating_income": 1320951707.3
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 381617806.0,
+      "social_services": {
+        "education_culture_sports_manpower_development": 12362499.66,
+        "health_nutrition_population_control": 72224976.64,
+        "labor_and_employment": 3568863.07,
+        "housing_and_community_development": 48516846.93,
+        "social_services_and_social_welfare": 249536359.16,
+        "total_social_services": 386209545.46
+      },
+      "economic_services": 96014685.77,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 863842037.23
+    },
+    "net_operating_income_loss_from_current_operations": 457109670.07,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 14571458.64,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 14571458.64
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 14571458.64
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 442538211.43,
+      "add_cash_balance_beginning": 1278121572.11,
+      "fund_cash_available": 1720659783.54,
+      "less_payment_of_prior_years_accounts_payable": 18198016.31,
+      "continuing_appropriation": 88572243.15,
+      "fund_cash_balance_end": 1613889524.08
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2023"]
+  },
+  {
+    "period": "FY-2023",
+    "fiscal_year": 2023,
+    "quarter": null,
+    "basis": "annual",
+    "blgf_label": "FY 2023",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 71109184.24,
+            "special_education_fund": 50806081.25,
+            "total": 121915265.49
+          },
+          "tax_on_business": 258037762.22,
+          "other_taxes": 25767386.72,
+          "total_tax_revenue": 405720414.43
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 56859084.5,
+          "service_user_charges": 21545507.76,
+          "receipts_from_economic_enterprises": 94407363.35,
+          "other_receipts": 6680764.51,
+          "total_non_tax_revenue": 179492720.12
+        },
+        "total_local_sources": 585213134.55
+      },
+      "external_sources": {
+        "national_tax_allotment": 732886131.96,
+        "other_shares_from_national_tax_collection": 2852440.79,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 735738572.75
+      },
+      "total_current_operating_income": 1320951707.3
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 381617806.0,
+      "social_services": {
+        "education_culture_sports_manpower_development": 12362499.66,
+        "health_nutrition_population_control": 72224976.64,
+        "labor_and_employment": 3568863.07,
+        "housing_and_community_development": 48516846.93,
+        "social_services_and_social_welfare": 249536359.16,
+        "total_social_services": 386209545.46
+      },
+      "economic_services": 96014685.77,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 863842037.23
+    },
+    "net_operating_income_loss_from_current_operations": 457109670.07,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 14571458.64,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 14571458.64
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 14571458.64
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 442538211.43,
+      "add_cash_balance_beginning": 1278121572.11,
+      "fund_cash_available": 1720659783.54,
+      "less_payment_of_prior_years_accounts_payable": 18198016.31,
+      "continuing_appropriation": 88572243.15,
+      "fund_cash_balance_end": 1613889524.08
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-by-lgu-fy2023"]
+  },
+  {
+    "period": "Q1-2024",
+    "fiscal_year": 2024,
+    "quarter": 1,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2024-1",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 38834322.33,
+            "special_education_fund": 27745042.38,
+            "total": 66579364.71
+          },
+          "tax_on_business": 176671283.84,
+          "other_taxes": 15473777.01,
+          "total_tax_revenue": 258724425.56
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 40892423.1,
+          "service_user_charges": 14912937.04,
+          "receipts_from_economic_enterprises": 26040778.52,
+          "other_receipts": 1290707.64,
+          "total_non_tax_revenue": 83136846.3
+        },
+        "total_local_sources": 341861271.86
+      },
+      "external_sources": {
+        "national_tax_allotment": 194051214.75,
+        "other_shares_from_national_tax_collection": 2716170.0,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 196767384.75
+      },
+      "total_current_operating_income": 538628656.61
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 56347395.72,
+      "social_services": {
+        "education_culture_sports_manpower_development": 411700.96,
+        "health_nutrition_population_control": 10672325.15,
+        "labor_and_employment": null,
+        "housing_and_community_development": null,
+        "social_services_and_social_welfare": 93241719.91,
+        "total_social_services": 114429051.72
+      },
+      "economic_services": 16662665.55,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 187439112.99
+    },
+    "net_operating_income_loss_from_current_operations": 351189543.62,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 0.0,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 0.0
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 0.0
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 351189543.62,
+      "add_cash_balance_beginning": 1613889524.08,
+      "fund_cash_available": 1965079067.7,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1965079067.7
+    },
+    "withheld": [
+      {
+        "field": "current_operating_expenditures.social_services.labor_and_employment",
+        "reason": "conflicting_sources"
+      },
+      {
+        "field": "current_operating_expenditures.social_services.housing_and_community_development",
+        "reason": "conflicting_sources"
+      }
+    ],
+    "sources": ["blgf-sre-quarterly-fy2024"]
+  },
+  {
+    "period": "Q2-2024",
+    "fiscal_year": 2024,
+    "quarter": 2,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2024-2",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 44974008.85,
+            "special_education_fund": 32132490.03,
+            "total": 77106498.88
+          },
+          "tax_on_business": 209832434.25,
+          "other_taxes": 23128205.59,
+          "total_tax_revenue": 310067138.72
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 48138305.04,
+          "service_user_charges": 17874291.43,
+          "receipts_from_economic_enterprises": 50911848.41,
+          "other_receipts": 2232988.45,
+          "total_non_tax_revenue": 119157433.33
+        },
+        "total_local_sources": 429224572.05
+      },
+      "external_sources": {
+        "national_tax_allotment": 388102429.5,
+        "other_shares_from_national_tax_collection": 3189943.49,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 391292372.99
+      },
+      "total_current_operating_income": 820516945.04
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 186337712.76,
+      "social_services": {
+        "education_culture_sports_manpower_development": 9249823.08,
+        "health_nutrition_population_control": 31641629.2,
+        "labor_and_employment": null,
+        "housing_and_community_development": null,
+        "social_services_and_social_welfare": 125289009.54,
+        "total_social_services": 194192139.42
+      },
+      "economic_services": 47434699.33,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 427964551.51
+    },
+    "net_operating_income_loss_from_current_operations": 392552393.53,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 146720.0,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 146720.0
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 146720.0
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 392405673.53,
+      "add_cash_balance_beginning": 1613889524.08,
+      "fund_cash_available": 2006295197.61,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 2006295197.61
+    },
+    "withheld": [
+      {
+        "field": "current_operating_expenditures.social_services.labor_and_employment",
+        "reason": "conflicting_sources"
+      },
+      {
+        "field": "current_operating_expenditures.social_services.housing_and_community_development",
+        "reason": "conflicting_sources"
+      }
+    ],
+    "sources": ["blgf-sre-quarterly-fy2024"]
+  },
+  {
+    "period": "Q3-2024",
+    "fiscal_year": 2024,
+    "quarter": 3,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2024-3",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 49961320.28,
+            "special_education_fund": 35696644.1,
+            "total": 85657964.38
+          },
+          "tax_on_business": 264424350.77,
+          "other_taxes": 26750390.97,
+          "total_tax_revenue": 376832706.12
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 55724323.8,
+          "service_user_charges": 19865478.16,
+          "receipts_from_economic_enterprises": 73895382.11,
+          "other_receipts": 4391085.73,
+          "total_non_tax_revenue": 153876269.8
+        },
+        "total_local_sources": 530708975.92
+      },
+      "external_sources": {
+        "national_tax_allotment": 582153644.25,
+        "other_shares_from_national_tax_collection": 3189943.49,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 585343587.74
+      },
+      "total_current_operating_income": 1116052563.66
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 293589931.47,
+      "social_services": {
+        "education_culture_sports_manpower_development": 16735695.74,
+        "health_nutrition_population_control": 50626740.92,
+        "labor_and_employment": null,
+        "housing_and_community_development": null,
+        "social_services_and_social_welfare": 252826067.16,
+        "total_social_services": 361519845.91
+      },
+      "economic_services": 73413668.28,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 728523445.66
+    },
+    "net_operating_income_loss_from_current_operations": 387529118.0,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 10626181.33,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 10626181.33
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 10626181.33
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 376902936.67,
+      "add_cash_balance_beginning": 1613889524.08,
+      "fund_cash_available": 1990792460.75,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1990792460.75
+    },
+    "withheld": [
+      {
+        "field": "current_operating_expenditures.social_services.labor_and_employment",
+        "reason": "conflicting_sources"
+      },
+      {
+        "field": "current_operating_expenditures.social_services.housing_and_community_development",
+        "reason": "conflicting_sources"
+      }
+    ],
+    "sources": ["blgf-sre-quarterly-fy2024"]
+  },
+  {
+    "period": "Q4-2024",
+    "fiscal_year": 2024,
+    "quarter": 4,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2024-4 (Final)",
+    "status": "final",
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 66525508.87,
+            "special_education_fund": 47529583.07,
+            "total": 114055091.94
+          },
+          "tax_on_business": 298478242.79,
+          "other_taxes": 34709250.89,
+          "total_tax_revenue": 447242585.62
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 61383451.89,
+          "service_user_charges": 21174602.89,
+          "receipts_from_economic_enterprises": 98245887.39,
+          "other_receipts": 9143277.75,
+          "total_non_tax_revenue": 189947219.92
+        },
+        "total_local_sources": 637189805.54
+      },
+      "external_sources": {
+        "national_tax_allotment": 776204859.0,
+        "other_shares_from_national_tax_collection": 3627376.09,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 779832235.09
+      },
+      "total_current_operating_income": 1417022040.63
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 437520425.48,
+      "social_services": {
+        "education_culture_sports_manpower_development": 27115810.86,
+        "health_nutrition_population_control": 98451880.67,
+        "labor_and_employment": null,
+        "housing_and_community_development": null,
+        "social_services_and_social_welfare": 370131397.49,
+        "total_social_services": 560296555.22
+      },
+      "economic_services": 109885156.8,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 1107702137.5
+    },
+    "net_operating_income_loss_from_current_operations": 309319903.13,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 67434634.75,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 67434634.75
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 67434634.75
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 241885268.38,
+      "add_cash_balance_beginning": 1613889524.08,
+      "fund_cash_available": 1855774792.46,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 207183417.04,
+      "fund_cash_balance_end": 1648591375.42
+    },
+    "withheld": [
+      {
+        "field": "current_operating_expenditures.social_services.labor_and_employment",
+        "reason": "conflicting_sources"
+      },
+      {
+        "field": "current_operating_expenditures.social_services.housing_and_community_development",
+        "reason": "conflicting_sources"
+      }
+    ],
+    "sources": ["blgf-sre-quarterly-fy2024"]
+  },
+  {
+    "period": "FY-2024",
+    "fiscal_year": 2024,
+    "quarter": null,
+    "basis": "annual",
+    "blgf_label": "FY 2024 (Final)",
+    "status": "final",
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 66525508.87,
+            "special_education_fund": 47529583.07,
+            "total": 114055091.94
+          },
+          "tax_on_business": 298478242.79,
+          "other_taxes": 34709250.89,
+          "total_tax_revenue": 447242585.62
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 61383451.89,
+          "service_user_charges": 21174602.89,
+          "receipts_from_economic_enterprises": 98245887.39,
+          "other_receipts": 9143277.75,
+          "total_non_tax_revenue": 189947219.92
+        },
+        "total_local_sources": 637189805.54
+      },
+      "external_sources": {
+        "national_tax_allotment": 776204859.0,
+        "other_shares_from_national_tax_collection": 3627376.09,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 779832235.09
+      },
+      "total_current_operating_income": 1417022040.63
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 437520425.48,
+      "social_services": {
+        "education_culture_sports_manpower_development": 27115810.86,
+        "health_nutrition_population_control": 98451880.67,
+        "labor_and_employment": 4367432.49,
+        "housing_and_community_development": 60230033.71,
+        "social_services_and_social_welfare": 370131397.49,
+        "total_social_services": 560296555.22
+      },
+      "economic_services": 109885156.8,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 1107702137.5
+    },
+    "net_operating_income_loss_from_current_operations": 309319903.13,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 67434634.75,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 67434634.75
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 67434634.75
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 241885268.38,
+      "add_cash_balance_beginning": 1613889524.08,
+      "fund_cash_available": 1855774792.46,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 207183417.04,
+      "fund_cash_balance_end": 1648591375.42
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-by-lgu-fy2024"]
+  },
+  {
+    "period": "Q1-2025",
+    "fiscal_year": 2025,
+    "quarter": 1,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2025-1",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 41966253.36,
+            "special_education_fund": 29978898.77,
+            "total": 71945152.13
+          },
+          "tax_on_business": 194174282.04,
+          "other_taxes": 17881184.84,
+          "total_tax_revenue": 284000619.01
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 45779662.88,
+          "service_user_charges": 15332192.31,
+          "receipts_from_economic_enterprises": 23446182.48,
+          "other_receipts": 1325816.48,
+          "total_non_tax_revenue": 85883854.15
+        },
+        "total_local_sources": 369884473.16
+      },
+      "external_sources": {
+        "national_tax_allotment": 230205644.0,
+        "other_shares_from_national_tax_collection": 420710.77,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 230626354.77
+      },
+      "total_current_operating_income": 600510827.93
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 108991916.28,
+      "social_services": {
+        "education_culture_sports_manpower_development": 6265024.56,
+        "health_nutrition_population_control": 17882749.54,
+        "labor_and_employment": 1049143.42,
+        "housing_and_community_development": 11503629.28,
+        "social_services_and_social_welfare": 128572330.58,
+        "total_social_services": 165272877.38
+      },
+      "economic_services": 24006315.55,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 298271109.21
+    },
+    "net_operating_income_loss_from_current_operations": 302239718.72,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 0.0,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 0.0
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 0.0
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 302239718.72,
+      "add_cash_balance_beginning": 1648591375.42,
+      "fund_cash_available": 1950831094.14,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1950831094.14
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2025"]
+  },
+  {
+    "period": "Q2-2025",
+    "fiscal_year": 2025,
+    "quarter": 2,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2025-Q2",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 46712172.01,
+            "special_education_fund": 33371242.31,
+            "total": 80083414.32
+          },
+          "tax_on_business": 236915788.62,
+          "other_taxes": 23362351.77,
+          "total_tax_revenue": 340361554.71
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 51688835.81,
+          "service_user_charges": 17825847.55,
+          "receipts_from_economic_enterprises": 46595100.13,
+          "other_receipts": 3545722.54,
+          "total_non_tax_revenue": 119655506.03
+        },
+        "total_local_sources": 460017060.74
+      },
+      "external_sources": {
+        "national_tax_allotment": 460411286.0,
+        "other_shares_from_national_tax_collection": 420710.77,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 460831996.77
+      },
+      "total_current_operating_income": 920849057.51
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 218504326.88,
+      "social_services": {
+        "education_culture_sports_manpower_development": 13661187.63,
+        "health_nutrition_population_control": 45342828.68,
+        "labor_and_employment": 2271527.64,
+        "housing_and_community_development": 26124787.79,
+        "social_services_and_social_welfare": 163053917.4,
+        "total_social_services": 250454249.14
+      },
+      "economic_services": 52719498.2,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 521678074.22
+    },
+    "net_operating_income_loss_from_current_operations": 399170983.29,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 30041547.87,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 30041547.87
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 30041547.87
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 369129435.42,
+      "add_cash_balance_beginning": 1648591375.42,
+      "fund_cash_available": 2017720810.84,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 2017720810.84
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2025"]
+  },
+  {
+    "period": "Q3-2025",
+    "fiscal_year": 2025,
+    "quarter": 3,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2025-3",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 50624652.65,
+            "special_education_fund": 36167006.91,
+            "total": 86791659.56
+          },
+          "tax_on_business": 278195175.93,
+          "other_taxes": 29368883.73,
+          "total_tax_revenue": 394355719.22
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 56867390.22,
+          "service_user_charges": 19672196.49,
+          "receipts_from_economic_enterprises": 66832362.99,
+          "other_receipts": 5888301.85,
+          "total_non_tax_revenue": 149260251.55
+        },
+        "total_local_sources": 543615970.77
+      },
+      "external_sources": {
+        "national_tax_allotment": 690616928.0,
+        "other_shares_from_national_tax_collection": 420710.77,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 691037638.77
+      },
+      "total_current_operating_income": 1234653609.54
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 330332935.82,
+      "social_services": {
+        "education_culture_sports_manpower_development": 22341108.17,
+        "health_nutrition_population_control": 71561268.1,
+        "labor_and_employment": 3857256.54,
+        "housing_and_community_development": 47506803.44,
+        "social_services_and_social_welfare": 290247692.95,
+        "total_social_services": 435514129.2
+      },
+      "economic_services": 82268075.68,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 848115140.7
+    },
+    "net_operating_income_loss_from_current_operations": 386538468.84,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 52070631.73,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 52070631.73
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 52070631.73
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 334467837.11,
+      "add_cash_balance_beginning": 1648591375.42,
+      "fund_cash_available": 1983059212.53,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 0.0,
+      "fund_cash_balance_end": 1983059212.53
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2025"]
+  },
+  {
+    "period": "Q4-2025",
+    "fiscal_year": 2025,
+    "quarter": 4,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2025-4 (Preliminary)",
+    "status": "preliminary",
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 69296391.87,
+            "special_education_fund": 49504398.55,
+            "total": 118800790.42
+          },
+          "tax_on_business": 319893541.11,
+          "other_taxes": 36061939.89,
+          "total_tax_revenue": 474756271.42
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 62376896.65,
+          "service_user_charges": 21783053.39,
+          "receipts_from_economic_enterprises": 91766313.7,
+          "other_receipts": 10046312.5,
+          "total_non_tax_revenue": 185972576.24
+        },
+        "total_local_sources": 660728847.66
+      },
+      "external_sources": {
+        "national_tax_allotment": 920822570.0,
+        "other_shares_from_national_tax_collection": 812375.66,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 921634945.66
+      },
+      "total_current_operating_income": 1582363793.32
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 497893605.84,
+      "social_services": {
+        "education_culture_sports_manpower_development": 25886134.52,
+        "health_nutrition_population_control": 119148312.17,
+        "labor_and_employment": 5335957.9,
+        "housing_and_community_development": 84709762.45,
+        "social_services_and_social_welfare": 456686856.98,
+        "total_social_services": 691767024.02
+      },
+      "economic_services": 120219213.88,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 1309879843.74
+    },
+    "net_operating_income_loss_from_current_operations": 272483949.58,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 190245789.7,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 190245789.7
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 190245789.7
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 82238159.88,
+      "add_cash_balance_beginning": 1648591375.42,
+      "fund_cash_available": 1730829535.3,
+      "less_payment_of_prior_years_accounts_payable": 297476253.95,
+      "continuing_appropriation": 187974243.28,
+      "fund_cash_balance_end": 1245379038.07
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2025"]
+  },
+  {
+    "period": "FY-2025",
+    "fiscal_year": 2025,
+    "quarter": null,
+    "basis": "annual",
+    "blgf_label": "FY 2025 (Preliminary)",
+    "status": "preliminary",
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 69296391.87,
+            "special_education_fund": 49504398.55,
+            "total": 118800790.42
+          },
+          "tax_on_business": 319893541.11,
+          "other_taxes": 36061939.89,
+          "total_tax_revenue": 474756271.42
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 62376896.65,
+          "service_user_charges": 21783053.39,
+          "receipts_from_economic_enterprises": 91766313.7,
+          "other_receipts": 10046312.5,
+          "total_non_tax_revenue": 185972576.24
+        },
+        "total_local_sources": 660728847.66
+      },
+      "external_sources": {
+        "national_tax_allotment": 920822570.0,
+        "other_shares_from_national_tax_collection": 812375.66,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 921634945.66
+      },
+      "total_current_operating_income": 1582363793.32
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 497893605.84,
+      "social_services": {
+        "education_culture_sports_manpower_development": 25886134.52,
+        "health_nutrition_population_control": 119148312.17,
+        "labor_and_employment": 5335957.9,
+        "housing_and_community_development": 84709762.45,
+        "social_services_and_social_welfare": 456686856.98,
+        "total_social_services": 691767024.02
+      },
+      "economic_services": 120219213.88,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 1309879843.74
+    },
+    "net_operating_income_loss_from_current_operations": 272483949.58,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 190245789.7,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 190245789.7
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 190245789.7
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 82238159.88,
+      "add_cash_balance_beginning": 1648591375.42,
+      "fund_cash_available": 1730829535.3,
+      "less_payment_of_prior_years_accounts_payable": 297476253.95,
+      "continuing_appropriation": 187974243.28,
+      "fund_cash_balance_end": 1245379038.07
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-by-lgu-fy2025"]
+  },
+  {
+    "period": "Q3-2026",
+    "fiscal_year": 2026,
+    "quarter": 3,
+    "basis": "year_to_date",
+    "blgf_label": "FY 2026-3",
+    "status": null,
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "current_operating_income": {
+      "local_sources": {
+        "tax_revenue": {
+          "real_property_tax": {
+            "general_fund": 52438013.87,
+            "special_education_fund": 37459567.11,
+            "total": 89897580.98
+          },
+          "tax_on_business": 312561733.55,
+          "other_taxes": 20323147.55,
+          "total_tax_revenue": 422782462.08
+        },
+        "non_tax_revenue": {
+          "regulatory_fees": 62856549.82,
+          "service_user_charges": 24818311.98,
+          "receipts_from_economic_enterprises": 70595941.66,
+          "other_receipts": 4822052.44,
+          "total_non_tax_revenue": 163092855.9
+        },
+        "total_local_sources": 585875317.98
+      },
+      "external_sources": {
+        "national_tax_allotment": 778671582.0,
+        "other_shares_from_national_tax_collection": 374264.65,
+        "inter_local_transfers": 0.0,
+        "extraordinary_receipts_grants_donations_aids": 0.0,
+        "total_external_sources": 779045846.65
+      },
+      "total_current_operating_income": 1364921164.63
+    },
+    "current_operating_expenditures": {
+      "general_public_services": 319871798.87,
+      "social_services": {
+        "education_culture_sports_manpower_development": 20783937.1,
+        "health_nutrition_population_control": 86471312.3,
+        "labor_and_employment": 4069966.5,
+        "housing_and_community_development": 59629155.06,
+        "social_services_and_social_welfare": 308916428.52,
+        "total_social_services": 479870799.48
+      },
+      "economic_services": 82782410.32,
+      "debt_service_interest_expense": 0.0,
+      "total_current_operating_expenditures": 882525008.67
+    },
+    "net_operating_income_loss_from_current_operations": 482396155.96,
+    "non_income_receipts": {
+      "capital_investment_receipts": {
+        "proceeds_from_sale_of_assets": 0.0,
+        "proceeds_from_sale_of_debt_securities_of_other_entities": 0.0,
+        "collection_of_loans_receivables": 0.0,
+        "total_capital_investment_receipts": 0.0
+      },
+      "receipts_from_loans_and_borrowings": {
+        "acquisition_of_loans": 0.0,
+        "issuance_of_bonds": 0.0,
+        "total_receipts_from_loans_and_borrowings": 0.0
+      },
+      "other_non_income_receipts": 0.0,
+      "total_non_income_receipts": 0.0
+    },
+    "non_operating_expenditures": {
+      "capital_investment_expenditures": {
+        "purchase_construct_of_property_plant_and_equipment": 52622710.64,
+        "purchase_of_debt_securities_of_other_entities": 0.0,
+        "grant_make_loan_to_other_entities": 0.0,
+        "total_capital_investment_expenditures": 52622710.64
+      },
+      "debt_service_principal_cost": {
+        "payment_of_loan_amortization": 0.0,
+        "retirement_redemption_of_bonds_debt_securities": 0.0,
+        "total_debt_service_principal_cost": 0.0
+      },
+      "other_non_operating_expenditures": 0.0,
+      "total_non_operating_expenditures": 52622710.64
+    },
+    "fund_summary": {
+      "net_increase_decrease_in_funds": 429773445.32,
+      "add_cash_balance_beginning": 1245379038.07,
+      "fund_cash_available": 1675152483.39,
+      "less_payment_of_prior_years_accounts_payable": 0.0,
+      "continuing_appropriation": 70194104.69,
+      "fund_cash_balance_end": 1604958378.7
+    },
+    "withheld": [],
+    "sources": ["blgf-sre-quarterly-fy2026-q3"]
+  }
+]
