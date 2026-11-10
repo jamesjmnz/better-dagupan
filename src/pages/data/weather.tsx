@@ -1,8 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
-import * as LucideIcons from 'lucide-react';
-
-import { fetchWeatherData } from '../../lib/weather';
+import { fetchWeatherData, weatherIcons } from '../../lib/weather';
 import { WeatherData } from '../../types';
 
 const WeatherPage: FC = () => {
@@ -13,7 +11,7 @@ const WeatherPage: FC = () => {
 
   // Function to get weather icon component
   const getWeatherIcon = (iconName: string, size = 'h-8 w-8') => {
-    const Icon = LucideIcons[iconName as keyof typeof LucideIcons];
+    const Icon = weatherIcons[iconName];
     return Icon ? <Icon className={size} /> : null;
   };
 

@@ -6,28 +6,13 @@ import L from 'leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
-import {
-  Cloud,
-  CloudDrizzle,
-  CloudLightning,
-  CloudMoon,
-  CloudRain,
-  CloudSnow,
-  CloudSun,
-  Droplet,
-  LoaderIcon,
-  LucideIcon,
-  MapPin,
-  Moon,
-  Sun,
-  Wind,
-} from 'lucide-react';
+import { Droplet, LoaderIcon, MapPin, Sun, Wind } from 'lucide-react';
 
 import { Card, CardContent } from '@/components/ui/Card';
 
 import { config } from '@/lib/lguConfig';
 import { lguLabels } from '@/lib/lguLabels';
-import { fetchWeatherData } from '@/lib/weather';
+import { fetchWeatherData, weatherIcons } from '@/lib/weather';
 
 const DefaultIcon = L.icon({
   iconUrl: icon,
@@ -37,19 +22,6 @@ const DefaultIcon = L.icon({
 });
 
 L.Marker.prototype.options.icon = DefaultIcon;
-
-// Map Lucide string to actual component
-const lucideIconMap: Record<string, LucideIcon> = {
-  Sun,
-  Moon,
-  CloudSun,
-  CloudMoon,
-  Cloud,
-  CloudDrizzle,
-  CloudRain,
-  CloudLightning,
-  CloudSnow,
-};
 
 interface LeafletHTMLElement extends HTMLElement {
   _leaflet_id?: number;
@@ -187,7 +159,7 @@ export default function WeatherMapSection() {
           icon: weather?.icon ?? 'Sun',
         }));
 
-  const WeatherIcon = weather ? lucideIconMap[weather.icon || 'Sun'] : Sun;
+  const WeatherIcon = weather ? weatherIcons[weather.icon || 'Sun'] : Sun;
 
   return (
     <section className='border-kapwa-border-weak border-t py-12 bg-kapwa-bg-surface'>
@@ -244,7 +216,7 @@ export default function WeatherMapSection() {
                   {/* Bottom: Hourly forecast */}
                   <div className='flex justify-between gap-2'>
                     {hourlyForecast.map((h, idx) => {
-                      const IconComp = lucideIconMap[h.icon] || Sun;
+                      const IconComp = weatherIcons[h.icon] || Sun;
                       return (
                         <div
                           key={idx}

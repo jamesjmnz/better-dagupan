@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from 'react';
 
-import * as LucideIcons from 'lucide-react';
+import { AlertCircle, BarChart3, Cloud, Loader } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { fetchForexData } from '../../lib/forex';
-import { fetchWeatherData } from '../../lib/weather';
+import { fetchWeatherData, weatherIcons } from '../../lib/weather';
 import { ForexRate, WeatherData } from '../../types';
 import { Card, CardContent, CardHeader } from '../ui/Card';
 import CriticalHotlinesWidget from '../widgets/CriticalHotlinesWidget';
@@ -20,7 +20,7 @@ const InfoWidgets: FC = () => {
 
   // Function to get weather icon component
   const getWeatherIcon = (iconName: string) => {
-    const Icon = LucideIcons[iconName as keyof typeof LucideIcons];
+    const Icon = weatherIcons[iconName];
     return Icon ? <Icon className='h-8 w-8' /> : null;
   };
 
@@ -94,18 +94,18 @@ const InfoWidgets: FC = () => {
           <Card>
             <CardHeader className='bg-kapwa-bg-brand-weak'>
               <h3 className='text-kapwa-text-strong flex items-center text-xl font-semibold'>
-                <LucideIcons.Cloud className='text-kapwa-text-brand mr-2 h-5 w-5' />
+                <Cloud className='text-kapwa-text-brand mr-2 h-5 w-5' />
                 {t('weather.title')}
               </h3>
             </CardHeader>
             <CardContent className='@container'>
               {isLoadingWeather ? (
                 <div className='flex h-40 items-center justify-center'>
-                  <LucideIcons.Loader className='text-kapwa-text-brand h-8 w-8 animate-spin' />
+                  <Loader className='text-kapwa-text-brand h-8 w-8 animate-spin' />
                 </div>
               ) : weatherError ? (
                 <div className='p-4 text-center text-kapwa-text-danger'>
-                  <LucideIcons.AlertCircle className='mx-auto mb-2 h-8 w-8' />
+                  <AlertCircle className='mx-auto mb-2 h-8 w-8' />
                   <p>{weatherError}</p>
                 </div>
               ) : (
@@ -159,7 +159,7 @@ const InfoWidgets: FC = () => {
           <Card>
             <CardHeader className='bg-kapwa-bg-brand-weak'>
               <h3 className='text-kapwa-text-strong flex items-center text-xl font-semibold'>
-                <LucideIcons.BarChart3 className='text-kapwa-text-brand mr-2 h-5 w-5' />
+                <BarChart3 className='text-kapwa-text-brand mr-2 h-5 w-5' />
                 {t('forex.title')}
               </h3>
             </CardHeader>
@@ -180,7 +180,7 @@ const InfoWidgets: FC = () => {
                     {isLoadingForex ? (
                       <tr>
                         <td colSpan={3} className='px-3 py-8 text-center'>
-                          <LucideIcons.Loader className='text-kapwa-text-brand mx-auto h-6 w-6 animate-spin' />
+                          <Loader className='text-kapwa-text-brand mx-auto h-6 w-6 animate-spin' />
                         </td>
                       </tr>
                     ) : forexError ? (
@@ -189,7 +189,7 @@ const InfoWidgets: FC = () => {
                           colSpan={3}
                           className='px-3 py-4 text-center text-kapwa-text-danger'
                         >
-                          <LucideIcons.AlertCircle className='mx-auto mb-2 h-6 w-6' />
+                          <AlertCircle className='mx-auto mb-2 h-6 w-6' />
                           <p>{forexError}</p>
                         </td>
                       </tr>

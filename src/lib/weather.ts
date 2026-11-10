@@ -1,6 +1,34 @@
-import { HourlyForecast, WeatherData } from '../types';
+import {
+  Cloud,
+  CloudDrizzle,
+  CloudLightning,
+  CloudMoon,
+  CloudRain,
+  CloudSnow,
+  CloudSun,
+  type LucideIcon,
+  Moon,
+  Sun,
+} from 'lucide-react';
+
+import { HourlyForecast, WeatherApiCity, WeatherData } from '../types';
 import { fetchWithCache } from './api';
 import { config } from './lguConfig';
+
+/**
+ * The Lucide icons `mapWeatherIconToLucide` can name, keyed by that name.
+ */
+export const weatherIcons: Record<string, LucideIcon> = {
+  Sun,
+  Moon,
+  CloudSun,
+  CloudMoon,
+  Cloud,
+  CloudDrizzle,
+  CloudRain,
+  CloudLightning,
+  CloudSnow,
+};
 
 /**
  * Map OpenWeatherMap icon codes to Lucide icon names
@@ -41,13 +69,15 @@ export const fetchWeatherData = async (): Promise<WeatherData[]> => {
     .replace(/ñ/g, 'n');
 
   // Always fetch specific city
-  let data = await fetchWithCache(
+  let data = await fetchWithCache<Record<string, WeatherApiCity>>(
     `/api/weather?city=${encodeURIComponent(cityName)}`
   );
 
   // If KV is empty or city missing, fallback to update
   if (!data || Object.keys(data).length === 0) {
-    data = await fetchWithCache('/api/weather?update=true');
+    data = await fetchWithCache<Record<string, WeatherApiCity>>(
+      '/api/weather?update=true'
+    );
   }
 
   const city =
@@ -61,16 +91,14 @@ export const fetchWeatherData = async (): Promise<WeatherData[]> => {
   }
 
   // Transform 3-hour forecast (first 4 entries)
-  const hourly: HourlyForecast[] = (city.hourly || [])
-    .slice(0, 4)
-    .map((h: HourlyForecast) => ({
-      hour: new Date(h.dt * 1000).toLocaleTimeString([], {
-        hour: 'numeric',
-        hour12: true,
-      }),
-      temperature: Math.round(h.temp),
-      icon: mapWeatherIconToLucide(h.icon),
-    }));
+  const hourly: HourlyForecast[] = (city.hourly || []).slice(0, 4).map(h => ({
+    hour: new Date(h.dt * 1000).toLocaleTimeString([], {
+      hour: 'numeric',
+      hour12: true,
+    }),
+    temperature: Math.round(h.temp),
+    icon: mapWeatherIconToLucide(h.icon),
+  }));
 
   const weatherData: WeatherData = {
     location: city.name || config.lgu.name,
