@@ -39,7 +39,7 @@
   },
   "transparency": {
     "procurement": {
-      "organizationName": "",
+      "organizationNames": [],
       "externalDashboard": "https://transparency.bettergov.ph/organizations/"
     },
     "infrastructure": {

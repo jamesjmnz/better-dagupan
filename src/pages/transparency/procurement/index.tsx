@@ -28,6 +28,7 @@ import { INDICES, PhilgepsDoc, client } from '@/lib/meilisearch';
 
 // Helper Interface for Aggregate Data (matching BetterGov structure)
 interface AggregateStats {
+  organization_name: string;
   count: number;
   total: number;
 }
@@ -56,12 +57,15 @@ export default function ProcurementPage() {
   >([]); // Full dataset for charts
 
   // Constants
-  const ORG_NAME = config.transparency.procurement.organizationName;
-  // The PhilGEPS entity name is left blank until it has been confirmed against
-  // the live index. Every query and outbound link below is gated on this.
-  const ORG_CONFIGURED = ORG_NAME.trim().length > 0;
-  const ORG_FILTER = `organization_name = "${ORG_NAME}"`;
-  const orgDashboardUrl = `${config.transparency.procurement.externalDashboard}${encodeURIComponent(ORG_NAME)}`;
+  // PhilGEPS has listed the LGU under more than one exact entity name over
+  // time. Names stay out of config until confirmed against the live index;
+  // every query and outbound link below is gated on at least one being set.
+  const ORG_NAMES = config.transparency.procurement.organizationNames.filter(
+    name => name.trim().length > 0
+  );
+  const ORG_CONFIGURED = ORG_NAMES.length > 0;
+  const ORG_FILTER = `organization_name IN [${ORG_NAMES.map(name => JSON.stringify(name)).join(', ')}]`;
+  const orgDashboardUrl = `${config.transparency.procurement.externalDashboard}${encodeURIComponent(ORG_NAMES[0] ?? '')}`;
 
   // Helper function to get badge variant based on award status
   const getAwardStatusBadgeVariant = (
@@ -149,9 +153,26 @@ export default function ProcurementPage() {
         });
 
         // 2. Fetch Precomputed Stats (Fast Total)
-        const statsPromise =
+        // Sum the exact-name aggregates; the organizations search is fuzzy.
+        const statsPromise: Promise<AggregateStats | null> =
           !precomputedStats && !query
-            ? orgIndex.search(ORG_NAME, { limit: 1 })
+            ? Promise.all(
+                ORG_NAMES.map(name => orgIndex.search(name, { limit: 20 }))
+              ).then(responses => {
+                const matches = responses
+                  .map((res, i) =>
+                    (res.hits as unknown as AggregateStats[]).find(
+                      hit => hit.organization_name === ORG_NAMES[i]
+                    )
+                  )
+                  .filter((hit): hit is AggregateStats => Boolean(hit));
+                if (matches.length === 0) return null;
+                return matches.reduce((sum, hit) => ({
+                  ...sum,
+                  count: Number(sum.count) + Number(hit.count),
+                  total: Number(sum.total) + Number(hit.total),
+                }));
+              })
             : Promise.resolve(null);
 
         // 3. Fetch Data for Visualizations
@@ -170,8 +191,8 @@ export default function ProcurementPage() {
 
         setResults(searchRes.hits as unknown as PhilgepsDoc[]);
 
-        if (statsRes && statsRes.hits.length > 0) {
-          setPrecomputedStats(statsRes.hits[0] as unknown as AggregateStats);
+        if (statsRes) {
+          setPrecomputedStats(statsRes);
         }
 
         setChartDataResults(
@@ -189,7 +210,7 @@ export default function ProcurementPage() {
 
     const timer = setTimeout(fetchData, 400);
     return () => clearTimeout(timer);
-  }, [query, currentPage, resultsPerPage]); // eslint-disable-line react-hooks/exhaustive-deps -- ORG_NAME and ORG_FILTER are config-derived constants; precomputedStats is only read conditionally
+  }, [query, currentPage, resultsPerPage]); // eslint-disable-line react-hooks/exhaustive-deps -- ORG_NAMES and ORG_FILTER are config-derived constants; precomputedStats is only read conditionally
 
   // --- Derived Statistics ---
   const detailedStats = useMemo(() => {

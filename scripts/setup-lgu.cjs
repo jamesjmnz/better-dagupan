@@ -174,7 +174,7 @@ async function main() {
       weather: { enabled: false },
     },
     transparency: {
-      procurement: { organizationName: orgName },
+      procurement: { organizationNames: orgName ? [orgName] : [] },
       infrastructure: {
         searchString: infraSearch,
         exactMatchTargets: [lguName.toLowerCase()],
