@@ -159,8 +159,23 @@ describe('civic sources', () => {
   it('cites only Philippine government publishers, not the inherited LGU', () => {
     expect(JSON.stringify(civicSources)).not.toMatch(INHERITED);
 
+    // A government page, or an Internet Archive capture of one. A capture is
+    // cited only when the live page could not be read; it is the publisher's
+    // own page as served, and its notes must name the live page it copies so
+    // it can be re-verified there.
+    const GOV_PAGE = /^https:\/\/([a-z0-9-]+\.)+gov\.ph\//;
+    const CAPTURE_OF_GOV_PAGE =
+      /^https:\/\/web\.archive\.org\/web\/\d{14}\/(https:\/\/([a-z0-9-]+\.)+gov\.ph\/\S*)$/;
+
     for (const source of civicSources) {
-      expect(source.url).toMatch(/\.gov\.ph\//);
+      const capture = source.url.match(CAPTURE_OF_GOV_PAGE);
+
+      if (capture) {
+        expect(source.notes ?? '', source.id).toContain(capture[1]);
+        expect(source.notes ?? '', source.id).toMatch(/Internet Archive/);
+      } else {
+        expect(source.url, source.id).toMatch(GOV_PAGE);
+      }
     }
   });
 
