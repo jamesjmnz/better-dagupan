@@ -25,9 +25,30 @@ export interface CMCIData {
   pillars: CMCIPillar[];
 }
 
-/** A Bureau of Local Government Finance annual regular income record. */
+/**
+ * One year of the Bureau of Local Government Finance's Annual Regular Income
+ * (ARI) and Dependencies table, transcribed cell for cell for the city.
+ *
+ * Amounts are pesos to the centavo (BLGF's cells hold pesos and display them
+ * in millions). The dependency rates are BLGF's own ratios to ARI, kept at the
+ * precision the workbook stores, never recomputed here.
+ */
 export interface AnnualRegularIncome {
+  /** "FY 2024". */
   period: string;
+  fiscal_year: number;
+  /** The year heading exactly as the BLGF sheet prints it. */
+  blgf_label: string;
+  /** "preliminary" only when BLGF marks the edition so; otherwise null. */
+  status: 'final' | 'preliminary' | null;
+  /**
+   * The allotment column heading as BLGF printed it. FY 2022 calls it the
+   * Internal Revenue Allotment (IRA); later editions the National Tax
+   * Allotment (NTA). The figure sits in national_tax_allotment either way.
+   */
+  allotment_label: string;
+  /** Civic-source ids (src/data/sources/civic-sources.json). */
+  sources: string[];
   location_info: {
     region: string;
     province: string;

@@ -15,17 +15,43 @@
   "income": {
     "title": "Kita ng {{adjective}}",
     "emptyDescription": "Mga pinagmumulan ng kita, awtonomiyang piskal, at pagdepende sa buwis ng pambansang pamahalaan.",
-    "description": "Detalyadong pagsusuri ng mga pinagmumulan ng kita, awtonomiyang piskal, at pagdepende sa buwis ng pambansang pamahalaan.",
+    "description": "Ang Annual Regular Income and Dependencies ng Bureau of Local Government Finance para sa {{lgu}}: kung saan nagmumula ang regular nitong kita, at kung gaano kalaki rito ang nalilikom nang lokal.",
     "blgfData": "Datos ng BLGF",
-    "totalIncome": "Kabuuang Kita",
-    "annualRevenue": "Taunang Kita",
-    "localSufficiency": "Lokal na Kasapatan",
-    "lsrShare": "Bahagi ng LSR",
-    "ntaDependency": "Pagdepende sa NTA",
-    "nationalAllotment": "Pambansang Alokasyon",
+    "status": {
+      "final": "BLGF: pinal",
+      "preliminary": "BLGF: paunang datos"
+    },
+    "yearPicker": "Taong piskal",
+    "totalIncome": "Taunang Regular na Kita",
+    "annualRevenue": "Ayon sa BLGF para sa taong piskal",
+    "localSufficiency": "Pagdepende sa lokal na nalikom na kita (LSR)",
+    "lsrShare": "Bahagi ng taunang regular na kita na nalikom nang lokal",
+    "allotmentNta": "National Tax Allotment (NTA)",
+    "allotmentIra": "Internal Revenue Allotment (IRA)",
+    "allotmentDependency": "Pagdepende sa {{allotment}}",
+    "allotmentShare": "Bahagi ng taunang regular na kita mula sa alokasyon",
+    "definition": "Ayon sa BLGF, ang taunang regular na kita ay ang lokal na nalikom na kita (buwis sa real property para sa general fund, buwis sa negosyo, iba pang buwis, regulatory fees, service charges at kita mula sa economic enterprises) kasama ang alokasyon, iba pang bahagi mula sa pambansang koleksyon ng buwis at interes. Ang bawat antas ng pagdepende ay sariling ratio ng BLGF ng pinagmulang iyon sa taunang regular na kita.",
     "revenueComposition": "Komposisyon ng Kita",
     "overview": "Pangkalahatang Tingin",
-    "itemization": "Buong Detalye ng Pananalapi"
+    "itemization": "Buong Detalye ng Pananalapi",
+    "groups": {
+      "localTax": "Mga lokal na buwis",
+      "nonTax": "Kitang hindi buwis",
+      "external": "Alokasyon, mga bahagi at interes"
+    },
+    "items": {
+      "lsr": "Lokal na Nalikom na Kita",
+      "taxRevenue": "Kita mula sa Buwis",
+      "nonTaxRevenue": "Kitang Hindi Buwis",
+      "otherShares": "Iba Pang Bahagi mula sa Pambansang Koleksyon ng Buwis",
+      "interest": "Kita mula sa Interes",
+      "realPropertyGeneralFund": "Buwis sa Real Property (General Fund)",
+      "businessTax": "Buwis sa Negosyo",
+      "otherTaxes": "Iba Pang Buwis",
+      "regulatoryFees": "Regulatory Fees",
+      "serviceCharges": "Service/User Charges",
+      "economicEnterprises": "Kita mula sa Economic Enterprises"
+    }
   },
   "competitiveness": {
     "title": "Kakayahang Makipagkumpitensya",
