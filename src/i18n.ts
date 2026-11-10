@@ -30,6 +30,7 @@ i18n
       'services',
       'openlgu',
       'transparency',
+      'statistics',
     ],
 
     backend: {

@@ -1,0 +1,49 @@
+{
+  "layout": {
+    "title": "{{adjective}} Statistics",
+    "description": "Data-driven insights into the population, economy, and performance of {{lgu}}."
+  },
+  "sidebar": {
+    "title": "{{adjective}} Statistics",
+    "demographics": "Demographics",
+    "demographicsDescription": "Population growth",
+    "competitiveness": "Competitiveness",
+    "competitivenessDescription": "CMCI Index & rankings",
+    "income": "{{adjective}} Income",
+    "incomeDescription": "Revenue sources"
+  },
+  "income": {
+    "title": "{{adjective}} Income",
+    "emptyDescription": "Revenue sources, fiscal autonomy, and national tax dependency.",
+    "description": "Detailed analysis of revenue sources, fiscal autonomy, and national tax dependency.",
+    "blgfData": "BLGF Data",
+    "totalIncome": "Total Income",
+    "annualRevenue": "Annual Revenue",
+    "localSufficiency": "Local Sufficiency",
+    "lsrShare": "LSR Share",
+    "ntaDependency": "NTA Dependency",
+    "nationalAllotment": "National Allotment",
+    "revenueComposition": "Revenue Composition",
+    "overview": "Overview",
+    "itemization": "Full Financial Itemization"
+  },
+  "competitiveness": {
+    "title": "Competitiveness",
+    "description": "National evaluation of local government progress across pillars of governance and development.",
+    "cmciYear": "CMCI {{year}}",
+    "dtiStandards": "DTI Standards",
+    "overallScore": "Overall Score",
+    "cmciIndex": "CMCI Index",
+    "pillarsTracked": "Pillars Tracked",
+    "tabs": {
+      "trends": "trends",
+      "pillars": "pillars"
+    },
+    "pillarTrends": "Pillar Trends",
+    "indicators": "{{pillar}} Indicators"
+  },
+  "footer": {
+    "verified": "Verified Data Audit",
+    "source": "Source:"
+  }
+}

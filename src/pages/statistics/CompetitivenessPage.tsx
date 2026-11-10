@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 
 import { CHART_THEME, standardAxisProps } from '@/constants/charts';
 import { BarChart3, Target, TrendingUp, Trophy } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
   CartesianGrid,
   Legend,
@@ -48,6 +49,7 @@ interface TrendPoint {
 const cmci = cmciData as CMCIData;
 
 export default function CompetitivenessPage() {
+  const { t } = useTranslation('statistics');
   const [activeTab, setActiveTab] = useState<'trends' | 'pillars'>('trends');
   const [selectedPillar, setSelectedPillar] = useState(
     cmci.pillars[0]?.name ?? ''
@@ -85,8 +87,8 @@ export default function CompetitivenessPage() {
     return (
       <>
         <PageHero
-          title='Competitiveness'
-          description='National evaluation of local government progress across pillars of governance and development.'
+          title={t('competitiveness.title')}
+          description={t('competitiveness.description')}
         />
         <NotYetAvailable />
       </>
@@ -97,29 +99,29 @@ export default function CompetitivenessPage() {
     <>
       {/* PageHero - documented pattern for layout headers */}
       <PageHero
-        title='Competitiveness'
-        description='National evaluation of local government progress across pillars of governance and development.'
+        title={t('competitiveness.title')}
+        description={t('competitiveness.description')}
       >
         <div className='flex flex-wrap gap-2 justify-center'>
           <Badge variant='primary' dot>
-            CMCI {latestYear}
+            {t('competitiveness.cmciYear', { year: latestYear })}
           </Badge>
-          <Badge variant='slate'>DTI Standards</Badge>
+          <Badge variant='slate'>{t('competitiveness.dtiStandards')}</Badge>
         </div>
       </PageHero>
 
       {/* KPI Cards - using new StatCard component */}
       <div className='grid grid-cols-1 gap-4 items-stretch md:grid-cols-2 mb-kapwa-lg'>
         <StatCard
-          label='Overall Score'
+          label={t('competitiveness.overallScore')}
           value={(cmci.overall_score[latestIdx] ?? 0).toFixed(2)}
-          subtext='CMCI Index'
+          subtext={t('competitiveness.cmciIndex')}
           variant='primary'
         />
         <StatCard
-          label='Pillars Tracked'
+          label={t('competitiveness.pillarsTracked')}
           value={cmci.pillars.length}
-          subtext='DTI Standards'
+          subtext={t('competitiveness.dtiStandards')}
           variant='slate'
           icon={Trophy}
         />
@@ -143,14 +145,17 @@ export default function CompetitivenessPage() {
             ) : (
               <BarChart3 className='inline mr-1 w-4 h-4' />
             )}
-            {tab}
+            {t(`competitiveness.tabs.${tab}`)}
           </button>
         ))}
       </nav>
 
       {/* Trends Chart wrapped in DetailSection */}
       {activeTab === 'trends' ? (
-        <DetailSection title='Pillar Trends' icon={TrendingUp}>
+        <DetailSection
+          title={t('competitiveness.pillarTrends')}
+          icon={TrendingUp}
+        >
           <ResponsiveChart height={384}>
             <LineChart
               data={trendData}
@@ -227,7 +232,9 @@ export default function CompetitivenessPage() {
           </div>
           <div className='lg:col-span-7'>
             <DetailSection
-              title={`${selectedPillar} Indicators`}
+              title={t('competitiveness.indicators', {
+                pillar: selectedPillar,
+              })}
               icon={Target}
               className='bg-kapwa-bg-surface/30'
             >
@@ -270,10 +277,10 @@ export default function CompetitivenessPage() {
         </div>
         <div className='space-y-1'>
           <p className='text-kapwa-text-strong text-[10px] font-bold tracking-widest uppercase'>
-            Verified Data Audit
+            {t('footer.verified')}
           </p>
           <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-            Source:{' '}
+            {t('footer.source')}{' '}
             <a
               href='https://cmci.dti.gov.ph/data-portal.php'
               target='_blank'

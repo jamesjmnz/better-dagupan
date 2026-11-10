@@ -1,0 +1,49 @@
+{
+  "layout": {
+    "title": "Istatistika ng {{adjective}}",
+    "description": "Mga kaalamang batay sa datos tungkol sa populasyon, ekonomiya, at kalagayan ng {{lgu}}."
+  },
+  "sidebar": {
+    "title": "Istatistika ng {{adjective}}",
+    "demographics": "Demograpiya",
+    "demographicsDescription": "Paglaki ng populasyon",
+    "competitiveness": "Kakayahang Makipagkumpitensya",
+    "competitivenessDescription": "CMCI Index at mga ranggo",
+    "income": "Kita ng {{adjective}}",
+    "incomeDescription": "Mga pinagmumulan ng kita"
+  },
+  "income": {
+    "title": "Kita ng {{adjective}}",
+    "emptyDescription": "Mga pinagmumulan ng kita, awtonomiyang piskal, at pagdepende sa buwis ng pambansang pamahalaan.",
+    "description": "Detalyadong pagsusuri ng mga pinagmumulan ng kita, awtonomiyang piskal, at pagdepende sa buwis ng pambansang pamahalaan.",
+    "blgfData": "Datos ng BLGF",
+    "totalIncome": "Kabuuang Kita",
+    "annualRevenue": "Taunang Kita",
+    "localSufficiency": "Lokal na Kasapatan",
+    "lsrShare": "Bahagi ng LSR",
+    "ntaDependency": "Pagdepende sa NTA",
+    "nationalAllotment": "Pambansang Alokasyon",
+    "revenueComposition": "Komposisyon ng Kita",
+    "overview": "Pangkalahatang Tingin",
+    "itemization": "Buong Detalye ng Pananalapi"
+  },
+  "competitiveness": {
+    "title": "Kakayahang Makipagkumpitensya",
+    "description": "Pambansang pagtatasa sa pag-unlad ng lokal na pamahalaan sa iba't ibang haligi ng pamamahala at kaunlaran.",
+    "cmciYear": "CMCI {{year}}",
+    "dtiStandards": "Pamantayan ng DTI",
+    "overallScore": "Kabuuang Iskor",
+    "cmciIndex": "CMCI Index",
+    "pillarsTracked": "Mga Haliging Sinusubaybayan",
+    "tabs": {
+      "trends": "mga trend",
+      "pillars": "mga haligi"
+    },
+    "pillarTrends": "Mga Trend ng Bawat Haligi",
+    "indicators": "Mga Indicator ng {{pillar}}"
+  },
+  "footer": {
+    "verified": "Beripikadong Pagsusuri ng Datos",
+    "source": "Pinagkunan:"
+  }
+}
