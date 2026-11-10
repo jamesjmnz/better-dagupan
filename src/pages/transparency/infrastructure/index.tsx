@@ -144,7 +144,7 @@ export default function InfrastructurePage() {
         const index = client.index(INDICES.DPWH);
 
         const provinceFilter = config.lgu.districtEngineeringOffice
-          ? `location.province = "${config.lgu.districtEngineeringOffice}" OR location.province = "${config.lgu.province}"`
+          ? `(location.province = "${config.lgu.districtEngineeringOffice}" OR location.province = "${config.lgu.province}")`
           : `location.province = "${config.lgu.province}"`;
 
         const filterConditions: string[] = [
