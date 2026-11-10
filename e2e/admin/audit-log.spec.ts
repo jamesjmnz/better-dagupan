@@ -1,19 +1,9 @@
 import { test, expect } from '../test-config';
-import { gotoAdmin } from '../utils/admin';
+import { ADMIN_CONTENT, gotoAdmin } from '../utils/admin';
 import { assertKapwaTokens } from '../utils/kapwa';
-
-/**
- * With no audit entries the page crashes: AuditLog.tsx passes a JSX element
- * (`<FileText />`) to EmptyState's `icon`, which expects a component, so React
- * throws "Element type is invalid" and the route renders nothing. tsc reports
- * the same line (TS2741). Every test below needs the page to render.
- */
-const CRASHES_WHEN_EMPTY =
-  'AuditLog crashes when there are no entries: EmptyState receives <FileText /> instead of FileText for `icon` (AuditLog.tsx, TS2741).';
 
 test.describe('Admin Audit Log', () => {
   test.beforeEach(async ({ page }) => {
-    test.fixme(true, CRASHES_WHEN_EMPTY);
     await gotoAdmin(page, '/admin/audit-logs');
     await expect(
       page.getByRole('heading', { level: 1, name: 'Audit Logs' })
@@ -21,7 +11,7 @@ test.describe('Admin Audit Log', () => {
   });
 
   test('audit log page uses Kapwa semantic tokens', async ({ page }) => {
-    await assertKapwaTokens(page);
+    await assertKapwaTokens(page, ADMIN_CONTENT);
   });
 
   test('audit log shows an empty state with no entries', async ({ page }) => {
@@ -34,15 +24,24 @@ test.describe('Admin Audit Log', () => {
     await expect(page.locator('input.kapwa-input').first()).toBeVisible();
   });
 
-  test('audit log has refresh button', async ({ page }) => {
-    await expect(page.getByRole('button', { name: 'Refresh' })).toBeVisible();
+  test('audit log has refresh controls', async ({ page }) => {
+    await expect(
+      page.getByRole('button', { name: 'Refresh', exact: true })
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: /Auto-refresh (On|Off)/ })
+    ).toBeVisible();
   });
 
   test('audit log has navigation back to dashboard', async ({ page }) => {
+    const breadcrumb = page.getByRole('navigation', { name: /breadcrumb/i });
+
     await expect(
-      page
-        .getByRole('navigation', { name: /breadcrumb/i })
-        .getByRole('link', { name: 'Admin' })
+      breadcrumb.getByRole('link', { name: 'Admin' })
     ).toHaveAttribute('href', '/admin');
+    await expect(breadcrumb.getByText('Audit Logs')).toHaveAttribute(
+      'aria-current',
+      'page'
+    );
   });
 });
