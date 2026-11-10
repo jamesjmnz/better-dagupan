@@ -220,26 +220,20 @@ test.describe('Statistics Pages', () => {
     await page.goto('/statistics');
     await page.waitForLoadState('networkidle');
 
-    // Check sidebar is visible
-    await openSidebar(page);
+    const sidebar = await openSidebar(page);
 
-    // Look for collapse button
-    const collapseButton = page.locator('button').filter({
-      hasText: /Collapse|Hide|Toggle/i,
-    });
-
-    const collapseButtonCount = await collapseButton.count();
-    if (collapseButtonCount > 0) {
-      // Click collapse button
-      await collapseButton.first().click();
-      await page.waitForTimeout(300);
-
-      // Main content should still be visible
-      const mainContent = page
-        .locator('main')
-        .or(page.locator('[role="main"]'));
-      await expect(mainContent).toBeVisible();
+    // Desktop collapses the sidebar with the layout's Hide control, which
+    // small screens hide; there the Menu disclosure folds it away.
+    const hide = page.getByRole('button', { name: 'Hide Menu' });
+    if (await hide.isVisible()) {
+      await hide.click();
+    } else {
+      await page.locator('button[aria-controls="layout-sidebar"]').click();
     }
+
+    await expect(sidebar).toBeHidden();
+    // The content stays put.
+    await expect(page.locator('#layout-content')).toBeVisible();
   });
 
   test('statistics pages have consistent breadcrumb navigation', async ({
