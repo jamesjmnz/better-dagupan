@@ -49,17 +49,19 @@ const JoinUs: FC = () => {
               transparent, efficient, and accessible to every Filipino.
             </p>
             <div className='flex flex-col justify-center gap-4 sm:flex-row'>
-              <Button
-                href='https://discord.gg/mHtThpN8bT'
-                target='_blank'
-                rel='noreferrer'
-                variant='secondary'
-                size='lg'
-                leftIcon={<MessageCircleIcon className='h-5 w-5' />}
-                className='text-kapwa-text-strong transform rounded-lg bg-kapwa-bg-accent-yellow-weak px-8 py-4 shadow-lg transition-all hover:scale-105'
-              >
-                Join Our Discord
-              </Button>
+              {config.portal.discordUrl && (
+                <Button
+                  href={config.portal.discordUrl}
+                  target='_blank'
+                  rel='noreferrer'
+                  variant='secondary'
+                  size='lg'
+                  leftIcon={<MessageCircleIcon className='h-5 w-5' />}
+                  className='text-kapwa-text-strong transform rounded-lg bg-kapwa-bg-accent-yellow-weak px-8 py-4 shadow-lg transition-all hover:scale-105'
+                >
+                  Join Our Discord
+                </Button>
+              )}
               <Button
                 href='#mission'
                 variant='outline'
@@ -261,17 +263,19 @@ const JoinUs: FC = () => {
             </p>
 
             <div className='flex flex-col items-center justify-center gap-6 sm:flex-row'>
-              <Button
-                href='https://discord.gg/mHtThpN8bT'
-                target='_blank'
-                rel='noreferrer'
-                variant='secondary'
-                size='lg'
-                leftIcon={<MessageCircleIcon className='h-6 w-6' />}
-                className='text-kapwa-text-strong transform rounded-lg bg-kapwa-bg-accent-yellow-weak px-8 py-4 text-lg shadow-lg transition-all hover:scale-105'
-              >
-                Join Our Discord Community
-              </Button>
+              {config.portal.discordUrl && (
+                <Button
+                  href={config.portal.discordUrl}
+                  target='_blank'
+                  rel='noreferrer'
+                  variant='secondary'
+                  size='lg'
+                  leftIcon={<MessageCircleIcon className='h-6 w-6' />}
+                  className='text-kapwa-text-strong transform rounded-lg bg-kapwa-bg-accent-yellow-weak px-8 py-4 text-lg shadow-lg transition-all hover:scale-105'
+                >
+                  Join Our Discord Community
+                </Button>
+              )}
 
               <div className='text-kapwa-text-inverse font-medium'>or</div>
 

@@ -121,36 +121,40 @@ const ContactUs: FC = () => {
 
         {/* Contact Methods Grid */}
         <div className='mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4'>
-          {contactMethods.map((method, index) => (
-            <div
-              key={index}
-              className='bg-kapwa-bg-surface border-kapwa-border-weak rounded-lg border p-6 shadow-xs transition-shadow hover:shadow-md'
-            >
-              <div className={`${method.color} mb-4 w-fit rounded-lg p-3`}>
-                {method.icon}
-              </div>
-              <h3 className='text-kapwa-text-strong mb-2 text-lg font-semibold'>
-                {method.title}
-              </h3>
-              <p className='text-kapwa-text-support mb-4 text-sm'>
-                {method.description}
-              </p>
-              <Button
-                href={method.action}
-                variant='link'
-                size='sm'
-                rightIcon={<ArrowRightIcon className='h-4 w-4' />}
-                target={method.action.startsWith('http') ? '_blank' : undefined}
-                rel={
-                  method.action.startsWith('http')
-                    ? 'noopener noreferrer'
-                    : undefined
-                }
+          {contactMethods
+            .filter(method => Boolean(method.action))
+            .map((method, index) => (
+              <div
+                key={index}
+                className='bg-kapwa-bg-surface border-kapwa-border-weak rounded-lg border p-6 shadow-xs transition-shadow hover:shadow-md'
               >
-                {method.contact}
-              </Button>
-            </div>
-          ))}
+                <div className={`${method.color} mb-4 w-fit rounded-lg p-3`}>
+                  {method.icon}
+                </div>
+                <h3 className='text-kapwa-text-strong mb-2 text-lg font-semibold'>
+                  {method.title}
+                </h3>
+                <p className='text-kapwa-text-support mb-4 text-sm'>
+                  {method.description}
+                </p>
+                <Button
+                  href={method.action}
+                  variant='link'
+                  size='sm'
+                  rightIcon={<ArrowRightIcon className='h-4 w-4' />}
+                  target={
+                    method.action.startsWith('http') ? '_blank' : undefined
+                  }
+                  rel={
+                    method.action.startsWith('http')
+                      ? 'noopener noreferrer'
+                      : undefined
+                  }
+                >
+                  {method.contact}
+                </Button>
+              </div>
+            ))}
         </div>
 
         {/* FAQ Section */}

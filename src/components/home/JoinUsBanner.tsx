@@ -6,6 +6,8 @@ import { Button } from '@bettergov/kapwa/button';
 import { ArrowRightIcon, UsersIcon, ZapIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import { config } from '@/lib/lguConfig';
+
 const JoinUsBanner: FC = () => {
   const { t } = useTranslation('common');
 
@@ -59,16 +61,18 @@ const JoinUsBanner: FC = () => {
               {t('joinUs.or')}
             </div>
 
-            <Button
-              href='https://discord.gg/mHtThpN8bT'
-              target='_blank'
-              rel='noreferrer'
-              className='text-kapwa-text-inverse hover:bg-kapwa-bg-surface hover:text-kapwa-text-strong border-kapwa-border-inverse'
-              size='lg'
-              variant='outline'
-            >
-              {t('joinUs.joinDiscord')}
-            </Button>
+            {config.portal.discordUrl && (
+              <Button
+                href={config.portal.discordUrl}
+                target='_blank'
+                rel='noreferrer'
+                className='text-kapwa-text-inverse hover:bg-kapwa-bg-surface hover:text-kapwa-text-strong border-kapwa-border-inverse'
+                size='lg'
+                variant='outline'
+              >
+                {t('joinUs.joinDiscord')}
+              </Button>
+            )}
           </div>
 
           <div className='mt-8 border-t border-kapwa-border-inverse/20 pt-6'>

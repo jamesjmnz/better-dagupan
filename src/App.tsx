@@ -172,7 +172,9 @@ function AppContent() {
             <Route path='/join-us' element={<JoinUs />} />
             <Route path='/terms-of-service' element={<TermsOfService />} />
             <Route path='/sitemap' element={<SitemapPage />} />
-            <Route path='/discord' element={<Discord />} />
+            {config.portal.discordUrl && (
+              <Route path='/discord' element={<Discord />} />
+            )}
 
             {/* Data Utilities */}
             <Route path='/data/weather' element={<WeatherPage />} />
