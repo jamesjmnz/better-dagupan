@@ -1,7 +1,7 @@
 # Project History Archive
 
-This directory preserves the record of Better Dagupan's early development inside
-the repository itself.
+This directory preserves the record of Better Dagupan's development inside the
+repository itself, one entry per merged pull request.
 
 ## Why this archive exists
 
@@ -29,6 +29,15 @@ current guidance, read the files listed under [Living documentation](#living-doc
 | [#1](pr-001-project-governance.md) | chore: establish project governance and enable `data` commit type | 2026-08-21 | `2d51b70` |
 | [#2](pr-002-ci-pipeline-health.md) | ci: make the CI pipeline produce a trustworthy signal | 2026-08-21 | `e0457b7` |
 | [#3](pr-003-dagupan-identity.md) | feat: configure Better Dagupan identity and LGU configuration | 2026-08-21 | `267fab9` |
+| [#4](pr-004-project-history-archive.md) | docs: archive early project development history | 2026-08-21 | `e7510f5` |
+| [#5](pr-005-branding-and-content-safety.md) | feat: Better Dagupan branding, localization, and inherited-content safety | 2026-08-21 | `1e45793` |
+| [#6](pr-006-barangay-index.md) | data: establish civic-data provenance and publish the verified Dagupan barangay index | 2026-08-22 | `682d346` |
+| [#7](pr-007-department-directory.md) | data: publish the verified Dagupan city office directory | 2026-08-23 | `0a05adc` |
+| [#8](pr-008-runtime-safety.md) | fix: make the portal safe to deploy for Dagupan | 2026-11-10 | `35b7e51` |
+| [#10](pr-010-inherited-artifacts.md) | chore: remove the inherited Los Baños data artifacts | 2026-11-10 | `357c8c0` |
+
+Pull requests #9 and #11 were still open when this index was last extended, so
+they are not archived. Only merged pull requests are added here.
 
 ### Merge order
 
@@ -39,6 +48,12 @@ PR #1 absorbed those fixes through a merge commit (`568616b`) before merging
 itself.
 
 ```
+357c8c0  Merge pull request #10  (inherited data artifacts removed)
+35b7e51  Merge pull request #8   (runtime safety)
+0a05adc  Merge pull request #7   (city office directory)
+682d346  Merge pull request #6   (civic-data provenance, barangay index)
+1e45793  Merge pull request #5   (branding and content safety)
+e7510f5  Merge pull request #4   (project history archive)
 267fab9  Merge pull request #3   (Dagupan identity and configuration)
 2d51b70  Merge pull request #1   (project governance)
 e0457b7  Merge pull request #2   (CI pipeline health)
@@ -71,6 +86,7 @@ This archive is frozen by design. Current, maintained guidance lives elsewhere:
 | `FORKING.md` | Re-keying the template for another LGU |
 | `docs/adr/` | Binding architecture decisions |
 | `docs/MEILISEARCH_INTEGRATION_GUIDE.md` | Transparency data sources and filter values |
+| `docs/civic-data-verification.md` | How a civic fact gets published |
 
 ## Attribution and licence
 
