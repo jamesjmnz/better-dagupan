@@ -43,7 +43,13 @@
         "CITY OF DAGUPAN  - PANGASINAN",
         "CITY OF DAGUPAN, PANGASINAN"
       ],
-      "externalDashboard": "https://transparency.bettergov.ph/organizations/"
+      "externalDashboard": "https://transparency.bettergov.ph/organizations/",
+      "cityNotices": {
+        "api": "https://www.dagupan.gov.ph/wp-json/wp/v2",
+        "postType": "bac",
+        "typeTaxonomy": "bac-type",
+        "pageUrl": "https://www.dagupan.gov.ph/bac/"
+      }
     },
     "infrastructure": {
       "searchString": "Dagupan",
