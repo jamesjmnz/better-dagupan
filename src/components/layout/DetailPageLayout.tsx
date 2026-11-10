@@ -8,12 +8,13 @@ import {
   ClockIcon,
 } from 'lucide-react';
 
-import { PageHero, type BreadcrumbItem, DetailSection } from './PageLayouts';
+import { PageHero, DetailSection } from './PageLayouts';
 import {
   ContactContainer,
   ContactItem,
 } from '@/components/data-display/ContactInfo';
 import { Card, CardContent } from '@/components/ui/Card';
+import type { BreadcrumbItem } from '@/types/components';
 
 export interface DetailPageLayoutProps {
   title: string;
@@ -134,7 +135,6 @@ export function DetailPageLayout({
         <DetailSection
           key={section.id}
           title={section.title}
-          description={section.description}
           variant={section.variant}
         >
           {section.content}

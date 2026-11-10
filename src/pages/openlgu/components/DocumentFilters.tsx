@@ -105,11 +105,7 @@ export default function DocumentFilters({
         <div className='flex flex-wrap gap-2'>
           {filterType !== 'all' && (
             <Badge
-              variant={
-                filterType === 'all'
-                  ? 'slate'
-                  : getDocTypeBadgeVariant(filterType)
-              }
+              variant={getDocTypeBadgeVariant(filterType)}
               className='cursor-pointer hover:opacity-80'
               onClick={() => setFilterType('all')}
             >

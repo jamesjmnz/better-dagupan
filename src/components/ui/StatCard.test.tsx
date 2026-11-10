@@ -139,7 +139,7 @@ describe('StatCard Component', () => {
       render(<StatCard label='Test' value='123' />);
       // No optional icon means no icon container (trend icon is invisible)
       const iconContainer = screen.queryByText((_, node) => {
-        return (
+        return Boolean(
           node?.textContent === '' &&
           node?.parentElement?.classList.contains('rounded-xl')
         );
@@ -228,10 +228,10 @@ describe('StatCard Component', () => {
       render(<StatCard label='Test' value='123' subtext='' />);
       // Empty subtext should not render (subtext is conditional)
       // Check that no subtext element with text-xs class exists
-      const allTexts = screen.queryAllByText(content => {
-        const elem = content as HTMLElement;
-        return elem.tagName === 'SPAN' && elem.classList.contains('text-xs');
-      });
+      const allTexts = screen.queryAllByText(
+        (_, element) =>
+          element?.tagName === 'SPAN' && element.classList.contains('text-xs')
+      );
       expect(allTexts).toHaveLength(0);
     });
   });

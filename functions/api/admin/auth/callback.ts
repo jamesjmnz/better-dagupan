@@ -72,7 +72,11 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       }
     );
 
-    let tokenData;
+    let tokenData: {
+      access_token?: string;
+      error?: string;
+      error_description?: string;
+    };
     try {
       tokenData = await tokenResponse.json();
     } catch (error) {
@@ -102,7 +106,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       },
     });
 
-    let userData;
+    let userData: Partial<GitHubUser>;
     try {
       userData = await userResponse.json();
     } catch (error) {
@@ -127,7 +131,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
       );
     }
 
-    const user: GitHubUser = userData;
+    const user = userData as GitHubUser;
 
     // Check if user is authorized
     let authorizedList: string[] = AUTHORIZED_USERS;

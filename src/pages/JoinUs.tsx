@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Button } from '@bettergov/kapwa/button';
+import { ButtonLink } from '@/components/ui/ButtonLink';
 import {
   ArrowRightIcon,
   BuildingIcon,
@@ -50,7 +50,7 @@ const JoinUs: FC = () => {
             </p>
             <div className='flex flex-col justify-center gap-4 sm:flex-row'>
               {config.portal.discordUrl && (
-                <Button
+                <ButtonLink
                   href={config.portal.discordUrl}
                   target='_blank'
                   rel='noreferrer'
@@ -60,9 +60,9 @@ const JoinUs: FC = () => {
                   className='text-kapwa-text-strong transform rounded-lg bg-kapwa-bg-accent-yellow-weak px-8 py-4 shadow-lg transition-all hover:scale-105'
                 >
                   Join Our Discord
-                </Button>
+                </ButtonLink>
               )}
-              <Button
+              <ButtonLink
                 href='#mission'
                 variant='outline'
                 size='lg'
@@ -70,7 +70,7 @@ const JoinUs: FC = () => {
                 className='hover:text-kapwa-text-brand text-kapwa-text-inverse hover:bg-kapwa-bg-surface rounded-lg border-2 border-white px-8 py-4'
               >
                 Learn More
-              </Button>
+              </ButtonLink>
             </div>
           </div>
         </div>
@@ -264,7 +264,7 @@ const JoinUs: FC = () => {
 
             <div className='flex flex-col items-center justify-center gap-6 sm:flex-row'>
               {config.portal.discordUrl && (
-                <Button
+                <ButtonLink
                   href={config.portal.discordUrl}
                   target='_blank'
                   rel='noreferrer'
@@ -274,12 +274,12 @@ const JoinUs: FC = () => {
                   className='text-kapwa-text-strong transform rounded-lg bg-kapwa-bg-accent-yellow-weak px-8 py-4 text-lg shadow-lg transition-all hover:scale-105'
                 >
                   Join Our Discord Community
-                </Button>
+                </ButtonLink>
               )}
 
               <div className='text-kapwa-text-inverse font-medium'>or</div>
 
-              <Button
+              <ButtonLink
                 href='/ideas'
                 target='_blank'
                 rel='noreferrer'
@@ -289,7 +289,7 @@ const JoinUs: FC = () => {
                 className='hover:text-kapwa-text-brand text-kapwa-text-inverse hover:bg-kapwa-bg-surface rounded-lg border-2 border-white px-8 py-4'
               >
                 Explore Project Ideas
-              </Button>
+              </ButtonLink>
             </div>
 
             <div className='mt-8 border-t border-white/20 pt-6'>

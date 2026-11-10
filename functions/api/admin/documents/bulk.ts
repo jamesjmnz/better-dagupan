@@ -140,7 +140,12 @@ async function handleBulkCreateDocuments(context: {
                WHERE da.document_id = ?1`
           )
             .bind(existing.id)
-            .all();
+            .all<{
+              id: string;
+              first_name: string;
+              last_name: string;
+              full_name: string;
+            }>();
 
           const existingWithAuthors: ExistingDocument = {
             ...existing,

@@ -395,7 +395,9 @@ export async function queryStagedDocuments(
   const itemsResult = await db
     .prepare(dataQuery)
     .bind(...searchParams, limit, offset)
-    .all();
+    .all<
+      StagedDocumentRow & Omit<SourceRecordRow, 'id' | 'raw_payload_json'>
+    >();
 
   return {
     items: itemsResult.results.map(row => ({
@@ -462,11 +464,11 @@ export async function queryDecoratedDocument(
     `
     )
     .bind(id, id)
-    .first();
+    .first<StagedDocumentRow & SourceRecordRow>();
 
   if (!docResult) return null;
 
-  const row = docResult as StagedDocumentRow & SourceRecordRow;
+  const row = docResult;
 
   // Fetch decisions
   const decisionsResult = await db

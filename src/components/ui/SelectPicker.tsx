@@ -11,14 +11,14 @@ import { ChevronDownIcon, SearchIcon, XIcon } from 'lucide-react';
 
 import { cn } from '../../lib/utils';
 
-interface SelectPickerOption {
+export interface SelectPickerOption<T extends string = string> {
   label: string;
-  value: string;
+  value: T;
 }
 
-interface SelectPickerProps {
-  options: SelectPickerOption[];
-  onSelect: (options: SelectPickerOption[]) => void;
+export interface SelectPickerProps<T extends string = string> {
+  options: SelectPickerOption<T>[];
+  onSelect: (options: SelectPickerOption<T>[]) => void;
   placeholder?: string;
   className?: string;
   size?: 'sm' | 'md' | 'lg';
@@ -28,7 +28,7 @@ interface SelectPickerProps {
   selectedValues?: string[];
 }
 
-const SelectPicker = ({
+const SelectPicker = <T extends string = string>({
   options,
   onSelect,
   placeholder = 'Select...',
@@ -39,12 +39,12 @@ const SelectPicker = ({
   clearable = true,
   selectedValues = [],
   ...props
-}: SelectPickerProps) => {
+}: SelectPickerProps<T>) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedOptions, setSelectedOptions] = useState<SelectPickerOption[]>(
-    []
-  );
+  const [selectedOptions, setSelectedOptions] = useState<
+    SelectPickerOption<T>[]
+  >([]);
   const [dropdownPosition, setDropdownPosition] = useState<'bottom' | 'top'>(
     'bottom'
   );
@@ -63,8 +63,8 @@ const SelectPicker = ({
     opt.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleSelect = (option: SelectPickerOption) => {
-    let updated: SelectPickerOption[];
+  const handleSelect = (option: SelectPickerOption<T>) => {
+    let updated: SelectPickerOption<T>[];
     if (selectedOptions.some(o => o.value === option.value)) {
       updated = selectedOptions.filter(o => o.value !== option.value);
     } else {

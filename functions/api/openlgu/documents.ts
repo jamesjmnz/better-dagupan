@@ -127,13 +127,28 @@ async function getDocumentsList(context: { request: Request; env: Env }) {
         sql += ` ORDER BY d.date_enacted DESC LIMIT ?${paramIndex++} OFFSET ?${paramIndex++}`;
         params.push(limit.toString(), offset.toString());
 
+        interface DocumentRow {
+          id: string;
+          type: string;
+          number: string;
+          title: string;
+          session_id: string | null;
+          publication_status: string;
+          verification_state: string;
+          source_type: string;
+          date_enacted: string;
+          pdf_url: string;
+          term_id: string | null;
+          session_number: number | null;
+          session_type: string | null;
+          session_date: string | null;
+        }
+
         const result = await env.BETTERLB_DB.prepare(sql)
           .bind(...params)
-          .all();
+          .all<DocumentRow>();
 
-        const documentIds = result.results
-          .map((r: { id: string }) => r.id)
-          .filter(Boolean);
+        const documentIds = result.results.map(r => r.id).filter(Boolean);
 
         const authorIdsMap = new Map<string, string[]>();
         if (documentIds.length > 0) {
@@ -192,24 +207,7 @@ async function getDocumentsList(context: { request: Request; env: Env }) {
           .first<{ count: number }>();
         const total = countResult?.count || 0;
 
-        interface DocumentRow {
-          id: string;
-          type: string;
-          number: string;
-          title: string;
-          session_id: string | null;
-          publication_status: string;
-          verification_state: string;
-          source_type: string;
-          date_enacted: string;
-          pdf_url: string;
-          term_id: string | null;
-          session_number: number | null;
-          session_type: string | null;
-          session_date: string | null;
-        }
-
-        const documents = result.results.map((row: DocumentRow) => ({
+        const documents = result.results.map(row => ({
           id: row.id,
           type: row.type,
           number: row.number,
@@ -229,10 +227,10 @@ async function getDocumentsList(context: { request: Request; env: Env }) {
                 number: row.session_number,
                 type: row.session_type,
                 date: row.session_date,
-                ordinal_number: formatSessionOrdinal(
-                  row.session_number,
-                  row.session_type
-                ),
+                ordinal_number:
+                  row.session_number !== null && row.session_type !== null
+                    ? formatSessionOrdinal(row.session_number, row.session_type)
+                    : null,
                 term_id: row.term_id,
               }
             : null,
@@ -376,10 +374,10 @@ async function getDocumentDetail(context: { request: Request; env: Env }) {
                 number: doc.session_number,
                 type: doc.session_type,
                 date: doc.session_date,
-                ordinal_number: formatSessionOrdinal(
-                  doc.session_number,
-                  doc.session_type
-                ),
+                ordinal_number:
+                  doc.session_number !== null && doc.session_type !== null
+                    ? formatSessionOrdinal(doc.session_number, doc.session_type)
+                    : null,
                 term_id: doc.term_id,
               }
             : null,

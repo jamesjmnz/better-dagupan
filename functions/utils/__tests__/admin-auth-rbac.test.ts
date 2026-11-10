@@ -12,6 +12,14 @@ import { withAuth, AuthContext } from '../admin-auth';
 import { UserRole, Permission } from '../rbac';
 import { MockKVNamespace } from '../../test/test-utils';
 
+/** The JSON bodies these handlers and the auth wrapper respond with. */
+type JsonBody = {
+  success?: boolean;
+  user?: string;
+  error?: string;
+  authenticated?: boolean;
+};
+
 describe('withAuth with RBAC', () => {
   let mockKV: MockKVNamespace;
   let mockEnv: any;
@@ -108,7 +116,7 @@ describe('withAuth with RBAC', () => {
 
       const wrappedHandler = withAuth(handler);
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(200);
       expect(data.success).toBe(true);
@@ -163,7 +171,7 @@ describe('withAuth with RBAC', () => {
         requirePermission: Permission.DOCUMENTS_WRITE,
       });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(403);
       expect(data.error).toContain('Insufficient permissions');
@@ -219,7 +227,7 @@ describe('withAuth with RBAC', () => {
         requirePermission: Permission.DOCUMENTS_DELETE,
       });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(403);
       expect(data.error).toContain('Insufficient permissions');
@@ -298,7 +306,7 @@ describe('withAuth with RBAC', () => {
         requireRole: UserRole.ADMIN,
       });
       const response = await wrappedHandler({ request, env: mockEnv });
-      const data = await response.json();
+      const data = await response.json<JsonBody>();
 
       expect(response.status).toBe(403);
       expect(data.error).toContain('Insufficient permissions');

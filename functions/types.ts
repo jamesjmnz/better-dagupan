@@ -18,6 +18,10 @@ export interface Env {
   CF_ACCOUNT_ID?: string;
   CF_API_TOKEN?: string;
 
+  // Runtime settings
+  ENVIRONMENT?: string; // 'development' relaxes the CSP
+  REQUEST_SIZE_LIMIT?: string; // Max request body in bytes (default 1MB)
+
   // Admin Authentication
   GITHUB_CLIENT_ID?: string;
   GITHUB_CLIENT_SECRET?: string;

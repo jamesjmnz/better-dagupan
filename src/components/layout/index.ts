@@ -18,11 +18,8 @@ export { PageHero, ModuleHeader, DetailSection } from './PageLayouts';
 
 // Reusable Page Layout Components
 export { IndexPageLayout } from './IndexPageLayout';
-export type {
-  IndexPageLayoutProps,
-  BreadcrumbItem,
-  FilterConfig,
-} from './IndexPageLayout';
+export type { IndexPageLayoutProps, FilterConfig } from './IndexPageLayout';
+export type { BreadcrumbItem } from '@/types/components';
 
 export { DetailPageLayout } from './DetailPageLayout';
 export type { DetailPageLayoutProps } from './DetailPageLayout';

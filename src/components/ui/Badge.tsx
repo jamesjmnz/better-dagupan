@@ -3,7 +3,7 @@ import { HTMLAttributes, ReactNode } from 'react';
 import { cn } from '@/lib/utils';
 
 // Unified Variants aligned with Municipal Branding
-type BadgeVariant =
+export type BadgeVariant =
   | 'primary' // Municipal Blue (Executive / Ordinances)
   | 'secondary' // Brand Orange (Resolutions / Contrast)
   | 'yellow' // Yellow (Executive Orders)

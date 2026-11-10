@@ -12,7 +12,7 @@ export {
   CardGrid,
   CardList,
   CardDivider,
-} from './Card';
+} from '../Card';
 
 // Kapwa components available for direct import
 export { Input } from '@bettergov/kapwa/input';

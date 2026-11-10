@@ -36,21 +36,19 @@ async function handleListTerms(context: {
       LIMIT ?1
     `;
 
-    const result = await env.BETTERLB_DB.prepare(sql).bind(limit).all();
+    const result = await env.BETTERLB_DB.prepare(sql).bind(limit).all<{
+      id: string;
+      term_number: number;
+      start_date: string;
+      end_date: string;
+    }>();
 
-    const terms = result.results.map(
-      (row: {
-        id: string;
-        term_number: number;
-        start_date: string;
-        end_date: string;
-      }) => ({
-        id: row.id,
-        name: formatTermName(row.term_number),
-        year_range: formatYearRange(row.start_date, row.end_date),
-        ordinal: formatOrdinal(row.term_number),
-      })
-    );
+    const terms = result.results.map(row => ({
+      id: row.id,
+      name: formatTermName(row.term_number),
+      year_range: formatYearRange(row.start_date, row.end_date),
+      ordinal: formatOrdinal(row.term_number),
+    }));
 
     return Response.json({ terms });
   } catch (error) {

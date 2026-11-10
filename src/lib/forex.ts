@@ -9,16 +9,16 @@ import { fetchWithCache } from './api';
 export const fetchForexData = async (
   filterSymbols?: string[]
 ): Promise<ForexRate[]> => {
-  const data = await fetchWithCache('https://api.bettergov.ph/forex');
+  const data = await fetchWithCache<{
+    rates: Array<{ country: string; symbol: string; phpEquivalent: number }>;
+  }>('https://api.bettergov.ph/forex');
 
   // Transform API data to match our ForexRate type
-  let transformedData: ForexRate[] = data.rates.map(
-    (rate: { country: string; symbol: string; phpEquivalent: number }) => ({
-      currency: rate.country,
-      code: rate.symbol,
-      rate: rate.phpEquivalent,
-    })
-  );
+  let transformedData: ForexRate[] = data.rates.map(rate => ({
+    currency: rate.country,
+    code: rate.symbol,
+    rate: rate.phpEquivalent,
+  }));
 
   // Filter by symbols if provided
   if (filterSymbols && filterSymbols.length > 0) {

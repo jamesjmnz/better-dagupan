@@ -3,6 +3,7 @@
  * Logout and clear session
  */
 import { Env } from '../../../types';
+import type { AdminSession } from '../../../utils/admin-auth';
 import { parseCookies } from '../../../utils/cookies';
 import {
   logAudit,
@@ -21,7 +22,7 @@ export async function onRequestPost(context: { request: Request; env: Env }) {
   if (sessionId) {
     try {
       // Get the session data before deleting for audit log
-      const sessionData = await env.WEATHER_KV.get(
+      const sessionData = await env.WEATHER_KV.get<AdminSession>(
         `session:${sessionId}`,
         'json'
       );

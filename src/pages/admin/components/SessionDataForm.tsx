@@ -122,8 +122,8 @@ export default function SessionDataForm({
         if (!response.ok) throw new Error('Failed to load session');
 
         const data = await response.json();
-        const absentIds = new Set(
-          data.absences.map((a: { person_id: number }) => a.person_id)
+        const absentIds = new Set<string>(
+          data.absences.map((a: { person_id: string }) => a.person_id)
         );
         setAbsentPersonIds(absentIds);
       } catch (error) {

@@ -76,7 +76,7 @@ function AdminContent() {
               <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold'>
                 Admin Dashboard
               </h1>
-              <Badge variant={USE_MOCK_AUTH ? 'info' : 'warning'}>
+              <Badge variant={USE_MOCK_AUTH ? 'primary' : 'warning'}>
                 {USE_MOCK_AUTH ? 'Mock Mode' : 'Admin Only'}
               </Badge>
             </div>

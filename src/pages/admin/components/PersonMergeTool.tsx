@@ -236,7 +236,7 @@ export default function PersonMergeTool() {
                         {person.id}
                       </span>
                       {isKeep && (
-                        <Badge variant='primary' size='sm'>
+                        <Badge variant='primary'>
                           <CheckCircle className='h-3 w-3' /> Keep
                         </Badge>
                       )}

@@ -226,7 +226,7 @@ const Ideas: FC = () => {
               .map(idea => (
                 <Card
                   key={idea.id}
-                  hoverable
+                  hover
                   className='bg-kapwa-bg-surface h-full'
                 >
                   <CardContent className='p-6'>
@@ -297,7 +297,7 @@ const Ideas: FC = () => {
             <Button
               onClick={() => navigate('/about')}
               variant='outline'
-              size='default'
+              size='md'
             >
               Learn More About Us
             </Button>

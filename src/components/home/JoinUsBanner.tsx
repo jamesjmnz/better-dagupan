@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Button } from '@bettergov/kapwa/button';
+import { ButtonLink } from '@/components/ui/ButtonLink';
 import { ArrowRightIcon, UsersIcon, ZapIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -62,7 +63,7 @@ const JoinUsBanner: FC = () => {
             </div>
 
             {config.portal.discordUrl && (
-              <Button
+              <ButtonLink
                 href={config.portal.discordUrl}
                 target='_blank'
                 rel='noreferrer'
@@ -71,7 +72,7 @@ const JoinUsBanner: FC = () => {
                 variant='outline'
               >
                 {t('joinUs.joinDiscord')}
-              </Button>
+              </ButtonLink>
             )}
           </div>
 

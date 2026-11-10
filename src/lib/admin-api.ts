@@ -325,9 +325,9 @@ export const statsApi = {
  */
 export const reconcileApi = {
   /**
-   * List conflicts
+   * List conflicts. The caller names the row shape it expects.
    */
-  list: (
+  list: <T = unknown>(
     params: {
       limit?: number;
       offset?: number;
@@ -335,7 +335,7 @@ export const reconcileApi = {
     } = {}
   ) => {
     const queryString = buildQueryString(params);
-    return fetchApi<PaginatedResponse<unknown>>(`/reconcile?${queryString}`);
+    return fetchApi<PaginatedResponse<T>>(`/reconcile?${queryString}`);
   },
 
   /**

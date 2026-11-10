@@ -116,7 +116,8 @@ export interface Service {
   quickInfo?: QuickInfo[];
 }
 
-export interface HourlyForecast {
+/** One 3-hour forecast entry as `/api/weather` returns it. */
+export interface WeatherApiHourly {
   dt: number;
   temp: number;
   feels_like: number;
@@ -124,7 +125,24 @@ export interface HourlyForecast {
   description: string;
   humidity: number;
   wind_speed: number;
-  hour?: string;
+}
+
+/** One city as `/api/weather` returns it, keyed by city in the response. */
+export interface WeatherApiCity {
+  name?: string;
+  weather?: Array<{ description: string; icon: string }>;
+  main?: { temp: number; pressure: number; humidity: number };
+  wind?: { speed: number };
+  visibility?: number;
+  hourly?: WeatherApiHourly[];
+}
+
+/** A forecast entry after `fetchWeatherData` has shaped it for display. */
+export interface HourlyForecast {
+  hour: string;
+  temperature: number;
+  /** A key of `weatherIcons`. */
+  icon: string;
 }
 
 export interface WeatherData {

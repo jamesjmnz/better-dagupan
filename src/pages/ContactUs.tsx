@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { Button } from '@bettergov/kapwa/button';
+import { ButtonLink } from '@/components/ui/ButtonLink';
 import {
   ArrowRightIcon,
   ChevronDownIcon,
@@ -137,7 +137,7 @@ const ContactUs: FC = () => {
                 <p className='text-kapwa-text-support mb-4 text-sm'>
                   {method.description}
                 </p>
-                <Button
+                <ButtonLink
                   href={method.action}
                   variant='link'
                   size='sm'
@@ -152,7 +152,7 @@ const ContactUs: FC = () => {
                   }
                 >
                   {method.contact}
-                </Button>
+                </ButtonLink>
               </div>
             ))}
         </div>

@@ -134,9 +134,6 @@ export interface Service {
   // NEW: Plain language name (user-friendly version)
   plainLanguageName?: string; // Simplified name following UK GOV.UK plain language principles
 
-  // NEW: Fee schedule for services that are lists of fees
-  feeSchedule?: FeeItem[];
-
   // NEW: Data quality flags
   dataComplete?: boolean; // false if has "See document" placeholders
   needsVerification?: boolean; // flagged for manual review

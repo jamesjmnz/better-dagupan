@@ -45,7 +45,7 @@ export default function AuditLog() {
   const [filters, setFilters] = useState<FilterState>({});
   const [autoRefresh, setAutoRefresh] = useState(false);
 
-  const limit = 50;
+  const [limit, setLimit] = useState(50);
 
   const fetchLogs = useCallback(async () => {
     setLoading(true);
@@ -181,7 +181,7 @@ export default function AuditLog() {
             variant='primary'
             size='sm'
             onClick={fetchLogs}
-            icon={<RefreshCw className='h-4 w-4' />}
+            leftIcon={<RefreshCw className='h-4 w-4' />}
           >
             Refresh
           </Button>
@@ -189,7 +189,7 @@ export default function AuditLog() {
             variant='secondary'
             size='sm'
             onClick={exportToCSV}
-            icon={<Download className='h-4 w-4' />}
+            leftIcon={<Download className='h-4 w-4' />}
           >
             Export CSV
           </Button>
@@ -282,9 +282,9 @@ export default function AuditLog() {
         </Card>
       ) : logs.length === 0 ? (
         <EmptyState
-          icon={<FileText className='h-12 w-12' />}
+          icon={FileText}
           title='No audit logs found'
-          description={
+          message={
             Object.keys(filters).length > 0
               ? 'Try adjusting your filters to see more results'
               : 'Audit logs will appear here when administrative actions are performed'
@@ -348,16 +348,19 @@ export default function AuditLog() {
             </div>
 
             {/* Pagination */}
-            <div className='mt-4 flex items-center justify-between'>
-              <div className='kapwa-body-sm text-kapwa-text-weak'>
-                Showing {logs.length} of {total} logs
-              </div>
+            <div className='mt-4'>
               <PaginationControls
                 currentPage={currentPage}
                 totalPages={totalPages}
+                resultsPerPage={limit}
+                totalItems={total}
                 onPageChange={page => {
                   setCurrentPage(page);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                onResultsPerPageChange={newLimit => {
+                  setLimit(newLimit);
+                  setCurrentPage(1);
                 }}
               />
             </div>

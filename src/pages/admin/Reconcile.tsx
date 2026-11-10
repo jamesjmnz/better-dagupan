@@ -19,14 +19,10 @@ import {
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { EmptyState } from '@/components/ui/EmptyState';
-import SelectPicker from '@/components/ui/SelectPicker';
+import SelectPicker, {
+  type SelectPickerOption,
+} from '@/components/ui/SelectPicker';
 import { adminApi } from '@/lib/admin-api';
-
-// Define the interface locally since it's not exported
-interface SelectPickerOption {
-  label: string;
-  value: string;
-}
 
 type ReconcileStatus = 'unresolved' | 'resolved' | 'skipped';
 type ConflictType = 'moved_by' | 'seconded_by' | 'authors' | 'title' | 'none';
@@ -138,7 +134,7 @@ export default function Reconcile() {
   const fetchConflicts = useCallback(async () => {
     setLoading(true);
     try {
-      const data = await adminApi.reconcile.list({
+      const data = await adminApi.reconcile.list<ConflictRecord>({
         limit: 20,
         offset: page * 20,
         status: statusFilter !== 'all' ? statusFilter : undefined,
@@ -252,21 +248,25 @@ export default function Reconcile() {
         </div>
         <div className='flex items-center gap-3'>
           <SelectPicker
-            value={conflictTypeFilter}
-            onChange={v => {
-              setConflictTypeFilter(v as ConflictType | 'all');
+            options={conflictTypeOptions}
+            selectedValues={[conflictTypeFilter]}
+            onSelect={selected => {
+              setConflictTypeFilter(
+                selected[selected.length - 1]?.value ?? 'all'
+              );
               setPage(0);
             }}
-            options={conflictTypeOptions}
+            searchable={false}
             className='w-40'
           />
           <SelectPicker
-            value={statusFilter}
-            onChange={v => {
-              setStatusFilter(v as ReconcileStatus | 'all');
+            options={statusOptions}
+            selectedValues={[statusFilter]}
+            onSelect={selected => {
+              setStatusFilter(selected[selected.length - 1]?.value ?? 'all');
               setPage(0);
             }}
-            options={statusOptions}
+            searchable={false}
             className='w-40'
           />
           <Button

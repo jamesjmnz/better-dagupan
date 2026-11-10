@@ -56,7 +56,7 @@ export default function AttendanceForm({
         setMembers(sessionData.members || []);
 
         // Set initial absences
-        const absentIds = new Set(
+        const absentIds = new Set<string>(
           (sessionData.absences || []).map(
             (a: { person_id: string }) => a.person_id
           )

@@ -16,8 +16,7 @@ export default function ReferenceImplementation() {
     <div className='min-h-screen bg-kapwa-bg-surface'>
       <PageHero
         title='Reference Implementation'
-        subtitle='Demonstrates design system patterns'
-        className='bg-kapwa-bg-surface-bold border-kapwa-border-weak'
+        description='Demonstrates design system patterns'
       />
 
       <main className='container mx-auto px-kapwa-md py-kapwa-lg'>

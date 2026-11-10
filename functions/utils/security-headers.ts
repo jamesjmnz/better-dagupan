@@ -97,7 +97,7 @@ export function getCSP(env?: { ENVIRONMENT?: string }): string {
   const isDevelopment =
     env?.ENVIRONMENT === 'development' ||
     (typeof globalThis !== 'undefined' &&
-      // @ts-expect-error - DEV is a Vite global
+      // DEV / __DEV__ are Vite globals
       ((globalThis as { DEV?: boolean; __DEV__?: boolean }).DEV ||
         (globalThis as { DEV?: boolean; __DEV__?: boolean }).__DEV__));
 
