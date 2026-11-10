@@ -212,7 +212,9 @@ export default function MunicipalIncomePage() {
               variant: 'secondary',
             },
             {
-              label: t('income.allotmentDependency', { allotment }),
+              label: t('income.allotmentDependency', {
+                allotment: /\((\w+)\)/.exec(allotment)?.[1] ?? allotment,
+              }),
               value: asPercent(
                 data.summary_indicators.dependency_rates.nta_dependency
               ),
