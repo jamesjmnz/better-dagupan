@@ -118,7 +118,6 @@ better-dagupan/
 │   ├── assets/                  # General media assets
 │   ├── locales/                 # Translation files (en, fil)
 │   └── logos/                   # Logo exports
-├── raw_data/                    # Unprocessed data before pipeline cleanup
 ├── scripts/                     # Automation, maintenance, and build scripts
 ├── src/                         # Main application source code
 │   ├── components/              # Reusable UI components

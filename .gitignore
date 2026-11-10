@@ -46,6 +46,7 @@ wrangler.toml
 .cursor/*
 .dev.vars
 /raw_data
+.backups/
 _worker.bundle
 pipeline/*
 CLAUDE.md
