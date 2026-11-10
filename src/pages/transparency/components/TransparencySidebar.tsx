@@ -35,7 +35,8 @@ export default function TransparencySidebar() {
             key={section.slug}
             label={t(section.nameKey)}
             icon={section.icon}
-            path={`${section.slug}`}
+            // Absolute, so SidebarItem can match it against the current pathname.
+            path={`/transparency/${section.slug}`}
           />
         ))}
       </ul>
