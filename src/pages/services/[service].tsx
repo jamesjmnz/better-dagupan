@@ -5,7 +5,6 @@ import {
   AlertCircle,
   ArrowRight,
   Banknote,
-  BookOpen,
   Building2,
   Calendar,
   CalendarCheck,
@@ -17,12 +16,12 @@ import {
   FileText,
   HeartHandshake,
   Info,
-  LinkIcon,
   LucideIcon,
   Users,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import { NotVerified, SourceNote } from '@/components/civic';
 import { DetailSection } from '@/components/layout';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
@@ -32,9 +31,12 @@ import { ProcessTimeline } from './components/ProcessTimeline';
 import { SupportingDocumentsDetail } from './components/SupportingDocumentsDetail';
 import { FeesCard } from './components/FeesCard';
 
+import {
+  formatVerificationDate,
+  resolveCivicSources,
+} from '@/lib/civicSources';
 import { getServiceBySlug } from '@/lib/services';
 import { config } from '@/lib/lguConfig';
-import { toTitleCase } from '@/lib/stringUtils';
 
 import departmentsDataRaw from '@/data/directory/departments.json';
 import executiveDataRaw from '@/data/directory/executive.json';
@@ -50,7 +52,7 @@ const departmentsData = departmentsDataRaw as Department[];
 const executiveData = executiveDataRaw as ExecutiveOfficial[];
 const legislativeData = legislativeDataRaw as LegislativeChamber[];
 
-import type { QuickInfo, Source } from '@/types/servicesTypes';
+import type { QuickInfo } from '@/types/servicesTypes';
 
 const QUICK_INFO_CONFIG: Record<
   keyof QuickInfo,
@@ -71,7 +73,7 @@ const QUICK_INFO_CONFIG: Record<
 };
 
 export default function ServiceDetail() {
-  const { t } = useTranslation('services');
+  const { t, i18n } = useTranslation('services');
   const { service: serviceSlug } = useParams<{ service: string }>();
 
   if (!serviceSlug) return null;
@@ -122,6 +124,16 @@ export default function ServiceDetail() {
   // Citizens Charter specific
   const isOfficialSource = service.source === 'citizens-charter';
   const needsVerification = service.needsVerification === true;
+  const sources = service.sources ?? [];
+
+  // The date the publisher released the cited page, when it states one. A
+  // reader deciding whether to rely on a procedure needs to know its edition,
+  // not only when this portal last checked it.
+  const publishedDates = resolveCivicSources(sources)
+    .map(source => source.published)
+    .filter((date): date is string => Boolean(date))
+    .sort();
+  const sourcePublished = publishedDates.length > 0 ? publishedDates[0] : null;
 
   const quickInfoArray = service.quickInfo
     ? (Object.entries(service.quickInfo) as [keyof QuickInfo, string][]).map(
@@ -142,13 +154,6 @@ export default function ServiceDetail() {
       label: t('detail.quickInfo.processingTime'),
       value: service.processingTime,
       icon: Clock,
-    });
-  }
-  if (service.whoMayAvail) {
-    ccInfoItems.push({
-      label: t('detail.quickInfo.whoCanApply'),
-      value: service.whoMayAvail,
-      icon: Users,
     });
   }
   if (service.classification) {
@@ -212,7 +217,10 @@ export default function ServiceDetail() {
                 <span className='text-kapwa-text-brand font-semibold'>
                   {t('detail.whoMayAvail')}{' '}
                 </span>
-                {service.whoMayAvail}
+                {/* As printed; the charter sometimes lists items on lines. */}
+                <span className='whitespace-pre-line'>
+                  {service.whoMayAvail}
+                </span>
               </p>
             </div>
           )}
@@ -272,6 +280,43 @@ export default function ServiceDetail() {
             </div>
           )}
 
+          {/*
+            What the charter does not state is said so, field by field. A
+            blank here would read as "no fee" or "no waiting", which is not
+            something this portal knows.
+          */}
+          {isOfficialSource &&
+            !needsVerification &&
+            (!service.whoMayAvail ||
+              !service.classification ||
+              !service.processingTime ||
+              !service.fees) && (
+              <div className='grid grid-cols-1 gap-3 md:grid-cols-2'>
+                {!service.whoMayAvail && (
+                  <NotVerified label={t('detail.whoMayAvailNotVerified')} />
+                )}
+                {!service.classification && (
+                  <NotVerified label={t('detail.classificationNotVerified')} />
+                )}
+                {!service.processingTime && (
+                  <NotVerified
+                    label={t('detail.processingTimeNotVerified')}
+                    detail={
+                      service.processingTimeStatus === 'conflicting'
+                        ? t('detail.processingTimeConflict')
+                        : undefined
+                    }
+                  />
+                )}
+                {!service.fees && (
+                  <NotVerified
+                    label={t('detail.feeNotVerified')}
+                    detail={t('detail.feeNotVerifiedBody')}
+                  />
+                )}
+              </div>
+            )}
+
           {/* Fees Card (Citizens Charter) */}
           {isOfficialSource && service.fees && <FeesCard fees={service.fees} />}
 
@@ -292,10 +337,14 @@ export default function ServiceDetail() {
 
           {/* Requirements (Citizens Charter) */}
           {isOfficialSource &&
-            service.detailedRequirements &&
-            service.detailedRequirements.length > 0 && (
+            (service.detailedRequirements &&
+            service.detailedRequirements.length > 0 ? (
               <RequirementGrid requirements={service.detailedRequirements} />
-            )}
+            ) : (
+              !needsVerification && (
+                <NotVerified label={t('detail.requirementsNotVerified')} />
+              )
+            ))}
 
           {/* Supporting Documents Detail (Citizens Charter - optional) */}
           {isOfficialSource &&
@@ -310,10 +359,13 @@ export default function ServiceDetail() {
 
           {/* Process Timeline (Citizens Charter) */}
           {isOfficialSource &&
-            service.clientSteps &&
-            service.clientSteps.length > 0 && (
+            (service.clientSteps && service.clientSteps.length > 0 ? (
               <ProcessTimeline steps={service.clientSteps} />
-            )}
+            ) : (
+              !needsVerification && (
+                <NotVerified label={t('detail.stepsNotVerified')} />
+              )
+            ))}
 
           {/* Regular Steps (community services) */}
           {!isOfficialSource && service.steps && service.steps.length > 0 && (
@@ -370,41 +422,21 @@ export default function ServiceDetail() {
             </div>
           )}
 
-          {/* Sources and References */}
-          {service.sources && service.sources.length > 0 && (
-            <DetailSection title={t('detail.sources')} icon={BookOpen}>
-              <ul className='grid grid-cols-1 gap-3' role='list'>
-                {service.sources.map((source: Source, idx: number) => (
-                  <li
-                    key={idx}
-                    className='hover:border-kapwa-border-brand group border-kapwa-border-weak bg-kapwa-bg-surface-raised/50 flex items-start gap-3 rounded-xl border p-4 transition-all'
-                  >
-                    <div className='group-hover:text-kapwa-text-brand bg-kapwa-bg-surface text-kapwa-text-disabled rounded-lg p-2 shadow-sm'>
-                      <LinkIcon className='h-3.5 w-3.5' />
-                    </div>
-                    <div className='flex flex-col'>
-                      <p className='text-kapwa-text-disabled mb-1 text-[10px] font-bold tracking-widest uppercase'>
-                        {t('detail.reference')}
-                      </p>
-                      {source.url ? (
-                        <a
-                          href={source.url}
-                          target='_blank'
-                          rel='noreferrer'
-                          className='text-kapwa-text-brand inline-flex items-center gap-1.5 text-sm font-bold hover:underline'
-                        >
-                          {source.name} <ExternalLink className='h-3 w-3' />
-                        </a>
-                      ) : (
-                        <span className='text-kapwa-text-support text-sm font-bold'>
-                          {source.name}
-                        </span>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </DetailSection>
+          {/* Where every detail above came from, and when it was checked. */}
+          {sources.length > 0 && (
+            <div className='space-y-2'>
+              <SourceNote sources={sources} />
+              {sourcePublished && (
+                <p className='text-kapwa-text-support pl-1 text-[11px]'>
+                  {t('detail.sourcePublished', {
+                    date: formatVerificationDate(
+                      sourcePublished,
+                      i18n.language
+                    ),
+                  })}
+                </p>
+              )}
+            </div>
           )}
         </div>
 
@@ -489,7 +521,8 @@ export default function ServiceDetail() {
                     >
                       <Link to={officePath} className='group block'>
                         <h3 className='group-hover:text-kapwa-text-brand text-kapwa-text-strong leading-tight font-bold transition-colors'>
-                          {toTitleCase(off.name)}
+                          {/* Verbatim: toTitleCase() turns "One-Stop" into "One-stop". */}
+                          {off.name}
                         </h3>
                         <span className='text-kapwa-text-brand mt-2 flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase'>
                           {t('detail.viewProfile')}{' '}
