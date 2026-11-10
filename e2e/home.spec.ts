@@ -130,7 +130,14 @@ test.describe('Home Page', () => {
 
     for (const href of links) {
       await page.goto('/');
-      await page.locator(`a[href*="${href}"]`).first().click();
+      // The first link in the DOM is the desktop navbar's, which small
+      // screens replace with the menu overlay, so take the first one the
+      // viewport actually shows.
+      await page
+        .locator(`a[href*="${href}"]`)
+        .filter({ visible: true })
+        .first()
+        .click();
       await page.waitForURL(new RegExp(href.replace('/', '\\/')));
       expect(page.url()).toMatch(new RegExp(href.replace('/', '\\/')));
     }
