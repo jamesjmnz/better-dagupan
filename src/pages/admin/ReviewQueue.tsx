@@ -684,7 +684,9 @@ export default function ReviewQueue() {
                       variant='outline'
                       size='sm'
                       leftIcon={<Edit3 className='h-4 w-4' />}
-                      onClick={() => openEditModal(item.document.id)}
+                      onClick={() =>
+                        item.document && openEditModal(item.document.id)
+                      }
                     >
                       Edit Document
                     </Button>

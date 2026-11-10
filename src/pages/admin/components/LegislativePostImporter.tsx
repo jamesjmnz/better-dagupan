@@ -255,7 +255,7 @@ export default function LegislativePostImporter({
         number: item.number,
         title: item.title,
         authors: item.authors
-          .map(name => {
+          .map((name): Person | null => {
             const matched = data.matched_persons[name];
             if (matched) {
               return {
