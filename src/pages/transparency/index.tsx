@@ -27,8 +27,7 @@ export default function TransparencyIndex() {
   const sections = [
     {
       title: 'Public Funds',
-      description:
-        `Independent visualization of ${lguLabels.adjective.toLowerCase()} income and where your taxes are being allocated.`,
+      description: `Independent visualization of ${lguLabels.adjective.toLowerCase()} income and where your taxes are being allocated.`,
       icon: Landmark,
       href: '/transparency/financial',
       color: 'blue',
@@ -45,8 +44,7 @@ export default function TransparencyIndex() {
     },
     {
       title: 'Procurement',
-      description:
-        `Audit of ${lguLabels.adjective.toLowerCase()} bidding and awarded contracts to ensure fair and open competition.`,
+      description: `Audit of ${lguLabels.adjective.toLowerCase()} bidding and awarded contracts to ensure fair and open competition.`,
       icon: ShoppingBag,
       href: '/transparency/procurement',
       color: 'blue',

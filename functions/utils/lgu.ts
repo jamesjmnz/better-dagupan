@@ -11,4 +11,7 @@ export const councilName =
   COUNCIL_BY_TYPE[lguConfig.lgu.type] ?? COUNCIL_BY_TYPE.municipality;
 
 /** The LGU's official website, without a trailing slash. */
-export const officialWebsite = lguConfig.lgu.officialWebsite.replace(/\/+$/, '');
+export const officialWebsite = lguConfig.lgu.officialWebsite.replace(
+  /\/+$/,
+  ''
+);
