@@ -32,7 +32,7 @@ export const NotVerified: FC<{
         <p className='text-kapwa-text-support text-xs font-semibold'>
           {label ?? t('civic.notVerified')}
         </p>
-        <p className='text-kapwa-text-disabled mt-0.5 text-[11px] leading-relaxed'>
+        <p className='text-kapwa-text-support mt-0.5 text-[11px] leading-relaxed'>
           {detail ?? t('civic.notVerifiedHint')}
         </p>
       </div>

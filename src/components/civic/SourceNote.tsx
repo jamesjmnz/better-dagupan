@@ -67,7 +67,7 @@ export const SourceNote: FC<{
               href={source.url}
               target='_blank'
               rel='noreferrer'
-              className='text-kapwa-text-link hover:text-kapwa-text-link-hover inline-flex items-center gap-1 underline underline-offset-2'
+              className='text-kapwa-text-brand hover:text-kapwa-text-brand-bold inline-flex items-center gap-1 underline underline-offset-2'
             >
               {source.title}
               <ExternalLink aria-hidden='true' className='h-3 w-3' />
@@ -76,7 +76,7 @@ export const SourceNote: FC<{
               Each citation states when it was last checked. Without this a
               reader cannot tell which of several sources is the stale one.
             */}
-            <span className='text-kapwa-text-disabled block text-[11px]'>
+            <span className='text-kapwa-text-support block text-[11px]'>
               {t('civic.lastVerified', {
                 date: formatVerificationDate(source.verified, i18n.language),
               })}
@@ -90,7 +90,7 @@ export const SourceNote: FC<{
         to reconcile; with a single source the line above already says it.
       */}
       {recordVerified && resolved.length > 1 && (
-        <p className='text-kapwa-text-disabled mt-2 text-[11px]'>
+        <p className='text-kapwa-text-support mt-2 text-[11px]'>
           {t('civic.recordVerified', {
             date: formatVerificationDate(recordVerified, i18n.language),
           })}

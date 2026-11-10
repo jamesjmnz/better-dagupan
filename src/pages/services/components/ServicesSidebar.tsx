@@ -65,7 +65,7 @@ export default function ServicesSidebar({
           </h4>
         </div>
 
-        <p className='text-xs leading-relaxed text-kapwa-text-on-disabled'>
+        <p className='text-xs leading-relaxed text-kapwa-text-support'>
           {t('sidebar.missingBody', { portal: config.portal.name })}
         </p>
 
@@ -73,7 +73,7 @@ export default function ServicesSidebar({
           href={`${config.portal.githubUrl}/issues/new?template=contribution.yml`}
           target='_blank'
           rel='noopener noreferrer'
-          className='bg-kapwa-bg-accent-orange-default hover:bg-kapwa-orange-700 shadow-md text-kapwa-text-inverse flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all'
+          className='bg-kapwa-bg-warning-active hover:bg-kapwa-orange-900 shadow-md text-kapwa-text-inverse flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all'
         >
           {t('sidebar.suggest')}
         </a>

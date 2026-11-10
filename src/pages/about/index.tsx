@@ -116,7 +116,7 @@ const AboutPage: FC = () => {
                         <h3 className='text-kapwa-text-strong mb-2 text-base font-semibold'>
                           {tp(`shared.provide.${item.key}.title`)}
                         </h3>
-                        <p className='text-kapwa-text-on-disabled text-sm'>
+                        <p className='text-kapwa-text-support text-sm'>
                           {tp(`shared.provide.${item.key}.desc`)}
                         </p>
                       </CardContent>
@@ -228,7 +228,7 @@ const AboutPage: FC = () => {
               <div className='flex flex-col justify-center gap-4 sm:flex-row'>
                 <Link to='/contact'>
                   <Button
-                    className='bg-kapwa-bg-accent-yellow-default hover:bg-kapwa-accent-yellow-hover text-kapwa-text-brand hover:opacity-90'
+                    className='bg-kapwa-bg-accent-yellow-default hover:bg-kapwa-accent-yellow-hover text-kapwa-text-strong hover:opacity-90'
                     size='lg'
                     leftIcon={<MessageCircleIcon className='h-5 w-5' />}
                   >
