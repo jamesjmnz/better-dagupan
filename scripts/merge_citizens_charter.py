@@ -63,9 +63,13 @@ def generate_service_slug(service_number: str, service_name: str, existing_slugs
     if base_slug not in existing_slugs:
         return base_slug
 
-    # Add service number prefix for uniqueness
-    section = service_number.split('.')[0]
-    slug_with_number = f"{section}-{service_number.replace('.', '-')}-{base_slug}"
+    # Add service number prefix for uniqueness. Dagupan's charter numbers no
+    # services, so without one the counter below disambiguates instead.
+    if service_number:
+        section = service_number.split('.')[0]
+        slug_with_number = f"{section}-{service_number.replace('.', '-')}-{base_slug}"
+    else:
+        slug_with_number = base_slug
 
     # If still duplicate, append incrementing number
     if slug_with_number not in existing_slugs:
@@ -85,7 +89,11 @@ def map_office_division_to_category(office_division: str, mapping_data: dict) ->
     Returns:
         {"name": str, "slug": str}
     """
-    for mapping in mapping_data.get("mappings", []):
+    mappings = mapping_data.get("mappings", [])
+    # An empty mapping was historically written as {}; treat it as no entries.
+    if isinstance(mappings, dict):
+        mappings = []
+    for mapping in mappings:
         if mapping["officeDivision"] == office_division:
             # Look up category name from slug
             category_slug = mapping["categorySlug"]
@@ -135,7 +143,7 @@ def is_incomplete_service(service: dict) -> bool:
     has_client_steps = "client_steps" in service and len(service.get("client_steps", [])) > 0
 
     # Services 1-8 should have detailed tables
-    service_number = service.get("service_number", "")
+    service_number = service.get("service_number") or ""
     section = int(service_number.split('.')[0]) if service_number.split('.')[0].isdigit() else 99
 
     if section <= 8 and not (has_requirements or has_client_steps):
@@ -144,18 +152,21 @@ def is_incomplete_service(service: dict) -> bool:
     return False
 
 
-def map_office_division_to_slug(office_division: str) -> str:
+def map_office_division_to_slug(office_division: str) -> list[str]:
     """Map Citizens Charter office division name to officeSlug
 
     Uses the naming convention from departments.json
     """
     # Map Citizen's Charter office names, exactly as the charter prints them,
-    # to slugs in src/data/directory/departments.json. The inherited entries
-    # named Los Baños offices and slugs, so the mapping starts empty.
-    # TODO: fill in when a verified Dagupan Citizen's Charter is published.
-    # Unmapped offices get an empty officeSlug.
-    office_mapping: dict[str, str] = {}
-    return office_mapping.get(office_division, "")
+    # to slugs in src/data/directory/departments.json.
+    # servicesProvenance.test.ts asserts that every slug produced here exists
+    # there, so a renamed office fails the tests rather than linking nowhere.
+    # Unmapped offices get no officeSlug.
+    office_mapping: dict[str, str] = {
+        "One Stop Business Center (OSBC)": "one-stop-business-center",
+    }
+    slug = office_mapping.get(office_division)
+    return [slug] if slug else []
 
 
 def convert_cc_service_to_service(cc_service: dict, category: dict, slug: str, mapping_data: dict) -> dict:
@@ -218,6 +229,19 @@ def convert_cc_service_to_service(cc_service: dict, category: dict, slug: str, m
 
     if "person_responsible" in cc_service and cc_service["person_responsible"]:
         service["personResponsible"] = cc_service["person_responsible"]
+
+    # Unstated fields are carried through as null rather than dropped, so the
+    # interface can say "not verified" instead of rendering nothing.
+    if "fees" in cc_service and cc_service["fees"] is None:
+        service["fees"] = None
+    if "processing_time" in cc_service and cc_service["processing_time"] is None:
+        service["processingTime"] = None
+
+    if "processing_time_status" in cc_service:
+        service["processingTimeStatus"] = cc_service["processing_time_status"]
+
+    # Civic-source ids: every published record cites where it came from.
+    service["sources"] = list(cc_service.get("sources", []))
 
     return service
 

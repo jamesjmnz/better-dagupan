@@ -1,12 +1,13 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://betterlb.org/schemas/services.schema.json",
+  "$id": "services.schema.json",
   "title": "Government Services",
-  "description": "Schema for Philippine government services data",
+  "description": "Schema for the published services: community entries in src/data/services/services.json and the merged Citizen's Charter and community list in src/data/citizens-charter/merged-services.json. Text is the publisher's wording; null and [] mean not verified yet, never does not exist.",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["service", "slug", "category", "updatedAt"],
+    "required": ["service", "slug", "category", "sources"],
+    "additionalProperties": false,
     "properties": {
       "service": {
         "type": "string",
@@ -35,12 +36,12 @@
       },
       "officeSlug": {
         "type": "array",
-        "description": "Slugs of the departments involved in this service",
-        "items": { "type": "string" }
+        "description": "Slugs, in src/data/directory/departments.json, of the offices involved in this service",
+        "items": { "type": "string", "minLength": 1 }
       },
       "category": {
         "type": "object",
-        "description": "Primary category of the service",
+        "description": "Primary category of the service. A display grouping chosen by this portal, not by the publisher.",
         "required": ["name", "slug"],
         "properties": {
           "name": {
@@ -109,16 +110,138 @@
       },
       "sources": {
         "type": "array",
-        "description": "References or official sources for this service",
+        "description": "Ids of the civic sources in src/data/sources/civic-sources.json that this record is verified against. Every published record cites at least one.",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        }
+      },
+      "source": {
+        "type": "string",
+        "description": "Where the entry comes from: the LGU's Citizen's Charter, or a community contribution.",
+        "enum": ["citizens-charter", "community"]
+      },
+      "serviceNumber": {
+        "type": ["string", "null"],
+        "description": "The charter's own service number, when it prints one."
+      },
+      "officeDivision": {
+        "type": "string",
+        "description": "The responsible office exactly as the charter prints it.",
+        "minLength": 1
+      },
+      "classification": {
+        "type": ["string", "null"],
+        "description": "Classification as printed by the charter, or null when not stated.",
+        "enum": ["Simple", "Complex", "Highly Technical", null]
+      },
+      "typeOfTransaction": {
+        "type": ["string", "null"],
+        "description": "Type of transaction as printed, e.g. \"Government to Business\"."
+      },
+      "whoMayAvail": {
+        "type": ["string", "null"],
+        "description": "Who may avail, as printed."
+      },
+      "dataComplete": { "type": "boolean" },
+      "needsVerification": { "type": "boolean" },
+      "plainLanguageName": { "type": ["string", "null"] },
+      "website": { "type": "string" },
+      "turnaroundTime": { "type": "string" },
+      "detailedRequirements": {
+        "type": "array",
+        "description": "The charter's checklist of requirements, with where to secure each.",
         "items": {
           "type": "object",
-          "required": ["name"],
+          "required": ["requirement", "where_to_secure"],
+          "additionalProperties": false,
           "properties": {
-            "name": { "type": "string", "minLength": 1 },
-            "url": { "type": ["string", "null"] }
-          },
-          "additionalProperties": false
+            "requirement": { "type": "string", "minLength": 1 },
+            "where_to_secure": {
+              "type": ["string", "null"],
+              "description": "As printed; null where the charter leaves the cell blank."
+            },
+            "copies": { "type": "string" },
+            "serviceSlug": { "type": "string" }
+          }
         }
+      },
+      "supportingDocumentsDetail": { "type": "object" },
+      "clientSteps": {
+        "type": "array",
+        "description": "The charter's client steps, each with the office's actions as printed.",
+        "items": {
+          "type": "object",
+          "required": ["step", "action"],
+          "additionalProperties": false,
+          "properties": {
+            "step": { "type": "integer", "minimum": 1 },
+            "action": { "type": "string", "minLength": 1 },
+            "sub_steps": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["letter", "action"],
+                "additionalProperties": false,
+                "properties": {
+                  "letter": { "type": "string", "minLength": 1 },
+                  "action": { "type": "string", "minLength": 1 },
+                  "details": { "type": "array", "items": { "type": "string" } }
+                }
+              }
+            },
+            "agency_actions": {
+              "type": "array",
+              "description": "One per charter row. The person-responsible column is deliberately not part of this schema.",
+              "items": {
+                "type": "object",
+                "required": ["action", "fees", "processing_time"],
+                "additionalProperties": false,
+                "properties": {
+                  "number": { "type": "string", "pattern": "^\\d+\\.\\d+$" },
+                  "action": { "type": "string", "minLength": 1 },
+                  "fees": { "type": ["string", "null"] },
+                  "processing_time": { "type": ["string", "null"] }
+                }
+              }
+            },
+            "url": { "type": "string" },
+            "processing_time": { "type": "string" }
+          }
+        }
+      },
+      "fees": {
+        "type": ["object", "null"],
+        "description": "The amount the charter states for the service, or null when it states none.",
+        "required": ["amount", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "amount": { "type": "string", "minLength": 1 },
+          "description": { "type": "string", "minLength": 1 },
+          "required": { "type": "boolean" }
+        }
+      },
+      "feeSchedule": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "required": ["name", "amount"],
+          "properties": {
+            "name": { "type": "string" },
+            "amount": { "type": "string" }
+          }
+        }
+      },
+      "processingTime": {
+        "type": ["string", "null"],
+        "description": "The charter's total processing time as printed, or null when not stated or withheld."
+      },
+      "processingTimeStatus": {
+        "type": "string",
+        "description": "Why processingTime is null when it is: not stated, or withheld because the charter's own step times do not add up to its total.",
+        "enum": ["stated", "not_stated", "conflicting"]
       }
     }
   }
