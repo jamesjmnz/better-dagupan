@@ -26,6 +26,8 @@ import { config } from '@/lib/lguConfig';
 import { lguLabels } from '@/lib/lguLabels';
 import { INDICES, PhilgepsDoc, client } from '@/lib/meilisearch';
 
+import CityNotices from './CityNotices';
+
 // Helper Interface for Aggregate Data (matching BetterGov structure)
 interface AggregateStats {
   organization_name: string;
@@ -454,6 +456,8 @@ export default function ProcurementPage() {
           />
         </div>
       )}
+
+      <CityNotices />
 
       {/* --- EXTERNAL LINKS FOOTER --- */}
       <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>

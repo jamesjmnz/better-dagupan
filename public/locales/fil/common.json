@@ -200,5 +200,23 @@
     "emailSubjectPage": "Pagwawasto ng impormasyon: {{page}}",
     "sourceNoteLink": "Mag-ulat ng mali",
     "sourceNoteLinkLabel": "Mag-ulat ng mali sa impormasyong ito"
+  },
+  "cityNotices": {
+    "title": "Mga abisong inilathala ng Pamahalaang Lungsod",
+    "description": "Mga paanyaya sa bidding, award at iba pang abiso sa pagbili na inilalathala ng {{lgu}} sa sarili nitong website.",
+    "typeLabel": "Paraan ng pagbili",
+    "allTypes": "Lahat ng paraan ng pagbili",
+    "searchPlaceholder": "Maghanap ng abiso…",
+    "unavailableTitle": "Hindi ma-load ang mga abiso ng lungsod",
+    "unavailableMessage": "Hindi tumugon ang website ng Pamahalaang Lungsod. Maaari mong tingnan doon mismo ang mga abiso.",
+    "openCityPage": "Buksan ang pahina ng pagbili ng lungsod",
+    "noMatchesTitle": "Walang tugmang abiso",
+    "noMatchesMessage": "Subukan ang ibang paghahanap o paraan ng pagbili.",
+    "opensCityPage": "(bubuksan ang pahina ng lungsod)",
+    "pagination": "Mga pahina ng abiso ng lungsod",
+    "previous": "Nakaraan",
+    "next": "Susunod",
+    "pageOf": "Pahina {{page}} ng {{totalPages}} · {{total}} abiso",
+    "attribution": "Ang mga pamagat at link ay mula sa website ng {{lgu}} at ipinapakita gaya ng pagkakalathala."
   }
 }

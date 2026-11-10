@@ -39,6 +39,13 @@ export interface LGUConfig {
     procurement: {
       /** Exact PhilGEPS entity names, current name first. */
       organizationNames: string[];
+      /** The LGU's own posted bid and award notices (WordPress REST API). */
+      cityNotices?: {
+        api: string;
+        postType: string;
+        typeTaxonomy: string;
+        pageUrl: string;
+      };
       externalDashboard: string;
     };
     infrastructure: {
