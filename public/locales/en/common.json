@@ -177,5 +177,26 @@
       "message": "Ordinances and resolutions of the {{body}} have not been added to this portal yet. Check the official website of the {{lgu}} in the meantime.",
       "action": "Visit the official website"
     }
+  },
+  "reportError": {
+    "seoTitle": "Report an error",
+    "seoDescription": "Tell the {{portal}} volunteers about information on the portal that is wrong or out of date.",
+    "title": "Report an error",
+    "intro": "Found something on {{portal}} that is wrong or out of date? Let us know, and a volunteer will check it against the official source.",
+    "howTitle": "How corrections work",
+    "ruleSource": "We publish a fact only when a primary government source states it, such as the City Government of {{lgu}}, the Philippine Statistics Authority, or another national agency.",
+    "ruleLink": "Include a link to where the correct information is officially published. Without a source, the page cannot be changed.",
+    "ruleReview": "A volunteer checks the source before anything on the page changes.",
+    "rulePublic": "Reports are public. Do not include personal information such as your phone number or home address.",
+    "reportingPage": "Page you are reporting",
+    "githubTitle": "Report on GitHub",
+    "githubBody": "Opens a short form on GitHub. You will need a free GitHub account.",
+    "githubAction": "Open the correction form",
+    "githubActionLabel": "Open the correction form on GitHub (opens in a new tab)",
+    "emailTitle": "No GitHub account?",
+    "emailBody": "Email the volunteers at {{email}}. Say which page is wrong, what the correct information is, and where it is officially published.",
+    "emailAction": "Send an email",
+    "emailSubject": "Data correction",
+    "emailSubjectPage": "Data correction: {{page}}"
   }
 }

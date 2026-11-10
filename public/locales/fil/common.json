@@ -177,5 +177,26 @@
       "message": "Hindi pa naidaragdag sa portal na ito ang mga ordinansa at resolusyon ng {{body}}. Pansamantala, tingnan ang opisyal na website ng {{lgu}}.",
       "action": "Bisitahin ang opisyal na website"
     }
+  },
+  "reportError": {
+    "seoTitle": "Mag-ulat ng mali",
+    "seoDescription": "Ipaalam sa mga boluntaryo ng {{portal}} ang impormasyong mali o luma na sa portal.",
+    "title": "Mag-ulat ng mali",
+    "intro": "May nakita ka bang mali o luma nang impormasyon sa {{portal}}? Ipaalam sa amin, at susuriin ito ng isang boluntaryo batay sa opisyal na pinagkunan.",
+    "howTitle": "Paano ginagawa ang pagwawasto",
+    "ruleSource": "Naglalathala lamang kami ng impormasyon kapag nakasaad ito sa isang pangunahing pinagkunan ng pamahalaan, gaya ng Pamahalaang Lungsod ng {{lgu}}, ng Philippine Statistics Authority, o ng iba pang ahensiyang pambansa.",
+    "ruleLink": "Maglagay ng link kung saan opisyal na nakalathala ang tamang impormasyon. Kung walang pinagkunan, hindi mababago ang pahina.",
+    "ruleReview": "Susuriin muna ng isang boluntaryo ang pinagkunan bago baguhin ang anumang nasa pahina.",
+    "rulePublic": "Pampubliko ang mga ulat. Huwag isama ang personal na impormasyon gaya ng iyong numero ng telepono o tirahan.",
+    "reportingPage": "Pahinang iniuulat mo",
+    "githubTitle": "Mag-ulat sa GitHub",
+    "githubBody": "Magbubukas ito ng maikling form sa GitHub. Kailangan mo ng libreng GitHub account.",
+    "githubAction": "Buksan ang form ng pagwawasto",
+    "githubActionLabel": "Buksan ang form ng pagwawasto sa GitHub (magbubukas sa bagong tab)",
+    "emailTitle": "Walang GitHub account?",
+    "emailBody": "Mag-email sa mga boluntaryo sa {{email}}. Sabihin kung aling pahina ang mali, ano ang tamang impormasyon, at saan ito opisyal na nakalathala.",
+    "emailAction": "Magpadala ng email",
+    "emailSubject": "Pagwawasto ng impormasyon",
+    "emailSubjectPage": "Pagwawasto ng impormasyon: {{page}}"
   }
 }
