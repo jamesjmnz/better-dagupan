@@ -1,6 +1,7 @@
 import { ComponentType, FC, useEffect, useState } from 'react';
 
 import * as LucideIcons from 'lucide-react';
+import { Trans, useTranslation } from 'react-i18next';
 import {
   CartesianGrid,
   Legend,
@@ -17,6 +18,7 @@ import { ForexRate } from '../../types';
 import { getCurrencyFlag } from '../../data/currencyFlags';
 
 const ForexPage: FC = () => {
+  const { t } = useTranslation('pages');
   const [forexRates, setForexRates] = useState<ForexRate[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -149,7 +151,7 @@ const ForexPage: FC = () => {
           </div>
         ) : error ? (
           <div className='bg-kapwa-bg-danger-weak text-kapwa-text-danger rounded-sm border-l-4 border-red-500 p-4 shadow-md'>
-            <p className='font-bold'>Error</p>
+            <p className='font-bold'>{t('forex.error')}</p>
             <p>{error}</p>
           </div>
         ) : (
@@ -160,7 +162,7 @@ const ForexPage: FC = () => {
                 {!isSearchOpen ? (
                   <div className='flex items-center justify-between'>
                     <h2 className='text-kapwa-text-support text-xl font-bold'>
-                      Currencies
+                      {t('forex.currencies')}
                     </h2>
                     <button
                       onClick={() => setIsSearchOpen(true)}
@@ -176,7 +178,7 @@ const ForexPage: FC = () => {
                     </div>
                     <input
                       type='text'
-                      placeholder='Search currencies...'
+                      placeholder={t('forex.searchPlaceholder')}
                       value={searchTerm}
                       onChange={e => setSearchTerm(e.target.value)}
                       onBlur={() => {
@@ -226,7 +228,9 @@ const ForexPage: FC = () => {
                           </div>
                         </div>
                         <span className='font-semibold'>
-                          {rate.rate ? `₱${rate.rate.toFixed(2)}` : 'No Data'}
+                          {rate.rate
+                            ? `₱${rate.rate.toFixed(2)}`
+                            : t('forex.noData')}
                         </span>
                       </button>
                     ))}
@@ -235,19 +239,19 @@ const ForexPage: FC = () => {
                   <div className='flex h-full flex-col items-center justify-center pt-8 text-center'>
                     <LucideIcons.SearchX className='text-kapwa-text-disabled mb-4 h-12 w-12' />
                     <h3 className='text-kapwa-text-support mb-2 text-lg font-medium'>
-                      No currencies found
+                      {t('forex.noneFound')}
                     </h3>
                     <p className='text-kapwa-text-disabled mb-4 text-sm'>
                       {searchTerm
-                        ? `No currencies match "${searchTerm}"`
-                        : 'No currencies available'}
+                        ? t('forex.noMatch', { term: searchTerm })
+                        : t('forex.noneAvailable')}
                     </p>
                     {searchTerm && (
                       <button
                         onClick={() => setSearchTerm('')}
                         className='text-kapwa-text-brand hover:text-kapwa-text-brand text-sm font-medium'
                       >
-                        Clear search
+                        {t('forex.clearSearch')}
                       </button>
                     )}
                   </div>
@@ -278,15 +282,15 @@ const ForexPage: FC = () => {
                     </div>
                     <div className='bg-kapwa-bg-hover rounded-lg p-4'>
                       <div className='text-kapwa-text-support mb-1 text-sm'>
-                        Current Rate
+                        {t('forex.currentRate')}
                       </div>
                       <div className='text-kapwa-text-support text-3xl font-bold'>
                         {selectedCurrencyData.rate
                           ? `₱${selectedCurrencyData.rate.toFixed(4)}`
-                          : 'Data Unavailable'}
+                          : t('forex.unavailable')}
                       </div>
                       <div className='text-kapwa-text-support text-xs'>
-                        Philippine Peso
+                        {t('forex.peso')}
                       </div>
                     </div>
                   </div>
@@ -335,7 +339,7 @@ const ForexPage: FC = () => {
                         <Tooltip
                           formatter={(value: number) => [
                             `₱${value.toFixed(4)}`,
-                            'Rate',
+                            t('forex.rate'),
                           ]}
                           labelFormatter={label => {
                             const date = new Date(label);
@@ -351,7 +355,9 @@ const ForexPage: FC = () => {
                         <Line
                           type='monotone'
                           dataKey='rate'
-                          name={`PHP to ${selectedCurrencyData.code} Rate`}
+                          name={t('forex.rateLegend', {
+                            code: selectedCurrencyData.code,
+                          })}
                           stroke='#4f46e5'
                           strokeWidth={2}
                           dot={false}
@@ -365,12 +371,12 @@ const ForexPage: FC = () => {
                 {/* Conversion Calculator */}
                 <div className='bg-kapwa-bg-surface rounded-lg p-6 shadow-md'>
                   <h3 className='text-kapwa-text-support mb-4 text-xl font-bold'>
-                    Currency Converter
+                    {t('forex.converter')}
                   </h3>
                   <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
                     <div>
                       <label className='text-kapwa-text-support mb-2 block text-sm font-medium'>
-                        Philippine Peso (PHP)
+                        {t('forex.pesoCode')}
                       </label>
                       <div className='relative rounded-md shadow-xs'>
                         <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'>
@@ -416,21 +422,21 @@ const ForexPage: FC = () => {
                                   parseFloat(phpAmount) /
                                   selectedCurrencyData.rate
                                 ).toFixed(2)
-                              : 'Data Unavailable'
+                              : t('forex.unavailable')
                           }
                         />
                       </div>
                     </div>
                   </div>
                   <p className='text-kapwa-text-support mt-4 text-sm'>
-                    Exchange rates are provided by Bangko Sentral ng Pilipinas
-                    (BSP). Last updated:{' '}
-                    {new Date().toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
+                    {t('forex.providedBy', {
+                      date: new Date().toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      }),
                     })}
                   </p>
                 </div>
@@ -442,42 +448,37 @@ const ForexPage: FC = () => {
         {/* Forex Information Section */}
         <div className='bg-kapwa-bg-surface mt-12 rounded-lg p-6 shadow-md'>
           <h2 className='text-kapwa-text-support mb-4 text-2xl font-bold'>
-            About Foreign Exchange Rates
+            {t('forex.aboutTitle')}
           </h2>
-          <p className='text-kapwa-text-support mb-4'>
-            The foreign exchange rates displayed on this page are sourced from
-            the Bangko Sentral ng Pilipinas (BSP), the central bank of the
-            Philippines. These rates represent the official reference rates for
-            the Philippine Peso against major world currencies.
-          </p>
+          <p className='text-kapwa-text-support mb-4'>{t('forex.aboutBody')}</p>
           <div className='mt-6 grid grid-cols-1 gap-6 md:grid-cols-2'>
             <div className='border-kapwa-border-brand border-l-4 pl-4'>
               <h3 className='text-kapwa-text-support mb-2 text-lg font-semibold'>
-                Understanding Exchange Rates
+                {t('forex.understandingTitle')}
               </h3>
               <p className='text-kapwa-text-strong'>
-                Exchange rates indicate how much of one currency can be
-                exchanged for another. The rates shown here represent the amount
-                of Philippine Pesos (PHP) needed to purchase one unit of the
-                foreign currency.
+                {t('forex.understandingBody')}
               </p>
             </div>
             <div className='border-kapwa-border-brand border-l-4 pl-4'>
               <h3 className='text-kapwa-text-support mb-2 text-lg font-semibold'>
-                Official BSP Rates
+                {t('forex.officialTitle')}
               </h3>
               <p className='text-kapwa-text-strong'>
-                For official foreign exchange reference rates and more detailed
-                information, please visit the{' '}
-                <a
-                  href='https://www.bsp.gov.ph/SitePages/Statistics/ExchangeRate.aspx'
-                  className='text-kapwa-text-brand hover:underline'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  Bangko Sentral ng Pilipinas website
-                </a>
-                .
+                <Trans
+                  t={t}
+                  i18nKey='forex.officialBody'
+                  components={{
+                    link: (
+                      <a
+                        href='https://www.bsp.gov.ph/SitePages/Statistics/ExchangeRate.aspx'
+                        className='text-kapwa-text-brand hover:underline'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      />
+                    ),
+                  }}
+                />
               </p>
             </div>
           </div>

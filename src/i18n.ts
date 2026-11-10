@@ -32,6 +32,7 @@ i18n
       'transparency',
       'statistics',
       'government',
+      'pages',
     ],
 
     backend: {

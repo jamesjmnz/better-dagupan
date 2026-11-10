@@ -1,9 +1,12 @@
 import { FC, useEffect, useState } from 'react';
 
+import { Trans, useTranslation } from 'react-i18next';
+
 import { fetchWeatherData, weatherIcons } from '../../lib/weather';
 import { WeatherData } from '../../types';
 
 const WeatherPage: FC = () => {
+  const { t } = useTranslation('pages');
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -85,7 +88,7 @@ const WeatherPage: FC = () => {
           </div>
         ) : error ? (
           <div className='bg-kapwa-bg-danger-weak text-kapwa-text-danger rounded-sm border-l-4 border-red-500 p-4 shadow-md'>
-            <p className='font-bold'>Error</p>
+            <p className='font-bold'>{t('weather.error')}</p>
             <p>{error}</p>
           </div>
         ) : (
@@ -93,7 +96,7 @@ const WeatherPage: FC = () => {
             {/* City Selection Panel */}
             <div className='bg-kapwa-bg-surface rounded-lg p-6 shadow-md'>
               <h2 className='text-kapwa-text-support mb-4 text-xl font-bold'>
-                Cities
+                {t('weather.cities')}
               </h2>
               <div className='space-y-2'>
                 {weatherData.map(city => (
@@ -150,21 +153,23 @@ const WeatherPage: FC = () => {
                   <div className='grid grid-cols-2 gap-4 text-center md:grid-cols-4'>
                     <div className='bg-kapwa-bg-surface/20 rounded-lg p-4 backdrop-blur-xs'>
                       <div className='text-kapwa-text-strong/80 mb-1'>
-                        Humidity
+                        {t('weather.humidity')}
                       </div>
                       <div className='text-xl font-semibold'>
                         {selectedCityData.humidity}%
                       </div>
                     </div>
                     <div className='bg-kapwa-bg-surface/20 rounded-lg p-4 backdrop-blur-xs'>
-                      <div className='text-kapwa-text-strong/80 mb-1'>Wind</div>
+                      <div className='text-kapwa-text-strong/80 mb-1'>
+                        {t('weather.wind')}
+                      </div>
                       <div className='text-xl font-semibold'>
                         {Math.round(selectedCityData.windSpeed * 3.6)} km/h
                       </div>
                     </div>
                     <div className='bg-kapwa-bg-surface/20 rounded-lg p-4 backdrop-blur-xs'>
                       <div className='text-kapwa-text-strong/80 mb-1'>
-                        Pressure
+                        {t('weather.pressure')}
                       </div>
                       <div className='text-xl font-semibold'>
                         {selectedCityData.pressure} hPa
@@ -172,7 +177,7 @@ const WeatherPage: FC = () => {
                     </div>
                     <div className='bg-kapwa-bg-surface/20 rounded-lg p-4 backdrop-blur-xs'>
                       <div className='text-kapwa-text-strong/80 mb-1'>
-                        Visibility
+                        {t('weather.visibility')}
                       </div>
                       <div className='text-xl font-semibold'>
                         {selectedCityData.visibility} km
@@ -184,7 +189,7 @@ const WeatherPage: FC = () => {
                 {/* Weather Forecast */}
                 <div className='bg-kapwa-bg-surface mt-8 hidden rounded-lg p-6 shadow-md'>
                   <h3 className='text-kapwa-text-support mb-4 text-xl font-bold'>
-                    5-Day Forecast
+                    {t('weather.forecast')}
                   </h3>
                   <div className='grid grid-cols-1 gap-4 sm:grid-cols-5'>
                     {[...Array(5)].map((_, index) => {
@@ -235,56 +240,57 @@ const WeatherPage: FC = () => {
         {/* Weather Information Section */}
         <div className='bg-kapwa-bg-surface mt-12 rounded-lg p-6 shadow-md'>
           <h2 className='text-kapwa-text-support mb-4 text-2xl font-bold'>
-            About Weather Data
+            {t('weather.aboutTitle')}
           </h2>
           <p className='text-kapwa-text-support mb-4'>
-            The weather data displayed on this page is sourced from the
-            Philippine Atmospheric, Geophysical and Astronomical Services
-            Administration (PAGASA) and other reliable weather services. The
-            information is updated regularly to provide you with the most
-            accurate and current weather conditions across major Philippine
-            cities.
+            {t('weather.aboutBody')}
           </p>
           <div className='mt-6 grid grid-cols-1 gap-6 md:grid-cols-2'>
             <div className='border-kapwa-border-brand border-l-4 pl-4'>
               <h3 className='text-kapwa-text-support mb-2 text-lg font-semibold'>
-                Understanding the Data
+                {t('weather.understandingTitle')}
               </h3>
               <p className='text-kapwa-text-strong'>
-                Temperature is displayed in Celsius (°C). Weather conditions are
-                categorized based on current atmospheric observations. The
-                forecast provides a 5-day outlook to help you plan ahead.
+                {t('weather.understandingBody')}
               </p>
             </div>
             <div className='border-kapwa-border-brand border-l-4 pl-4'>
               <h3 className='text-kapwa-text-support mb-2 text-lg font-semibold'>
-                Weather Advisories
+                {t('weather.advisoriesTitle')}
               </h3>
               <p className='text-kapwa-text-strong'>
-                For official weather advisories, warnings, and detailed
-                forecasts, please visit the{' '}
-                <a
-                  href='https://bagong.pagasa.dost.gov.ph/'
-                  className='text-kapwa-text-brand hover:underline'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  PAGASA official website
-                </a>{' '}
-                or follow their social media channels for real-time updates.
+                <Trans
+                  t={t}
+                  i18nKey='weather.advisoriesBody'
+                  components={{
+                    link: (
+                      <a
+                        href='https://bagong.pagasa.dost.gov.ph/'
+                        className='text-kapwa-text-brand hover:underline'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                      />
+                    ),
+                  }}
+                />
               </p>
             </div>
           </div>
           <p className='text-kapwa-text-support mt-4 text-right text-sm'>
-            Weather data provided by{' '}
-            <a
-              href='https://openweathermap.org/'
-              className='hover:text-kapwa-text-strong text-kapwa-text-strong underline'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              OpenWeather
-            </a>
+            <Trans
+              t={t}
+              i18nKey='weather.providedBy'
+              components={{
+                link: (
+                  <a
+                    href='https://openweathermap.org/'
+                    className='hover:text-kapwa-text-strong text-kapwa-text-strong underline'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  />
+                ),
+              }}
+            />
           </p>
         </div>
       </div>

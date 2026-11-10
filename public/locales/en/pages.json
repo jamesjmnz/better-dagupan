@@ -1,0 +1,584 @@
+{
+  "shared": {
+    "readyTitle": "Ready to Make a Difference?",
+    "or": "or",
+    "civictechBefore": "BetterGov is a <strong>volunteer-led tech initiative</strong> committed to creating",
+    "civictechAfter": "projects aimed at making government more transparent, efficient, and accessible to citizens.",
+    "provideTitle": "What We Provide",
+    "provide": {
+      "infrastructure": {
+        "title": "Infrastructure & Tools",
+        "desc": "Servers, AI credits, development tools, and more!"
+      },
+      "hackathons": {
+        "title": "Tech Hackathons",
+        "desc": "Regular events to collaborate and build together"
+      },
+      "data": {
+        "title": "Data & APIs",
+        "desc": "Access to government data and API endpoints"
+      },
+      "team": {
+        "title": "Find Your Team",
+        "desc": "Connect with the right people and resource persons"
+      },
+      "mentorship": {
+        "title": "Industry Mentorship",
+        "desc": "Guidance from seasoned tech and startup veterans"
+      },
+      "office": {
+        "title": "Office Space",
+        "desc": "Physical workspace for collaboration and meetings"
+      }
+    },
+    "lookingFor": "WE'RE LOOKING FOR PEOPLE SMARTER THAN US!"
+  },
+  "about": {
+    "seoTitle": "About",
+    "seoDescription": "A volunteer-led tech initiative committed to creating #civictech projects aimed at making government more transparent, efficient, and accessible to citizens.",
+    "goal": "Our goal is to <strong>support, promote, consolidate, and empower</strong> citizen builders!",
+    "provideIntro": "To support citizen builders in building impactful civic tech projects:",
+    "commitmentTitle": "Our Commitment",
+    "doneWaiting": "WE'RE DONE WAITING.",
+    "angry": "We're angry. You're angry. But we can contribute in our own ways — <strong>no matter how little it is</strong>.",
+    "together": "We can do <strong>amazing things</strong> together. <highlight>Grassroots style. Open source. No permission needed.</highlight>",
+    "committed": "We are committed to putting <strong>time, resources, and money</strong> into this initiative. We will keep building <strong>relentlessly</strong> without anyone's permission. Open source, public, <strong>high quality</strong> sites.",
+    "ctaBody": "Join our community of builders, dreamers, and changemakers.",
+    "contacts": "Contacts",
+    "joinUs": "Join Us"
+  },
+  "contact": {
+    "seoTitle": "Contact Us",
+    "seoDescription": "Get in touch with our volunteers, report issues, or join our community.",
+    "title": "Connect with Us",
+    "intro": "We're a passionate community of volunteers, developers, and designers dedicated to improving digital public services in the Philippines. Whether you have a question, a suggestion, or want to join our mission, we'd love to hear from you.",
+    "methods": {
+      "email": {
+        "title": "Email Us",
+        "description": "Send us an email for general inquiries and collaboration opportunities"
+      },
+      "discord": {
+        "title": "Discord Community",
+        "description": "Join our volunteer community for real-time discussions and support",
+        "contact": "Discord"
+      },
+      "volunteer": {
+        "title": "Volunteer With Us",
+        "description": "Help us build better digital services for Filipinos",
+        "contact": "Become a Volunteer"
+      },
+      "issues": {
+        "title": "Report Issues",
+        "description": "Found a bug or have a suggestion? Open an issue on GitHub",
+        "contact": "GitHub Issues"
+      }
+    },
+    "faqTitle": "Frequently Asked Questions",
+    "faqIntro": "Find answers to common questions about BetterGov",
+    "faqs": {
+      "volunteer": {
+        "question": "How can I volunteer for BetterGov?",
+        "answer": "We welcome volunteers with various skills! Check out our Join Us page to see current opportunities and fill out our volunteer form.",
+        "link": "Join Us page"
+      },
+      "affiliation": {
+        "question": "Is BetterGov affiliated with the Philippine government?",
+        "answer": "No, BetterGov is an independent volunteer-led initiative. We work alongside government agencies but are not officially part of the Philippine government."
+      },
+      "bugs": {
+        "question": "How do I report a bug or request a feature?",
+        "answer": "The best way is to open an issue on our GitHub repository. This helps us track and prioritize all requests.",
+        "link": "GitHub repository"
+      },
+      "reuse": {
+        "question": "Can I use BetterGov content for my project?",
+        "answer": "Yes! BetterGov is released under Creative Commons CC0, meaning our content is in the public domain and can be used freely for any purpose."
+      },
+      "data": {
+        "question": "Where does the data on BetterGov come from?",
+        "answer": "Our data is aggregated from various publicly available government sources. We use custom scripts and tools to collect, process, and display this information in a way that is easy for citizens to access and understand."
+      }
+    },
+    "ctaBody": "Join our community of volunteers building better digital services for the Philippines.",
+    "ctaButton": "Become a Volunteer"
+  },
+  "joinUs": {
+    "seoTitle": "Join Us",
+    "seoDescription": "A volunteer-led civic tech initiative building open-source tools to make government more transparent, efficient, and accessible.",
+    "heroTitle": "Join the <highlight>#CivicTech</highlight> Revolution",
+    "heroBody": "Together with industry veterans, we're building <strong>{{portal}}</strong> — making government transparent, efficient, and accessible to every Filipino.",
+    "joinDiscord": "Join Our Discord",
+    "learnMore": "Learn More",
+    "missionTitle": "Our Mission",
+    "missionLead": "We're not just building websites — we're building the future of governance in the Philippines.",
+    "goal": "We've seen a surge of wonderful and impressive tech ideas being launched recently. Our goal is to <strong>support, promote, consolidate, and empower</strong> these builders!",
+    "provideIntro": "Everything you need to build impactful civic tech projects",
+    "doneWaiting": "WE'RE DONE WAITING",
+    "angry": "“WE'RE ANGRY. YOU'RE ANGRY.”",
+    "contribute": "But we can contribute in our own ways — <accent>NO MATTER HOW LITTLE IT IS.</accent>",
+    "amazing": "We can do <highlight>AMAZING THINGS</highlight> together.",
+    "grassroots": "GRASSROOTS STYLE. OPEN SOURCE. NO PERMISSION NEEDED.",
+    "committed": "We are committed to putting <strong>TIME, RESOURCES, AND MONEY</strong> into this initiative.",
+    "relentless": "We will keep building <accent>RELENTLESSLY</accent> without anyone's permission. Open source, public, <strong>HIGH QUALITY</strong> sites.",
+    "ctaBody": "Join our community of builders, dreamers, and changemakers. Together, we'll create the government technology the Philippines deserves.",
+    "joinDiscordCommunity": "Join Our Discord Community",
+    "exploreIdeas": "Explore Project Ideas",
+    "footerLine": "Open source • Community-driven • Built with ❤️ for the Philippines"
+  },
+  "ideas": {
+    "seoTitle": "Project Ideas",
+    "seoDescription": "Explore innovative project ideas to improve government transparency, accountability, and citizen engagement.",
+    "title": "Project Ideas",
+    "intro": "Innovative concepts to enhance government transparency, accountability, and citizen engagement. These ideas aim to bridge the gap between citizens and government through technology and better design.",
+    "stats": {
+      "total": "Total Ideas",
+      "highPriority": "High Priority",
+      "categories": "Categories",
+      "simple": "Simple Projects",
+      "votes": "Total Votes"
+    },
+    "submitIdea": "Submit Idea",
+    "contributePr": "Contribute a Pull Request",
+    "allIdeas": "All Project Ideas",
+    "priority": {
+      "high": "High Priority",
+      "medium": "Medium Priority",
+      "low": "Low Priority"
+    },
+    "complexity": {
+      "simple": "Simple Complexity",
+      "moderate": "Moderate Complexity",
+      "complex": "Complex Complexity"
+    },
+    "items": {
+      "1": {
+        "title": "Blockchain powered community government project reporting app",
+        "description": "A transparent, immutable platform where citizens can report and track government projects in their communities. Uses blockchain technology to ensure data integrity and prevent tampering with project reports and progress updates.",
+        "category": "Transparency & Accountability"
+      },
+      "2": {
+        "title": "Glassdoor for government agencies",
+        "description": "An anonymous review platform where government employees and citizens can rate and review government agencies, departments, and services. Provides insights into workplace culture, service quality, and areas for improvement.",
+        "category": "Public Feedback"
+      },
+      "3": {
+        "title": "Design guidelines for {{portal}}",
+        "description": "Comprehensive design system and guidelines for the {{portal}} platform. Includes UI components, color schemes, typography, accessibility standards, and best practices for government web services.",
+        "category": "Platform Development"
+      },
+      "4": {
+        "title": "Rate the politicians",
+        "description": "A citizen-driven platform to rate and review elected officials based on their performance, campaign promises, voting records, and public service delivery. Includes fact-checking and transparency features.",
+        "category": "Political Accountability"
+      }
+    },
+    "ctaTitle": "Have an Idea?",
+    "ctaBody": "We're always looking for innovative ways to improve government services and citizen engagement. Submit your ideas via GitHub or learn more about our mission.",
+    "submitGithub": "Submit via GitHub",
+    "learnMore": "Learn More About Us"
+  },
+  "contribute": {
+    "breadcrumb": "Contribute",
+    "title": "Contribute to {{portal}}",
+    "description": "Help us keep the service directory accurate and up-to-date.",
+    "howTitle": "How it works",
+    "steps": [
+      "Click the button below to open a contribution form on GitHub. You'll need a free GitHub account.",
+      "Fill in the service name, steps, requirements, and an official source link.",
+      "Our team reviews your submission and adds it to the directory."
+    ],
+    "openForm": "Open Contribution Form",
+    "whyGithub": "<strong>Why GitHub?</strong> Using GitHub ensures all contributions are attributed to real accounts, helps prevent spam, and lets us track the review process transparently.",
+    "whatTitle": "What you can contribute",
+    "whatList": [
+      "New services not yet in the directory",
+      "Corrections to outdated information",
+      "Updated steps or requirements",
+      "New office or department listings"
+    ],
+    "note": "<strong>Note:</strong> All submissions are reviewed manually. Provide an official source link to avoid rejection.",
+    "back": "← Back to Services"
+  },
+  "sitemap": {
+    "seoTitle": "Sitemap",
+    "seoDescription": "Complete sitemap — find all pages and services available on this portal.",
+    "title": "Sitemap",
+    "intro": "A complete guide to all pages and services available on {{portal}}",
+    "notFound": "Can't find what you're looking for? Try using our <link>search feature</link>.",
+    "subdivisions": "Barangays",
+    "subdivisions_province": "Municipalities & Cities",
+    "sections": {
+      "main": "Main Pages",
+      "services": "Services",
+      "government": "Government",
+      "statistics": "Statistics",
+      "transparency": "Transparency",
+      "legislation": "Legislation",
+      "community": "Data and Community"
+    },
+    "links": {
+      "home": { "title": "Home", "description": "Main landing page" },
+      "about": { "title": "About", "description": "About {{portal}}" },
+      "search": { "title": "Search", "description": "Search the portal" },
+      "contact": {
+        "title": "Contact",
+        "description": "Ways to reach the project volunteers"
+      },
+      "accessibility": {
+        "title": "Accessibility",
+        "description": "Accessibility statement and features"
+      },
+      "terms": {
+        "title": "Terms of Service",
+        "description": "Terms for using this portal"
+      },
+      "services": {
+        "title": "Public Services",
+        "description": "Services offered by the {{fullName}}"
+      },
+      "officials": {
+        "title": "Elected Officials",
+        "description": "The {{head}}, Vice {{head}} and {{body}}"
+      },
+      "committees": {
+        "title": "Committees",
+        "description": "Standing committees of the {{body}}"
+      },
+      "departments": {
+        "title": "Departments",
+        "description": "Offices of the {{fullName}}"
+      },
+      "barangays": { "description": "The barangays of {{lgu}}" },
+      "statsOverview": {
+        "title": "Overview",
+        "description": "Key figures about {{lgu}}"
+      },
+      "population": {
+        "title": "Population",
+        "description": "Census population figures"
+      },
+      "income": {
+        "title": "Income",
+        "description": "{{adjective}} income figures"
+      },
+      "competitiveness": {
+        "title": "Competitiveness",
+        "description": "Cities and Municipalities Competitiveness Index"
+      },
+      "transparencyOverview": {
+        "title": "Overview",
+        "description": "Public funds, works and procurement"
+      },
+      "funds": {
+        "title": "Public Funds",
+        "description": "Income and expenditure"
+      },
+      "procurement": {
+        "title": "Procurement",
+        "description": "Bids and awarded contracts"
+      },
+      "infrastructure": {
+        "title": "Infrastructure Projects",
+        "description": "DPWH projects in the city"
+      },
+      "legislation": {
+        "title": "Ordinances and Resolutions",
+        "description": "Legislative records of the {{body}}"
+      },
+      "openlguTerms": {
+        "title": "Terms",
+        "description": "Terms of the {{body}}"
+      },
+      "weather": {
+        "title": "Weather",
+        "description": "Current weather in {{lgu}}"
+      },
+      "forex": {
+        "title": "Exchange Rates",
+        "description": "Foreign exchange rates"
+      },
+      "reportError": {
+        "title": "Report an Error",
+        "description": "Tell us about information that is wrong or out of date"
+      },
+      "contribute": {
+        "title": "Contribute",
+        "description": "Help improve the data on this portal"
+      },
+      "joinUs": {
+        "title": "Join Us",
+        "description": "Volunteer with the project"
+      },
+      "ideas": { "title": "Ideas", "description": "Suggest improvements" }
+    }
+  },
+  "search": {
+    "documentTitle": "Search - Better Government Portal",
+    "metaDescription": "Search for government services and resources",
+    "title": "Search",
+    "placeholder": "Search for government services, offices, and resources...",
+    "activeFilters": "Active filters:",
+    "typeBadge": "Type: {{type}}",
+    "removeType": "Remove type filter",
+    "categoryBadge": "Category: {{category}}",
+    "removeCategory": "Remove category filter",
+    "clearAll": "Clear all",
+    "filterBy": "Filter By",
+    "type": "Type",
+    "category": "Category",
+    "all": "All",
+    "transaction": "Transaction",
+    "information": "Information",
+    "noResults": "No results found",
+    "noMatches": "We couldn't find matches for \"{{query}}\"",
+    "adjustFilters": "Try adjusting your filters",
+    "clearFilters": "Clear all filters",
+    "resultsFound_one": "{{count}} result found",
+    "resultsFound_other": "{{count}} results found"
+  },
+  "weather": {
+    "error": "Error",
+    "cities": "Cities",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "pressure": "Pressure",
+    "visibility": "Visibility",
+    "forecast": "5-Day Forecast",
+    "aboutTitle": "About Weather Data",
+    "aboutBody": "The weather data displayed on this page is sourced from the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) and other reliable weather services. The information is updated regularly to provide you with the most accurate and current weather conditions across major Philippine cities.",
+    "understandingTitle": "Understanding the Data",
+    "understandingBody": "Temperature is displayed in Celsius (°C). Weather conditions are categorized based on current atmospheric observations. The forecast provides a 5-day outlook to help you plan ahead.",
+    "advisoriesTitle": "Weather Advisories",
+    "advisoriesBody": "For official weather advisories, warnings, and detailed forecasts, please visit the <link>PAGASA official website</link> or follow their social media channels for real-time updates.",
+    "providedBy": "Weather data provided by <link>OpenWeather</link>"
+  },
+  "forex": {
+    "error": "Error",
+    "currencies": "Currencies",
+    "searchPlaceholder": "Search currencies...",
+    "noData": "No Data",
+    "noneFound": "No currencies found",
+    "noMatch": "No currencies match \"{{term}}\"",
+    "noneAvailable": "No currencies available",
+    "clearSearch": "Clear search",
+    "currentRate": "Current Rate",
+    "unavailable": "Data Unavailable",
+    "peso": "Philippine Peso",
+    "rate": "Rate",
+    "rateLegend": "PHP to {{code}} Rate",
+    "converter": "Currency Converter",
+    "pesoCode": "Philippine Peso (PHP)",
+    "providedBy": "Exchange rates are provided by Bangko Sentral ng Pilipinas (BSP). Last updated: {{date}}",
+    "aboutTitle": "About Foreign Exchange Rates",
+    "aboutBody": "The foreign exchange rates displayed on this page are sourced from the Bangko Sentral ng Pilipinas (BSP), the central bank of the Philippines. These rates represent the official reference rates for the Philippine Peso against major world currencies.",
+    "understandingTitle": "Understanding Exchange Rates",
+    "understandingBody": "Exchange rates indicate how much of one currency can be exchanged for another. The rates shown here represent the amount of Philippine Pesos (PHP) needed to purchase one unit of the foreign currency.",
+    "officialTitle": "Official BSP Rates",
+    "officialBody": "For official foreign exchange reference rates and more detailed information, please visit the <link>Bangko Sentral ng Pilipinas website</link>."
+  },
+  "accessibility": {
+    "seoTitle": "Accessibility Statement",
+    "seoDescription": "Our commitment to web accessibility, current progress toward WCAG, features we support today, and how to request help.",
+    "title": "Accessibility Statement",
+    "description": "{{portal}} is committed to making {{adjectiveLower}} information usable for people with disabilities. We improve the experience continuously and do not claim full certification.",
+    "commitmentTitle": "Our Commitment",
+    "commitment": [
+      "Everyone should be able to reach local government information and services. We design for assistive technologies such as screen readers and keyboard navigation, and we treat accessibility bugs as first-class defects.",
+      "This portal is volunteer-run. Features and audits improve over time; if something blocks you, tell us and we will prioritize a fix or provide an alternative."
+    ],
+    "worksTitle": "What Works Today",
+    "features": {
+      "visual": {
+        "title": "Visual Accessibility",
+        "items": [
+          "Kapwa design tokens for text and surface contrast",
+          "Text that scales with browser zoom",
+          "Alt text on meaningful images where present",
+          "Clear page headings and section structure",
+          "Works with common screen readers (ongoing testing)"
+        ]
+      },
+      "keyboard": {
+        "title": "Keyboard Navigation",
+        "items": [
+          "Core navigation and links are keyboard reachable",
+          "Visible focus styles on interactive controls",
+          "Skip link to jump past the header into main content",
+          "Logical reading and tab order on primary pages",
+          "Escape closes search overlays and menus where implemented"
+        ]
+      },
+      "audio": {
+        "title": "Audio & Screen Reader Support",
+        "items": [
+          "Semantic landmarks (header, main, footer)",
+          "Heading hierarchy on key pages",
+          "Descriptive link text in most navigation",
+          "Labeled form fields and search inputs",
+          "Status updates for hero search results"
+        ]
+      },
+      "motor": {
+        "title": "Motor Accessibility",
+        "items": [
+          "Comfortable hit targets on primary buttons and nav items",
+          "Pointer and keyboard alternatives for common actions",
+          "No essential drag-and-drop on public pages",
+          "Clear error states on forms we ship",
+          "Multiple paths to services (search, categories, directory)"
+        ]
+      },
+      "mobile": {
+        "title": "Mobile Accessibility",
+        "items": [
+          "Responsive layout across phone, tablet, and desktop",
+          "Touch-friendly spacing on primary controls",
+          "Browser zoom supported",
+          "Works in portrait and landscape",
+          "Standard mobile browser input methods"
+        ]
+      },
+      "language": {
+        "title": "Language & Cognitive Support",
+        "items": [
+          "Plain-language service names where available",
+          "Consistent navigation patterns",
+          "English and Filipino interface strings",
+          "Content grouped with clear headings",
+          "Contact path for questions and feedback"
+        ]
+      }
+    },
+    "standardsTitle": "Standards Progress",
+    "standards": {
+      "wcag": "We aim for WCAG 2.1 Level AA. This site is not yet fully audited or certified; we fix gaps as we find them.",
+      "section508": "We follow Section 508 principles where they apply to a civic volunteer portal. Full conformance is not claimed.",
+      "en301549": "We have not evaluated against EN 301 549. European standards are a longer-term reference, not a current claim."
+    },
+    "keyboardTitle": "Keyboard Basics",
+    "keys": {
+      "skip": "Skip to main content",
+      "skipKey": "Tab (first focus)",
+      "move": "Move between controls",
+      "activate": "Activate link or button",
+      "activateKey": "Enter / Space",
+      "close": "Close overlay or menu",
+      "closeKey": "Escape",
+      "noShortcut": "There is no global Ctrl+K shortcut yet. Use the hero or site search fields, or open Search from the navigation."
+    },
+    "feedbackTitle": "Feedback and Support",
+    "feedbackBody": "If you hit an accessibility barrier on {{portal}}, email us. Include the page URL, what you tried, and the assistive technology you use if you can.",
+    "emailTitle": "Email",
+    "emailBody": "Accessibility feedback and accommodation requests.",
+    "lastUpdated": "This accessibility statement was last updated on <time>July 27, 2026</time>.",
+    "revise": "We revise it when supported features or known gaps change."
+  },
+  "terms": {
+    "seoTitle": "Terms of Service",
+    "seoDescription": "Public domain content, volunteer operation, and user responsibilities for accessing government information.",
+    "title": "Terms of Service",
+    "lastUpdated": "Last Updated: {{date}}",
+    "acceptanceTitle": "Acceptance of Terms",
+    "acceptance": "By accessing and using this website, you accept and agree to be bound by the terms and provisions of this agreement.",
+    "publicDomainTitle": "Public Domain Content and Volunteer Operation",
+    "publicDomain": [
+      "This website and all its content are in the public domain and operated entirely by volunteers. All information, data, documents, and materials provided on this website are in the public domain unless otherwise noted. Public domain content may be freely used, copied, distributed, and modified without permission or attribution, though attribution is appreciated.",
+      "As a volunteer-operated resource, we encourage users to conduct their own independent research and verification of information."
+    ],
+    "asIsTitle": "\"AS IS\" Disclaimer",
+    "asIsLead": "ALL INFORMATION ON THIS WEBSITE IS PROVIDED \"AS IS\" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO:",
+    "asIsList": [
+      "Warranties of merchantability",
+      "Fitness for a particular purpose",
+      "Non-infringement of intellectual property rights",
+      "Accuracy, completeness, or reliability of information",
+      "Freedom from errors, viruses, or other harmful components"
+    ],
+    "liabilityTitle": "Limitation of Liability",
+    "liabilityLead": "Under no circumstances shall the website operators, contributors, or affiliated parties be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising from:",
+    "liabilityList": [
+      "Your use of this website",
+      "Any errors or omissions in the content",
+      "Any interruption or cessation of transmission to or from the website",
+      "Any bugs, viruses, or other harmful components",
+      "Loss of data or information"
+    ],
+    "liabilityScope": "This limitation applies regardless of whether such damages arise from contract, tort, negligence, strict liability, or any other legal theory or otherwise.",
+    "responsibilitiesTitle": "User Responsibilities and Research Guidelines",
+    "responsibilitiesLead": "Users are solely responsible for:",
+    "responsibilitiesList": [
+      "<strong>Independent Verification:</strong> Conducting their own research and verification of all information obtained from this website",
+      "<strong>Following Source Links:</strong> Reviewing and visiting the original source links and references provided on our pages for complete and authoritative information",
+      "<strong>Cross-Referencing:</strong> Comparing information with multiple reliable sources before making decisions",
+      "Determining the suitability of information for their intended use",
+      "Compliance with all applicable laws and regulations",
+      "Any consequences resulting from their use of the website content"
+    ],
+    "encourageLead": "We strongly encourage users to:",
+    "encourageList": [
+      "Use the source links and references provided on each page to access primary documents and official sources",
+      "Conduct independent research beyond the information presented here",
+      "Consult official government websites and agencies for the most current information",
+      "Verify dates, figures, and details through multiple reputable sources"
+    ],
+    "adviceTitle": "No Professional Advice",
+    "advice": "Information on this website is not intended as professional advice (legal, medical, financial, or otherwise). Users should consult qualified professionals for specific advice related to their situations.",
+    "sourcesTitle": "Source Links and External References",
+    "sourcesLead": "This website provides links to official sources, government documents, and other authoritative materials. Users are strongly encouraged to:",
+    "sourcesList": [
+      "Click through and review all source links provided",
+      "Access primary documents and official publications referenced",
+      "Verify information through the original sources",
+      "Check for updates or amendments to referenced materials"
+    ],
+    "sourcesNote": "We make no guarantee as to the continued availability of external links, and users should always verify information through official channels.",
+    "availabilityTitle": "Website Availability",
+    "availabilityLead": "We make no guarantee that this website will be:",
+    "availabilityList": [
+      "Available at all times",
+      "Error-free or uninterrupted",
+      "Free from technical problems",
+      "Compatible with your equipment"
+    ],
+    "indemnificationTitle": "Indemnification",
+    "indemnification": "Users agree to indemnify and hold harmless the website operators from any claims, damages, losses, or expenses arising from their use of the website.",
+    "modificationsTitle": "Modifications",
+    "modifications": "These terms may be modified at any time without notice. Continued use of the website constitutes acceptance of any modifications.",
+    "lawTitle": "Governing Law",
+    "law": "These terms are governed by the laws of the Republic of the Philippines without regard to conflict of law principles.",
+    "severabilityTitle": "Severability",
+    "severability": "If any provision of these terms is found to be unenforceable, the remaining provisions will continue in full force and effect.",
+    "concernsTitle": "Content Concerns and Takedown Requests",
+    "concernsLead": "While we strive to provide accurate public domain information, we recognize that errors, outdated information, or other concerns may arise.",
+    "reportingTitle": "Reporting Concerning Content:",
+    "reportingLead": "If you believe content on this website is:",
+    "reportingList": [
+      "Factually incorrect or misleading",
+      "Potentially harmful or dangerous",
+      "Violates applicable laws",
+      "Contains personal information that should not be public",
+      "Infringes on legitimate rights"
+    ],
+    "contactUs": "Please contact us at:",
+    "includeLead": "Please include:",
+    "includeList": [
+      "Specific URL or page location",
+      "Clear description of the concern",
+      "Supporting documentation or evidence where applicable",
+      "Your contact information for follow-up"
+    ],
+    "responseTitle": "Our Response Process:",
+    "responseList": [
+      "We will review all legitimate concerns in good faith",
+      "Response time may vary due to our volunteer nature",
+      "We may remove, modify, or add disclaimers to content as appropriate",
+      "We reserve the right to make editorial decisions about content",
+      "We are not obligated to remove content but will consider all reasonable requests"
+    ],
+    "frivolous": "<strong>False or Frivolous Complaints:</strong> Submitting knowingly false takedown requests or complaints may result in being blocked from contacting our volunteers.",
+    "contactTitle": "Contact Information",
+    "contactLead": "For questions about these terms or content concerns, contact:",
+    "educational": "This website provides public domain information for educational and informational purposes only.",
+    "effective": "Effective as of September 23, 2025"
+  }
+}

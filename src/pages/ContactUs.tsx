@@ -13,43 +13,43 @@ import {
   MessageCircleIcon,
   UsersIcon,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { config } from '@/lib/lguConfig';
 import { SEO } from '@/components/layout/SEO';
 
 const ContactUs: FC = () => {
+  const { t } = useTranslation('pages');
   const contactMethods = [
     {
       icon: <MailIcon className='h-8 w-8' />,
-      title: 'Email Us',
-      description:
-        'Send us an email for general inquiries and collaboration opportunities',
+      title: t('contact.methods.email.title'),
+      description: t('contact.methods.email.description'),
       contact: config.portal.contactEmail,
       action: `mailto:${config.portal.contactEmail}`,
       color: 'bg-kapwa-bg-brand-weak text-kapwa-text-brand',
     },
     {
       icon: <MessageCircleIcon className='h-8 w-8' />,
-      title: 'Discord Community',
-      description:
-        'Join our volunteer community for real-time discussions and support',
-      contact: 'Discord',
+      title: t('contact.methods.discord.title'),
+      description: t('contact.methods.discord.description'),
+      contact: t('contact.methods.discord.contact'),
       action: config.portal.discordUrl,
       color: 'bg-kapwa-bg-brand-weak text-kapwa-text-brand',
     },
     {
       icon: <UsersIcon className='h-8 w-8' />,
-      title: 'Volunteer With Us',
-      description: 'Help us build better digital services for Filipinos',
-      contact: 'Become a Volunteer',
+      title: t('contact.methods.volunteer.title'),
+      description: t('contact.methods.volunteer.description'),
+      contact: t('contact.methods.volunteer.contact'),
       action: '/join-us',
       color: 'bg-kapwa-bg-brand-weak text-kapwa-text-brand',
     },
     {
       icon: <GlobeIcon className='h-8 w-8' />,
-      title: 'Report Issues',
-      description: 'Found a bug or have a suggestion? Open an issue on GitHub',
-      contact: 'GitHub Issues',
+      title: t('contact.methods.issues.title'),
+      description: t('contact.methods.issues.description'),
+      contact: t('contact.methods.issues.contact'),
       action: `${config.portal.githubUrl}/issues`,
       color: 'bg-kapwa-bg-brand-weak text-kapwa-text-brand',
     },
@@ -57,34 +57,29 @@ const ContactUs: FC = () => {
 
   const faqs = [
     {
-      question: 'How can I volunteer for BetterGov?',
-      answer:
-        'We welcome volunteers with various skills! Check out our Join Us page to see current opportunities and fill out our volunteer form.',
-      link: { text: 'Join Us page', href: '/join-us' },
+      question: t('contact.faqs.volunteer.question'),
+      answer: t('contact.faqs.volunteer.answer'),
+      link: { text: t('contact.faqs.volunteer.link'), href: '/join-us' },
     },
     {
-      question: 'Is BetterGov affiliated with the Philippine government?',
-      answer:
-        'No, BetterGov is an independent volunteer-led initiative. We work alongside government agencies but are not officially part of the Philippine government.',
+      question: t('contact.faqs.affiliation.question'),
+      answer: t('contact.faqs.affiliation.answer'),
     },
     {
-      question: 'How do I report a bug or request a feature?',
-      answer:
-        'The best way is to open an issue on our GitHub repository. This helps us track and prioritize all requests.',
+      question: t('contact.faqs.bugs.question'),
+      answer: t('contact.faqs.bugs.answer'),
       link: {
-        text: 'GitHub repository',
+        text: t('contact.faqs.bugs.link'),
         href: `${config.portal.githubUrl}/issues`,
       },
     },
     {
-      question: 'Can I use BetterGov content for my project?',
-      answer:
-        'Yes! BetterGov is released under Creative Commons CC0, meaning our content is in the public domain and can be used freely for any purpose.',
+      question: t('contact.faqs.reuse.question'),
+      answer: t('contact.faqs.reuse.answer'),
     },
     {
-      question: 'Where does the data on BetterGov come from?',
-      answer:
-        'Our data is aggregated from various publicly available government sources. We use custom scripts and tools to collect, process, and display this information in a way that is easy for citizens to access and understand.',
+      question: t('contact.faqs.data.question'),
+      answer: t('contact.faqs.data.answer'),
     },
   ];
 
@@ -93,8 +88,8 @@ const ContactUs: FC = () => {
   return (
     <div className='bg-kapwa-bg-surface-raised min-h-screen'>
       <SEO
-        title='Contact Us'
-        description='Get in touch with our volunteers, report issues, or join our community.'
+        title={t('contact.seoTitle')}
+        description={t('contact.seoDescription')}
         keywords={['contact', 'volunteer', 'feedback', 'support']}
       />
 
@@ -108,13 +103,10 @@ const ContactUs: FC = () => {
               </div>
             </div>
             <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold'>
-              Connect with Us
+              {t('contact.title')}
             </h1>
             <p className='text-kapwa-text-support mx-auto mb-8 max-w-3xl text-lg md:text-xl'>
-              We&apos;re a passionate community of volunteers, developers, and
-              designers dedicated to improving digital public services in the
-              Philippines. Whether you have a question, a suggestion, or want to
-              join our mission, we&apos;d love to hear from you.
+              {t('contact.intro')}
             </p>
           </div>
         </div>
@@ -162,11 +154,9 @@ const ContactUs: FC = () => {
           <div className='mx-auto max-w-4xl'>
             <div className='mb-8 text-center'>
               <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-                Frequently Asked Questions
+                {t('contact.faqTitle')}
               </h2>
-              <p className='text-kapwa-text-support'>
-                Find answers to common questions about BetterGov
-              </p>
+              <p className='text-kapwa-text-support'>{t('contact.faqIntro')}</p>
             </div>
 
             <div className='space-y-4'>
@@ -223,17 +213,16 @@ const ContactUs: FC = () => {
         {/* Call to Action */}
         <div className='from-kapwa-brand-600 to-kapwa-purple-600 bg-linear-to-r mt-8 rounded-lg p-8 text-center'>
           <h3 className='text-kapwa-text-inverse mb-4 kapwa-heading-md font-bold'>
-            Ready to Make a Difference?
+            {t('shared.readyTitle')}
           </h3>
           <p className='text-kapwa-text-inverse/80 mx-auto mb-6 max-w-2xl'>
-            Join our community of volunteers building better digital services
-            for the Philippines.
+            {t('contact.ctaBody')}
           </p>
           <Link
             to='/join-us'
             className='bg-kapwa-bg-surface text-kapwa-text-info hover:bg-kapwa-bg-surface-raised inline-flex items-center rounded-lg px-6 py-3 font-semibold transition-colors'
           >
-            Become a Volunteer
+            {t('contact.ctaButton')}
             <ArrowRightIcon className='ml-2 h-5 w-5' />
           </Link>
         </div>

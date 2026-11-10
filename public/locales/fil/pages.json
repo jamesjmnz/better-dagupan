@@ -1,0 +1,584 @@
+{
+  "shared": {
+    "readyTitle": "Handa Ka Na Bang Gumawa ng Pagbabago?",
+    "or": "o",
+    "civictechBefore": "Ang BetterGov ay isang <strong>tech na inisyatibang pinamumunuan ng mga boluntaryo</strong> na nakatuon sa paglikha ng mga proyektong",
+    "civictechAfter": "na naglalayong gawing mas bukas, mahusay, at abot-kamay ng mamamayan ang pamahalaan.",
+    "provideTitle": "Ang Aming Ibinibigay",
+    "provide": {
+      "infrastructure": {
+        "title": "Imprastraktura at mga Kagamitan",
+        "desc": "Mga server, AI credit, development tool, at marami pa!"
+      },
+      "hackathons": {
+        "title": "Mga Tech Hackathon",
+        "desc": "Regular na mga kaganapan para magtulungan at bumuo nang sama-sama"
+      },
+      "data": {
+        "title": "Datos at mga API",
+        "desc": "Access sa datos ng pamahalaan at mga API endpoint"
+      },
+      "team": {
+        "title": "Hanapin ang Iyong Koponan",
+        "desc": "Makipag-ugnayan sa mga tamang tao at resource person"
+      },
+      "mentorship": {
+        "title": "Mentorship mula sa Industriya",
+        "desc": "Gabay mula sa mga beteranong eksperto sa tech at startup"
+      },
+      "office": {
+        "title": "Espasyo ng Opisina",
+        "desc": "Pisikal na lugar para sa pagtutulungan at mga pulong"
+      }
+    },
+    "lookingFor": "NAGHAHANAP KAMI NG MGA TAONG MAS MAGALING SA AMIN!"
+  },
+  "about": {
+    "seoTitle": "Tungkol",
+    "seoDescription": "Isang tech na inisyatibang pinamumunuan ng mga boluntaryo na nakatuon sa paglikha ng mga proyektong #civictech na naglalayong gawing mas bukas, mahusay, at abot-kamay ng mamamayan ang pamahalaan.",
+    "goal": "Ang aming layunin ay <strong>suportahan, itaguyod, pagbuklurin, at bigyang-kakayahan</strong> ang mga mamamayang tagabuo!",
+    "provideIntro": "Para suportahan ang mga mamamayang tagabuo sa paggawa ng makabuluhang mga proyektong civic tech:",
+    "commitmentTitle": "Ang Aming Paninindigan",
+    "doneWaiting": "TAPOS NA KAMI SA PAGHIHINTAY.",
+    "angry": "Galit kami. Galit ka. Pero makakapag-ambag tayo sa sarili nating paraan — <strong>gaano man ito kaliit</strong>.",
+    "together": "Makakagawa tayo ng <strong>mga kahanga-hangang bagay</strong> nang sama-sama. <highlight>Mula sa ugat. Open source. Hindi kailangan ng pahintulot.</highlight>",
+    "committed": "Nakatuon kaming maglaan ng <strong>oras, rekurso, at pera</strong> sa inisyatibang ito. Patuloy kaming bubuo nang <strong>walang humpay</strong> nang hindi naghihintay ng pahintulot ninuman. Mga site na open source, pampubliko, at <strong>de-kalidad</strong>.",
+    "ctaBody": "Sumali sa aming komunidad ng mga tagabuo, mapangarapin, at tagapagdala ng pagbabago.",
+    "contacts": "Makipag-ugnayan",
+    "joinUs": "Sumali sa Amin"
+  },
+  "contact": {
+    "seoTitle": "Makipag-ugnayan sa Amin",
+    "seoDescription": "Makipag-ugnayan sa aming mga boluntaryo, mag-ulat ng isyu, o sumali sa aming komunidad.",
+    "title": "Makipag-ugnayan sa Amin",
+    "intro": "Kami ay isang masigasig na komunidad ng mga boluntaryo, developer, at designer na nakatuon sa pagpapabuti ng mga digital na serbisyong pampubliko sa Pilipinas. May tanong ka man, mungkahi, o gustong sumali sa aming misyon, ikagagalak naming marinig mula sa iyo.",
+    "methods": {
+      "email": {
+        "title": "Mag-email sa Amin",
+        "description": "Padalhan kami ng email para sa mga pangkalahatang tanong at pagkakataong makipagtulungan"
+      },
+      "discord": {
+        "title": "Komunidad sa Discord",
+        "description": "Sumali sa aming komunidad ng mga boluntaryo para sa real-time na talakayan at suporta",
+        "contact": "Discord"
+      },
+      "volunteer": {
+        "title": "Magboluntaryo sa Amin",
+        "description": "Tulungan kaming bumuo ng mas mahusay na digital na serbisyo para sa mga Pilipino",
+        "contact": "Maging Boluntaryo"
+      },
+      "issues": {
+        "title": "Mag-ulat ng Isyu",
+        "description": "May nakitang bug o may mungkahi? Magbukas ng issue sa GitHub",
+        "contact": "GitHub Issues"
+      }
+    },
+    "faqTitle": "Mga Madalas Itanong",
+    "faqIntro": "Hanapin ang mga sagot sa mga karaniwang tanong tungkol sa BetterGov",
+    "faqs": {
+      "volunteer": {
+        "question": "Paano ako makakapagboluntaryo sa BetterGov?",
+        "answer": "Tinatanggap namin ang mga boluntaryong may iba't ibang kasanayan! Tingnan ang aming Join Us page para makita ang mga kasalukuyang pagkakataon at sagutan ang aming volunteer form.",
+        "link": "Join Us page"
+      },
+      "affiliation": {
+        "question": "Kaanib ba ng pamahalaan ng Pilipinas ang BetterGov?",
+        "answer": "Hindi. Ang BetterGov ay isang malayang inisyatibang pinamumunuan ng mga boluntaryo. Nakikipagtulungan kami sa mga ahensya ng pamahalaan pero hindi kami opisyal na bahagi ng pamahalaan ng Pilipinas."
+      },
+      "bugs": {
+        "question": "Paano ako mag-uulat ng bug o hihiling ng bagong feature?",
+        "answer": "Pinakamainam na magbukas ng issue sa aming GitHub repository. Nakatutulong ito para masubaybayan at maunang maasikaso ang lahat ng kahilingan.",
+        "link": "GitHub repository"
+      },
+      "reuse": {
+        "question": "Puwede ko bang gamitin ang nilalaman ng BetterGov sa aking proyekto?",
+        "answer": "Oo! Inilabas ang BetterGov sa ilalim ng Creative Commons CC0, kaya ang aming nilalaman ay nasa public domain at malayang magagamit para sa anumang layunin."
+      },
+      "data": {
+        "question": "Saan nagmumula ang datos sa BetterGov?",
+        "answer": "Tinitipon ang aming datos mula sa iba't ibang pampublikong pinagkukunan ng pamahalaan. Gumagamit kami ng sariling mga script at kagamitan para kolektahin, iproseso, at ipakita ang impormasyong ito sa paraang madaling ma-access at maunawaan ng mamamayan."
+      }
+    },
+    "ctaBody": "Sumali sa aming komunidad ng mga boluntaryong bumubuo ng mas mahusay na digital na serbisyo para sa Pilipinas.",
+    "ctaButton": "Maging Boluntaryo"
+  },
+  "joinUs": {
+    "seoTitle": "Sumali sa Amin",
+    "seoDescription": "Isang civic tech na inisyatibang pinamumunuan ng mga boluntaryo na bumubuo ng mga open-source na kagamitan para gawing mas bukas, mahusay, at abot-kamay ang pamahalaan.",
+    "heroTitle": "Sumali sa <highlight>#CivicTech</highlight> Revolution",
+    "heroBody": "Kasama ang mga beterano ng industriya, binubuo namin ang <strong>{{portal}}</strong> — para gawing bukas, mahusay, at abot-kamay ng bawat Pilipino ang pamahalaan.",
+    "joinDiscord": "Sumali sa Aming Discord",
+    "learnMore": "Alamin Pa",
+    "missionTitle": "Ang Aming Misyon",
+    "missionLead": "Hindi lang kami gumagawa ng mga website — binubuo namin ang kinabukasan ng pamamahala sa Pilipinas.",
+    "goal": "Nakita namin ang pagdami ng mahuhusay at kahanga-hangang ideyang tech na inilulunsad kamakailan. Ang aming layunin ay <strong>suportahan, itaguyod, pagbuklurin, at bigyang-kakayahan</strong> ang mga tagabuong ito!",
+    "provideIntro": "Lahat ng kailangan mo para bumuo ng makabuluhang mga proyektong civic tech",
+    "doneWaiting": "TAPOS NA KAMI SA PAGHIHINTAY",
+    "angry": "“GALIT KAMI. GALIT KA.”",
+    "contribute": "Pero makakapag-ambag tayo sa sarili nating paraan — <accent>GAANO MAN ITO KALIIT.</accent>",
+    "amazing": "Makakagawa tayo ng <highlight>MGA KAHANGA-HANGANG BAGAY</highlight> nang sama-sama.",
+    "grassroots": "MULA SA UGAT. OPEN SOURCE. HINDI KAILANGAN NG PAHINTULOT.",
+    "committed": "Nakatuon kaming maglaan ng <strong>ORAS, REKURSO, AT PERA</strong> sa inisyatibang ito.",
+    "relentless": "Patuloy kaming bubuo nang <accent>WALANG HUMPAY</accent> nang hindi naghihintay ng pahintulot ninuman. Mga site na open source, pampubliko, at <strong>DE-KALIDAD</strong>.",
+    "ctaBody": "Sumali sa aming komunidad ng mga tagabuo, mapangarapin, at tagapagdala ng pagbabago. Sama-sama nating likhain ang teknolohiyang pampamahalaan na nararapat sa Pilipinas.",
+    "joinDiscordCommunity": "Sumali sa Aming Komunidad sa Discord",
+    "exploreIdeas": "Tuklasin ang mga Ideya ng Proyekto",
+    "footerLine": "Open source • Pinapatakbo ng komunidad • Binuo nang may ❤️ para sa Pilipinas"
+  },
+  "ideas": {
+    "seoTitle": "Mga Ideya ng Proyekto",
+    "seoDescription": "Tuklasin ang mga makabagong ideya ng proyekto para mapabuti ang transparency ng pamahalaan, pananagutan, at pakikilahok ng mamamayan.",
+    "title": "Mga Ideya ng Proyekto",
+    "intro": "Mga makabagong konsepto para mapahusay ang transparency ng pamahalaan, pananagutan, at pakikilahok ng mamamayan. Layunin ng mga ideyang ito na paglapitin ang mamamayan at pamahalaan sa pamamagitan ng teknolohiya at mas mahusay na disenyo.",
+    "stats": {
+      "total": "Kabuuang Ideya",
+      "highPriority": "Mataas na Prayoridad",
+      "categories": "Mga Kategorya",
+      "simple": "Mga Simpleng Proyekto",
+      "votes": "Kabuuang Boto"
+    },
+    "submitIdea": "Magsumite ng Ideya",
+    "contributePr": "Mag-ambag ng Pull Request",
+    "allIdeas": "Lahat ng Ideya ng Proyekto",
+    "priority": {
+      "high": "Mataas na Prayoridad",
+      "medium": "Katamtamang Prayoridad",
+      "low": "Mababang Prayoridad"
+    },
+    "complexity": {
+      "simple": "Simpleng Gawin",
+      "moderate": "Katamtamang Hirap",
+      "complex": "Masalimuot"
+    },
+    "items": {
+      "1": {
+        "title": "App na gumagamit ng blockchain para sa pag-uulat ng komunidad sa mga proyekto ng pamahalaan",
+        "description": "Isang bukas at hindi nababagong plataporma kung saan maaaring mag-ulat at sumubaybay ang mamamayan sa mga proyekto ng pamahalaan sa kanilang komunidad. Gumagamit ng teknolohiyang blockchain para matiyak ang integridad ng datos at maiwasan ang pagbabago sa mga ulat at update ng proyekto.",
+        "category": "Transparency at Pananagutan"
+      },
+      "2": {
+        "title": "Glassdoor para sa mga ahensya ng pamahalaan",
+        "description": "Isang anonimong plataporma ng pagsusuri kung saan maaaring mag-rate at magsuri ang mga kawani ng pamahalaan at mamamayan sa mga ahensya, departamento, at serbisyo ng pamahalaan. Nagbibigay ng kaalaman tungkol sa kultura sa trabaho, kalidad ng serbisyo, at mga bahaging dapat pagbutihin.",
+        "category": "Puna ng Publiko"
+      },
+      "3": {
+        "title": "Mga gabay sa disenyo para sa {{portal}}",
+        "description": "Kumpletong design system at mga gabay para sa plataporma ng {{portal}}. Kasama ang mga UI component, color scheme, typography, pamantayan sa accessibility, at pinakamahusay na mga kasanayan para sa mga web service ng pamahalaan.",
+        "category": "Pagbuo ng Plataporma"
+      },
+      "4": {
+        "title": "I-rate ang mga pulitiko",
+        "description": "Isang platapormang pinapatakbo ng mamamayan para i-rate at suriin ang mga halal na opisyal batay sa kanilang pagganap, mga pangako noong kampanya, rekord ng pagboto, at paghahatid ng serbisyong pampubliko. May kasamang fact-checking at mga feature para sa transparency.",
+        "category": "Pananagutang Pampulitika"
+      }
+    },
+    "ctaTitle": "May Ideya Ka Ba?",
+    "ctaBody": "Lagi kaming naghahanap ng mga makabagong paraan para mapabuti ang mga serbisyo ng pamahalaan at pakikilahok ng mamamayan. Isumite ang iyong mga ideya sa GitHub o alamin pa ang tungkol sa aming misyon.",
+    "submitGithub": "Isumite sa GitHub",
+    "learnMore": "Alamin Pa ang Tungkol sa Amin"
+  },
+  "contribute": {
+    "breadcrumb": "Mag-ambag",
+    "title": "Mag-ambag sa {{portal}}",
+    "description": "Tulungan kaming panatilihing tumpak at napapanahon ang direktoryo ng mga serbisyo.",
+    "howTitle": "Paano ito gumagana",
+    "steps": [
+      "I-click ang button sa ibaba para magbukas ng contribution form sa GitHub. Kakailanganin mo ng libreng GitHub account.",
+      "Ilagay ang pangalan ng serbisyo, mga hakbang, mga kinakailangan, at link sa opisyal na pinagkunan.",
+      "Susuriin ng aming team ang iyong isinumite at idaragdag ito sa direktoryo."
+    ],
+    "openForm": "Buksan ang Contribution Form",
+    "whyGithub": "<strong>Bakit GitHub?</strong> Sa paggamit ng GitHub, natitiyak na nakapangalan sa totoong account ang bawat ambag, naiiwasan ang spam, at nasusubaybayan nang bukas ang proseso ng pagsusuri.",
+    "whatTitle": "Ano ang maaari mong iambag",
+    "whatList": [
+      "Mga bagong serbisyong wala pa sa direktoryo",
+      "Mga pagtatama sa lumang impormasyon",
+      "Mga na-update na hakbang o kinakailangan",
+      "Mga bagong tanggapan o departamento"
+    ],
+    "note": "<strong>Paalala:</strong> Mano-manong sinusuri ang lahat ng isinumite. Maglagay ng link sa opisyal na pinagkunan para hindi ito matanggihan.",
+    "back": "← Bumalik sa Mga Serbisyo"
+  },
+  "sitemap": {
+    "seoTitle": "Sitemap",
+    "seoDescription": "Kumpletong sitemap — hanapin ang lahat ng pahina at serbisyong makukuha sa portal na ito.",
+    "title": "Sitemap",
+    "intro": "Kumpletong gabay sa lahat ng pahina at serbisyong makukuha sa {{portal}}",
+    "notFound": "Hindi mo makita ang hinahanap mo? Subukan ang aming <link>paghahanap</link>.",
+    "subdivisions": "Mga Barangay",
+    "subdivisions_province": "Mga Bayan at Lungsod",
+    "sections": {
+      "main": "Mga Pangunahing Pahina",
+      "services": "Mga Serbisyo",
+      "government": "Pamahalaan",
+      "statistics": "Istatistika",
+      "transparency": "Transparency",
+      "legislation": "Lehislasyon",
+      "community": "Datos at Komunidad"
+    },
+    "links": {
+      "home": { "title": "Home", "description": "Pangunahing pahina" },
+      "about": { "title": "Tungkol", "description": "Tungkol sa {{portal}}" },
+      "search": { "title": "Maghanap", "description": "Maghanap sa portal" },
+      "contact": {
+        "title": "Makipag-ugnayan",
+        "description": "Mga paraan para maabot ang mga boluntaryo ng proyekto"
+      },
+      "accessibility": {
+        "title": "Accessibility",
+        "description": "Pahayag at mga feature para sa accessibility"
+      },
+      "terms": {
+        "title": "Mga Tuntunin ng Serbisyo",
+        "description": "Mga tuntunin sa paggamit ng portal na ito"
+      },
+      "services": {
+        "title": "Mga Serbisyong Pampubliko",
+        "description": "Mga serbisyong iniaalok ng {{fullName}}"
+      },
+      "officials": {
+        "title": "Mga Halal na Opisyal",
+        "description": "Ang {{head}}, Bise {{head}} at {{body}}"
+      },
+      "committees": {
+        "title": "Mga Komite",
+        "description": "Mga nakatayong komite ng {{body}}"
+      },
+      "departments": {
+        "title": "Mga Departamento",
+        "description": "Mga tanggapan ng {{fullName}}"
+      },
+      "barangays": { "description": "Ang mga barangay ng {{lgu}}" },
+      "statsOverview": {
+        "title": "Pangkalahatang Tingin",
+        "description": "Mahahalagang bilang tungkol sa {{lgu}}"
+      },
+      "population": {
+        "title": "Populasyon",
+        "description": "Mga bilang ng populasyon mula sa census"
+      },
+      "income": {
+        "title": "Kita",
+        "description": "Mga bilang ng kita ng {{adjective}}"
+      },
+      "competitiveness": {
+        "title": "Kakayahang Makipagkumpitensya",
+        "description": "Cities and Municipalities Competitiveness Index"
+      },
+      "transparencyOverview": {
+        "title": "Pangkalahatang Tingin",
+        "description": "Pampublikong pondo, gawain, at procurement"
+      },
+      "funds": {
+        "title": "Pampublikong Pondo",
+        "description": "Kita at gastusin"
+      },
+      "procurement": {
+        "title": "Procurement",
+        "description": "Mga bid at iginawad na kontrata"
+      },
+      "infrastructure": {
+        "title": "Mga Proyektong Pang-imprastraktura",
+        "description": "Mga proyekto ng DPWH sa lungsod"
+      },
+      "legislation": {
+        "title": "Mga Ordinansa at Resolusyon",
+        "description": "Mga rekord pambatasan ng {{body}}"
+      },
+      "openlguTerms": {
+        "title": "Mga Termino",
+        "description": "Mga termino ng {{body}}"
+      },
+      "weather": {
+        "title": "Panahon",
+        "description": "Kasalukuyang lagay ng panahon sa {{lgu}}"
+      },
+      "forex": {
+        "title": "Palitan ng Pera",
+        "description": "Mga halaga ng palitan ng dayuhang pera"
+      },
+      "reportError": {
+        "title": "Mag-ulat ng Mali",
+        "description": "Sabihin sa amin ang impormasyong mali o luma na"
+      },
+      "contribute": {
+        "title": "Mag-ambag",
+        "description": "Tumulong na pagbutihin ang datos sa portal na ito"
+      },
+      "joinUs": {
+        "title": "Sumali sa Amin",
+        "description": "Magboluntaryo sa proyekto"
+      },
+      "ideas": { "title": "Mga Ideya", "description": "Magmungkahi ng mga pagpapabuti" }
+    }
+  },
+  "search": {
+    "documentTitle": "Maghanap - Better Government Portal",
+    "metaDescription": "Maghanap ng mga serbisyo at rekurso ng pamahalaan",
+    "title": "Maghanap",
+    "placeholder": "Maghanap ng mga serbisyo, tanggapan, at rekurso ng pamahalaan...",
+    "activeFilters": "Mga aktibong filter:",
+    "typeBadge": "Uri: {{type}}",
+    "removeType": "Alisin ang filter ng uri",
+    "categoryBadge": "Kategorya: {{category}}",
+    "removeCategory": "Alisin ang filter ng kategorya",
+    "clearAll": "Alisin lahat",
+    "filterBy": "Salain Ayon sa",
+    "type": "Uri",
+    "category": "Kategorya",
+    "all": "Lahat",
+    "transaction": "Transaksiyon",
+    "information": "Impormasyon",
+    "noResults": "Walang nahanap na resulta",
+    "noMatches": "Walang tumugma sa \"{{query}}\"",
+    "adjustFilters": "Subukang baguhin ang iyong mga filter",
+    "clearFilters": "Alisin ang lahat ng filter",
+    "resultsFound_one": "{{count}} resulta ang nahanap",
+    "resultsFound_other": "{{count}} resulta ang nahanap"
+  },
+  "weather": {
+    "error": "Error",
+    "cities": "Mga Lungsod",
+    "humidity": "Halumigmig",
+    "wind": "Hangin",
+    "pressure": "Presyon",
+    "visibility": "Visibility",
+    "forecast": "Taya ng Panahon sa Loob ng 5 Araw",
+    "aboutTitle": "Tungkol sa Datos ng Panahon",
+    "aboutBody": "Ang datos ng panahon na ipinapakita sa pahinang ito ay mula sa Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) at iba pang maaasahang serbisyo sa panahon. Regular na ina-update ang impormasyon para maibigay sa iyo ang pinakatumpak at pinakabagong lagay ng panahon sa mga pangunahing lungsod ng Pilipinas.",
+    "understandingTitle": "Pag-unawa sa Datos",
+    "understandingBody": "Ipinapakita ang temperatura sa Celsius (°C). Inuuri ang lagay ng panahon batay sa kasalukuyang obserbasyon sa atmospera. Nagbibigay ang taya ng panahon ng tanaw sa loob ng 5 araw para makatulong sa iyong pagpaplano.",
+    "advisoriesTitle": "Mga Abiso sa Panahon",
+    "advisoriesBody": "Para sa mga opisyal na abiso, babala, at detalyadong taya ng panahon, bisitahin ang <link>opisyal na website ng PAGASA</link> o sundan ang kanilang mga social media channel para sa real-time na update.",
+    "providedBy": "Ang datos ng panahon ay mula sa <link>OpenWeather</link>"
+  },
+  "forex": {
+    "error": "Error",
+    "currencies": "Mga Pera",
+    "searchPlaceholder": "Maghanap ng pera...",
+    "noData": "Walang Datos",
+    "noneFound": "Walang nahanap na pera",
+    "noMatch": "Walang perang tumugma sa \"{{term}}\"",
+    "noneAvailable": "Walang available na pera",
+    "clearSearch": "Burahin ang paghahanap",
+    "currentRate": "Kasalukuyang Halaga",
+    "unavailable": "Walang Datos",
+    "peso": "Piso ng Pilipinas",
+    "rate": "Halaga",
+    "rateLegend": "Halaga ng PHP sa {{code}}",
+    "converter": "Pampalit ng Pera",
+    "pesoCode": "Piso ng Pilipinas (PHP)",
+    "providedBy": "Ang mga halaga ng palitan ay mula sa Bangko Sentral ng Pilipinas (BSP). Huling na-update: {{date}}",
+    "aboutTitle": "Tungkol sa Palitan ng Dayuhang Pera",
+    "aboutBody": "Ang mga halaga ng palitan ng dayuhang pera na ipinapakita sa pahinang ito ay mula sa Bangko Sentral ng Pilipinas (BSP), ang sentral na bangko ng Pilipinas. Ito ang mga opisyal na reference rate ng Piso laban sa mga pangunahing pera sa mundo.",
+    "understandingTitle": "Pag-unawa sa Palitan ng Pera",
+    "understandingBody": "Ipinapakita ng halaga ng palitan kung gaano karami ng isang pera ang maipapalit sa iba. Ang mga halagang nakikita rito ay ang dami ng Piso (PHP) na kailangan para makabili ng isang yunit ng dayuhang pera.",
+    "officialTitle": "Opisyal na Halaga mula sa BSP",
+    "officialBody": "Para sa mga opisyal na reference rate ng dayuhang pera at mas detalyadong impormasyon, bisitahin ang <link>website ng Bangko Sentral ng Pilipinas</link>."
+  },
+  "accessibility": {
+    "seoTitle": "Pahayag sa Accessibility",
+    "seoDescription": "Ang aming paninindigan sa web accessibility, kasalukuyang pag-usad tungo sa WCAG, mga feature na sinusuportahan namin ngayon, at kung paano humingi ng tulong.",
+    "title": "Pahayag sa Accessibility",
+    "description": "Nakatuon ang {{portal}} na gawing magagamit ng mga taong may kapansanan ang impormasyon ng {{adjectiveLower}}. Patuloy naming pinabubuti ang karanasan at hindi namin sinasabing ganap na kaming sertipikado.",
+    "commitmentTitle": "Ang Aming Paninindigan",
+    "commitment": [
+      "Dapat maabot ng lahat ang impormasyon at mga serbisyo ng lokal na pamahalaan. Nagdidisenyo kami para sa mga assistive technology gaya ng screen reader at keyboard navigation, at itinuturing naming pangunahing depekto ang mga bug sa accessibility.",
+      "Pinapatakbo ng mga boluntaryo ang portal na ito. Unti-unting gumaganda ang mga feature at pagsusuri; kung may humahadlang sa iyo, sabihin sa amin at uunahin naming ayusin ito o magbibigay kami ng ibang paraan."
+    ],
+    "worksTitle": "Ano ang Gumagana Ngayon",
+    "features": {
+      "visual": {
+        "title": "Accessibility sa Paningin",
+        "items": [
+          "Mga Kapwa design token para sa contrast ng teksto at background",
+          "Tekstong lumalaki kasabay ng zoom ng browser",
+          "Alt text sa mahahalagang larawan kung mayroon",
+          "Malinaw na mga heading at istruktura ng mga seksyon",
+          "Gumagana sa mga karaniwang screen reader (patuloy na sinusubok)"
+        ]
+      },
+      "keyboard": {
+        "title": "Pag-navigate gamit ang Keyboard",
+        "items": [
+          "Naaabot gamit ang keyboard ang pangunahing navigation at mga link",
+          "Nakikitang focus style sa mga interactive na kontrol",
+          "Skip link para lumaktaw sa header papunta sa pangunahing nilalaman",
+          "Lohikal na pagkakasunod-sunod ng pagbasa at tab sa mga pangunahing pahina",
+          "Isinasara ng Escape ang mga search overlay at menu kung saan ito naipatupad"
+        ]
+      },
+      "audio": {
+        "title": "Suporta sa Audio at Screen Reader",
+        "items": [
+          "Mga semantic landmark (header, main, footer)",
+          "Hierarchy ng mga heading sa mahahalagang pahina",
+          "Naglalarawang teksto ng link sa karamihan ng navigation",
+          "May label ang mga form field at search input",
+          "Mga status update para sa resulta ng paghahanap sa hero"
+        ]
+      },
+      "motor": {
+        "title": "Accessibility sa Paggalaw",
+        "items": [
+          "Komportableng laki ng pipindutin sa mga pangunahing button at navigation",
+          "Alternatibong pointer at keyboard para sa mga karaniwang aksyon",
+          "Walang kinakailangang drag-and-drop sa mga pampublikong pahina",
+          "Malinaw na error state sa mga form na inilalabas namin",
+          "Maraming paraan para maabot ang mga serbisyo (paghahanap, kategorya, direktoryo)"
+        ]
+      },
+      "mobile": {
+        "title": "Accessibility sa Mobile",
+        "items": [
+          "Responsive na layout sa telepono, tablet, at desktop",
+          "Maluwag na espasyo para sa touch sa mga pangunahing kontrol",
+          "Sinusuportahan ang zoom ng browser",
+          "Gumagana nang patayo at pahiga",
+          "Karaniwang paraan ng pag-input sa mobile browser"
+        ]
+      },
+      "language": {
+        "title": "Suporta sa Wika at Pag-unawa",
+        "items": [
+          "Simpleng pangalan ng mga serbisyo kung mayroon",
+          "Pare-parehong paraan ng navigation",
+          "Interface sa Ingles at Filipino",
+          "Nilalamang nakapangkat sa ilalim ng malinaw na mga heading",
+          "Paraan ng pakikipag-ugnayan para sa mga tanong at puna"
+        ]
+      }
+    },
+    "standardsTitle": "Pag-usad sa mga Pamantayan",
+    "standards": {
+      "wcag": "Layunin naming maabot ang WCAG 2.1 Level AA. Hindi pa ganap na nasusuri o nasesertipika ang site na ito; inaayos namin ang mga kakulangan habang natutuklasan namin ang mga ito.",
+      "section508": "Sinusunod namin ang mga prinsipyo ng Section 508 kung saan angkop ang mga ito sa isang sibikong portal ng mga boluntaryo. Hindi namin sinasabing ganap kaming sumusunod.",
+      "en301549": "Hindi pa namin nasusuri ang site batay sa EN 301 549. Pangmatagalang batayan ang mga pamantayang European, hindi kasalukuyang pahayag."
+    },
+    "keyboardTitle": "Mga Batayan sa Keyboard",
+    "keys": {
+      "skip": "Lumaktaw sa pangunahing nilalaman",
+      "skipKey": "Tab (unang focus)",
+      "move": "Lumipat sa pagitan ng mga kontrol",
+      "activate": "Buksan ang link o pindutin ang button",
+      "activateKey": "Enter / Space",
+      "close": "Isara ang overlay o menu",
+      "closeKey": "Escape",
+      "noShortcut": "Wala pang pangkalahatang shortcut na Ctrl+K. Gamitin ang search field sa hero o sa site, o buksan ang Maghanap mula sa navigation."
+    },
+    "feedbackTitle": "Puna at Suporta",
+    "feedbackBody": "Kung may humadlang sa iyo sa paggamit ng {{portal}}, mag-email sa amin. Isama ang URL ng pahina, ang sinubukan mong gawin, at ang assistive technology na gamit mo kung maaari.",
+    "emailTitle": "Email",
+    "emailBody": "Puna sa accessibility at mga kahilingan para sa akomodasyon.",
+    "lastUpdated": "Huling na-update ang pahayag na ito noong <time>Hulyo 27, 2026</time>.",
+    "revise": "Binabago namin ito kapag nagbago ang mga sinusuportahang feature o mga alam na kakulangan."
+  },
+  "terms": {
+    "seoTitle": "Mga Tuntunin ng Serbisyo",
+    "seoDescription": "Nilalamang nasa public domain, operasyon ng mga boluntaryo, at mga pananagutan ng gumagamit sa pag-access ng impormasyon ng pamahalaan.",
+    "title": "Mga Tuntunin ng Serbisyo",
+    "lastUpdated": "Huling Na-update: {{date}}",
+    "acceptanceTitle": "Pagtanggap sa mga Tuntunin",
+    "acceptance": "Sa pag-access at paggamit sa website na ito, tinatanggap mo at sumasang-ayon kang sumunod sa mga tuntunin at probisyon ng kasunduang ito.",
+    "publicDomainTitle": "Nilalamang Nasa Public Domain at Operasyon ng mga Boluntaryo",
+    "publicDomain": [
+      "Ang website na ito at ang lahat ng nilalaman nito ay nasa public domain at buong pinapatakbo ng mga boluntaryo. Ang lahat ng impormasyon, datos, dokumento, at materyal sa website na ito ay nasa public domain maliban kung may ibang nakasaad. Ang nilalamang nasa public domain ay malayang magagamit, makokopya, maipamamahagi, at mababago nang walang pahintulot o pagkilala, bagama't pinahahalagahan ang pagkilala.",
+      "Bilang rekursong pinapatakbo ng mga boluntaryo, hinihikayat namin ang mga gumagamit na magsagawa ng sarili nilang pananaliksik at beripikasyon ng impormasyon."
+    ],
+    "asIsTitle": "Paalala na \"AS IS\"",
+    "asIsLead": "ANG LAHAT NG IMPORMASYON SA WEBSITE NA ITO AY IBINIBIGAY NANG \"AS IS\" NANG WALANG ANUMANG GARANTIYA, TAHASAN MAN O IPINAHIHIWATIG, KASAMA NGUNIT HINDI LIMITADO SA:",
+    "asIsList": [
+      "Mga garantiya ng kakayahang maipagbili",
+      "Pagiging angkop sa isang partikular na layunin",
+      "Hindi paglabag sa mga karapatan sa intelektwal na ari-arian",
+      "Katumpakan, pagkakumpleto, o pagiging maaasahan ng impormasyon",
+      "Kawalan ng mali, virus, o iba pang mapanganib na bahagi"
+    ],
+    "liabilityTitle": "Limitasyon ng Pananagutan",
+    "liabilityLead": "Sa anumang pagkakataon, hindi mananagot ang mga nagpapatakbo ng website, mga nag-aambag, o mga kaanib na partido sa anumang direkta, hindi direkta, nagkataon, espesyal, kinahinatnan, o pamparusang pinsala na nagmula sa:",
+    "liabilityList": [
+      "Iyong paggamit sa website na ito",
+      "Anumang mali o kakulangan sa nilalaman",
+      "Anumang pagkaantala o pagtigil ng transmisyon papunta o mula sa website",
+      "Anumang bug, virus, o iba pang mapanganib na bahagi",
+      "Pagkawala ng datos o impormasyon"
+    ],
+    "liabilityScope": "Umiiral ang limitasyong ito kahit pa ang pinsala ay nagmula sa kontrata, tort, kapabayaan, mahigpit na pananagutan, o anumang iba pang legal na teorya o iba pa.",
+    "responsibilitiesTitle": "Mga Pananagutan ng Gumagamit at Gabay sa Pananaliksik",
+    "responsibilitiesLead": "Ang mga gumagamit lamang ang may pananagutan sa:",
+    "responsibilitiesList": [
+      "<strong>Malayang Beripikasyon:</strong> Pagsasagawa ng sarili nilang pananaliksik at beripikasyon sa lahat ng impormasyong nakuha mula sa website na ito",
+      "<strong>Pagsunod sa mga Link ng Pinagkunan:</strong> Pagsusuri at pagbisita sa orihinal na mga link at sanggunian na nakalagay sa aming mga pahina para sa kumpleto at awtoritatibong impormasyon",
+      "<strong>Paghahambing ng Sanggunian:</strong> Paghahambing ng impormasyon sa maraming maaasahang pinagkunan bago gumawa ng desisyon",
+      "Pagtiyak kung angkop ang impormasyon sa nilalayon nilang paggamit",
+      "Pagsunod sa lahat ng umiiral na batas at regulasyon",
+      "Anumang kahihinatnan ng kanilang paggamit sa nilalaman ng website"
+    ],
+    "encourageLead": "Mahigpit naming hinihikayat ang mga gumagamit na:",
+    "encourageList": [
+      "Gamitin ang mga link at sanggunian sa bawat pahina para ma-access ang mga pangunahing dokumento at opisyal na pinagkunan",
+      "Magsagawa ng malayang pananaliksik lampas sa impormasyong narito",
+      "Sumangguni sa mga opisyal na website at ahensya ng pamahalaan para sa pinakabagong impormasyon",
+      "Beripikahin ang mga petsa, bilang, at detalye sa maraming kapani-paniwalang pinagkunan"
+    ],
+    "adviceTitle": "Walang Propesyonal na Payo",
+    "advice": "Ang impormasyon sa website na ito ay hindi nilalayong maging propesyonal na payo (legal, medikal, pinansyal, o iba pa). Dapat sumangguni ang mga gumagamit sa mga kwalipikadong propesyonal para sa payong angkop sa kanilang sitwasyon.",
+    "sourcesTitle": "Mga Link ng Pinagkunan at Panlabas na Sanggunian",
+    "sourcesLead": "Nagbibigay ang website na ito ng mga link sa mga opisyal na pinagkunan, dokumento ng pamahalaan, at iba pang awtoritatibong materyal. Mahigpit na hinihikayat ang mga gumagamit na:",
+    "sourcesList": [
+      "Buksan at suriin ang lahat ng link ng pinagkunan",
+      "I-access ang mga pangunahing dokumento at opisyal na publikasyong binanggit",
+      "Beripikahin ang impormasyon sa orihinal na mga pinagkunan",
+      "Tingnan kung may update o susog sa mga binanggit na materyal"
+    ],
+    "sourcesNote": "Hindi namin ginagarantiya na patuloy na gagana ang mga panlabas na link, at dapat laging beripikahin ng mga gumagamit ang impormasyon sa mga opisyal na daluyan.",
+    "availabilityTitle": "Pagiging Available ng Website",
+    "availabilityLead": "Hindi namin ginagarantiya na ang website na ito ay:",
+    "availabilityList": [
+      "Available sa lahat ng oras",
+      "Walang mali o pagkaantala",
+      "Walang problemang teknikal",
+      "Tugma sa iyong kagamitan"
+    ],
+    "indemnificationTitle": "Indemnipikasyon",
+    "indemnification": "Sumasang-ayon ang mga gumagamit na bayaran at huwag papanagutin ang mga nagpapatakbo ng website sa anumang paghahabol, pinsala, pagkalugi, o gastusing nagmula sa kanilang paggamit sa website.",
+    "modificationsTitle": "Mga Pagbabago",
+    "modifications": "Maaaring baguhin ang mga tuntuning ito anumang oras nang walang abiso. Ang patuloy na paggamit sa website ay nangangahulugan ng pagtanggap sa anumang pagbabago.",
+    "lawTitle": "Batas na Umiiral",
+    "law": "Ang mga tuntuning ito ay saklaw ng mga batas ng Republika ng Pilipinas, nang hindi isinasaalang-alang ang mga prinsipyo ng conflict of law.",
+    "severabilityTitle": "Paghihiwalay ng mga Probisyon",
+    "severability": "Kung may probisyon sa mga tuntuning ito na mapatunayang hindi maipatutupad, mananatiling may buong bisa ang iba pang mga probisyon.",
+    "concernsTitle": "Mga Alalahanin sa Nilalaman at Kahilingang Pag-alis",
+    "concernsLead": "Bagama't sinisikap naming magbigay ng tumpak na impormasyong nasa public domain, kinikilala namin na maaaring magkaroon ng mali, lumang impormasyon, o iba pang alalahanin.",
+    "reportingTitle": "Pag-uulat ng Nilalamang Nakababahala:",
+    "reportingLead": "Kung sa tingin mo ang nilalaman ng website na ito ay:",
+    "reportingList": [
+      "Mali o nakalilinlang",
+      "Maaaring makapinsala o mapanganib",
+      "Lumalabag sa mga umiiral na batas",
+      "Naglalaman ng personal na impormasyong hindi dapat isapubliko",
+      "Lumalabag sa lehitimong karapatan"
+    ],
+    "contactUs": "Makipag-ugnayan sa amin sa:",
+    "includeLead": "Pakisama ang:",
+    "includeList": [
+      "Tiyak na URL o lokasyon ng pahina",
+      "Malinaw na paglalarawan ng alalahanin",
+      "Sumusuportang dokumento o ebidensya kung mayroon",
+      "Iyong contact information para sa follow-up"
+    ],
+    "responseTitle": "Ang Aming Proseso ng Pagtugon:",
+    "responseList": [
+      "Susuriin namin nang may mabuting loob ang lahat ng lehitimong alalahanin",
+      "Maaaring mag-iba ang tagal ng pagtugon dahil boluntaryo kami",
+      "Maaari naming alisin, baguhin, o lagyan ng paalala ang nilalaman kung nararapat",
+      "Nakalaan sa amin ang karapatang gumawa ng mga desisyong editoryal tungkol sa nilalaman",
+      "Hindi kami obligadong mag-alis ng nilalaman ngunit isasaalang-alang namin ang lahat ng makatwirang kahilingan"
+    ],
+    "frivolous": "<strong>Mga Maling Reklamo o Walang Batayan:</strong> Ang sadyang pagsusumite ng maling kahilingang pag-alis o reklamo ay maaaring humantong sa pagharang sa iyo sa pakikipag-ugnayan sa aming mga boluntaryo.",
+    "contactTitle": "Impormasyon sa Pakikipag-ugnayan",
+    "contactLead": "Para sa mga tanong tungkol sa mga tuntuning ito o mga alalahanin sa nilalaman, makipag-ugnayan sa:",
+    "educational": "Nagbibigay ang website na ito ng impormasyong nasa public domain para lamang sa layuning pang-edukasyon at pang-impormasyon.",
+    "effective": "Epektibo simula Setyembre 23, 2025"
+  }
+}

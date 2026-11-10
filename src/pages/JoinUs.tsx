@@ -16,16 +16,19 @@ import {
   UsersIcon,
   ZapIcon,
 } from 'lucide-react';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { config } from '@/lib/lguConfig';
 import { SEO } from '@/components/layout/SEO';
 
 const JoinUs: FC = () => {
+  const { t } = useTranslation('pages');
+
   return (
     <div className='min-h-screen bg-linear-to-br from-kapwa-blue-50 via-white to-kapwa-purple-50'>
       <SEO
-        title='Join Us'
-        description='A volunteer-led civic tech initiative building open-source tools to make government more transparent, efficient, and accessible.'
+        title={t('joinUs.seoTitle')}
+        description={t('joinUs.seoDescription')}
       />
 
       {/* Hero Section */}
@@ -39,14 +42,21 @@ const JoinUs: FC = () => {
               </div>
             </div>
             <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold leading-tight'>
-              Join the{' '}
-              <span className='text-kapwa-text-accent-yellow'>#CivicTech</span>{' '}
-              Revolution
+              <Trans
+                t={t}
+                i18nKey='joinUs.heroTitle'
+                components={{
+                  highlight: <span className='text-kapwa-text-accent-yellow' />,
+                }}
+              />
             </h1>
             <p className='mb-8 kapwa-body leading-relaxed text-kapwa-text-inverse/80'>
-              Together with industry veterans, we&apos;re building{' '}
-              <strong>{config.portal.name}</strong> — making government
-              transparent, efficient, and accessible to every Filipino.
+              <Trans
+                t={t}
+                i18nKey='joinUs.heroBody'
+                values={{ portal: config.portal.name }}
+                components={{ strong: <strong /> }}
+              />
             </p>
             <div className='flex flex-col justify-center gap-4 sm:flex-row'>
               {config.portal.discordUrl && (
@@ -59,7 +69,7 @@ const JoinUs: FC = () => {
                   leftIcon={<MessageCircleIcon className='h-5 w-5' />}
                   className='text-kapwa-text-strong transform rounded-lg bg-kapwa-bg-accent-yellow-weak px-8 py-4 shadow-lg transition-all hover:scale-105'
                 >
-                  Join Our Discord
+                  {t('joinUs.joinDiscord')}
                 </ButtonLink>
               )}
               <ButtonLink
@@ -69,7 +79,7 @@ const JoinUs: FC = () => {
                 rightIcon={<ArrowRightIcon className='h-5 w-5' />}
                 className='hover:text-kapwa-text-brand text-kapwa-text-inverse hover:bg-kapwa-bg-surface rounded-lg border-2 border-white px-8 py-4'
               >
-                Learn More
+                {t('joinUs.learnMore')}
               </ButtonLink>
             </div>
           </div>
@@ -91,31 +101,33 @@ const JoinUs: FC = () => {
               <TargetIcon className='text-kapwa-text-brand h-8 w-8' />
             </div>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              Our Mission
+              {t('joinUs.missionTitle')}
             </h2>
             <p className='text-kapwa-text-support mx-auto max-w-3xl text-xl'>
-              We&apos;re not just building websites — we&apos;re building the
-              future of governance in the Philippines.
+              {t('joinUs.missionLead')}
             </p>
           </div>
 
           <div className='mx-auto max-w-4xl'>
             <div className='from-kapwa-brand-50 mb-8 rounded-2xl bg-linear-to-r to-kapwa-blue-50 p-8 md:p-12'>
               <p className='text-kapwa-text-support mb-6 text-lg leading-relaxed'>
-                BetterGov is a <strong>volunteer-led tech initiative</strong>{' '}
-                committed to creating
+                <Trans
+                  t={t}
+                  i18nKey='shared.civictechBefore'
+                  components={{ strong: <strong /> }}
+                />
                 <span className='bg-kapwa-bg-brand-default text-kapwa-text-inverse mx-2 inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold'>
                   <ZapIcon className='mr-1 h-4 w-4' />
                   #civictech
                 </span>
-                projects aimed at making government more transparent, efficient,
-                and accessible to citizens.
+                {t('shared.civictechAfter')}
               </p>
               <p className='text-kapwa-text-support text-lg leading-relaxed'>
-                We&apos;ve seen a surge of wonderful and impressive tech ideas
-                being launched recently. Our goal is to{' '}
-                <strong>support, promote, consolidate, and empower</strong>{' '}
-                these builders!
+                <Trans
+                  t={t}
+                  i18nKey='joinUs.goal'
+                  components={{ strong: <strong /> }}
+                />
               </p>
             </div>
           </div>
@@ -127,45 +139,21 @@ const JoinUs: FC = () => {
         <div className='container mx-auto px-4'>
           <div className='mb-12 text-center'>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              What We Provide
+              {t('shared.provideTitle')}
             </h2>
             <p className='text-kapwa-text-support text-xl'>
-              Everything you need to build impactful civic tech projects
+              {t('joinUs.provideIntro')}
             </p>
           </div>
 
           <div className='mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {[
-              {
-                icon: ServerIcon,
-                title: 'Infrastructure & Tools',
-                desc: 'Servers, AI credits, development tools, and more!',
-              },
-              {
-                icon: UsersIcon,
-                title: 'Tech Hackathons',
-                desc: 'Regular events to collaborate and build together',
-              },
-              {
-                icon: GlobeIcon,
-                title: 'Data & APIs',
-                desc: 'Access to government data and API endpoints',
-              },
-              {
-                icon: HeartIcon,
-                title: 'Find Your Team',
-                desc: 'Connect with the right people and resource persons',
-              },
-              {
-                icon: StarIcon,
-                title: 'Industry Mentorship',
-                desc: 'Guidance from seasoned tech and startup veterans',
-              },
-              {
-                icon: BuildingIcon,
-                title: 'Office Space',
-                desc: 'Physical workspace for collaboration and meetings',
-              },
+              { icon: ServerIcon, key: 'infrastructure' },
+              { icon: UsersIcon, key: 'hackathons' },
+              { icon: GlobeIcon, key: 'data' },
+              { icon: HeartIcon, key: 'team' },
+              { icon: StarIcon, key: 'mentorship' },
+              { icon: BuildingIcon, key: 'office' },
             ].map((item, index) => (
               <div
                 key={index}
@@ -175,9 +163,11 @@ const JoinUs: FC = () => {
                   <item.icon className='text-kapwa-text-brand h-6 w-6' />
                 </div>
                 <h3 className='text-kapwa-text-strong mb-2 text-lg font-semibold'>
-                  {item.title}
+                  {t(`shared.provide.${item.key}.title`)}
                 </h3>
-                <p className='text-kapwa-text-support'>{item.desc}</p>
+                <p className='text-kapwa-text-support'>
+                  {t(`shared.provide.${item.key}.desc`)}
+                </p>
               </div>
             ))}
           </div>
@@ -195,46 +185,61 @@ const JoinUs: FC = () => {
               </div>
             </div>
             <h2 className='mb-12 bg-linear-to-r from-kapwa-yellow-300 via-kapwa-orange-300 to-kapwa-red-300 bg-clip-text text-4xl font-black text-transparent md:text-6xl'>
-              WE&apos;RE DONE WAITING
+              {t('joinUs.doneWaiting')}
             </h2>
             <div className='rounded-3xl border border-white/20 bg-linear-to-r from-white/20 to-white/10 p-10 shadow-2xl backdrop-blur-lg md:p-16'>
               <blockquote className='space-y-8 text-center kapwa-heading-lg leading-relaxed font-bold'>
                 <p className='kapwa-heading-xl font-black tracking-wider text-kapwa-text-accent-yellow uppercase'>
-                  &ldquo;WE&apos;RE ANGRY. YOU&apos;RE ANGRY.&rdquo;
+                  {t('joinUs.angry')}
                 </p>
                 <p className='text-kapwa-text-inverse text-xl md:text-2xl'>
-                  But we can contribute in our own ways —{' '}
-                  <strong className='text-kapwa-text-accent-yellow'>
-                    NO MATTER HOW LITTLE IT IS.
-                  </strong>
+                  <Trans
+                    t={t}
+                    i18nKey='joinUs.contribute'
+                    components={{
+                      accent: (
+                        <strong className='text-kapwa-text-accent-yellow' />
+                      ),
+                    }}
+                  />
                 </p>
                 <p className='text-kapwa-text-inverse text-xl md:text-2xl'>
-                  We can do{' '}
-                  <span className='bg-linear-to-r from-kapwa-yellow-300 to-kapwa-orange-300 bg-clip-text text-2xl font-black text-transparent md:text-3xl'>
-                    AMAZING THINGS
-                  </span>{' '}
-                  together.
+                  <Trans
+                    t={t}
+                    i18nKey='joinUs.amazing'
+                    components={{
+                      highlight: (
+                        <span className='bg-linear-to-r from-kapwa-yellow-300 to-kapwa-orange-300 bg-clip-text text-2xl font-black text-transparent md:text-3xl' />
+                      ),
+                    }}
+                  />
                 </p>
                 <p className='text-xl font-black text-kapwa-text-accent-orange uppercase md:text-2xl'>
-                  GRASSROOTS STYLE. OPEN SOURCE. NO PERMISSION NEEDED.
+                  {t('joinUs.grassroots')}
                 </p>
                 <p className='text-kapwa-text-inverse text-lg md:text-xl'>
-                  We are committed to putting{' '}
-                  <strong>TIME, RESOURCES, AND MONEY</strong> into this
-                  initiative.
+                  <Trans
+                    t={t}
+                    i18nKey='joinUs.committed'
+                    components={{ strong: <strong /> }}
+                  />
                 </p>
                 <p className='text-kapwa-text-inverse text-lg md:text-xl'>
-                  We will keep building{' '}
-                  <strong className='text-kapwa-text-accent-yellow'>
-                    RELENTLESSLY
-                  </strong>{' '}
-                  without anyone&apos;s permission. Open source, public,{' '}
-                  <strong>HIGH QUALITY</strong> sites.
+                  <Trans
+                    t={t}
+                    i18nKey='joinUs.relentless'
+                    components={{
+                      accent: (
+                        <strong className='text-kapwa-text-accent-yellow' />
+                      ),
+                      strong: <strong />,
+                    }}
+                  />
                 </p>
               </blockquote>
               <div className='mt-12 border-t-2 border-kapwa-border-accent-yellow pt-8'>
                 <p className='text-xl font-black tracking-wide text-kapwa-text-accent-yellow uppercase md:text-2xl'>
-                  WE&apos;RE LOOKING FOR PEOPLE SMARTER THAN US!
+                  {t('shared.lookingFor')}
                 </p>
               </div>
             </div>
@@ -254,12 +259,10 @@ const JoinUs: FC = () => {
         <div className='container mx-auto px-4 text-center'>
           <div className='mx-auto max-w-3xl'>
             <h2 className='text-kapwa-text-inverse mb-6 kapwa-heading-lg font-bold'>
-              Ready to Make a Difference?
+              {t('shared.readyTitle')}
             </h2>
             <p className='mb-8 text-xl text-kapwa-text-inverse/80'>
-              Join our community of builders, dreamers, and changemakers.
-              Together, we&apos;ll create the government technology the
-              Philippines deserves.
+              {t('joinUs.ctaBody')}
             </p>
 
             <div className='flex flex-col items-center justify-center gap-6 sm:flex-row'>
@@ -273,11 +276,13 @@ const JoinUs: FC = () => {
                   leftIcon={<MessageCircleIcon className='h-6 w-6' />}
                   className='text-kapwa-text-strong transform rounded-lg bg-kapwa-bg-accent-yellow-weak px-8 py-4 text-lg shadow-lg transition-all hover:scale-105'
                 >
-                  Join Our Discord Community
+                  {t('joinUs.joinDiscordCommunity')}
                 </ButtonLink>
               )}
 
-              <div className='text-kapwa-text-inverse font-medium'>or</div>
+              <div className='text-kapwa-text-inverse font-medium'>
+                {t('shared.or')}
+              </div>
 
               <ButtonLink
                 href='/ideas'
@@ -288,14 +293,13 @@ const JoinUs: FC = () => {
                 leftIcon={<LightbulbIcon className='h-5 w-5' />}
                 className='hover:text-kapwa-text-brand text-kapwa-text-inverse hover:bg-kapwa-bg-surface rounded-lg border-2 border-white px-8 py-4'
               >
-                Explore Project Ideas
+                {t('joinUs.exploreIdeas')}
               </ButtonLink>
             </div>
 
             <div className='mt-8 border-t border-white/20 pt-6'>
               <p className='text-sm text-kapwa-text-inverse/80'>
-                Open source • Community-driven • Built with ❤️ for the
-                Philippines
+                {t('joinUs.footerLine')}
               </p>
             </div>
           </div>

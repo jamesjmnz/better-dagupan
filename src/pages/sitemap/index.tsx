@@ -13,9 +13,12 @@ import {
   Home,
 } from 'lucide-react';
 
+import { Trans, useTranslation } from 'react-i18next';
+
 import { SEO } from '@/components/layout/SEO';
 import { config } from '@/lib/lguConfig';
 import { lguLabels } from '@/lib/lguLabels';
+import { useLguTerms } from '@/lib/useLguTerms';
 
 interface SitemapSection {
   title: string;
@@ -28,101 +31,59 @@ interface SitemapSection {
 }
 
 const SitemapPage: FC = () => {
+  const { t } = useTranslation('pages');
+  const terms = useLguTerms();
+  const link = (key: string) => ({
+    title: t(`sitemap.links.${key}.title`),
+    description: t(`sitemap.links.${key}.description`, terms),
+  });
   const sitemapSections: SitemapSection[] = [
     {
-      title: 'Main Pages',
+      title: t('sitemap.sections.main'),
       icon: <Home className='w-5 h-5' />,
       links: [
-        { title: 'Home', url: '/', description: 'Main landing page' },
-        {
-          title: 'About',
-          url: '/about',
-          description: `About ${config.portal.name}`,
-        },
-        {
-          title: 'Search',
-          url: '/search',
-          description: 'Search the portal',
-        },
-        {
-          title: 'Contact',
-          url: '/contact',
-          description: 'Ways to reach the project volunteers',
-        },
-        {
-          title: 'Accessibility',
-          url: '/accessibility',
-          description: 'Accessibility statement and features',
-        },
-        {
-          title: 'Terms of Service',
-          url: '/terms-of-service',
-          description: 'Terms for using this portal',
-        },
+        { ...link('home'), url: '/' },
+        { ...link('about'), url: '/about' },
+        { ...link('search'), url: '/search' },
+        { ...link('contact'), url: '/contact' },
+        { ...link('accessibility'), url: '/accessibility' },
+        { ...link('terms'), url: '/terms-of-service' },
       ],
     },
     {
-      title: 'Services',
+      title: t('sitemap.sections.services'),
       icon: <Briefcase className='w-5 h-5' />,
-      links: [
-        {
-          title: 'Public Services',
-          url: '/services',
-          description: `Services offered by the ${lguLabels.fullName}`,
-        },
-      ],
+      links: [{ ...link('services'), url: '/services' }],
     },
     {
-      title: 'Government',
+      title: t('sitemap.sections.government'),
       icon: <Building2 className='w-5 h-5' />,
       links: [
+        { ...link('officials'), url: '/government/elected-officials' },
         {
-          title: 'Elected Officials',
-          url: '/government/elected-officials',
-          description: `The ${lguLabels.head}, Vice ${lguLabels.head} and ${lguLabels.body}`,
-        },
-        {
-          title: 'Committees',
+          ...link('committees'),
           url: '/government/elected-officials/committees',
-          description: `Standing committees of the ${lguLabels.body}`,
         },
+        { ...link('departments'), url: '/government/departments' },
         {
-          title: 'Departments',
-          url: '/government/departments',
-          description: `Offices of the ${lguLabels.fullName}`,
-        },
-        {
-          title: lguLabels.subdivisions,
+          title: t('sitemap.subdivisions', { context: config.lgu.type }),
           url: '/government/barangays',
-          description: `The barangays of ${lguLabels.name}`,
+          description: t('sitemap.links.barangays.description', terms),
         },
       ],
     },
     ...(config.features.statistics
       ? [
           {
-            title: 'Statistics',
+            title: t('sitemap.sections.statistics'),
             icon: <BarChart3 className='w-5 h-5' />,
             links: [
+              { ...link('statsOverview'), url: '/statistics' },
+              { ...link('population'), url: '/statistics/population' },
+              { ...link('income'), url: '/statistics/municipal-income' },
               {
-                title: 'Overview',
-                url: '/statistics',
-                description: `Key figures about ${lguLabels.name}`,
-              },
-              {
-                title: 'Population',
-                url: '/statistics/population',
-                description: 'Census population figures',
-              },
-              {
-                title: 'Income',
-                url: '/statistics/municipal-income',
-                description: `${lguLabels.adjective} income figures`,
-              },
-              {
-                title: 'Competitiveness',
+                ...link('competitiveness'),
                 url: '/statistics/competitiveness',
-                description: 'Cities and Municipalities Competitiveness Index',
               },
             ],
           },
@@ -131,28 +92,15 @@ const SitemapPage: FC = () => {
     ...(config.features.transparency
       ? [
           {
-            title: 'Transparency',
+            title: t('sitemap.sections.transparency'),
             icon: <FileCheck className='w-5 h-5' />,
             links: [
+              { ...link('transparencyOverview'), url: '/transparency' },
+              { ...link('funds'), url: '/transparency/financial' },
+              { ...link('procurement'), url: '/transparency/procurement' },
               {
-                title: 'Overview',
-                url: '/transparency',
-                description: 'Public funds, works and procurement',
-              },
-              {
-                title: 'Public Funds',
-                url: '/transparency/financial',
-                description: 'Income and expenditure',
-              },
-              {
-                title: 'Procurement',
-                url: '/transparency/procurement',
-                description: 'Bids and awarded contracts',
-              },
-              {
-                title: 'Infrastructure Projects',
+                ...link('infrastructure'),
                 url: '/transparency/infrastructure',
-                description: 'DPWH projects in the city',
               },
             ],
           },
@@ -161,57 +109,25 @@ const SitemapPage: FC = () => {
     ...(config.features.openLGU
       ? [
           {
-            title: 'Legislation',
+            title: t('sitemap.sections.legislation'),
             icon: <FileText className='w-5 h-5' />,
             links: [
-              {
-                title: 'Ordinances and Resolutions',
-                url: '/openlgu',
-                description: `Legislative records of the ${lguLabels.body}`,
-              },
-              {
-                title: 'Terms',
-                url: '/openlgu/terms',
-                description: `Terms of the ${lguLabels.body}`,
-              },
+              { ...link('legislation'), url: '/openlgu' },
+              { ...link('openlguTerms'), url: '/openlgu/terms' },
             ],
           },
         ]
       : []),
     {
-      title: 'Data and Community',
+      title: t('sitemap.sections.community'),
       icon: <Globe className='w-5 h-5' />,
       links: [
-        {
-          title: 'Weather',
-          url: '/data/weather',
-          description: `Current weather in ${lguLabels.name}`,
-        },
-        {
-          title: 'Exchange Rates',
-          url: '/data/forex',
-          description: 'Foreign exchange rates',
-        },
-        {
-          title: 'Report an Error',
-          url: '/report-an-error',
-          description: 'Tell us about information that is wrong or out of date',
-        },
-        {
-          title: 'Contribute',
-          url: '/contribute',
-          description: 'Help improve the data on this portal',
-        },
-        {
-          title: 'Join Us',
-          url: '/join-us',
-          description: 'Volunteer with the project',
-        },
-        {
-          title: 'Ideas',
-          url: '/ideas',
-          description: 'Suggest improvements',
-        },
+        { ...link('weather'), url: '/data/weather' },
+        { ...link('forex'), url: '/data/forex' },
+        { ...link('reportError'), url: '/report-an-error' },
+        { ...link('contribute'), url: '/contribute' },
+        { ...link('joinUs'), url: '/join-us' },
+        { ...link('ideas'), url: '/ideas' },
       ],
     },
   ];
@@ -219,8 +135,8 @@ const SitemapPage: FC = () => {
   return (
     <div className='py-12 min-h-screen bg-kapwa-bg-surface-raised'>
       <SEO
-        title='Sitemap'
-        description='Complete sitemap — find all pages and services available on this portal.'
+        title={t('sitemap.seoTitle')}
+        description={t('sitemap.seoDescription')}
         keywords={[
           'sitemap',
           'navigation',
@@ -235,11 +151,10 @@ const SitemapPage: FC = () => {
           <div className='overflow-hidden rounded-xl bg-kapwa-bg-surface shadow-xs'>
             <div className='p-6 border-b border-kapwa-border-weak md:p-8'>
               <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold'>
-                Sitemap
+                {t('sitemap.title')}
               </h1>
               <p className='mt-2 text-kapwa-text-support'>
-                A complete guide to all pages and services available on
-                {config.portal.name}
+                {t('sitemap.intro', { portal: config.portal.name })}
               </p>
             </div>
 
@@ -285,14 +200,18 @@ const SitemapPage: FC = () => {
 
           <div className='mt-8 text-sm text-center text-kapwa-text-support'>
             <p>
-              Can&apos;t find what you&apos;re looking for? Try using our{' '}
-              <Link
-                to='/search'
-                className='text-kapwa-text-brand hover:underline'
-              >
-                search feature
-              </Link>
-              .
+              <Trans
+                t={t}
+                i18nKey='sitemap.notFound'
+                components={{
+                  link: (
+                    <Link
+                      to='/search'
+                      className='text-kapwa-text-brand hover:underline'
+                    />
+                  ),
+                }}
+              />
             </p>
           </div>
         </div>

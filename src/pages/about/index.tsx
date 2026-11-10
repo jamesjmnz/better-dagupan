@@ -17,17 +17,18 @@ import {
   ZapIcon,
 } from 'lucide-react';
 import { SEO } from '@/components/layout/SEO';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { Card, CardContent } from '@/components/ui/Card';
 
 const AboutPage: FC = () => {
   const { t } = useTranslation('about');
+  const { t: tp } = useTranslation('pages');
   return (
     <div className='bg-kapwa-bg-surface-raised min-h-screen'>
       <SEO
-        title='About'
-        description='A volunteer-led tech initiative committed to creating #civictech projects aimed at making government more transparent, efficient, and accessible to citizens.'
+        title={tp('about.seoTitle')}
+        description={tp('about.seoDescription')}
         keywords={[
           'government projects',
           'civic tech',
@@ -51,20 +52,23 @@ const AboutPage: FC = () => {
                 </h2>
                 <div className='bg-kapwa-bg-surface-brand/30 mb-6 rounded-xl p-6 md:p-8'>
                   <p className='text-kapwa-text-support mb-4 text-lg leading-relaxed'>
-                    BetterGov is a{' '}
-                    <strong>volunteer-led tech initiative</strong> committed to
-                    creating
+                    <Trans
+                      t={tp}
+                      i18nKey='shared.civictechBefore'
+                      components={{ strong: <strong /> }}
+                    />
                     <span className='bg-kapwa-bg-brand-default text-kapwa-text-inverse mx-2 inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold'>
                       <ZapIcon className='mr-1 h-4 w-4' />
                       #civictech
                     </span>
-                    projects aimed at making government more transparent,
-                    efficient, and accessible to citizens.
+                    {tp('shared.civictechAfter')}
                   </p>
                   <p className='text-kapwa-text-support mb-4 text-lg leading-relaxed'>
-                    Our goal is to{' '}
-                    <strong>support, promote, consolidate, and empower</strong>{' '}
-                    citizen builders!
+                    <Trans
+                      t={tp}
+                      i18nKey='about.goal'
+                      components={{ strong: <strong /> }}
+                    />
                   </p>
                 </div>
               </section>
@@ -90,44 +94,19 @@ const AboutPage: FC = () => {
               <section className='mb-10'>
                 <h2 className='text-kapwa-text-support mb-4 flex items-center text-2xl font-bold'>
                   <RocketIcon className='text-kapwa-text-brand mr-2 h-6 w-6' />
-                  What We Provide
+                  {tp('shared.provideTitle')}
                 </h2>
                 <p className='text-kapwa-text-support mb-6'>
-                  To support citizen builders in building impactful civic tech
-                  projects:
+                  {tp('about.provideIntro')}
                 </p>
                 <div className='mb-6 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
                   {[
-                    {
-                      icon: ServerIcon,
-                      title: 'Infrastructure & Tools',
-                      desc: 'Servers, AI credits, development tools, and more!',
-                    },
-                    {
-                      icon: UsersIcon,
-                      title: 'Tech Hackathons',
-                      desc: 'Regular events to collaborate and build together',
-                    },
-                    {
-                      icon: GlobeIcon,
-                      title: 'Data & APIs',
-                      desc: 'Access to government data and API endpoints',
-                    },
-                    {
-                      icon: HeartIcon,
-                      title: 'Find Your Team',
-                      desc: 'Connect with the right people and resource persons',
-                    },
-                    {
-                      icon: StarIcon,
-                      title: 'Industry Mentorship',
-                      desc: 'Guidance from seasoned tech and startup veterans',
-                    },
-                    {
-                      icon: BuildingIcon,
-                      title: 'Office Space',
-                      desc: 'Physical workspace for collaboration and meetings',
-                    },
+                    { icon: ServerIcon, key: 'infrastructure' },
+                    { icon: UsersIcon, key: 'hackathons' },
+                    { icon: GlobeIcon, key: 'data' },
+                    { icon: HeartIcon, key: 'team' },
+                    { icon: StarIcon, key: 'mentorship' },
+                    { icon: BuildingIcon, key: 'office' },
                   ].map((item, index) => (
                     <Card key={index} hover className='bg-kapwa-bg-surface'>
                       <CardContent className='p-5'>
@@ -135,10 +114,10 @@ const AboutPage: FC = () => {
                           <item.icon className='text-kapwa-text-brand h-6 w-6' />
                         </div>
                         <h3 className='text-kapwa-text-strong mb-2 text-base font-semibold'>
-                          {item.title}
+                          {tp(`shared.provide.${item.key}.title`)}
                         </h3>
                         <p className='text-kapwa-text-on-disabled text-sm'>
-                          {item.desc}
+                          {tp(`shared.provide.${item.key}.desc`)}
                         </p>
                       </CardContent>
                     </Card>
@@ -180,35 +159,42 @@ const AboutPage: FC = () => {
               <section className='mb-10'>
                 <h2 className='text-kapwa-text-support mb-4 flex items-center text-2xl font-bold'>
                   <ZapIcon className='text-kapwa-text-warning mr-2 h-6 w-6' />
-                  Our Commitment
+                  {tp('about.commitmentTitle')}
                 </h2>
                 <div className='border-kapwa-border-brand bg-gradient-to-r from-kapwa-bg-danger-weak via-kapwa-bg-accent-orange-weak to-kapwa-bg-warning-weak rounded-xl border-l-4 p-6 md:p-8'>
                   <div className='text-kapwa-text-support space-y-4'>
                     <p className='text-kapwa-text-brand text-lg font-bold'>
-                      WE&apos;RE DONE WAITING.
+                      {tp('about.doneWaiting')}
                     </p>
                     <p className='text-base leading-relaxed'>
-                      We&apos;re angry. You&apos;re angry. But we can contribute
-                      in our own ways —{' '}
-                      <strong>no matter how little it is</strong>.
+                      <Trans
+                        t={tp}
+                        i18nKey='about.angry'
+                        components={{ strong: <strong /> }}
+                      />
                     </p>
                     <p className='text-base leading-relaxed'>
-                      We can do <strong>amazing things</strong> together.{' '}
-                      <span className='text-kapwa-text-brand font-semibold'>
-                        Grassroots style. Open source. No permission needed.
-                      </span>
+                      <Trans
+                        t={tp}
+                        i18nKey='about.together'
+                        components={{
+                          strong: <strong />,
+                          highlight: (
+                            <span className='text-kapwa-text-brand font-semibold' />
+                          ),
+                        }}
+                      />
                     </p>
                     <p className='text-base leading-relaxed'>
-                      We are committed to putting{' '}
-                      <strong>time, resources, and money</strong> into this
-                      initiative. We will keep building{' '}
-                      <strong>relentlessly</strong> without anyone&apos;s
-                      permission. Open source, public,{' '}
-                      <strong>high quality</strong> sites.
+                      <Trans
+                        t={tp}
+                        i18nKey='about.committed'
+                        components={{ strong: <strong /> }}
+                      />
                     </p>
                     <div className='border-kapwa-border-brand mt-6 border-t-2 pt-4'>
                       <p className='text-kapwa-text-brand text-lg font-bold'>
-                        WE&apos;RE LOOKING FOR PEOPLE SMARTER THAN US!
+                        {tp('shared.lookingFor')}
                       </p>
                     </div>
                   </div>
@@ -234,10 +220,10 @@ const AboutPage: FC = () => {
             {/* Call to Action */}
             <div className='bg-kapwa-bg-brand-default mt-8 rounded-lg p-8 text-center'>
               <h3 className='text-kapwa-text-inverse mb-4 text-2xl font-bold'>
-                Ready to Make a Difference?
+                {tp('shared.readyTitle')}
               </h3>
               <p className='text-kapwa-text-inverse mx-auto mb-6 max-w-2xl opacity-90'>
-                Join our community of builders, dreamers, and changemakers.
+                {tp('about.ctaBody')}
               </p>
               <div className='flex flex-col justify-center gap-4 sm:flex-row'>
                 <Link to='/contact'>
@@ -246,11 +232,11 @@ const AboutPage: FC = () => {
                     size='lg'
                     leftIcon={<MessageCircleIcon className='h-5 w-5' />}
                   >
-                    Contacts
+                    {tp('about.contacts')}
                   </Button>
                 </Link>
                 <span className='text-kapwa-text-inverse flex items-center justify-center'>
-                  or
+                  {tp('shared.or')}
                 </span>
                 <Link to='/join-us'>
                   <Button
@@ -259,7 +245,7 @@ const AboutPage: FC = () => {
                     variant='outline'
                     leftIcon={<LightbulbIcon className='h-5 w-5' />}
                   >
-                    Join Us
+                    {tp('about.joinUs')}
                   </Button>
                 </Link>
               </div>
