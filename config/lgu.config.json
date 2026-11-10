@@ -47,17 +47,9 @@
       "exactMatchTargets": ["dagupan", "dagupan city"]
     }
   },
-  "dataPaths": {
-    "departments": "src/data/directory/departments.json",
-    "barangays": "src/data/directory/barangays.json",
-    "executive": "src/data/directory/executive.json",
-    "legislative": "src/data/directory/legislative.json",
-    "services": "src/data/services"
-  },
   "features": {
     "openLGU": true,
     "transparency": true,
-    "tourism": true,
     "statistics": true
   }
 }

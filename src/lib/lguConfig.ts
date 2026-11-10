@@ -45,11 +45,9 @@ export interface LGUConfig {
       exactMatchTargets: string[];
     };
   };
-  dataPaths: Record<string, string>;
   features: {
     openLGU: boolean;
     transparency: boolean;
-    tourism: boolean;
     statistics: boolean;
   };
 }
