@@ -3,6 +3,7 @@ import { FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 import {
+  BarChart3,
   Briefcase,
   Building2,
   ChevronRight,
@@ -10,11 +11,11 @@ import {
   FileText,
   Globe,
   Home,
-  Waves,
 } from 'lucide-react';
 
 import { SEO } from '@/components/layout/SEO';
 import { config } from '@/lib/lguConfig';
+import { lguLabels } from '@/lib/lguLabels';
 
 interface SitemapSection {
   title: string;
@@ -39,55 +40,35 @@ const SitemapPage: FC = () => {
           description: `About ${config.portal.name}`,
         },
         {
+          title: 'Search',
+          url: '/search',
+          description: 'Search the portal',
+        },
+        {
+          title: 'Contact',
+          url: '/contact',
+          description: 'Ways to reach the project volunteers',
+        },
+        {
           title: 'Accessibility',
           url: '/accessibility',
           description: 'Accessibility statement and features',
         },
         {
-          title: 'Search',
-          url: '/search',
-          description: 'Search the entire site',
+          title: 'Terms of Service',
+          url: '/terms-of-service',
+          description: 'Terms for using this portal',
         },
       ],
     },
     {
-      title: 'Philippines',
-      icon: <Globe className='w-5 h-5' />,
+      title: 'Services',
+      icon: <Briefcase className='w-5 h-5' />,
       links: [
         {
-          title: 'About the Philippines',
-          url: '/philippines/about',
-          description: 'General information about the Philippines',
-        },
-        {
-          title: 'History',
-          url: '/philippines/history',
-          description: 'Historical timeline of the Philippines',
-        },
-        {
-          title: 'Culture',
-          url: '/philippines/culture',
-          description: 'Cultural heritage and traditions',
-        },
-        {
-          title: 'Regions',
-          url: '/philippines/regions',
-          description: 'Administrative regions of the Philippines',
-        },
-        {
-          title: 'Map',
-          url: '/philippines/map',
-          description: 'Interactive map of the Philippines',
-        },
-        {
-          title: 'Public Holidays',
-          url: '/philippines/holidays',
-          description: 'Official holidays in the Philippines',
-        },
-        {
-          title: 'Hotlines',
-          url: 'https://hotlines.bettergov.ph/',
-          description: 'Emergency and important contact numbers',
+          title: 'Public Services',
+          url: '/services',
+          description: `Services offered by the ${lguLabels.fullName}`,
         },
       ],
     },
@@ -96,226 +77,135 @@ const SitemapPage: FC = () => {
       icon: <Building2 className='w-5 h-5' />,
       links: [
         {
-          title: 'Executive Branch',
-          url: '/government/executive',
-          description: 'Office of the President and executive offices',
+          title: 'Elected Officials',
+          url: '/government/elected-officials',
+          description: `The ${lguLabels.head}, Vice ${lguLabels.head} and ${lguLabels.body}`,
         },
         {
-          title: 'Office of the Mayor',
-          url: '/government/executive/office-of-the-mayor',
-          description: 'Information about the Office of the President',
-        },
-        {
-          title: 'Office of the Vice Mayor',
-          url: '/government/executive/office-of-the-vice-mayor',
-          description: 'Information about the Office of the Vice Mayor',
-        },
-        {
-          title: 'Presidential Communications Office',
-          url: '/government/executive/presidential-communications-office',
-          description:
-            'Information about the Presidential Communications Office',
-        },
-        {
-          title: 'Other Executive Offices',
-          url: '/government/executive/other-executive-offices',
-          description: 'Other offices under the Executive branch',
+          title: 'Committees',
+          url: '/government/elected-officials/committees',
+          description: `Standing committees of the ${lguLabels.body}`,
         },
         {
           title: 'Departments',
           url: '/government/departments',
-          description: 'Government departments and agencies',
+          description: `Offices of the ${lguLabels.fullName}`,
         },
         {
-          title: 'Constitutional Bodies',
-          url: '/government/constitutional',
-          description: 'Constitutional commissions and offices',
-        },
-        {
-          title: 'GOCCs',
-          url: '/government/constitutional/goccs',
-          description: 'Government-Owned and Controlled Corporations',
-        },
-        {
-          title: 'SUCs',
-          url: '/government/constitutional/sucs',
-          description: 'State Universities and Colleges',
-        },
-        {
-          title: 'Legislative Branch',
-          url: '/government/legislative',
-          description: 'Senate and House of Representatives',
-        },
-        {
-          title: 'Municipal Council Committees',
-          url: '/government/legislative/municipal-committees',
-          description: 'Committees in the Municipal Council',
-        },
-        {
-          title: 'House Members',
-          url: '/government/legislative/house-members',
-          description: 'Members of the House of Representatives',
-        },
-        {
-          title: 'Diplomatic Missions',
-          url: '/government/diplomatic/missions',
-          description: 'Philippine diplomatic missions abroad',
-        },
-        {
-          title: 'Consulates',
-          url: '/government/diplomatic/consulates',
-          description: 'Philippine consulates',
-        },
-        {
-          title: 'International Organizations',
-          url: '/government/diplomatic/organizations',
-          description: 'International organizations in the Philippines',
-        },
-        {
-          title: 'Local Government',
-          url: '/government/local',
-          description: 'Local government units by region',
+          title: lguLabels.subdivisions,
+          url: '/government/barangays',
+          description: `The barangays of ${lguLabels.name}`,
         },
       ],
     },
+    ...(config.features.statistics
+      ? [
+          {
+            title: 'Statistics',
+            icon: <BarChart3 className='w-5 h-5' />,
+            links: [
+              {
+                title: 'Overview',
+                url: '/statistics',
+                description: `Key figures about ${lguLabels.name}`,
+              },
+              {
+                title: 'Population',
+                url: '/statistics/population',
+                description: 'Census population figures',
+              },
+              {
+                title: 'Income',
+                url: '/statistics/municipal-income',
+                description: `${lguLabels.adjective} income figures`,
+              },
+              {
+                title: 'Competitiveness',
+                url: '/statistics/competitiveness',
+                description: 'Cities and Municipalities Competitiveness Index',
+              },
+            ],
+          },
+        ]
+      : []),
+    ...(config.features.transparency
+      ? [
+          {
+            title: 'Transparency',
+            icon: <FileCheck className='w-5 h-5' />,
+            links: [
+              {
+                title: 'Overview',
+                url: '/transparency',
+                description: 'Public funds, works and procurement',
+              },
+              {
+                title: 'Public Funds',
+                url: '/transparency/financial',
+                description: 'Income and expenditure',
+              },
+              {
+                title: 'Procurement',
+                url: '/transparency/procurement',
+                description: 'Bids and awarded contracts',
+              },
+              {
+                title: 'Infrastructure Projects',
+                url: '/transparency/infrastructure',
+                description: 'DPWH projects in the city',
+              },
+            ],
+          },
+        ]
+      : []),
+    ...(config.features.openLGU
+      ? [
+          {
+            title: 'Legislation',
+            icon: <FileText className='w-5 h-5' />,
+            links: [
+              {
+                title: 'Ordinances and Resolutions',
+                url: '/openlgu',
+                description: `Legislative records of the ${lguLabels.body}`,
+              },
+              {
+                title: 'Terms',
+                url: '/openlgu/terms',
+                description: `Terms of the ${lguLabels.body}`,
+              },
+            ],
+          },
+        ]
+      : []),
     {
-      title: 'Services',
-      icon: <FileText className='w-5 h-5' />,
-      links: [
-        {
-          title: 'All Services',
-          url: '/services',
-          description: 'Browse all government services',
-        },
-        {
-          title: 'Government Websites Directory',
-          url: '/services/websites',
-          description: 'Directory of official government websites',
-        },
-        {
-          title: 'Business & Trade',
-          url: '/services?category=business-trade',
-          description: 'Business registration, permits, and trade services',
-        },
-        {
-          title: 'Certificates & IDs',
-          url: '/services?category=certificates-ids',
-          description: 'Birth certificates, IDs, and other documents',
-        },
-        {
-          title: 'Contributions',
-          url: '/services?category=contributions',
-          description: 'SSS, PhilHealth, and other contribution services',
-        },
-        {
-          title: 'Disaster & Weather',
-          url: '/services?category=disaster-weather',
-          description: 'Disaster preparedness and weather information',
-        },
-        {
-          title: 'Education',
-          url: '/services?category=education',
-          description: 'Educational services and scholarships',
-        },
-        {
-          title: 'Employment',
-          url: '/services?category=employment',
-          description: 'Job search and employment services',
-        },
-        {
-          title: 'Health',
-          url: '/services?category=health',
-          description: 'Health services and medical assistance',
-        },
-        {
-          title: 'Housing',
-          url: '/services?category=housing',
-          description: 'Housing loans and property services',
-        },
-        {
-          title: 'Passport & Travel',
-          url: '/services?category=passport-travel',
-          description: 'Passport application and travel documents',
-        },
-        {
-          title: 'Social Services',
-          url: '/services?category=social-services-assistance',
-          description: 'Social welfare and assistance programs',
-        },
-        {
-          title: 'Tax',
-          url: '/services?category=tax',
-          description: 'Tax filing and payment services',
-        },
-        {
-          title: 'Transport & Driving',
-          url: '/services?category=transport-driving',
-          description: "Driver's license and transportation services",
-        },
-      ],
-    },
-    {
-      title: 'Travel',
-      icon: <Briefcase className='w-5 h-5' />,
-      links: [
-        {
-          title: 'Visa Information',
-          url: '/travel/visa',
-          description: 'Visa requirements for the Philippines',
-        },
-        {
-          title: 'Visa Types',
-          url: '/travel/visa-types',
-          description: 'Different types of Philippine visas',
-        },
-        {
-          title: 'Special Work Permit',
-          url: '/travel/visa-types/swp-c',
-          description: 'Information about Special Work Permits',
-        },
-      ],
-    },
-    {
-      title: 'Data Services',
-      icon: <FileCheck className='w-5 h-5' />,
+      title: 'Data and Community',
+      icon: <Globe className='w-5 h-5' />,
       links: [
         {
           title: 'Weather',
           url: '/data/weather',
-          description: 'Real-time weather information',
+          description: `Current weather in ${lguLabels.name}`,
         },
         {
-          title: 'Foreign Exchange Rates',
+          title: 'Exchange Rates',
           url: '/data/forex',
-          description: 'Current foreign exchange rates',
-        },
-      ],
-    },
-    {
-      title: 'Infrastructure',
-      icon: <Waves className='w-5 h-5' />,
-      links: [
-        {
-          title: 'Flood Control Projects',
-          url: '/flood-control-projects',
-          description: 'Overview of flood control infrastructure projects',
+          description: 'Foreign exchange rates',
         },
         {
-          title: 'Projects Table View',
-          url: '/flood-control-projects/table',
-          description: 'Detailed table view of all flood control projects',
+          title: 'Contribute',
+          url: '/contribute',
+          description: 'Help improve the data on this portal',
         },
         {
-          title: 'Projects Map View',
-          url: '/flood-control-projects/map',
-          description:
-            'Interactive map showing flood control project locations',
+          title: 'Join Us',
+          url: '/join-us',
+          description: 'Volunteer with the project',
         },
         {
-          title: 'Contractors Directory',
-          url: '/flood-control-projects/contractors',
-          description:
-            'Directory of contractors working on flood control projects',
+          title: 'Ideas',
+          url: '/ideas',
+          description: 'Suggest improvements',
         },
       ],
     },
@@ -330,7 +220,7 @@ const SitemapPage: FC = () => {
           'sitemap',
           'navigation',
           'government services',
-          'philippines government',
+          lguLabels.fullName,
           'website map',
         ]}
       />
