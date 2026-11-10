@@ -14,6 +14,7 @@ import { config } from '@/lib/lguConfig';
 
 import useOpenLGU from '@/hooks/useOpenLGU';
 
+import CouncilOrdinances from './components/CouncilOrdinances';
 import OpenLGUSidebar from './components/OpenLGUSidebar';
 
 const filterValues = [
@@ -78,12 +79,14 @@ export default function OpenLGULayout() {
               lgu: lguLabels.name,
             })}
             actions={
-              <SearchInput
-                placeholder={t('openlgu:layout.searchPlaceholder')}
-                value={searchQuery}
-                onChangeValue={setSearchQuery}
-                size='md'
-              />
+              hasNoRecords ? undefined : (
+                <SearchInput
+                  placeholder={t('openlgu:layout.searchPlaceholder')}
+                  value={searchQuery}
+                  onChangeValue={setSearchQuery}
+                  size='md'
+                />
+              )
             }
           />
         ) : (
@@ -95,12 +98,14 @@ export default function OpenLGULayout() {
             })}
             autoBreadcrumbs={true}
             actions={
-              <SearchInput
-                placeholder={t('openlgu:layout.searchPlaceholder')}
-                value={searchQuery}
-                onChangeValue={setSearchQuery}
-                size='sm'
-              />
+              hasNoRecords ? undefined : (
+                <SearchInput
+                  placeholder={t('openlgu:layout.searchPlaceholder')}
+                  value={searchQuery}
+                  onChangeValue={setSearchQuery}
+                  size='sm'
+                />
+              )
             }
           />
         )
@@ -118,16 +123,19 @@ export default function OpenLGULayout() {
       }
     >
       {hasNoRecords ? (
-        <EmptyState
-          icon={Landmark}
-          title={t('openlgu.unavailable.title')}
-          message={t('openlgu.unavailable.message', {
-            body: lguLabels.body,
-            lgu: lguLabels.fullName,
-          })}
-          actionHref={config.lgu.officialWebsite}
-          actionLabel={t('openlgu.unavailable.action')}
-        />
+        <>
+          <EmptyState
+            icon={Landmark}
+            title={t('openlgu.unavailable.title')}
+            message={t('openlgu.unavailable.message', {
+              body: lguLabels.body,
+              lgu: lguLabels.fullName,
+            })}
+            actionHref={config.lgu.officialWebsite}
+            actionLabel={t('openlgu.unavailable.action')}
+          />
+          <CouncilOrdinances />
+        </>
       ) : (
         <Outlet
           context={{

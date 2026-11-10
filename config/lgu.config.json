@@ -56,6 +56,14 @@
       "exactMatchTargets": ["dagupan", "dagupan city"]
     }
   },
+  "openlgu": {
+    "councilFeed": {
+      "api": "https://sp.dagupan.gov.ph/wp-json/wp/v2",
+      "postType": "ordinance",
+      "taxonomy": "classification",
+      "pageUrl": "https://sp.dagupan.gov.ph/ordinance/"
+    }
+  },
   "features": {
     "openLGU": true,
     "transparency": true,

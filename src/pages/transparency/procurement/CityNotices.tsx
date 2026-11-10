@@ -219,7 +219,7 @@ export default function CityNotices() {
           href={feed.pageUrl}
           target='_blank'
           rel='noreferrer'
-          className='text-kapwa-text-link underline'
+          className='text-kapwa-text-brand hover:text-kapwa-text-brand-bold underline'
         >
           {t('cityNotices.openCityPage')}
         </a>

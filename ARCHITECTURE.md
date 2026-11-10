@@ -119,6 +119,17 @@ No D1 database is bound yet. `functions/api/openlgu/_middleware.ts` answers
 `503` with `legislative_data_unavailable` while `BETTERLB_DB` is missing, and the
 OpenLGU pages show that the records are not published yet.
 
+In the meantime, that empty state lists the ordinances the Sangguniang
+Panlungsod posts on its own WordPress site (`openlgu.councilFeed` in
+`config/lgu.config.json`). `/api/council-ordinances` proxies the feed live,
+caches it at the edge for 30 minutes, and stores nothing: titles link to the
+council's pages, and the date shown is the posting date, since the feed has no
+ordinance number or enactment date. The council publishes no resolution or
+executive order feed. This is an interim link-back list, not the pipeline: its
+items are not source records, and nothing from it reaches D1. Once the
+pipeline is re-keyed for Dagupan and canonical records exist, the OpenLGU pages
+render those instead.
+
 ### External APIs
 | Service | Purpose |
 |---------|---------|

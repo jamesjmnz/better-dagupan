@@ -53,6 +53,19 @@ export interface LGUConfig {
       exactMatchTargets: string[];
     };
   };
+  openlgu?: {
+    /**
+     * Ordinances the council posts on its own WordPress site, listed live
+     * while the legislative database is not bound. Nothing is stored.
+     */
+    councilFeed?: {
+      api: string;
+      postType: string;
+      /** Optional taxonomy offered as a filter (e.g. "classification"). */
+      taxonomy?: string;
+      pageUrl: string;
+    };
+  };
   features: {
     openLGU: boolean;
     transparency: boolean;
