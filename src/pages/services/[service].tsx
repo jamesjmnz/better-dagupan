@@ -135,6 +135,13 @@ export default function ServiceDetail() {
     .sort();
   const sourcePublished = publishedDates.length > 0 ? publishedDates[0] : null;
 
+  // A citation that links an Internet Archive capture rather than the city's
+  // live page says so in words: the link alone does not tell a reader that
+  // the page was read from a copy.
+  const citesArchivedCopy = resolveCivicSources(sources).some(source =>
+    source.url.startsWith('https://web.archive.org/')
+  );
+
   const quickInfoArray = service.quickInfo
     ? (Object.entries(service.quickInfo) as [keyof QuickInfo, string][]).map(
         ([key, value]) => ({
@@ -426,6 +433,11 @@ export default function ServiceDetail() {
           {sources.length > 0 && (
             <div className='space-y-2'>
               <SourceNote sources={sources} />
+              {citesArchivedCopy && (
+                <p className='text-kapwa-text-support pl-1 text-[11px]'>
+                  {t('detail.archivedCopy')}
+                </p>
+              )}
               {sourcePublished && (
                 <p className='text-kapwa-text-support pl-1 text-[11px]'>
                   {t('detail.sourcePublished', {

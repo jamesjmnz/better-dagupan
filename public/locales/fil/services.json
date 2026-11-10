@@ -103,7 +103,8 @@
     "feeNotVerifiedBody": "Walang halagang nakasaad sa pahina ng lungsod para sa serbisyong ito. Tinutukoy nito ang hiwalay na talaan ng mga buwis, bayarin at singil na hindi pa naberipika ng Better Dagupan. Ipinapakita sa ibaba ang hanay ng bayad ng bawat hakbang ayon sa pagkakalimbag.",
     "requirementsNotVerified": "Mga kinakailangan: hindi pa beripikado",
     "stepsNotVerified": "Mga hakbang: hindi pa beripikado",
-    "sourcePublished": "Inilathala ng lungsod ang pahinang ito noong {{date}}."
+    "sourcePublished": "Inilathala ng lungsod ang pahinang ito noong {{date}}.",
+    "archivedCopy": "Hindi maabot ang website ng lungsod nang huling suriin ang serbisyong ito, kaya bubuksan ng link sa itaas ang kopya ng Internet Archive ng pahina ng lungsod. Ang teksto ay sariling teksto ng lungsod."
   },
   "fees": {
     "title": "Mga Bayarin",

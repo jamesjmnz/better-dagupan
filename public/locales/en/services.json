@@ -103,7 +103,8 @@
     "feeNotVerifiedBody": "The city's page states no amount for this service. It refers to a separate table of taxes, fees and charges that Better Dagupan has not verified. The fee column of each step is shown below as printed.",
     "requirementsNotVerified": "Requirements: not verified",
     "stepsNotVerified": "Steps: not verified",
-    "sourcePublished": "The city published this page on {{date}}."
+    "sourcePublished": "The city published this page on {{date}}.",
+    "archivedCopy": "The city's website could not be reached when this service was last checked, so the link above opens the Internet Archive's copy of the city's page. The text is the city's own."
   },
   "fees": {
     "title": "Fees",
