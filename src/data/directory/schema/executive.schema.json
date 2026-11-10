@@ -1,36 +1,97 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Executive Leadership",
-  "description": "Schema for municipal executive leaders (Elected and Appointed)",
+  "description": "Schema for the elected executive of the city: the City Mayor and the City Vice Mayor. Fields that have not been verified against a civic source are null, never invented or filled with placeholder text. A person is named in a seat only when two independent source families name them there; the seat itself is published regardless, so a withheld name reads as a fact about this portal rather than an empty office.",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["slug", "name", "role", "isElected"],
+    "additionalProperties": false,
+    "required": [
+      "slug",
+      "role",
+      "isElected",
+      "name_status",
+      "name",
+      "office",
+      "term",
+      "address",
+      "phone",
+      "email",
+      "website",
+      "sources"
+    ],
     "properties": {
-      "slug": { "type": "string" },
-      "name": { "type": "string" },
-      "role": { "type": "string" },
-      "isElected": { "type": "boolean" },
-      "office": {
+      "slug": {
+        "description": "Stable identifier for the seat, not the person, so it survives a change of office-holder. Lowercase, hyphen-separated.",
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "role": {
+        "description": "The seat as the city publishes it, e.g. \"City Mayor\".",
+        "type": "string",
+        "minLength": 1
+      },
+      "isElected": {
+        "type": "boolean"
+      },
+      "name_status": {
+        "description": "Why the name is or is not published. `published` requires name to be present. `conflicting_sources`: official sources name different people and nothing establishes which is current. `uncorroborated`: fewer than two independent source families name anyone. Both withheld states require name to be null.",
+        "type": "string",
+        "enum": ["published", "conflicting_sources", "uncorroborated"]
+      },
+      "name": {
+        "description": "The office-holder's name as published, without honorifics. Null unless established by two independent source families.",
         "type": ["string", "null"],
-        "description": "The specific office name or null"
+        "minLength": 1
+      },
+      "office": {
+        "description": "The office the official heads, as the city names it. Null until sourced.",
+        "type": ["string", "null"]
+      },
+      "term": {
+        "description": "Term of office, e.g. \"2025–2028\". Null unless an election source establishes the election the term follows from.",
+        "type": ["string", "null"],
+        "pattern": "^\\d{4}–\\d{4}$"
       },
       "address": {
+        "description": "Null until an authoritative address is sourced for the official.",
         "type": ["string", "null"]
       },
       "phone": {
+        "description": "Null until a source states a number for the official.",
         "type": ["string", "null"]
       },
       "email": {
-        "oneOf": [{ "type": "string", "format": "email" }, { "type": "null" }],
-        "description": "Valid email address or null",
+        "description": "Null until a source states an address for the official.",
+        "type": ["string", "null"],
         "format": "email"
       },
       "website": {
-        "oneOf": [{ "type": "string", "format": "uri" }, { "type": "null" }],
-        "description": "Valid URL starting with http/https or null",
+        "description": "Null until an authoritative page is sourced.",
+        "type": ["string", "null"],
         "format": "uri"
+      },
+      "personId": {
+        "description": "Optional link to an OpenLGU person record.",
+        "type": "string"
+      },
+      "sources": {
+        "description": "Civic-source ids from src/data/sources/civic-sources.json naming this person in this seat. At least two, from at least two independent source families; the provenance test enforces the independence.",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": { "type": "string", "minLength": 1 }
       }
-    }
+    },
+    "allOf": [
+      {
+        "if": { "properties": { "name_status": { "const": "published" } } },
+        "then": {
+          "properties": { "name": { "type": "string" } },
+          "required": ["name"]
+        },
+        "else": { "properties": { "name": { "type": "null" } } }
+      }
+    ]
   }
 }

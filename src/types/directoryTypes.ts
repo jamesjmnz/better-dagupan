@@ -128,38 +128,117 @@ export interface Department {
   sources: string[];
 }
 
+/**
+ * Why an elected seat has, or has no, published holder.
+ *
+ * The same reasoning as DepartmentHeadStatus: a seat with no published name is
+ * never an empty seat, so the reason is recorded rather than left to be
+ * inferred from a null.
+ */
+export type OfficialNameStatus =
+  | 'published'
+  | 'conflicting_sources'
+  | 'uncorroborated';
+
+/**
+ * A seat in the city executive: the City Mayor or the City Vice Mayor.
+ *
+ * The slug identifies the seat, not the person, so it survives a change of
+ * office-holder. Mirrors src/data/directory/schema/executive.schema.json.
+ */
 export interface ExecutiveOfficial {
   slug: string;
-  name: string;
+  /** The seat as the city publishes it, e.g. "City Mayor". */
   role: string;
-  office?: string;
-  address?: string;
-  phone?: string;
-  email?: string;
-  website?: string;
-  isElected?: boolean;
+  isElected: boolean;
+  name_status: OfficialNameStatus;
+  /**
+   * The office-holder as published, without honorifics, stored ready to
+   * render. Do not pass it through toTitleCase(): it lowercases initials and
+   * suffixes such as "DV." and "IV". null unless the name is established.
+   */
+  name: string | null;
+  /** The office the official heads, as the city names it. */
+  office: string | null;
+  /** e.g. "2025–2028". null unless an election source establishes it. */
+  term: string | null;
+  address: string | null;
+  /** null until a source states a number for the official. */
+  phone: string | null;
+  /** null until a source states an address for the official. */
+  email: string | null;
+  website: string | null;
   personId?: string;
+  /**
+   * Civic-source ids naming this person in this seat, from at least two
+   * independent source families. Enforced by electedOfficialsProvenance.test.ts.
+   */
+  sources: string[];
+}
+
+/**
+ * How a council seat is filled. Two of the council's seats are not elected at
+ * large: they belong ex officio to the presidents of the city chapter of the
+ * Liga ng mga Barangay and of the city federation of the Sangguniang Kabataan.
+ */
+export type CouncilSeat = 'elected' | 'ex_officio_liga' | 'ex_officio_sk';
+
+/** Another spelling of an official's name on a cited source. */
+export interface OfficialNameVariant {
+  name: string;
+  /** Civic-source id of the page that spells it this way. */
+  source: string;
+}
+
+export interface CouncilOfficial {
+  slug: string;
+  /** The title as the council publishes it, e.g. "Councilor". */
+  role: string;
+  seat: CouncilSeat;
+  name_status: OfficialNameStatus;
+  /** As the council publishes it, without honorifics. Render verbatim. */
+  name: string | null;
+  name_variants: OfficialNameVariant[];
+  /** null when no cited source establishes it, as for the ex-officio seats. */
+  term: string | null;
+  contact: string | null;
+  website: string | null;
+  personId?: string;
+  sources: string[];
 }
 
 export interface CommitteeMember {
   name: string;
-  role: string;
+  role: string | null;
 }
 
 export interface PermanentCommittee {
   committee: string;
   chairperson: string;
   members: CommitteeMember[];
+  sources: string[];
 }
 
 export interface LegislativeChamber {
   slug: string;
   branch: string;
+  /** e.g. "Sangguniang Panlungsod". */
   chamber: string;
+  /** Term of the elected membership. null unless an election source says. */
+  term: string | null;
   address: string | null;
   trunkline: string | null;
   website: string | null;
   email: string | null;
-  officials: DirectoryOfficial[];
+  /** Slug of the executive.json seat that presides over the council. */
+  presiding_officer: string | null;
+  officials: CouncilOfficial[];
+  /**
+   * Why committee assignments are or are not published. Both withheld states
+   * require permanent_committees to be empty.
+   */
+  committees_status: OfficialNameStatus;
   permanent_committees: PermanentCommittee[];
+  /** Civic-source ids backing the chamber: its name, address, website, term. */
+  sources: string[];
 }
