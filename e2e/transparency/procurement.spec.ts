@@ -7,17 +7,19 @@ import { assertKapwaTokens } from '../utils/kapwa';
 
 /**
  * Procurement records come from the shared Meilisearch PhilGEPS index,
- * filtered by `transparency.procurement.organizationName` in
- * config/lgu.config.json. Until that entity name is confirmed the page must
+ * filtered by `transparency.procurement.organizationNames` in
+ * config/lgu.config.json. Without a confirmed entity name the page must
  * refuse to query at all (an empty filter returns another organization's
- * contracts) and say the source is pending, with zeroed totals. Once it is
- * set, the results settle into a table or "No Records Found".
+ * contracts) and say the source is pending, with zeroed totals. Once one is
+ * set, the results settle into a table or "No Records Found". The city's own
+ * notices section is covered by city-notices.spec.ts.
  */
 const lguConfig = JSON.parse(
   readFileSync(new URL('../../config/lgu.config.json', import.meta.url), 'utf8')
-) as { transparency: { procurement: { organizationName: string } } };
-const orgConfigured =
-  lguConfig.transparency.procurement.organizationName.trim().length > 0;
+) as { transparency: { procurement: { organizationNames: string[] } } };
+const orgConfigured = lguConfig.transparency.procurement.organizationNames.some(
+  name => name.trim().length > 0
+);
 
 async function gotoProcurement(page: Page) {
   await page.goto('/transparency/procurement');
