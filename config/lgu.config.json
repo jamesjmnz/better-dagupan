@@ -50,6 +50,7 @@
   "features": {
     "openLGU": true,
     "transparency": true,
-    "statistics": true
+    "statistics": true,
+    "pangasinan": false
   }
 }

@@ -184,6 +184,8 @@ async function main() {
       openLGU: enableOpenLGU,
       transparency: enableTransparency,
       statistics: enableStats,
+      // Off until the Pangasinan locale has human-reviewed translations.
+      pangasinan: false,
     },
   };
 

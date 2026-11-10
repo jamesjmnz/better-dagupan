@@ -11,7 +11,7 @@ import { config } from '@/lib/lguConfig';
 import { cn } from '@/lib/utils';
 
 import { mainNavigation } from '../../data/navigation';
-import { LANGUAGES } from '../../i18n/languages';
+import { getEnabledLanguages } from '../../i18n/languages';
 import { LanguageType } from '../../types';
 
 export const Navbar: FC = () => {
@@ -87,8 +87,8 @@ export const Navbar: FC = () => {
                 onChange={e => changeLanguage(e.target.value as LanguageType)}
                 className='cursor-pointer bg-transparent text-[9px] font-bold tracking-widest text-kapwa-text-support uppercase outline-none sm:text-[10px] md:text-xs'
               >
-                {Object.entries(LANGUAGES).map(([code, lang]) => (
-                  <option key={code} value={code}>
+                {getEnabledLanguages().map(lang => (
+                  <option key={lang.code} value={lang.code}>
                     {lang.nativeName}
                   </option>
                 ))}

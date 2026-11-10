@@ -49,6 +49,11 @@ export interface LGUConfig {
     openLGU: boolean;
     transparency: boolean;
     statistics: boolean;
+    /**
+     * Offer Pangasinan in the language switcher. Keep this off until the
+     * locale has human-reviewed translations; see src/i18n/README.md.
+     */
+    pangasinan: boolean;
   };
 }
 
