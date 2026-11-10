@@ -83,20 +83,28 @@
     "pendingBody": "This service data is from the Citizens Charter document. Detailed requirements, steps, and fee information will be added as we verify and extract data from the official document.",
     "processSteps": "Process Steps",
     "informationDetails": "Information Details",
-    "sources": "Sources & References",
-    "reference": "Reference",
     "dataIntegrity": "Data Integrity",
     "officialData": "Official Data",
     "verifiedInformation": "Verified Information",
     "unverifiedData": "Unverified Data",
-    "fromCharter": "From Citizens Charter document",
+    "fromCharter": "From the city's Citizen's Charter pages",
     "lastAudit": "Last Audit: {{date}}",
     "awaitingVerification": "Awaiting official verification",
     "responsibleOffices": "Responsible Offices",
     "viewProfile": "View Profile",
     "helpTitle": "Help improve this data",
     "helpBody": "Find an error or outdated info? Our community helps keep this portal accurate.",
-    "suggestEdit": "Suggest an Edit"
+    "suggestEdit": "Suggest an Edit",
+    "whoMayAvailNotVerified": "Who may avail: not verified",
+    "classificationNotVerified": "Classification: not verified",
+    "processingTimeNotVerified": "Total processing time: not verified",
+    "processingTimeConflict": "The city's page states a total processing time that its own step times do not add up to, so Better Dagupan publishes no total. Each step's time is shown as printed.",
+    "feeNotVerified": "Fee amount: not verified",
+    "feeNotVerifiedBody": "The city's page states no amount for this service. It refers to a separate table of taxes, fees and charges that Better Dagupan has not verified. The fee column of each step is shown below as printed.",
+    "requirementsNotVerified": "Requirements: not verified",
+    "stepsNotVerified": "Steps: not verified",
+    "sourcePublished": "The city published this page on {{date}}.",
+    "archivedCopy": "The city's website could not be reached when this service was last checked, so the link above opens the Internet Archive's copy of the city's page. The text is the city's own."
   },
   "fees": {
     "title": "Fees",
@@ -108,12 +116,16 @@
   "timeline": {
     "title": "How to Apply",
     "visitPortal": "Visit Portal",
-    "time": "Time:"
+    "time": "Time:",
+    "agencyActions": "What the office does",
+    "fees": "Fees:",
+    "staffWithheld": "The city's page also names the staff responsible for each step. Better Dagupan does not republish those names."
   },
   "requirements": {
     "title": "Requirements",
     "from": "from: {{place}}",
-    "viewService": "View Service"
+    "viewService": "View Service",
+    "whereNotVerified": "Where to secure: not verified"
   },
   "supporting": {
     "title": "Supporting Documents Details",

@@ -31,12 +31,21 @@ export function RequirementCard({ requirement }: RequirementCardProps) {
           <FileText className='h-4 w-4' />
         </div>
         <div className='flex-1'>
-          <h4 className='text-kapwa-text-strong text-sm font-semibold'>
+          {/* As printed; some requirements list their options on lines. */}
+          <h4 className='text-kapwa-text-strong whitespace-pre-line text-sm font-semibold'>
             {title}
           </h4>
-          <p className='text-kapwa-text-support mt-1 text-xs'>
-            {t('requirements.from', { place: where_to_secure })}
-          </p>
+          {where_to_secure ? (
+            <p className='text-kapwa-text-support mt-1 whitespace-pre-line text-xs'>
+              {t('requirements.from', { place: where_to_secure })}
+            </p>
+          ) : (
+            // A blank cell in the charter is not a statement that the
+            // document can be had anywhere, so say what this portal knows.
+            <p className='text-kapwa-text-disabled mt-1 text-xs italic'>
+              {t('requirements.whereNotVerified')}
+            </p>
+          )}
           {copies && (
             <p className='text-kapwa-text-brand mt-1 text-xs font-medium'>
               {copies}

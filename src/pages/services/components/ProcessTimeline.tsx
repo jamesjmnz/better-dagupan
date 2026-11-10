@@ -50,7 +50,7 @@ export function ProcessTimeline({ steps }: ProcessTimelineProps) {
                         className='border-l-2 border-kapwa-border-weak pl-4'
                       >
                         <div className='flex items-start gap-2'>
-                          <span className='text-kapwa-text-brand bg-kapwa-bg-brand-weak/20 flex h-5 w-5 shrink-0 items-center justify-center rounded text-xs font-bold'>
+                          <span className='text-kapwa-text-brand bg-kapwa-bg-brand-weak/20 flex h-5 min-w-5 shrink-0 items-center px-1 justify-center rounded text-xs font-bold'>
                             {subStep.letter}
                           </span>
                           <p className='text-kapwa-text-support text-xs leading-relaxed flex-1'>
@@ -91,6 +91,60 @@ export function ProcessTimeline({ steps }: ProcessTimelineProps) {
                   </div>
                 )}
 
+                {/*
+                  What the office does at this step, with the fee and time
+                  the charter prints beside each action. A blank cell stays
+                  blank rather than being filled from a neighbouring row.
+                */}
+                {step.agency_actions && step.agency_actions.length > 0 && (
+                  <div className='mt-3 ml-4 space-y-2'>
+                    <p className='text-kapwa-text-disabled text-[10px] font-bold uppercase tracking-wider'>
+                      {t('timeline.agencyActions')}
+                    </p>
+                    <ul className='space-y-2'>
+                      {step.agency_actions.map((agency, agencyIdx) => (
+                        <li
+                          key={agencyIdx}
+                          className='border-l-2 border-kapwa-border-weak pl-4'
+                        >
+                          <p className='text-kapwa-text-support whitespace-pre-line text-xs leading-relaxed'>
+                            {agency.number && (
+                              <span className='text-kapwa-text-brand mr-1 font-bold'>
+                                {agency.number}
+                              </span>
+                            )}
+                            {agency.action}
+                          </p>
+                          {(agency.fees || agency.processing_time) && (
+                            <p className='mt-1 flex flex-wrap gap-x-4 gap-y-1 text-[11px]'>
+                              {agency.fees && (
+                                <span>
+                                  <span className='text-kapwa-text-disabled font-bold uppercase tracking-wider'>
+                                    {t('timeline.fees')}
+                                  </span>{' '}
+                                  <span className='text-kapwa-text-strong whitespace-pre-line'>
+                                    {agency.fees}
+                                  </span>
+                                </span>
+                              )}
+                              {agency.processing_time && (
+                                <span>
+                                  <span className='text-kapwa-text-disabled font-bold uppercase tracking-wider'>
+                                    {t('timeline.time')}
+                                  </span>{' '}
+                                  <span className='text-kapwa-text-strong whitespace-pre-line'>
+                                    {agency.processing_time}
+                                  </span>
+                                </span>
+                              )}
+                            </p>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 {/* Processing time for this step */}
                 {step.processing_time && (
                   <div className='mt-2 ml-4 flex items-center gap-2'>
@@ -107,6 +161,14 @@ export function ProcessTimeline({ steps }: ProcessTimelineProps) {
           </div>
         ))}
       </div>
+      {/*
+        The charter's person-responsible column names individual staff on an
+        undated page. They are left out, and the reader is told so, rather
+        than the column silently disappearing.
+      */}
+      <p className='text-kapwa-text-support mt-6 text-[11px] leading-relaxed'>
+        {t('timeline.staffWithheld')}
+      </p>
     </DetailSection>
   );
 }

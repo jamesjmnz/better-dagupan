@@ -1,12 +1,13 @@
+import type {
+  ClientStep as CharterClientStep,
+  Requirement,
+  ServiceClassification,
+} from './citizens-charter';
+
 // --- Service Types ---
 export interface ServiceCategory {
   name: string;
   slug: string;
-}
-
-export interface Source {
-  name: string;
-  url?: string;
 }
 
 export type ServiceType = 'transaction' | 'information';
@@ -24,12 +25,6 @@ export interface QuickInfo {
 }
 
 // Citizens Charter specific types
-export interface DetailedRequirement {
-  requirement: string;
-  where_to_secure: string;
-  copies?: string;
-}
-
 export interface SupportingDocument {
   document: string;
   where_to_secure: string;
@@ -64,18 +59,6 @@ export interface SupportingDocumentsDetail {
   note?: string;
 }
 
-export interface ClientStep {
-  step: number;
-  action: string;
-  sub_steps?: {
-    letter: string;
-    action: string;
-    details?: string[];
-  }[];
-  url?: string;
-  processing_time?: string;
-}
-
 export interface ServiceFee {
   amount: string;
   description: string;
@@ -108,25 +91,30 @@ export interface Service {
   faqs?: { question: string; answer: string }[];
   quickInfo?: QuickInfo;
   updatedAt?: string | null;
-  sources?: Source[];
+  /**
+   * Ids of the civic sources in src/data/sources/civic-sources.json that this
+   * record is verified against. Rendered by SourceNote.
+   */
+  sources?: string[];
 
   // NEW: Source tracking
   source?: ServiceSource;
 
   // NEW: Citizens Charter fields (optional - only for CC services)
-  serviceNumber?: string; // e.g., "1.1", "9.2"
+  serviceNumber?: string | null; // e.g., "1.1", "9.2"; null when the charter numbers none
   officeDivision?: string; // Full office name from CC
-  classification?: 'Simple' | 'Complex';
-  typeOfTransaction?: string; // G2C, G2B, G2G
-  whoMayAvail?: string;
+  classification?: ServiceClassification | null;
+  typeOfTransaction?: string | null; // as printed, e.g. "Government to Business"
+  whoMayAvail?: string | null;
 
   // NEW: Detailed data from Citizens Charter
-  detailedRequirements?: DetailedRequirement[]; // { requirement, where_to_secure }
-  clientSteps?: ClientStep[]; // { step, action, sub_steps?, url?, offices? }
+  detailedRequirements?: Requirement[]; // { requirement, where_to_secure }
+  clientSteps?: CharterClientStep[]; // { step, action, sub_steps?, agency_actions? }
   supportingDocumentsDetail?: SupportingDocumentsDetail; // Detailed supporting documents structure
-  fees?: ServiceFee; // { amount, description } - dict format only after standardization
+  fees?: ServiceFee | null; // { amount, description }; null when the charter states no amount
   feeSchedule?: FeeItem[]; // For services that are lists of fees
-  processingTime?: string; // In-person transaction time
+  processingTime?: string | null; // In-person transaction time
+  processingTimeStatus?: 'stated' | 'not_stated' | 'conflicting';
   turnaroundTime?: string; // Total time including waiting/approval (working days)
   personResponsible?: string[]; // DEPRECATED - use officeDivision instead
   website?: string; // Portal URL for online services
@@ -144,7 +132,7 @@ export interface ServiceFilterOptions {
   category?: string;
   officeDivision?: string;
   source?: ServiceSource | 'all';
-  classification?: 'Simple' | 'Complex';
+  classification?: ServiceClassification;
   search?: string;
 }
 

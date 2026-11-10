@@ -83,20 +83,28 @@
     "pendingBody": "Ang datos ng serbisyong ito ay mula sa dokumento ng Citizens Charter. Idaragdag ang detalyadong mga kinakailangan, hakbang, at impormasyon sa bayad habang bineberipika at kinukuha namin ang datos mula sa opisyal na dokumento.",
     "processSteps": "Mga Hakbang sa Proseso",
     "informationDetails": "Mga Detalye ng Impormasyon",
-    "sources": "Mga Pinagkunan at Sanggunian",
-    "reference": "Sanggunian",
     "dataIntegrity": "Katumpakan ng Datos",
     "officialData": "Opisyal na Datos",
     "verifiedInformation": "Beripikadong Impormasyon",
     "unverifiedData": "Hindi Pa Beripikadong Datos",
-    "fromCharter": "Mula sa dokumento ng Citizens Charter",
+    "fromCharter": "Mula sa mga pahina ng Citizen’s Charter ng lungsod",
     "lastAudit": "Huling Pagsusuri: {{date}}",
     "awaitingVerification": "Hinihintay ang opisyal na beripikasyon",
     "responsibleOffices": "Mga Responsableng Tanggapan",
     "viewProfile": "Tingnan ang Profile",
     "helpTitle": "Tumulong na pagbutihin ang datos na ito",
     "helpBody": "May nakitang mali o lumang impormasyon? Tinutulungan ng aming komunidad na panatilihing tumpak ang portal na ito.",
-    "suggestEdit": "Magmungkahi ng Pagbabago"
+    "suggestEdit": "Magmungkahi ng Pagbabago",
+    "whoMayAvailNotVerified": "Sino ang maaaring makinabang: hindi pa beripikado",
+    "classificationNotVerified": "Klasipikasyon: hindi pa beripikado",
+    "processingTimeNotVerified": "Kabuuang tagal ng pagproseso: hindi pa beripikado",
+    "processingTimeConflict": "Ang pahina ng lungsod ay nagsasaad ng kabuuang tagal ng pagproseso na hindi tugma sa kabuuan ng sarili nitong oras bawat hakbang, kaya walang kabuuang inilalathala ang Better Dagupan. Ipinapakita ang oras ng bawat hakbang ayon sa pagkakalimbag.",
+    "feeNotVerified": "Halaga ng bayad: hindi pa beripikado",
+    "feeNotVerifiedBody": "Walang halagang nakasaad sa pahina ng lungsod para sa serbisyong ito. Tinutukoy nito ang hiwalay na talaan ng mga buwis, bayarin at singil na hindi pa naberipika ng Better Dagupan. Ipinapakita sa ibaba ang hanay ng bayad ng bawat hakbang ayon sa pagkakalimbag.",
+    "requirementsNotVerified": "Mga kinakailangan: hindi pa beripikado",
+    "stepsNotVerified": "Mga hakbang: hindi pa beripikado",
+    "sourcePublished": "Inilathala ng lungsod ang pahinang ito noong {{date}}.",
+    "archivedCopy": "Hindi maabot ang website ng lungsod nang huling suriin ang serbisyong ito, kaya bubuksan ng link sa itaas ang kopya ng Internet Archive ng pahina ng lungsod. Ang teksto ay sariling teksto ng lungsod."
   },
   "fees": {
     "title": "Mga Bayarin",
@@ -108,12 +116,16 @@
   "timeline": {
     "title": "Paano Mag-apply",
     "visitPortal": "Bisitahin ang Portal",
-    "time": "Oras:"
+    "time": "Oras:",
+    "agencyActions": "Ang ginagawa ng tanggapan",
+    "fees": "Bayad:",
+    "staffWithheld": "Pinangangalanan din ng pahina ng lungsod ang mga kawaning responsable sa bawat hakbang. Hindi muling inilalathala ng Better Dagupan ang mga pangalang iyon."
   },
   "requirements": {
     "title": "Mga Kinakailangan",
     "from": "mula sa: {{place}}",
-    "viewService": "Tingnan ang Serbisyo"
+    "viewService": "Tingnan ang Serbisyo",
+    "whereNotVerified": "Saan makukuha: hindi pa beripikado"
   },
   "supporting": {
     "title": "Detalye ng mga Sumusuportang Dokumento",

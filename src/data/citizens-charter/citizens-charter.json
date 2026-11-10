@@ -1,3 +1,1089 @@
 {
-  "services": []
+  "services": [
+    {
+      "service_number": null,
+      "service_name": "Applying for a New Business Permit",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Business",
+      "who_may_avail": "Business owners within the territorial jurisdiction of the City.",
+      "requirements": [
+        {
+          "requirement": "Duly Accomplished Business Application Form",
+          "where_to_secure": "One Stop Business Center, Official Website of Dagupan City"
+        },
+        {
+          "requirement": "One (1) pc 2×2 picture",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Community Tax Certificate (Original and Photocopy)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Barangay Business Clearance (Original and Photocopy)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "requirement": "Health Certificate (For Food Handlers and Health Care Services)",
+          "where_to_secure": "City Health Office"
+        },
+        {
+          "requirement": "Contract of Lease (For Leased Properties)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Proof of ownership if business area is owned",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Proof of Business Registration:\nDTI Registration for Sole Proprietor\nSEC Registration and Articles of Incorporation for Partnership or Corporation\nCDA Registration and Articles of Cooperation for Cooperative",
+          "where_to_secure": "Department of Trade and Industry (DTI)\nSecurities and Exchange Commission (SEC)\nCooperative Development Authority (CDA)"
+        },
+        {
+          "requirement": "Certificate of Occupancy",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Zoning Clearance",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Fire Safety Inspection Certificate (FSIC)",
+          "where_to_secure": "Bureau of Fire Protection"
+        },
+        {
+          "requirement": "Other Special Requirements (Please see Table of Special Requirements)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Authorization Letter/SPA (if representative)",
+          "where_to_secure": null
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "File",
+          "sub_steps": [
+            {
+              "letter": "1.1",
+              "action": "Submits duly accomplished business application form together with documentary requirements."
+            },
+            {
+              "letter": "1.2",
+              "action": "Receives billing statement."
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "1.1",
+              "action": "Verifies and receives the application form together with the attached documentary requirements.",
+              "fees": "None",
+              "processing_time": "3 minutes"
+            },
+            {
+              "number": "1.2",
+              "action": "Composite Team inspects business establishments.",
+              "fees": null,
+              "processing_time": "5 minutes"
+            },
+            {
+              "number": "1.3",
+              "action": "BINning personnel encodes information.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.4",
+              "action": "CEO verifies compliance to the National Building Code.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.5",
+              "action": "CHO verifies compliance with Sanitation Code.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.6",
+              "action": "CTO-RPT attached RPT Billing Statement.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.7",
+              "action": "CPDO verifies compliance with Zoning Regulations.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.8",
+              "action": "Assesses and consolidates fees to be paid in one billing statement.",
+              "fees": null,
+              "processing_time": "3 minutes"
+            },
+            {
+              "number": "1.9",
+              "action": "Reviews and approves assessed taxes and fees.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.10",
+              "action": "Releases approved billing statement.",
+              "fees": null,
+              "processing_time": "1 minute"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Pay",
+          "sub_steps": [
+            {
+              "letter": "2.1",
+              "action": "Presents the billing statement to the cashier."
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "2.1",
+              "action": "Accepts payment and issues Official Receipt",
+              "fees": "Please Refer to Table of Taxes, Fees and Charges",
+              "processing_time": "2 minutes"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Claim",
+          "sub_steps": [
+            {
+              "letter": "3.1",
+              "action": "Resubmits business application form after paying."
+            },
+            {
+              "letter": "3.2",
+              "action": "Receives business permit."
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "3.1",
+              "action": "Receives application form and verifies completeness of attached requirements.",
+              "fees": "None",
+              "processing_time": "1 minute"
+            },
+            {
+              "number": "3.2",
+              "action": "Prints business permit.",
+              "fees": null,
+              "processing_time": "1 minute"
+            },
+            {
+              "number": "3.3",
+              "action": "Reviews permit.",
+              "fees": null,
+              "processing_time": "1 minute"
+            },
+            {
+              "number": "3.4",
+              "action": "Releases business permit and license.",
+              "fees": null,
+              "processing_time": "1 minute"
+            }
+          ]
+        }
+      ],
+      "fees": null,
+      "processing_time": "30 minutes",
+      "processing_time_status": "stated",
+      "sources": ["dagupan-lgu-charter-applying-for-a-new-business-permit"],
+      "category_override": "business-trade-investment"
+    },
+    {
+      "service_number": null,
+      "service_name": "Applying for Renewal of Business Permit",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Business",
+      "who_may_avail": "Business owners within the territorial jurisdiction of the City.",
+      "requirements": [
+        {
+          "requirement": "Duly Accomplished Business Application Form",
+          "where_to_secure": "One Stop Business Center, Official Website of Dagupan City"
+        },
+        {
+          "requirement": "Community Tax Certificate (Original and Photocopy)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Barangay Business Clearance (Original and Photocopy)",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "requirement": "Health Certificate (For Food Handlers and Health Care Services)",
+          "where_to_secure": "City Health Office"
+        },
+        {
+          "requirement": "Zoning Clearance",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Fire Safety Inspection Certificate (FSIC)",
+          "where_to_secure": "Bureau of Fire Protection"
+        },
+        {
+          "requirement": "Authorization Letter/SPA (if representative)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Other Special Requirements (Please see Table of Special Requirements)",
+          "where_to_secure": null
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "File",
+          "sub_steps": [
+            {
+              "letter": "1.1",
+              "action": "Submits duly accomplished business application form together with documentary requirements."
+            },
+            {
+              "letter": "1.2",
+              "action": "Receives billing statement."
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "1.1",
+              "action": "Receives the application form and checks completeness of the attached documentary requirements.",
+              "fees": "None",
+              "processing_time": "3 minutes"
+            },
+            {
+              "number": "1.2",
+              "action": "BINning personnel validates information.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.3",
+              "action": "CEO verifies compliance to the National Building Code.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.4",
+              "action": "CHO verifies compliance with Sanitation Code.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.5",
+              "action": "CTO-RPT attached RPT Billing Statement.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.6",
+              "action": "CPDO verifies compliance with Zoning Regulations.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.7",
+              "action": "Assesses and consolidates fees to be paid in one billing statement.",
+              "fees": null,
+              "processing_time": "5 minutes"
+            },
+            {
+              "number": "1.8",
+              "action": "Reviews and approves assessed taxes and fees.",
+              "fees": null,
+              "processing_time": "2 minutes"
+            },
+            {
+              "number": "1.9",
+              "action": "Releases approved billing statement",
+              "fees": null,
+              "processing_time": "1 minute"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Pay",
+          "sub_steps": [
+            {
+              "letter": "2.1",
+              "action": "Presents the billing statement to the cashier."
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "2.1",
+              "action": "Accepts payment and issues Official Receipt",
+              "fees": "Please Refer to Table of Taxes, Fees and Charges",
+              "processing_time": "2 minutes"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Claim",
+          "sub_steps": [
+            {
+              "letter": "3.1",
+              "action": "Resubmits business application form after paying."
+            },
+            {
+              "letter": "3.2",
+              "action": "Receives business permit."
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "3.1",
+              "action": "Receives application form and verifies completeness of attached requirements.",
+              "fees": "None",
+              "processing_time": "1 minute"
+            },
+            {
+              "number": "3.2",
+              "action": "Prints business permit.",
+              "fees": null,
+              "processing_time": "1 minute"
+            },
+            {
+              "number": "3.3",
+              "action": "Reviews permit.",
+              "fees": null,
+              "processing_time": "1 minute"
+            },
+            {
+              "number": "3.4",
+              "action": "Releases business permit and license.",
+              "fees": null,
+              "processing_time": "1 minute"
+            }
+          ]
+        }
+      ],
+      "fees": null,
+      "processing_time": null,
+      "processing_time_status": "conflicting",
+      "sources": [
+        "dagupan-lgu-charter-applying-for-renewal-of-business-permit"
+      ],
+      "category_override": "business-trade-investment"
+    },
+    {
+      "service_number": null,
+      "service_name": "Applying for Amendment to Existing Business Permit",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Business",
+      "who_may_avail": "Business owners within the territorial jurisdiction of the City.",
+      "requirements": [
+        {
+          "requirement": "Duly Accomplished Application Form",
+          "where_to_secure": "One Stop Business Center"
+        },
+        {
+          "requirement": "DTI Registration, SEC Registration, CDA Registration if change of business name/corporate name",
+          "where_to_secure": "Department of Trade and Industry (DTI)\nSecurities and Exchange Commission (SEC)\nCooperative Development Authority (CDA)"
+        },
+        {
+          "requirement": "Certificate of Lease/Proof of ownership if transfer of location",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Letter of transfer of business ownership (for transfer of ownership)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Fire Safety Inspection Certificate (for transfer of location)",
+          "where_to_secure": "Bureau of Fire Protection"
+        },
+        {
+          "requirement": "Authorization Letter/SPA (if representative)",
+          "where_to_secure": null
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "File",
+          "sub_steps": [
+            {
+              "letter": "1.1",
+              "action": "Submits application form together with requirements"
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "1.1",
+              "action": "Accepts and verifies completeness of application. Endorses application to appropriate regulatory section.",
+              "fees": "None",
+              "processing_time": "5 minutes"
+            },
+            {
+              "number": "1.2",
+              "action": "Application for transfer of location and additional line of business is inspected by the Composite Team.",
+              "fees": null,
+              "processing_time": "10 minutes"
+            },
+            {
+              "number": "1.3",
+              "action": "Issues necessary clearances/certifications.",
+              "fees": null,
+              "processing_time": "5 minutes"
+            },
+            {
+              "number": "1.4",
+              "action": "Assesses additional regulatory fees and prepares order of payment. Releases order of payment.",
+              "fees": null,
+              "processing_time": "5 minutes"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Pay",
+          "sub_steps": [
+            {
+              "letter": "2.1",
+              "action": "Pays the necessary fees"
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "2.1",
+              "action": "Accepts payment and issues Official Receipt",
+              "fees": "Please Refer to Table of Taxes, Fees and Charges",
+              "processing_time": "3 minutes"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Claim",
+          "sub_steps": [
+            {
+              "letter": "3.1",
+              "action": "Claims permit"
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "3.1",
+              "action": "Incorporates amendment and prints the permit.",
+              "fees": "None",
+              "processing_time": "3 minutes"
+            },
+            {
+              "number": "3.2",
+              "action": "Reviews permit.",
+              "fees": null,
+              "processing_time": null
+            },
+            {
+              "number": "3.3",
+              "action": "Releases the business permit.",
+              "fees": null,
+              "processing_time": null
+            }
+          ]
+        }
+      ],
+      "fees": null,
+      "processing_time": "31 minutes",
+      "processing_time_status": "stated",
+      "sources": [
+        "dagupan-lgu-charter-applying-for-amendment-to-existing-business-permit"
+      ],
+      "category_override": "business-trade-investment"
+    },
+    {
+      "service_number": null,
+      "service_name": "Retiring a Business Operation",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Business",
+      "who_may_avail": "Business owners within the territorial jurisdiction of the City.",
+      "requirements": [
+        {
+          "requirement": "Duly Accomplished Application Form for Business Closure",
+          "where_to_secure": "One Stop Business Center"
+        },
+        {
+          "requirement": "Certification of Cessation of business from Barangay",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "requirement": "Sworn Statement of Gross Receipts",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "For Corporation: Board Resolution of business closure",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Authorization Letter/SPA (if representative)",
+          "where_to_secure": null
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "File",
+          "sub_steps": [
+            {
+              "letter": "1.1",
+              "action": "Fills-out application form for business closure and submits the said form together with documentary requirements."
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "1.1",
+              "action": "Receives form and checks completeness of submitted requirements.",
+              "fees": "None",
+              "processing_time": "5 minutes"
+            },
+            {
+              "number": "1.2",
+              "action": "Conducts inspection.",
+              "fees": null,
+              "processing_time": "10 minutes"
+            },
+            {
+              "number": "1.3",
+              "action": "Assesses business taxes and fees due and prepares order of payment. Releases the order of payment to the applicant.",
+              "fees": null,
+              "processing_time": "5 minutes"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Pay",
+          "sub_steps": [
+            {
+              "letter": "2.1",
+              "action": "Receives order of payment and proceeds to the cashier for payment."
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "2.1",
+              "action": "Accepts payment and issues Official Receipt.",
+              "fees": "Please Refer to Table of Taxes, Fees and Charges",
+              "processing_time": "3 minutes"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Claim",
+          "sub_steps": [
+            {
+              "letter": "3.1",
+              "action": "Presents the Official Receipt together with the business closure form and requirements."
+            },
+            {
+              "letter": "3.2",
+              "action": "Receives approved application form for business closure and the certification."
+            }
+          ],
+          "agency_actions": [
+            {
+              "number": "3.1",
+              "action": "Receives form and prepares retirement form for approval of the City Treasurer.",
+              "fees": "None",
+              "processing_time": "5 minutes"
+            },
+            {
+              "number": "3.2",
+              "action": "Approves application for business closure.",
+              "fees": null,
+              "processing_time": "3 minutes"
+            },
+            {
+              "number": "3.3",
+              "action": "Prepares Certification for signature of the Office Manager.",
+              "fees": null,
+              "processing_time": "5 minutes"
+            },
+            {
+              "number": "3.4",
+              "action": "Signs the Certification.",
+              "fees": null,
+              "processing_time": "3 minutes"
+            },
+            {
+              "number": "3.5",
+              "action": "Releases the approved form for business closure together with the certification.",
+              "fees": null,
+              "processing_time": "3 minutes"
+            }
+          ]
+        }
+      ],
+      "fees": null,
+      "processing_time": "42 minutes",
+      "processing_time_status": "stated",
+      "sources": ["dagupan-lgu-charter-retiring-a-business-operation"],
+      "category_override": "business-trade-investment"
+    },
+    {
+      "service_number": null,
+      "service_name": "Securing Certification of Business Record",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Citizen, Government to Business, Government to Government",
+      "who_may_avail": "Clients requesting for certification of business record.",
+      "requirements": [
+        {
+          "requirement": "Request letter",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Authorization Letter/SPA (if representative)",
+          "where_to_secure": null
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "Submits request letter along with requirements.",
+          "agency_actions": [
+            {
+              "action": "Receives request letter together with requirements.\nVerifies record and issues order of payment.",
+              "fees": "None",
+              "processing_time": "5 minutes"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Pays the necessary fee at the Miscellaneous Counter.",
+          "agency_actions": [
+            {
+              "action": "Accepts payment and issues Official Receipt.",
+              "fees": "Php 200.00",
+              "processing_time": "3 minutes"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Submits the OR",
+          "agency_actions": [
+            {
+              "action": "Receives the OR and prepares the certification\nSigns the certification.",
+              "fees": "None",
+              "processing_time": "5 minutes\n2 minutes"
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "action": "Claims the certification.",
+          "agency_actions": [
+            {
+              "action": "Releases the certification.",
+              "fees": "None",
+              "processing_time": "2 minutes"
+            }
+          ]
+        }
+      ],
+      "fees": {
+        "amount": "Php 200.00",
+        "description": "Pays the necessary fee at the Miscellaneous Counter."
+      },
+      "processing_time": "17 minutes",
+      "processing_time_status": "stated",
+      "sources": [
+        "dagupan-lgu-charter-securing-certification-of-business-record"
+      ],
+      "category_override": "business-trade-investment"
+    },
+    {
+      "service_number": null,
+      "service_name": "Issuance of Certified Copy of Business Permit",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Citizen, Government to Business, Government to Government",
+      "who_may_avail": "Clients requesting for certified copy of business permit.",
+      "requirements": [
+        {
+          "requirement": "Valid ID of owner",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Authorization Letter/SPA (if representative)",
+          "where_to_secure": null
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "Client proceeds to Releasing of Permit Section and presents valid IDs and other requirements.",
+          "agency_actions": [
+            {
+              "action": "Verifies if business permit was issued.\nIssues order of payment when permit is verified.",
+              "fees": "None",
+              "processing_time": "5 minutes"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Pays the necessary fee at the Miscellaneous Counter.",
+          "agency_actions": [
+            {
+              "action": "Accepts payment and issues Official Receipt.",
+              "fees": "Php 100.00",
+              "processing_time": "3 minutes"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Submits OR to the Releasing Section.",
+          "agency_actions": [
+            {
+              "action": "Signs the photocopy/machine copy of business permit.\nReleases the Certified Copy of business permit.",
+              "fees": "None",
+              "processing_time": "2 minutes\n2 minutes"
+            }
+          ]
+        }
+      ],
+      "fees": {
+        "amount": "Php 100.00",
+        "description": "Pays the necessary fee at the Miscellaneous Counter."
+      },
+      "processing_time": "12 minutes",
+      "processing_time_status": "stated",
+      "sources": [
+        "dagupan-lgu-charter-issuance-of-certified-copy-of-business-permit"
+      ],
+      "category_override": "business-trade-investment"
+    },
+    {
+      "service_number": null,
+      "service_name": "Securing Mayor’s Clearance",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Citizen",
+      "who_may_avail": "Job applicants or employees",
+      "requirements": [
+        {
+          "requirement": "Barangay Clearance",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "requirement": "Community Tax Certificate",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "NBI or Police Clearance",
+          "where_to_secure": "National Bureau of Investigation/\nPhilippine National Police Station"
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "Pays Mayor’s Clearance Fee at the Miscellaneous Counter.",
+          "agency_actions": [
+            {
+              "action": "Accepts payment and issues Official Receipt.",
+              "fees": "Php 50.00",
+              "processing_time": "3 minutes"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Proceeds to Information Desk at the City Mayor’s Office to present the OR and requirements.",
+          "agency_actions": [
+            {
+              "action": "Checks requirements and prepares the clearance.\nSigns the Mayor’s Clearance.",
+              "fees": null,
+              "processing_time": "5 minutes\n5 minutes"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Receives signed Mayor’s Clearance",
+          "agency_actions": [
+            {
+              "action": "Releases the Mayor’s Clearance",
+              "fees": null,
+              "processing_time": "3 minutes"
+            }
+          ]
+        }
+      ],
+      "fees": {
+        "amount": "Php 50.00",
+        "description": "Pays Mayor’s Clearance Fee at the Miscellaneous Counter."
+      },
+      "processing_time": "16 minutes",
+      "processing_time_status": "stated",
+      "sources": ["dagupan-lgu-charter-securing-mayors-clearance"],
+      "category_override": "certificates-vital-records"
+    },
+    {
+      "service_number": null,
+      "service_name": "Issuance of Tricycle Operator’s Permit",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Citizen",
+      "who_may_avail": "All citizens who plan to operate a tricycle business in the City.",
+      "requirements": [
+        {
+          "requirement": "Community Tax Certificate",
+          "where_to_secure": "One Stop Business Center"
+        },
+        {
+          "requirement": "Barangay Clearance",
+          "where_to_secure": "Barangay Hall"
+        },
+        {
+          "requirement": "Police Clearance",
+          "where_to_secure": "Philippine National Police Station"
+        },
+        {
+          "requirement": "Municipal Trial Court Clearance",
+          "where_to_secure": "Municipal Trial Court (Justice Hall)"
+        },
+        {
+          "requirement": "Prosecutor’s Clearance",
+          "where_to_secure": "Prosecutor’s Office (Justice Hall)"
+        },
+        {
+          "requirement": "Voter’s Certificate",
+          "where_to_secure": "Commission on Election (COMELEC)"
+        },
+        {
+          "requirement": "Certificate of Registration (Photocopy)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Official Receipt of MVVR (Photocopy) Legalization (Photocopy)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Previous Mayor’s Permit",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Official Receipt for Mayor’s Permit",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Driver’s License (Photocopy)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "2”x2” Operator’s Picture",
+          "where_to_secure": null
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "Secures City Engineering Endorsement Form and list of documentary requirements from Tricycle Permit Counter.",
+          "agency_actions": [
+            {
+              "action": "Dispenses the form and reiterates the requirements and the process for tricycle permitting.",
+              "fees": "None",
+              "processing_time": "1 minute"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Proceeds to the City Engineering Office for inspection of the motorized tricycle.",
+          "agency_actions": [
+            {
+              "action": "CEO personnel performs the inspection of the motorized tricycle.",
+              "fees": "None",
+              "processing_time": "10 minutes"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Presents the Form at the Miscellaneous Counter for payment of necessary fees.",
+          "agency_actions": [
+            {
+              "action": "Accepts payment and issues Official Receipts and Community Tax Certificate.",
+              "fees": "Please Refer to Table of Taxes, Fees and Charges",
+              "processing_time": "5 minutes"
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "action": "Submits the Endorsement Form together with the Documentary Requirements at Tricycle Permit Counter.",
+          "agency_actions": [
+            {
+              "action": "Accepts the form and verifies the completeness of submitted requirements.\nPrepares the permit.\nReviews the permit.\nApproves the permit",
+              "fees": "None",
+              "processing_time": "1 hour"
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "action": "Claims tricycle permit.",
+          "agency_actions": [
+            {
+              "action": "Releases approved tricycle permits.",
+              "fees": null,
+              "processing_time": null
+            }
+          ]
+        }
+      ],
+      "fees": null,
+      "processing_time": "1 hour and 16 minutes",
+      "processing_time_status": "stated",
+      "sources": ["dagupan-lgu-charter-issuance-of-tricycle-operators-permit"],
+      "category_override": "business-trade-investment"
+    },
+    {
+      "service_number": null,
+      "service_name": "Securing Mayor’s Permit for the Following Activities or Undertakings",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Citizen, Government to Business, Government to Government",
+      "who_may_avail": "Securing Mayor’s Permit for the Following Activities/Undertakings:\n1. Motorcade/Parade/Procession\n2. Installation/Hanging of Tarpaulins\n3. Conduct of Concerts, Live Shows, Group Assembly and Rally\n4. Rental of LGU-owned facility/structure (Dagupan City Astrodome, Mayor’s Pavillion, Dawel River Cruise Dock)",
+      "requirements": [
+        {
+          "requirement": "Request Letter",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Endorsements from POSO and PNP for Motorcade, Procession, Parade, Concerts, Group Assembly and Rally",
+          "where_to_secure": "Public Order and Safety Office\nPhilippine National Police Station"
+        },
+        {
+          "requirement": "Actual tarpaulins to be installed",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Actual admission tickets for concerts/live shows",
+          "where_to_secure": null
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "Submits request letter to the City Mayor’s Office.",
+          "agency_actions": [
+            {
+              "action": "Receives request letter and forwards to the City Mayor for approval.\nApproves request letter.\nForwards letter to the OSBC.",
+              "fees": "None",
+              "processing_time": "5 minutes"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Proceeds to OSBC for submission of the necessary requirements and payment of fees.",
+          "agency_actions": [
+            {
+              "action": "Receives requirements.\nAccepts payment and issues Official Receipt.\nPrepares the permit.\nApproves the special permit.",
+              "fees": "Please Refer to Table of Taxes, Fees and Charges",
+              "processing_time": "30 minutes"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "action": "Claims permit",
+          "agency_actions": [
+            {
+              "action": "Releases the permit.",
+              "fees": "None",
+              "processing_time": "5 minutes"
+            }
+          ]
+        }
+      ],
+      "fees": null,
+      "processing_time": "40 minutes",
+      "processing_time_status": "stated",
+      "sources": [
+        "dagupan-lgu-charter-securing-mayors-permit-for-the-following-activities-undertakings"
+      ],
+      "category_override": "public-safety-security"
+    },
+    {
+      "service_number": null,
+      "service_name": "Issuance of Community Tax Certificate",
+      "office_division": "One Stop Business Center (OSBC)",
+      "classification": "Simple",
+      "type_of_transaction": "Government to Citizen, Government to Business, Government to Government",
+      "who_may_avail": "All citizens who need a Community Tax Certificate (Cedula) for various purposes..",
+      "requirements": [
+        {
+          "requirement": "Community Tax certificate Declaration Form",
+          "where_to_secure": "One Stop Business Center"
+        },
+        {
+          "requirement": "Valid Identification Card (ID)",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Proof of income, pay slip, BIR Form 2316",
+          "where_to_secure": null
+        },
+        {
+          "requirement": "Authorization Letter/SPA (if representative)",
+          "where_to_secure": null
+        }
+      ],
+      "client_steps": [
+        {
+          "step": 1,
+          "action": "Fills out Community Tax Declaration Form and proceeds to CTC Counter.",
+          "agency_actions": [
+            {
+              "action": "Accepts the form and required documents.",
+              "fees": "None",
+              "processing_time": "5 minutes"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "action": "Pays the required amount.",
+          "agency_actions": [
+            {
+              "action": "Receives payment and issues the Community Tax Certificate.",
+              "fees": "The amount depends on the income of the taxpayer.\nPlease refer to the Table of Taxes and Fees.",
+              "processing_time": "3 minutes"
+            }
+          ]
+        }
+      ],
+      "fees": null,
+      "processing_time": "8 minutes",
+      "processing_time_status": "stated",
+      "sources": ["dagupan-lgu-charter-issuance-of-community-tax-certificate"],
+      "category_override": "taxation-payments"
+    }
+  ]
 }

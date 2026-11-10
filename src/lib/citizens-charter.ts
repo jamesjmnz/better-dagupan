@@ -50,7 +50,7 @@ export function getServicesBySection(
   section: string
 ): CitizensCharterService[] {
   return getAllServices().filter(service =>
-    service.service_number.startsWith(`${section}.`)
+    (service.service_number ?? '').startsWith(`${section}.`)
   );
 }
 
@@ -65,7 +65,7 @@ export function searchServices(query: string): CitizensCharterService[] {
     service =>
       service.service_name.toLowerCase().includes(lowerQuery) ||
       service.office_division.toLowerCase().includes(lowerQuery) ||
-      service.who_may_avail.toLowerCase().includes(lowerQuery)
+      (service.who_may_avail ?? '').toLowerCase().includes(lowerQuery)
   );
 }
 
@@ -93,7 +93,7 @@ export function filterServices(
 
   if (options.type_of_transaction) {
     services = services.filter(service =>
-      service.type_of_transaction.includes(options.type_of_transaction!)
+      (service.type_of_transaction ?? '').includes(options.type_of_transaction!)
     );
   }
 
@@ -126,7 +126,9 @@ export function getAllOffices(): string[] {
  */
 export function getAllSections(): string[] {
   const sections = new Set(
-    getAllServices().map(service => service.service_number.split('.')[0])
+    getAllServices()
+      .map(service => service.service_number?.split('.')[0])
+      .filter((section): section is string => Boolean(section))
   );
   return Array.from(sections).sort();
 }
@@ -165,12 +167,30 @@ export function getComplexServices(): CitizensCharterService[] {
 }
 
 /**
+ * Whether a printed transaction type names a code, in either the short form
+ * ("G2C") or the spelled-out form the Dagupan charter prints
+ * ("Government to Citizen").
+ */
+function namesTransactionType(
+  printed: string | null,
+  code: 'G2C' | 'G2B',
+  spelled: string
+): boolean {
+  if (!printed) return false;
+  return printed.includes(code) || printed.includes(spelled);
+}
+
+/**
  * Get G2C (Government to Citizen) services
  * @returns Array of G2C services
  */
 export function getG2CServices(): CitizensCharterService[] {
   return getAllServices().filter(service =>
-    service.type_of_transaction.includes('G2C')
+    namesTransactionType(
+      service.type_of_transaction,
+      'G2C',
+      'Government to Citizen'
+    )
   );
 }
 
@@ -180,6 +200,10 @@ export function getG2CServices(): CitizensCharterService[] {
  */
 export function getG2BServices(): CitizensCharterService[] {
   return getAllServices().filter(service =>
-    service.type_of_transaction.includes('G2B')
+    namesTransactionType(
+      service.type_of_transaction,
+      'G2B',
+      'Government to Business'
+    )
   );
 }

@@ -34,19 +34,19 @@ const INHERITED =
 /**
  * Datasets that are still empty. directory/barangays, directory/departments,
  * directory/executive, directory/legislative, the two statistics/population
- * series, about/history, about/highlights, transparency/sre, statistics/ari
- * and statistics/cmci have left this list: they now hold verified Dagupan
- * records, checked by barangayProvenance.test.ts, departmentProvenance.test.ts,
- * electedOfficialsProvenance.test.ts, populationProvenance.test.ts,
- * aboutProvenance.test.ts, sreProvenance.test.ts, ariProvenance.test.ts and
- * cmciProvenance.test.ts in this directory. All are still asserted below to be
- * free of inherited content.
+ * series, about/history, about/highlights, transparency/sre, statistics/ari,
+ * statistics/cmci and the citizens-charter files have left this list: they
+ * now hold verified Dagupan records, checked by barangayProvenance.test.ts,
+ * departmentProvenance.test.ts, electedOfficialsProvenance.test.ts,
+ * populationProvenance.test.ts, aboutProvenance.test.ts,
+ * sreProvenance.test.ts, ariProvenance.test.ts, cmciProvenance.test.ts and
+ * servicesProvenance.test.ts in this directory. All are still asserted below
+ * to be free of inherited content.
+ *
+ * services/services stays: it holds community-contributed entries, and none
+ * have been verified yet. Only the Citizen's Charter has been published.
  */
-const recordSets: [string, unknown[]][] = [
-  ['services/services', services],
-  ['citizens-charter/merged-services', mergedServices],
-  ['citizens-charter/citizens-charter', citizensCharter.services],
-];
+const recordSets: [string, unknown[]][] = [['services/services', services]];
 
 describe('inherited civic records', () => {
   it.each(recordSets)('%s holds no records', (_name, records) => {
@@ -191,6 +191,25 @@ describe('inherited civic records', () => {
     expect(cmci.editions.length).toBeGreaterThan(0);
     expect(cmci.meta.lgu_name_as_published).toBe('Dagupan');
     expect(JSON.stringify(cmci)).not.toMatch(INHERITED);
+  });
+
+  it('citizens-charter holds verified Dagupan services, not inherited ones', () => {
+    // The inherited file carried another LGU's charter, and the merged list is
+    // generated from it, so both move together. The guarantee is no longer
+    // emptiness but that every record is the city's own and is cited to a
+    // dagupan.gov.ph charter page; servicesProvenance.test.ts checks them
+    // field by field, including that each office is in the Dagupan directory.
+    expect(citizensCharter.services.length).toBeGreaterThan(0);
+    expect(mergedServices.length).toBe(citizensCharter.services.length);
+    expect(JSON.stringify(citizensCharter)).not.toMatch(INHERITED);
+    expect(JSON.stringify(mergedServices)).not.toMatch(INHERITED);
+
+    for (const record of citizensCharter.services) {
+      expect(record.sources.length, record.service_name).toBeGreaterThan(0);
+      expect(record.sources.every(id => id.startsWith('dagupan-lgu-'))).toBe(
+        true
+      );
+    }
   });
 
   it('keeps the nationwide datasets that are not LGU-specific', () => {

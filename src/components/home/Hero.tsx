@@ -33,7 +33,7 @@ interface MergedService {
   slug: string;
   service: string;
   plainLanguageName?: string;
-  officeSlug: string;
+  officeSlug: string | string[];
 }
 
 interface QuickAccessCard {

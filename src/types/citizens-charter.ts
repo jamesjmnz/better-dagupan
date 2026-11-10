@@ -1,8 +1,12 @@
 /**
  * Citizen's Charter Service Types
  *
- * Types for the Citizen's Charter service data extracted from the
- * LGU's published Citizen's Charter document.
+ * Types for the Citizen's Charter service data transcribed from the LGU's
+ * published Citizen's Charter pages.
+ *
+ * Every text field holds the city's wording as printed. A field the page does
+ * not state is null or [], which means "not verified yet", never "does not
+ * exist"; see docs/civic-data-verification.md.
  */
 
 /**
@@ -11,8 +15,11 @@
 export interface Requirement {
   /** Name of the requirement */
   requirement: string;
-  /** Source office or agency where to secure the requirement */
-  where_to_secure: string;
+  /**
+   * Source office or agency where to secure the requirement, as printed.
+   * Null when the charter leaves the cell blank.
+   */
+  where_to_secure: string | null;
   /** Number of copies required */
   copies?: string;
   /** Optional: Link to related service page if this requirement is itself a service */
@@ -85,18 +92,32 @@ export interface ConditionalRequirement {
 }
 
 /**
- * A step in the client service process
+ * One row of the charter's agency-action column: what the office does, with
+ * the fee and time printed beside it. Null where the charter leaves the cell
+ * blank. The person-responsible column is deliberately not transcribed.
+ */
+export interface AgencyAction {
+  /** The charter's own action number, e.g. "1.2", when it prints one. */
+  number?: string;
+  /** What the office does, as printed. */
+  action: string;
+  /** The fees-to-be-paid cell, as printed (e.g. "None", "Php 100.00"). */
+  fees: string | null;
+  /** The time cell, as printed (e.g. "3 minutes"). */
+  processing_time: string | null;
+}
+
+/**
+ * A step in the client service process.
  *
- * Follows UK GOV.UK plain language standard:
- * - Use imperative verbs: "Submit" (not "Submits"), "Pay" (not "Payment")
- * - Active voice: "Submit requirements" (not "Requirements are submitted")
- * - Address user as "you" where appropriate
- * - Be specific: "Pay fees and receive approval" (not "Payment and approval")
+ * The wording is the charter's own, not a plain-language rewrite: the city
+ * writes its client steps in the third person ("Submits the OR"), and changing
+ * a published procedure's wording is a change to what it says.
  */
 export interface ClientStep {
   /** Step number */
   step: number;
-  /** What the client does - must use imperative language (e.g., "Submit requirements") */
+  /** What the client does, as printed */
   action: string;
   /** Optional: Sub-steps with letter labels (A, B, C, etc.) */
   sub_steps?: {
@@ -111,6 +132,8 @@ export interface ClientStep {
   url?: string;
   /** Optional: Processing time for this step */
   processing_time?: string;
+  /** Optional: The office's actions for this step, one per charter row */
+  agency_actions?: AgencyAction[];
 }
 
 /**
@@ -157,8 +180,8 @@ export interface FeeItem {
  * - supporting_documents_detail, website, fee_schedule
  */
 export interface CitizensCharterService {
-  /** Service identifier (e.g., "1.1", "5.2") */
-  service_number: string;
+  /** Service identifier (e.g., "1.1", "5.2"). Null when the charter numbers none. */
+  service_number: string | null;
   /** Full name of the service (as it appears in the Citizens Charter document) */
   service_name: string;
   /**
@@ -176,15 +199,18 @@ export interface CitizensCharterService {
    * - "Issuance of Barangay Clearance" → "Get a barangay clearance"
    * - "Request for Police Clearance" → "Apply for a police clearance"
    */
-  plain_language_name: string;
-  /** Office or division responsible for the service */
+  plain_language_name?: string | null;
+  /** Office or division responsible for the service, as printed */
   office_division: string;
-  /** Service classification: "Simple" or "Complex" */
-  classification: 'Simple' | 'Complex';
-  /** Type of transaction: "G2C" or "G2B" */
-  type_of_transaction: 'G2C' | 'G2B';
-  /** Description of who may avail of the service */
-  who_may_avail: string;
+  /** Service classification as printed, or null when not stated */
+  classification: ServiceClassification | null;
+  /**
+   * Type of transaction as printed, e.g. "Government to Business". Null when
+   * not stated.
+   */
+  type_of_transaction: string | null;
+  /** Who may avail of the service, as printed, or null when not stated */
+  who_may_avail: string | null;
   /** Array of requirements with sources */
   requirements: Requirement[];
   /** Optional: Detailed supporting documents structure for complex requirements */
@@ -193,8 +219,11 @@ export interface CitizensCharterService {
   website?: string;
   /** Step-by-step client process - actions must use imperative language */
   client_steps: ClientStep[];
-  /** Fee information - always a dict format with amount and optional description */
-  fees: Fee;
+  /**
+   * The amount the charter states for the service, or null when it states none
+   * (for example, when it refers to a separate table of taxes and fees).
+   */
+  fees: Fee | null;
   /** Optional: Fee schedule for services that are lists of fees (e.g., Collection of Other Payments) */
   fee_schedule?: FeeItem[];
   /**
@@ -206,7 +235,13 @@ export interface CitizensCharterService {
    * For simple services, this is the full service time.
    * For complex services, this excludes waiting/approval periods (see turnaround_time).
    */
-  processing_time: string;
+  processing_time: string | null;
+  /**
+   * Why processing_time is null when it is. "conflicting" means the charter
+   * states a total that its own step times do not add up to, so neither is
+   * published as the total.
+   */
+  processing_time_status?: 'stated' | 'not_stated' | 'conflicting';
   /**
    * Total turnaround time (optional)
    *
@@ -216,7 +251,14 @@ export interface CitizensCharterService {
    * For simple services with no waiting/approval period, this field can be empty.
    */
   turnaround_time?: string;
+  /** Ids of the civic sources this record is transcribed from */
+  sources: string[];
+  /** Optional display category, chosen by this portal, not by the city */
+  category_override?: string;
 }
+
+/** Classifications defined for Citizen's Charter services. */
+export type ServiceClassification = 'Simple' | 'Complex' | 'Highly Technical';
 
 /**
  * Citizen's Charter data structure
@@ -232,8 +274,8 @@ export interface CitizensCharterData {
 export interface ServiceFilterOptions {
   /** Filter by office/division */
   office?: string;
-  /** Filter by classification (Simple/Complex) */
-  classification?: 'Simple' | 'Complex';
+  /** Filter by classification (Simple/Complex/Highly Technical) */
+  classification?: ServiceClassification;
   /** Filter by transaction type (G2C/G2B) */
   type_of_transaction?: string;
   /** Search query string (searches in service name and office) */

@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { PageHeader } from '@/components/layout';
 import { SidebarLayout } from '@/components/layout/SidebarLayout';
 import SearchInput from '@/components/ui/SearchInput';
+import { getServiceBySlug } from '@/lib/services';
 import { useLguTerms } from '@/lib/useLguTerms';
 
 import ServicesSidebar from './components/ServicesSidebar';
@@ -35,6 +36,20 @@ export default function ServicesLayout() {
 
   const isIndexPage =
     location.pathname === '/services' || location.pathname === '/services/';
+
+  // The header's breadcrumb is the only one on a detail page, so its last
+  // crumb carries the service's published name rather than a label made from
+  // the URL slug. Unknown slugs keep the generated label.
+  const detailSlug = isIndexPage
+    ? null
+    : decodeURIComponent(location.pathname.replace(/^\/services\/|\/$/g, ''));
+  const detailService = detailSlug ? getServiceBySlug(detailSlug) : undefined;
+  const breadcrumbConfig = detailService
+    ? {
+        [`/services/${detailService.slug}`]:
+          detailService.plainLanguageName || detailService.service,
+      }
+    : undefined;
 
   const initialCategory = searchParams.get('category') || 'all';
   const [selectedCategorySlug, setSelectedCategorySlug] =
@@ -88,6 +103,7 @@ export default function ServicesLayout() {
             title={t('layout.directoryTitle')}
             description={t('layout.directoryDescription')}
             autoBreadcrumbs={true}
+            breadcrumbConfig={breadcrumbConfig}
           />
         )
       }
