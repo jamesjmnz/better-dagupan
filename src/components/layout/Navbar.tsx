@@ -21,7 +21,7 @@ export const Navbar: FC = () => {
     null
   );
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
-  const { t, i18n } = useTranslation(['common', 'navigation']);
+  const { t, i18n } = useTranslation(['common', 'navigation', 'services']);
   const terms = useLguTerms();
   const childLabel = (child: { label: string; labelKey?: string }) =>
     child.labelKey ? t(child.labelKey, terms) : child.label;

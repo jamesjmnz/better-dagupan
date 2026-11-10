@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 import { SearchXIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 import { CardGrid } from '@/components/ui/Card';
@@ -17,6 +18,7 @@ import type { ServicesOutletContext } from './layout';
 const ITEMS_PER_PAGE = 12;
 
 export default function ServicesPage() {
+  const { t } = useTranslation('services');
   const {
     searchQuery,
     selectedCategorySlug,
@@ -83,12 +85,10 @@ export default function ServicesPage() {
     return (
       <EmptyState
         icon={SearchXIcon}
-        title='No services found'
-        message={
-          "We couldn't find any services matching your filters. Try adjusting your search or filters."
-        }
+        title={t('index.emptyTitle')}
+        message={t('index.emptyMessage')}
         actionHref={`${config.portal.githubUrl}/issues/new?template=contribution.yml`}
-        actionLabel='Suggest New Service'
+        actionLabel={t('sidebar.suggest')}
       />
     );
   }
@@ -111,7 +111,7 @@ export default function ServicesPage() {
           variant='slate'
           className='bg-kapwa-bg-surface-raised border-kapwa-border-weak'
         >
-          {filteredServices.length} Results
+          {t('index.results', { total: filteredServices.length })}
         </Badge>
 
         {/* Active Filters Display */}
@@ -134,8 +134,8 @@ export default function ServicesPage() {
             {selectedSource !== 'all' && (
               <Badge variant='primary' className='gap-1'>
                 {selectedSource === 'citizens-charter'
-                  ? 'Official'
-                  : 'Community'}
+                  ? t('source.official')
+                  : t('source.community')}
                 <button
                   type='button'
                   onClick={() => setSource('all')}

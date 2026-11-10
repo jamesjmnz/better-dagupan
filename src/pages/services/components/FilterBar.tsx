@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   Layers,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 import { getAllOfficeDivisions } from '@/lib/services';
@@ -31,6 +32,7 @@ export default function FilterBar({
   onSourceChange,
   onClassificationChange,
 }: FilterBarProps) {
+  const { t } = useTranslation('services');
   const [isExpanded, setIsExpanded] = useState(false);
   const officeDivisions = getAllOfficeDivisions();
 
@@ -53,11 +55,11 @@ export default function FilterBar({
       >
         <div className='flex items-center gap-3'>
           <span className='text-kapwa-text-strong text-sm font-bold'>
-            Filters
+            {t('filters.title')}
           </span>
           {hasActiveFilters && (
             <Badge variant='primary' className='text-xs'>
-              Active
+              {t('filters.active')}
             </Badge>
           )}
         </div>
@@ -77,24 +79,24 @@ export default function FilterBar({
               <div className='mb-2 flex items-center gap-2'>
                 <CheckCircle2 className='text-kapwa-text-disabled h-3.5 w-3.5' />
                 <h4 className='text-kapwa-text-disabled text-[10px] font-bold uppercase tracking-wider'>
-                  Source
+                  {t('filters.source')}
                 </h4>
               </div>
               <div className='flex flex-wrap gap-1.5'>
                 <FilterPill
-                  label='All'
+                  label={t('source.all')}
                   selected={selectedSource === 'all'}
                   onClick={() => onSourceChange('all')}
                   data-testid='filter-source-all'
                 />
                 <FilterPill
-                  label='Official'
+                  label={t('source.official')}
                   selected={selectedSource === 'citizens-charter'}
                   onClick={() => onSourceChange('citizens-charter')}
                   data-testid='filter-source-official'
                 />
                 <FilterPill
-                  label='Community'
+                  label={t('source.community')}
                   selected={selectedSource === 'community'}
                   onClick={() => onSourceChange('community')}
                   data-testid='filter-source-community'
@@ -107,12 +109,12 @@ export default function FilterBar({
               <div className='mb-2 flex items-center gap-2'>
                 <Layers className='text-kapwa-text-disabled h-3.5 w-3.5' />
                 <h4 className='text-kapwa-text-disabled text-[10px] font-bold uppercase tracking-wider'>
-                  Type
+                  {t('filters.type')}
                 </h4>
               </div>
               <div className='flex flex-wrap gap-1.5'>
                 <FilterPill
-                  label='All'
+                  label={t('source.all')}
                   selected={selectedClassification === 'all'}
                   onClick={() => onClassificationChange('all')}
                   data-testid='filter-classification-all'
@@ -137,7 +139,7 @@ export default function FilterBar({
               <div className='mb-2 flex items-center gap-2'>
                 <Building2 className='text-kapwa-text-disabled h-3.5 w-3.5' />
                 <h4 className='text-kapwa-text-disabled text-[10px] font-bold uppercase tracking-wider'>
-                  Office
+                  {t('filters.office')}
                 </h4>
               </div>
               <select
@@ -146,7 +148,7 @@ export default function FilterBar({
                 className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-strong w-full rounded-lg border px-3 py-1.5 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-kapwa-border-brand'
                 data-testid='filter-office-select'
               >
-                <option value='all'>All Offices</option>
+                <option value='all'>{t('filters.allOffices')}</option>
                 {officeDivisions.map(division => (
                   <option key={division} value={division}>
                     {division}
@@ -168,7 +170,7 @@ export default function FilterBar({
                   className='text-kapwa-text-brand hover:text-kapwa-text-accent-orange text-xs font-bold transition-colors'
                   data-testid='filter-clear-all'
                 >
-                  Clear All
+                  {t('filters.clearAll')}
                 </button>
               </div>
             )}

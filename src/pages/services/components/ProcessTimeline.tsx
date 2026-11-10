@@ -1,4 +1,5 @@
 import { ClipboardList, ExternalLink } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { DetailSection } from '@/components/layout/PageLayouts';
 import { ClientStep } from '@/types/citizens-charter';
 
@@ -7,12 +8,14 @@ interface ProcessTimelineProps {
 }
 
 export function ProcessTimeline({ steps }: ProcessTimelineProps) {
+  const { t } = useTranslation('services');
+
   if (!steps || steps.length === 0) {
     return null;
   }
 
   return (
-    <DetailSection title='How to Apply' icon={ClipboardList}>
+    <DetailSection title={t('timeline.title')} icon={ClipboardList}>
       <div className='space-y-6' data-testid='process-timeline'>
         {steps.map((step, idx) => (
           <div key={idx} className='group'>
@@ -32,7 +35,7 @@ export function ProcessTimeline({ steps }: ProcessTimelineProps) {
                       rel='noreferrer'
                       className='text-kapwa-text-brand hover:text-kapwa-text-accent-orange flex shrink-0 items-center gap-1 text-xs font-bold transition-colors'
                     >
-                      Visit Portal
+                      {t('timeline.visitPortal')}
                       <ExternalLink className='h-3 w-3' />
                     </a>
                   )}
@@ -92,7 +95,7 @@ export function ProcessTimeline({ steps }: ProcessTimelineProps) {
                 {step.processing_time && (
                   <div className='mt-2 ml-4 flex items-center gap-2'>
                     <span className='text-kapwa-text-disabled text-[10px] font-bold uppercase tracking-wider'>
-                      Time:
+                      {t('timeline.time')}
                     </span>
                     <span className='text-kapwa-text-support text-xs'>
                       {step.processing_time}

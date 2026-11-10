@@ -1,4 +1,5 @@
 import { FileText, PlusCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import {
   SidebarContainer,
@@ -20,12 +21,14 @@ export default function ServicesSidebar({
   selectedCategorySlug,
   handleCategoryChange,
 }: ServicesSidebarProps) {
+  const { t } = useTranslation('services');
+
   return (
     <div className='space-y-6'>
-      <SidebarContainer title='Categories'>
+      <SidebarContainer title={t('sidebar.categories')}>
         {/* Special "All Services" item */}
         <SidebarItem
-          label='All Services'
+          label={t('sidebar.allServices')}
           icon={FileText}
           isActive={selectedCategorySlug === 'all'}
           onClick={() => {
@@ -38,7 +41,9 @@ export default function ServicesSidebar({
         {serviceCategories.categories.map(category => (
           <SidebarItem
             key={category.slug}
-            label={category.name}
+            label={t(`categories.${category.slug}`, {
+              defaultValue: category.name,
+            })}
             icon={getCategoryIconBySlug(category.slug)}
             isActive={selectedCategorySlug === category.slug}
             onClick={() => {
@@ -54,13 +59,12 @@ export default function ServicesSidebar({
             <PlusCircle className='w-5 h-5' />
           </div>
           <h4 className='text-sm font-bold leading-tight text-kapwa-text-strong'>
-            Missing a service?
+            {t('sidebar.missingTitle')}
           </h4>
         </div>
 
         <p className='text-xs leading-relaxed text-kapwa-text-on-disabled'>
-          {config.portal.name} is community-maintained. Help your fellow
-          citizens by suggesting a new service directory.
+          {t('sidebar.missingBody', { portal: config.portal.name })}
         </p>
 
         <a
@@ -69,7 +73,7 @@ export default function ServicesSidebar({
           rel='noopener noreferrer'
           className='bg-kapwa-bg-accent-orange-default hover:bg-kapwa-orange-700 shadow-md text-kapwa-text-inverse flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all'
         >
-          Suggest New Service
+          {t('sidebar.suggest')}
         </a>
       </div>
     </div>

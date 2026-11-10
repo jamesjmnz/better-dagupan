@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FileText, ArrowRightIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Requirement } from '@/types/citizens-charter';
 
 interface RequirementCardProps {
@@ -7,6 +8,7 @@ interface RequirementCardProps {
 }
 
 export function RequirementCard({ requirement }: RequirementCardProps) {
+  const { t } = useTranslation('services');
   const {
     requirement: title,
     where_to_secure,
@@ -33,7 +35,7 @@ export function RequirementCard({ requirement }: RequirementCardProps) {
             {title}
           </h4>
           <p className='text-kapwa-text-support mt-1 text-xs'>
-            from: {where_to_secure}
+            {t('requirements.from', { place: where_to_secure })}
           </p>
           {copies && (
             <p className='text-kapwa-text-brand mt-1 text-xs font-medium'>
@@ -42,7 +44,8 @@ export function RequirementCard({ requirement }: RequirementCardProps) {
           )}
           {isClickable && (
             <span className='text-kapwa-text-brand mt-2 inline-flex items-center gap-1 text-xs font-bold group-hover:underline'>
-              View Service <ArrowRightIcon className='h-3 w-3' />
+              {t('requirements.viewService')}{' '}
+              <ArrowRightIcon className='h-3 w-3' />
             </span>
           )}
         </div>

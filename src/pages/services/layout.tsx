@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 
 import { useQueryState } from 'nuqs';
+import { useTranslation } from 'react-i18next';
 
 import { PageHeader } from '@/components/layout';
 import { SidebarLayout } from '@/components/layout/SidebarLayout';
 import SearchInput from '@/components/ui/SearchInput';
+import { useLguTerms } from '@/lib/useLguTerms';
 
 import ServicesSidebar from './components/ServicesSidebar';
 
@@ -26,6 +28,8 @@ export interface ServicesOutletContext {
 }
 
 export default function ServicesLayout() {
+  const { t } = useTranslation('services');
+  const terms = useLguTerms();
   const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -67,11 +71,11 @@ export default function ServicesLayout() {
         isIndexPage ? (
           <PageHeader
             variant='hero'
-            title='Local Government Services'
-            description='Explore official municipal services from the Citizens Charter and community contributions. Choose a category to filter or search below.'
+            title={t('layout.title')}
+            description={t('layout.description', terms)}
             actions={
               <SearchInput
-                placeholder='Search for services (e.g., Business Permit)...'
+                placeholder={t('layout.searchPlaceholder')}
                 value={searchQuery}
                 onChangeValue={setSearchQuery}
                 size='md'
@@ -81,8 +85,8 @@ export default function ServicesLayout() {
         ) : (
           <PageHeader
             variant='compact'
-            title='Service Directory'
-            description='Browse requirements and procedures.'
+            title={t('layout.directoryTitle')}
+            description={t('layout.directoryDescription')}
             autoBreadcrumbs={true}
           />
         )

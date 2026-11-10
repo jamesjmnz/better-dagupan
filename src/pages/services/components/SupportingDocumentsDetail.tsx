@@ -8,6 +8,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SupportingDocumentsDetail as SupportingDocumentsDetailType } from '@/types/citizens-charter';
 
 interface SupportingDocumentsDetailProps {
@@ -17,6 +18,7 @@ interface SupportingDocumentsDetailProps {
 export function SupportingDocumentsDetail({
   detail,
 }: SupportingDocumentsDetailProps) {
+  const { t } = useTranslation('services');
   const [isExpanded, setIsExpanded] = useState(true);
   const [showAdditional, setShowAdditional] = useState(false);
   const [showConditional, setShowConditional] = useState(false);
@@ -35,10 +37,10 @@ export function SupportingDocumentsDetail({
           </div>
           <div>
             <h3 className='text-kapwa-text-strong text-sm font-bold'>
-              Supporting Documents Details
+              {t('supporting.title')}
             </h3>
             <p className='text-kapwa-text-disabled text-[10px] font-medium'>
-              Click to {isExpanded ? 'collapse' : 'expand'}
+              {isExpanded ? t('supporting.collapse') : t('supporting.expand')}
             </p>
           </div>
         </div>
@@ -56,7 +58,7 @@ export function SupportingDocumentsDetail({
             <div>
               <h4 className='text-kapwa-text-strong mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider'>
                 <AlertCircle className='text-kapwa-text-warning h-3.5 w-3.5' />
-                Mandatory Requirements
+                {t('supporting.mandatory')}
               </h4>
               <p className='text-kapwa-text-support mb-3 text-xs italic'>
                 {detail.mandatory_requirements.instruction}
@@ -75,7 +77,7 @@ export function SupportingDocumentsDetail({
                         {doc.document}
                       </p>
                       <p className='text-kapwa-text-support mt-0.5 text-[11px]'>
-                        from:{' '}
+                        {t('supporting.from')}{' '}
                         <span className='font-medium'>
                           {doc.where_to_secure}
                         </span>
@@ -111,7 +113,7 @@ export function SupportingDocumentsDetail({
           {detail.primary_documents && detail.primary_documents.length > 0 && (
             <div>
               <h4 className='text-kapwa-text-strong mb-3 text-xs font-bold uppercase tracking-wider'>
-                Choose Any Two (2):
+                {t('supporting.chooseTwo')}
               </h4>
               <div className='space-y-2'>
                 {detail.primary_documents.map((doc, idx) => (
@@ -127,7 +129,7 @@ export function SupportingDocumentsDetail({
                         {doc.document}
                       </p>
                       <p className='text-kapwa-text-support mt-0.5 text-[11px]'>
-                        from:{' '}
+                        {t('supporting.from')}{' '}
                         <span className='font-medium'>
                           {doc.where_to_secure}
                         </span>
@@ -160,7 +162,7 @@ export function SupportingDocumentsDetail({
                 <div className='flex items-center gap-2'>
                   <Info className='text-kapwa-text-accent-orange h-4 w-4' />
                   <h4 className='text-kapwa-text-strong text-xs font-bold uppercase tracking-wider'>
-                    Additional Documents (if applicable)
+                    {t('supporting.additional')}
                   </h4>
                 </div>
                 {showAdditional ? (
@@ -189,7 +191,7 @@ export function SupportingDocumentsDetail({
                             {doc.document}
                           </p>
                           <p className='text-kapwa-text-disabled mt-0.5 text-[11px]'>
-                            from: {doc.where_to_secure}
+                            {t('supporting.from')} {doc.where_to_secure}
                           </p>
                           {doc.copies && (
                             <p className='text-kapwa-text-brand mt-1 text-[11px] font-medium'>
@@ -221,7 +223,7 @@ export function SupportingDocumentsDetail({
                 <div className='flex items-center gap-2'>
                   <AlertCircle className='text-kapwa-text-brand h-4 w-4' />
                   <h4 className='text-kapwa-text-strong text-xs font-bold uppercase tracking-wider'>
-                    Conditional Requirements
+                    {t('supporting.conditional')}
                   </h4>
                 </div>
                 {showConditional ? (
@@ -253,7 +255,7 @@ export function SupportingDocumentsDetail({
                                 {option.condition}
                               </p>
                               <p className='text-kapwa-text-support text-[11px]'>
-                                from: {option.where_to_secure}
+                                {t('supporting.from')} {option.where_to_secure}
                               </p>
                               {option.copies && (
                                 <p className='text-kapwa-text-brand mt-1 text-[11px] font-medium'>
@@ -269,7 +271,7 @@ export function SupportingDocumentsDetail({
                                 option.if_unavailable.length > 0 && (
                                   <div className='mt-2 border-t border-kapwa-border-weak pt-2'>
                                     <p className='text-kapwa-text-disabled mb-1 text-[10px] font-semibold uppercase'>
-                                      If unavailable:
+                                      {t('supporting.ifUnavailable')}
                                     </p>
                                     {option.if_unavailable.map(
                                       (alt, altIdx) => (
@@ -299,7 +301,8 @@ export function SupportingDocumentsDetail({
             <div className='border-kapwa-border-warning bg-kapwa-bg-warning-weak/20 flex items-start gap-3 rounded-lg border p-3'>
               <Info className='text-kapwa-text-warning h-4 w-4 shrink-0 mt-0.5' />
               <p className='text-kapwa-text-support text-[11px] leading-relaxed'>
-                <span className='font-semibold'>Note:</span> {detail.note}
+                <span className='font-semibold'>{t('supporting.note')}</span>{' '}
+                {detail.note}
               </p>
             </div>
           )}
