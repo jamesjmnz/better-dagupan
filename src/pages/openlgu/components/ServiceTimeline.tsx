@@ -1,4 +1,5 @@
 import { Calendar, FileText, Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 
@@ -25,10 +26,11 @@ export default function ServiceTimeline({
   sessions,
   documents,
 }: ServiceTimelineProps) {
+  const { t } = useTranslation('openlgu');
   // Sort memberships by term number (most recent first)
   const sortedMemberships = [...memberships].sort((a, b) => {
-    const termA = terms.find(t => t.id === a.term_id);
-    const termB = terms.find(t => t.id === b.term_id);
+    const termA = terms.find(item => item.id === a.term_id);
+    const termB = terms.find(item => item.id === b.term_id);
     return (termB?.term_number || 0) - (termA?.term_number || 0);
   });
 
@@ -74,7 +76,7 @@ export default function ServiceTimeline({
   if (sortedMemberships.length === 0) {
     return (
       <div className='text-kapwa-text-disabled py-4 text-center text-sm'>
-        No service history available
+        {t('officials.noServiceHistory')}
       </div>
     );
   }
@@ -82,7 +84,7 @@ export default function ServiceTimeline({
   return (
     <div className='space-y-3'>
       {sortedMemberships.map(membership => {
-        const term = terms.find(t => t.id === membership.term_id);
+        const term = terms.find(item => item.id === membership.term_id);
         if (!term) return null;
 
         const attendanceRate = calculateAttendanceForTerm(term.id);
@@ -125,7 +127,7 @@ export default function ServiceTimeline({
                             : 'text-kapwa-text-warning'
                       }
                     >
-                      {attendanceRate}% attendance
+                      {t('common.attendance', { rate: attendanceRate })}
                     </span>
                   </div>
                 )}
@@ -133,7 +135,7 @@ export default function ServiceTimeline({
                   <div className='flex items-center gap-1'>
                     <FileText className='h-3 w-3' />
                     <span>
-                      {docsCount} document{docsCount !== 1 ? 's' : ''}
+                      {t('common.documentCount', { count: docsCount })}
                     </span>
                   </div>
                 )}
@@ -141,8 +143,9 @@ export default function ServiceTimeline({
                   <div className='flex items-center gap-1'>
                     <FileText className='h-3 w-3' />
                     <span>
-                      {execOrdersCount} executive order
-                      {execOrdersCount !== 1 ? 's' : ''}
+                      {t('common.executiveOrderCount', {
+                        count: execOrdersCount,
+                      })}
                     </span>
                   </div>
                 )}

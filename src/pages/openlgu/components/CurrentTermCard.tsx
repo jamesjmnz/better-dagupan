@@ -7,6 +7,7 @@ import {
   FileText,
   ScrollText,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -22,6 +23,8 @@ export default function CurrentTermCard({
   term,
   documents,
 }: CurrentTermCardProps) {
+  const { t } = useTranslation('openlgu');
+
   if (!term) {
     return null;
   }
@@ -44,7 +47,7 @@ export default function CurrentTermCard({
         <CardContent className='p-5'>
           <div className='mb-4 flex items-center justify-between'>
             <Badge variant='primary' dot>
-              {term.ordinal} Term
+              {t('common.termBadge', { nth: term.ordinal })}
             </Badge>
             <ChevronRight className='group-hover:text-kapwa-text-brand text-kapwa-text-support h-5 w-5 transition-colors' />
           </div>
@@ -63,7 +66,7 @@ export default function CurrentTermCard({
                   {ordCount}
                 </span>
                 <span className='text-kapwa-brand-700 ml-2 text-xs font-bold uppercase'>
-                  Ordinances
+                  {t('common.ordinances')}
                 </span>
               </div>
             </div>
@@ -74,7 +77,7 @@ export default function CurrentTermCard({
                   {resCount}
                 </span>
                 <span className='text-kapwa-text-accent-orange ml-2 text-xs font-bold uppercase'>
-                  Resolutions
+                  {t('common.resolutions')}
                 </span>
               </div>
             </div>
@@ -85,7 +88,7 @@ export default function CurrentTermCard({
                   {eoCount}
                 </span>
                 <span className='text-kapwa-text-warning ml-2 text-xs font-bold uppercase'>
-                  Exec. Orders
+                  {t('common.execOrders')}
                 </span>
               </div>
             </div>

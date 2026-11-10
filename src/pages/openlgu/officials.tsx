@@ -2,6 +2,8 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { useOutletContext } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 import { PageLoadingState } from '@/components/ui';
 import { lguLabels } from '@/lib/lguLabels';
 import { IndexPageLayout } from '@/components/layout/IndexPageLayout';
@@ -59,6 +61,7 @@ function servedInTerm(person: Person, termFilter: string): boolean {
 }
 
 export default function OfficialsIndex() {
+  const { t } = useTranslation('openlgu');
   const {
     persons,
     sessions,
@@ -112,28 +115,30 @@ export default function OfficialsIndex() {
   }, [personsByLetter]);
 
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: 'Home', href: '/' },
-    { label: 'OpenLGU', href: '/openlgu' },
-    { label: 'Officials', href: '/openlgu/officials' },
+    { label: t('common.home'), href: '/' },
+    { label: t('common.openlgu'), href: '/openlgu' },
+    { label: t('common.officials'), href: '/openlgu/officials' },
   ];
 
   return (
     <IndexPageLayout
-      title={`Officials of ${lguLabels.name}`}
-      description={`Browse the historical collection of all LGU politicians who have served ${lguLabels.name}.`}
+      title={t('officials.title', { lgu: lguLabels.name })}
+      description={t('officials.description', { lgu: lguLabels.name })}
       breadcrumbs={breadcrumbs}
       search={{
         value: searchQuery,
         onChange: setSearchQuery,
-        placeholder: 'Search officials...',
+        placeholder: t('officials.searchPlaceholder'),
       }}
       resultsCount={filteredPersons.length}
-      resultsLabel={filteredPersons.length === 1 ? 'official' : 'officials'}
+      resultsLabel={t('officials.resultLabel', {
+        count: filteredPersons.length,
+      })}
       emptyState={
         !isLoading && filteredPersons.length === 0
           ? {
-              title: 'No officials found',
-              message: "We couldn't find any officials matching your filters",
+              title: t('officials.emptyTitle'),
+              message: t('officials.emptyMessage'),
             }
           : undefined
       }
@@ -151,7 +156,7 @@ export default function OfficialsIndex() {
 
       {/* Loading State */}
       {isLoading ? (
-        <PageLoadingState message='Loading officials...' />
+        <PageLoadingState message={t('common.loadingOfficials')} />
       ) : (
         <>
           {/* A-Z grouped list */}
@@ -175,7 +180,7 @@ export default function OfficialsIndex() {
                       if (!latestMembership) return null;
 
                       const latestTerm = terms.find(
-                        t => t.id === latestMembership.term_id
+                        term => term.id === latestMembership.term_id
                       );
                       if (!latestTerm) return null;
 

@@ -14,6 +14,7 @@ import {
   Users,
   XCircle,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { DetailSection } from '@/components/layout/PageLayouts';
 import {
@@ -31,6 +32,7 @@ import { Badge } from '@/components/ui/Badge';
 import { getDocTypeBadgeVariant, getPersonName } from '@/lib/openlgu';
 
 export default function SessionDetail() {
+  const { t } = useTranslation('openlgu');
   const { sessionId } = useParams<{ sessionId: string }>();
   const { sessions, persons, documents, isLoading } =
     useOutletContext<LegislationContext>();
@@ -38,13 +40,13 @@ export default function SessionDetail() {
   const session = sessions.find((s: Session) => s.id === sessionId);
 
   if (isLoading) {
-    return <PageLoadingState message='Loading session...' />;
+    return <PageLoadingState message={t('session.loading')} />;
   }
 
   if (!session)
     return (
       <div className='p-20 text-center' role='alert'>
-        Session not found
+        {t('session.notFound')}
       </div>
     );
 
@@ -71,11 +73,15 @@ export default function SessionDetail() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href='/openlgu'>OpenLGU</BreadcrumbLink>
+            <BreadcrumbLink href='/openlgu'>
+              {t('common.openlgu')}
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>{session.ordinal_number} Session</BreadcrumbPage>
+            <BreadcrumbPage>
+              {t('session.breadcrumb', { nth: session.ordinal_number })}
+            </BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -87,21 +93,24 @@ export default function SessionDetail() {
           <div className='space-y-4'>
             <div className='flex items-center gap-3'>
               <Badge variant={isRegular ? 'primary' : 'secondary'} dot>
-                {session.type} Session
+                {t('common.sessionType', { type: session.type })}
               </Badge>
               <span className='text-kapwa-text-disabled font-mono text-[10px] font-bold tracking-widest uppercase'>
-                ID: {session.id}
+                {t('session.id', { id: session.id })}
               </span>
             </div>
             <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold'>
-              {session.ordinal_number} {session.type} Session
+              {t('common.sessionTitle', {
+                nth: session.ordinal_number,
+                type: session.type,
+              })}
             </h1>
           </div>
           <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised flex items-center gap-4 rounded-xl border p-4'>
             <Calendar className='text-kapwa-text-brand h-5 w-5' />
             <div>
               <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-                Date Held
+                {t('session.dateHeld')}
               </p>
               <p className='text-kapwa-text-support text-sm font-bold'>
                 {session.date}
@@ -113,19 +122,21 @@ export default function SessionDetail() {
 
       <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
         <aside className='space-y-6'>
-          <DetailSection title='Attendance' icon={Users}>
+          <DetailSection title={t('session.attendance')} icon={Users}>
             {presentMembers.length === 0 && absentMembers.length === 0 ? (
               <EmptyState
-                title='No Attendance Records'
-                message='No attendance data is available for this session.'
+                title={t('session.noAttendanceTitle')}
+                message={t('session.noAttendanceMessage')}
                 icon={Users}
               />
             ) : (
               <div className='space-y-6'>
                 <div>
                   <h3 className='mb-3 flex items-center gap-2 text-[10px] font-bold tracking-widest text-kapwa-text-success uppercase'>
-                    <CheckCircle2 className='h-3.5 w-3.5' /> Present (
-                    {presentMembers.length})
+                    <CheckCircle2 className='h-3.5 w-3.5' />{' '}
+                    {t('session.presentCount', {
+                      count: presentMembers.length,
+                    })}
                   </h3>
                   <ul className='space-y-2'>
                     {presentMembers.map((p: Person) => (
@@ -144,8 +155,10 @@ export default function SessionDetail() {
                 {absentMembers.length > 0 && (
                   <div className='border-kapwa-border-weak border-t pt-4'>
                     <h3 className='text-kapwa-text-accent-orange mb-3 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
-                      <XCircle className='h-3.5 w-3.5' /> Absent (
-                      {absentMembers.length})
+                      <XCircle className='h-3.5 w-3.5' />{' '}
+                      {t('session.absentCount', {
+                        count: absentMembers.length,
+                      })}
                     </h3>
                     <ul className='space-y-2'>
                       {absentMembers.map((p: Person) => (
@@ -165,11 +178,11 @@ export default function SessionDetail() {
         </aside>
 
         <div className='lg:col-span-2'>
-          <DetailSection title='Legislation Enacted' icon={Gavel}>
+          <DetailSection title={t('session.legislationEnacted')} icon={Gavel}>
             {relatedDocs.length === 0 ? (
               <EmptyState
-                title='No Documents Enacted'
-                message='No documents were enacted during this session.'
+                title={t('session.noDocumentsTitle')}
+                message={t('session.noDocumentsMessage')}
                 icon={ScrollText}
               />
             ) : (

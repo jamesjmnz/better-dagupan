@@ -1,5 +1,6 @@
 import { Button } from '@bettergov/kapwa/button';
 import { X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 import SelectPicker from '@/components/ui/SelectPicker';
@@ -19,11 +20,11 @@ interface DocumentFiltersProps {
   yearOptions: Array<{ label: string; value: string }>;
 }
 
-const typeOptions: Array<{ label: string; value: FilterType }> = [
-  { label: 'All Documents', value: 'all' },
-  { label: 'Ordinances', value: 'ordinance' },
-  { label: 'Resolutions', value: 'resolution' },
-  { label: 'Executive Orders', value: 'executive_order' },
+const typeOptions: Array<{ labelKey: string; value: FilterType }> = [
+  { labelKey: 'common.allDocuments', value: 'all' },
+  { labelKey: 'common.ordinances', value: 'ordinance' },
+  { labelKey: 'common.resolutions', value: 'resolution' },
+  { labelKey: 'common.executiveOrders', value: 'executive_order' },
 ];
 
 export default function DocumentFilters({
@@ -36,6 +37,11 @@ export default function DocumentFilters({
   authorOptions,
   yearOptions,
 }: DocumentFiltersProps) {
+  const { t } = useTranslation('openlgu');
+  const localizedTypeOptions = typeOptions.map(option => ({
+    label: t(option.labelKey),
+    value: option.value,
+  }));
   const hasActiveFilters =
     filterType !== 'all' || authorIds.length > 0 || year !== '';
 
@@ -51,10 +57,10 @@ export default function DocumentFilters({
         {/* Type Filter - Single Select */}
         <div className='min-w-[180px] flex-1 sm:flex-none'>
           <SelectPicker
-            options={typeOptions}
+            options={localizedTypeOptions}
             selectedValues={[filterType]}
             onSelect={selected => setFilterType(selected[0]?.value || 'all')}
-            placeholder='Type'
+            placeholder={t('filters.type')}
             size='md'
             searchable={false}
             clearable={true}
@@ -67,7 +73,7 @@ export default function DocumentFilters({
             options={authorOptions}
             selectedValues={authorIds}
             onSelect={selected => setAuthorIds(selected.map(s => s.value))}
-            placeholder='Authors'
+            placeholder={t('filters.authors')}
             size='md'
             searchable={true}
             clearable={true}
@@ -80,7 +86,7 @@ export default function DocumentFilters({
             options={yearOptions}
             selectedValues={year ? [year] : []}
             onSelect={selected => setYear(selected[0]?.value || '')}
-            placeholder='Year'
+            placeholder={t('filters.year')}
             size='md'
             searchable={true}
             clearable={true}
@@ -95,7 +101,7 @@ export default function DocumentFilters({
             onClick={handleClearAll}
             leftIcon={<X className='h-4 w-4' />}
           >
-            Clear all
+            {t('common.clearAll')}
           </Button>
         )}
       </div>
@@ -109,7 +115,10 @@ export default function DocumentFilters({
               className='cursor-pointer hover:opacity-80'
               onClick={() => setFilterType('all')}
             >
-              Type: {typeOptions.find(o => o.value === filterType)?.label}
+              {t('filters.typeBadge', {
+                type: localizedTypeOptions.find(o => o.value === filterType)
+                  ?.label,
+              })}
             </Badge>
           )}
           {authorIds.length > 0 && (
@@ -118,7 +127,7 @@ export default function DocumentFilters({
               className='cursor-pointer hover:opacity-80'
               onClick={() => setAuthorIds([])}
             >
-              {authorIds.length} Author{authorIds.length > 1 ? 's' : ''}
+              {t('filters.authorBadge', { count: authorIds.length })}
             </Badge>
           )}
           {year && (
@@ -127,7 +136,7 @@ export default function DocumentFilters({
               className='cursor-pointer hover:opacity-80'
               onClick={() => setYear('')}
             >
-              Year: {year}
+              {t('filters.yearBadge', { year })}
             </Badge>
           )}
         </div>

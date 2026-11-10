@@ -14,6 +14,7 @@ import {
   User,
   Users,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { DetailSection, useBreadcrumbs } from '@/components/layout';
 import {
@@ -60,6 +61,7 @@ interface LegislationContext {
 }
 
 export default function TermDetail() {
+  const { t } = useTranslation('openlgu');
   const { termId } = useParams<{ termId: string }>();
   const { persons, terms, documents, sessions, committees, isLoading } =
     useOutletContext<LegislationContext>();
@@ -70,7 +72,7 @@ export default function TermDetail() {
 
   // Find the requested term from the terms array
   const term = useMemo(() => {
-    return terms.find(t => t.id === termId) || null;
+    return terms.find(item => item.id === termId) || null;
   }, [terms, termId]);
 
   // Filter members by role - executive vs legislative
@@ -122,13 +124,13 @@ export default function TermDetail() {
   }, [sessions, term]);
 
   if (isLoading) {
-    return <PageLoadingState message='Loading term data...' />;
+    return <PageLoadingState message={t('term.loading')} />;
   }
 
   if (!term) {
     return (
       <div className='text-kapwa-text-disabled p-20 text-center font-bold uppercase'>
-        Term data not found
+        {t('term.notFound')}
       </div>
     );
   }
@@ -160,7 +162,9 @@ export default function TermDetail() {
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
                       {isLast ? (
-                        <BreadcrumbPage>{term.ordinal} Term</BreadcrumbPage>
+                        <BreadcrumbPage>
+                          {t('common.termBadge', { nth: term.ordinal })}
+                        </BreadcrumbPage>
                       ) : (
                         <BreadcrumbLink href={crumb.href}>
                           {crumb.label}
@@ -179,7 +183,7 @@ export default function TermDetail() {
       <header className='border-l-kapwa-border-brand border-kapwa-border-weak bg-kapwa-bg-surface rounded-2xl border-l-8 p-6 shadow-sm md:p-10'>
         <div className='flex flex-wrap items-center gap-3'>
           <Badge variant='primary' dot>
-            {term.ordinal} Term
+            {t('common.termBadge', { nth: term.ordinal })}
           </Badge>
           <Badge variant='slate'>{term.year_range}</Badge>
         </div>
@@ -193,7 +197,7 @@ export default function TermDetail() {
 
       {/* Executive Officials Section - Data Driven */}
       {executiveMembers.length > 0 && (
-        <DetailSection title='Executive Officials' icon={Crown}>
+        <DetailSection title={t('term.executiveOfficials')} icon={Crown}>
           <div className='space-y-3'>
             {executiveMembers.map(person => {
               const membership = person.memberships.find(
@@ -214,7 +218,7 @@ export default function TermDetail() {
                       {getPersonName(person)}
                     </p>
                     <p className='text-kapwa-text-brand text-xs font-medium tracking-wide uppercase'>
-                      {membership?.role || 'Executive Official'}
+                      {membership?.role || t('term.executiveOfficial')}
                     </p>
                   </div>
                   <ChevronRight className='group-hover:text-kapwa-text-brand text-kapwa-text-support h-5 w-5 transition-colors' />
@@ -229,7 +233,7 @@ export default function TermDetail() {
         {/* Sidebar - Legislative Members */}
         {legislativeMembers.length > 0 && (
           <aside className='space-y-6'>
-            <DetailSection title='Legislative Members' icon={Users}>
+            <DetailSection title={t('term.legislativeMembers')} icon={Users}>
               <div className='space-y-3'>
                 {legislativeMembers.map(person => {
                   const membership = person.memberships.find(
@@ -315,8 +319,9 @@ export default function TermDetail() {
                           <div className='border-kapwa-border-weak flex items-center gap-2 border-t pt-2'>
                             <Users className='text-kapwa-text-disabled h-3 w-3' />
                             <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-                              {totalCommittees} committee
-                              {totalCommittees > 1 ? 's' : ''}
+                              {t('term.committeeCount', {
+                                count: totalCommittees,
+                              })}
                             </span>
                           </div>
                           <div className='flex flex-wrap gap-2'>
@@ -381,7 +386,7 @@ export default function TermDetail() {
                   {ordCount}
                 </span>
                 <span className='text-kapwa-text-brand text-[10px] font-bold tracking-widest uppercase'>
-                  Ordinances
+                  {t('common.ordinances')}
                 </span>
               </div>
             </div>
@@ -392,7 +397,7 @@ export default function TermDetail() {
                   {resCount}
                 </span>
                 <span className='text-kapwa-text-accent-orange text-[10px] font-bold tracking-widest uppercase'>
-                  Resolutions
+                  {t('common.resolutions')}
                 </span>
               </div>
             </div>
@@ -404,7 +409,7 @@ export default function TermDetail() {
                     {eoCount}
                   </span>
                   <span className='text-[10px] font-bold tracking-widest text-kapwa-text-warning uppercase'>
-                    Exec. Orders
+                    {t('common.execOrders')}
                   </span>
                 </div>
               </div>
@@ -413,7 +418,10 @@ export default function TermDetail() {
 
           {/* Sessions Section */}
           {termSessions.length > 0 && (
-            <DetailSection title='Legislative Sessions' icon={Calendar}>
+            <DetailSection
+              title={t('term.legislativeSessions')}
+              icon={Calendar}
+            >
               <div className='space-y-3'>
                 {termSessions.map(session => {
                   const sessionDocs = documents.filter(
@@ -435,7 +443,10 @@ export default function TermDetail() {
                         </Badge>
                         <div>
                           <p className='text-kapwa-text-strong font-semibold'>
-                            {session.ordinal_number} {session.type} Session
+                            {t('common.sessionTitle', {
+                              nth: session.ordinal_number,
+                              type: session.type,
+                            })}
                           </p>
                           <p className='text-kapwa-text-disabled text-sm'>
                             {session.date}
@@ -447,7 +458,7 @@ export default function TermDetail() {
                           <span className='text-kapwa-text-brand font-semibold'>
                             {sessionDocs.length}
                           </span>{' '}
-                          docs
+                          {t('term.docs')}
                         </span>
                         <ChevronRight className='group-hover:text-kapwa-text-brand text-kapwa-text-support h-5 w-5' />
                       </div>
@@ -458,11 +469,11 @@ export default function TermDetail() {
             </DetailSection>
           )}
 
-          <DetailSection title='Legislative Output' icon={ScrollText}>
+          <DetailSection title={t('term.legislativeOutput')} icon={ScrollText}>
             {termDocuments.length === 0 ? (
               <EmptyState
-                title='No Documents Found'
-                message='No legislative documents were produced during this term.'
+                title={t('term.noDocumentsTitle')}
+                message={t('term.noDocumentsMessage')}
                 icon={ScrollText}
               />
             ) : (
@@ -493,7 +504,7 @@ export default function TermDetail() {
                     onClick={() => setVisibleDocs(prev => prev + 15)}
                     className='text-kapwa-text-brand hover:text-kapwa-text-brand flex min-h-[48px] w-full items-center justify-center gap-2 py-4 text-xs font-bold tracking-widest uppercase'
                   >
-                    Load More <ChevronDown className='h-4 w-4' />
+                    {t('term.loadMore')} <ChevronDown className='h-4 w-4' />
                   </button>
                 )}
               </div>

@@ -3,6 +3,7 @@ import { useEffect, useMemo } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 
 import { parseAsInteger, useQueryState } from 'nuqs';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 import { CardSkeleton } from '@/components/ui/Skeletons';
@@ -39,6 +40,7 @@ interface LegislationContext {
 }
 
 export default function LegislationIndex() {
+  const { t } = useTranslation('openlgu');
   const {
     searchQuery,
     setSearchQuery,
@@ -142,12 +144,12 @@ export default function LegislationIndex() {
   if (isLoading) {
     return (
       <IndexPageLayout
-        title='Legislation'
-        description={`Browse ordinances, resolutions, and executive orders from the ${lguLabels.body}.`}
+        title={t('index.title')}
+        description={t('index.description', { body: lguLabels.body })}
         search={{
           value: searchQuery,
           onChange: setSearchQuery,
-          placeholder: 'Search legislation...',
+          placeholder: t('index.searchPlaceholder'),
         }}
       >
         <section className='space-y-4'>
@@ -161,20 +163,20 @@ export default function LegislationIndex() {
 
   return (
     <IndexPageLayout
-      title='Legislation'
-      description={`Browse ordinances, resolutions, and executive orders from the ${lguLabels.body}.`}
+      title={t('index.title')}
+      description={t('index.description', { body: lguLabels.body })}
       search={{
         value: searchQuery,
         onChange: setSearchQuery,
-        placeholder: 'Search legislation...',
+        placeholder: t('index.searchPlaceholder'),
       }}
       resultsCount={filteredDocs.length}
-      resultsLabel='Results'
+      resultsLabel={t('common.results')}
       emptyState={
         filteredDocs.length === 0
           ? {
-              title: 'No documents found',
-              message: `We couldn't find matches for "${searchQuery}"`,
+              title: t('index.emptyTitle'),
+              message: t('index.emptyMessage', { query: searchQuery }),
             }
           : undefined
       }
@@ -234,7 +236,9 @@ export default function LegislationIndex() {
                   </Badge>
                   <span
                     className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'
-                    aria-label={`Enacted on ${doc.date_enacted}`}
+                    aria-label={t('index.enactedOn', {
+                      date: doc.date_enacted,
+                    })}
                   >
                     {doc.date_enacted}
                   </span>
@@ -248,10 +252,10 @@ export default function LegislationIndex() {
                   </span>
                   <span className='text-kapwa-text-support'>|</span>
                   <span className='truncate'>
-                    Authors:{' '}
+                    {t('index.authors')}{' '}
                     {displayAuthors.length > 0
                       ? displayAuthors.map(a => getPersonName(a)).join(', ')
-                      : 'Office of the Mayor'}
+                      : t('common.officeOfTheMayor')}
                   </span>
                 </div>
               </div>
@@ -264,9 +268,11 @@ export default function LegislationIndex() {
       {totalPages > 1 && (
         <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised flex flex-wrap items-center justify-between gap-4 rounded-xl border-t p-4'>
           <span className='text-kapwa-text-disabled text-xs font-medium'>
-            Showing {(currentPage - 1) * itemsPerPage + 1}—
-            {Math.min(currentPage * itemsPerPage, filteredDocs.length)} of{' '}
-            {filteredDocs.length}
+            {t('index.showing', {
+              from: (currentPage - 1) * itemsPerPage + 1,
+              to: Math.min(currentPage * itemsPerPage, filteredDocs.length),
+              total: filteredDocs.length,
+            })}
           </span>
           <nav className='flex items-center gap-2'>
             <button
@@ -274,10 +280,10 @@ export default function LegislationIndex() {
               disabled={currentPage === 1}
               className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-strong hover:bg-kapwa-bg-surface-raised disabled:text-kapwa-text-disabled rounded-lg border px-3 py-1.5 text-xs font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-50'
             >
-              ← Previous
+              {t('index.previous')}
             </button>
             <span className='text-kapwa-text-disabled text-xs font-medium'>
-              Page {currentPage} of {totalPages}
+              {t('index.page', { page: currentPage, total: totalPages })}
             </span>
             <button
               onClick={() =>
@@ -286,7 +292,7 @@ export default function LegislationIndex() {
               disabled={currentPage === totalPages}
               className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-strong hover:bg-kapwa-bg-surface-raised disabled:text-kapwa-text-disabled rounded-lg border px-3 py-1.5 text-xs font-bold transition-colors disabled:cursor-not-allowed disabled:opacity-50'
             >
-              Next →
+              {t('index.next')}
             </button>
           </nav>
         </div>

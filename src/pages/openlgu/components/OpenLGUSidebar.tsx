@@ -6,6 +6,7 @@ import {
   Signature,
   Users,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import {
   SidebarContainer,
@@ -40,36 +41,41 @@ export default function OpenLGUSidebar({
   term,
   documents,
 }: OpenLGUSidebarProps) {
+  const { t } = useTranslation('openlgu');
   const categories = [
-    { id: 'all', label: 'All Documents', icon: LayoutGrid },
-    { id: 'ordinance', label: 'Ordinances', icon: Scale },
-    { id: 'resolution', label: 'Resolutions', icon: Scroll },
-    { id: 'executive_order', label: 'Executive Orders', icon: Signature },
+    { id: 'all', label: t('common.allDocuments'), icon: LayoutGrid },
+    { id: 'ordinance', label: t('common.ordinances'), icon: Scale },
+    { id: 'resolution', label: t('common.resolutions'), icon: Scroll },
+    {
+      id: 'executive_order',
+      label: t('common.executiveOrders'),
+      icon: Signature,
+    },
   ];
 
   return (
-    <SidebarContainer title='OpenLGU Portal'>
+    <SidebarContainer title={t('common.portal')}>
       {/* Current Term Stats */}
       {term && <CurrentTermCard term={term} documents={documents} />}
 
       {/* Group 1: Browse */}
-      <SidebarGroup title='Browse'>
+      <SidebarGroup title={t('sidebar.browse')}>
         <SidebarItem
-          label='Legislative Terms'
-          description={`${terms.length} terms`}
+          label={t('sidebar.legislativeTerms')}
+          description={t('sidebar.termCount', { count: terms.length })}
           path='/openlgu/terms'
           icon={Landmark}
         />
         <SidebarItem
-          label='Officials'
-          description={`${persons.length} officials`}
+          label={t('common.officials')}
+          description={t('sidebar.officialCount', { count: persons.length })}
           path='/openlgu/officials'
           icon={Users}
         />
       </SidebarGroup>
 
       {/* Group 2: Document Types */}
-      <SidebarGroup title='Document Types'>
+      <SidebarGroup title={t('sidebar.documentTypes')}>
         {categories.map(cat => {
           const path =
             cat.id === 'all' ? '/openlgu' : `/openlgu?type=${cat.id}`;

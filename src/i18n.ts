@@ -28,6 +28,7 @@ i18n
       'ui',
       'navigation',
       'services',
+      'openlgu',
     ],
 
     backend: {
