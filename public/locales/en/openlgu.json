@@ -186,5 +186,26 @@
     "overallAttendance": "Overall Attendance",
     "executiveOrdersSigned": "Executive Orders Signed",
     "totalDocuments": "Total Documents"
+  },
+  "councilOrdinances": {
+    "title": "Ordinances posted by the {{body}}",
+    "description": "Until this portal publishes its own legislative records, here are the ordinances the {{body}} posts on its website.",
+    "classificationLabel": "Classification",
+    "allClassifications": "All classifications",
+    "classificationNote": "Only some ordinances are classified on the council's website, so this filter leaves the others out.",
+    "searchLabel": "Search the {{body}}'s ordinances",
+    "searchPlaceholder": "Search ordinances…",
+    "posted": "Posted {{date}}",
+    "unavailableTitle": "The council's ordinances could not be loaded",
+    "unavailableMessage": "The {{body}}'s website did not respond. You can browse its ordinances there directly.",
+    "openCouncilPage": "Open the council's ordinances page",
+    "noMatchesTitle": "No ordinances match",
+    "noMatchesMessage": "Try a different search or classification.",
+    "opensCouncilPage": "(opens the council's page)",
+    "pagination": "Council ordinances pages",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {{page}} of {{totalPages}} · {{total}} ordinances",
+    "attribution": "Titles and links come from the {{body}}'s website and are shown as posted. Each date is when the item was posted there, not when the ordinance was enacted."
   }
 }

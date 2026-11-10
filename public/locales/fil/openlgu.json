@@ -186,5 +186,26 @@
     "overallAttendance": "Kabuuang Pagdalo",
     "executiveOrdersSigned": "Mga Executive Order na Nilagdaan",
     "totalDocuments": "Kabuuang Dokumento"
+  },
+  "councilOrdinances": {
+    "title": "Mga ordinansang inilathala ng {{body}}",
+    "description": "Habang hindi pa naglalathala ang portal na ito ng sarili nitong mga talaang pambatasan, narito ang mga ordinansang inilalathala ng {{body}} sa website nito.",
+    "classificationLabel": "Klasipikasyon",
+    "allClassifications": "Lahat ng klasipikasyon",
+    "classificationNote": "Iilan lamang sa mga ordinansa ang may klasipikasyon sa website ng konseho, kaya hindi kasama rito ang iba.",
+    "searchLabel": "Maghanap sa mga ordinansa ng {{body}}",
+    "searchPlaceholder": "Maghanap ng ordinansa…",
+    "posted": "Inilathala noong {{date}}",
+    "unavailableTitle": "Hindi ma-load ang mga ordinansa ng konseho",
+    "unavailableMessage": "Hindi tumugon ang website ng {{body}}. Maaari mong tingnan doon mismo ang mga ordinansa nito.",
+    "openCouncilPage": "Buksan ang pahina ng mga ordinansa ng konseho",
+    "noMatchesTitle": "Walang tugmang ordinansa",
+    "noMatchesMessage": "Subukan ang ibang paghahanap o klasipikasyon.",
+    "opensCouncilPage": "(bubuksan ang pahina ng konseho)",
+    "pagination": "Mga pahina ng ordinansa ng konseho",
+    "previous": "Nakaraan",
+    "next": "Susunod",
+    "pageOf": "Pahina {{page}} ng {{totalPages}} · {{total}} ordinansa",
+    "attribution": "Ang mga pamagat at link ay mula sa website ng {{body}} at ipinapakita gaya ng pagkakalathala. Ang bawat petsa ay kung kailan ito inilathala roon, hindi kung kailan pinagtibay ang ordinansa."
   }
 }
