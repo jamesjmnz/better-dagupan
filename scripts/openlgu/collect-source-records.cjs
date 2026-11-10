@@ -43,6 +43,7 @@ This preserves what was observed or manually staged. It does not write canonical
 
 Options:
   --input <path>    Legacy/manual staging CSV. Default: ${DEFAULT_INPUT}
+                    (not shipped with the repository; supply your own)
   --output <path>   Source record JSONL output. Default: ${DEFAULT_OUTPUT}
 `);
 }
@@ -147,6 +148,14 @@ function writeJsonl(filePath, records) {
 
 function main() {
   const args = parseArgs(process.argv);
+  if (!fs.existsSync(args.input)) {
+    throw new Error(
+      `Input CSV not found: ${args.input}\n` +
+        'The inherited legacy staging CSV is no longer shipped with the repository. ' +
+        'Pass --input <path> to convert a local staging CSV, or use ' +
+        '`npm run openlgu:collect-website` for website source records.'
+    );
+  }
   const rows = parseCsv(fs.readFileSync(args.input, 'utf8'));
   const records = rows.map(row => toSourceRecord(row, args.input));
 

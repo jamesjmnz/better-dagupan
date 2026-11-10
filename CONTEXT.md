@@ -117,7 +117,7 @@ An initial or investigative reconciliation run executed locally to iterate on pa
 _Avoid_: Worker sync, production import
 
 **Legacy Manual Staging CSV**:
-The manually edited `pipeline/data/documents.csv` file from the original pipeline. It is a transitional staging input and source of evidence, not a canonical import artifact.
+The manually edited `pipeline/data/documents.csv` file from the original pipeline. It is a transitional staging input and source of evidence, not a canonical import artifact. The inherited copy is no longer in the repository; its shape is recorded in `docs/reference/betterlb-data-model.md`.
 _Avoid_: Canonical CSV, production import CSV
 
 **Routine Worker Sync**:

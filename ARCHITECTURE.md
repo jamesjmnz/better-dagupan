@@ -125,17 +125,15 @@ functions/api/
 
 ## Data Pipeline
 
-Legislative documents are processed through Python scripts:
+Legislative documents go through the OpenLGU Legislative Source Pipeline
+(`scripts/openlgu/`). Collectors emit source records, staging produces staged
+records, shadow reconciliation compares them with canonical records, and only
+reviewed promotion writes to D1. Local artifacts live under `pipeline/openlgu/`
+and are not committed.
 
-```bash
-pipeline/
-├── 1_scrape.py         # Download PDFs
-├── 1.5_normalize.py    # Standardize filenames
-├── 3_parse.py          # Extract text/metadata
-└── 4_generate.py       # Create JSON for D1 import
-```
-
-See `pipeline/README.md` for details.
+See `docs/openlgu/source-pipeline.md` for details, and
+`docs/reference/betterlb-data-model.md` for the shape of the data inherited
+from BetterLB.
 
 ---
 

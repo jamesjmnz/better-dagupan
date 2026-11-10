@@ -114,13 +114,6 @@ better-dagupan/
 │   └── utils/                   # Test helpers and shared testing logic
 ├── functions/                   # Serverless / backend functions (Cloudflare Pages)
 │   └── api/                     # API endpoints and handlers
-├── pipeline/                    # Data processing pipeline (Python side)
-│   ├── data/                    # Structured source documents
-│   │   └── pdfs/                # Source legislative PDFs
-│   │       ├── executive_orders/
-│   │       ├── ordinances/
-│   │       └── resolutions/
-│   └── __pycache__/             # Python cache (auto-generated)
 ├── public/                      # Static public assets
 │   ├── assets/                  # General media assets
 │   ├── locales/                 # Translation files (en, fil)
@@ -212,14 +205,15 @@ rather than the generated output.
 
 #### Data Pipeline for Legislative Documents
 
-Legislative documents are processed through a Python pipeline:
+Legislative documents go through the OpenLGU Legislative Source Pipeline in
+`scripts/openlgu/`: collection into source records, staging, shadow
+reconciliation, and reviewed promotion to canonical records in D1. Its local
+artifacts are written under `pipeline/openlgu/`, which is not committed.
 
-1. **Scrape** (`pipeline/1_scrape.py`) - Download PDFs from official sources
-2. **Normalize** (`pipeline/1.5_normalize.py`) - Standardize filenames and metadata
-3. **Parse** (`pipeline/3_parse.py`) - Extract text and metadata from PDFs
-4. **Generate** (`pipeline/4_generate.py`) - Create structured JSON for database import
-
-See [`pipeline/README.md`](./pipeline/README.md) for complete documentation.
+See [`docs/openlgu/source-pipeline.md`](./docs/openlgu/source-pipeline.md) for
+the pipeline and
+[`docs/reference/betterlb-data-model.md`](./docs/reference/betterlb-data-model.md)
+for the data inherited from BetterLB.
 
 ---
 
