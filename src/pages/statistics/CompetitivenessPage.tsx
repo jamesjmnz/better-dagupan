@@ -1,7 +1,14 @@
 import { useMemo, useState } from 'react';
 
 import { CHART_THEME, standardAxisProps } from '@/constants/charts';
-import { BarChart3, Target, TrendingUp, Trophy } from 'lucide-react';
+import {
+  BarChart3,
+  ExternalLink,
+  Medal,
+  Target,
+  TrendingUp,
+  Trophy,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import {
   CartesianGrid,
@@ -15,6 +22,8 @@ import {
 
 import { StatCard } from '@/components/ui/StatCard';
 import { Badge } from '@/components/ui/Badge';
+import { NotVerified } from '@/components/civic/NotVerified';
+import { SourceNote } from '@/components/civic/SourceNote';
 import {
   ChartTooltip,
   ResponsiveChart,
@@ -22,6 +31,7 @@ import {
 import { DetailSection } from '@/components/layout/PageLayouts';
 import { PageHero } from '@/components/layout/PageLayouts';
 
+import { getCivicSource } from '@/lib/civicSources';
 import { cn } from '@/lib/utils';
 
 import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
@@ -39,51 +49,59 @@ const PILLAR_COLORS: Record<string, string> = {
   Innovation: '#64748b',
 };
 
-// 1. Define the shape of the trend data to avoid 'any'
+/** Pillars in the order DTI lists them; later editions add to the end. */
+const PILLAR_ORDER = Object.keys(PILLAR_COLORS).filter(k => k !== 'Overall');
+
 interface TrendPoint {
   year: number;
-  Overall: number | null;
-  [key: string]: number | null; // For the 5 pillars
+  Overall: number;
+  [pillar: string]: number | null;
 }
 
-const cmci = cmciData as CMCIData;
+const cmci = cmciData as unknown as CMCIData;
+// Ordered by year in the file.
+const editions = cmci.editions;
 
 export default function CompetitivenessPage() {
-  const { t } = useTranslation('statistics');
+  const { t, i18n } = useTranslation('statistics');
   const [activeTab, setActiveTab] = useState<'trends' | 'pillars'>('trends');
+  const [selectedYear, setSelectedYear] = useState(
+    editions[editions.length - 1]?.year
+  );
+  const edition = editions.find(e => e.year === selectedYear);
   const [selectedPillar, setSelectedPillar] = useState(
-    cmci.pillars[0]?.name ?? ''
+    edition?.pillars[0]?.name ?? ''
   );
 
-  const hasScores = cmci.meta.years.length > 0 && cmci.pillars.length > 0;
-  const latestIdx = cmci.meta.years.length - 1;
-  const latestYear = cmci.meta.years[latestIdx];
+  // A pillar DTI did not score in the selected year falls back to the first.
+  const currentPillar =
+    edition?.pillars.find(p => p.name === selectedPillar) ??
+    edition?.pillars[0];
 
-  // 2. Strictly Typed Trend Logic
-  const trendData = useMemo<TrendPoint[]>(() => {
-    return cmci.meta.years
-      .map((year, idx) => {
-        const dp: TrendPoint = {
-          year,
-          Overall: cmci.overall_score[idx] ?? null,
-        };
-        cmci.pillars.forEach(p => {
-          dp[p.name] = p.scores[idx] ?? null;
-        });
-        return dp;
-      })
-      .filter(d => d.Overall !== null);
-  }, []);
-
-  // 3. Find current pillar safely
-  const currentPillar = useMemo(
-    () => cmci.pillars.find(p => p.name === selectedPillar),
-    [selectedPillar]
+  // Scores as DTI published them, per year. A pillar DTI did not score that
+  // year is null, so its line starts where the pillar was introduced.
+  const trendData = useMemo<TrendPoint[]>(
+    () =>
+      editions.map(e => {
+        const point: TrendPoint = { year: e.year, Overall: e.overall_score };
+        for (const name of PILLAR_ORDER) {
+          point[name] = e.pillars.find(p => p.name === name)?.score ?? null;
+        }
+        return point;
+      }),
+    []
   );
+
+  const ordinal = useMemo(
+    () => new Intl.PluralRules(i18n.language, { type: 'ordinal' }),
+    [i18n.language]
+  );
+  const rankLabel = (rank: number) =>
+    t(`competitiveness.rank.${ordinal.select(rank)}`, { rank });
 
   // Hooks above run unconditionally; the bail-out sits below them so hook order
   // is stable whether or not verified CMCI scores exist.
-  if (!hasScores) {
+  if (!edition || !currentPillar) {
     return (
       <>
         <PageHero
@@ -104,28 +122,71 @@ export default function CompetitivenessPage() {
       >
         <div className='flex flex-wrap gap-2 justify-center'>
           <Badge variant='primary' dot>
-            {t('competitiveness.cmciYear', { year: latestYear })}
+            {t('competitiveness.cmciYear', { year: edition.year })}
           </Badge>
           <Badge variant='slate'>{t('competitiveness.dtiStandards')}</Badge>
         </div>
       </PageHero>
 
+      {/* Edition switcher */}
+      <div
+        role='group'
+        aria-label={t('competitiveness.yearPicker')}
+        className='flex flex-wrap gap-2 justify-center mb-kapwa-lg'
+      >
+        {editions.map(e => (
+          <button
+            key={e.year}
+            type='button'
+            aria-pressed={e.year === selectedYear}
+            onClick={() => setSelectedYear(e.year)}
+            className={cn(
+              'focus-visible:ring-kapwa-border-focus min-h-[44px] rounded-xl border px-3 text-sm font-bold focus-visible:ring-2 focus-visible:outline-none',
+              e.year === selectedYear
+                ? 'border-kapwa-border-brand bg-kapwa-bg-surface text-kapwa-text-brand-bold shadow-sm'
+                : 'border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support hover:text-kapwa-text-strong'
+            )}
+          >
+            {e.year}
+          </button>
+        ))}
+      </div>
+
       {/* KPI Cards - using new StatCard component */}
-      <div className='grid grid-cols-1 gap-4 items-stretch md:grid-cols-2 mb-kapwa-lg'>
+      <div className='grid grid-cols-1 gap-4 items-stretch md:grid-cols-3 mb-kapwa-lg'>
         <StatCard
           label={t('competitiveness.overallScore')}
-          value={(cmci.overall_score[latestIdx] ?? 0).toFixed(2)}
+          value={String(edition.overall_score)}
           subtext={t('competitiveness.cmciIndex')}
           variant='primary'
         />
         <StatCard
+          label={t('competitiveness.overallRank')}
+          value={rankLabel(edition.overall_rank)}
+          subtext={
+            edition.peer_count
+              ? t('competitiveness.ofPeers', {
+                  count: edition.peer_count,
+                  group: edition.peer_group,
+                })
+              : t('competitiveness.amongCategory', {
+                  category: edition.category,
+                })
+          }
+          variant='secondary'
+          icon={Medal}
+        />
+        <StatCard
           label={t('competitiveness.pillarsTracked')}
-          value={cmci.pillars.length}
+          value={edition.pillars.length}
           subtext={t('competitiveness.dtiStandards')}
           variant='slate'
           icon={Trophy}
         />
       </div>
+      <p className='mx-auto max-w-3xl text-xs leading-relaxed text-center text-kapwa-text-support mb-kapwa-lg'>
+        {t('competitiveness.methodologyNote')}
+      </p>
 
       {/* Tab Switcher */}
       <nav className='mb-kapwa-lg bg-kapwa-bg-hover flex gap-1.5 rounded-2xl p-1.5'>
@@ -150,7 +211,6 @@ export default function CompetitivenessPage() {
         ))}
       </nav>
 
-      {/* Trends Chart wrapped in DetailSection */}
       {activeTab === 'trends' ? (
         <DetailSection
           title={t('competitiveness.pillarTrends')}
@@ -187,29 +247,93 @@ export default function CompetitivenessPage() {
                 dot={{ r: 4 }}
                 activeDot={{ r: 8 }}
               />
-              {cmci.pillars.map(p => (
+              {PILLAR_ORDER.map(name => (
                 <Line
-                  key={p.name}
+                  key={name}
                   type='monotone'
-                  dataKey={p.name}
-                  stroke={PILLAR_COLORS[p.name]}
+                  dataKey={name}
+                  stroke={PILLAR_COLORS[name]}
                   strokeWidth={2}
                   dot={false}
                 />
               ))}
             </LineChart>
           </ResponsiveChart>
+
+          {/* The same figures as a table, with each year's DTI page. */}
+          <div className='overflow-x-auto mt-6'>
+            <table className='w-full text-sm text-left'>
+              <caption className='sr-only'>
+                {t('competitiveness.byYearCaption')}
+              </caption>
+              <thead>
+                <tr className='text-[10px] font-bold tracking-widest uppercase border-b border-kapwa-border-weak text-kapwa-text-support'>
+                  <th scope='col' className='py-2 pr-4'>
+                    {t('competitiveness.columns.year')}
+                  </th>
+                  <th scope='col' className='py-2 pr-4'>
+                    {t('competitiveness.columns.score')}
+                  </th>
+                  <th scope='col' className='py-2 pr-4'>
+                    {t('competitiveness.columns.rank')}
+                  </th>
+                  <th scope='col' className='py-2 pr-4'>
+                    {t('competitiveness.columns.pillars')}
+                  </th>
+                  <th scope='col' className='py-2'>
+                    {t('competitiveness.columns.source')}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {editions.map(e => {
+                  const profile = getCivicSource(e.sources[0] as string);
+                  return (
+                    <tr
+                      key={e.year}
+                      className='border-b border-kapwa-border-weak text-kapwa-text-strong'
+                    >
+                      <th scope='row' className='py-2 pr-4 font-bold'>
+                        {e.year}
+                      </th>
+                      <td className='py-2 pr-4 font-mono'>{e.overall_score}</td>
+                      <td className='py-2 pr-4'>
+                        {rankLabel(e.overall_rank)}
+                        {e.peer_count ? ` / ${e.peer_count}` : ''}
+                      </td>
+                      <td className='py-2 pr-4'>{e.pillars.length}</td>
+                      <td className='py-2'>
+                        <a
+                          href={profile.url}
+                          target='_blank'
+                          rel='noreferrer'
+                          className='inline-flex gap-1 items-center underline underline-offset-2 text-kapwa-text-brand hover:text-kapwa-text-brand-bold'
+                        >
+                          {t('competitiveness.profileLink', { year: e.year })}
+                          <ExternalLink
+                            aria-hidden='true'
+                            className='w-3 h-3'
+                          />
+                        </a>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </DetailSection>
       ) : (
         <div className='grid grid-cols-1 gap-8 lg:grid-cols-12'>
           <div className='space-y-3 lg:col-span-5'>
-            {cmci.pillars.map(p => (
+            {edition.pillars.map(p => (
               <button
                 key={p.name}
                 onClick={() => setSelectedPillar(p.name)}
+                aria-pressed={currentPillar.name === p.name}
                 className={cn(
-                  'flex min-h-[56px] w-full items-center justify-between rounded-2xl border p-4 text-left transition-all',
-                  selectedPillar === p.name
+                  'flex min-h-[56px] w-full items-center justify-between gap-3 rounded-2xl border p-4 text-left transition-all',
+                  currentPillar.name === p.name
                     ? 'bg-kapwa-bg-surface border-kapwa-border-brand shadow-sm'
                     : 'border-kapwa-border-weak bg-kapwa-bg-surface'
                 )}
@@ -217,81 +341,64 @@ export default function CompetitivenessPage() {
                 <span
                   className={cn(
                     'text-sm font-bold',
-                    selectedPillar === p.name
+                    currentPillar.name === p.name
                       ? 'text-kapwa-text-brand-bold'
                       : 'text-kapwa-text-support'
                   )}
                 >
                   {p.name}
                 </span>
-                <Badge variant='slate'>
-                  {p.scores[latestIdx]?.toFixed(2) || '0.00'}
-                </Badge>
+                <span className='flex gap-2 items-center'>
+                  <Badge variant='slate'>{rankLabel(p.rank)}</Badge>
+                  <Badge variant='slate'>{p.score.toFixed(4)}</Badge>
+                </span>
               </button>
             ))}
           </div>
           <div className='lg:col-span-7'>
             <DetailSection
               title={t('competitiveness.indicators', {
-                pillar: selectedPillar,
+                pillar: currentPillar.name,
               })}
               icon={Target}
               className='bg-kapwa-bg-surface/30'
             >
-              <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
-                {currentPillar?.indicators.map((ind, idx) => (
-                  <div
-                    key={idx}
-                    className='border-kapwa-border-weak bg-kapwa-bg-surface flex min-h-[100px] flex-col justify-between rounded-xl border p-4 shadow-xs'
-                  >
-                    <span className='text-kapwa-text-disabled text-[10px] leading-tight font-bold tracking-widest uppercase'>
-                      {ind.name}
-                    </span>
-                    <span className='mt-2 text-xl font-black text-kapwa-text-strong'>
-                      {ind.values[latestIdx]?.toFixed(4) || '0.0000'}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              {currentPillar.indicators_status === 'published' ? (
+                <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
+                  {currentPillar.indicators.map(ind => (
+                    <div
+                      key={ind.name}
+                      className='border-kapwa-border-weak bg-kapwa-bg-surface flex min-h-[100px] flex-col justify-between rounded-xl border p-4 shadow-xs'
+                    >
+                      <span className='text-kapwa-text-disabled text-[10px] leading-tight font-bold tracking-widest uppercase'>
+                        {ind.name}
+                      </span>
+                      <span className='flex gap-2 justify-between items-baseline mt-2'>
+                        <span className='text-xl font-black text-kapwa-text-strong'>
+                          {ind.score.toFixed(4)}
+                        </span>
+                        <span className='text-xs font-bold text-kapwa-text-support'>
+                          {rankLabel(ind.rank)}
+                        </span>
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <NotVerified
+                  label={t('competitiveness.indicatorsWithheld')}
+                  detail={t('competitiveness.indicatorsWithheldDetail', {
+                    year: edition.year,
+                  })}
+                />
+              )}
             </DetailSection>
           </div>
         </div>
       )}
 
-      {/* Footer */}
-      <footer className='pt-10 space-y-4 text-center border-t border-kapwa-border-weak'>
-        <div className='flex justify-center items-center mx-auto w-6 h-6 rounded-full bg-kapwa-bg-success-weak text-kapwa-text-success'>
-          <svg
-            className='w-4 h-4'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
-            />
-          </svg>
-        </div>
-        <div className='space-y-1'>
-          <p className='text-kapwa-text-strong text-[10px] font-bold tracking-widest uppercase'>
-            {t('footer.verified')}
-          </p>
-          <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-            {t('footer.source')}{' '}
-            <a
-              href='https://cmci.dti.gov.ph/data-portal.php'
-              target='_blank'
-              rel='noreferrer'
-              className='underline hover:text-kapwa-text-brand'
-            >
-              {cmci.meta.source}
-            </a>
-          </p>
-        </div>
-      </footer>
+      {/* Provenance for the selected edition */}
+      <SourceNote className='mt-kapwa-lg' sources={edition.sources} />
     </>
   );
 }

@@ -9,8 +9,7 @@ import { readData } from '../utils/data';
  */
 const hasIncome = readData<unknown[]>('statistics/ari.json').length > 0;
 const hasCmci =
-  readData<{ overall_score: unknown[] }>('statistics/cmci.json').overall_score
-    .length > 0;
+  readData<{ editions: unknown[] }>('statistics/cmci.json').editions.length > 0;
 const NO_INCOME = 'No verified city income records (ari.json) yet.';
 const NO_CMCI = 'No verified CMCI scores (cmci.json) yet.';
 

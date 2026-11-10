@@ -1,8 +1,8 @@
 {
   "meta": {
     "source": "Cities and Municipalities Competitiveness Index (CMCI)",
-    "years": []
+    "agency": "Department of Trade and Industry",
+    "lgu_name_as_published": "Dagupan"
   },
-  "overall_score": [],
-  "pillars": []
+  "editions": []
 }

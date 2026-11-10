@@ -45,7 +45,7 @@ const recordSets: [string, unknown[]][] = [
   ['services/services', services],
   ['citizens-charter/merged-services', mergedServices],
   ['citizens-charter/citizens-charter', citizensCharter.services],
-  ['statistics/cmci.pillars', cmci.pillars],
+  ['statistics/cmci.editions', cmci.editions],
 ];
 
 describe('inherited civic records', () => {
