@@ -133,7 +133,7 @@ const AboutPage: FC = () => {
                   {t('whyBuilding.intro')}
                   <a
                     href='https://www.gov.ph'
-                    className='text-kapwa-text-brand mx-1 hover:opacity-80'
+                    className='text-kapwa-text-brand mx-1 underline underline-offset-2 hover:opacity-80'
                   >
                     {t('whyBuilding.govPhLink')}
                   </a>
@@ -208,7 +208,7 @@ const AboutPage: FC = () => {
                   {t('license.description')}
                   <a
                     href='https://creativecommons.org/publicdomain/zero/1.0/'
-                    className='text-kapwa-text-brand mx-1 hover:opacity-80'
+                    className='text-kapwa-text-brand mx-1 underline underline-offset-2 hover:opacity-80'
                   >
                     {t('license.ccLink')}
                   </a>

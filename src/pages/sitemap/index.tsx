@@ -207,7 +207,7 @@ const SitemapPage: FC = () => {
                   link: (
                     <Link
                       to='/search'
-                      className='text-kapwa-text-brand hover:underline'
+                      className='text-kapwa-text-brand underline underline-offset-2 hover:no-underline'
                     />
                   ),
                 }}
