@@ -76,7 +76,7 @@ export default function OpenLGULayout() {
           <PageHeader
             variant='compact'
             title='OpenLGU Document'
-            description='Official record from the Sangguniang Bayan.'
+            description={`Official record from the ${lguLabels.body}.`}
             autoBreadcrumbs={true}
             actions={
               <SearchInput

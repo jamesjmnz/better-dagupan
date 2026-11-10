@@ -27,7 +27,7 @@ export default function TransparencyLayout() {
           <PageHeader
             variant='compact'
             title='Transparency Portal'
-            description='Track municipal funds, infrastructure projects, and procurement records.'
+            description={`Track ${lguLabels.adjective.toLowerCase()} funds, infrastructure projects, and procurement records.`}
             autoBreadcrumbs={true}
           />
         )
