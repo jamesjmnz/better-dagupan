@@ -1,6 +1,8 @@
-# Contributing to BetterLB
+# Contributing to Better Dagupan
 
-Thank you for your interest in contributing! We welcome developers, designers, writers, and anyone passionate about better government transparency.
+Thank you for your interest in contributing! We welcome developers, designers, writers, data auditors, and anyone passionate about better government transparency for the City of Dagupan.
+
+Better Dagupan is an independent, community-led project. It is not the official website of the City Government of Dagupan.
 
 ---
 
@@ -8,9 +10,9 @@ Thank you for your interest in contributing! We welcome developers, designers, w
 
 1. **Fork and Clone**
    ```bash
-   git clone https://github.com/<your-username>/betterlb
-   cd betterlb
-   npm install
+   git clone https://github.com/<your-username>/better-dagupan
+   cd better-dagupan
+   npm install --legacy-peer-deps
    ```
 
 2. **Create a Branch**
@@ -39,20 +41,28 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 ```
 <type>[optional scope]: <short description>
 
-Types:
+Types (enforced by commitlint.config.js):
 feat:     New feature
 fix:      Bug fix
+data:     Verified civic data changes
 docs:     Documentation only
 style:    Code style (no logic change)
 refactor: Code refactoring
+perf:     Performance improvement
 test:     Adding or updating tests
+build:    Build system or dependencies
+ci:       CI workflows
 chore:    Maintenance tasks
+revert:   Revert an earlier commit
 
 Examples:
 feat(services): add search filter by category
 fix(navbar): correct mobile menu toggle
+data: add verified Dagupan barangay index
 docs: update setup instructions
 ```
+
+A commit with any other type is rejected by the `commit-msg` hook.
 
 ### Code Style
 
@@ -95,11 +105,11 @@ export type { ExampleProps };
 # Use correct Node version
 nvm use  # or fnm use
 
-# Install dependencies
-npm install
+# Install dependencies (CI uses the same flag)
+npm install --legacy-peer-deps
 
 # Prepare data files
-python3 scripts/merge_services.py
+npm run merge:services
 
 # Start dev server
 npm run dev
@@ -111,7 +121,7 @@ npm run dev
 # Run the smoke suite a pull request has to pass
 npx playwright test --project=chromium --grep @smoke
 
-# Run the full cross-browser E2E suite (slow — 1135 tests across 5 browsers)
+# Run the full cross-browser E2E suite (slow — five browser projects)
 npm run test:e2e
 
 # Run specific test file
@@ -145,8 +155,9 @@ Pull requests are gated by four checks:
 
 The full cross-browser Playwright suite (`.github/workflows/e2e.yml`) does
 **not** run on pull requests. It takes longer than the job timeout allows and
-still fails in bulk on inherited Los Baños expectations, so it runs weekly and
-on demand via `workflow_dispatch` while it is being repaired. Trigger it from
+still fails in bulk, mostly in specs that expect data Better Dagupan has not
+published yet, so it runs weekly and on demand via `workflow_dispatch` while it
+is being repaired. Trigger it from
 the Actions tab before merging anything that touches rendering broadly.
 
 Tag a test `@smoke` only if it must hold for any LGU — the smoke suite has to
@@ -156,9 +167,9 @@ officials, departments, or services belong in the full suite.
 ### Pre-commit Hooks
 
 Husky runs automatically:
-- **Prettier** formats code
-- **ESLint** checks quality
-- **Kapwa token check** prevents raw colors in component files
+- **Kapwa token check** rejects raw `gray`/`slate` color classes in `src/pages/services`, `government`, `statistics`, `transparency`, and `openlgu`
+- **lint-staged** runs `eslint --fix` and `prettier --write` on staged files
+- **commitlint** checks the commit message type
 
 ### Testing Utilities
 
@@ -178,10 +189,10 @@ These utilities help maintain design system consistency across the application.
 
 ```tsx
 // Static data - direct import
-import services from '@/data/services.json';
+import barangays from '@/data/directory/barangays.json';
 
 // Dynamic data - API endpoint
-const response = await fetch('/api/legislation/documents');
+const response = await fetch('/api/openlgu/documents');
 ```
 
 ### Custom Hooks
@@ -220,10 +231,27 @@ export default function PageName() {
 
 ## Common Tasks
 
+### Contributing Civic Data
+
+Read [`docs/civic-data-verification.md`](./docs/civic-data-verification.md)
+first. In short:
+
+1. Use primary government sources, and add each one to
+   `src/data/sources/civic-sources.json`
+2. Cite at least one source by id on every record
+3. Leave a field `null` or `[]` when it cannot be verified; the interface shows
+   it as not verified yet, never as absent
+4. Update `src/data/__tests__/inheritedRecords.test.ts` deliberately when a
+   dataset goes from empty to populated
+5. Use the `data:` commit type
+
+Never add officials, offices, contacts, services, budgets, or legislation from
+memory or from an unofficial source.
+
 ### Adding a New Service
 
-1. Update service data in `src/data/citizens-charter/`
-2. Run `python3 scripts/merge_services.py`
+1. Update service data in `src/data/services/categories/` or `src/data/citizens-charter/`, following the data rules above
+2. Run `npm run merge:services`
 3. Test the service detail page
 
 ### Adding a New Page
@@ -235,7 +263,7 @@ export default function PageName() {
 
 ### Updating LGU Config
 
-Edit `config/lgu.config.json` - changes apply automatically.
+Edit `config/lgu.config.json` - changes apply automatically. Some values are still hardcoded elsewhere; see [`FORKING.md`](./FORKING.md#what-still-is-not).
 
 ---
 
@@ -272,9 +300,9 @@ Closes #123
 
 ## Getting Help
 
-- **Issues:** [github.com/BetterLosBanos/betterlb/issues](https://github.com/BetterLosBanos/betterlb/issues)
-- **Discussions:** [github.com/BetterLosBanos/betterlb/discussions](https://github.com/BetterLosBanos/betterlb/discussions)
-- **Live Site:** [https://betterlb.org](https://betterlb.org)
+- **Issues:** [github.com/jamesjmnz/better-dagupan/issues](https://github.com/jamesjmnz/better-dagupan/issues)
+- **Live Site:** not deployed yet
+- **Template:** improvements that apply to every LGU portal can also go upstream to [BetterLB](https://github.com/BetterLosBanos/betterlb)
 
 ---
 
@@ -284,4 +312,4 @@ By contributing, you agree that your code will be released under the [Creative C
 
 ---
 
-**Thank you for contributing to BetterLB!** 🇵🇭
+**Thank you for contributing to Better Dagupan!** 🇵🇭
