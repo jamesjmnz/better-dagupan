@@ -6,5 +6,5 @@
  * @module components/widgets
  */
 
-// NOTE: CriticalHotlinesWidget exists but is currently unused
-// May be reinstated for emergency contact features
+// CriticalHotlinesWidget is rendered on the home page: the city's verified
+// emergency numbers (src/data/directory/hotlines.json) above the national ones.

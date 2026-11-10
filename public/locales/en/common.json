@@ -297,5 +297,26 @@
     "readTitle": "How to read this data",
     "readCity": "Each figure is a PSA census count at the census reference date ({{dates}}). The censuses are not evenly spaced, so compare growth using the PSA's annual rates rather than the slope between points. None of these figures is an estimate or a projection.",
     "readBarangays": "Barangay counts are shown for {{years}}, the censuses whose PSA barangay tables have been verified. Barangay names follow the current PSGC; for each census the barangay figures add up exactly to the city total."
+  },
+  "hotlines": {
+    "title": "Emergency hotlines",
+    "cityGroup": "{{lgu}}",
+    "nationalGroup": "National hotlines",
+    "call": "Call {{name}} at {{number}}",
+    "viewAll": "See all hotlines",
+    "cityNotVerified": "No city hotline is verified yet",
+    "cityWithheld": "Some numbers the city lists are not shown yet",
+    "cityWithheldHint": "Better Dagupan lists a number only when two independent official lists state it. Numbers the city publishes in a single list, or gives to two different offices, are held back until a second source settles them. It is not a statement that those lines do not exist.",
+    "categories": {
+      "police": "Police",
+      "fire": "Fire",
+      "disaster": "Disaster response",
+      "health": "Health",
+      "rescue": "Rescue and relief",
+      "utility": "Utility",
+      "employment": "Employment",
+      "social-welfare": "Social welfare",
+      "public-order": "Public order and safety"
+    }
   }
 }
