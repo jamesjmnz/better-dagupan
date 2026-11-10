@@ -2,10 +2,10 @@ import { test, expect } from '../test-config';
 import { readData } from '../utils/data';
 
 /*
- * Only the population page has verified data (PSA census). City income
- * (ari.json) and competitiveness (cmci.json) have none yet, so their pages
- * show NotYetAvailable, which e2e/statistics/index.spec.ts asserts. Their
- * chart tests below skip until records are published.
+ * Each statistics page's chart tests run only while its dataset holds
+ * verified records: population (PSA census) and city income (BLGF) do.
+ * An empty dataset's page shows NotYetAvailable instead, which
+ * e2e/statistics/index.spec.ts asserts, and its chart tests skip.
  */
 const hasIncome = readData<unknown[]>('statistics/ari.json').length > 0;
 const hasCmci =
@@ -222,30 +222,29 @@ test.describe('Statistics Page Charts', () => {
     });
 
     test('municipal income page chart tooltips work', async ({ page }) => {
-      // Hover over pie chart
-      const pieChart = page.locator('.recharts-pie');
-      await pieChart.hover();
+      // Pointer hover is unreliable here: an arc's box centre falls in the
+      // donut hole, and the slices re-render while the pie animates in. Send
+      // the event to the slice itself instead.
+      const slice = page.locator('.recharts-pie-sector path').first();
+      await expect(slice).toBeAttached();
+      await slice.dispatchEvent('mouseover');
 
-      // Check for tooltip
-      const tooltip = page.locator('.recharts-tooltip-wrapper');
-      const tooltipCount = await tooltip.count();
-
-      if (tooltipCount > 0) {
-        // Check tooltip has content
-        const tooltipContent = page.locator('.recharts-tooltip-content');
-        await expect(tooltipContent).toBeVisible();
-      }
+      // FinancialPieChart renders its own tooltip, which has no
+      // .recharts-tooltip-content element; check it shows an amount.
+      await expect(
+        page.locator('.recharts-tooltip-wrapper').first()
+      ).toContainText('₱');
     });
 
     test('municipal income page displays income breakdown with correct colors', async ({
       page,
     }) => {
-      // Check for pie chart sectors with different colors
-      const sectors = page.locator('.recharts-pie-sector');
-      const sectorCount = await sectors.count();
+      // Check for pie chart sectors with different colors. Recharts wraps
+      // each sector's path in a <g>, so the fill is on the path.
+      const sectors = page.locator('.recharts-pie-sector path');
 
-      // Should have multiple colored sectors
-      expect(sectorCount).toBeGreaterThanOrEqual(3);
+      // Should have multiple colored sectors once the pie has drawn
+      await expect.poll(() => sectors.count()).toBeGreaterThanOrEqual(3);
 
       // Check that sectors have fill colors
       const firstSector = sectors.first();
@@ -536,12 +535,11 @@ test.describe('Statistics Page Charts', () => {
       await page.goto('/statistics/municipal-income');
       await page.waitForLoadState('networkidle');
 
-      // Check for pie chart sectors
+      // Check for pie chart sectors, polling while the pie animates in
       const sectors = page.locator('.recharts-pie-sector');
-      const sectorCount = await sectors.count();
 
       // Should have at least 4 income categories
-      expect(sectorCount).toBeGreaterThanOrEqual(4);
+      await expect.poll(() => sectors.count()).toBeGreaterThanOrEqual(4);
     });
 
     test('competitiveness page chart displays multi-year data', async ({

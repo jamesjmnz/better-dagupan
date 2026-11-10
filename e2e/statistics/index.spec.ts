@@ -124,11 +124,10 @@ test.describe('Statistics Pages', () => {
   });
 
   /*
-   * Population is published from the PSA census; income (ari.json) and
-   * competitiveness (cmci.json) have no verified Dagupan records yet. Each
-   * page is tested for what its dataset supports: the empty pages must say
-   * the data is not available, and switch to the chart checks on their own
-   * once records land.
+   * Population is published from the PSA census and income (ari.json) from
+   * BLGF. Each page is tested for what its dataset supports: an empty page
+   * must say the data is not available, and switches to the chart checks on
+   * its own once records land.
    */
   for (const route of [
     {
@@ -165,8 +164,8 @@ test.describe('Statistics Pages', () => {
 
   test('the population page shows its KPI cards', async ({ page }) => {
     // StatCard renders no test id or marker class; its labels are what a
-    // reader sees. The other statistics pages have no verified figures, so
-    // they are covered by the not-yet-available checks above.
+    // reader sees. The other statistics pages are covered by the chart or
+    // not-yet-available checks above, whichever their data supports.
     await page.goto('/statistics');
     const content = page.locator('#layout-content');
     for (const label of ['Total population', 'Annual growth rate']) {

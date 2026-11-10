@@ -37,27 +37,49 @@
   },
   "financial": {
     "title": "Kalagayang Pinansyal",
-    "breadcrumbTransparency": "Transparency",
-    "breadcrumb": "Ulat Pinansyal",
-    "verifiedAudit": "Beripikadong Audit",
+    "status": {
+      "final": "BLGF: pinal",
+      "preliminary": "BLGF: paunang datos"
+    },
     "fiscalYear": "FY {{year}}",
-    "millions": "Milyon (PHP)",
-    "description": "Malayang paglalarawan ng badyet ng {{adjectiveLower}}, kasama ang kasalukuyang kita at gastusin sa operasyon.",
+    "pesos": "Mga halaga sa piso",
+    "description": "Ang mga Statement of Receipts and Expenditures ng pamahalaan ng {{adjectiveLower}}, ayon sa ulat sa Bureau of Local Government Finance.",
     "summaryCards": "Mga Card ng Buod Pinansyal",
     "incomeComposition": "Komposisyon ng Kita",
     "expenditureAllocation": "Paglalaan ng Gastusin",
-    "source": "Pinagkunan: LGU SRE mula sa BLGF at Full Disclosure Policy Portal"
+    "periodAnnual": "Taong piskal {{year}}, Enero hanggang Disyembre",
+    "periodYearToDate": "{{months}} {{year}}, mula simula ng taon",
+    "blgfLabel": "Panahon ayon sa BLGF: {{label}}",
+    "yearToDateNote": "Ang mga datos kada quarter ay mula simula ng taon: bawat isa ay mula Enero hanggang sa katapusan ng ipinapakitang quarter, at ang datos ng ikaapat na quarter ng BLGF ay tugma sa buong-taong statement nito. Hindi pinagsasama-sama rito ang mga quarter.",
+    "noAnnual": "Wala pang buong-taong statement para sa FY {{year}}",
+    "noAnnualDetail": "Wala pang nahahanap ang Better Dagupan na buong-taong statement ng BLGF para sa taong piskal na ito. Hindi pinagsasama ang mga datos kada quarter para makabuo nito; lumipat sa view kada quarter para makita ang pinakabagong nailathalang panahon.",
+    "noYearToDate": "Wala pang statement kada quarter para sa FY {{year}}",
+    "noYearToDateDetail": "Wala pang nahahanap ang Better Dagupan na statement kada quarter ng BLGF para sa taong piskal na ito. Lumipat sa taunang view para makita ang buong-taong statement.",
+    "withheldLabel": "May mga linyang hindi muna ipinapakita para sa panahong ito",
+    "withheldSocialServices": "Magkabaligtad ang datos ng Labor and Employment at ng Housing and Community Development sa quarterly workbook ng BLGF para sa 2024 at sa pinal nitong statement para sa FY 2024, kaya hindi ipinapakita ang alinman sa dalawa para sa mga quarter ng 2024. Ipinapakita ang kabuuan ng social services, na pareho sa dalawa."
   },
   "summary": {
-    "revenue": "Kabuuang Kita (M)",
-    "expenditure": "Kabuuang Gastusin (M)",
-    "netIncome": "Netong Kita sa Operasyon (M)",
-    "treasury": "Balanse ng Kaban (M)"
+    "revenue": "Kabuuang Kasalukuyang Kita sa Operasyon",
+    "expenditure": "Kabuuang Kasalukuyang Gastusin sa Operasyon",
+    "netIncome": "Netong Kita sa Operasyon",
+    "treasury": "Balanse ng Pondo/Cash sa Katapusan"
   },
   "quarter": {
     "quarterly": "Kada Quarter",
     "annual": "Taunan",
-    "period": "Panahon"
+    "period": "Panahon",
+    "yearToDate": {
+      "Q1": "Q1: Enero hanggang Marso, mula simula ng taon",
+      "Q2": "Q2: Enero hanggang Hunyo, mula simula ng taon",
+      "Q3": "Q3: Enero hanggang Setyembre, mula simula ng taon",
+      "Q4": "Q4: Enero hanggang Disyembre, mula simula ng taon"
+    },
+    "months": {
+      "Q1": "Enero hanggang Marso",
+      "Q2": "Enero hanggang Hunyo",
+      "Q3": "Enero hanggang Setyembre",
+      "Q4": "Enero hanggang Disyembre"
+    }
   },
   "chart": {
     "percentOfTotal": "{{percent}}% ng kabuuan",

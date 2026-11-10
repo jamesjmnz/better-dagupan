@@ -1,10 +1,11 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Coins, Landmark, Wallet } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { StatGrid } from '@/components/ui/StatCard';
 import { Badge } from '@/components/ui/Badge';
+import { SourceNote } from '@/components/civic/SourceNote';
 import { DetailSection } from '@/components/layout/PageLayouts';
 import { PageHero } from '@/components/layout/PageLayouts';
 
@@ -12,6 +13,7 @@ import FinancialPieChart from '@/pages/transparency/components/FinancialPieChart
 
 import { formatPesoAdaptive } from '@/lib/format';
 import { useLguTerms } from '@/lib/useLguTerms';
+import { cn } from '@/lib/utils';
 
 import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
 
@@ -26,31 +28,47 @@ const COLORS = {
   other: '#64748b',
 };
 
+// Ordered by fiscal year in the file; the latest year is shown first.
+const records = ariData as unknown as AnnualRegularIncome[];
+
+/** BLGF's dependency ratios are fractions of ARI; it displays them as 0.0%. */
+const asPercent = (ratio: number) => `${(ratio * 100).toFixed(1)}%`;
+
+const peso = (amount: number) => formatPesoAdaptive(amount).fullString;
+
 export default function MunicipalIncomePage() {
   const { t } = useTranslation('statistics');
   const terms = useLguTerms();
-  const records = ariData as AnnualRegularIncome[];
-  const data = records[0] as AnnualRegularIncome | undefined;
+  const [selectedYear, setSelectedYear] = useState(
+    records[records.length - 1]?.fiscal_year
+  );
+  const data = records.find(r => r.fiscal_year === selectedYear);
+
+  // The FY 2022 edition heads the allotment column "Internal Revenue
+  // Allotment (IRA)"; later ones "National Tax Allotment (NTA)".
+  const allotment = data?.allotment_label.toUpperCase().startsWith('INTERNAL')
+    ? t('income.allotmentIra')
+    : t('income.allotmentNta');
 
   const drillDownIncomeData = useMemo(
     () => [
       {
-        name: 'National Tax Allotment',
+        name: allotment,
         value: data?.other_income_sources.national_tax_allotment ?? 0,
         color: COLORS.national,
       },
       {
-        name: 'Locally Sourced Revenue',
+        name: t('income.items.lsr'),
         value: data?.locally_sourced_revenue.total_locally_sourced_revenue ?? 0,
         color: COLORS.local,
         details: [
           {
-            name: 'Tax Revenue',
+            name: t('income.items.taxRevenue'),
             value:
               data?.locally_sourced_revenue.tax_revenue.total_tax_revenue ?? 0,
           },
           {
-            name: 'Non-Tax Revenue',
+            name: t('income.items.nonTaxRevenue'),
             value:
               data?.locally_sourced_revenue.non_tax_revenue
                 .total_non_tax_revenue ?? 0,
@@ -58,19 +76,19 @@ export default function MunicipalIncomePage() {
         ],
       },
       {
-        name: 'Other National Shares',
+        name: t('income.items.otherShares'),
         value:
           data?.other_shares_from_national_tax_collection.total_other_shares ??
           0,
         color: COLORS.special,
       },
       {
-        name: 'Interest Income',
+        name: t('income.items.interest'),
         value: data?.other_income_sources.interest_income ?? 0,
         color: COLORS.other,
       },
     ],
-    [data]
+    [data, allotment, t]
   );
 
   // Hooks above run unconditionally; the bail-out sits below them so hook order
@@ -87,20 +105,92 @@ export default function MunicipalIncomePage() {
     );
   }
 
+  const lsr = data.locally_sourced_revenue;
+  const itemGroups = [
+    {
+      title: t('income.groups.localTax'),
+      className: 'text-kapwa-text-accent-orange',
+      items: [
+        [
+          t('income.items.realPropertyGeneralFund'),
+          lsr.tax_revenue.real_property_tax_general_fund,
+        ],
+        [t('income.items.businessTax'), lsr.tax_revenue.tax_on_business],
+        [t('income.items.otherTaxes'), lsr.tax_revenue.other_taxes],
+      ],
+    },
+    {
+      title: t('income.groups.nonTax'),
+      className: 'text-kapwa-text-brand',
+      items: [
+        [t('income.items.regulatoryFees'), lsr.non_tax_revenue.regulatory_fees],
+        [
+          t('income.items.serviceCharges'),
+          lsr.non_tax_revenue.service_user_charges,
+        ],
+        [
+          t('income.items.economicEnterprises'),
+          lsr.non_tax_revenue.receipts_from_economic_enterprises,
+        ],
+      ],
+    },
+    {
+      title: t('income.groups.external'),
+      className: 'text-kapwa-text-success',
+      items: [
+        [allotment, data.other_income_sources.national_tax_allotment],
+        [
+          t('income.items.otherShares'),
+          data.other_shares_from_national_tax_collection.total_other_shares,
+        ],
+        [t('income.items.interest'), data.other_income_sources.interest_income],
+      ],
+    },
+  ] as const;
+
   return (
     <>
       {/* PageHero - documented pattern for layout headers */}
       <PageHero
         title={t('income.title', terms)}
-        description={t('income.description')}
+        description={t('income.description', terms)}
       >
         <div className='flex flex-wrap justify-center gap-2'>
           <Badge variant='primary' dot>
             {data.period}
           </Badge>
+          {data.status && (
+            <Badge variant='warning'>{t(`income.status.${data.status}`)}</Badge>
+          )}
           <Badge variant='slate'>{t('income.blgfData')}</Badge>
         </div>
       </PageHero>
+
+      {/* Fiscal-year switcher */}
+      {records.length > 1 && (
+        <div
+          role='group'
+          aria-label={t('income.yearPicker')}
+          className='mb-kapwa-lg flex flex-wrap justify-center gap-2'
+        >
+          {records.map(r => (
+            <button
+              key={r.fiscal_year}
+              type='button'
+              aria-pressed={r.fiscal_year === selectedYear}
+              onClick={() => setSelectedYear(r.fiscal_year)}
+              className={cn(
+                'focus-visible:ring-kapwa-border-focus min-h-[44px] rounded-xl border px-4 text-sm font-bold focus-visible:ring-2 focus-visible:outline-none',
+                r.fiscal_year === selectedYear
+                  ? 'border-kapwa-border-brand bg-kapwa-bg-surface text-kapwa-text-brand-bold shadow-sm'
+                  : 'border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support hover:text-kapwa-text-strong'
+              )}
+            >
+              {r.fiscal_year}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* KPI Cards - using StatGrid with StatCard */}
       <div className='mb-kapwa-lg'>
@@ -109,27 +199,34 @@ export default function MunicipalIncomePage() {
           stats={[
             {
               label: t('income.totalIncome'),
-              value: formatPesoAdaptive(
-                data.summary_indicators.annual_regular_income * 1_000_000
-              ).fullString,
+              value: peso(data.summary_indicators.annual_regular_income),
               subtext: t('income.annualRevenue'),
               variant: 'primary',
             },
             {
               label: t('income.localSufficiency'),
-              value: `${data.summary_indicators.dependency_rates.lsr_dependency}`,
+              value: asPercent(
+                data.summary_indicators.dependency_rates.lsr_dependency
+              ),
               subtext: t('income.lsrShare'),
               variant: 'secondary',
             },
             {
-              label: t('income.ntaDependency'),
-              value: `${data.summary_indicators.dependency_rates.nta_dependency}`,
-              subtext: t('income.nationalAllotment'),
+              label: t('income.allotmentDependency', {
+                allotment: /\((\w+)\)/.exec(allotment)?.[1] ?? allotment,
+              }),
+              value: asPercent(
+                data.summary_indicators.dependency_rates.nta_dependency
+              ),
+              subtext: t('income.allotmentShare'),
               variant: 'slate',
               icon: Wallet,
             },
           ]}
         />
+        <p className='text-kapwa-text-support mx-auto mt-3 max-w-3xl text-center text-xs leading-relaxed'>
+          {t('income.definition')}
+        </p>
       </div>
 
       {/* Chart wrapped in DetailSection */}
@@ -154,128 +251,34 @@ export default function MunicipalIncomePage() {
       {/* Full Financial Itemization */}
       <DetailSection title={t('income.itemization')} icon={Coins}>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
-          <div className='space-y-4'>
-            <h4 className='text-kapwa-text-accent-orange border-b pb-2 text-[10px] font-black tracking-widest uppercase'>
-              Local Tax
-            </h4>
-            <div className='text-kapwa-text-support space-y-2 text-sm font-bold'>
-              <div className='bg-kapwa-bg-surface-raised flex justify-between rounded-lg p-2'>
-                <span>Real Property</span>
-                <span>
-                  {
-                    formatPesoAdaptive(
-                      data.locally_sourced_revenue.tax_revenue
-                        .real_property_tax_general_fund
-                    ).fullString
-                  }
-                </span>
-              </div>
-              <div className='bg-kapwa-bg-surface-raised flex justify-between rounded-lg p-2'>
-                <span>Business Tax</span>
-                <span>
-                  {
-                    formatPesoAdaptive(
-                      data.locally_sourced_revenue.tax_revenue.tax_on_business
-                    ).fullString
-                  }
-                </span>
-              </div>
+          {itemGroups.map(group => (
+            <div key={group.title} className='space-y-4'>
+              <h4
+                className={cn(
+                  'border-b pb-2 text-[10px] font-black tracking-widest uppercase',
+                  group.className
+                )}
+              >
+                {group.title}
+              </h4>
+              <dl className='text-kapwa-text-support space-y-2 text-sm font-bold'>
+                {group.items.map(([label, amount]) => (
+                  <div
+                    key={label}
+                    className='bg-kapwa-bg-surface-raised flex justify-between gap-4 rounded-lg p-2'
+                  >
+                    <dt>{label}</dt>
+                    <dd className='text-right'>{peso(amount)}</dd>
+                  </div>
+                ))}
+              </dl>
             </div>
-          </div>
-          <div className='space-y-4'>
-            <h4 className='text-kapwa-text-brand border-b pb-2 text-[10px] font-black tracking-widest uppercase'>
-              Non-Tax
-            </h4>
-            <div className='text-kapwa-text-support space-y-2 text-sm font-bold'>
-              <div className='bg-kapwa-bg-surface-raised flex justify-between rounded-lg p-2'>
-                <span>Fees</span>
-                <span>
-                  {
-                    formatPesoAdaptive(
-                      data.locally_sourced_revenue.non_tax_revenue
-                        .regulatory_fees
-                    ).fullString
-                  }
-                </span>
-              </div>
-              <div className='bg-kapwa-bg-surface-raised flex justify-between rounded-lg p-2'>
-                <span>Enterprises</span>
-                <span>
-                  {
-                    formatPesoAdaptive(
-                      data.locally_sourced_revenue.non_tax_revenue
-                        .receipts_from_economic_enterprises
-                    ).fullString
-                  }
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className='space-y-4'>
-            <h4 className='border-b pb-2 text-[10px] font-black tracking-widest text-kapwa-text-success uppercase'>
-              External
-            </h4>
-            <div className='text-kapwa-text-support space-y-2 text-sm font-bold'>
-              <div className='bg-kapwa-bg-surface-raised flex justify-between rounded-lg p-2'>
-                <span>Allotment</span>
-                <span>
-                  {
-                    formatPesoAdaptive(
-                      data.other_income_sources.national_tax_allotment
-                    ).fullString
-                  }
-                </span>
-              </div>
-              <div className='bg-kapwa-bg-surface-raised flex justify-between rounded-lg p-2'>
-                <span>Other Shares</span>
-                <span>
-                  {
-                    formatPesoAdaptive(
-                      data.other_shares_from_national_tax_collection
-                        .total_other_shares
-                    ).fullString
-                  }
-                </span>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </DetailSection>
 
-      {/* Footer */}
-      <footer className='border-kapwa-border-weak space-y-4 border-t pt-10 text-center'>
-        <div className='bg-kapwa-bg-success-weak text-kapwa-text-success mx-auto flex h-6 w-6 items-center justify-center rounded-full'>
-          <svg
-            className='h-4 w-4'
-            fill='none'
-            viewBox='0 0 24 24'
-            stroke='currentColor'
-          >
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
-            />
-          </svg>
-        </div>
-        <div className='space-y-1'>
-          <p className='text-kapwa-text-strong text-[10px] font-bold tracking-widest uppercase'>
-            {t('footer.verified')}
-          </p>
-          <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-            {t('footer.source')}{' '}
-            <a
-              href='https://data.bettergov.ph/datasets/9/resources/31'
-              target='_blank'
-              rel='noreferrer'
-              className='hover:text-kapwa-text-brand underline'
-            >
-              Bureau of Local Government Finance (BLGF)
-            </a>
-          </p>
-        </div>
-      </footer>
+      {/* Provenance */}
+      <SourceNote className='mt-kapwa-lg' sources={data.sources} />
     </>
   );
 }

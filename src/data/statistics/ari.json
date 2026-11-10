@@ -1,1 +1,202 @@
-[]
+[
+  {
+    "period": "FY 2022",
+    "fiscal_year": 2022,
+    "blgf_label": "FY 2022",
+    "status": null,
+    "allotment_label": "INTERNAL REVENUE ALLOTMENT (IRA)",
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "locally_sourced_revenue": {
+      "tax_revenue": {
+        "real_property_tax_general_fund": 73930890.4,
+        "tax_on_business": 234910325.05,
+        "other_taxes": 22470092.94,
+        "total_tax_revenue": 331311308.39
+      },
+      "non_tax_revenue": {
+        "regulatory_fees": 52772700.42,
+        "service_user_charges": 19075402.81,
+        "receipts_from_economic_enterprises": 82944989.23,
+        "total_non_tax_revenue": 154793092.46
+      },
+      "total_locally_sourced_revenue": 486104400.85
+    },
+    "other_income_sources": {
+      "interest_income": 5804509.43,
+      "national_tax_allotment": 861028983.96
+    },
+    "other_shares_from_national_tax_collection": {
+      "share_from_economic_zone": 0.0,
+      "share_from_evat": 0.0,
+      "share_from_national_wealth": 0.0,
+      "share_from_pagcor_pcso_lotto": 1711158.25,
+      "share_from_tobacco_excise_tax": 0.0,
+      "others": 0.0,
+      "total_other_shares": 1711158.25
+    },
+    "summary_indicators": {
+      "annual_regular_income": 1354649052.49,
+      "dependency_rates": {
+        "lsr_dependency": 0.3588415759465409,
+        "nta_dependency": 0.6356103688828706,
+        "other_shares_from_national_tax_dependency": 0.001263174581530689
+      }
+    },
+    "sources": ["blgf-ari-by-lgu-fy2022"]
+  },
+  {
+    "period": "FY 2023",
+    "fiscal_year": 2023,
+    "blgf_label": "FY 2023",
+    "status": null,
+    "allotment_label": "NATIONAL TAX ALLOTMENT (NTA)",
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "locally_sourced_revenue": {
+      "tax_revenue": {
+        "real_property_tax_general_fund": 71109184.24,
+        "tax_on_business": 258037762.22,
+        "other_taxes": 25767386.72,
+        "total_tax_revenue": 354914333.18
+      },
+      "non_tax_revenue": {
+        "regulatory_fees": 56859084.5,
+        "service_user_charges": 21545507.76,
+        "receipts_from_economic_enterprises": 94407363.35,
+        "total_non_tax_revenue": 172811955.61
+      },
+      "total_locally_sourced_revenue": 527726288.79
+    },
+    "other_income_sources": {
+      "interest_income": 6299718.64,
+      "national_tax_allotment": 732886131.96
+    },
+    "other_shares_from_national_tax_collection": {
+      "share_from_economic_zone": 0.0,
+      "share_from_evat": 1255844.53,
+      "share_from_national_wealth": 0.0,
+      "share_from_pagcor_pcso_lotto": 1596596.26,
+      "share_from_tobacco_excise_tax": 0.0,
+      "others": 0.0,
+      "total_other_shares": 2852440.79
+    },
+    "summary_indicators": {
+      "annual_regular_income": 1269764580.18,
+      "dependency_rates": {
+        "lsr_dependency": 0.41560955237481134,
+        "nta_dependency": 0.5771826867749825,
+        "other_shares_from_national_tax_dependency": 0.0022464327911837344
+      }
+    },
+    "sources": ["blgf-ari-by-lgu-fy2023"]
+  },
+  {
+    "period": "FY 2024",
+    "fiscal_year": 2024,
+    "blgf_label": "FY 2024",
+    "status": null,
+    "allotment_label": "NATIONAL TAX ALLOTMENT (NTA)",
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "locally_sourced_revenue": {
+      "tax_revenue": {
+        "real_property_tax_general_fund": 66525508.87,
+        "tax_on_business": 298478242.79,
+        "other_taxes": 34709250.89,
+        "total_tax_revenue": 399713002.55
+      },
+      "non_tax_revenue": {
+        "regulatory_fees": 61383451.89,
+        "service_user_charges": 21174602.89,
+        "receipts_from_economic_enterprises": 98245887.39,
+        "total_non_tax_revenue": 180803942.17
+      },
+      "total_locally_sourced_revenue": 580516944.72
+    },
+    "other_income_sources": {
+      "interest_income": 8859103.99,
+      "national_tax_allotment": 776204859.0
+    },
+    "other_shares_from_national_tax_collection": {
+      "share_from_economic_zone": 0.0,
+      "share_from_evat": 0.0,
+      "share_from_national_wealth": 0.0,
+      "share_from_pagcor_pcso_lotto": 916006.09,
+      "share_from_tobacco_excise_tax": 2711370.0,
+      "others": 0.0,
+      "total_other_shares": 3627376.09
+    },
+    "summary_indicators": {
+      "annual_regular_income": 1369208283.8,
+      "dependency_rates": {
+        "lsr_dependency": 0.4239800120905462,
+        "nta_dependency": 0.5669004987654458,
+        "other_shares_from_national_tax_dependency": 0.002649250762588762
+      }
+    },
+    "sources": ["blgf-ari-by-lgu-fy2024"]
+  },
+  {
+    "period": "FY 2025",
+    "fiscal_year": 2025,
+    "blgf_label": "FY 2025",
+    "status": "preliminary",
+    "allotment_label": "NATIONAL TAX ALLOTMENT (NTA)",
+    "location_info": {
+      "region": "Region I",
+      "province": "Pangasinan",
+      "lgu_name": "Dagupan City",
+      "lgu_type": "City"
+    },
+    "locally_sourced_revenue": {
+      "tax_revenue": {
+        "real_property_tax_general_fund": 69296391.87,
+        "tax_on_business": 319893541.11,
+        "other_taxes": 36061939.89,
+        "total_tax_revenue": 425251872.87
+      },
+      "non_tax_revenue": {
+        "regulatory_fees": 62376896.65,
+        "service_user_charges": 21783053.39,
+        "receipts_from_economic_enterprises": 91766313.7,
+        "total_non_tax_revenue": 175926263.74
+      },
+      "total_locally_sourced_revenue": 601178136.61
+    },
+    "other_income_sources": {
+      "interest_income": 8962225.43,
+      "national_tax_allotment": 920822570.0
+    },
+    "other_shares_from_national_tax_collection": {
+      "share_from_economic_zone": 0.0,
+      "share_from_evat": 0.0,
+      "share_from_national_wealth": 0.0,
+      "share_from_pagcor_pcso_lotto": 812375.66,
+      "share_from_tobacco_excise_tax": 0.0,
+      "others": 0.0,
+      "total_other_shares": 812375.66
+    },
+    "summary_indicators": {
+      "annual_regular_income": 1531775307.7,
+      "dependency_rates": {
+        "lsr_dependency": 0.3924714895115292,
+        "nta_dependency": 0.6011472866621924,
+        "other_shares_from_national_tax_dependency": 0.0005303491027152037
+      }
+    },
+    "sources": ["blgf-ari-by-lgu-fy2025"]
+  }
+]

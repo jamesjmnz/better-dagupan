@@ -1,164 +1,122 @@
 import { useMemo, useState } from 'react';
 
-import { aggregateExpenditures, aggregateIncome } from '@/lib/budgetUtils';
-
-// Removed useEffect
 import budgetData from '@/data/transparency/budgetData';
 
-import { FinancialQuarter } from '@/types/budgetTypes';
+import type { FinancialStatement } from '@/types/budgetTypes';
 
-const getYear = (period: string) => period.split('-')[1];
-const getQuarter = (period: string) => period.split('-')[0];
+const quarterLabel = (statement: FinancialStatement) =>
+  statement.quarter ? `Q${statement.quarter}` : 'FY';
 
+const yearToDateIn = (year: string) =>
+  budgetData
+    .filter(s => s.basis === 'year_to_date' && String(s.fiscal_year) === year)
+    .sort((a, b) => (a.quarter ?? 0) - (b.quarter ?? 0));
+
+const annualIn = (year: string) =>
+  budgetData.find(s => s.basis === 'annual' && String(s.fiscal_year) === year);
+
+export interface ComparisonBaseline {
+  totalIncome: number;
+  totalExpenditure: number;
+  netIncome: number;
+  fundCashEnd: number;
+}
+
+/**
+ * Selection state for the financial page.
+ *
+ * BLGF publishes two kinds of statement for a fiscal year: year-to-date ones
+ * at the end of each quarter, and a full-year one. The quarterly view shows a
+ * year-to-date statement; the annual view shows the full-year statement for
+ * that year, or nothing when BLGF has published none. Statements are never
+ * added together: a year-to-date figure already contains the quarters before
+ * it, so summing them would count January several times over.
+ */
 export function useFinancialData() {
-  // 1. Determine available years
   const years = useMemo(
-    () => Array.from(new Set(budgetData.map(q => getYear(q.period)))).sort(),
+    () =>
+      Array.from(new Set(budgetData.map(s => String(s.fiscal_year)))).sort(),
     []
   );
 
-  // 2. State
   const [selectedYear, setSelectedYear] = useState(years[years.length - 1]);
   const [viewMode, setViewMode] = useState<'quarter' | 'year'>('quarter');
 
-  // 3. Filter data for selected year
   const quartersInYear = useMemo(
-    () => budgetData.filter(q => getYear(q.period) === selectedYear),
+    () => (selectedYear ? yearToDateIn(selectedYear) : []),
     [selectedYear]
   );
 
-  // 4. Selected Quarter State
-  // Initialize with the last available quarter of the latest year
-  // Undefined while no verified quarters are published: the inherited Los
-  // Banos statements were removed and Dagupan's are not sourced yet.
+  const annualStatement = useMemo(
+    () => (selectedYear ? annualIn(selectedYear) : undefined),
+    [selectedYear]
+  );
+
+  // Undefined while no statements are published at all.
   const [selectedQuarter, setSelectedQuarter] = useState<
-    FinancialQuarter | undefined
-  >(quartersInYear[quartersInYear.length - 1] ?? budgetData[0]);
+    FinancialStatement | undefined
+  >(quartersInYear[quartersInYear.length - 1]);
 
   /**
-   * Smart Year Change Handler
-   * Attempts to keep the same quarter (e.g. Q2) when switching years.
-   * If Q2 doesn't exist in the new year, falls back to the latest available.
+   * Keeps the same quarter (e.g. Q2) when switching years, falling back to
+   * the latest one published for the new year.
    */
   const changeYear = (newYear: string) => {
     setSelectedYear(newYear);
 
-    // Find all quarters for the NEW year
-    const newYearData = budgetData.filter(q => getYear(q.period) === newYear);
-
-    // Get the currently selected quarter string (e.g., "Q2")
-    const currentQStr = selectedQuarter
-      ? getQuarter(selectedQuarter.period)
+    const newYearQuarters = yearToDateIn(newYear);
+    const matching = selectedQuarter
+      ? newYearQuarters.find(q => q.quarter === selectedQuarter.quarter)
       : undefined;
 
-    // Try to find "Q2" in the new year
-    const matchingQuarter = currentQStr
-      ? newYearData.find(q => getQuarter(q.period) === currentQStr)
-      : undefined;
-
-    if (matchingQuarter) {
-      setSelectedQuarter(matchingQuarter);
-    } else {
-      // Fallback: Use the last available quarter for that year
-      setSelectedQuarter(newYearData[newYearData.length - 1]);
-    }
+    setSelectedQuarter(matching ?? newYearQuarters[newYearQuarters.length - 1]);
   };
 
-  // 5. Aggregate Data based on View Mode
-  const displayedIncome = useMemo(
-    () =>
-      viewMode === 'year'
-        ? aggregateIncome(quartersInYear.map(q => q.current_operating_income))
-        : selectedQuarter?.current_operating_income,
-    [viewMode, quartersInYear, selectedQuarter]
-  );
+  const displayedStatement =
+    viewMode === 'year' ? annualStatement : selectedQuarter;
 
-  const displayedExpenditure = useMemo(
-    () =>
-      viewMode === 'year'
-        ? aggregateExpenditures(
-            quartersInYear.map(q => q.current_operating_expenditures)
-          )
-        : selectedQuarter?.current_operating_expenditures,
-    [viewMode, quartersInYear, selectedQuarter]
-  );
+  /** The same kind of statement one year earlier, for the trend arrows. */
+  const comparisonBaseline = useMemo<ComparisonBaseline | undefined>(() => {
+    if (!selectedYear || !displayedStatement) return undefined;
 
-  const displayedFundSummary = useMemo(() => {
-    if (viewMode === 'quarter') return selectedQuarter?.fund_summary;
-    const lastQ = quartersInYear[quartersInYear.length - 1];
-    return lastQ?.fund_summary;
-  }, [viewMode, selectedQuarter, quartersInYear]);
+    const prevYear = String(Number(selectedYear) - 1);
+    const previous =
+      displayedStatement.basis === 'annual'
+        ? annualIn(prevYear)
+        : yearToDateIn(prevYear).find(
+            q => q.quarter === displayedStatement.quarter
+          );
 
-  // 6. Comparison Baseline logic
-  const comparisonBaseline = useMemo(() => {
-    const prevYear = (parseInt(selectedYear) - 1).toString();
-    const prevYearData = budgetData.filter(q => getYear(q.period) === prevYear);
-
-    if (prevYearData.length === 0) return undefined;
-
-    let targetIncome = 0;
-    let targetExpenditure = 0;
-    let targetNet = 0;
-    let targetFundEnd = 0;
-
-    if (viewMode === 'quarter') {
-      if (!selectedQuarter) return undefined;
-      const qStr = getQuarter(selectedQuarter.period);
-      const match = prevYearData.find(q => getQuarter(q.period) === qStr);
-      // Comparison: If Q3 2025 is selected but Q3 2024 doesn't exist, comparison is undefined
-      if (!match) return undefined;
-
-      targetIncome =
-        match.current_operating_income.total_current_operating_income;
-      targetExpenditure =
-        match.current_operating_expenditures
-          .total_current_operating_expenditures;
-      targetNet = match.net_operating_income_loss_from_current_operations;
-      targetFundEnd = match.fund_summary?.fund_cash_balance_end || 0;
-    } else {
-      targetIncome = prevYearData.reduce(
-        (acc, q) =>
-          acc + q.current_operating_income.total_current_operating_income,
-        0
-      );
-      targetExpenditure = prevYearData.reduce(
-        (acc, q) =>
-          acc +
-          q.current_operating_expenditures.total_current_operating_expenditures,
-        0
-      );
-      targetNet = prevYearData.reduce(
-        (acc, q) => acc + q.net_operating_income_loss_from_current_operations,
-        0
-      );
-      targetFundEnd =
-        prevYearData[prevYearData.length - 1]?.fund_summary
-          ?.fund_cash_balance_end || 0;
-    }
+    if (!previous) return undefined;
 
     return {
-      totalIncome: targetIncome,
-      totalExpenditure: targetExpenditure,
-      netIncome: targetNet,
-      fundCashEnd: targetFundEnd,
+      totalIncome:
+        previous.current_operating_income.total_current_operating_income,
+      totalExpenditure:
+        previous.current_operating_expenditures
+          .total_current_operating_expenditures,
+      netIncome: previous.net_operating_income_loss_from_current_operations,
+      fundCashEnd: previous.fund_summary.fund_cash_balance_end,
     };
-  }, [selectedYear, viewMode, selectedQuarter]);
+  }, [selectedYear, displayedStatement]);
 
   return {
     /** False while no verified financial statements are published. */
     hasData: budgetData.length > 0,
     years,
     selectedYear,
-    setSelectedYear: changeYear, // Return our smart handler instead of the raw setter
+    setSelectedYear: changeYear,
     viewMode,
     setViewMode,
     quartersInYear,
     selectedQuarter,
     setSelectedQuarter,
-    displayedIncome,
-    displayedExpenditure,
-    displayedFundSummary,
+    annualStatement,
+    displayedStatement,
+    displayedIncome: displayedStatement?.current_operating_income,
+    displayedExpenditure: displayedStatement?.current_operating_expenditures,
+    displayedFundSummary: displayedStatement?.fund_summary,
     comparisonBaseline,
-    getQuarter,
+    getQuarter: quarterLabel,
   };
 }

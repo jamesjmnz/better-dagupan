@@ -15,17 +15,43 @@
   "income": {
     "title": "{{adjective}} Income",
     "emptyDescription": "Revenue sources, fiscal autonomy, and national tax dependency.",
-    "description": "Detailed analysis of revenue sources, fiscal autonomy, and national tax dependency.",
+    "description": "The Bureau of Local Government Finance's Annual Regular Income and Dependencies for {{lgu}}: where its regular income comes from, and how much of it is raised locally.",
     "blgfData": "BLGF Data",
-    "totalIncome": "Total Income",
-    "annualRevenue": "Annual Revenue",
-    "localSufficiency": "Local Sufficiency",
-    "lsrShare": "LSR Share",
-    "ntaDependency": "NTA Dependency",
-    "nationalAllotment": "National Allotment",
+    "status": {
+      "final": "BLGF: final",
+      "preliminary": "BLGF: preliminary"
+    },
+    "yearPicker": "Fiscal year",
+    "totalIncome": "Annual Regular Income",
+    "annualRevenue": "As stated by BLGF for the fiscal year",
+    "localSufficiency": "LSR dependency",
+    "lsrShare": "Share of annual regular income raised locally",
+    "allotmentNta": "National Tax Allotment (NTA)",
+    "allotmentIra": "Internal Revenue Allotment (IRA)",
+    "allotmentDependency": "{{allotment}} dependency",
+    "allotmentShare": "Share of annual regular income from the allotment",
+    "definition": "BLGF defines annual regular income as locally sourced revenue (real property tax for the general fund, tax on business, other taxes, regulatory fees, service charges and receipts from economic enterprises) plus the allotment, other shares from national tax collections and interest income. Each dependency is BLGF's own ratio of that source to annual regular income.",
     "revenueComposition": "Revenue Composition",
     "overview": "Overview",
-    "itemization": "Full Financial Itemization"
+    "itemization": "Full Financial Itemization",
+    "groups": {
+      "localTax": "Local taxes",
+      "nonTax": "Non-tax revenue",
+      "external": "Allotment, shares and interest"
+    },
+    "items": {
+      "lsr": "Locally Sourced Revenue",
+      "taxRevenue": "Tax Revenue",
+      "nonTaxRevenue": "Non-Tax Revenue",
+      "otherShares": "Other Shares from National Tax Collection",
+      "interest": "Interest Income",
+      "realPropertyGeneralFund": "Real Property Tax (General Fund)",
+      "businessTax": "Tax on Business",
+      "otherTaxes": "Other Taxes",
+      "regulatoryFees": "Regulatory Fees",
+      "serviceCharges": "Service/User Charges",
+      "economicEnterprises": "Receipts from Economic Enterprises"
+    }
   },
   "competitiveness": {
     "title": "Competitiveness",
