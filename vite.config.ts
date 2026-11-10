@@ -1,7 +1,27 @@
+import { optimize } from '@tailwindcss/node';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
+
+/**
+ * Tailwind v4 writes responsive variants as nested CSS (`.md\:w-0 { @media
+ * (...) { width: 0 } }`) and only flattens it in production builds. WebKit does
+ * not restyle an element when a class change only affects rules nested that
+ * way, so on the dev server a collapsed sidebar stayed open in Safari. Run the
+ * same optimize step the production build uses, unminified, on the dev server.
+ */
+function flattenCssInDev(): Plugin {
+  return {
+    name: 'better-dagupan:flatten-css-in-dev',
+    apply: 'serve',
+    enforce: 'pre',
+    transform(code, id) {
+      if (!/\.css(?:$|\?)/.test(id) || /[?&](?:raw|url)\b/.test(id)) return;
+      return { code: optimize(code, { file: id, minify: false }).code };
+    },
+  };
+}
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -29,7 +49,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), flattenCssInDev()],
   resolve: {
     alias: [
       {
