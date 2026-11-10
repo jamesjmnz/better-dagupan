@@ -132,6 +132,13 @@ describe('toTelUri() - phone number to tel: URI conversion', () => {
     expect(result).toBe('tel:+63495302981');
   });
 
+  it('converts a landline with another area code', () => {
+    // Dagupan numbers are published as "(075) xxx-xxxx". Only 049 used to be
+    // recognised, so every Dagupan landline produced no link at all.
+    expect(toTelUri('(075) 529-5604')).toBe('tel:+63755295604');
+    expect(toTelUri('(02) 8911-1406')).toBe('tel:+63289111406');
+  });
+
   it('converts 9-digit number starting with 049', () => {
     const result = toTelUri('049 536 7965');
     expect(result).toBe('tel:+63495367965');
