@@ -25,6 +25,14 @@ describe('Better Dagupan public identity', () => {
     expect(JSON.stringify(config)).not.toMatch(INHERITED);
   });
 
+  it("filters procurement to the city government's own PhilGEPS entities", () => {
+    // Exact names as indexed; the newer one carries a double space.
+    expect(config.transparency.procurement.organizationNames).toEqual([
+      'CITY OF DAGUPAN  - PANGASINAN',
+      'CITY OF DAGUPAN, PANGASINAN',
+    ]);
+  });
+
   it('claims no domain or social account it does not own', () => {
     // Deliberately unset until a production domain is assigned. An empty
     // baseUrl keeps SEO canonicals root-relative instead of inventing a host.
