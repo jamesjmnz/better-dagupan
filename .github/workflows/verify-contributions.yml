@@ -83,7 +83,7 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "BetterLB Auditor Bot"
+          git config --local user.name "Better Dagupan Auditor"
           git add src/data/services/categories/*.json src/data/services/services.json
 
           # Standardized BetterGov commit message format
