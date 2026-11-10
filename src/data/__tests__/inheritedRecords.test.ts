@@ -34,18 +34,18 @@ const INHERITED =
 /**
  * Datasets that are still empty. directory/barangays, directory/departments,
  * directory/executive, directory/legislative, the two statistics/population
- * series, about/history, about/highlights, transparency/sre and
- * statistics/ari have left this list: they now hold verified Dagupan records,
- * checked by barangayProvenance.test.ts, departmentProvenance.test.ts,
+ * series, about/history, about/highlights, transparency/sre, statistics/ari
+ * and statistics/cmci have left this list: they now hold verified Dagupan
+ * records, checked by barangayProvenance.test.ts, departmentProvenance.test.ts,
  * electedOfficialsProvenance.test.ts, populationProvenance.test.ts,
- * aboutProvenance.test.ts, sreProvenance.test.ts and ariProvenance.test.ts in
- * this directory. All are still asserted below to be free of inherited content.
+ * aboutProvenance.test.ts, sreProvenance.test.ts, ariProvenance.test.ts and
+ * cmciProvenance.test.ts in this directory. All are still asserted below to be
+ * free of inherited content.
  */
 const recordSets: [string, unknown[]][] = [
   ['services/services', services],
   ['citizens-charter/merged-services', mergedServices],
   ['citizens-charter/citizens-charter', citizensCharter.services],
-  ['statistics/cmci.editions', cmci.editions],
 ];
 
 describe('inherited civic records', () => {
@@ -182,6 +182,15 @@ describe('inherited civic records', () => {
         lgu_type: 'City',
       });
     }
+  });
+
+  it('statistics/cmci holds Dagupan competitiveness scores, not inherited ones', () => {
+    // The inherited file was converted by hand from another LGU's CSV. The
+    // guarantee now is that every edition is DTI's profile of Dagupan, which
+    // cmciProvenance.test.ts checks score by score.
+    expect(cmci.editions.length).toBeGreaterThan(0);
+    expect(cmci.meta.lgu_name_as_published).toBe('Dagupan');
+    expect(JSON.stringify(cmci)).not.toMatch(INHERITED);
   });
 
   it('keeps the nationwide datasets that are not LGU-specific', () => {
