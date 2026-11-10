@@ -39,7 +39,10 @@
   },
   "transparency": {
     "procurement": {
-      "organizationName": "",
+      "organizationNames": [
+        "CITY OF DAGUPAN  - PANGASINAN",
+        "CITY OF DAGUPAN, PANGASINAN"
+      ],
       "externalDashboard": "https://transparency.bettergov.ph/organizations/"
     },
     "infrastructure": {

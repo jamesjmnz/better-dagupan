@@ -37,7 +37,8 @@ export interface LGUConfig {
   };
   transparency: {
     procurement: {
-      organizationName: string;
+      /** Exact PhilGEPS entity names, current name first. */
+      organizationNames: string[];
       externalDashboard: string;
     };
     infrastructure: {

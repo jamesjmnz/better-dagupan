@@ -229,7 +229,7 @@ export default function InfrastructurePage() {
       <CardGrid columns={4}>
         <StatCard
           label='Total Allocation'
-          value={stats.totalBudget}
+          value={formatPesoAdaptive(stats.totalBudget).fullString}
           subtext='Current List'
           icon={Wallet}
           iconBg='bg-kapwa-green-50 text-kapwa-green-600'
@@ -253,7 +253,7 @@ export default function InfrastructurePage() {
 
         <StatCard
           label='Fiscal Year'
-          value={stats.infraYear || 'N/A'}
+          value={stats.infraYear ? String(stats.infraYear) : 'N/A'}
           subtext='Most Recent'
           icon={CalendarCheck}
           iconBg='bg-kapwa-orange-50 text-kapwa-orange-600'
