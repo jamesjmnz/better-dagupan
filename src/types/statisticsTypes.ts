@@ -1,8 +1,9 @@
 /**
  * Shapes for the statistics datasets that are not covered by populationTypes.
  *
- * Both files are emptied until verified Dagupan figures are sourced, so their
- * arrays infer as never[] and consumers must state the element type.
+ * ari.json holds BLGF's records for the city. cmci.json is emptied until
+ * verified Dagupan figures are sourced, so its arrays infer as never[] and
+ * consumers must state the element type.
  */
 
 export interface CMCIIndicator {

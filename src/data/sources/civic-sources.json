@@ -572,5 +572,61 @@
     "licence": "Workbook Metadata sheet, \"Use constraints\": acknowledge the Bureau of Local Government Finance as the source. The same sheet says the data may be cited or reproduced in whole or in part provided BLGF is duly informed and/or recognized, and restricts reselling, redistributing or creating plagiaristic works for viable purposes without its written permission.",
     "notes": "Listed on BLGF's \"LGU Fiscal Data\" statistics page (https://blgf.gov.ph/lgu-fiscal-data/) under \"II. Quarterly\", \"FY 2026\"; the only FY 2026 workbook listed when read. One sheet headed \"FY 2026-3\". Metadata extraction date \"October 21, 2026\"; no release date stated (HTTP Last-Modified Fri, 30 Oct 2026). Read as year to date, like the earlier quarterly workbooks; no FY 2026 full-year statement exists to check it against yet. One row is named \"Dagupan City\" (Region I, Pangasinan, LGU type City); no other row names Dagupan. The sheet heading says \"In Php Million\", but the cells hold peso amounts that a #,##0.00,, number format displays in millions; the records carry the cell values in pesos, rounded to the centavo.",
     "derives_from": null
+  },
+  {
+    "id": "blgf-ari-by-lgu-fy2022",
+    "agency": "Bureau of Local Government Finance",
+    "title": "Annual Regular Income (ARI) and Dependencies by LGU, FY 2022",
+    "url": "https://blgf.gov.ph/wp-content/uploads/2025/03/By-LGU-ARI-and-Dependencies-2022.xlsx",
+    "published": null,
+    "data_as_of": null,
+    "coverage": "FY 2022",
+    "retrieved": "2026-11-10",
+    "verified": "2026-11-10",
+    "licence": "Workbook Metadata sheet, \"Use constraints\": acknowledge the Bureau of Local Government Finance as the source. The same sheet says the data may be cited or reproduced in whole or in part provided BLGF is duly informed and/or recognized, and restricts reselling, redistributing or creating plagiaristic works for viable purposes without its written permission.",
+    "notes": "Listed on BLGF's \"LGU Fiscal Data\" statistics page (https://blgf.gov.ph/lgu-fiscal-data/) under \"I. Annual\", \"A. By LGU\", \"b. ARI and Dependencies\", \"FY 2022\". Sheet heading \"FY 2022\" over \"In Php \" (no \"Million\"); the cells hold pesos either way. Metadata extraction date \"September 28, 2023\"; no release date stated (HTTP Last-Modified Thu, 27 Mar 2025). One row is named \"Dagupan City\" (Region I, Pangasinan, LGU type City); no other row names Dagupan. This edition has an extra \"INCOME CLASS\" column (Dagupan: \"2nd\"), which is not published as current, and heads the allotment column \"INTERNAL REVENUE ALLOTMENT (IRA)\" and its ratio \"IRA DEPENDENCY\". The metadata sheet defines LSR as RPT (General Fund) + Tax on Business + Other Taxes + Regulatory Fees + Service Charges + Receipts from Economic Enterprises, and ARI as LSR + allotment + Other Shares + Interest Income; the dependencies are LSR, allotment and other shares each divided by ARI. Its LSR, allotment and other-share lines equal blgf-sre-by-lgu-fy2022.",
+    "derives_from": null
+  },
+  {
+    "id": "blgf-ari-by-lgu-fy2023",
+    "agency": "Bureau of Local Government Finance",
+    "title": "Annual Regular Income (ARI) and Dependencies by LGU, FY 2023",
+    "url": "https://blgf.gov.ph/wp-content/uploads/2025/03/By-LGU-ARI-and-Dependencies-2023.xlsx",
+    "published": null,
+    "data_as_of": null,
+    "coverage": "FY 2023",
+    "retrieved": "2026-11-10",
+    "verified": "2026-11-10",
+    "licence": "Workbook Metadata sheet, \"Use constraints\": acknowledge the Bureau of Local Government Finance as the source. The same sheet says the data may be cited or reproduced in whole or in part provided BLGF is duly informed and/or recognized, and restricts reselling, redistributing or creating plagiaristic works for viable purposes without its written permission.",
+    "notes": "Listed on BLGF's \"LGU Fiscal Data\" statistics page (https://blgf.gov.ph/lgu-fiscal-data/) under \"b. ARI and Dependencies\", \"FY 2023\". Metadata extraction date \"September 17, 2024\"; no release date stated (HTTP Last-Modified Thu, 27 Mar 2025). One row is named \"Dagupan City\" (Region I, Pangasinan, LGU type City); no other row names Dagupan. The sheet heading says \"In Php Million\", but the cells hold peso amounts that a #,##0.00,, number format displays in millions; the records carry the cell values in pesos, rounded to the centavo. The allotment column is headed \"NATIONAL TAX ALLOTMENT (NTA)\" but its ratio \"IRA DEPENDENCY\". Definitions as in blgf-ari-by-lgu-fy2022. Its LSR, allotment and other-share lines equal blgf-sre-by-lgu-fy2023.",
+    "derives_from": null
+  },
+  {
+    "id": "blgf-ari-by-lgu-fy2024",
+    "agency": "Bureau of Local Government Finance",
+    "title": "Annual Regular Income (ARI) and Dependencies by LGU, FY 2024",
+    "url": "https://blgf.gov.ph/wp-content/uploads/2026/03/By-LGU-ARI-and-Dependencies-2024.xlsx",
+    "published": null,
+    "data_as_of": null,
+    "coverage": "FY 2024",
+    "retrieved": "2026-11-10",
+    "verified": "2026-11-10",
+    "licence": "Workbook Metadata sheet, \"Use constraints\": acknowledge the Bureau of Local Government Finance as the source. The same sheet says the data may be cited or reproduced in whole or in part provided BLGF is duly informed and/or recognized, and restricts reselling, redistributing or creating plagiaristic works for viable purposes without its written permission.",
+    "notes": "Listed on BLGF's \"LGU Fiscal Data\" statistics page (https://blgf.gov.ph/lgu-fiscal-data/) under \"b. ARI and Dependencies\", \"FY 2024\". Metadata extraction date \"November 27, 2025\", the same as the final FY 2024 SRE; no release date stated (HTTP Last-Modified Mon, 02 Mar 2026). One row is named \"Dagupan City\" (Region I, Pangasinan, LGU type City); no other row names Dagupan. The sheet heading says \"In Php Million\", but the cells hold peso amounts that a #,##0.00,, number format displays in millions; the records carry the cell values in pesos, rounded to the centavo. Its LSR, allotment and other-share lines equal blgf-sre-by-lgu-fy2024.",
+    "derives_from": null
+  },
+  {
+    "id": "blgf-ari-by-lgu-fy2025",
+    "agency": "Bureau of Local Government Finance",
+    "title": "Annual Regular Income (ARI) and Dependencies by LGU, FY 2025 (Preliminary)",
+    "url": "https://blgf.gov.ph/wp-content/uploads/2026/05/By-LGU-ARI-and-Dependencies-2025Preliminary.xlsx",
+    "published": null,
+    "data_as_of": null,
+    "coverage": "FY 2025",
+    "retrieved": "2026-11-10",
+    "verified": "2026-11-10",
+    "licence": "Workbook Metadata sheet, \"Use constraints\": acknowledge the Bureau of Local Government Finance as the source. The same sheet says the data may be cited or reproduced in whole or in part provided BLGF is duly informed and/or recognized, and restricts reselling, redistributing or creating plagiaristic works for viable purposes without its written permission.",
+    "notes": "Listed on BLGF's \"LGU Fiscal Data\" statistics page (https://blgf.gov.ph/lgu-fiscal-data/) under \"b. ARI and Dependencies\", \"FY 2025\". The sheet heading is \"FY 2025\" alone; \"Preliminary\" is in BLGF's file name, and it matches the preliminary FY 2025 SRE. The Metadata sheet's extraction date reads \"November 27, 2025\", identical to the FY 2024 edition and earlier than the FY 2025 SRE's \"March 03, 2026\"; it appears to have been carried over and is not relied on. No release date stated (HTTP Last-Modified Tue, 12 May 2026). One row is named \"Dagupan City\" (Region I, Pangasinan, LGU type City); no other row names Dagupan. The sheet heading says \"In Php Million\", but the cells hold peso amounts that a #,##0.00,, number format displays in millions; the records carry the cell values in pesos, rounded to the centavo. Its LSR, allotment and other-share lines equal blgf-sre-by-lgu-fy2025.",
+    "derives_from": null
   }
 ]

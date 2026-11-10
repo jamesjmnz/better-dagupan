@@ -34,15 +34,14 @@ const INHERITED =
 /**
  * Datasets that are still empty. directory/barangays, directory/departments,
  * directory/executive, directory/legislative, the two statistics/population
- * series, about/history, about/highlights and transparency/sre have left this
- * list: they now hold verified Dagupan records, checked by
- * barangayProvenance.test.ts, departmentProvenance.test.ts,
+ * series, about/history, about/highlights, transparency/sre and
+ * statistics/ari have left this list: they now hold verified Dagupan records,
+ * checked by barangayProvenance.test.ts, departmentProvenance.test.ts,
  * electedOfficialsProvenance.test.ts, populationProvenance.test.ts,
- * aboutProvenance.test.ts and sreProvenance.test.ts in this directory.
- * All are still asserted below to be free of inherited content.
+ * aboutProvenance.test.ts, sreProvenance.test.ts and ariProvenance.test.ts in
+ * this directory. All are still asserted below to be free of inherited content.
  */
 const recordSets: [string, unknown[]][] = [
-  ['statistics/ari', ari],
   ['services/services', services],
   ['citizens-charter/merged-services', mergedServices],
   ['citizens-charter/citizens-charter', citizensCharter.services],
@@ -161,6 +160,22 @@ describe('inherited civic records', () => {
     expect(JSON.stringify(sre)).not.toMatch(INHERITED);
     for (const statement of sre) {
       expect(statement.location_info).toEqual({
+        region: 'Region I',
+        province: 'Pangasinan',
+        lgu_name: 'Dagupan City',
+        lgu_type: 'City',
+      });
+    }
+  });
+
+  it('statistics/ari holds Dagupan income records, not inherited ones', () => {
+    // Every record must be BLGF's ARI row for Dagupan City, which
+    // ariProvenance.test.ts checks line by line against the statements.
+    expect(Array.isArray(ari)).toBe(true);
+    expect(ari.length).toBeGreaterThan(0);
+    expect(JSON.stringify(ari)).not.toMatch(INHERITED);
+    for (const record of ari) {
+      expect(record.location_info).toEqual({
         region: 'Region I',
         province: 'Pangasinan',
         lgu_name: 'Dagupan City',
