@@ -347,7 +347,7 @@
     "visibility": "Visibility",
     "forecast": "Taya ng Panahon sa Loob ng 5 Araw",
     "aboutTitle": "Tungkol sa Datos ng Panahon",
-    "aboutBody": "Ang datos ng panahon na ipinapakita sa pahinang ito ay mula sa Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) at iba pang maaasahang serbisyo sa panahon. Regular na ina-update ang impormasyon para maibigay sa iyo ang pinakatumpak at pinakabagong lagay ng panahon sa mga pangunahing lungsod ng Pilipinas.",
+    "aboutBody": "Ang lagay ng panahon sa pahinang ito ay mula sa OpenWeatherMap, isang komersyal na serbisyo sa panahon, at ina-update humigit-kumulang isang beses bawat oras. Hindi ito opisyal na taya ng PAGASA.",
     "understandingTitle": "Pag-unawa sa Datos",
     "understandingBody": "Ipinapakita ang temperatura sa Celsius (°C). Inuuri ang lagay ng panahon batay sa kasalukuyang obserbasyon sa atmospera. Nagbibigay ang taya ng panahon ng tanaw sa loob ng 5 araw para makatulong sa iyong pagpaplano.",
     "advisoriesTitle": "Mga Abiso sa Panahon",
