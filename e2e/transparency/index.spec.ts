@@ -22,21 +22,21 @@ test.describe('Transparency Pages', () => {
   });
 
   test('transparency index displays navigation cards', async ({ page }) => {
-    // Check that transparency section cards are displayed
-    const cards = page.locator('a[href^="/transparency/"]');
-    const count = await cards.count();
+    // One card per section: financial, infrastructure and procurement. Scoped
+    // to the content panel, because the sidebar links the same routes and is
+    // hidden on small screens. toHaveCount waits for the lazy route to render,
+    // where a bare count() raced it and read zero in Firefox and WebKit.
+    const cards = page.locator('#layout-content a[href^="/transparency/"]');
+    await expect(cards).toHaveCount(3);
 
-    // Should have multiple transparency sections
-    expect(count).toBeGreaterThan(0);
-
-    // Check first card is visible
-    const firstCard = cards.first();
-    await expect(firstCard).toBeVisible();
+    for (const card of await cards.all()) {
+      await expect(card).toBeVisible();
+    }
   });
 
   test('transparency section cards are navigable', async ({ page }) => {
     // Get all transparency section cards
-    const cards = page.locator('a[href^="/transparency/"]');
+    const cards = page.locator('#layout-content a[href^="/transparency/"]');
     const firstCard = cards.first();
 
     // Navigate to first section
