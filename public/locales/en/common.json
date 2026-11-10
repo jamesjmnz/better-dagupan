@@ -170,5 +170,12 @@
     "websiteAvailable": "Website available",
     "viewProfile": "View profile",
     "profileOf": "View details for {{name}}"
+  },
+  "openlgu": {
+    "unavailable": {
+      "title": "Legislative records are not published yet",
+      "message": "Ordinances and resolutions of the {{body}} have not been added to this portal yet. Check the official website of the {{lgu}} in the meantime.",
+      "action": "Visit the official website"
+    }
   }
 }

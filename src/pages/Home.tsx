@@ -5,7 +5,6 @@ import { FC } from 'react';
 // import JoinUsBanner from '../components/home/JoinUsBanner';
 import GovernmentSection from '@/components/home/GovernmentSection';
 import Hero from '@/components/home/Hero';
-// import NewsSection from '@/components/home/NewsSection';
 // import JoinUsStrip from '../components/home/JoinUsStrip';
 import ServicesSection from '@/components/home/ServicesSection';
 import TimelineSection from '@/components/home/TimelineSection';
@@ -39,8 +38,6 @@ const Home: FC = () => {
           <ErrorBoundary name='WeatherMap'>
             <WeatherMapSection />
           </ErrorBoundary>
-
-          {/* <NewsSection /> */}
 
           <ErrorBoundary name='Government'>
             <GovernmentSection />

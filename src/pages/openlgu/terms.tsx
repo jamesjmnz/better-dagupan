@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/Badge';
 import { Card, CardGrid } from '@/components/ui/Card';
 
 import type { DocumentItem, Person, Session, Term } from '@/lib/openlgu';
+import { lguLabels } from '@/lib/lguLabels';
 
 interface LegislationContext {
   terms: Term[];
@@ -79,7 +80,7 @@ export default function TermsIndex() {
   return (
     <IndexPageLayout
       title='Legislative Terms'
-      description='Browse historical records of the Sangguniang Bayan sessions.'
+      description={`Browse historical records of the ${lguLabels.body} sessions.`}
       breadcrumbs={breadcrumbs}
       resultsCount={termsWithStats.length}
       resultsLabel='terms'

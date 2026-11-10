@@ -18,6 +18,7 @@ import { DetailSection } from '@/components/layout';
 import { config } from '@/lib/lguConfig';
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent, CardGrid } from '@/components/ui/Card';
+import { lguLabels } from '@/lib/lguLabels';
 
 export default function TransparencyIndex() {
   const { t } = useTranslation('common');
@@ -26,8 +27,7 @@ export default function TransparencyIndex() {
   const sections = [
     {
       title: 'Public Funds',
-      description:
-        'Independent visualization of municipal income and where your taxes are being allocated.',
+      description: `Independent visualization of ${lguLabels.adjective.toLowerCase()} income and where your taxes are being allocated.`,
       icon: Landmark,
       href: '/transparency/financial',
       color: 'blue',
@@ -38,14 +38,13 @@ export default function TransparencyIndex() {
       description:
         'Community tracking of road repairs, building constructions, and local infrastructure projects.',
       icon: HardHat,
-      href: '/transparency/infrastructure-projects',
+      href: '/transparency/infrastructure',
       color: 'orange',
       badge: 'Monitoring',
     },
     {
       title: 'Procurement',
-      description:
-        'Audit of municipal bidding and awarded contracts to ensure fair and open competition.',
+      description: `Audit of ${lguLabels.adjective.toLowerCase()} bidding and awarded contracts to ensure fair and open competition.`,
       icon: ShoppingBag,
       href: '/transparency/procurement',
       color: 'blue',

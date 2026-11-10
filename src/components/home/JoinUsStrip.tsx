@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { ArrowRightIcon, UsersIcon, ZapIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import { config } from '@/lib/lguConfig';
+
 const JoinUsStrip: FC = () => {
   const { t } = useTranslation('common');
 
@@ -45,14 +47,16 @@ const JoinUsStrip: FC = () => {
               {t('joinUs.joinNow')}
               <ArrowRightIcon className='h-3 w-3' />
             </Link>
-            <a
-              href='https://discord.gg/mHtThpN8bT'
-              target='_blank'
-              rel='noreferrer'
-              className='kapwa-body-sm-default text-kapwa-text-inverse underline transition-colors hover:text-kapwa-text-inverse-strong'
-            >
-              {t('joinUs.discord')}
-            </a>
+            {config.portal.discordUrl && (
+              <a
+                href={config.portal.discordUrl}
+                target='_blank'
+                rel='noreferrer'
+                className='kapwa-body-sm-default text-kapwa-text-inverse underline transition-colors hover:text-kapwa-text-inverse-strong'
+              >
+                {t('joinUs.discord')}
+              </a>
+            )}
           </div>
         </div>
       </div>

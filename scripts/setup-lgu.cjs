@@ -99,9 +99,6 @@ async function main() {
 
   // Optional features
   console.log('\n--- Features ---');
-  const enableTourism =
-    (await question(rl, 'Enable tourism module? (y/n)', 'n')).toLowerCase() ===
-    'y';
   const enableStats =
     (
       await question(rl, 'Enable statistics module? (y/n)', 'y')
@@ -183,17 +180,9 @@ async function main() {
         exactMatchTargets: [lguName.toLowerCase()],
       },
     },
-    dataPaths: {
-      departments: 'src/data/directory/departments.json',
-      barangays: 'src/data/directory/barangays.json',
-      executive: 'src/data/directory/executive.json',
-      legislative: 'src/data/directory/legislative.json',
-      services: 'src/data/services',
-    },
     features: {
       openLGU: enableOpenLGU,
       transparency: enableTransparency,
-      tourism: enableTourism,
       statistics: enableStats,
     },
   };

@@ -9,8 +9,8 @@ GITHUB_CLIENT_ID=your_dev_oauth_client_id
 GITHUB_CLIENT_SECRET=your_dev_oauth_client_secret
 
 # Who may sign in (JSON array of GitHub logins). Empty = nobody (fail-closed).
-AUTHORIZED_USERS=["miconficker"]
+AUTHORIZED_USERS=["your-github-login"]
 
 # Role assignment (JSON arrays). Absent from both -> viewer (read-only).
-ADMIN_USERS=["miconficker"]
+ADMIN_USERS=["your-github-login"]
 # EDITOR_USERS=["some-volunteer"]

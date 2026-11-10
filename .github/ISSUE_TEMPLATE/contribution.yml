@@ -45,7 +45,7 @@ body:
     attributes:
       label: Source URL
       description: Official government source for this information
-      placeholder: https://losbanos.gov.ph/...
+      placeholder: https://www.dagupan.gov.ph/...
     validations:
       required: true
 

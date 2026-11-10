@@ -19,6 +19,7 @@ import { getDocTypeBadgeVariant, getPersonName } from '@/lib/openlgu';
 
 import DocumentFilters from './components/DocumentFilters';
 import type { FilterType } from './layout';
+import { lguLabels } from '@/lib/lguLabels';
 
 interface LegislationContext {
   searchQuery: string;
@@ -142,7 +143,7 @@ export default function LegislationIndex() {
     return (
       <IndexPageLayout
         title='Legislation'
-        description='Browse ordinances, resolutions, and executive orders from the Sangguniang Bayan.'
+        description={`Browse ordinances, resolutions, and executive orders from the ${lguLabels.body}.`}
         search={{
           value: searchQuery,
           onChange: setSearchQuery,
@@ -161,7 +162,7 @@ export default function LegislationIndex() {
   return (
     <IndexPageLayout
       title='Legislation'
-      description='Browse ordinances, resolutions, and executive orders from the Sangguniang Bayan.'
+      description={`Browse ordinances, resolutions, and executive orders from the ${lguLabels.body}.`}
       search={{
         value: searchQuery,
         onChange: setSearchQuery,

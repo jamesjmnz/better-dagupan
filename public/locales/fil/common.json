@@ -170,5 +170,12 @@
     "websiteAvailable": "May website",
     "viewProfile": "Tingnan ang profile",
     "profileOf": "Tingnan ang detalye ng {{name}}"
+  },
+  "openlgu": {
+    "unavailable": {
+      "title": "Hindi pa nailalathala ang mga talaang pambatasan",
+      "message": "Hindi pa naidaragdag sa portal na ito ang mga ordinansa at resolusyon ng {{body}}. Pansamantala, tingnan ang opisyal na website ng {{lgu}}.",
+      "action": "Bisitahin ang opisyal na website"
+    }
   }
 }

@@ -172,7 +172,9 @@ function AppContent() {
             <Route path='/join-us' element={<JoinUs />} />
             <Route path='/terms-of-service' element={<TermsOfService />} />
             <Route path='/sitemap' element={<SitemapPage />} />
-            <Route path='/discord' element={<Discord />} />
+            {config.portal.discordUrl && (
+              <Route path='/discord' element={<Discord />} />
+            )}
 
             {/* Data Utilities */}
             <Route path='/data/weather' element={<WeatherPage />} />
@@ -215,11 +217,13 @@ function AppContent() {
                 <Route path=':barangay' element={<BarangayDetail />} />
               </Route>
 
-              {/* 4. Reference Implementation */}
-              <Route
-                path='reference-implementation'
-                element={<ReferenceImplementationPage />}
-              />
+              {/* 4. Reference Implementation (development only) */}
+              {import.meta.env.DEV && (
+                <Route
+                  path='reference-implementation'
+                  element={<ReferenceImplementationPage />}
+                />
+              )}
             </Route>
 
             {/* Statistics Dashboard — feature gated */}
