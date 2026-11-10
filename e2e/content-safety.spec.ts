@@ -45,12 +45,13 @@ test.describe('Inherited civic records', () => {
 });
 
 test.describe('Honest empty states', () => {
-  // /statistics (population) is no longer empty: PSA census figures are
-  // published, and e2e/statistics/population.spec.ts covers them.
+  // /statistics (population) and /transparency/financial are no longer
+  // empty: PSA census figures and BLGF statements are published, and
+  // e2e/statistics/population.spec.ts and e2e/transparency/financial.spec.ts
+  // cover them.
   const emptyRoutes = [
     '/statistics/competitiveness',
     '/statistics/municipal-income',
-    '/transparency/financial',
   ];
 
   for (const path of emptyRoutes) {

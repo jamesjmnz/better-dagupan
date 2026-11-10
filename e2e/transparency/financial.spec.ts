@@ -95,13 +95,78 @@ test.describe('Financial Transparency Page', () => {
     });
 
     test('financial page quarter toggle updates display', async ({ page }) => {
+      // Quarters BLGF has not published yet are rendered but disabled, so
+      // pick the last one that can actually be chosen.
       const quarterButtons = page
         .locator('#layout-content')
-        .getByRole('button', { name: /Q[1-4]/ });
+        .getByRole('button', { name: /Q[1-4]/, disabled: false });
       await expect(quarterButtons.first()).toBeVisible();
 
       await quarterButtons.last().click();
+      await expect(quarterButtons.last()).toHaveAttribute(
+        'aria-pressed',
+        'true'
+      );
       await expect(page.locator('#layout-content')).toContainText('₱');
+    });
+
+    test('says that quarterly figures are year to date', async ({ page }) => {
+      const content = page.locator('#layout-content');
+
+      // BLGF's quarterly statements run from January; "Q3" alone would
+      // read as July to September.
+      await expect(
+        content.getByRole('button', { name: /Q[1-4]: January to/ }).first()
+      ).toBeVisible();
+      await expect(content).toContainText(/year to date/i);
+    });
+
+    test('shows the full-year statement in the annual view', async ({
+      page,
+    }) => {
+      const content = page.locator('#layout-content');
+
+      await content.getByRole('button', { name: '2025', exact: true }).click();
+      await content
+        .getByRole('button', { name: 'Annual', exact: true })
+        .click();
+
+      await expect(content).toContainText(
+        'Fiscal year 2025, January to December'
+      );
+      await expect(content).toContainText('BLGF: preliminary');
+      await expect(content.locator('.recharts-wrapper').first()).toBeVisible();
+    });
+
+    test('names its BLGF source and when it was checked', async ({ page }) => {
+      const note = page
+        .locator('#layout-content')
+        .getByRole('region', { name: /^Sources?$/ });
+
+      await expect(note).toContainText('Bureau of Local Government Finance');
+      await expect(note.getByRole('link').first()).toHaveAttribute(
+        'href',
+        /^https:\/\/blgf\.gov\.ph\//
+      );
+      await expect(note).toContainText(/Last verified/);
+    });
+
+    test('marks the withheld 2024 lines rather than drawing them', async ({
+      page,
+    }) => {
+      const content = page.locator('#layout-content');
+
+      await content.getByRole('button', { name: '2024', exact: true }).click();
+      await expect(content).toContainText(
+        'Some lines are withheld for this period'
+      );
+
+      await content
+        .getByRole('button', { name: 'Annual', exact: true })
+        .click();
+      await expect(content).not.toContainText(
+        'Some lines are withheld for this period'
+      );
     });
   });
 
