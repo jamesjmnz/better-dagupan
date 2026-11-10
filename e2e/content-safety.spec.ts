@@ -45,11 +45,12 @@ test.describe('Inherited civic records', () => {
 });
 
 test.describe('Honest empty states', () => {
-  // /statistics (population), /statistics/municipal-income and
-  // /transparency/financial are no longer empty: PSA census figures and BLGF
-  // statements are published, and e2e/statistics and
-  // e2e/transparency/financial.spec.ts cover them.
-  const emptyRoutes = ['/statistics/competitiveness'];
+  // /statistics (population), /statistics/municipal-income,
+  // /statistics/competitiveness and /transparency/financial are no longer
+  // empty: PSA census figures, BLGF statements and DTI's CMCI scores are
+  // published, and e2e/statistics and e2e/transparency/financial.spec.ts
+  // cover them. Add a route here if a page goes back to an empty state.
+  const emptyRoutes: string[] = [];
 
   for (const path of emptyRoutes) {
     test(`${path} says the records are not available yet`, async ({ page }) => {

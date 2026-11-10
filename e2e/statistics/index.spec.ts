@@ -124,10 +124,10 @@ test.describe('Statistics Pages', () => {
   });
 
   /*
-   * Population is published from the PSA census and income (ari.json) from
-   * BLGF. Each page is tested for what its dataset supports: an empty page
-   * must say the data is not available, and switches to the chart checks on
-   * its own once records land.
+   * Population is published from the PSA census, income (ari.json) from BLGF
+   * and competitiveness (cmci.json) from DTI. Each page is tested for what its
+   * dataset supports: an empty page must say the data is not available, and
+   * switches to the chart checks on its own once records land.
    */
   for (const route of [
     {
