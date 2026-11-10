@@ -6,6 +6,11 @@ where it stands so the next phase does not have to repeat the investigation.
 Last measured 2026-11-10 on `fix/typescript-errors`, branched from `main` at
 `6fbd318`. The original 2026-08-22 measurement is kept below for history.
 
+**All three projects are at zero errors, and CI enforces it:** `npm run
+typecheck` runs the app, node and functions projects, and both the quality and
+deploy workflows call it instead of the bare `npx tsc --noEmit` (which checked
+no files).
+
 ## Toolchain
 
 ```
@@ -31,7 +36,7 @@ app and node projects; `functions/` has its own config.
 
 | Project | Command | Before | Now |
 |---|---|---|---|
-| App (`src/`, tests included) | `npx tsc --noEmit -p tsconfig.app.json` | 304 | **2** |
+| App (`src/`, tests included) | `npx tsc --noEmit -p tsconfig.app.json` | 304 | **0** |
 | Pages Functions | `npx tsc --noEmit -p functions/tsconfig.json` | 101 | **0** |
 | Node (`vite.config.ts`, `scripts/**/*.ts`) | `npx tsc --noEmit -p tsconfig.node.json` | 0 | 0 |
 
