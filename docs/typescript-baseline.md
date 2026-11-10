@@ -1,11 +1,10 @@
 # TypeScript error baseline
 
-The repository carries a large inherited TypeScript error backlog. Two different
-counts have been reported for it — 60 and 307 — and both are correct. They
-measure different scopes. This records the measurements so the next phase does
-not have to repeat the investigation.
+The repository inherited a large TypeScript error backlog. This file records
+where it stands so the next phase does not have to repeat the investigation.
 
-Measured 2026-08-22 on `main` at `1e45793` and on `data/dagupan-barangay-foundation`.
+Last measured 2026-11-10 on `fix/typescript-errors`, branched from `main` at
+`6fbd318`. The original 2026-08-22 measurement is kept below for history.
 
 ## Toolchain
 
@@ -19,80 +18,127 @@ $ npm ls typescript @types/react @types/react-dom --depth=0
 └── typescript@5.9.3
 ```
 
-Note the mismatch: `react@19.1.0` is installed, but the React type packages are
-still on 18.x. That accounts for several of the app-source errors, including the
-`lucide-react` "cannot be used as a JSX component" failure.
+`react@19.1.0` is installed but the React type packages are still on 18.x.
+Nothing in the backlog needed the upgrade: the two `lucide-react` "cannot be
+used as a JSX component" errors came from indexing `import * as LucideIcons`
+with a string, not from the type packages. The upgrade is still worth doing,
+but it changes `package-lock.json` and belongs in its own change.
 
 ## The counts
 
-| Command | Result |
-|---|---|
-| `npx tsc --noEmit` | **exit 0 — passes** |
-| `npx tsc -p tsconfig.app.json --noEmit` | **307 errors** |
-| `npx tsc -b --noEmit` | 307 errors |
+There are three TypeScript projects. The root `tsconfig.json` references the
+app and node projects; `functions/` has its own config.
 
-Split of the 307:
+| Project | Command | Before | Now |
+|---|---|---|---|
+| App (`src/`, tests included) | `npx tsc --noEmit -p tsconfig.app.json` | 304 | **2** |
+| Pages Functions | `npx tsc --noEmit -p functions/tsconfig.json` | 101 | **0** |
+| Node (`vite.config.ts`, `scripts/**/*.ts`) | `npx tsc --noEmit -p tsconfig.node.json` | 0 | 0 |
 
-| Scope | Errors |
-|---|---|
-| Application source (non-test) | **60** |
-| Test files (`*.test.ts` / `*.test.tsx`) | 247 |
-| **Total** | **307** |
+"Before" is `main` at `6fbd318`. The app count had drifted from 307 to 304
+since the first measurement.
 
-`main` and the Phase 3A branch produce **byte-identical** error output; a sorted
-diff of the two is empty. Phase 3A introduces zero additional errors.
+### The two remaining app errors
 
-## Why the numbers differ
+Both are in files that open pull requests are editing, so they were left
+alone here. Each is a one-line fix in the file itself.
 
-**60 is the application-source count.** It excludes test files.
+| File | Error | Cause |
+|---|---|---|
+| `src/pages/transparency/procurement/index.tsx:91` | TS2322 | `getBusinessCategoryBadgeVariant` returns `'slate'`, but its declared return type is `'primary' \| 'secondary' \| 'warning' \| 'success'`. `Badge` accepts `'slate'`, so widening the return type (or using `BadgeVariant`) fixes it. |
+| `src/pages/government/elected-officials/municipal-committees.tsx:67` | TS2322 | Passes `heroActions` to `PageHero`, which has no such prop, so the committee search box is never rendered. Pass the search input as `PageHero` children, or give `PageHero` a `heroActions` slot. |
 
-**247 of the errors are in test files and are a configuration gap, not defects.**
-The dominant code is `TS2339` (246 occurrences), almost all of the form:
+## What was fixed
 
-```
-Property 'toBeInTheDocument' does not exist on type 'Assertion<HTMLElement>'.
-```
+Grouped by cause. Fixes are typed, not silenced: no new `@ts-ignore` or
+`@ts-expect-error`, and `any` only where the test mocks implement the
+overloaded KV and D1 methods.
 
-`tsconfig.app.json` has `"include": ["src"]`, so it type-checks the co-located
-test files. The matcher types come from `@testing-library/jest-dom`, which is
-imported only at runtime in `vitest.setup.ts` and never enters the type graph.
-The tests themselves pass — all 440 of them.
+**Test matcher types (244 errors).** `vitest.setup.ts` registered the
+`@testing-library/jest-dom` matchers at runtime, but their types never entered
+the program. `src/vitest-env.d.ts` now references
+`@testing-library/jest-dom/vitest`, and the setup file imports that entry.
 
-**`npx tsc --noEmit` passes because it checks nothing.** The root
-`tsconfig.json` is a solution-style config:
+**kapwa `Button` used as a link.** The kapwa `Button` only renders a
+`<button>`, so `href`, `target` and `rel` were passed to a button and the
+controls on Join Us, Contact Us and the Join Us banner did not navigate.
+`src/components/ui/ButtonLink.tsx` renders an anchor with the same class
+recipe as the kapwa button; screenshots before and after are pixel-identical.
+Admin buttons that passed `icon` now pass `leftIcon`.
 
-```json
-{ "files": [], "references": [{ "path": "./tsconfig.app.json" },
-                              { "path": "./tsconfig.node.json" }] }
-```
+**Props a component does not accept.** Badge variants (`'info'` → `'primary'`,
+a non-existent `size`), `Card` `hoverable` → `hover`, kapwa button
+`size='default'` → `'md'`, `PageHero` `subtitle` → `description`, the audit
+log's `EmptyState` and `PaginationControls` props (the empty state crashed the
+page), and `EmptyState` gained an `onAction` so Search can show its "Clear all
+filters" button.
 
-With `files: []` and no `-b`, `tsc` compiles an empty file list and exits 0. It
-does not follow the references. Build mode (`tsc -b`) does, and reports the same
-307.
+**Shared component types.** `BadgeVariant`, `IndexPageLayoutProps` and the
+`SelectPicker` option types are exported; `SelectPicker` is generic over its
+value type; `BreadcrumbItem` is imported from `@/types/components`, where it is
+declared. The reconcile page used a `value`/`onChange` API `SelectPicker` never
+had and now uses `options`/`selectedValues`/`onSelect`.
 
-## This matters for CI
+**Untyped responses.** Weather and forex responses are typed through
+`fetchWithCache<T>`. The weather API shape (`WeatherApiCity`,
+`WeatherApiHourly`) is now separate from the display shape (`HourlyForecast`),
+and the weather icon map lives once in `src/lib/weather.ts`.
 
-`.github/workflows/quality-check.yml` and `.github/workflows/deploy.yml` both run:
+**Functions `Env`.** `Env` now declares `ENVIRONMENT` and
+`REQUEST_SIZE_LIMIT`, which the security-headers and request helpers read.
+
+**`withAuth`.** The wrapper now infers the handler's full context and returns
+a function that takes that context without `auth`, so handlers can declare
+their own route params. The `[id]` routes declare `params: { id: string }`,
+which is what Pages passes for a file named `[id].ts`.
+
+**D1 rows.** Queries pass their row type to `.all<T>()` / `.first<T>()`
+instead of annotating `map` callbacks over `Record<string, unknown>`. Where a
+`LEFT JOIN` can return a null term or session number, the formatter is only
+called when the value is present.
+
+**Functions tests.** The Workers mocks in `functions/test/test-utils.ts` now
+implement `D1Database` and `KVNamespace` as declared (including the one- and
+two-argument `get` forms), auth tests type their JSON bodies, and
+`fail()` became `expect.unreachable()`. The unused
+`functions/test/test-types.ts`, which imported app code across project
+boundaries, was removed.
+
+## CI is still not type-checking
+
+`.github/workflows/quality-check.yml` and `.github/workflows/deploy.yml` run:
 
 ```yaml
 run: npx tsc --noEmit
 ```
 
-That gate is currently **vacuous** — it type-checks zero files and cannot fail.
-A green "Code Quality Checks" tick does not mean the app type-checks.
+The root `tsconfig.json` is solution-style (`"files": []` plus references).
+Without `-b`, `tsc` compiles an empty file list and exits 0, so that step
+checks nothing. `npm run build` starts with the same bare `tsc`, and Vite
+transpiles without type-checking.
 
-`npm run build` has the same shape: its `tsc` step is the bare root invocation,
-so the build also does not type-check the application. Vite transpiles without
-type-checking, so nothing else catches it either.
+The gate was not changed in this pass, because the app project is not yet at
+zero. Once the two errors above are fixed:
 
-## Recommended remediation, in order
+1. Add a script to `package.json`:
 
-Not done here — Phase 3A deliberately does not touch the baseline.
+   ```json
+   "typecheck": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p functions/tsconfig.json"
+   ```
 
-1. Add the jest-dom matcher types to the type graph (a `types` entry or a
-   `.d.ts` reference). Expected to clear ~247 errors without touching any test.
-2. Change the CI and `build` commands to `tsc -b --noEmit` so the gate is real.
-3. Align `@types/react` / `@types/react-dom` with React 19.
-4. Work through the remaining application-source errors, then turn the gate red-on-failure.
+2. Replace `npx tsc --noEmit` with `npm run typecheck` in both workflows.
+3. Optionally replace the bare `tsc` at the start of `npm run build` the same
+   way.
 
-Step 2 must come after 1 and 3, or CI turns red immediately.
+## History: 2026-08-22 measurement
+
+Measured on `main` at `1e45793`.
+
+| Command | Result |
+|---|---|
+| `npx tsc --noEmit` | exit 0 (checks nothing) |
+| `npx tsc -p tsconfig.app.json --noEmit` | 307 errors |
+| `npx tsc -b --noEmit` | 307 errors |
+
+Of the 307, 60 were in application source and 247 in test files; 246 of those
+were `TS2339` from the missing jest-dom matcher types.
