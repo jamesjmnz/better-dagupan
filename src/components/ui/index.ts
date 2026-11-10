@@ -10,6 +10,7 @@
 // Basic interactive components
 export { Badge } from './Badge';
 export { Button } from '@bettergov/kapwa/button';
+export { ButtonLink } from './ButtonLink';
 export { Card } from './Card';
 
 // Form and input components
