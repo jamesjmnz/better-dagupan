@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Population Statistics",
+  "description": "Census population counts for the LGU and its barangays. Every count and growth rate cites civic sources by id (src/data/sources/civic-sources.json). The latest barangay counts are not stored here: they are read from src/data/directory/barangays.json at runtime, so this file holds only the earlier census years. Mirrors PopulationDataset in src/types/populationTypes.ts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["meta", "municipality", "barangays"],
+  "definitions": {
+    "sources": {
+      "description": "Civic-source ids backing this value. At least one.",
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      }
+    },
+    "historyPoint": {
+      "description": "A census count at the census reference date for that year.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["year", "population", "sources"],
+      "properties": {
+        "year": { "type": "integer", "minimum": 1900, "maximum": 2100 },
+        "population": { "type": "integer", "minimum": 0 },
+        "sources": { "$ref": "#/definitions/sources" }
+      }
+    }
+  },
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["location", "source", "censusDates"],
+      "properties": {
+        "location": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["region", "province", "municipality"],
+          "properties": {
+            "region": { "type": "string" },
+            "province": { "type": "string" },
+            "municipality": { "type": "string" }
+          }
+        },
+        "source": {
+          "description": "Publishing agency, for display only. Citations live on each value.",
+          "type": "string"
+        },
+        "notes": { "type": "string" },
+        "censusDates": {
+          "description": "Census reference date per census year, e.g. \"2015\": \"2015-08-01\".",
+          "type": "object",
+          "propertyNames": { "pattern": "^[0-9]{4}$" },
+          "additionalProperties": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "municipality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "history", "growthRates"],
+      "properties": {
+        "name": { "type": "string" },
+        "history": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/historyPoint" }
+        },
+        "growthRates": {
+          "description": "Annual population growth rates as published by the PSA, in percent.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["period", "rate", "sources"],
+            "properties": {
+              "period": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{4}$"
+              },
+              "rate": { "type": "number" },
+              "sources": { "$ref": "#/definitions/sources" }
+            }
+          }
+        }
+      }
+    },
+    "barangays": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slug", "history"],
+        "properties": {
+          "slug": {
+            "description": "Slug of the barangay in src/data/directory/barangays.json, which supplies its name and latest count.",
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          "history": {
+            "type": "array",
+            "items": { "$ref": "#/definitions/historyPoint" }
+          }
+        }
+      }
+    }
+  }
+}

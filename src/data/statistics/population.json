@@ -1,18 +1,543 @@
 {
   "meta": {
     "location": {
-      "region": "",
-      "province": "",
-      "municipality": ""
+      "region": "Region I (Ilocos Region)",
+      "province": "Pangasinan",
+      "municipality": "City of Dagupan"
     },
-    "source": "",
-    "notes": "",
-    "censusDates": {}
+    "source": "Philippine Statistics Authority",
+    "notes": "Census counts only. Every figure is a PSA census count at the census reference date; none is an estimate or projection. Growth rates are the annual population growth rates PSA publishes, not values computed here. Barangay figures for 2024 are read from src/data/directory/barangays.json at runtime rather than duplicated in this file.",
+    "censusDates": {
+      "2010": "2010-05-01",
+      "2015": "2015-08-01",
+      "2020": "2020-05-01",
+      "2024": "2024-07-01"
+    }
   },
   "municipality": {
-    "name": "",
-    "history": [],
-    "growthRates": []
+    "name": "City of Dagupan",
+    "history": [
+      {
+        "year": 2010,
+        "population": 163676,
+        "sources": [
+          "psa-2024-popcen-table-b-by-region",
+          "psa-pangasinan-quickstat-2024-10"
+        ]
+      },
+      {
+        "year": 2015,
+        "population": 171271,
+        "sources": [
+          "psa-2015-popcen-region-1-by-barangay",
+          "psa-2015-popcen-region-1-highlights",
+          "psa-2024-popcen-table-b-by-region",
+          "psa-pangasinan-quickstat-2024-10"
+        ]
+      },
+      {
+        "year": 2020,
+        "population": 174302,
+        "sources": [
+          "psa-2020-cph-region-1-by-barangay",
+          "psa-2020-cph-region-1-highlights",
+          "psa-2024-popcen-table-b-by-region",
+          "psa-pangasinan-quickstat-2024-10"
+        ]
+      },
+      {
+        "year": 2024,
+        "population": 174777,
+        "sources": [
+          "psa-2024-popcen-table-b-by-region",
+          "psa-2024-popcen-table-c-region-1",
+          "psa-psgc-dagupan-2026q2"
+        ]
+      }
+    ],
+    "growthRates": [
+      {
+        "period": "2010-2015",
+        "rate": 0.87,
+        "sources": ["psa-2024-popcen-table-b-by-region"]
+      },
+      {
+        "period": "2015-2020",
+        "rate": 0.37,
+        "sources": ["psa-2024-popcen-table-b-by-region"]
+      },
+      {
+        "period": "2020-2024",
+        "rate": 0.07,
+        "sources": ["psa-2024-popcen-table-b-by-region"]
+      }
+    ]
   },
-  "barangays": []
+  "barangays": [
+    {
+      "slug": "bacayao-norte",
+      "history": [
+        {
+          "year": 2015,
+          "population": 3476,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 4295,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "bacayao-sur",
+      "history": [
+        {
+          "year": 2015,
+          "population": 2686,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 2520,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "barangay-ii",
+      "history": [
+        {
+          "year": 2015,
+          "population": 2562,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 2300,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "barangay-iv",
+      "history": [
+        {
+          "year": 2015,
+          "population": 1201,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 1199,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "bolosan",
+      "history": [
+        {
+          "year": 2015,
+          "population": 3872,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 3320,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "bonuan-binloc",
+      "history": [
+        {
+          "year": 2015,
+          "population": 9506,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 10674,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "bonuan-boquig",
+      "history": [
+        {
+          "year": 2015,
+          "population": 14354,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 15351,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "bonuan-gueset",
+      "history": [
+        {
+          "year": 2015,
+          "population": 23373,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 25390,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "calmay",
+      "history": [
+        {
+          "year": 2015,
+          "population": 6972,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 5906,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "carael",
+      "history": [
+        {
+          "year": 2015,
+          "population": 4872,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 6490,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "caranglaan",
+      "history": [
+        {
+          "year": 2015,
+          "population": 7485,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 5880,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "herrero",
+      "history": [
+        {
+          "year": 2015,
+          "population": 2474,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 1583,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "lasip-chico",
+      "history": [
+        {
+          "year": 2015,
+          "population": 1983,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 1208,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "lasip-grande",
+      "history": [
+        {
+          "year": 2015,
+          "population": 2818,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 2413,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "lomboy",
+      "history": [
+        {
+          "year": 2015,
+          "population": 1337,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 1300,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "lucao",
+      "history": [
+        {
+          "year": 2015,
+          "population": 10252,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 10153,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "malued",
+      "history": [
+        {
+          "year": 2015,
+          "population": 9581,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 9265,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "mamalingling",
+      "history": [
+        {
+          "year": 2015,
+          "population": 1653,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 1844,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "mangin",
+      "history": [
+        {
+          "year": 2015,
+          "population": 4019,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 4079,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "mayombo",
+      "history": [
+        {
+          "year": 2015,
+          "population": 6943,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 8470,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "pantal",
+      "history": [
+        {
+          "year": 2015,
+          "population": 17841,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 17807,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "poblacion-oeste",
+      "history": [
+        {
+          "year": 2015,
+          "population": 4651,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 4234,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "barangay-i",
+      "history": [
+        {
+          "year": 2015,
+          "population": 664,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 722,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "pogo-chico",
+      "history": [
+        {
+          "year": 2015,
+          "population": 4747,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 4389,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "pogo-grande",
+      "history": [
+        {
+          "year": 2015,
+          "population": 2211,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 1990,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "pugaro-suit",
+      "history": [
+        {
+          "year": 2015,
+          "population": 5233,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 5431,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "salapingao",
+      "history": [
+        {
+          "year": 2015,
+          "population": 2996,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 2954,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "salisay",
+      "history": [
+        {
+          "year": 2015,
+          "population": 2140,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 2701,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "tambac",
+      "history": [
+        {
+          "year": 2015,
+          "population": 2272,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 2399,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "tapuac",
+      "history": [
+        {
+          "year": 2015,
+          "population": 4154,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 5004,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    },
+    {
+      "slug": "tebeng",
+      "history": [
+        {
+          "year": 2015,
+          "population": 2943,
+          "sources": ["psa-2015-popcen-region-1-by-barangay"]
+        },
+        {
+          "year": 2020,
+          "population": 3031,
+          "sources": ["psa-2020-cph-region-1-by-barangay"]
+        }
+      ]
+    }
+  ]
 }
