@@ -37,8 +37,6 @@
   },
   "financial": {
     "title": "Financial Performance",
-    "breadcrumbTransparency": "Transparency",
-    "breadcrumb": "Financial Report",
     "status": {
       "final": "BLGF: final",
       "preliminary": "BLGF: preliminary"

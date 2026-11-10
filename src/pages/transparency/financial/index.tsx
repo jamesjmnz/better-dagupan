@@ -1,15 +1,6 @@
 import { BarChart2Icon, Info, Landmark, ReceiptText } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import {
-  Breadcrumb,
-  BreadcrumbHome,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/navigation/Breadcrumb';
 // UI Components
 import { Badge } from '@/components/ui/Badge';
 import { NotVerified } from '@/components/civic/NotVerified';
@@ -61,26 +52,11 @@ export default function FinancialPage() {
 
   return (
     <div className='animate-in fade-in mx-auto max-w-7xl space-y-6 pb-20 duration-500'>
-      {/* 1. Standardized Breadcrumbs */}
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbHome href='/' />
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href='/transparency'>
-              {t('financial.breadcrumbTransparency')}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>{t('financial.breadcrumb')}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-
-      {/* 2. Unified Header with Controls */}
+      {/*
+        The transparency layout already renders the breadcrumb trail; a
+        second one here gave the page two "breadcrumb" landmarks.
+      */}
+      {/* Unified Header with Controls */}
       <div className='border-kapwa-border-weak bg-kapwa-bg-surface flex flex-col gap-8 rounded-3xl border p-8 shadow-sm xl:flex-row xl:items-center xl:justify-between'>
         <div className='space-y-4'>
           <div className='flex flex-wrap items-center gap-2'>

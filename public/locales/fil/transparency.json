@@ -37,8 +37,6 @@
   },
   "financial": {
     "title": "Kalagayang Pinansyal",
-    "breadcrumbTransparency": "Transparency",
-    "breadcrumb": "Ulat Pinansyal",
     "status": {
       "final": "BLGF: pinal",
       "preliminary": "BLGF: paunang datos"
