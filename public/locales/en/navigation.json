@@ -1,0 +1,71 @@
+{
+  "topBar": {
+    "joinUs": "🚀 Join Us",
+    "about": "About",
+    "officialShort": "Gov.ph",
+    "official": "Official Gov.ph",
+    "hotlines": "Hotlines",
+    "selectLanguage": "Select Language"
+  },
+  "brand": {
+    "logoAlt": "{{portal}} Logo",
+    "tagline": "Community Portal for the {{fullName}}"
+  },
+  "search": "Search",
+  "toggleMenu": "Toggle Menu",
+  "mobile": {
+    "joinUs": "🚀 Join the Revolution",
+    "about": "About {{portal}}",
+    "contact": "Contact Us"
+  },
+  "menu": {
+    "electedOfficials": "Elected Officials",
+    "departments": "Departments",
+    "barangays": "Barangays",
+    "demographics": "Demographics",
+    "competitiveness": "Competitiveness",
+    "income": "{{adjective}} Income",
+    "ordinances": "Ordinances",
+    "resolutions": "Resolutions",
+    "executiveOrders": "Executive Orders",
+    "financialReports": "Financial Reports",
+    "procurement": "Procurement",
+    "dpwhProjects": "DPWH Projects"
+  },
+  "footer": {
+    "tagline": "Community Civic Portal",
+    "description": "An open-source initiative providing transparent access to {{adjectiveLower}} services, local legislation, and public data for the people of {{lgu}}.",
+    "builtBy": "Built by the community for the community.",
+    "cost": "Cost to the People of {{lgu}} =",
+    "github": "GitHub",
+    "sitemap": "Sitemap",
+    "sections": {
+      "localServices": "Local Services",
+      "localGovernment": "Local Government",
+      "network": "BetterGov Network",
+      "resources": "Resources"
+    },
+    "links": {
+      "allServices": "All Services",
+      "business": "Business, Trade & Investment",
+      "health": "Health & Wellness",
+      "social": "Social Services",
+      "agriculture": "Agriculture & Economic Development",
+      "electedOfficials": "Elected Officials",
+      "departments": "Departments",
+      "barangayDirectory": "Barangay Directory",
+      "openlgu": "OpenLGU Portal",
+      "transparency": "Transparency",
+      "transparencyPortal": "Transparency Portal",
+      "openData": "Open Data Portal",
+      "petitions": "Petitions PH",
+      "saln": "SALN Tracker",
+      "budget": "Budget Tracker",
+      "philgeps": "Philgeps Tracker",
+      "lguSite": "{{lgu}} Gov.ph",
+      "foi": "Freedom of Information",
+      "province": "Province of {{province}}",
+      "reportError": "Report an Error"
+    }
+  }
+}

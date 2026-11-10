@@ -12,13 +12,16 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { config } from '@/lib/lguConfig';
-import { lguLabels } from '@/lib/lguLabels';
+import { useLguTerms } from '@/lib/useLguTerms';
 
 import { footerNavigation } from '../../data/navigation';
 import { DisclaimerLine } from './Disclaimer';
 
 export const Footer: FC = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'navigation']);
+  const terms = useLguTerms();
+  const label = (link: { label: string; labelKey?: string }) =>
+    link.labelKey ? t(link.labelKey, terms) : link.label;
 
   const getSocialIcon = (label: string) => {
     switch (label) {
@@ -54,14 +57,12 @@ export const Footer: FC = () => {
                   {config.portal.footerBrandName}
                 </div>
                 <div className='text-[10px] font-bold tracking-widest text-kapwa-text-disabled uppercase'>
-                  Community Civic Portal
+                  {t('navigation:footer.tagline')}
                 </div>
               </div>
             </div>
             <p className='max-w-sm text-sm leading-relaxed text-kapwa-text-disabled'>
-              An open-source initiative providing transparent access to{' '}
-              {lguLabels.adjective.toLowerCase()} services, local legislation,
-              and public data for the people of {config.lgu.name}.
+              {t('navigation:footer.description', terms)}
             </p>
             <div className='flex space-x-4'>
               {footerNavigation.socialLinks.map(link => (
@@ -82,7 +83,7 @@ export const Footer: FC = () => {
           {footerNavigation.mainSections.map(section => (
             <div key={section.title} className='col-span-1'>
               <h3 className='mb-6 text-[10px] font-bold tracking-[0.2em] text-kapwa-text-disabled uppercase'>
-                {section.title}
+                {t(section.titleKey)}
               </h3>
               <ul className='space-y-4'>
                 {section.links.map(link => (
@@ -94,14 +95,14 @@ export const Footer: FC = () => {
                         rel='noreferrer'
                         className='flex gap-1 items-center text-sm transition-colors hover:text-kapwa-text-link-hover text-kapwa-text-support'
                       >
-                        {link.label}
+                        {label(link)}
                       </a>
                     ) : (
                       <Link
                         to={link.href}
                         className='text-sm transition-colors hover:text-kapwa-text-link-hover text-kapwa-text-support'
                       >
-                        {link.label}
+                        {label(link)}
                       </Link>
                     )}
                   </li>
@@ -115,11 +116,11 @@ export const Footer: FC = () => {
         <div className='flex justify-center mt-20'>
           <div className='inline-flex flex-col gap-2 items-center px-6 py-4 text-center rounded-full border border-kapwa-border-strong bg-kapwa-bg-surface-bold/20 md:flex-row md:gap-4'>
             <p className='text-xs font-medium text-kapwa-text-support md:text-sm'>
-              Built by the community for the community.
+              {t('navigation:footer.builtBy')}
             </p>
             <span className='hidden w-1 h-1 rounded-full bg-kapwa-border-strong md:block' />
             <p className='text-xs font-bold md:text-sm'>
-              Cost to the People of {config.lgu.name} ={' '}
+              {t('navigation:footer.cost', terms)}{' '}
               <span className='text-kapwa-text-success'>₱0</span>
             </p>
           </div>
@@ -140,13 +141,13 @@ export const Footer: FC = () => {
               rel='noreferrer'
               className='text-[10px] font-bold tracking-widest text-kapwa-text-disabled uppercase hover:text-kapwa-text-inverse'
             >
-              GitHub
+              {t('navigation:footer.github')}
             </a>
             <Link
               to='/sitemap'
               className='text-[10px] font-bold tracking-widest text-kapwa-text-disabled uppercase hover:text-kapwa-text-inverse'
             >
-              Sitemap
+              {t('navigation:footer.sitemap')}
             </Link>
             {/* <Link to='/accessibility' className='text-[10px] font-bold text-kapwa-text-disabled hover:text-kapwa-text-inverse uppercase tracking-widest'>Accessibility</Link> */}
           </div>

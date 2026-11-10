@@ -51,7 +51,10 @@ export interface GovernmentBranch {
 }
 
 export interface NavigationItem {
+  /** English label, also used as a stable React key. */
   label: string;
+  /** i18n key (with its namespace) rendered in place of `label`. */
+  labelKey?: string;
   href: string;
   target?: string;
   children?: NavigationItem[];
