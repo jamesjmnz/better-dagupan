@@ -263,7 +263,7 @@ const WeatherPage: FC = () => {
                   t={t}
                   i18nKey='weather.advisoriesBody'
                   components={{
-                    link: (
+                    anchor: (
                       <a
                         href='https://bagong.pagasa.dost.gov.ph/'
                         className='text-kapwa-text-brand hover:underline'
@@ -281,7 +281,7 @@ const WeatherPage: FC = () => {
               t={t}
               i18nKey='weather.providedBy'
               components={{
-                link: (
+                anchor: (
                   <a
                     href='https://openweathermap.org/'
                     className='hover:text-kapwa-text-strong text-kapwa-text-strong underline'
