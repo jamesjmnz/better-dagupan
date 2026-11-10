@@ -338,6 +338,8 @@
   },
   "weather": {
     "error": "Error",
+    "unavailableTitle": "Hindi pa available ang lagay ng panahon",
+    "unavailableMessage": "Lalabas dito ang kasalukuyang lagay ng panahon sa {{lgu}} kapag nakakonekta na ang serbisyo ng panahon.",
     "cities": "Mga Lungsod",
     "humidity": "Halumigmig",
     "wind": "Hangin",

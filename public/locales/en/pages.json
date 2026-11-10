@@ -338,6 +338,8 @@
   },
   "weather": {
     "error": "Error",
+    "unavailableTitle": "Weather is not available right now",
+    "unavailableMessage": "Current conditions for {{lgu}} will appear here once the weather service is connected.",
     "cities": "Cities",
     "humidity": "Humidity",
     "wind": "Wind",

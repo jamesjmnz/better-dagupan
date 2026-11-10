@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 import { HourlyForecast, WeatherApiCity, WeatherData } from '../types';
-import { fetchWithCache } from './api';
+import { fetchWithCache, HttpError } from './api';
 import { config } from './lguConfig';
 
 /**
@@ -68,16 +68,23 @@ export const fetchWeatherData = async (): Promise<WeatherData[]> => {
     .replace(/\s+/g, '_')
     .replace(/ñ/g, 'n');
 
-  // Always fetch specific city
-  let data = await fetchWithCache<Record<string, WeatherApiCity>>(
-    `/api/weather?city=${encodeURIComponent(cityName)}`
-  );
-
-  // If KV is empty or city missing, fallback to update
-  if (!data || Object.keys(data).length === 0) {
+  let data: Record<string, WeatherApiCity>;
+  try {
+    // Always fetch specific city
     data = await fetchWithCache<Record<string, WeatherApiCity>>(
-      '/api/weather?update=true'
+      `/api/weather?city=${encodeURIComponent(cityName)}`
     );
+
+    // If KV is empty or city missing, fallback to update
+    if (!data || Object.keys(data).length === 0) {
+      data = await fetchWithCache<Record<string, WeatherApiCity>>(
+        '/api/weather?update=true'
+      );
+    }
+  } catch (error) {
+    // 503 means the deployment has no weather API key: nothing to show.
+    if (error instanceof HttpError && error.status === 503) return [];
+    throw error;
   }
 
   const city =
