@@ -21,19 +21,33 @@ Better Dagupan is being built as a community portal for the City of Dagupan, off
 - Mobile-responsive design for access on any device
 
 ## Current status
-The interface exists; the Dagupan civic data does not yet.
+The interface exists; most of the Dagupan civic data does not yet.
 
 The portal was adapted from a template that shipped Los Baños' own government
 records. Those records have been removed rather than relabelled, because
 presenting one city's departments, officials, barangays, budgets, and statistics
 as another's would be worse than showing nothing.
 
-Every affected section now renders an honest empty state saying that verified
-Dagupan information has not been added yet. Records will be sourced from primary
-government sources — the City Government of Dagupan, the Philippine Statistics
-Authority, the Commission on Audit, DBM, DILG, PhilGEPS, and the Official
-Gazette — and verified before publication, with each dataset recording its
-source and retrieval date.
+Two verified Dagupan datasets are published so far:
+
+- **Barangays** — the 31 barangays of the City of Dagupan, from the Philippine
+  Statistics Authority's PSGC, with codes, urban/rural classification, and 2024
+  census population.
+- **City offices** — 34 offices from the City Government of Dagupan's own
+  pages. Office heads are named only where two independent official pages
+  agree; 11 are withheld until a dated, authoritative roster is found.
+
+Each of these records cites its source, and the pages show the agency, a link to
+the document, and the date it was last verified. Elected officials and PhilGEPS
+procurement are in review. Every other section renders an honest empty state
+saying that verified Dagupan information has not been added yet.
+
+Further records will be sourced from primary government sources — the City
+Government of Dagupan, the Philippine Statistics Authority, the Commission on
+Audit, DBM, DILG, PhilGEPS, and the Official Gazette — and verified before
+publication, following `docs/civic-data-verification.md`.
+
+The portal is not deployed yet and has no production domain.
 
 ## How we built it
 The platform is built using modern web technologies:
@@ -46,13 +60,13 @@ The platform is built using modern web technologies:
 - React Router for client-side routing
 - Vite for fast development and optimized builds
 - Cloudflare Pages and D1 for deployment and legislative data storage
-- Meilisearch with Fuse.js for fast, fuzzy search
-- Python pipeline for processing legislative PDFs
+- BetterGov.ph's shared Meilisearch instance for procurement and infrastructure data, and Fuse.js for fuzzy search
+- Node scripts for the legislative source pipeline, and Python scripts for service data
 
 ## Challenges we ran into
 - Separating reusable template infrastructure from the previous LGU's civic records, which were not always labelled as such
-- Sourcing, cleaning, and structuring legislative documents from official PDFs
-- Organizing a large number of city services into a navigable directory
+- Reconciling official sources that disagree — the city publishes several department rosters at once, and they do not always name the same office heads
+- Keeping the dates on a source distinct: when it was published, what date its content describes, and when it was last checked
 - Implementing a responsive design that works across all device sizes
 - Ensuring accessibility for residents with different abilities
 - Managing multilingual support while keeping English and Filipino in step
@@ -60,15 +74,16 @@ The platform is built using modern web technologies:
 
 ## What we learned
 - Inherited data is the hardest part of forking a civic portal: a search for the previous LGU's name does not find records that never mention it
-- Techniques for extracting and structuring data from government PDFs at scale
+- A field left empty and marked "not verified yet" is more honest than one filled from memory or from a single unconfirmed page
 - Strategies for managing multilingual content effectively
 - Approaches to building accessible local government portals
 - How to design community contribution workflows that non-developers can participate in
 - The importance of open data and transparency in local governance
 
 ## What's next for Better Dagupan
-- Sourcing and verifying Dagupan's department, barangay, and elected-official directories
+- Finishing review of the elected-officials and procurement changes, then publishing them
 - Building out the public services directory and citizens charter
-- Adding transparency data (budget execution, procurement, project tracking)
+- Adding statistics and financial transparency data (budget execution, audit reports)
+- Re-keying the legislative pipeline to the Sangguniang Panlungsod
 - Growing the volunteer community of data auditors and translators
 - Assigning a production domain and deploying the portal
