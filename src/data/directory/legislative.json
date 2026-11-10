@@ -1,1 +1,242 @@
-[]
+[
+  {
+    "slug": "sangguniang-panlungsod",
+    "branch": "Legislative",
+    "chamber": "Sangguniang Panlungsod",
+    "term": "2025–2028",
+    "address": "2nd Floor SP Building, Dagupan City Hall Complex, A.B. Fernandez Ave., Dagupan City 2400",
+    "trunkline": null,
+    "website": "https://sp.dagupan.gov.ph/",
+    "email": null,
+    "presiding_officer": "city-vice-mayor",
+    "officials": [
+      {
+        "slug": "danielle-francine-b-canto",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Danielle Francine B. Canto",
+        "name_variants": [],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity"
+        ]
+      },
+      {
+        "slug": "jalice-d-cayabyab-md",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Jalice D. Cayabyab, MD",
+        "name_variants": [],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity"
+        ]
+      },
+      {
+        "slug": "marvin-dv-fabia",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Marvin DV. Fabia",
+        "name_variants": [
+          {
+            "name": "Marvin V. Fabia",
+            "source": "dagupan-lgu-2026-state-of-calamity"
+          }
+        ],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity",
+          "dagupan-lgu-2025-local-election-results",
+          "comelec-2025-nle-results-dagupan"
+        ]
+      },
+      {
+        "slug": "michael-b-fernandez",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Michael B. Fernandez",
+        "name_variants": [],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity",
+          "dagupan-lgu-2025-local-election-results",
+          "comelec-2025-nle-results-dagupan"
+        ]
+      },
+      {
+        "slug": "christel-hilary-paras",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Christel Hilary Paras",
+        "name_variants": [
+          {
+            "name": "Christel Hilary U. Paras",
+            "source": "dagupan-lgu-2026-state-of-calamity"
+          }
+        ],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity"
+        ]
+      },
+      {
+        "slug": "karlos-liberato-e-reyna-iv",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Karlos Liberato E. Reyna IV",
+        "name_variants": [],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity",
+          "dagupan-lgu-2025-local-election-results",
+          "comelec-2025-nle-results-dagupan"
+        ]
+      },
+      {
+        "slug": "ma-librada-fe-m-reyna",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Ma. Librada Fe M. Reyna",
+        "name_variants": [
+          {
+            "name": "Maria Librada Fe M. Reyna",
+            "source": "dagupan-sp-2025-inauguration"
+          },
+          {
+            "name": "Maria Librada Fe M. Reyna",
+            "source": "dagupan-lgu-2026-state-of-calamity"
+          }
+        ],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity"
+        ]
+      },
+      {
+        "slug": "luis-m-samson-jr",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Luis M. Samson Jr.",
+        "name_variants": [],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity"
+        ]
+      },
+      {
+        "slug": "jeslito-c-seen",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Jeslito C. Seen",
+        "name_variants": [],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity"
+        ]
+      },
+      {
+        "slug": "jose-netu-m-tamayo",
+        "role": "Councilor",
+        "seat": "elected",
+        "name_status": "published",
+        "name": "Jose Netu M. Tamayo",
+        "name_variants": [],
+        "term": "2025–2028",
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-sp-2025-inauguration",
+          "dagupan-lgu-2026-state-of-calamity"
+        ]
+      },
+      {
+        "slug": "marcelino-d-fernandez",
+        "role": "Councilor",
+        "seat": "ex_officio_liga",
+        "name_status": "published",
+        "name": "Marcelino D. Fernandez",
+        "name_variants": [],
+        "term": null,
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-lgu-2026-state-of-calamity",
+          "dagupan-lgu-2026-waste-segregation",
+          "dagupan-lgu-2026-world-teachers-day"
+        ]
+      },
+      {
+        "slug": "bradley-claude-c-benavides",
+        "role": "Councilor",
+        "seat": "ex_officio_sk",
+        "name_status": "published",
+        "name": "Bradley Claude C. Benavides",
+        "name_variants": [],
+        "term": null,
+        "contact": null,
+        "website": null,
+        "sources": [
+          "dagupan-sp-councilors",
+          "dagupan-lgu-2026-state-of-calamity",
+          "dagupan-lgu-2026-waste-segregation",
+          "dagupan-lgu-2026-world-teachers-day"
+        ]
+      }
+    ],
+    "committees_status": "conflicting_sources",
+    "permanent_committees": [],
+    "sources": [
+      "dagupan-sp-councilors",
+      "dagupan-lgu-vice-mayor-profile",
+      "dagupan-sp-2025-inauguration",
+      "comelec-2025-nle-results-dagupan"
+    ]
+  }
+]
