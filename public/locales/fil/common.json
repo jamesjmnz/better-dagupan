@@ -268,5 +268,34 @@
       "withheldConflict": "Hindi nagkakasundo ang mga opisyal na pinagkunan kung sino ang namumuno sa ilang komite, at walang nagpapatunay kung alin ang kasalukuyan, kaya walang ipinapakita rito. Lalabas ang mga ito kapag may kasalukuyang pinagkunan na nagpapatunay nito.",
       "withheldUncorroborated": "Iisang pinagkunan lamang ang naglilista ng pamunuan at kasapian ng mga komite, na hindi sapat upang matiyak na kasalukuyan ang mga ito. Lalabas ang mga ito kapag may pangalawang pinagkunan na nagpapatunay nito."
     }
+  },
+  "population": {
+    "title": "Profile ng Populasyon",
+    "description": "Ang populasyon ng {{lgu}} at ng mga barangay nito ayon sa senso ng Philippine Statistics Authority.",
+    "censusBadge": "Senso {{year}}",
+    "barangayBadge": "{{count}} barangay",
+    "totalLabel": "Kabuuang populasyon",
+    "totalSubtext": "Bilang ng senso ng PSA noong {{date}}",
+    "growthLabel": "Taunang antas ng paglaki",
+    "growthSubtext": "{{period}}, ayon sa inilathala ng PSA",
+    "barangaysLabel": "Mga barangay",
+    "barangaysSubtext": "Ayon sa PSGC ng PSA",
+    "tabsLabel": "Tanaw ng populasyon",
+    "cityTab": "Buong lungsod",
+    "barangayTab": "Bawat barangay",
+    "cityChartTitle": "Populasyon ng {{lgu}} bawat senso",
+    "barangayChartTitle": "Populasyon ng barangay bawat senso",
+    "seriesName": "Populasyon",
+    "barangayYearsNotVerified": "Walang ipinapakitang hati bawat barangay para sa {{years}}",
+    "barangayYearsNotVerifiedHint": "Hindi pa napapatunayan ng Better Dagupan ang talaan ng PSA bawat barangay para sa sensong iyon. Makikita ang bilang ng buong lungsod para sa taong iyon sa tanaw na Buong lungsod.",
+    "tableTitle": "Mga bilang ng senso",
+    "tableCaption": "Populasyon ng {{lgu}} bawat taon ng senso",
+    "tableYear": "Senso",
+    "tableReferenceDate": "Petsa ng sanggunian",
+    "tablePopulation": "Populasyon",
+    "growthTitle": "Taunang antas ng paglaki ng populasyon (PSA)",
+    "readTitle": "Paano basahin ang datos na ito",
+    "readCity": "Bawat bilang ay bilang ng senso ng PSA sa petsa ng sanggunian ng senso ({{dates}}). Hindi pantay ang pagitan ng mga senso, kaya gamitin ang taunang antas ng PSA sa paghahambing ng paglaki sa halip na ang hilig ng linya sa pagitan ng mga punto. Wala sa mga bilang na ito ang tantiya o projection.",
+    "readBarangays": "Ipinapakita ang bilang bawat barangay para sa {{years}}, ang mga sensong napatunayan na ang talaan ng PSA bawat barangay. Sumusunod ang mga pangalan ng barangay sa kasalukuyang PSGC; sa bawat senso, eksaktong tumutugma ang kabuuan ng mga barangay sa kabuuan ng lungsod."
   }
 }

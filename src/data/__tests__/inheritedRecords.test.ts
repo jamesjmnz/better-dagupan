@@ -32,11 +32,11 @@ const INHERITED =
 
 /**
  * Datasets that are still empty. directory/barangays, directory/departments,
- * directory/executive and directory/legislative have left this list: they now
- * hold verified Dagupan records, checked by
- * src/data/__tests__/barangayProvenance.test.ts, departmentProvenance.test.ts
- * and electedOfficialsProvenance.test.ts. All are still asserted below to be
- * free of inherited content.
+ * directory/executive, directory/legislative and the two statistics/population
+ * series have left this list: they now hold verified Dagupan records, checked
+ * by barangayProvenance.test.ts, departmentProvenance.test.ts,
+ * electedOfficialsProvenance.test.ts and populationProvenance.test.ts in this
+ * directory. All are still asserted below to be free of inherited content.
  */
 const recordSets: [string, unknown[]][] = [
   ['about/highlights', highlights],
@@ -46,11 +46,6 @@ const recordSets: [string, unknown[]][] = [
   ['services/services', services],
   ['citizens-charter/merged-services', mergedServices],
   ['citizens-charter/citizens-charter', citizensCharter.services],
-  ['statistics/population.barangays', population.barangays],
-  [
-    'statistics/population.municipality.history',
-    population.municipality.history,
-  ],
   ['statistics/cmci.pillars', cmci.pillars],
 ];
 
@@ -102,6 +97,25 @@ describe('inherited civic records', () => {
     expect(Array.isArray(legislative)).toBe(true);
     expect(legislative.length).toBeGreaterThan(0);
     expect(JSON.stringify(legislative)).not.toMatch(INHERITED);
+  });
+
+  it('statistics/population holds verified Dagupan census counts, not inherited ones', () => {
+    // The third dataset to move from "must be empty" to "must be Dagupan".
+    // The inherited file charted another LGU's barangays; the guarantee now is
+    // that the city series and every barangay series are present and are the
+    // PSA's counts for Dagupan, which populationProvenance.test.ts checks
+    // figure by figure, including that the barangays sum to the city total.
+    expect(population.municipality.history.length).toBeGreaterThan(0);
+    expect(population.barangays.length).toBeGreaterThan(0);
+    expect(population.meta.location.municipality).toBe('City of Dagupan');
+    expect(population.meta.location.province).toBe('Pangasinan');
+    expect(JSON.stringify(population)).not.toMatch(INHERITED);
+
+    // Every barangay series belongs to a barangay in the Dagupan index.
+    const slugs = new Set(barangays.map(b => b.slug));
+    for (const record of population.barangays) {
+      expect(slugs.has(record.slug), record.slug).toBe(true);
+    }
   });
 
   it('keeps the nationwide datasets that are not LGU-specific', () => {

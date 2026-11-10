@@ -268,5 +268,34 @@
       "withheldConflict": "Official sources disagree about who chairs some committees, and nothing establishes which assignments are current, so none is shown here. They will appear once a current source settles them.",
       "withheldUncorroborated": "Only one source lists committee assignments, which is not enough to establish that they are current. They will appear once a second source confirms them."
     }
+  },
+  "population": {
+    "title": "Population Profile",
+    "description": "Census population of the {{lgu}} and its barangays, as counted by the Philippine Statistics Authority.",
+    "censusBadge": "Census {{year}}",
+    "barangayBadge": "{{count}} barangays",
+    "totalLabel": "Total population",
+    "totalSubtext": "PSA census count as of {{date}}",
+    "growthLabel": "Annual growth rate",
+    "growthSubtext": "{{period}}, as published by the PSA",
+    "barangaysLabel": "Barangays",
+    "barangaysSubtext": "Per the PSA PSGC",
+    "tabsLabel": "Population view",
+    "cityTab": "Citywide",
+    "barangayTab": "By barangay",
+    "cityChartTitle": "Population of the {{lgu}} by census",
+    "barangayChartTitle": "Barangay population by census",
+    "seriesName": "Population",
+    "barangayYearsNotVerified": "No barangay breakdown is shown for {{years}}",
+    "barangayYearsNotVerifiedHint": "Better Dagupan has not yet verified a PSA barangay table for that census. The citywide count for that year is shown on the Citywide view.",
+    "tableTitle": "Census counts",
+    "tableCaption": "Census population of the {{lgu}} by census year",
+    "tableYear": "Census",
+    "tableReferenceDate": "Reference date",
+    "tablePopulation": "Population",
+    "growthTitle": "Annual population growth rate (PSA)",
+    "readTitle": "How to read this data",
+    "readCity": "Each figure is a PSA census count at the census reference date ({{dates}}). The censuses are not evenly spaced, so compare growth using the PSA's annual rates rather than the slope between points. None of these figures is an estimate or a projection.",
+    "readBarangays": "Barangay counts are shown for {{years}}, the censuses whose PSA barangay tables have been verified. Barangay names follow the current PSGC; for each census the barangay figures add up exactly to the city total."
   }
 }

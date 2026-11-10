@@ -387,6 +387,85 @@ The councilor published as "Karlos Liberato E. Reyna IV" is the "Karlos Reyna"
 in the office-directory note above. That remains suggestive about the stale
 tourism-office roster, and remains unasserted there.
 
+## Worked example: census population (November 2026)
+
+The barangay index had one dated source and the office directory had several
+undated ones that disagreed. The census series is the easy case in one sense —
+every figure comes from the agency that counts — and the hard case in another:
+one agency cannot corroborate itself independently, so the check has to come
+from arithmetic and from separately issued publications agreeing.
+
+### Sources
+
+| Census | Reference date | Dagupan | Stated by |
+|---|---|---|---|
+| 2010 CPH | 2010-05-01 | 163,676 | 2024 POPCEN Table B; Pangasinan QuickStat (Oct 2024) |
+| 2015 POPCEN | 2015-08-01 | 171,271 | 2015 Region I barangay table; PSA release 2016-064; Table B; QuickStat |
+| 2020 CPH | 2020-05-01 | 174,302 | 2020 Region I barangay table; PSA press release 2021-316; Table B; QuickStat |
+| 2024 POPCEN | 2024-07-01 | 174,777 | Table B; 2024 Region I Table C; the PSGC page |
+
+All are PSA publications, released between 2016 and 2025 by the central office
+and the Pangasinan provincial office. Each census count is published only
+when **at least two** of them state it, and one of the two is always the
+2024 Table B — the only document found that gives all four counts side by side.
+The tests assert both.
+
+Every source carries the census reference date as `data_as_of`, and its
+release date as `published` where one is stated. The QuickStat is titled
+"October 2024" but states no release date, so its `published` is null.
+
+### Parts sum to the whole, every year
+
+The PSA publishes barangay tables for 2015, 2020 and 2024. For each of the three,
+the 31 barangay figures add up **exactly** to the city total in the same table,
+and that total matches every other publication for that year. This is asserted
+per year in `populationProvenance.test.ts`.
+
+The 2024 barangay figures are **not** stored in `population.json`. They already
+live in `directory/barangays.json`, where they cite the PSGC; the population
+page joins them in by slug at runtime (`src/lib/populationStatistics.ts`). A
+second copy would be a second thing to keep in step. The 2024 Region I Table C
+agrees with all 31 PSGC figures and names, and is cited on the 2024 city count.
+
+### Names across censuses
+
+The 2015 and 2020 tables write three barangays with a parenthetical the current
+PSGC omits: "Barangay I (T. Bugallon)", "Barangay II (Nueva)" and
+"Barangay IV (Zamora)". They were matched to the PSGC names with the
+parenthetical removed; the PSGC remains the naming authority, so only its names
+are displayed. All other names match exactly across the three censuses.
+
+### Growth rates are read, not computed
+
+Table B publishes annual population growth rates. Three consecutive ones are
+published here: 2010–2015 0.87, 2015–2020 0.37, 2020–2024 0.07 percent. The
+fourth in the table, 2015–2024, overlaps the others and is left out. Nothing is
+derived locally, but the test recomputes each rate from the counts with the
+PSA's geometric formula, `r = (Pₜ/P₀)^(1/t) − 1` with `t` in months between
+reference dates over 12, and requires agreement to two decimal places. All
+three agree, which also confirms the reference dates.
+
+### Withheld and noted
+
+- **2010 barangay counts**: no 2010 barangay table was retrieved, so the barangay
+  chart starts at 2015 and the page says so with `NotVerified`.
+- **2000 and earlier**: a 2000 figure appears in non-government sources only;
+  no PSA document stating it was retrieved.
+- **The 2010 CPH release itself** was not located. 2010 rests on Table B and
+  the QuickStat, which agree.
+- **Land area and density**: no document from the land-area authority (the
+  Land Management Bureau, DENR) was retrieved, so neither is published.
+- **Not cited**: the PSA Region I release of 06 June 2016 repeats 171,271 for
+  Dagupan but gives the regional total as 5,025,128 against 5,026,128 everywhere
+  else, and Core Indicators table 1.55 agrees on all three Dagupan counts but
+  shows `#REF!` spreadsheet errors in its national row. Both agree on every
+  Dagupan figure; they are left out because cleaner sources state the same
+  numbers.
+- **Proclamations** No. 1179 (2021) and No. 973 (2025) declare the 2020 and 2024
+  counts official, but the copies read state only the national total; their
+  per-city annexes were not reproduced, so they are recorded in source notes
+  rather than cited for Dagupan's figure.
+
 ## Note on retrieval
 
 The city pages were read directly from their HTML rather than through a
@@ -394,8 +473,10 @@ summariser, because the reconciliation turns on exact digits and spellings.
 
 `psa.gov.ph` returns HTTP 403 to plain command-line fetchers. The PSGC page was
 read in an ordinary browser, where it serves normally. Nothing was bypassed and
-no credentials were used; both sources are public government pages. If you
-automate any of this, respect the publisher's terms and rate limits.
+no credentials were used; both sources are public government pages. The
+census spreadsheets and releases were downloaded the same way and read cell by
+cell rather than from a summary. If you automate any of this, respect the
+publisher's terms and rate limits.
 
 For the elected officials, both city sites were also read through their public
 WordPress REST endpoints (`/wp-json/wp/v2/pages`, `/posts`, and the council
