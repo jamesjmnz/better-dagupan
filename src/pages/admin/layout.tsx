@@ -31,6 +31,7 @@ const ADMIN_ROUTES: Record<string, string> = {
   '/admin': 'Admin',
   '/admin/documents': 'Documents',
   '/admin/errors': 'Error Log',
+  '/admin/audit-logs': 'Audit Logs',
   '/admin/review-queue': 'Review Queue',
   '/admin/reconcile': 'Reconcile',
   '/admin/openlgu/workbench': 'OpenLGU Workbench',
