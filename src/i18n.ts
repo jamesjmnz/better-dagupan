@@ -20,7 +20,7 @@ i18n
     supportedLngs: getEnabledLanguages().map(language => language.code),
     debug: false,
     defaultNS: 'common',
-    ns: ['common', 'visa', 'about', 'about-philippines'],
+    ns: ['common', 'visa', 'about', 'about-philippines', 'ui'],
 
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',

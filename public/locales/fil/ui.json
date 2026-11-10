@@ -1,0 +1,30 @@
+{
+  "lgu": {
+    "fullName": "{{name}}",
+    "fullName_city": "Lungsod ng {{name}}",
+    "fullName_municipality": "Bayan ng {{name}}",
+    "fullName_province": "Lalawigan ng {{name}}",
+    "adjective": "Lokal",
+    "adjective_city": "Lungsod",
+    "adjective_municipality": "Bayan",
+    "adjective_province": "Lalawigan",
+    "adjectiveLower": "lokal",
+    "adjectiveLower_city": "lungsod",
+    "adjectiveLower_municipality": "bayan",
+    "adjectiveLower_province": "lalawigan",
+    "head": "Punong Ehekutibo",
+    "head_city": "Alkalde",
+    "head_municipality": "Alkalde",
+    "head_province": "Gobernador"
+  },
+  "emptyState": {
+    "title": "Walang nahanap na resulta",
+    "message": "Subukang baguhin ang iyong paghahanap o mga filter.",
+    "goBack": "Bumalik"
+  },
+  "sidebar": {
+    "menu": "Menu",
+    "expand": "Ipakita ang Menu",
+    "hide": "Itago ang Menu"
+  }
+}
