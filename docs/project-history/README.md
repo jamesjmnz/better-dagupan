@@ -35,9 +35,10 @@ current guidance, read the files listed under [Living documentation](#living-doc
 | [#7](pr-007-department-directory.md) | data: publish the verified Dagupan city office directory | 2026-08-23 | `0a05adc` |
 | [#8](pr-008-runtime-safety.md) | fix: make the portal safe to deploy for Dagupan | 2026-11-10 | `35b7e51` |
 | [#10](pr-010-inherited-artifacts.md) | chore: remove the inherited Los Baños data artifacts | 2026-11-10 | `357c8c0` |
+| [#13](pr-013-report-an-error-and-pangasinan.md) | feat: add error reporting and Pangasinan locale scaffolding | 2026-11-10 | `c2b62c8` |
 
-Pull requests #9 and #11 were still open when this index was last extended, so
-they are not archived. Only merged pull requests are added here.
+Pull requests #9, #11, and #12 were still open when this index was last
+extended, so they are not archived. Only merged pull requests are added here.
 
 ### Merge order
 
@@ -48,6 +49,7 @@ PR #1 absorbed those fixes through a merge commit (`568616b`) before merging
 itself.
 
 ```
+c2b62c8  Merge pull request #13  (error reporting, Pangasinan scaffolding)
 357c8c0  Merge pull request #10  (inherited data artifacts removed)
 35b7e51  Merge pull request #8   (runtime safety)
 0a05adc  Merge pull request #7   (city office directory)
