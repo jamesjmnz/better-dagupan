@@ -7,6 +7,7 @@ import {
 import { Env } from './types';
 import { onRequest as weatherKVRequest } from './weather';
 import { setSecurityHeaders } from './utils/security-headers';
+import { ALLOWED_ORIGINS } from './utils/origins';
 
 // Export the scheduled handlers
 export { scheduled as scheduled_getWeather } from './api/weather';
@@ -15,11 +16,6 @@ export { scheduled as scheduled_getWeather } from './api/weather';
  * CORS Configuration
  * Restricts API access to trusted origins only (security fix for T-059)
  */
-const ALLOWED_ORIGINS = [
-  'https://better-dagupan.pages.dev',
-  'http://localhost:5173', // Vite dev server
-  'http://localhost:8788', // Wrangler dev server
-];
 
 /**
  * Get appropriate CORS headers based on request origin

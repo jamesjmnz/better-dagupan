@@ -98,7 +98,7 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
     const userResponse = await fetch('https://api.github.com/user', {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-        'User-Agent': 'BetterLB-Admin',
+        'User-Agent': 'Better-Dagupan-Admin',
       },
     });
 

@@ -218,7 +218,7 @@ export const personsApi = {
    * Merge persons
    */
   merge: (data: { keep_id: string; remove_ids: string[] }) => {
-    return fetchApi<{ success: boolean }>('/persons/merge', {
+    return fetchApi<{ success: boolean }>('/persons-merge', {
       method: 'POST',
       body: JSON.stringify(data),
     });
