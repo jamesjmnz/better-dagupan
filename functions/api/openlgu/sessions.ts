@@ -95,14 +95,13 @@ async function getSessionsList(context: { request: Request; env: Env }) {
           ' ORDER BY t.term_number DESC, s.date DESC, s.number DESC LIMIT ? OFFSET ?';
         params.push(limit.toString(), offset.toString());
 
+        // s.* plus the joined term number; only these columns are read here
         const result = await env.BETTERLB_DB.prepare(sql)
           .bind(...params)
-          .all();
+          .all<{ id: string; term_id: string; [column: string]: unknown }>();
 
         // Get all session IDs to fetch attendance data
-        const sessionIds = result.results
-          .map((r: { id: string }) => r.id)
-          .filter(Boolean);
+        const sessionIds = result.results.map(r => r.id).filter(Boolean);
 
         // Initialize data arrays
         const presentData: Array<{ session_id: string; present: string[] }> =
@@ -141,11 +140,7 @@ async function getSessionsList(context: { request: Request; env: Env }) {
 
           // Get unique term IDs and batch fetch memberships (optimization)
           const termIds = [
-            ...new Set(
-              result.results
-                .map((r: { term_id: string }) => r.term_id)
-                .filter(Boolean)
-            ),
+            ...new Set(result.results.map(r => r.term_id).filter(Boolean)),
           ];
 
           if (termIds.length > 0) {
@@ -196,22 +191,18 @@ async function getSessionsList(context: { request: Request; env: Env }) {
         }
 
         // Combine session data with attendance
-        const sessions = result.results.map(
-          (session: { id: string; [key: string]: unknown }) => {
-            const presentEntry = presentData.find(
-              p => p.session_id === session.id
-            );
-            const absentEntry = absentData.find(
-              a => a.session_id === session.id
-            );
+        const sessions = result.results.map(session => {
+          const presentEntry = presentData.find(
+            p => p.session_id === session.id
+          );
+          const absentEntry = absentData.find(a => a.session_id === session.id);
 
-            return {
-              ...session,
-              present: presentEntry?.present || [],
-              absent: absentEntry?.absent || [],
-            };
-          }
-        );
+          return {
+            ...session,
+            present: presentEntry?.present || [],
+            absent: absentEntry?.absent || [],
+          };
+        });
 
         // Get count
         let countSql = 'SELECT COUNT(*) as count FROM sessions WHERE 1=1';

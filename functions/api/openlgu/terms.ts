@@ -86,13 +86,14 @@ async function getTermsList(context: { request: Request; env: Env }) {
           LEFT JOIN persons pv ON vm.person_id = pv.id
           ORDER BY t.term_number DESC
         `;
-        const termsResult = await env.BETTERLB_DB.prepare(termsSql).all();
+        const termsResult =
+          await env.BETTERLB_DB.prepare(termsSql).all<TermResultRow>();
 
         if (termsResult.results.length === 0) {
           return { terms: [] };
         }
 
-        const termIds = termsResult.results.map((t: TermResultRow) => t.id);
+        const termIds = termsResult.results.map(t => t.id);
         const placeholders = termIds.map(() => '?').join(',');
 
         const memberCountsSql = `
@@ -127,7 +128,7 @@ async function getTermsList(context: { request: Request; env: Env }) {
           docCountsMap.set(row.term_id, row.count);
         }
 
-        const terms = termsResult.results.map((term: TermResultRow) => ({
+        const terms = termsResult.results.map(term => ({
           id: term.id,
           term_number: term.term_number,
           ordinal: formatOrdinal(term.term_number),

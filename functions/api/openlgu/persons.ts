@@ -143,11 +143,11 @@ async function getPersonsList(context: { request: Request; env: Env }) {
 
         const result = await env.BETTERLB_DB.prepare(sql)
           .bind(...params)
-          .all();
+          .all<PersonResultRow>();
 
         // Get committee memberships for all persons
         const personIds = result.results
-          .map((r: PersonResultRow) => r.id)
+          .map(r => r.id)
           .filter((v, i, a) => a.indexOf(v) === i);
 
         let committeeMemberships: CommitteeMembershipRow[] = [];
@@ -185,7 +185,7 @@ async function getPersonsList(context: { request: Request; env: Env }) {
               term?: {
                 id: string;
                 term_number: number | null;
-                ordinal: number | null;
+                ordinal: string | null;
                 name: string | null;
                 year_range: string | null;
                 start_date: string | null;
@@ -247,7 +247,7 @@ async function getPersonsList(context: { request: Request; env: Env }) {
               term?: {
                 id: string;
                 term_number: number | null;
-                ordinal: number | null;
+                ordinal: string | null;
                 name: string | null;
                 year_range: string | null;
                 start_date: string | null;
@@ -262,13 +262,17 @@ async function getPersonsList(context: { request: Request; env: Env }) {
             };
 
             // Add term info to membership
-            if (row.term_id) {
+            // term_number is NOT NULL, so null here means no term row joined
+            if (row.term_id && row.term_number !== null) {
               membership.term = {
                 id: row.term_id,
                 term_number: row.term_number,
                 ordinal: formatOrdinal(row.term_number),
                 name: formatTermName(row.term_number),
-                year_range: formatYearRange(row.term_start, row.term_end),
+                year_range: formatYearRange(
+                  row.term_start ?? '',
+                  row.term_end ?? ''
+                ),
                 start_date: row.term_start,
                 end_date: row.term_end,
               };
@@ -384,13 +388,35 @@ async function getPersonDetail(context: { request: Request; env: Env }) {
           WHERE m.person_id = ?
           ORDER BY t.term_number DESC
         `;
+        interface CommitteeRow {
+          term_id: string;
+          id: string;
+          name: string;
+          type: string;
+          role: string;
+        }
+
+        interface MembershipRow {
+          id: string;
+          term_id: string;
+          chamber: string | null;
+          role: string;
+          rank: number | null;
+          term_number: number | null;
+          start_date: string | null;
+          end_date: string | null;
+          mayor: string | null;
+          vice_mayor: string | null;
+          committees?: Array<Omit<CommitteeRow, 'term_id'>>;
+        }
+
         const membershipsResult = await env.BETTERLB_DB.prepare(membershipsSql)
           .bind(personId)
-          .all();
+          .all<MembershipRow>();
 
         // Get all term IDs for batch fetching committee memberships (fixes N+1)
         const termIds = membershipsResult.results
-          .map((m: { term_id: string }) => m.term_id)
+          .map(m => m.term_id)
           .filter(Boolean);
 
         // Fetch all committee memberships in a single query
@@ -414,19 +440,10 @@ async function getPersonDetail(context: { request: Request; env: Env }) {
           `;
           const committeeResult = await env.BETTERLB_DB.prepare(committeeSql)
             .bind(personId, ...termIds)
-            .all();
-
-          interface CommitteeRow {
-            term_id: string;
-            id: string;
-            name: string;
-            type: string;
-            role: string;
-          }
+            .all<CommitteeRow>();
 
           // Group by term_id
-          for (const row of committeeResult.results) {
-            const committeeRow = row as CommitteeRow;
+          for (const committeeRow of committeeResult.results) {
             if (!committeeMembershipsByTerm.has(committeeRow.term_id)) {
               committeeMembershipsByTerm.set(committeeRow.term_id, []);
             }
@@ -440,9 +457,8 @@ async function getPersonDetail(context: { request: Request; env: Env }) {
 
         // Assign committee memberships to each membership
         for (const membership of membershipsResult.results) {
-          const membershipTermId = (membership as { term_id: string }).term_id;
-          (membership as { committees: unknown[] }).committees =
-            committeeMembershipsByTerm.get(membershipTermId) || [];
+          membership.committees =
+            committeeMembershipsByTerm.get(membership.term_id) || [];
         }
 
         // Get authored documents
@@ -482,26 +498,17 @@ async function getPersonDetail(context: { request: Request; env: Env }) {
 
         return {
           ...person,
-          memberships: membershipsResult.results.map(
-            (m: Record<string, unknown>) => ({
-              ...m,
-              term_name:
-                m.term_number != null
-                  ? formatTermName(m.term_number as number)
-                  : null,
-              term_ordinal:
-                m.term_number != null
-                  ? formatOrdinal(m.term_number as number)
-                  : null,
-              year_range:
-                m.start_date && m.end_date
-                  ? formatYearRange(
-                      m.start_date as string,
-                      m.end_date as string
-                    )
-                  : null,
-            })
-          ),
+          memberships: membershipsResult.results.map(m => ({
+            ...m,
+            term_name:
+              m.term_number != null ? formatTermName(m.term_number) : null,
+            term_ordinal:
+              m.term_number != null ? formatOrdinal(m.term_number) : null,
+            year_range:
+              m.start_date && m.end_date
+                ? formatYearRange(m.start_date, m.end_date)
+                : null,
+          })),
           authored_documents: documentsResult.results,
           attendance_stats: {
             total_sessions: totalSessions,

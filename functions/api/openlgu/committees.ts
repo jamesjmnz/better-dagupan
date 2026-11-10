@@ -33,12 +33,10 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
 
         const committeesResult = await env.BETTERLB_DB.prepare(sql)
           .bind(...params)
-          .all();
+          .all<{ id: string; name: string; type: string }>();
 
         // Get all committee IDs for batch fetching members
-        const committeeIds = committeesResult.results.map(
-          (c: { id: string }) => c.id
-        );
+        const committeeIds = committeesResult.results.map(c => c.id);
 
         if (committeeIds.length === 0) {
           return { committees: [] };
@@ -100,12 +98,10 @@ export async function onRequestGet(context: { request: Request; env: Env }) {
         }
 
         // Combine committees with their members
-        const committees = committeesResult.results.map(
-          (committee: { id: string; name: string; type: string }) => ({
-            ...committee,
-            members: membersByCommittee.get(committee.id) || [],
-          })
-        );
+        const committees = committeesResult.results.map(committee => ({
+          ...committee,
+          members: membersByCommittee.get(committee.id) || [],
+        }));
 
         return { committees };
       },
