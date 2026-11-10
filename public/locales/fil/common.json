@@ -197,6 +197,8 @@
     "emailBody": "Mag-email sa mga boluntaryo sa {{email}}. Sabihin kung aling pahina ang mali, ano ang tamang impormasyon, at saan ito opisyal na nakalathala.",
     "emailAction": "Magpadala ng email",
     "emailSubject": "Pagwawasto ng impormasyon",
-    "emailSubjectPage": "Pagwawasto ng impormasyon: {{page}}"
+    "emailSubjectPage": "Pagwawasto ng impormasyon: {{page}}",
+    "sourceNoteLink": "Mag-ulat ng mali",
+    "sourceNoteLinkLabel": "Mag-ulat ng mali sa impormasyong ito"
   }
 }

@@ -1,6 +1,8 @@
 import { FC } from 'react';
 
-import { ExternalLink, ShieldCheck } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+
+import { ExternalLink, Flag, ShieldCheck } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -8,6 +10,7 @@ import {
   formatVerificationDate,
   resolveCivicSources,
 } from '@/lib/civicSources';
+import { buildReportErrorPath } from '@/lib/reportError';
 
 /**
  * The citation line shown beneath any published civic record.
@@ -27,6 +30,7 @@ export const SourceNote: FC<{
   className?: string;
 }> = ({ sources, className }) => {
   const { t, i18n } = useTranslation('common');
+  const { pathname } = useLocation();
   const resolved = resolveCivicSources(sources);
 
   if (resolved.length === 0) return null;
@@ -92,6 +96,20 @@ export const SourceNote: FC<{
           })}
         </p>
       )}
+
+      {/*
+        A citation is also where a reader is most likely to notice that a fact
+        is wrong, so the way to say so sits right beside it.
+      */}
+      <Link
+        to={buildReportErrorPath(pathname)}
+        aria-label={t('reportError.sourceNoteLinkLabel')}
+        data-testid='source-note-report'
+        className='text-kapwa-text-support hover:text-kapwa-text-link-hover focus-visible:ring-kapwa-border-focus mt-3 inline-flex items-center gap-1 rounded-sm text-[11px] font-semibold underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:outline-none'
+      >
+        <Flag aria-hidden='true' className='h-3 w-3' />
+        {t('reportError.sourceNoteLink')}
+      </Link>
     </section>
   );
 };

@@ -197,6 +197,8 @@
     "emailBody": "Email the volunteers at {{email}}. Say which page is wrong, what the correct information is, and where it is officially published.",
     "emailAction": "Send an email",
     "emailSubject": "Data correction",
-    "emailSubjectPage": "Data correction: {{page}}"
+    "emailSubjectPage": "Data correction: {{page}}",
+    "sourceNoteLink": "Report an error",
+    "sourceNoteLinkLabel": "Report an error in this information"
   }
 }
