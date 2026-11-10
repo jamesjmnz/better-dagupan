@@ -1,15 +1,32 @@
 # Build Scripts Documentation
 
-This directory contains automation, maintenance, and build scripts for the Better LB project.
+This directory contains automation, maintenance, and build scripts for Better Dagupan. Most of them come from the BetterLB template.
 
 ## Overview
 
 Scripts in this directory handle:
 - Service data merging
-- Sitemap generation
+- `llms.txt` generation
 - Build automation
 - Data validation
 - **Database migrations**
+- The OpenLGU Legislative Source Pipeline (`scripts/openlgu/`)
+
+---
+
+## OpenLGU Pipeline Scripts (`scripts/openlgu/`)
+
+The `openlgu:*` npm scripts run the OpenLGU Legislative Source Pipeline:
+collection into source records, staging, and shadow reconciliation. Run it in
+shadow mode first (`npm run openlgu:pipeline:shadow`), and never promote staged
+records to canonical records without review. See
+[`docs/openlgu/source-pipeline.md`](../docs/openlgu/source-pipeline.md) and the
+vocabulary in [`CONTEXT.md`](../CONTEXT.md).
+
+**Not yet re-keyed for Dagupan.** The collectors still read the template's
+`losbanos.gov.ph` tables and Facebook source, and `generate-term-snapshot.cjs`
+still holds Sangguniang Bayan terms. Re-keying them to Dagupan's Sangguniang
+Panlungsod is a later phase; until then their output is not Dagupan data.
 
 ---
 
@@ -58,7 +75,10 @@ npm run db:migrate:create <migration_name>
 - Migration files in `db/migrations/` with numeric prefixes
 - Skips already-applied migrations automatically
 
-**See `docs/DATABASE-MIGRATION-AUTOMATION.md` for complete guide.**
+The script's D1 database name (`DB_NAME`) is still the template's, and
+`db/migrations/002_baseline_data.sql` seeds the template's Sangguniang Bayan
+terms. Review both before running migrations against a Better Dagupan database.
+See also [`docs/openlgu/schema-rebuild.md`](../docs/openlgu/schema-rebuild.md).
 
 ---
 
@@ -85,8 +105,8 @@ python3 scripts/merge_services.py
 
 **When to Run:**
 - Before starting development server (`npm run dev`)
-- Before building for production (`npm run build`)
 - After modifying any service category file
+- `npm run build` runs it for you through `npm run merge:services`
 
 **Process:**
 1. Reads all `.json` files from `src/data/services/categories/`
@@ -98,21 +118,23 @@ python3 scripts/merge_services.py
 
 ### `generate-sitemap.js`
 
-Generates an XML sitemap for search engines.
-
-**Purpose:**
-Creates a sitemap.xml file listing all pages on the site, improving SEO.
+Despite its name, this script generates `public/llms.txt` (crawler guidance),
+not an XML sitemap. The portal has no `sitemap.xml`; the human-readable sitemap
+is the `/sitemap` route.
 
 **Output:**
-- `public/sitemap.xml` - Sitemap for search engines
+- `public/llms.txt`
 
 **Usage:**
 ```bash
-node scripts/generate-sitemap.js
+npm run generate:sitemap
+# or: node scripts/generate-sitemap.js
 ```
 
 **Automated:**
-Run automatically during the build process.
+Not run by the build. `scripts/generate-llms-txt.js` is an older generator for
+the same file; check its output before committing, because it still emits
+upstream branding.
 
 ---
 
@@ -238,12 +260,13 @@ ajv validate -s src/data/schema/services.schema.json -d src/data/services/servic
 
 ## Automation in Build Process
 
-The merge script is integrated into the build process:
+The merge scripts are integrated into the build process:
 
 ```json
 {
   "scripts": {
-    "build": "tsc && npm run merge:data && vite build",
+    "build": "tsc && npm run merge:services && vite build",
+    "merge:services": "python3 scripts/merge_citizens_charter.py && npm run merge:data && npx prettier --write src/data/citizens-charter/*.json",
     "merge:data": "python3 scripts/merge_services.py"
   }
 }
@@ -267,5 +290,5 @@ When adding new scripts:
 ## Related Documentation
 
 - [Services Schema](../src/data/schema/services.schema.json)
-- [Services Data](../src/data/services/README.md)
-- [Build Documentation](../README.md#build-process)
+- [Civic data verification](../docs/civic-data-verification.md) — required reading before adding service records
+- [Build Documentation](../README.md#6-building-for-production)

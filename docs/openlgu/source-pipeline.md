@@ -2,6 +2,14 @@
 
 This is the v2 pipeline lane for OpenLGU legislative records.
 
+> **Status in Better Dagupan:** this document describes the collectors as
+> inherited from the BetterLB template. The source keys, URLs, and examples
+> below (`losbanos_website_*`, `losbanos.gov.ph`) are the template's and match
+> the code in `scripts/openlgu/` today. Re-keying the collectors to Dagupan's
+> Sangguniang Panlungsod (for example the WordPress JSON feed at
+> `sp.dagupan.gov.ph`) is a later phase. Until then, the pipeline's output is not
+> Dagupan data and must not be loaded into a Better Dagupan database.
+
 The old numbered Python scripts remain available as legacy tooling, but this lane uses explicit artifact names so it is clear whether a file is source evidence, staging output, reconciliation evidence, or a canonical promotion artifact.
 
 ## Artifact Names
@@ -407,13 +415,13 @@ If the website keeps the same dead PDF URL, that is the same source row with a d
 
 ## PDF Mirrors
 
-Official LGU PDF URLs remain the canonical source link. BetterLB may store archived PDF mirrors separately, usually in R2, so review and OCR can continue when official links rot.
+Official LGU PDF URLs remain the canonical source link. The portal may store archived PDF mirrors separately, usually in R2, so review and OCR can continue when official links rot.
 
 Recommended fields:
 
 - `pdf_url`: official LGU URL
 - `pdf_url_status`: `unchecked`, `reachable`, `dead`, `redirected`, or `missing`
-- `mirror_pdf_uri`: BetterLB-controlled archived copy
+- `mirror_pdf_uri`: portal-controlled archived copy
 - `mirror_status`: `archived`, `missing`, or `failed`
 
 Scheduled scrapes should not block on mirroring every PDF. Scrapes detect source row changes; a separate archive job downloads or refreshes mirrors.
@@ -1195,7 +1203,7 @@ OCR may:
 
 Canonical updates from OCR must go through the same staged validation and review/promotion path as other source evidence. Early OCR-derived updates should require manual review.
 
-PDF mirroring should happen before OCR. OCR should read from a BetterLB-controlled mirror when available, not directly from official LGU URLs.
+PDF mirroring should happen before OCR. OCR should read from a portal-controlled mirror when available, not directly from official LGU URLs.
 
 ```text
 official pdf_url
