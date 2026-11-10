@@ -7,6 +7,7 @@ import {
   useMemo,
   useLayoutEffect,
   useCallback,
+  isValidElement,
 } from 'react';
 
 import { HomeIcon } from 'lucide-react';
@@ -222,7 +223,9 @@ export function SectionBlock({
   // Auto-alternate if no explicit variant and wrapped in SectionAlternator
   const variant =
     explicitVariant ||
-    (['default', 'raised', 'brand'][index % 3] as SectionBlockProps['variant']);
+    (['default', 'raised', 'brand'][index % 3] as NonNullable<
+      SectionBlockProps['variant']
+    >);
 
   // Increment after render (using useLayoutEffect to run before paint)
   useLayoutEffect(() => {
@@ -526,7 +529,7 @@ export function StaggeredGrid({
       {Array.isArray(children)
         ? children.map((child, index) => (
             <div
-              key={(child as { key?: ReactNode }).key || index}
+              key={(isValidElement(child) && child.key) || index}
               className='duration-500 animate-in fade-in slide-in-from-bottom-4'
               style={{ animationDelay: `${baseDelay + index * delayStep}ms` }}
             >

@@ -4,12 +4,16 @@ import { useOutletContext } from 'react-router-dom';
 
 import { PageLoadingState } from '@/components/ui';
 import { lguLabels } from '@/lib/lguLabels';
-import {
-  IndexPageLayout,
-  type BreadcrumbItem,
-} from '@/components/layout/IndexPageLayout';
+import { IndexPageLayout } from '@/components/layout/IndexPageLayout';
+import type { BreadcrumbItem } from '@/types/components';
 
-import type { DocumentItem, Person, Session, Term } from '@/lib/openlgu';
+import type {
+  DocumentItem,
+  Person,
+  PersonMembership,
+  Session,
+  Term,
+} from '@/lib/openlgu';
 import { getPersonName } from '@/lib/openlgu';
 
 import OfficialCard from './components/OfficialCard';

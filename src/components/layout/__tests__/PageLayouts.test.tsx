@@ -1,12 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import {
-  PageHero,
-  ModuleHeader,
-  DetailSection,
-  type BreadcrumbItem,
-} from '../PageLayouts';
+import { PageHero, ModuleHeader, DetailSection } from '../PageLayouts';
+import type { BreadcrumbItem } from '@/types/components';
 
 describe('PageLayouts Components', () => {
   const renderWithRouter = (component: React.ReactElement) => {

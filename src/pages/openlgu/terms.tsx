@@ -3,10 +3,8 @@ import { useMemo } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 
 import { Calendar, ChevronRight, FileText, Users } from 'lucide-react';
-import {
-  IndexPageLayout,
-  type BreadcrumbItem,
-} from '@/components/layout/IndexPageLayout';
+import { IndexPageLayout } from '@/components/layout/IndexPageLayout';
+import type { BreadcrumbItem } from '@/types/components';
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardGrid } from '@/components/ui/Card';
 
