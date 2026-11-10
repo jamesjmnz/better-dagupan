@@ -26,32 +26,34 @@ export default function ServicesSidebar({
   return (
     <div className='space-y-6'>
       <SidebarContainer title={t('sidebar.categories')}>
-        {/* Special "All Services" item */}
-        <SidebarItem
-          label={t('sidebar.allServices')}
-          icon={FileText}
-          isActive={selectedCategorySlug === 'all'}
-          onClick={() => {
-            scrollToTop();
-            handleCategoryChange('all');
-          }}
-        />
-
-        {/* Dynamic Categories */}
-        {serviceCategories.categories.map(category => (
+        <ul className='space-y-1'>
+          {/* Special "All Services" item */}
           <SidebarItem
-            key={category.slug}
-            label={t(`categories.${category.slug}`, {
-              defaultValue: category.name,
-            })}
-            icon={getCategoryIconBySlug(category.slug)}
-            isActive={selectedCategorySlug === category.slug}
+            label={t('sidebar.allServices')}
+            icon={FileText}
+            isActive={selectedCategorySlug === 'all'}
             onClick={() => {
               scrollToTop();
-              handleCategoryChange(category.slug);
+              handleCategoryChange('all');
             }}
           />
-        ))}
+
+          {/* Dynamic Categories */}
+          {serviceCategories.categories.map(category => (
+            <SidebarItem
+              key={category.slug}
+              label={t(`categories.${category.slug}`, {
+                defaultValue: category.name,
+              })}
+              icon={getCategoryIconBySlug(category.slug)}
+              isActive={selectedCategorySlug === category.slug}
+              onClick={() => {
+                scrollToTop();
+                handleCategoryChange(category.slug);
+              }}
+            />
+          ))}
+        </ul>
       </SidebarContainer>
       <div className='p-5 mt-8 space-y-4 rounded-2xl border-2 shadow-sm border-kapwa-orange-100 bg-kapwa-bg-accent-orange-weak/30'>
         <div className='flex gap-3 items-center'>

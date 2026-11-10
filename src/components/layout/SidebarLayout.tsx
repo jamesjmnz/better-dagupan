@@ -74,7 +74,10 @@ export function SidebarLayout({
         {/* Mobile Sidebar Toggle */}
         <div className='mb-4 md:hidden'>
           <button
+            type='button'
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-controls='layout-sidebar'
             className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support active:bg-kapwa-bg-surface-raised flex w-full items-center justify-between rounded-xl border px-4 py-3 font-bold shadow-sm'
           >
             <span className='text-sm tracking-widest uppercase'>
@@ -99,8 +102,13 @@ export function SidebarLayout({
             )}
           >
             <button
+              type='button'
               onClick={() => setIsCollapsed(false)}
-              className='hover:text-kapwa-text-brand hover:border-kapwa-border-brand border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-disabled rounded-lg border p-2 shadow-sm transition-colors'
+              // Invisible until the sidebar is collapsed, so keep it out of
+              // the tab order and the accessibility tree until then.
+              tabIndex={collapsible && isCollapsed ? undefined : -1}
+              aria-hidden={collapsible && isCollapsed ? undefined : true}
+              className='hover:text-kapwa-text-brand hover:border-kapwa-border-brand border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support rounded-lg border p-2 shadow-sm transition-colors'
               title={t('sidebar.expand')}
             >
               <PanelLeftOpen className='h-5 w-5' />
@@ -109,6 +117,7 @@ export function SidebarLayout({
 
           {/* Sidebar */}
           <aside
+            id='layout-sidebar'
             className={cn(
               'shrink-0',
               mobileMenuOpen ? 'block' : 'hidden',
@@ -124,8 +133,9 @@ export function SidebarLayout({
               {collapsible && (
                 <div className='mb-2 hidden justify-end md:flex'>
                   <button
+                    type='button'
                     onClick={() => setIsCollapsed(true)}
-                    className='hover:text-kapwa-text-brand text-kapwa-text-disabled flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase transition-colors'
+                    className='hover:text-kapwa-text-brand text-kapwa-text-support flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase transition-colors'
                   >
                     {t('sidebar.hide')}{' '}
                     <PanelLeftClose className='h-3.5 w-3.5' />
@@ -136,15 +146,16 @@ export function SidebarLayout({
             </div>
           </aside>
 
-          {/* Main Content */}
-          <main className='min-w-0 flex-1 transition-all duration-500 ease-in-out'>
+          {/* Main Content. A div, not <main>: App.tsx already renders the page's
+              one main landmark around every route. */}
+          <div className='min-w-0 flex-1 transition-all duration-500 ease-in-out'>
             <div
               id='layout-content'
               className='border-kapwa-border-weak bg-kapwa-bg-surface min-h-[50vh] rounded-2xl border p-4 shadow-sm md:p-8'
             >
               {children}
             </div>
-          </main>
+          </div>
         </div>
       </div>
     </div>

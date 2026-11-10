@@ -4,7 +4,10 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { LucideIcon } from 'lucide-react';
 
-// 1. The Outer Wrapper
+// 1. The Outer Wrapper. A div, not <aside>: SidebarLayout already wraps the
+// sidebar in the complementary landmark, and nesting a second one is invalid.
+// Children are list items, so callers wrap SidebarItems in a <ul> or use
+// SidebarGroup, which brings its own.
 export function SidebarContainer({
   children,
   title,
@@ -13,7 +16,7 @@ export function SidebarContainer({
   title?: string;
 }) {
   return (
-    <aside className='w-full shrink-0 md:w-64'>
+    <div className='w-full shrink-0 md:w-64'>
       <div className='border-kapwa-border-weak bg-kapwa-bg-surface sticky top-32 overflow-hidden rounded-lg border shadow-sm'>
         {title && (
           <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised/50 border-b px-4 py-3'>
@@ -22,11 +25,14 @@ export function SidebarContainer({
             </h2>
           </div>
         )}
-        <nav className='scrollbar-thin max-h-[calc(100vh-200px)] overflow-y-auto p-2'>
+        <nav
+          aria-label={title}
+          className='scrollbar-thin max-h-[calc(100vh-200px)] overflow-y-auto p-2'
+        >
           {children}
         </nav>
       </div>
-    </aside>
+    </div>
   );
 }
 
@@ -40,7 +46,7 @@ export function SidebarGroup({
 }) {
   return (
     <div className='mb-4 last:mb-0'>
-      <h3 className='text-kapwa-text-disabled px-3 py-2 text-[10px] font-bold tracking-widest uppercase'>
+      <h3 className='text-kapwa-text-support px-3 py-2 text-[10px] font-bold tracking-widest uppercase'>
         {title}
       </h3>
       <ul className='space-y-1'>{children}</ul>
@@ -92,7 +98,7 @@ export function SidebarItem({
         <span className='truncate'>{label}</span>
         {description && (
           <span
-            className={`text-[11px] leading-tight ${active ? 'text-kapwa-text-brand/70' : 'text-kapwa-text-disabled'}`}
+            className={`text-[11px] leading-tight ${active ? 'text-kapwa-text-brand' : 'text-kapwa-text-support'}`}
           >
             {description}
           </span>
