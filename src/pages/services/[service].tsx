@@ -23,16 +23,7 @@ import {
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { DetailSection, useBreadcrumbs } from '@/components/layout';
-import {
-  Breadcrumb,
-  BreadcrumbHome,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/navigation/Breadcrumb';
+import { DetailSection } from '@/components/layout';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import { EmptyState } from '@/components/ui/EmptyState';
@@ -82,9 +73,6 @@ const QUICK_INFO_CONFIG: Record<
 export default function ServiceDetail() {
   const { t } = useTranslation('services');
   const { service: serviceSlug } = useParams<{ service: string }>();
-
-  // Auto-generate breadcrumbs using the hook (must be called before early returns)
-  const breadcrumbs = useBreadcrumbs();
 
   if (!serviceSlug) return null;
 
@@ -173,37 +161,10 @@ export default function ServiceDetail() {
 
   return (
     <div className='animate-in fade-in mx-auto max-w-7xl space-y-6 duration-500'>
-      <Breadcrumb>
-        <BreadcrumbList>
-          {breadcrumbs.map((crumb, index) => {
-            const isLast = index === breadcrumbs.length - 1;
-            return (
-              <div key={crumb.href} className='flex items-center gap-2'>
-                {index === 0 ? (
-                  <BreadcrumbItem>
-                    <BreadcrumbHome href={crumb.href} />
-                  </BreadcrumbItem>
-                ) : (
-                  <>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
-                      {isLast ? (
-                        <BreadcrumbPage>
-                          {service.plainLanguageName || service.service}
-                        </BreadcrumbPage>
-                      ) : (
-                        <BreadcrumbLink href={crumb.href}>
-                          {crumb.label}
-                        </BreadcrumbLink>
-                      )}
-                    </BreadcrumbItem>
-                  </>
-                )}
-              </div>
-            );
-          })}
-        </BreadcrumbList>
-      </Breadcrumb>
+      {/*
+        The trail is the services layout's header breadcrumb, which names this
+        service. A second trail here gave the page two breadcrumb landmarks.
+      */}
 
       {/* HEADER */}
       <header
