@@ -33,15 +33,14 @@ const INHERITED =
 
 /**
  * Datasets that are still empty. directory/barangays, directory/departments,
- * directory/executive, directory/legislative and the two statistics/population
- * series have left this list: they now hold verified Dagupan records, checked
- * by barangayProvenance.test.ts, departmentProvenance.test.ts,
- * electedOfficialsProvenance.test.ts and populationProvenance.test.ts in this
- * directory. All are still asserted below to be free of inherited content.
+ * directory/executive, directory/legislative, the two statistics/population
+ * series, about/history and about/highlights have left this list: they now
+ * hold verified Dagupan records, checked by barangayProvenance.test.ts,
+ * departmentProvenance.test.ts, electedOfficialsProvenance.test.ts,
+ * populationProvenance.test.ts and aboutProvenance.test.ts in this directory.
+ * All are still asserted below to be free of inherited content.
  */
 const recordSets: [string, unknown[]][] = [
-  ['about/highlights', highlights],
-  ['about/history', history],
   ['statistics/ari', ari],
   ['transparency/sre', sre],
   ['services/services', services],
@@ -117,6 +116,29 @@ describe('inherited civic records', () => {
     for (const record of population.barangays) {
       expect(slugs.has(record.slug), record.slug).toBe(true);
     }
+  });
+
+  it('about/history and about/highlights hold verified Dagupan records, not inherited ones', () => {
+    // The inherited timeline told another LGU's story under the Dagupan
+    // heading. The guarantee now is that every entry is Dagupan's and cites
+    // an official text, which aboutProvenance.test.ts checks entry by entry.
+    // Emptying either file again would be a regression, not safety.
+    //
+    // History is the one dataset where "municipality of" is legitimately
+    // Dagupan's: the charter created the city from "the municipality of
+    // Dagupan", and an executive order joined "the municipality of Calasiao"
+    // to it. Exactly those two are allowed; any other municipality, or the
+    // inherited LGU under any spelling, still fails.
+    const OFFICIAL_MUNICIPALITIES = /municipality of (Dagupan|Calasiao)\b/gi;
+
+    for (const records of [history, highlights]) {
+      expect(Array.isArray(records)).toBe(true);
+      expect(records.length).toBeGreaterThan(0);
+      expect(
+        JSON.stringify(records).replace(OFFICIAL_MUNICIPALITIES, '')
+      ).not.toMatch(INHERITED);
+    }
+    expect(JSON.stringify(history)).toMatch(/Dagupan/);
   });
 
   it('directory/hotlines holds verified Dagupan numbers, not inherited ones', () => {

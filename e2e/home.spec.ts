@@ -77,13 +77,18 @@ test.describe('Home Page', () => {
       await expect(page.getByRole('heading', { level: 2, name })).toBeVisible();
     }
 
-    // The history timeline has no verified records yet and must say so.
+    // The history timeline now holds cited milestones. It opens with the
+    // charter and says that earlier history is not yet verified, rather than
+    // the empty state it showed before records were sourced.
     const history = page
       .locator('section')
       .filter({ has: page.getByRole('heading', { name: /History of/i }) });
     await expect(
-      history.getByRole('heading', { name: 'Not yet available' })
+      history.getByRole('heading', { name: 'City of Dagupan created' })
     ).toBeVisible();
+    await expect(
+      history.getByRole('heading', { name: 'Not yet available' })
+    ).toHaveCount(0);
   });
 
   test('Services section displays a card for each listed category', async ({

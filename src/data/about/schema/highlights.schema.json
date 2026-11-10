@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "City Highlights",
+  "description": "Short factual statements shown beside the history timeline, each cited to civic sources by id (src/data/sources/civic-sources.json). Mirrors HistoryHighlight in src/types/aboutTypes.ts.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["slug", "title", "description", "icon", "sources"],
+    "properties": {
+      "slug": {
+        "description": "Stable identifier, unique in the file.",
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "title": {
+        "description": "The fact, in a few words.",
+        "type": "string",
+        "minLength": 1
+      },
+      "description": {
+        "description": "Where the fact comes from or what it is measured against.",
+        "type": "string",
+        "minLength": 1
+      },
+      "icon": {
+        "description": "Key into the timeline component's icon map.",
+        "type": "string",
+        "enum": ["Scroll", "MapPin", "Users", "Gavel", "Landmark"]
+      },
+      "sources": {
+        "description": "Civic-source ids of the documents that state this fact.",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        }
+      }
+    }
+  }
+}

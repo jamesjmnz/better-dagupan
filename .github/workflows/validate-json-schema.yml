@@ -66,6 +66,18 @@ jobs:
             src/data/directory/schema/barangays.schema.json \
             src/data/directory/barangays.json
 
+      - name: Validate history timeline JSON file
+        run: |
+          node scripts/validate-json-schema.js \
+            src/data/about/schema/history.schema.json \
+            src/data/about/history.json
+
+      - name: Validate history highlights JSON file
+        run: |
+          node scripts/validate-json-schema.js \
+            src/data/about/schema/highlights.schema.json \
+            src/data/about/highlights.json
+
       - name: Validate SEO metadata JSON file
         run: |
           node scripts/validate-json-schema.js \

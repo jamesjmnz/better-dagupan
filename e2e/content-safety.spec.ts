@@ -1,3 +1,5 @@
+import type { Page } from '@playwright/test';
+
 import { expect, test } from './test-config';
 
 /**
@@ -74,16 +76,56 @@ test.describe('Honest empty states', () => {
     expect(body).not.toMatch(/no results found/i);
     expect(body).toMatch(/not been added yet/i);
   });
+});
 
-  test('the homepage history section explains that it is empty', async ({
+test.describe('Homepage history', () => {
+  // The history section is no longer empty: it publishes legal milestones,
+  // each cited to the official text, and says where its coverage stops.
+  // src/data/__tests__/aboutProvenance.test.ts pins every entry to its source.
+  const historySection = (page: Page) =>
+    page
+      .locator('section')
+      .filter({ has: page.getByRole('heading', { name: /History of/i }) });
+
+  test('cites the official text for each milestone', async ({ page }) => {
+    await page.goto('/');
+    const history = historySection(page);
+
+    const first = history.getByTestId('history-milestone').first();
+    await expect(first).toContainText('Republic Act No. 170');
+    await expect(first.getByRole('region', { name: /Sources?/ })).toBeVisible();
+    await expect(
+      first.getByRole('link', { name: /Republic Act No\. 170/ })
+    ).toHaveAttribute(
+      'href',
+      'https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/9189'
+    );
+
+    // No longer the empty state.
+    await expect(
+      history.getByText(/Verified Dagupan information has not been added yet/i)
+    ).toHaveCount(0);
+  });
+
+  test('says earlier history is unverified rather than absent', async ({
     page,
   }) => {
     await page.goto('/');
+    const history = historySection(page);
 
+    await history.getByRole('button', { name: /Show \d+ more/ }).click();
+    await expect(history.getByTestId('history-milestone')).toHaveCount(7);
     await expect(
-      page
-        .getByText(/Verified Dagupan information has not been added yet/i)
-        .first()
+      history.getByText('Earlier history not yet verified')
     ).toBeVisible();
+  });
+
+  test('shows the cited highlights on a phone as well', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto('/');
+    const history = historySection(page);
+
+    await expect(history.getByTestId('history-highlight')).toHaveCount(3);
+    await expect(history.getByText('174,777 residents')).toBeVisible();
   });
 });

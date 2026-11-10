@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "slug": "city-charter-approved",
+    "date": "1947-06-20",
+    "instrument": "Republic Act No. 170",
+    "title": "City of Dagupan created",
+    "description": "The Charter of the City of Dagupan was approved and took effect on approval. It created the city from the territory of the municipality of Dagupan, Pangasinan, with a mayor appointed by the President and a Municipal Board of the mayor and eight councilors elected at large.",
+    "sources": ["sc-elibrary-ra-170-1947", "dagupan-sp-about-us"]
+  },
+  {
+    "slug": "organization-date-fixed",
+    "date": "1947-10-15",
+    "instrument": "Executive Order No. 96",
+    "title": "Date of the city's organization fixed",
+    "description": "President Manuel Roxas fixed 1 January 1948 as the date for organizing the City of Dagupan and for the qualification of its appointed mayor and Municipal Board, and ordered the municipality of Calasiao joined to the city upon its organization.",
+    "sources": ["sc-elibrary-eo-96-1947"]
+  },
+  {
+    "slug": "organization-date-and-territory-restated",
+    "date": "1947-12-31",
+    "instrument": "Executive Order No. 115",
+    "title": "Organization date and territory restated",
+    "description": "A second order kept 1 January 1948 as the organization date and provided that, unless the President ordered otherwise, the city would comprise the territory of the municipality of Dagupan, modifying the inconsistent provisions of Executive Order No. 96.",
+    "sources": ["sc-elibrary-eo-115-1947"]
+  },
+  {
+    "slug": "municipal-board-and-provincial-vote",
+    "date": "1950-06-10",
+    "instrument": "Republic Act No. 484",
+    "title": "Charter amended: Municipal Board and provincial vote",
+    "description": "The Municipal Board was reconstituted as the mayor, the city treasurer, the city engineer, the city attorney, the city health officer and four councilors elected at large, and the city's voters were made qualified to vote for the governor and provincial board of Pangasinan.",
+    "sources": ["sc-elibrary-ra-484-1950"]
+  },
+  {
+    "slug": "city-offices-made-elective",
+    "date": "1959-06-19",
+    "instrument": "Republic Act No. 2259",
+    "title": "City offices made elective",
+    "description": "A law covering all chartered cities declared elective the offices of mayor, vice-mayor and councilors that were filled by appointment, created the office of vice-mayor where a charter had none, and named Dagupan among the cities whose voters \"shall not vote for provincial officials\".",
+    "sources": ["sc-elibrary-ra-2259-1959"]
+  },
+  {
+    "slug": "assistant-city-fiscals",
+    "date": "1965-06-19",
+    "instrument": "Republic Act No. 4291",
+    "title": "Four assistant city fiscals created",
+    "description": "Section 24 of the charter was amended so that the city's law department consists of the city fiscal and four assistant city fiscals, with effect from 2 January 1966.",
+    "sources": ["sc-elibrary-ra-4291-1965"]
+  },
+  {
+    "slug": "city-court-branches",
+    "date": "1973-07-06",
+    "instrument": "Presidential Decree No. 235",
+    "title": "City court expanded to three branches",
+    "description": "Section 75 of the charter was amended to give the City Court of Dagupan three branches and an auxiliary judge. The decree records that the court then had a single branch with over 3,500 cases pending.",
+    "sources": ["sc-elibrary-pd-235-1973"]
+  }
+]
