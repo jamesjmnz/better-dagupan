@@ -1,6 +1,8 @@
 # Meilisearch Integration Guide
 
-This guide documents how Better LB integrates with [BetterGov's Meilisearch instance](https://search2.bettergov.ph) to display filtered transparency data for the Municipality of Los Baños. The key insight is that we leverage BetterGov.ph's existing Meilisearch infrastructure and national datasets—filtering and searching only for data relevant to our specific LGU.
+This guide documents how Better Dagupan integrates with [BetterGov's Meilisearch instance](https://search2.bettergov.ph) to display filtered transparency data for the City of Dagupan. The pattern comes from the [BetterLB](https://github.com/BetterLosBanos/betterlb) template. The key insight is that we leverage BetterGov.ph's existing Meilisearch infrastructure and national datasets—filtering and searching only for data relevant to our specific LGU.
+
+**Current state on `main`:** infrastructure (DPWH) is live, filtered by `Region I`, `Pangasinan 2nd DEO`, and the name "Dagupan". Procurement (PhilGEPS) shows a "source pending" state because `transparency.procurement.organizationName` is empty; the entity names, checked against the live index, are in review in [#9](https://github.com/jamesjmnz/better-dagupan/pull/9). Financial data (SRE) is empty.
 
 Other LGUs can follow this same pattern to implement their own transparency portals without setting up their own Meilisearch instances or scraping data.
 
@@ -18,7 +20,7 @@ Other LGUs can follow this same pattern to implement their own transparency port
 
 ## Overview
 
-Better LB leverages **BetterGov.ph's existing Meilisearch infrastructure** to display transparency data. We don't host any national data ourselves—we simply query BetterGov's public search endpoint with filters for our specific LGU.
+Better Dagupan leverages **BetterGov.ph's existing Meilisearch infrastructure** to display transparency data. We don't host any national data ourselves—we simply query BetterGov's public search endpoint with filters for our specific LGU.
 
 | Feature | Data Source | How We Access It |
 |---------|-------------|------------------|
@@ -28,7 +30,7 @@ Better LB leverages **BetterGov.ph's existing Meilisearch infrastructure** to di
 
 ### Requirements
 
-- **Meilisearch API Key**: Required - extract from https://transparency.bettergov.ph (see Step 2)
+- **Meilisearch API Key**: A public search-only key is built into `src/lib/meilisearch.ts` as the default; override it only if BetterGov rotates it (see Step 2)
 - **No server/database**: All data comes from BetterGov's existing infrastructure
 
 ### The Pattern in One Diagram
@@ -57,7 +59,7 @@ Better LB leverages **BetterGov.ph's existing Meilisearch infrastructure** to di
 
 | Endpoint | Usage |
 |----------|-------|
-| `https://search2.bettergov.ph` | Meilisearch host (public, no auth) |
+| `https://search2.bettergov.ph` | Meilisearch host (public search-only key) |
 | `https://api.dpwh.bettergov.ph/projects/{id}` | DPWH project detail API |
 | `https://data.bettergov.ph` | SRE/ARI financial data downloads |
 
@@ -65,7 +67,7 @@ Better LB leverages **BetterGov.ph's existing Meilisearch infrastructure** to di
 
 ## Architecture
 
-Better LB follows a **"filter-downstream"** pattern—we don't host or scrape any national data ourselves. Instead, we query BetterGov's existing Meilisearch instance with LGU-specific filters.
+Better Dagupan follows a **"filter-downstream"** pattern—we don't host or scrape any national data ourselves. Instead, we query BetterGov's existing Meilisearch instance with LGU-specific filters.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -82,7 +84,7 @@ Better LB follows a **"filter-downstream"** pattern—we don't host or scrape an
                                     │ (organization_name, region, province, etc.)
                                     ▼
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│                         YOUR LGU FRONTEND (Better LB)                       │
+│                       YOUR LGU FRONTEND (Better Dagupan)                    │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
 │  │  /src/lib/meilisearch.ts                                             │   │
 │  │  - Configured to point to search2.bettergov.ph                       │   │
@@ -121,7 +123,11 @@ import { MeiliSearch } from 'meilisearch';
 // 1. Configuration
 const HOST =
   import.meta.env.VITE_MEILISEARCH_HOST || 'https://search2.bettergov.ph';
-const KEY = import.meta.env.VITE_MEILISEARCH_API_KEY || '';
+const KEY =
+  import.meta.env.VITE_MEILISEARCH_API_KEY ||
+  // Public search-only key (same one shipped in transparency.bettergov.ph's
+  // client bundle); override with VITE_MEILISEARCH_API_KEY if it rotates.
+  '<public search-only key>';
 
 export const client = new MeiliSearch({
   host: HOST,
@@ -137,15 +143,16 @@ export const INDICES = {
 
 ### Environment Variables
 
-Create a `.env` file in your project root:
+Copy `.env.example` to `.env` in your project root:
 
 ```bash
-# Optional: For private Meilisearch instances
 VITE_MEILISEARCH_HOST=https://search2.bettergov.ph
-VITE_MEILISEARCH_API_KEY=your_api_key_here
+VITE_MEILISEARCH_PORT=443
+# Optional: defaults to the public search-only key bundled with the app.
+VITE_MEILISEARCH_API_KEY=
 ```
 
-**Note**: The BetterGov.meilisearch instance at `https://search2.bettergov.ph` is publicly accessible for querying PhilGEPS and DPWH data.
+**Note**: The BetterGov Meilisearch instance at `https://search2.bettergov.ph` is queried with a public search-only key — the same one transparency.bettergov.ph ships in its client bundle.
 
 ### Available Indices
 
@@ -163,11 +170,19 @@ VITE_MEILISEARCH_API_KEY=your_api_key_here
 
 ### Key Implementation Details
 
-1. **Organization Filter**: Filter by LGU organization name
+1. **Organization Filter**: Filter by the LGU's exact PhilGEPS entity name, read from config
    ```typescript
-   const ORG_NAME = 'MUNICIPALITY OF LOS BAÑOS, LAGUNA';
+   const ORG_NAME = config.transparency.procurement.organizationName;
+   // Every query and outbound link is gated on a configured name, so an empty
+   // value shows "source pending" instead of another entity's records.
+   const ORG_CONFIGURED = ORG_NAME.trim().length > 0;
    const ORG_FILTER = `organization_name = "${ORG_NAME}"`;
    ```
+
+   PhilGEPS lists the City Government of Dagupan under two exact names,
+   `CITY OF DAGUPAN  - PANGASINAN` (note the double space) and
+   `CITY OF DAGUPAN, PANGASINAN`. The change in review in #9 turns the field into
+   an `organizationNames` array and filters with `organization_name IN [...]`.
 
 2. **Search Query**: With debouncing (400ms) and pagination
    ```typescript
@@ -214,13 +229,13 @@ console.log(orgs);
 
 ### Key Implementation Details
 
-1. **Location Filters**: Filter by region, province (including DEO), and optionally status
+1. **Location Filters**: Filter by region, province (including DEO), and optionally status. The values come from `config.lgu.region`, `config.lgu.districtEngineeringOffice`, and `config.lgu.province`; for Dagupan they produce:
    ```typescript
    const filterConditions = [
-     'location.region = "Region IV-A"',
+     'location.region = "Region I"',
      // IMPORTANT: location.province includes BOTH province name AND DEO designation
      // Include both variations to capture all projects
-     '(location.province = "Laguna 2nd DEO" OR location.province = "Laguna")',
+     '(location.province = "Pangasinan 2nd DEO" OR location.province = "Pangasinan")',
      // Optional: status filter
      selectedStatuses.length > 0
        ? `(${selectedStatuses.map(s => `status = "${s}"`).join(' OR ')})`
@@ -234,12 +249,12 @@ console.log(orgs);
    const exactMatches = hits.filter(h => {
      const mun = h.location.municipality?.toLowerCase() || '';
      const desc = h.description?.toLowerCase() || '';
-     const target = ['los baños', 'los banos'];
+     const target = config.transparency.infrastructure.exactMatchTargets; // ['dagupan', 'dagupan city']
      return target.some(t => mun.includes(t) || desc.includes(t));
    });
    ```
 
-> **Note**: `location.province` in the DPWH dataset contains both the province name AND the District Engineering Office (DEO) designation (e.g., "Laguna 2nd DEO", "Pampanga 1st DEO"). Always include BOTH the plain province name AND the DEO variant in your filter to ensure complete results.
+> **Note**: `location.province` in the DPWH dataset contains both the province name AND the District Engineering Office (DEO) designation (e.g., "Pangasinan 2nd DEO", "Pampanga 1st DEO"). Always include BOTH the plain province name AND the DEO variant in your filter to ensure complete results.
 
 3. **Project Detail Page**: Direct API call for full project details
    ```typescript
@@ -324,7 +339,7 @@ import budgetData from '@/data/transparency/budgetData';
 ### TL;DR: What You Need to Do
 
 1. **Install the Meilisearch client** (one npm package)
-2. **Get the API key** from transparency.bettergov.ph (see instructions below)
+2. **Check the API key** — the public search-only key is already the default (see below)
 3. **Find your LGU's filter values** (organization name, region, province)
 4. **Update the filter constants** in your pages
 5. **That's it!** No servers, no scraping, no databases
@@ -337,7 +352,7 @@ npm install meilisearch
 
 ### Step 2: Get the Meilisearch API Key
 
-The API key is required for querying BetterGov's Meilisearch instance. You can extract it from https://transparency.bettergov.ph:
+`src/lib/meilisearch.ts` already defaults to BetterGov's public search-only key, so you can skip this step unless that key stops working. If BetterGov rotates it, you can find the current one on https://transparency.bettergov.ph and set it as `VITE_MEILISEARCH_API_KEY`:
 
 **Method 1: Browser DevTools (Recommended)**
 
@@ -368,7 +383,7 @@ import { MeiliSearch } from 'meilisearch';
 
 // Point to BetterGov's public Meilisearch instance
 const HOST = 'https://search2.bettergov.ph';
-const KEY = import.meta.env.VITE_MEILISEARCH_API_KEY || 'YOUR_API_KEY_HERE';
+const KEY = import.meta.env.VITE_MEILISEARCH_API_KEY || '<public search-only key>';
 
 export const client = new MeiliSearch({ host: HOST, apiKey: KEY });
 
@@ -379,7 +394,7 @@ export const INDICES = {
 } as const;
 ```
 
-### Step 3: Find Your LGU's Filter Values
+### Step 4: Find Your LGU's Filter Values
 
 #### For Procurement (PhilGEPS)
 
@@ -388,7 +403,7 @@ You need to find your **exact organization name** as it appears in PhilGEPS:
 ```typescript
 // Quick script to find your org name:
 const index = client.index(INDICES.PHILGEPS);
-const response = await index.search('[YOUR MUNICIPALITY NAME]', {
+const response = await index.search('[YOUR LGU NAME]', {
   limit: 100,
   attributesToRetrieve: ['organization_name'],
 });
@@ -398,10 +413,11 @@ const orgs = [...new Set(response.hits.map(h => h.organization_name))];
 console.log(orgs);
 ```
 
-**Examples of organization names:**
-- `MUNICIPALITY OF LOS BAÑOS, LAGUNA`
-- `CITY OF CEBU, CEBU`
-- `PROVINCIAL GOVERNMENT OF PAMPANGA`
+**Examples of organization names** (Dagupan's, from the `philgeps_organizations` index):
+- `CITY OF DAGUPAN  - PANGASINAN` — note the double space before the hyphen
+- `CITY OF DAGUPAN, PANGASINAN` — an older name for the same city government
+
+Names must match exactly, spaces included. Other entities that mention the LGU (a water district, a DepEd division, national agency field offices) are different organizations; confirm each candidate against the LGU's own procurement notices before using it.
 
 #### For Infrastructure (DPWH)
 
@@ -416,16 +432,23 @@ You need your **region, province, and DEO designation**:
 **Easiest Method**: Visit https://transparency.bettergov.ph/dpwh, use the filters to find your region/province, and copy the exact values from the URL or filter dropdown.
 
 **Examples:**
-- Region: `Region IV-A`, `Region III`, `NCR`
-- Province (include BOTH): `Laguna` AND `Laguna 2nd DEO`, `Pampanga` AND `Pampanga 1st DEO`
+- Region: `Region I`, `Region III`, `NCR`
+- Province (include BOTH): `Pangasinan` AND `Pangasinan 2nd DEO`, `Pampanga` AND `Pampanga 1st DEO`
 
-### Step 4: Configure Your Filters
+For Dagupan, plain `Pangasinan` never appears as a `location.province` value, and some Dagupan works sit under other Pangasinan DEOs or under `Region I` itself. Results are post-filtered by name, so a narrow filter can miss projects but does not show another LGU's.
+
+### Step 5: Configure Your Filters
+
+In this repository the filter values live in `config/lgu.config.json`
+(`lgu.region`, `lgu.province`, `lgu.districtEngineeringOffice`,
+`transparency.procurement`, `transparency.infrastructure`); the pages read them
+from there. If you copy the pages into another project, the equivalent code is:
 
 #### Procurement Page (`src/pages/transparency/procurement/index.tsx`)
 
 ```typescript
-// CHANGE THIS VALUE ONLY
-const ORG_NAME = 'MUNICIPALITY OF [YOUR LGU], [YOUR PROVINCE]';
+// The exact PhilGEPS entity name, confirmed against the index
+const ORG_NAME = '[EXACT PHILGEPS ENTITY NAME]';
 const ORG_FILTER = `organization_name = "${ORG_NAME}"`;
 
 // Search query (rest of code remains the same)
@@ -443,10 +466,10 @@ const response = await index.search(query, {
 ```typescript
 // CHANGE THESE VALUES
 const filterConditions = [
-  'location.region = "[YOUR REGION]"',           // e.g., "Region IV-A"
+  'location.region = "[YOUR REGION]"',           // e.g., "Region I"
   // IMPORTANT: Include BOTH plain province AND DEO variant
   '(location.province = "[YOUR PROVINCE]" OR location.province = "[YOUR PROVINCE] Xth DEO")',
-  // Example: '(location.province = "Laguna" OR location.province = "Laguna 2nd DEO")'
+  // Example: '(location.province = "Pangasinan" OR location.province = "Pangasinan 2nd DEO")'
   // Status filter is optional
   selectedStatuses.length > 0
     ? `(${selectedStatuses.map(s => `status = "${s}"`).join(' OR ')})`
@@ -459,8 +482,8 @@ const exactMatches = hits.filter(h => {
   const mun = h.location.municipality?.toLowerCase() || '';
   const desc = h.description?.toLowerCase() || '';
   const target = [
-    '[municipality name 1]',  // e.g., 'los baños'
-    '[municipality name 2]',  // e.g., 'los banos' (without tilde)
+    '[lgu name 1]',  // e.g., 'dagupan'
+    '[lgu name 2]',  // e.g., 'dagupan city'
   ];
   return target.some(t => mun.includes(t) || desc.includes(t));
 });
@@ -468,7 +491,7 @@ const exactMatches = hits.filter(h => {
 
 **Finding Your Values**: Visit https://transparency.bettergov.ph/dpwh and use the filter dropdowns to discover the exact region, province, and DEO values for your area.
 
-### Step 5: Optional - Add Financial Data
+### Step 6: Optional - Add Financial Data
 
 Financial data (SRE) is not in Meilisearch. You have two options:
 
@@ -482,7 +505,7 @@ Financial data (SRE) is not in Meilisearch. You have two options:
 - Focus on Procurement and Infrastructure (both work out-of-the-box)
 - Financial data can be added later
 
-### Step 6: Data Attribution (Required)
+### Step 7: Data Attribution (Required)
 
 Always attribute BetterGov.ph as the data source:
 
@@ -500,7 +523,7 @@ Always attribute BetterGov.ph as the data source:
 
 ---
 
-## Required Files from Better LB
+## Required Files from This Repository
 
 You can implement this integration in two ways:
 
@@ -513,7 +536,7 @@ These are the essential files needed for any implementation:
 
 | File | Purpose | Changes Needed |
 |------|---------|----------------|
-| `src/lib/meilisearch.ts` | Meilisearch client setup and type definitions | None (points to public BetterGov instance) |
+| `src/lib/meilisearch.ts` | Meilisearch client setup and type definitions | None (points to public BetterGov instance with its public search key) |
 | `src/lib/format.ts` | Peso formatting utilities | None (generic utility, or use your own) |
 
 **Minimum Viable Implementation:**
@@ -541,8 +564,8 @@ If you want a complete transparency portal, copy these files:
 
 | File | Purpose | Changes Needed |
 |------|---------|----------------|
-| `src/pages/transparency/procurement/index.tsx` | Procurement list page with search, stats, table | Update `ORG_NAME` constant (line ~57) |
-| `src/pages/transparency/infrastructure/index.tsx` | Infrastructure list with filters, stats | Update `filterConditions` (line ~94) and `target` array (line ~115) |
+| `src/pages/transparency/procurement/index.tsx` | Procurement list page with search, stats, table | Reads `config.transparency.procurement` |
+| `src/pages/transparency/infrastructure/index.tsx` | Infrastructure list with filters, stats | Reads `config.lgu` and `config.transparency.infrastructure` |
 | `src/pages/transparency/infrastructure/[project].tsx` | Project detail page | None (uses direct API) |
 | `src/pages/transparency/financial/index.tsx` | Financial dashboard | Requires your LGU's SRE data |
 | `src/pages/transparency/layout.tsx` | Layout wrapper | None |
@@ -557,7 +580,7 @@ These components are used by the page components. You can use your own UI librar
 | `src/components/ui/SearchInput.tsx` | Debounced search input | Any input component |
 | `src/components/ui/Pagination.tsx` | Pagination controls | Any pagination component |
 | `src/components/ui/SelectPicker.tsx` | Multi-select filter | Any select/multi-select |
-| `src/components/data-display/StatsUI.tsx` | Stats cards | Any card/metric component |
+| `src/components/ui/StatCard.tsx` | Stats cards | Any card/metric component |
 | `src/components/layout/PageLayouts.tsx` | ModuleHeader, DetailSection | Your layout components |
 | `src/components/ui/Card.tsx` | Card containers | Your card components |
 | `src/components/ui/Badge.tsx` | Status badges | Any badge component |
@@ -573,13 +596,13 @@ These components are used by the page components. You can use your own UI librar
 ### Quick Start - Minimal Copy
 
 ```bash
-# Clone Better LB to examine files
-git clone https://github.com/BetterLosBanos/betterlb.git temp-betterlb
+# Clone Better Dagupan to examine files
+git clone https://github.com/jamesjmnz/better-dagupan.git temp-portal
 
 # Copy ONLY the core files
 mkdir -p YOUR_PROJECT/src/lib
-cp temp-betterlb/src/lib/meilisearch.ts YOUR_PROJECT/src/lib/
-cp temp-betterlb/src/lib/format.ts YOUR_PROJECT/src/lib/
+cp temp-portal/src/lib/meilisearch.ts YOUR_PROJECT/src/lib/
+cp temp-portal/src/lib/format.ts YOUR_PROJECT/src/lib/
 
 # Now you can use the Meilisearch client in your existing components!
 ```
@@ -587,33 +610,34 @@ cp temp-betterlb/src/lib/format.ts YOUR_PROJECT/src/lib/
 ### Quick Start - Full Copy
 
 ```bash
-# Clone Better LB
-git clone https://github.com/BetterLosBanos/betterlb.git temp-betterlb
+# Clone Better Dagupan
+git clone https://github.com/jamesjmnz/better-dagupan.git temp-portal
 
 # Copy core files
-cp temp-betterlb/src/lib/meilisearch.ts YOUR_PROJECT/src/lib/
-cp temp-betterlb/src/lib/format.ts YOUR_PROJECT/src/lib/
+cp temp-portal/src/lib/meilisearch.ts YOUR_PROJECT/src/lib/
+cp temp-portal/src/lib/format.ts YOUR_PROJECT/src/lib/
 
 # Copy page components
 mkdir -p YOUR_PROJECT/src/pages/transparency/infrastructure
-cp temp-betterlb/src/pages/transparency/procurement/index.tsx YOUR_PROJECT/src/pages/transparency/
-cp temp-betterlb/src/pages/transparency/infrastructure/index.tsx YOUR_PROJECT/src/pages/transparency/infrastructure/
-cp temp-betterlb/src/pages/transparency/infrastructure/\[project\].tsx YOUR_PROJECT/src/pages/transparency/infrastructure/
-cp temp-betterlb/src/pages/transparency/layout.tsx YOUR_PROJECT/src/pages/transparency/
+cp temp-portal/src/pages/transparency/procurement/index.tsx YOUR_PROJECT/src/pages/transparency/
+cp temp-portal/src/pages/transparency/infrastructure/index.tsx YOUR_PROJECT/src/pages/transparency/infrastructure/
+cp temp-portal/src/pages/transparency/infrastructure/\[project\].tsx YOUR_PROJECT/src/pages/transparency/infrastructure/
+cp temp-portal/src/pages/transparency/layout.tsx YOUR_PROJECT/src/pages/transparency/
 
 # Copy UI components (if you don't have your own)
-cp -r temp-betterlb/src/components/ui YOUR_PROJECT/src/components/
-cp -r temp-betterlb/src/components/data-display YOUR_PROJECT/src/components/
-cp -r temp-betterlb/src/components/layout YOUR_PROJECT/src/components/
+cp -r temp-portal/src/components/ui YOUR_PROJECT/src/components/
+cp -r temp-portal/src/components/data-display YOUR_PROJECT/src/components/
+cp -r temp-portal/src/components/layout YOUR_PROJECT/src/components/
 
-# Update the filter constants in the copied page files for your LGU
+# The copied pages read config/lgu.config.json through src/lib/lguConfig.ts;
+# copy those too, or replace the config reads with your own values
 ```
 
 ---
 
 ## Cloudflare Pages Deployment
 
-Better LB is deployed on Cloudflare Pages. Here's how to configure environment variables for your deployment:
+Better Dagupan targets Cloudflare Pages (project `better-dagupan`) but is not deployed yet. Here's how to configure environment variables for a deployment:
 
 ### Setting Environment Variables in Cloudflare Pages
 
@@ -629,7 +653,7 @@ Better LB is deployed on Cloudflare Pages. Here's how to configure environment v
    | Variable | Value | Description |
    |----------|-------|-------------|
    | `VITE_MEILISEARCH_HOST` | `https://search2.bettergov.ph` | BetterGov's Meilisearch host |
-   | `VITE_MEILISEARCH_API_KEY` | `YOUR_API_KEY_HERE` | Required - extract from transparency.bettergov.ph (see Step 2 above) |
+   | `VITE_MEILISEARCH_API_KEY` | (empty) | Optional - only to override the bundled public search key (see Step 2 above) |
 
 4. **Add Preview/Development Variables** (optional but recommended)
    - Repeat the same variables for the **Preview** environment
@@ -649,8 +673,8 @@ wrangler login
 wrangler pages secret put VITE_MEILISEARCH_HOST --project-name=YOUR_PROJECT_NAME
 # Enter value when prompted: https://search2.bettergov.ph
 
+# Only if the public search key has rotated:
 wrangler pages secret put VITE_MEILISEARCH_API_KEY --project-name=YOUR_PROJECT_NAME
-# Enter the API key extracted from transparency.bettergov.ph
 ```
 
 ### Accessing Variables in Code
@@ -660,8 +684,11 @@ The variables are automatically available via `import.meta.env`:
 ```typescript
 // src/lib/meilisearch.ts
 const HOST = import.meta.env.VITE_MEILISEARCH_HOST || 'https://search2.bettergov.ph';
-const KEY = import.meta.env.VITE_MEILISEARCH_API_KEY || '';
+const KEY = import.meta.env.VITE_MEILISEARCH_API_KEY || '<public search-only key>';
 ```
+
+`VITE_` variables are read by Vite at build time, so set them where `npm run build`
+runs (for this repository, the GitHub Actions deploy workflow).
 
 ### Deploying to Cloudflare Pages
 
@@ -678,18 +705,21 @@ wrangler pages deploy dist --project-name=YOUR_PROJECT_NAME
 
 ### Cloudflare Pages Configuration (Optional)
 
-Create `wrangler.toml` in your project root:
+This repository uses `wrangler.jsonc`:
 
-```toml
-name = "your-lgu-portal"
-compatibility_date = "2024-01-01"
-
-[env.production]
-vars = { VITE_MEILISEARCH_HOST = "https://search2.bettergov.ph" }
-
-[env.preview]
-vars = { VITE_MEILISEARCH_HOST = "https://search2.bettergov.ph" }
+```jsonc
+{
+  "name": "better-dagupan",
+  "pages_build_output_dir": "dist",
+  "compatibility_date": "2026-01-13",
+  "vars": {
+    "GITHUB_REPO": "jamesjmnz/better-dagupan"
+  }
+}
 ```
+
+The Meilisearch host and key do not need to be set there: they are build-time
+`VITE_` variables with working defaults.
 
 ---
 
@@ -726,8 +756,8 @@ interface DPWHProject {
   amountPaid: number;
   progress: number;
   location: {
-    region: string;        // KEY: Filter by this (e.g., "Region IV-A")
-    province: string;      // KEY: Filter by this - INCLUDES DEO (e.g., "Laguna 2nd DEO")
+    region: string;        // KEY: Filter by this (e.g., "Region I")
+    province: string;      // KEY: Filter by this - INCLUDES DEO (e.g., "Pangasinan 2nd DEO")
     municipality?: string; // Use fuzzy search, not Meilisearch filter
     barangay?: string;
     coordinates: {
@@ -752,7 +782,8 @@ interface DPWHProject {
 
 **Solution**: Verify the exact organization name. PhilGEPS names are specific:
 - Check for "MUNICIPALITY OF" vs "CITY OF" vs "PROVINCIAL GOVERNMENT"
-- Check for special characters (Ñ) - try both with and without tilde
+- Check for special characters (Ñ) and spacing - names must match exactly (Dagupan's current name has a double space: `CITY OF DAGUPAN  - PANGASINAN`)
+- Check whether the LGU appears under more than one name over the years
 - Try searching without filter first to discover available organizations:
   ```typescript
   const response = await index.search('[YOUR LGU NAME]', { limit: 100 });
@@ -765,9 +796,9 @@ interface DPWHProject {
 1. **Include BOTH province variants** - `location.province` includes DEO designation:
    ```typescript
    // WRONG - will miss some projects
-   'location.province = "Laguna"'
+   'location.province = "Pangasinan"'
    // CORRECT - captures all projects
-   '(location.province = "Laguna" OR location.province = "Laguna 2nd DEO")'
+   '(location.province = "Pangasinan" OR location.province = "Pangasinan 2nd DEO")'
    ```
 2. Verify values on https://transparency.bettergov.ph/dpwh - use the filter dropdowns to see exact values
 3. Try broader filters (region only) to confirm data exists for your area
@@ -801,6 +832,6 @@ interface DPWHProject {
 ## Contributing
 
 To improve this guide or report issues:
-1. Open an issue on the Better LB GitHub repository
+1. Open an issue on the [Better Dagupan repository](https://github.com/jamesjmnz/better-dagupan), or on the upstream [BetterLB](https://github.com/BetterLosBanos/betterlb) template for changes that apply to every LGU
 2. Submit a PR with documentation updates
 3. Share your LGU's implementation for case studies
