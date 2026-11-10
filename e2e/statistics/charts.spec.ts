@@ -72,9 +72,9 @@ test.describe('Statistics Page Charts', () => {
 
       // Tooltip may or may not appear on initial hover
       if (tooltipCount > 0) {
-        // If tooltip appears, check it has content
-        const tooltipContent = page.locator('.recharts-tooltip-content');
-        await expect(tooltipContent).toBeVisible();
+        // The page renders its own ChartTooltip, which has no
+        // .recharts-tooltip-content element; check its census-year label.
+        await expect(tooltip.first()).toContainText(/Year/);
       }
     });
 

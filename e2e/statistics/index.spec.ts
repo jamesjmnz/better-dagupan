@@ -13,32 +13,35 @@ test.describe('Statistics Pages', () => {
       page.locator('h1').filter({ hasText: 'Population Profile' })
     ).toBeVisible();
 
-    // Check PageHeader is visible
+    // Check PageHeader is visible. The heading takes the LGU-type adjective
+    // from lguLabels, which for a city is "City".
     await expect(
-      page.locator('h1').filter({ hasText: 'Municipal Statistics' })
+      page.locator('h1').filter({ hasText: 'City Statistics' })
     ).toBeVisible();
 
-    // Verify Kapwa semantic tokens are used
-    await assertKapwaTokens(page);
+    // Verify Kapwa semantic tokens are used. Scoped to the page's own main
+    // landmark: the app shell renders a second <main>.
+    await assertKapwaTokens(page, '#main-content');
   });
 
   test('statistics layout has PageHeader and Sidebar', async ({ page }) => {
     // Check PageHeader with centered variant
-    const pageHeader = page.locator('header');
+    const pageHeader = page.locator('header').filter({
+      has: page.locator('h1:has-text("City Statistics")'),
+    });
     await expect(pageHeader).toBeVisible();
-    await expect(
-      pageHeader.locator('h1:has-text("Municipal Statistics")')
-    ).toBeVisible();
 
     // Check description is present
     await expect(
       page.locator('p:has-text("Data-driven insights")')
     ).toBeVisible();
 
-    // Check StatisticsSidebar is present
+    // Check StatisticsSidebar is present (the layout renders more than one
+    // <aside>, so take the first).
     const sidebar = page
       .locator('aside')
-      .or(page.locator('[data-testid="sidebar"]'));
+      .or(page.locator('[data-testid="sidebar"]'))
+      .first();
     await expect(sidebar).toBeVisible();
   });
 
@@ -46,18 +49,14 @@ test.describe('Statistics Pages', () => {
     // Wait for page to load
     await page.waitForLoadState('networkidle');
 
-    // Check StatCard components are displayed
-    const statCards = page
-      .locator('[data-testid="stat-card"]')
-      .or(page.locator('.stat-card'));
-    const count = await statCards.count();
-
-    // Should have at least 3 KPI cards
-    expect(count).toBeGreaterThanOrEqual(3);
-
-    // Check first card has proper structure
-    const firstCard = statCards.first();
-    await expect(firstCard).toBeVisible();
+    // StatCard renders no test id or marker class, so check the three KPI
+    // labels the population page passes to it.
+    for (const label of ['Total population', 'Annual growth rate']) {
+      await expect(page.getByText(label, { exact: true })).toBeVisible();
+    }
+    await expect(
+      page.getByText('Barangays', { exact: true }).first()
+    ).toBeVisible();
   });
 
   test('population page displays chart', async ({ page }) => {
