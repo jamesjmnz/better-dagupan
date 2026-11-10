@@ -112,7 +112,7 @@ export const Navbar: FC = () => {
           {/* Brand/Logo Section (Constrained) */}
           <Link
             to='/'
-            className='group flex max-w-[60%] min-w-0 items-center md:max-w-md'
+            className='group flex min-h-11 max-w-[60%] min-w-0 items-center md:max-w-md'
             onClick={closeMenu}
           >
             <img
@@ -205,7 +205,7 @@ export const Navbar: FC = () => {
               onClick={toggleMenu}
               variant='ghost'
               aria-label={t('navigation:toggleMenu')}
-              className='p-3 rounded-xl bg-kapwa-bg-surface-raised text-kapwa-text-strong'
+              className='p-3 w-12 h-12 rounded-xl bg-kapwa-bg-surface-raised text-kapwa-text-strong'
             >
               {isOpen ? (
                 <XIcon className='w-6 h-6' />
@@ -250,7 +250,7 @@ export const Navbar: FC = () => {
                           setActiveMobileSubmenu(isSubOpen ? null : item.label);
                         }}
                         variant='ghost'
-                        className='p-4 text-kapwa-text-disabled'
+                        className='p-3 w-12 h-12 text-kapwa-text-disabled'
                       >
                         <ChevronDownIcon
                           className={cn(
