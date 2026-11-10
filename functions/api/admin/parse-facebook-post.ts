@@ -10,6 +10,13 @@ import {
   AuditTargetTypes,
 } from '../../utils/audit-log';
 
+interface MatchedPersonRow {
+  id: string;
+  first_name: string;
+  middle_name: string | null;
+  last_name: string;
+}
+
 interface ParseFacebookPostBody {
   content: string;
 }
@@ -178,7 +185,7 @@ async function handleParsePost(context: {
              WHERE first_name = ?1 AND last_name = ?2`
           )
             .bind(firstName, lastName)
-            .first();
+            .first<MatchedPersonRow>();
 
           // If no exact match, try fuzzy search
           if (!match) {
@@ -189,7 +196,7 @@ async function handleParsePost(context: {
                LIMIT 5`
             )
               .bind(`${firstName}%`, `${lastName}%`)
-              .first();
+              .first<MatchedPersonRow>();
           }
 
           if (match) {

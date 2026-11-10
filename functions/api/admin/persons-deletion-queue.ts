@@ -62,14 +62,14 @@ async function handleGetQueue(context: {
       LIMIT ?1
     `;
 
-    const results = await env.BETTERLB_DB.prepare(sql).bind(limit).all();
+    const results = await env.BETTERLB_DB.prepare(sql)
+      .bind(limit)
+      .all<Person & { deleted_by: string | null }>();
 
     const persons: Array<Person & { full_name: string; deleted_by?: string }> =
       [];
 
-    for (const row of results.results as Array<
-      typeof results.results extends (infer T)[] ? T : never
-    >) {
+    for (const row of results.results) {
       const parts = [row.first_name, row.middle_name, row.last_name];
       if (row.suffix) parts.push(row.suffix);
       persons.push({
@@ -80,7 +80,7 @@ async function handleGetQueue(context: {
         suffix: row.suffix,
         deleted_at: row.deleted_at,
         full_name: parts.filter(Boolean).join(' '),
-        deleted_by: row.deleted_by,
+        deleted_by: row.deleted_by ?? undefined,
       });
     }
 
