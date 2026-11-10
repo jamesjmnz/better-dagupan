@@ -1,58 +1,216 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Legislative Branch",
-  "description": "Schema for municipal legislative council data allowing null for optional fields",
+  "description": "Schema for the city's legislative council. Fields that have not been verified against a civic source are null or empty, never invented or filled with placeholder text. The chamber, each member and the committee assignments are separate claims with their own citations, because different sources establish them.",
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["slug", "branch", "chamber"],
+    "additionalProperties": false,
+    "required": [
+      "slug",
+      "branch",
+      "chamber",
+      "term",
+      "address",
+      "trunkline",
+      "website",
+      "email",
+      "presiding_officer",
+      "officials",
+      "committees_status",
+      "permanent_committees",
+      "sources"
+    ],
     "properties": {
-      "slug": { "type": "string" },
-      "branch": { "type": "string" },
-      "chamber": { "type": "string" },
-      "address": { "type": ["string", "null"] },
-      "trunkline": { "type": ["string", "null"] },
+      "slug": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "branch": { "type": "string", "minLength": 1 },
+      "chamber": {
+        "description": "The council's name as published, e.g. \"Sangguniang Panlungsod\".",
+        "type": "string",
+        "minLength": 1
+      },
+      "term": {
+        "description": "Term of the elected membership, e.g. \"2025–2028\". Null unless an election source establishes it.",
+        "type": ["string", "null"],
+        "pattern": "^\\d{4}–\\d{4}$"
+      },
+      "address": {
+        "description": "Null until an authoritative address is sourced.",
+        "type": ["string", "null"]
+      },
+      "trunkline": {
+        "description": "Null until a source states a number.",
+        "type": ["string", "null"]
+      },
       "website": {
+        "description": "Null until an authoritative page is sourced.",
         "type": ["string", "null"],
         "format": "uri"
       },
+      "email": {
+        "description": "Null until a source states an address.",
+        "type": ["string", "null"],
+        "format": "email"
+      },
+      "presiding_officer": {
+        "description": "Slug of the executive.json seat that presides over the council (the City Vice Mayor), so the person is recorded once rather than copied into two files. Null until sourced.",
+        "type": ["string", "null"]
+      },
       "officials": {
+        "description": "The council's members. A seat is listed even when its holder is withheld, so a reader sees that the seat exists.",
         "type": "array",
         "items": {
           "type": "object",
-          "required": ["role", "name"],
+          "additionalProperties": false,
+          "required": [
+            "slug",
+            "role",
+            "seat",
+            "name_status",
+            "name",
+            "name_variants",
+            "term",
+            "contact",
+            "website",
+            "sources"
+          ],
           "properties": {
-            "role": { "type": "string" },
-            "name": { "type": "string" },
-            "contact": { "type": ["string", "null"] },
+            "slug": {
+              "type": "string",
+              "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            },
+            "role": {
+              "description": "The title as the council publishes it, e.g. \"Councilor\".",
+              "type": "string",
+              "minLength": 1
+            },
+            "seat": {
+              "description": "How the seat is filled. `elected`: one of the councilors elected at large. `ex_officio_liga`: the president of the city chapter of the Liga ng mga Barangay. `ex_officio_sk`: the president of the city federation of the Sangguniang Kabataan.",
+              "type": "string",
+              "enum": ["elected", "ex_officio_liga", "ex_officio_sk"]
+            },
+            "name_status": {
+              "description": "Why the name is or is not published. `published` requires name to be present; both withheld states require it to be null.",
+              "type": "string",
+              "enum": ["published", "conflicting_sources", "uncorroborated"]
+            },
+            "name": {
+              "description": "The member's name as the council publishes it, without honorifics. Null unless established by two independent source families.",
+              "type": ["string", "null"],
+              "minLength": 1
+            },
+            "name_variants": {
+              "description": "Other spellings of the same name on another cited source, kept with that source's id so the difference stays attributable.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["name", "source"],
+                "properties": {
+                  "name": { "type": "string", "minLength": 1 },
+                  "source": { "type": "string", "minLength": 1 }
+                }
+              }
+            },
+            "term": {
+              "description": "Term of office. Null when no cited source establishes it, as for the ex-officio seats, whose terms follow the Liga and SK federation cycles.",
+              "type": ["string", "null"],
+              "pattern": "^\\d{4}–\\d{4}$"
+            },
+            "contact": {
+              "description": "Null until a source states a number.",
+              "type": ["string", "null"]
+            },
             "website": {
+              "description": "Null until an authoritative page is sourced.",
               "type": ["string", "null"],
               "format": "uri"
+            },
+            "personId": { "type": "string" },
+            "sources": {
+              "description": "Civic-source ids naming this person in this seat.",
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
             }
-          }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": { "name_status": { "const": "published" } }
+              },
+              "then": {
+                "properties": { "name": { "type": "string" } },
+                "required": ["name"]
+              },
+              "else": { "properties": { "name": { "type": "null" } } }
+            }
+          ]
         }
+      },
+      "committees_status": {
+        "description": "Why committee assignments are or are not published. `published` requires at least one committee; both withheld states require permanent_committees to be empty.",
+        "type": "string",
+        "enum": ["published", "conflicting_sources", "uncorroborated"]
       },
       "permanent_committees": {
         "type": "array",
         "items": {
           "type": "object",
-          "required": ["committee", "chairperson"],
+          "additionalProperties": false,
+          "required": ["committee", "chairperson", "members", "sources"],
           "properties": {
-            "committee": { "type": "string" },
-            "chairperson": { "type": "string" },
+            "committee": { "type": "string", "minLength": 1 },
+            "chairperson": { "type": "string", "minLength": 1 },
             "members": {
               "type": "array",
               "items": {
                 "type": "object",
+                "additionalProperties": false,
+                "required": ["name", "role"],
                 "properties": {
-                  "name": { "type": ["string", "null"] },
+                  "name": { "type": "string", "minLength": 1 },
                   "role": { "type": ["string", "null"] }
                 }
               }
+            },
+            "sources": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
             }
           }
         }
+      },
+      "sources": {
+        "description": "Civic-source ids backing the chamber itself: its name, address, website and term.",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": { "type": "string", "minLength": 1 }
       }
-    }
+    },
+    "allOf": [
+      {
+        "if": {
+          "properties": { "committees_status": { "const": "published" } }
+        },
+        "then": {
+          "properties": {
+            "permanent_committees": { "type": "array", "minItems": 1 }
+          }
+        },
+        "else": {
+          "properties": {
+            "permanent_committees": { "type": "array", "maxItems": 0 }
+          }
+        }
+      }
+    ]
   }
 }
