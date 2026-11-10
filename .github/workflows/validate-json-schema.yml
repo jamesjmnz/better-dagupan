@@ -84,6 +84,19 @@ jobs:
             src/data/schema/seo-metadata.schema.json \
             src/data/seo-metadata.json
 
+      - name: Validate Citizen's Charter JSON file
+        run: |
+          node scripts/validate-json-schema.js \
+            src/data/citizens-charter/schema/citizens-charter.schema.json \
+            src/data/citizens-charter/citizens-charter.json
+
+      - name: Validate services JSON files
+        run: |
+          node scripts/validate-json-schema.js \
+            src/data/schema/services.schema.json \
+            src/data/services/services.json \
+            src/data/citizens-charter/merged-services.json
+
       - name: Validate service categories JSON file
         run: |
           node scripts/validate-json-schema.js \
