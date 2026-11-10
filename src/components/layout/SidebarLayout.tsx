@@ -3,6 +3,7 @@ import { ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Menu, PanelLeftClose, PanelLeftOpen, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/lib/utils';
 
@@ -33,6 +34,7 @@ export function SidebarLayout({
   defaultCollapsed = false,
   className = '',
 }: SidebarLayoutProps) {
+  const { t } = useTranslation('ui');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
   const location = useLocation();
@@ -75,7 +77,9 @@ export function SidebarLayout({
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support active:bg-kapwa-bg-surface-raised flex w-full items-center justify-between rounded-xl border px-4 py-3 font-bold shadow-sm'
           >
-            <span className='text-sm tracking-widest uppercase'>Menu</span>
+            <span className='text-sm tracking-widest uppercase'>
+              {t('sidebar.menu')}
+            </span>
             {mobileMenuOpen ? (
               <X className='h-5 w-5' />
             ) : (
@@ -97,7 +101,7 @@ export function SidebarLayout({
             <button
               onClick={() => setIsCollapsed(false)}
               className='hover:text-kapwa-text-brand hover:border-kapwa-border-brand border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-disabled rounded-lg border p-2 shadow-sm transition-colors'
-              title='Expand Menu'
+              title={t('sidebar.expand')}
             >
               <PanelLeftOpen className='h-5 w-5' />
             </button>
@@ -123,7 +127,8 @@ export function SidebarLayout({
                     onClick={() => setIsCollapsed(true)}
                     className='hover:text-kapwa-text-brand text-kapwa-text-disabled flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase transition-colors'
                   >
-                    Hide Menu <PanelLeftClose className='h-3.5 w-3.5' />
+                    {t('sidebar.hide')}{' '}
+                    <PanelLeftClose className='h-3.5 w-3.5' />
                   </button>
                 </div>
               )}

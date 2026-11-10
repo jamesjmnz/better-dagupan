@@ -2,6 +2,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { MapPinIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import {
   SidebarContainer,
@@ -23,11 +24,12 @@ const barangaysData = barangaysDataRaw as Barangay[];
  * is the same module-level import the index page renders from.
  */
 export default function BarangaysSidebar() {
+  const { t } = useTranslation('government');
   const { barangay: activeSlug } = useParams(); // URL param: /barangays/:barangay
   const navigate = useNavigate();
 
   return (
-    <SidebarContainer title='Barangays'>
+    <SidebarContainer title={t('barangays.sidebarTitle')}>
       {[...barangaysData]
         .sort((a, b) => a.barangay_name.localeCompare(b.barangay_name))
         .map(brgy => (

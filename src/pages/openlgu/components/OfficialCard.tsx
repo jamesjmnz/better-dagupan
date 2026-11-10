@@ -1,4 +1,5 @@
 import { Calendar, ChevronDown, ChevronRight, FileText } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -35,6 +36,7 @@ export default function OfficialCard({
   isExpanded,
   onToggle,
 }: OfficialCardProps) {
+  const { t } = useTranslation('openlgu');
   const personName = getPersonName(person);
   const initials =
     `${person.first_name[0]}${person.last_name[0]}`.toUpperCase();
@@ -101,7 +103,7 @@ export default function OfficialCard({
         onClick={onToggle}
         className='w-full text-left'
         aria-expanded={isExpanded}
-        aria-label={`Toggle details for ${personName}`}
+        aria-label={t('officials.toggleDetails', { name: personName })}
       >
         <CardContent className='flex items-center gap-4 p-4'>
           {/* Avatar with initials */}
@@ -139,24 +141,23 @@ export default function OfficialCard({
                           : 'text-kapwa-text-warning'
                     }
                   >
-                    {attendanceRate}% attendance
+                    {t('common.attendance', { rate: attendanceRate })}
                   </span>
                 </div>
               )}
               {!isExecutive && docsCount > 0 && (
                 <div className='flex items-center gap-1'>
                   <FileText className='h-3 w-3' />
-                  <span>
-                    {docsCount} document{docsCount !== 1 ? 's' : ''}
-                  </span>
+                  <span>{t('common.documentCount', { count: docsCount })}</span>
                 </div>
               )}
               {isExecutive && execOrdersCount > 0 && (
                 <div className='flex items-center gap-1'>
                   <FileText className='h-3 w-3' />
                   <span>
-                    {execOrdersCount} executive order
-                    {execOrdersCount !== 1 ? 's' : ''}
+                    {t('common.executiveOrderCount', {
+                      count: execOrdersCount,
+                    })}
                   </span>
                 </div>
               )}
@@ -168,8 +169,8 @@ export default function OfficialCard({
             {!isExpanded && (
               <span className='text-kapwa-text-disabled hidden text-xs sm:inline'>
                 {totalTermsServed > 1
-                  ? `served in ${totalTermsServed} term${totalTermsServed > 1 ? 's' : ''}`
-                  : 'view details'}
+                  ? t('officials.servedInTerms', { count: totalTermsServed })
+                  : t('officials.viewDetails')}
               </span>
             )}
             {isExpanded ? (
@@ -185,7 +186,7 @@ export default function OfficialCard({
       {isExpanded && (
         <CardContent className='animate-in fade-in slide-in-from-top-2 border-kapwa-border-weak bg-kapwa-bg-surface-raised/50 border-t p-4 duration-200'>
           <div className='text-kapwa-text-disabled mb-3 text-xs font-semibold tracking-wide uppercase'>
-            Service History
+            {t('officials.serviceHistory')}
           </div>
           <ServiceTimeline
             person={person}

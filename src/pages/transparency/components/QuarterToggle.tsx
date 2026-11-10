@@ -1,4 +1,5 @@
 import { Calendar, PieChart } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface QuarterToggleProps {
   quarters: string[];
@@ -58,6 +59,8 @@ export default function QuarterToggle({
   onViewModeChange,
   onQuarterChange,
 }: QuarterToggleProps) {
+  const { t } = useTranslation('transparency');
+
   return (
     <div className='flex flex-col items-end gap-3 md:items-center'>
       {/* Top Row: Year and View Mode Toggles */}
@@ -79,7 +82,10 @@ export default function QuarterToggle({
             options={['quarter', 'year']}
             selected={viewMode}
             onChange={onViewModeChange}
-            labels={{ quarter: 'Quarterly', year: 'Annual' }}
+            labels={{
+              quarter: t('quarter.quarterly'),
+              year: t('quarter.annual'),
+            }}
           />
         </div>
       </div>
@@ -88,7 +94,7 @@ export default function QuarterToggle({
       {viewMode === 'quarter' && (
         <div className='animate-in fade-in slide-in-from-top-1 flex items-center gap-2 duration-200'>
           <span className='text-kapwa-text-disabled mr-1 text-xs font-semibold tracking-wider uppercase'>
-            Period
+            {t('quarter.period')}
           </span>
           <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised flex rounded-lg border p-1'>
             {ALL_QUARTERS.map(q => {

@@ -18,6 +18,7 @@ import {
   Landmark,
   Users,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import FlagForReviewButton from '@/components/admin/FlagForReviewButton';
 import { DetailSection, useBreadcrumbs } from '@/components/layout';
@@ -39,6 +40,7 @@ import type { LegislationContext, Person } from '@/types/legislationTypes';
 import { lguLabels } from '@/lib/lguLabels';
 
 export default function LegislationDocument() {
+  const { t } = useTranslation('openlgu');
   const { document: urlId } = useParams();
   const { documents, persons, sessions, terms, isLoading } =
     useOutletContext<LegislationContext>();
@@ -54,17 +56,17 @@ export default function LegislationDocument() {
   const doc = documents?.find(d => d.id === urlId);
 
   if (isLoading) {
-    return <PageLoadingState message='Loading document...' />;
+    return <PageLoadingState message={t('document.loading')} />;
   }
 
   if (!doc)
     return (
       <div className='p-20 text-center' role='alert'>
         <h2 className='text-kapwa-text-strong text-xl font-bold'>
-          Document not found
+          {t('document.notFound')}
         </h2>
         <Link to={backLink} className='text-kapwa-text-brand hover:underline'>
-          Return to Archive
+          {t('document.returnToArchive')}
         </Link>
       </div>
     );
@@ -89,7 +91,7 @@ export default function LegislationDocument() {
   const session = doc.session_id
     ? sessions.find(s => s.id === doc.session_id)
     : null;
-  const term = terms?.find((t: any) => t.id === (doc as any).term_id);
+  const term = terms?.find((item: any) => item.id === (doc as any).term_id);
 
   return (
     <div className='animate-in fade-in mx-auto max-w-5xl space-y-6 duration-500'>
@@ -146,7 +148,7 @@ export default function LegislationDocument() {
 
       <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
         <div className='space-y-8 lg:col-span-2'>
-          <DetailSection title='Authored By' icon={Users}>
+          <DetailSection title={t('document.authoredBy')} icon={Users}>
             <div className='flex flex-wrap gap-2' role='list'>
               {displayAuthors.length > 0 ? (
                 displayAuthors.map(author => (
@@ -169,7 +171,7 @@ export default function LegislationDocument() {
                 ))
               ) : (
                 <span className='text-kapwa-text-disabled text-sm font-bold italic'>
-                  Office of the Mayor
+                  {t('common.officeOfTheMayor')}
                 </span>
               )}
             </div>
@@ -184,10 +186,10 @@ export default function LegislationDocument() {
               </div>
               <div className='text-center sm:text-left'>
                 <p className='text-kapwa-text-strong font-bold'>
-                  Official Document
+                  {t('document.officialDocument')}
                 </p>
                 <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
-                  Portable Document Format
+                  {t('document.pdf')}
                 </p>
               </div>
             </div>
@@ -197,18 +199,19 @@ export default function LegislationDocument() {
               rel='noreferrer'
               className={`flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl px-8 py-3 text-sm font-bold text-white shadow-md transition-all sm:w-auto ${doc.type === 'ordinance' ? 'bg-kapwa-bg-brand-default hover:bg-kapwa-bg-brand-hover' : doc.type === 'executive_order' ? 'bg-kapwa-bg-warning-default hover:bg-kapwa-bg-warning-hover' : 'bg-kapwa-bg-accent-orange-default hover:bg-kapwa-bg-accent-orange-hover'}`}
             >
-              <Download className='h-4 w-4' /> Download PDF
+              <Download className='h-4 w-4' /> {t('document.downloadPdf')}
             </a>
           </div>
         </div>
 
         <aside className='space-y-6'>
-          <DetailSection title='Legislative Context'>
+          <DetailSection title={t('document.legislativeContext')}>
             <dl className='space-y-6'>
               {/* Restored: Term Link */}
               <div>
                 <dt className='text-kapwa-text-disabled mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
-                  <Landmark className='h-3.5 w-3.5' /> Legislative Term
+                  <Landmark className='h-3.5 w-3.5' />{' '}
+                  {t('document.legislativeTerm')}
                 </dt>
                 <dd>
                   <Link
@@ -228,7 +231,8 @@ export default function LegislationDocument() {
               {/* Restored: Session Link */}
               <div className='border-kapwa-border-weak border-t pt-4'>
                 <dt className='text-kapwa-text-disabled mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
-                  <Gavel className='h-3.5 w-3.5' /> Approved During
+                  <Gavel className='h-3.5 w-3.5' />{' '}
+                  {t('document.approvedDuring')}
                 </dt>
                 <dd>
                   {session ? (
@@ -237,15 +241,18 @@ export default function LegislationDocument() {
                       className='group hover:border-kapwa-border-brand border-kapwa-border-weak bg-kapwa-bg-surface-raised/50 hover:bg-kapwa-bg-surface block min-h-[44px] rounded-xl border p-3 transition-all'
                     >
                       <span className='group-hover:text-kapwa-text-brand text-kapwa-text-support block text-sm leading-tight font-bold'>
-                        {session.ordinal_number} {session.type} Session
+                        {t('common.sessionTitle', {
+                          nth: session.ordinal_number,
+                          type: session.type,
+                        })}
                       </span>
                       <span className='text-kapwa-text-disabled mt-1 block font-mono text-[10px]'>
-                        Held on {session.date}
+                        {t('document.heldOn', { date: session.date })}
                       </span>
                     </Link>
                   ) : (
                     <span className='text-kapwa-text-disabled text-sm font-bold italic'>
-                      No session data linked
+                      {t('document.noSession')}
                     </span>
                   )}
                 </dd>
@@ -253,7 +260,8 @@ export default function LegislationDocument() {
 
               <div className='border-kapwa-border-weak border-t pt-4'>
                 <dt className='text-kapwa-text-disabled mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
-                  <Calendar className='h-3.5 w-3.5' /> Enacted Date
+                  <Calendar className='h-3.5 w-3.5' />{' '}
+                  {t('document.enactedDate')}
                 </dt>
                 <dd className='text-kapwa-text-support pl-5.5 text-sm font-bold'>
                   {doc.date_enacted}
@@ -262,7 +270,7 @@ export default function LegislationDocument() {
 
               <div className='border-kapwa-border-weak border-t pt-4'>
                 <dt className='text-kapwa-text-disabled mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
-                  <Activity className='h-3.5 w-3.5' /> Status
+                  <Activity className='h-3.5 w-3.5' /> {t('document.status')}
                 </dt>
                 <dd className='mt-1 pl-5.5'>
                   <Badge
@@ -279,8 +287,7 @@ export default function LegislationDocument() {
           {/* Flag for Review */}
           <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised rounded-xl border p-4'>
             <p className='text-kapwa-text-support mb-3 text-xs leading-relaxed'>
-              Notice an error with this document? Flag it for review by the
-              admin team.
+              {t('document.flagNotice')}
             </p>
             <FlagForReviewButton
               itemType='document'

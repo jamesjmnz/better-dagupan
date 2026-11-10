@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { Coins, Landmark, Wallet } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { StatGrid } from '@/components/ui/StatCard';
 import { Badge } from '@/components/ui/Badge';
@@ -10,7 +11,7 @@ import { PageHero } from '@/components/layout/PageLayouts';
 import FinancialPieChart from '@/pages/transparency/components/FinancialPieChart';
 
 import { formatPesoAdaptive } from '@/lib/format';
-import { lguLabels } from '@/lib/lguLabels';
+import { useLguTerms } from '@/lib/useLguTerms';
 
 import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
 
@@ -26,6 +27,8 @@ const COLORS = {
 };
 
 export default function MunicipalIncomePage() {
+  const { t } = useTranslation('statistics');
+  const terms = useLguTerms();
   const records = ariData as AnnualRegularIncome[];
   const data = records[0] as AnnualRegularIncome | undefined;
 
@@ -76,8 +79,8 @@ export default function MunicipalIncomePage() {
     return (
       <>
         <PageHero
-          title={`${lguLabels.adjective} Income`}
-          description='Revenue sources, fiscal autonomy, and national tax dependency.'
+          title={t('income.title', terms)}
+          description={t('income.emptyDescription')}
         />
         <NotYetAvailable />
       </>
@@ -88,14 +91,14 @@ export default function MunicipalIncomePage() {
     <>
       {/* PageHero - documented pattern for layout headers */}
       <PageHero
-        title={`${lguLabels.adjective} Income`}
-        description='Detailed analysis of revenue sources, fiscal autonomy, and national tax dependency.'
+        title={t('income.title', terms)}
+        description={t('income.description')}
       >
         <div className='flex flex-wrap justify-center gap-2'>
           <Badge variant='primary' dot>
             {data.period}
           </Badge>
-          <Badge variant='slate'>BLGF Data</Badge>
+          <Badge variant='slate'>{t('income.blgfData')}</Badge>
         </div>
       </PageHero>
 
@@ -105,23 +108,23 @@ export default function MunicipalIncomePage() {
           columns={3}
           stats={[
             {
-              label: 'Total Income',
+              label: t('income.totalIncome'),
               value: formatPesoAdaptive(
                 data.summary_indicators.annual_regular_income * 1_000_000
               ).fullString,
-              subtext: 'Annual Revenue',
+              subtext: t('income.annualRevenue'),
               variant: 'primary',
             },
             {
-              label: 'Local Sufficiency',
+              label: t('income.localSufficiency'),
               value: `${data.summary_indicators.dependency_rates.lsr_dependency}`,
-              subtext: 'LSR Share',
+              subtext: t('income.lsrShare'),
               variant: 'secondary',
             },
             {
-              label: 'NTA Dependency',
+              label: t('income.ntaDependency'),
               value: `${data.summary_indicators.dependency_rates.nta_dependency}`,
-              subtext: 'National Allotment',
+              subtext: t('income.nationalAllotment'),
               variant: 'slate',
               icon: Wallet,
             },
@@ -131,10 +134,10 @@ export default function MunicipalIncomePage() {
 
       {/* Chart wrapped in DetailSection */}
       <div className='mb-kapwa-lg'>
-        <DetailSection title='Revenue Composition' icon={Landmark}>
+        <DetailSection title={t('income.revenueComposition')} icon={Landmark}>
           <div className='flex justify-center'>
             <FinancialPieChart
-              title='Overview'
+              title={t('income.overview')}
               icon={Landmark}
               data={drillDownIncomeData}
               colors={[
@@ -149,7 +152,7 @@ export default function MunicipalIncomePage() {
       </div>
 
       {/* Full Financial Itemization */}
-      <DetailSection title='Full Financial Itemization' icon={Coins}>
+      <DetailSection title={t('income.itemization')} icon={Coins}>
         <div className='grid grid-cols-1 gap-8 md:grid-cols-3'>
           <div className='space-y-4'>
             <h4 className='text-kapwa-text-accent-orange border-b pb-2 text-[10px] font-black tracking-widest uppercase'>
@@ -258,10 +261,10 @@ export default function MunicipalIncomePage() {
         </div>
         <div className='space-y-1'>
           <p className='text-kapwa-text-strong text-[10px] font-bold tracking-widest uppercase'>
-            Verified Data Audit
+            {t('footer.verified')}
           </p>
           <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-            Source:{' '}
+            {t('footer.source')}{' '}
             <a
               href='https://data.bettergov.ph/datasets/9/resources/31'
               target='_blank'

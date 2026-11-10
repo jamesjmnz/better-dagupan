@@ -1,4 +1,5 @@
 import { Building2, CheckCircle2, FileText, Layers } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import { getAllOfficeDivisions } from '@/lib/services';
@@ -24,6 +25,7 @@ export default function ServiceFilters({
   onSourceChange,
   onClassificationChange,
 }: ServiceFiltersProps) {
+  const { t } = useTranslation('services');
   const officeDivisions = getAllOfficeDivisions();
 
   return (
@@ -33,7 +35,7 @@ export default function ServiceFilters({
         <div className='mb-3 flex items-center gap-2'>
           <CheckCircle2 className='text-kapwa-text-disabled h-4 w-4' />
           <h4 className='text-kapwa-text-strong text-xs font-bold uppercase tracking-wider'>
-            Data Source
+            {t('filters.dataSource')}
           </h4>
         </div>
         <div className='flex flex-wrap gap-2'>
@@ -60,7 +62,7 @@ export default function ServiceFilters({
         <div className='mb-3 flex items-center gap-2'>
           <Layers className='text-kapwa-text-disabled h-4 w-4' />
           <h4 className='text-kapwa-text-strong text-xs font-bold uppercase tracking-wider'>
-            Classification
+            {t('filters.classification')}
           </h4>
         </div>
         <div className='flex flex-wrap gap-2'>
@@ -87,13 +89,13 @@ export default function ServiceFilters({
         <div className='mb-3 flex items-center gap-2'>
           <Building2 className='text-kapwa-text-disabled h-4 w-4' />
           <h4 className='text-kapwa-text-strong text-xs font-bold uppercase tracking-wider'>
-            Office Division
+            {t('filters.officeDivision')}
           </h4>
         </div>
         <ScrollArea className='h-48'>
           <div className='space-y-1 pr-2'>
             <OfficeDivisionItem
-              division='All Offices'
+              division={t('filters.allOffices')}
               value='all'
               selected={selectedOfficeDivision === 'all'}
               onClick={() => onOfficeDivisionChange('all')}
@@ -122,9 +124,10 @@ interface SourceBadgeProps {
 }
 
 function SourceBadge({ source, selected, onClick }: SourceBadgeProps) {
+  const { t } = useTranslation('services');
   const labels: Record<Exclude<ServiceSource, 'all'>, string> = {
-    'citizens-charter': 'Official',
-    community: 'Community',
+    'citizens-charter': t('source.official'),
+    community: t('source.community'),
   };
 
   const isSelected = source === 'all';
@@ -142,7 +145,7 @@ function SourceBadge({ source, selected, onClick }: SourceBadgeProps) {
       {isSelected ? (
         <>
           <CheckCircle2 className='h-3.5 w-3.5' />
-          All Sources
+          {t('source.allSources')}
         </>
       ) : (
         <>
@@ -166,6 +169,8 @@ function ClassificationBadge({
   selected,
   onClick,
 }: ClassificationBadgeProps) {
+  const { t } = useTranslation('services');
+
   return (
     <button
       type='button'
@@ -177,7 +182,7 @@ function ClassificationBadge({
       } inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-bold`}
     >
       {classification === 'all' ? (
-        <>All Types</>
+        <>{t('filters.allTypes')}</>
       ) : (
         <>
           <Layers className='h-3.5 w-3.5' />

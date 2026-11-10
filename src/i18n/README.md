@@ -10,9 +10,22 @@ Translation files live in `public/locales/`:
 
 To organize translations better the concept of namespacing is used
 
-- `common.json` - Navigation, buttons, shared text
-- `visa.json` - Visa information pages
+- `common.json` - Home page, disclaimer, directory and shared civic text
 - `about.json` - About page
+- `navigation.json` - Navbar, menus and footer
+- `ui.json` - Shared components, plus LGU-type words (`city`, `municipality`,
+  `province`) picked by i18next context
+- `services.json` - Services directory and service detail pages
+- `openlgu.json` - OpenLGU legislative pages
+- `transparency.json` - Transparency portal and financial report
+- `statistics.json` - Statistics layout, income and competitiveness pages
+- `government.json` - Government hub and barangay pages
+- `pages.json` - Contact, Join Us, Ideas, Contribute, Sitemap, Search,
+  weather, forex, Accessibility and Terms of Service
+
+Every namespace exists in `en`, `fil` and `pag` (Pangasinan files start as
+`{}`), and is listed in the `ns` array in `src/i18n.ts` so it loads before a
+page renders. `src/data/__tests__/localeParity.test.ts` enforces both.
 
 ## For translators
 
@@ -54,13 +67,13 @@ and a pull request is merged only after a Pangasinan speaker has reviewed it.
 
 ### Contributing
 
-1. Pick keys from `public/locales/en/common.json` or
-   `public/locales/en/about.json` and copy them into the matching file in
-   `public/locales/pag/`, keeping the same nesting.
+1. Pick keys from any file in `public/locales/en/` and copy them into the
+   matching file in `public/locales/pag/`, keeping the same nesting.
 2. Translate the values. Leave the keys themselves in English.
 3. Keep every placeholder exactly as it is, including the double braces:
    `{{portal}}`, `{{lgu}}`, `{{date}}` and so on. They are filled in by the
-   portal; translating or dropping one breaks the sentence.
+   portal; translating or dropping one breaks the sentence. Keep tags such as
+   `<strong>` and `<link>` too: translate the words between them, not the tags.
 4. Translate lists whole. A list in Pangasinan replaces the English one rather
    than merging with it, so it needs the same number of items.
 5. Do not add empty strings. Leave a key out instead, and English will show.
@@ -94,6 +107,11 @@ const items = t('items', { returnObjects: true }) as string[];
 
 ### Adding new feature with translation
 
-1. Create `new-namespace.json` under `public/locales/{locale}`
+1. Create `new-namespace.json` under `public/locales/en` and
+   `public/locales/fil` with the same keys, and an empty `{}` under
+   `public/locales/pag`
 2. Add to `src/i18n.ts`: `ns: [...otherNamespaces,'new-namespace']`
 3. Use `useTranslation('new-namespace')` in your component
+4. Pass LGU names and type-aware words from `useLguTerms()`
+   (`src/lib/useLguTerms.ts`) as interpolation values rather than writing
+   "City" or the LGU name into the strings

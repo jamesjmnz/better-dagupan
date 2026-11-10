@@ -1,5 +1,6 @@
 import { Banknote, ChevronDown, ChevronUp } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import type { ServiceFee } from '@/types/servicesTypes';
 
 interface FeesCardProps {
@@ -34,6 +35,7 @@ function formatPeso(amount: number): string {
 }
 
 export function FeesCard({ fees }: FeesCardProps) {
+  const { t } = useTranslation('services');
   const [isExpanded, setIsExpanded] = useState(false);
   const feeArray = Array.isArray(fees) ? fees : [fees];
 
@@ -53,7 +55,7 @@ export function FeesCard({ fees }: FeesCardProps) {
   if (minFee === maxFee) {
     feeDisplay = formatPeso(minFee);
   } else if (maxFee === 0) {
-    feeDisplay = 'Variable';
+    feeDisplay = t('fees.variable');
   } else {
     feeDisplay = `${formatPeso(minFee)} - ${formatPeso(maxFee)}`;
   }
@@ -71,7 +73,7 @@ export function FeesCard({ fees }: FeesCardProps) {
         <div className='flex flex-1 items-center justify-between'>
           <div className='text-left'>
             <p className='text-kapwa-text-disabled mb-1 text-[10px] font-bold tracking-widest uppercase'>
-              Fees
+              {t('fees.title')}
             </p>
             <p className='text-kapwa-text-strong text-xs font-bold'>
               {feeDisplay}
@@ -91,7 +93,7 @@ export function FeesCard({ fees }: FeesCardProps) {
           {requiredFees.length > 0 && (
             <div className='mb-4'>
               <h4 className='text-kapwa-text-strong mb-2 text-xs font-semibold uppercase tracking-wider'>
-                Required Fees
+                {t('fees.required')}
               </h4>
               <div className='space-y-2'>
                 {requiredFees.map((fee, idx) => (
@@ -117,7 +119,7 @@ export function FeesCard({ fees }: FeesCardProps) {
           {optionalFees.length > 0 && (
             <div>
               <h4 className='text-kapwa-text-support mb-2 text-xs font-semibold uppercase tracking-wider'>
-                Additional Fees (if applicable)
+                {t('fees.additional')}
               </h4>
               <div className='space-y-2'>
                 {optionalFees.map((fee, idx) => (
@@ -144,7 +146,7 @@ export function FeesCard({ fees }: FeesCardProps) {
           (requiredFees.length > 1 && minFee !== maxFee) ? (
             <div className='border-kapwa-border-brand bg-kapwa-bg-brand-weak/20 mt-4 flex items-center justify-between rounded-lg border p-3'>
               <span className='text-kapwa-text-support text-xs font-medium'>
-                Total Range
+                {t('fees.totalRange')}
               </span>
               <span className='text-kapwa-text-brand text-xs font-bold'>
                 {feeDisplay}

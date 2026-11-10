@@ -1,0 +1,15 @@
+{
+  "layout": {
+    "title": "Government",
+    "description": "Access information on elected leaders, {{adjectiveLower}} departments, and the component barangays of {{lgu}}.",
+    "categories": {
+      "leadership": "Leadership",
+      "administrative": "Administrative",
+      "localUnits": "Local Units"
+    }
+  },
+  "barangays": {
+    "sidebarTitle": "Barangays",
+    "notFound": "Barangay not found"
+  }
+}

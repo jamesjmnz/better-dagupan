@@ -1,0 +1,71 @@
+{
+  "topBar": {
+    "joinUs": "🚀 Sumali",
+    "about": "Tungkol",
+    "officialShort": "Gov.ph",
+    "official": "Opisyal na Gov.ph",
+    "hotlines": "Mga Hotline",
+    "selectLanguage": "Pumili ng Wika"
+  },
+  "brand": {
+    "logoAlt": "Logo ng {{portal}}",
+    "tagline": "Portal ng Komunidad para sa {{fullName}}"
+  },
+  "search": "Maghanap",
+  "toggleMenu": "Buksan o Isara ang Menu",
+  "mobile": {
+    "joinUs": "🚀 Sumali sa Rebolusyon",
+    "about": "Tungkol sa {{portal}}",
+    "contact": "Makipag-ugnayan sa Amin"
+  },
+  "menu": {
+    "electedOfficials": "Mga Halal na Opisyal",
+    "departments": "Mga Departamento",
+    "barangays": "Mga Barangay",
+    "demographics": "Demograpiya",
+    "competitiveness": "Kakayahang Makipagkumpitensya",
+    "income": "Kita ng {{adjective}}",
+    "ordinances": "Mga Ordinansa",
+    "resolutions": "Mga Resolusyon",
+    "executiveOrders": "Mga Executive Order",
+    "financialReports": "Mga Ulat Pinansyal",
+    "procurement": "Procurement",
+    "dpwhProjects": "Mga Proyekto ng DPWH"
+  },
+  "footer": {
+    "tagline": "Sibikong Portal ng Komunidad",
+    "description": "Isang open-source na inisyatiba na nagbibigay ng bukas na access sa mga serbisyo ng {{adjectiveLower}}, lokal na lehislasyon, at pampublikong datos para sa mga mamamayan ng {{lgu}}.",
+    "builtBy": "Binuo ng komunidad para sa komunidad.",
+    "cost": "Gastos sa Mamamayan ng {{lgu}} =",
+    "github": "GitHub",
+    "sitemap": "Sitemap",
+    "sections": {
+      "localServices": "Mga Lokal na Serbisyo",
+      "localGovernment": "Lokal na Pamahalaan",
+      "network": "BetterGov Network",
+      "resources": "Mga Mapagkukunan"
+    },
+    "links": {
+      "allServices": "Lahat ng Serbisyo",
+      "business": "Negosyo, Kalakalan at Pamumuhunan",
+      "health": "Kalusugan at Kagalingan",
+      "social": "Serbisyong Panlipunan",
+      "agriculture": "Agrikultura at Pagpapaunlad ng Ekonomiya",
+      "electedOfficials": "Mga Halal na Opisyal",
+      "departments": "Mga Departamento",
+      "barangayDirectory": "Direktoryo ng Barangay",
+      "openlgu": "OpenLGU Portal",
+      "transparency": "Transparency",
+      "transparencyPortal": "Transparency Portal",
+      "openData": "Open Data Portal",
+      "petitions": "Petitions PH",
+      "saln": "SALN Tracker",
+      "budget": "Budget Tracker",
+      "philgeps": "Philgeps Tracker",
+      "lguSite": "{{lgu}} Gov.ph",
+      "foi": "Freedom of Information",
+      "province": "Lalawigan ng {{province}}",
+      "reportError": "Mag-ulat ng Mali"
+    }
+  }
+}

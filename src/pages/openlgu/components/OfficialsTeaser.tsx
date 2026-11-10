@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Crown, Shield, User } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { PageLoadingState } from '@/components/ui';
 import { Badge } from '@/components/ui/Badge';
@@ -23,6 +24,7 @@ export default function OfficialsTeaser({
   term,
   isLoading,
 }: OfficialsTeaserProps) {
+  const { t } = useTranslation('openlgu');
   // Session-based seed for stable randomness during navigation
   const [sessionSeed] = useState(() => Math.random());
 
@@ -97,7 +99,7 @@ export default function OfficialsTeaser({
 
   // Show loading state while data is being fetched
   if (isLoading) {
-    return <PageLoadingState message='Loading officials...' />;
+    return <PageLoadingState message={t('common.loadingOfficials')} />;
   }
 
   // Early return if data is not available
@@ -119,14 +121,14 @@ export default function OfficialsTeaser({
     if (role.includes('mayor') && !role.includes('vice')) {
       return (
         <Badge variant='warning' dot>
-          Mayor
+          {t('filters.mayor')}
         </Badge>
       );
     }
     if (role.includes('vice mayor')) {
       return (
         <Badge variant='secondary' dot>
-          Vice Mayor
+          {t('filters.viceMayor')}
         </Badge>
       );
     }
@@ -148,13 +150,13 @@ export default function OfficialsTeaser({
     <div className='space-y-4'>
       <div className='flex items-center justify-between'>
         <h2 className='text-kapwa-text-disabled text-sm font-bold tracking-widest uppercase'>
-          Officials
+          {t('common.officials')}
         </h2>
         <Link
           to='/openlgu/officials'
           className='text-kapwa-text-brand hover:text-kapwa-text-brand text-xs font-bold'
         >
-          View all →
+          {t('officials.viewAll')}
         </Link>
       </div>
       <div className='grid grid-cols-2 gap-3'>

@@ -1,18 +1,23 @@
 import { Outlet } from 'react-router-dom';
 
+import { useTranslation } from 'react-i18next';
+
 import { PageHeader, SectionBlock } from '@/components/layout';
 import { SidebarLayout } from '@/components/layout/SidebarLayout';
 
 import StatisticsSidebar from './components/StatisticsSidebar';
-import { lguLabels } from '@/lib/lguLabels';
+import { useLguTerms } from '@/lib/useLguTerms';
 
 export default function StatisticsLayout() {
+  const { t } = useTranslation('statistics');
+  const terms = useLguTerms();
+
   return (
     <div className='min-h-screen bg-kapwa-bg-surface'>
       <PageHeader
         variant='centered'
-        title={`${lguLabels.adjective} Statistics`}
-        description={`Data-driven insights into the population, economy, and performance of ${lguLabels.name}.`}
+        title={t('layout.title', terms)}
+        description={t('layout.description', terms)}
       />
 
       <SectionBlock>

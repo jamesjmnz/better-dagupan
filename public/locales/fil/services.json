@@ -1,0 +1,128 @@
+{
+  "categories": {
+    "certificates-vital-records": "Mga Sertipiko at Rekord Sibil",
+    "business-trade-investment": "Negosyo, Kalakalan at Pamumuhunan",
+    "social-services-assistance": "Serbisyong Panlipunan at Tulong",
+    "health-wellness": "Kalusugan at Kagalingan",
+    "taxation-payments": "Buwis at mga Bayarin",
+    "agriculture-economic-development": "Agrikultura at Pagpapaunlad ng Ekonomiya",
+    "infrastructure-public-works": "Imprastraktura at Pampublikong Gawain",
+    "education-scholarship": "Edukasyon at Iskolarsip",
+    "public-safety-security": "Kaligtasan at Seguridad ng Publiko",
+    "environment-natural-resources": "Kapaligiran at Likas na Yaman"
+  },
+  "layout": {
+    "title": "Mga Serbisyo ng Lokal na Pamahalaan",
+    "description": "Tuklasin ang mga opisyal na serbisyo ng {{adjectiveLower}} mula sa Citizens Charter at mga ambag ng komunidad. Pumili ng kategorya para salain, o maghanap sa ibaba.",
+    "searchPlaceholder": "Maghanap ng serbisyo (hal., Business Permit)...",
+    "directoryTitle": "Direktoryo ng mga Serbisyo",
+    "directoryDescription": "Tingnan ang mga kinakailangan at proseso."
+  },
+  "sidebar": {
+    "categories": "Mga Kategorya",
+    "allServices": "Lahat ng Serbisyo",
+    "missingTitle": "May kulang na serbisyo?",
+    "missingBody": "Ang {{portal}} ay pinapanatili ng komunidad. Tulungan ang iyong kapwa mamamayan sa pagmumungkahi ng bagong serbisyo para sa direktoryo.",
+    "suggest": "Magmungkahi ng Bagong Serbisyo"
+  },
+  "index": {
+    "emptyTitle": "Walang nahanap na serbisyo",
+    "emptyMessage": "Wala kaming nahanap na serbisyong tumutugma sa iyong mga filter. Subukang baguhin ang iyong paghahanap o mga filter.",
+    "results": "{{total}} Resulta"
+  },
+  "source": {
+    "official": "Opisyal",
+    "officialCc": "Opisyal (CC)",
+    "community": "Komunidad",
+    "all": "Lahat",
+    "allSources": "Lahat ng Pinagmulan"
+  },
+  "filters": {
+    "title": "Mga Filter",
+    "active": "Aktibo",
+    "source": "Pinagmulan",
+    "type": "Uri",
+    "office": "Tanggapan",
+    "allOffices": "Lahat ng Tanggapan",
+    "clearAll": "Alisin Lahat",
+    "dataSource": "Pinagmulan ng Datos",
+    "classification": "Klasipikasyon",
+    "officeDivision": "Dibisyon ng Tanggapan",
+    "allTypes": "Lahat ng Uri"
+  },
+  "card": {
+    "viewDetails": "Tingnan ang detalye ng {{name}}",
+    "online": "Online",
+    "walkIn": "Walk-in",
+    "serviceNo": "Serbisyo Blg. {{number}}",
+    "pendingVerification": "Hinihintay ang Beripikasyon",
+    "officialData": "Opisyal na Datos",
+    "unverified": "Hindi Pa Beripikado",
+    "view": "Tingnan",
+    "transaction": "{{classification}} na Transaksiyon"
+  },
+  "detail": {
+    "notFound": "Hindi nahanap ang serbisyo",
+    "quickInfo": {
+      "processingTime": "Tagal ng Pagproseso",
+      "fee": "Bayad",
+      "whoCanApply": "Sino ang Maaaring Mag-apply",
+      "appointmentType": "Uri ng Appointment",
+      "validity": "Bisa",
+      "documents": "Mga Kailangang Dokumento"
+    },
+    "classification": "Klasipikasyon",
+    "transactional": "Transaksiyonal",
+    "resource": "Sanggunian",
+    "whoMayAvail": "Sino ang maaaring makinabang:",
+    "accessPortal": "Buksan ang Online Portal",
+    "viewDocument": "Tingnan ang Buong Dokumento",
+    "pendingTitle": "Hinihintay pa ang Beripikasyon ng Detalyadong Impormasyon",
+    "pendingBody": "Ang datos ng serbisyong ito ay mula sa dokumento ng Citizens Charter. Idaragdag ang detalyadong mga kinakailangan, hakbang, at impormasyon sa bayad habang bineberipika at kinukuha namin ang datos mula sa opisyal na dokumento.",
+    "processSteps": "Mga Hakbang sa Proseso",
+    "informationDetails": "Mga Detalye ng Impormasyon",
+    "sources": "Mga Pinagkunan at Sanggunian",
+    "reference": "Sanggunian",
+    "dataIntegrity": "Katumpakan ng Datos",
+    "officialData": "Opisyal na Datos",
+    "verifiedInformation": "Beripikadong Impormasyon",
+    "unverifiedData": "Hindi Pa Beripikadong Datos",
+    "fromCharter": "Mula sa dokumento ng Citizens Charter",
+    "lastAudit": "Huling Pagsusuri: {{date}}",
+    "awaitingVerification": "Hinihintay ang opisyal na beripikasyon",
+    "responsibleOffices": "Mga Responsableng Tanggapan",
+    "viewProfile": "Tingnan ang Profile",
+    "helpTitle": "Tumulong na pagbutihin ang datos na ito",
+    "helpBody": "May nakitang mali o lumang impormasyon? Tinutulungan ng aming komunidad na panatilihing tumpak ang portal na ito.",
+    "suggestEdit": "Magmungkahi ng Pagbabago"
+  },
+  "fees": {
+    "title": "Mga Bayarin",
+    "variable": "Nag-iiba",
+    "required": "Mga Kailangang Bayarin",
+    "additional": "Karagdagang Bayarin (kung kailangan)",
+    "totalRange": "Kabuuang Saklaw"
+  },
+  "timeline": {
+    "title": "Paano Mag-apply",
+    "visitPortal": "Bisitahin ang Portal",
+    "time": "Oras:"
+  },
+  "requirements": {
+    "title": "Mga Kinakailangan",
+    "from": "mula sa: {{place}}",
+    "viewService": "Tingnan ang Serbisyo"
+  },
+  "supporting": {
+    "title": "Detalye ng mga Sumusuportang Dokumento",
+    "collapse": "I-click para itago",
+    "expand": "I-click para ipakita",
+    "mandatory": "Mga Sapilitang Kinakailangan",
+    "from": "mula sa:",
+    "chooseTwo": "Pumili ng Alinmang Dalawa (2):",
+    "additional": "Karagdagang Dokumento (kung kailangan)",
+    "conditional": "Mga Kondisyonal na Kinakailangan",
+    "ifUnavailable": "Kung wala:",
+    "note": "Paalala:"
+  }
+}

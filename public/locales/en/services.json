@@ -1,0 +1,128 @@
+{
+  "categories": {
+    "certificates-vital-records": "Certificates & Vital Records",
+    "business-trade-investment": "Business, Trade & Investment",
+    "social-services-assistance": "Social Services & Assistance",
+    "health-wellness": "Health & Wellness",
+    "taxation-payments": "Taxation & Payments",
+    "agriculture-economic-development": "Agriculture & Economic Development",
+    "infrastructure-public-works": "Infrastructure & Public Works",
+    "education-scholarship": "Education & Scholarship",
+    "public-safety-security": "Public Safety & Security",
+    "environment-natural-resources": "Environment & Natural Resources"
+  },
+  "layout": {
+    "title": "Local Government Services",
+    "description": "Explore official {{adjectiveLower}} services from the Citizens Charter and community contributions. Choose a category to filter or search below.",
+    "searchPlaceholder": "Search for services (e.g., Business Permit)...",
+    "directoryTitle": "Service Directory",
+    "directoryDescription": "Browse requirements and procedures."
+  },
+  "sidebar": {
+    "categories": "Categories",
+    "allServices": "All Services",
+    "missingTitle": "Missing a service?",
+    "missingBody": "{{portal}} is community-maintained. Help your fellow citizens by suggesting a new service directory.",
+    "suggest": "Suggest New Service"
+  },
+  "index": {
+    "emptyTitle": "No services found",
+    "emptyMessage": "We couldn't find any services matching your filters. Try adjusting your search or filters.",
+    "results": "{{total}} Results"
+  },
+  "source": {
+    "official": "Official",
+    "officialCc": "Official (CC)",
+    "community": "Community",
+    "all": "All",
+    "allSources": "All Sources"
+  },
+  "filters": {
+    "title": "Filters",
+    "active": "Active",
+    "source": "Source",
+    "type": "Type",
+    "office": "Office",
+    "allOffices": "All Offices",
+    "clearAll": "Clear All",
+    "dataSource": "Data Source",
+    "classification": "Classification",
+    "officeDivision": "Office Division",
+    "allTypes": "All Types"
+  },
+  "card": {
+    "viewDetails": "View details for {{name}}",
+    "online": "Online",
+    "walkIn": "Walk-in",
+    "serviceNo": "Service No. {{number}}",
+    "pendingVerification": "Pending Verification",
+    "officialData": "Official Data",
+    "unverified": "Unverified",
+    "view": "View",
+    "transaction": "{{classification}} Transaction"
+  },
+  "detail": {
+    "notFound": "Service not found",
+    "quickInfo": {
+      "processingTime": "Processing Time",
+      "fee": "Fee",
+      "whoCanApply": "Who Can Apply",
+      "appointmentType": "Appointment Type",
+      "validity": "Validity Period",
+      "documents": "Documents Required"
+    },
+    "classification": "Classification",
+    "transactional": "Transactional",
+    "resource": "Resource",
+    "whoMayAvail": "Who may avail:",
+    "accessPortal": "Access Online Portal",
+    "viewDocument": "View Full Document",
+    "pendingTitle": "Detailed Information Pending Verification",
+    "pendingBody": "This service data is from the Citizens Charter document. Detailed requirements, steps, and fee information will be added as we verify and extract data from the official document.",
+    "processSteps": "Process Steps",
+    "informationDetails": "Information Details",
+    "sources": "Sources & References",
+    "reference": "Reference",
+    "dataIntegrity": "Data Integrity",
+    "officialData": "Official Data",
+    "verifiedInformation": "Verified Information",
+    "unverifiedData": "Unverified Data",
+    "fromCharter": "From Citizens Charter document",
+    "lastAudit": "Last Audit: {{date}}",
+    "awaitingVerification": "Awaiting official verification",
+    "responsibleOffices": "Responsible Offices",
+    "viewProfile": "View Profile",
+    "helpTitle": "Help improve this data",
+    "helpBody": "Find an error or outdated info? Our community helps keep this portal accurate.",
+    "suggestEdit": "Suggest an Edit"
+  },
+  "fees": {
+    "title": "Fees",
+    "variable": "Variable",
+    "required": "Required Fees",
+    "additional": "Additional Fees (if applicable)",
+    "totalRange": "Total Range"
+  },
+  "timeline": {
+    "title": "How to Apply",
+    "visitPortal": "Visit Portal",
+    "time": "Time:"
+  },
+  "requirements": {
+    "title": "Requirements",
+    "from": "from: {{place}}",
+    "viewService": "View Service"
+  },
+  "supporting": {
+    "title": "Supporting Documents Details",
+    "collapse": "Click to collapse",
+    "expand": "Click to expand",
+    "mandatory": "Mandatory Requirements",
+    "from": "from:",
+    "chooseTwo": "Choose Any Two (2):",
+    "additional": "Additional Documents (if applicable)",
+    "conditional": "Conditional Requirements",
+    "ifUnavailable": "If unavailable:",
+    "note": "Note:"
+  }
+}

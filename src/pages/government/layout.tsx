@@ -7,11 +7,13 @@ import { PageHeader, SectionBlock } from '@/components/layout';
 
 import { cn } from '@/lib/utils';
 import { lguLabels } from '@/lib/lguLabels';
+import { useLguTerms } from '@/lib/useLguTerms';
 
 export default function GovernmentRootLayout() {
   const location = useLocation();
   const currentPath = location.pathname;
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'government']);
+  const terms = useLguTerms();
 
   const branches = [
     {
@@ -22,7 +24,7 @@ export default function GovernmentRootLayout() {
       ),
       icon: UsersIcon,
       path: '/government/elected-officials',
-      category: 'Leadership',
+      category: t('government:layout.categories.leadership'),
     },
     {
       title: t('government.departmentsTitle', 'Departments'),
@@ -32,7 +34,7 @@ export default function GovernmentRootLayout() {
       ),
       icon: Building2Icon,
       path: '/government/departments',
-      category: 'Administrative',
+      category: t('government:layout.categories.administrative'),
     },
     {
       title: t('government.barangaysTitle', 'Barangays'),
@@ -42,7 +44,7 @@ export default function GovernmentRootLayout() {
       ),
       icon: HomeIcon,
       path: '/government/barangays',
-      category: 'Local Units',
+      category: t('government:layout.categories.localUnits'),
     },
   ];
 
@@ -51,8 +53,8 @@ export default function GovernmentRootLayout() {
       {/* Unified Page Header */}
       <PageHeader
         variant='centered'
-        title='Government'
-        description={`Access information on elected leaders, ${lguLabels.adjective.toLowerCase()} departments, and the component barangays of ${lguLabels.name}.`}
+        title={t('government:layout.title')}
+        description={t('government:layout.description', terms)}
       />
 
       <SectionBlock className='pb-kapwa-xs md:pb-kapwa-sm'>

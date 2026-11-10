@@ -3,6 +3,8 @@ import { useMemo } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 
 import { Calendar, ChevronRight, FileText, Users } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+
 import { IndexPageLayout } from '@/components/layout/IndexPageLayout';
 import type { BreadcrumbItem } from '@/types/components';
 import { Badge } from '@/components/ui/Badge';
@@ -19,6 +21,7 @@ interface LegislationContext {
 }
 
 export default function TermsIndex() {
+  const { t } = useTranslation('openlgu');
   const { terms, persons, sessions, documents } =
     useOutletContext<LegislationContext>();
 
@@ -70,21 +73,21 @@ export default function TermsIndex() {
   }, [terms, persons, sessions, documents]);
 
   const breadcrumbs: BreadcrumbItem[] = [
-    { label: 'Home', href: '/' },
-    { label: 'OpenLGU', href: '/openlgu' },
-    { label: 'Terms', href: '/openlgu/terms' },
+    { label: t('common.home'), href: '/' },
+    { label: t('common.openlgu'), href: '/openlgu' },
+    { label: t('common.terms'), href: '/openlgu/terms' },
   ];
 
   return (
     <IndexPageLayout
-      title='Legislative Terms'
-      description={`Browse historical records of the ${lguLabels.body} sessions.`}
+      title={t('terms.title')}
+      description={t('terms.description', { body: lguLabels.body })}
       breadcrumbs={breadcrumbs}
       resultsCount={termsWithStats.length}
-      resultsLabel='terms'
+      resultsLabel={t('terms.resultsLabel')}
       emptyState={{
-        title: 'No terms found',
-        message: 'No legislative terms are available at this time.',
+        title: t('terms.emptyTitle'),
+        message: t('terms.emptyMessage'),
       }}
     >
       <CardGrid columns={3}>
@@ -101,7 +104,7 @@ export default function TermsIndex() {
               <header className='mb-4 flex items-start justify-between'>
                 <div>
                   <Badge variant='primary' dot className='mb-2'>
-                    {term.ordinal} Term
+                    {t('common.termBadge', { nth: term.ordinal })}
                   </Badge>
                   <h3 className='group-hover:text-kapwa-text-brand text-kapwa-text-strong text-xl font-bold transition-colors'>
                     {term.name}
@@ -129,7 +132,7 @@ export default function TermsIndex() {
                     </span>
                   </div>
                   <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
-                    Councilors
+                    {t('terms.councilors')}
                   </p>
                 </div>
                 <div className='text-center'>
@@ -140,7 +143,7 @@ export default function TermsIndex() {
                     </span>
                   </div>
                   <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
-                    Documents
+                    {t('terms.documents')}
                   </p>
                 </div>
               </div>
@@ -149,17 +152,17 @@ export default function TermsIndex() {
                 <div className='mt-3 flex flex-wrap gap-2'>
                   {term.ordCount > 0 && (
                     <span className='bg-kapwa-bg-surface text-kapwa-text-brand rounded-full px-2 py-1 text-[10px] font-bold'>
-                      {term.ordCount} Ord
+                      {t('terms.ordShort', { count: term.ordCount })}
                     </span>
                   )}
                   {term.resCount > 0 && (
                     <span className='bg-kapwa-bg-accent-orange-weak text-kapwa-text-accent-orange rounded-full px-2 py-1 text-[10px] font-bold'>
-                      {term.resCount} Res
+                      {t('terms.resShort', { count: term.resCount })}
                     </span>
                   )}
                   {term.eoCount > 0 && (
                     <span className='bg-kapwa-yellow-50 text-kapwa-yellow-700 rounded-full px-2 py-1 text-[10px] font-bold'>
-                      {term.eoCount} EO
+                      {t('terms.eoShort', { count: term.eoCount })}
                     </span>
                   )}
                 </div>

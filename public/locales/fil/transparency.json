@@ -1,0 +1,72 @@
+{
+  "layout": {
+    "title": "Transparency Portal",
+    "description": "Isang inisyatiba ng komunidad para gawing madaling makita, maunawaan, at mapatunayan ng bawat mamamayan ang pampublikong datos ng {{lgu}}.",
+    "compactDescription": "Subaybayan ang pondo ng {{adjectiveLower}}, mga proyektong pang-imprastraktura, at mga rekord ng procurement."
+  },
+  "sidebar": {
+    "title": "Transparency",
+    "financial": "Badyet at Pananalapi",
+    "procurement": "Procurement",
+    "infrastructure": "Mga Proyekto ng DPWH"
+  },
+  "index": {
+    "funds": {
+      "title": "Pampublikong Pondo",
+      "description": "Malayang paglalarawan ng kita ng {{adjectiveLower}} at kung saan inilalaan ang iyong mga buwis.",
+      "badge": "Pananalapi"
+    },
+    "works": {
+      "title": "Pampublikong Gawain",
+      "description": "Pagsubaybay ng komunidad sa pagkukumpuni ng kalsada, pagpapatayo ng gusali, at mga lokal na proyektong pang-imprastraktura.",
+      "badge": "Pagsubaybay"
+    },
+    "procurement": {
+      "title": "Procurement",
+      "description": "Pagsusuri sa bidding at mga iginawad na kontrata ng {{adjectiveLower}} upang matiyak ang patas at bukas na kompetisyon.",
+      "badge": "Mga Kontrata"
+    },
+    "analyze": "Suriin ang Datos",
+    "helpTitle": "Tumulong sa Aming Pagsusuri",
+    "helpBody": "Nakasalalay ang aming datos sa mga boluntaryong tulad mo. Kung may makita kang proyektong nawawala o gastusing tila mali, ipaalam sa amin.",
+    "reportIssue": "Mag-ulat ng Isyu",
+    "sourcesTitle": "Mga Pinagkunan ng Datos",
+    "sourcesBody": "Kinokopya at bineberipika namin ang datos mula sa mga sumusunod na plataporma:",
+    "dashboard": "Transparency Dashboard",
+    "dataPortal": "BetterGov Data Portal"
+  },
+  "financial": {
+    "title": "Kalagayang Pinansyal",
+    "breadcrumbTransparency": "Transparency",
+    "breadcrumb": "Ulat Pinansyal",
+    "verifiedAudit": "Beripikadong Audit",
+    "fiscalYear": "FY {{year}}",
+    "millions": "Milyon (PHP)",
+    "description": "Malayang paglalarawan ng badyet ng {{adjectiveLower}}, kasama ang kasalukuyang kita at gastusin sa operasyon.",
+    "summaryCards": "Mga Card ng Buod Pinansyal",
+    "incomeComposition": "Komposisyon ng Kita",
+    "expenditureAllocation": "Paglalaan ng Gastusin",
+    "source": "Pinagkunan: LGU SRE mula sa BLGF at Full Disclosure Policy Portal"
+  },
+  "summary": {
+    "revenue": "Kabuuang Kita (M)",
+    "expenditure": "Kabuuang Gastusin (M)",
+    "netIncome": "Netong Kita sa Operasyon (M)",
+    "treasury": "Balanse ng Kaban (M)"
+  },
+  "quarter": {
+    "quarterly": "Kada Quarter",
+    "annual": "Taunan",
+    "period": "Panahon"
+  },
+  "chart": {
+    "percentOfTotal": "{{percent}}% ng kabuuan",
+    "clickToView": "I-click para makita ang detalye",
+    "breakdownView": "Detalyadong Tingin",
+    "back": "Bumalik",
+    "toggleLabels": "Ipakita o Itago ang mga Label",
+    "toggleList": "Ipakita o Itago ang Listahan",
+    "return": "Bumalik",
+    "total": "Kabuuan"
+  }
+}

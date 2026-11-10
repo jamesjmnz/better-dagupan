@@ -2,6 +2,7 @@ import { FC, useMemo, useState } from 'react';
 
 import Fuse from 'fuse.js';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 
 import { Input } from '@bettergov/kapwa/input';
 import { SearchIcon } from 'lucide-react';
@@ -49,6 +50,7 @@ const Hit: FC<HitProps> = ({ hit }) => {
 };
 
 const SearchPage: FC = () => {
+  const { t } = useTranslation('pages');
   const [query, setQuery] = useState('');
   const [typeFilter, setTypeFilter] = useState<string>('');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
@@ -81,15 +83,12 @@ const SearchPage: FC = () => {
   return (
     <div className='container mx-auto px-4 py-8 md:py-12'>
       <Helmet>
-        <title>Search - Better Government Portal</title>
-        <meta
-          name='description'
-          content='Search for government services and resources'
-        />
+        <title>{t('search.documentTitle')}</title>
+        <meta name='description' content={t('search.metaDescription')} />
       </Helmet>
 
       <h1 className='kapwa-heading-xl text-kapwa-text-strong font-extrabold'>
-        Search
+        {t('search.title')}
       </h1>
 
       <div className='mb-6'>
@@ -97,7 +96,7 @@ const SearchPage: FC = () => {
           <SearchIcon className='absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-kapwa-text-disabled' />
           <Input
             type='text'
-            placeholder='Search for government services, offices, and resources...'
+            placeholder={t('search.placeholder')}
             value={query}
             onChange={e => setQuery(e.target.value)}
             className='pl-12'
@@ -109,15 +108,15 @@ const SearchPage: FC = () => {
       {activeFiltersCount > 0 && (
         <div className='mb-6 flex flex-wrap items-center gap-2'>
           <span className='text-kapwa-text-disabled text-sm'>
-            Active filters:
+            {t('search.activeFilters')}
           </span>
           {typeFilter && (
             <Badge variant='primary' className='flex items-center gap-1'>
-              Type: {typeFilter}
+              {t('search.typeBadge', { type: typeFilter })}
               <button
                 onClick={() => setTypeFilter('')}
                 className='hover:text-kapwa-text-inverse ml-1'
-                aria-label='Remove type filter'
+                aria-label={t('search.removeType')}
               >
                 ×
               </button>
@@ -125,11 +124,11 @@ const SearchPage: FC = () => {
           )}
           {categoryFilter && (
             <Badge variant='secondary' className='flex items-center gap-1'>
-              Category: {categoryFilter}
+              {t('search.categoryBadge', { category: categoryFilter })}
               <button
                 onClick={() => setCategoryFilter('')}
                 className='hover:text-kapwa-text-inverse ml-1'
-                aria-label='Remove category filter'
+                aria-label={t('search.removeCategory')}
               >
                 ×
               </button>
@@ -143,7 +142,7 @@ const SearchPage: FC = () => {
               }}
               className='text-kapwa-text-brand hover:text-kapwa-text-link-hover text-sm font-medium'
             >
-              Clear all
+              {t('search.clearAll')}
             </button>
           )}
         </div>
@@ -153,34 +152,34 @@ const SearchPage: FC = () => {
         <div className='lg:col-span-1'>
           <div className='bg-kapwa-bg-surface border-kapwa-border-weak sticky top-24 rounded-lg border p-4 shadow-sm'>
             <h3 className='mb-4 kapwa-heading-md text-kapwa-text-strong'>
-              Filter By
+              {t('search.filterBy')}
             </h3>
 
             <div className='mb-6'>
               <h4 className='mb-3 kapwa-label-sm text-kapwa-text-disabled'>
-                Type
+                {t('search.type')}
               </h4>
               <select
                 value={typeFilter}
                 onChange={e => setTypeFilter(e.target.value)}
                 className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-strong w-full rounded-lg border p-2 text-sm focus:border-kapwa-border-focus focus:outline-none focus:ring-2 focus:ring-kapwa-border-focus/20'
               >
-                <option value=''>All</option>
-                <option value='transaction'>Transaction</option>
-                <option value='information'>Information</option>
+                <option value=''>{t('search.all')}</option>
+                <option value='transaction'>{t('search.transaction')}</option>
+                <option value='information'>{t('search.information')}</option>
               </select>
             </div>
 
             <div>
               <h4 className='mb-3 kapwa-label-sm text-kapwa-text-disabled'>
-                Category
+                {t('search.category')}
               </h4>
               <select
                 value={categoryFilter}
                 onChange={e => setCategoryFilter(e.target.value)}
                 className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-strong w-full rounded-lg border p-2 text-sm focus:border-kapwa-border-focus focus:outline-none focus:ring-2 focus:ring-kapwa-border-focus/20'
               >
-                <option value=''>All</option>
+                <option value=''>{t('search.all')}</option>
                 {categories.map(c => (
                   <option key={c} value={c}>
                     {c}
@@ -195,16 +194,16 @@ const SearchPage: FC = () => {
           <div className='bg-kapwa-bg-surface overflow-hidden rounded-lg shadow-sm'>
             {filteredResults.length === 0 ? (
               <EmptyState
-                title='No results found'
+                title={t('search.noResults')}
                 message={
                   query
-                    ? `We couldn't find matches for "${query}"`
-                    : 'Try adjusting your filters'
+                    ? t('search.noMatches', { query })
+                    : t('search.adjustFilters')
                 }
                 icon={SearchIcon}
                 actionLabel={
                   query || typeFilter || categoryFilter
-                    ? 'Clear all filters'
+                    ? t('search.clearFilters')
                     : undefined
                 }
                 onAction={
@@ -221,8 +220,9 @@ const SearchPage: FC = () => {
               <>
                 <div className='border-kapwa-border-weak border-b p-4'>
                   <p className='text-kapwa-text-disabled text-sm'>
-                    {filteredResults.length} result
-                    {filteredResults.length !== 1 ? 's' : ''} found
+                    {t('search.resultsFound', {
+                      count: filteredResults.length,
+                    })}
                   </p>
                 </div>
                 {filteredResults.map(hit => (

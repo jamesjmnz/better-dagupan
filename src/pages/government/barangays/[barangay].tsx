@@ -22,12 +22,16 @@ import type { Barangay } from '@/types/directoryTypes';
 const barangaysData = barangaysDataRaw as Barangay[];
 
 export default function BarangayDetail() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'government']);
   const { barangay: slug } = useParams();
   const barangay = barangaysData.find(b => b.slug === slug);
 
   if (!barangay)
-    return <div className='p-20 text-center'>Barangay not found</div>;
+    return (
+      <div className='p-20 text-center'>
+        {t('government:barangays.notFound')}
+      </div>
+    );
 
   return (
     <div className='animate-in fade-in space-y-6 pb-20 duration-500'>

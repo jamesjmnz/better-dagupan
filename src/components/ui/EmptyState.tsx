@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 
 import { ArrowLeft, LucideIcon, PlusCircle, SearchX } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface EmptyStateProps {
   title?: string;
@@ -16,17 +17,23 @@ const actionClassName =
   'border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support hover:border-kapwa-border-weak hover:bg-kapwa-bg-surface-raised mt-8 inline-flex min-h-[48px] items-center gap-2 rounded-xl border px-6 py-3 text-sm font-bold transition-all hover:shadow-md';
 
 export function EmptyState({
-  title = 'No results found',
-  message = 'Try adjusting your search or filters.',
+  title,
+  message,
   actionHref,
   onAction,
-  actionLabel = 'Go Back', // Default value
+  actionLabel: customActionLabel,
   icon: Icon = SearchX,
 }: EmptyStateProps) {
+  const { t } = useTranslation('ui');
+  const heading = title ?? t('emptyState.title');
+  const body = message ?? t('emptyState.message');
+  const actionLabel = customActionLabel ?? t('emptyState.goBack');
+
   // Adaptive Icon logic: Use Plus icon if it's a contribution, otherwise an Arrow
   const isContribution =
-    actionLabel.toLowerCase().includes('suggest') ||
-    actionLabel.toLowerCase().includes('add');
+    !!customActionLabel &&
+    (customActionLabel.toLowerCase().includes('suggest') ||
+      customActionLabel.toLowerCase().includes('add'));
 
   // Auto-detect external links
   const isExternal = actionHref?.startsWith('http');
@@ -54,10 +61,10 @@ export function EmptyState({
 
       {/* Text Content */}
       <h3 className='text-kapwa-text-strong kapwa-heading-lg leading-tight'>
-        {title}
+        {heading}
       </h3>
       <p className='text-kapwa-text-support mx-auto mt-kapwa-xs max-w-sm kapwa-body-sm-default leading-relaxed'>
-        {message}
+        {body}
       </p>
 
       {/* Conditional Action Button */}

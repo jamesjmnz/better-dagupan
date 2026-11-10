@@ -11,6 +11,7 @@ import {
   TrendingUpIcon,
   UsersIcon,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { config } from '@/lib/lguConfig';
 import { SEO } from '@/components/layout/SEO';
@@ -105,6 +106,7 @@ const getComplexityColor = (complexity: string) => {
 };
 
 const Ideas: FC = () => {
+  const { t } = useTranslation('pages');
   const [projectIdeas] = useState<ProjectIdea[]>(initialProjectIdeas);
   const navigate = useNavigate();
 
@@ -120,8 +122,8 @@ const Ideas: FC = () => {
   return (
     <div className='bg-kapwa-bg-surface-raised min-h-screen'>
       <SEO
-        title='Project Ideas'
-        description='Explore innovative project ideas to improve government transparency, accountability, and citizen engagement.'
+        title={t('ideas.seoTitle')}
+        description={t('ideas.seoDescription')}
         keywords={[
           'government projects',
           'civic tech',
@@ -138,14 +140,11 @@ const Ideas: FC = () => {
               <LightbulbIcon className='h-8 w-8' />
             </div>
             <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold'>
-              Project Ideas
+              {t('ideas.title')}
             </h1>
           </div>
           <p className='text-kapwa-text-support mx-auto max-w-3xl text-sm md:text-lg'>
-            Innovative concepts to enhance government transparency,
-            accountability, and citizen engagement. These ideas aim to bridge
-            the gap between citizens and government through technology and
-            better design.
+            {t('ideas.intro')}
           </p>
         </header>
 
@@ -156,7 +155,7 @@ const Ideas: FC = () => {
               {projectIdeas.length}
             </div>
             <div className='text-kapwa-text-on-disabled text-sm'>
-              Total Ideas
+              {t('ideas.stats.total')}
             </div>
           </div>
           <div className='bg-kapwa-bg-surface rounded-lg p-4 text-center shadow-xs'>
@@ -164,7 +163,7 @@ const Ideas: FC = () => {
               {projectIdeas.filter(idea => idea.priority === 'high').length}
             </div>
             <div className='text-kapwa-text-on-disabled text-sm'>
-              High Priority
+              {t('ideas.stats.highPriority')}
             </div>
           </div>
           <div className='bg-kapwa-bg-surface rounded-lg p-4 text-center shadow-xs'>
@@ -172,7 +171,7 @@ const Ideas: FC = () => {
               {new Set(projectIdeas.map(idea => idea.category)).size}
             </div>
             <div className='text-kapwa-text-on-disabled text-sm'>
-              Categories
+              {t('ideas.stats.categories')}
             </div>
           </div>
           <div className='bg-kapwa-bg-surface rounded-lg p-4 text-center shadow-xs'>
@@ -180,7 +179,7 @@ const Ideas: FC = () => {
               {projectIdeas.filter(idea => idea.complexity === 'simple').length}
             </div>
             <div className='text-kapwa-text-on-disabled text-sm'>
-              Simple Projects
+              {t('ideas.stats.simple')}
             </div>
           </div>
           <div className='bg-kapwa-bg-surface rounded-lg p-4 text-center shadow-xs'>
@@ -188,7 +187,7 @@ const Ideas: FC = () => {
               {projectIdeas.reduce((sum, idea) => sum + idea.upvotes, 0)}
             </div>
             <div className='text-kapwa-text-on-disabled text-sm'>
-              Total Votes
+              {t('ideas.stats.votes')}
             </div>
           </div>
         </div>
@@ -201,14 +200,14 @@ const Ideas: FC = () => {
               variant='primary'
               leftIcon={<GithubIcon className='h-5 w-5' />}
             >
-              Submit Idea
+              {t('ideas.submitIdea')}
             </Button>
             <Button
               onClick={handleSubmitPR}
               variant='outline'
               leftIcon={<PlusIcon className='h-5 w-5' />}
             >
-              Contribute a Pull Request
+              {t('ideas.contributePr')}
             </Button>
           </div>
         </div>
@@ -216,7 +215,7 @@ const Ideas: FC = () => {
         {/* Project Ideas List */}
         <main>
           <h2 className='text-kapwa-text-strong mb-6 text-2xl font-bold'>
-            All Project Ideas
+            {t('ideas.allIdeas')}
           </h2>
           <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
             {projectIdeas
@@ -237,17 +236,25 @@ const Ideas: FC = () => {
                         </div>
                         <div className='flex-1'>
                           <h3 className='text-kapwa-text-strong mb-1 text-xl font-semibold'>
-                            {idea.title}
+                            {t(`ideas.items.${idea.id}.title`, {
+                              defaultValue: idea.title,
+                              portal: config.portal.name,
+                            })}
                           </h3>
                           <span className='bg-kapwa-bg-hover text-kapwa-text-support inline-block rounded-sm px-2 py-1 text-xs font-medium'>
-                            {idea.category}
+                            {t(`ideas.items.${idea.id}.category`, {
+                              defaultValue: idea.category,
+                            })}
                           </span>
                         </div>
                       </div>
                     </div>
 
                     <p className='text-kapwa-text-support mb-4 leading-relaxed'>
-                      {idea.description}
+                      {t(`ideas.items.${idea.id}.description`, {
+                        defaultValue: idea.description,
+                        portal: config.portal.name,
+                      })}
                     </p>
 
                     <div className='mb-3 flex flex-wrap gap-2'>
@@ -256,18 +263,14 @@ const Ideas: FC = () => {
                           idea.priority
                         )}`}
                       >
-                        {idea.priority.charAt(0).toUpperCase() +
-                          idea.priority.slice(1)}{' '}
-                        Priority
+                        {t(`ideas.priority.${idea.priority}`)}
                       </span>
                       <span
                         className={`inline-block rounded px-2 py-1 text-xs font-medium ${getComplexityColor(
                           idea.complexity
                         )}`}
                       >
-                        {idea.complexity.charAt(0).toUpperCase() +
-                          idea.complexity.slice(1)}{' '}
-                        Complexity
+                        {t(`ideas.complexity.${idea.complexity}`)}
                       </span>
                     </div>
                   </CardContent>
@@ -279,12 +282,10 @@ const Ideas: FC = () => {
         {/* Call to Action */}
         <section className='bg-kapwa-bg-surface mt-12 rounded-lg p-8 text-center shadow-xs'>
           <h2 className='text-kapwa-text-strong mb-4 text-2xl font-bold'>
-            Have an Idea?
+            {t('ideas.ctaTitle')}
           </h2>
           <p className='text-kapwa-text-support mx-auto mb-6 max-w-2xl'>
-            We&apos;re always looking for innovative ways to improve government
-            services and citizen engagement. Submit your ideas via GitHub or
-            learn more about our mission.
+            {t('ideas.ctaBody')}
           </p>
           <div className='flex flex-col justify-center gap-4 sm:flex-row'>
             <Button
@@ -292,14 +293,14 @@ const Ideas: FC = () => {
               variant='primary'
               leftIcon={<GithubIcon className='h-5 w-5' />}
             >
-              Submit via GitHub
+              {t('ideas.submitGithub')}
             </Button>
             <Button
               onClick={() => navigate('/about')}
               variant='outline'
               size='md'
             >
-              Learn More About Us
+              {t('ideas.learnMore')}
             </Button>
           </div>
         </section>

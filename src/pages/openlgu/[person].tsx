@@ -17,6 +17,7 @@ import {
   Users,
   XCircle,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { DetailSection, useBreadcrumbs } from '@/components/layout';
 import {
@@ -83,6 +84,7 @@ interface MembershipWithDetails {
 }
 
 export default function PersonDetail() {
+  const { t } = useTranslation('openlgu');
   const { personId } = useParams<{ personId: string }>();
 
   // Auto-generate breadcrumbs using the hook
@@ -95,7 +97,7 @@ export default function PersonDetail() {
   const person = persons.find((p: Person) => p.id === personId);
 
   if (isLoading) {
-    return <PageLoadingState message='Loading official profile...' />;
+    return <PageLoadingState message={t('person.loading')} />;
   }
 
   if (!person) {
@@ -104,7 +106,7 @@ export default function PersonDetail() {
         className='text-kapwa-text-disabled p-12 text-center font-bold tracking-widest uppercase'
         role='alert'
       >
-        Official not found
+        {t('person.notFound')}
       </div>
     );
   }
@@ -135,7 +137,7 @@ export default function PersonDetail() {
   // Build membership details with term info
   const membershipsWithDetails: MembershipWithDetails[] = memberships
     .map(m => {
-      const term = terms.find(t => t.id === m.term_id);
+      const term = terms.find(item => item.id === m.term_id);
       const termSessions = sessions.filter(s => s.term_id === m.term_id);
       const presentInTerm = termSessions.filter(s =>
         s.present.includes(person.id)
@@ -260,7 +262,7 @@ export default function PersonDetail() {
           {/* Name and role info */}
           <div className='flex-1 text-center md:text-left'>
             <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold'>
-              Hon. {officialName}
+              {t('person.honorific', { name: officialName })}
             </h1>
             <div className='mt-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between'>
               <div className='flex flex-wrap justify-center gap-2 md:justify-start'>
@@ -276,7 +278,7 @@ export default function PersonDetail() {
                 )}
               </div>
               <p className='text-kapwa-text-disabled text-sm'>
-                {totalTermsServed} term{totalTermsServed > 1 ? 's' : ''} served
+                {t('person.termsServed', { count: totalTermsServed })}
                 {latestMembership?.term && (
                   <> • {latestMembership.term.year_range}</>
                 )}
@@ -307,7 +309,7 @@ export default function PersonDetail() {
               </span>
             </div>
             <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-              Attendance Rate
+              {t('person.attendanceRate')}
             </p>
           </div>
         </div>
@@ -322,7 +324,7 @@ export default function PersonDetail() {
               </span>
             </div>
             <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
-              Ordinances
+              {t('common.ordinances')}
             </p>
           </div>
           <div className='text-center'>
@@ -333,7 +335,7 @@ export default function PersonDetail() {
               </span>
             </div>
             <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
-              Resolutions
+              {t('common.resolutions')}
             </p>
           </div>
           <div className='text-center'>
@@ -344,7 +346,7 @@ export default function PersonDetail() {
               </span>
             </div>
             <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
-              Exec. Orders
+              {t('common.execOrders')}
             </p>
           </div>
           {hasExecutiveRole && totalExecutiveOrdersSigned > 0 ? (
@@ -356,7 +358,7 @@ export default function PersonDetail() {
                 </span>
               </div>
               <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
-                EOs Signed
+                {t('person.eosSigned')}
               </p>
             </div>
           ) : (
@@ -368,7 +370,7 @@ export default function PersonDetail() {
                 </span>
               </div>
               <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
-                Sessions
+                {t('person.sessions')}
               </p>
             </div>
           )}
@@ -380,7 +382,7 @@ export default function PersonDetail() {
         {/* Main content column - spans 2 */}
         <div className='space-y-8 lg:col-span-2'>
           {/* Service History */}
-          <DetailSection title='Service History' icon={Calendar}>
+          <DetailSection title={t('officials.serviceHistory')} icon={Calendar}>
             <div className='space-y-3'>
               {membershipsWithDetails.map((membership, index) => {
                 const isActive = index === 0;
@@ -438,7 +440,7 @@ export default function PersonDetail() {
                   >
                     {isActive && (
                       <div className='bg-kapwa-bg-brand-default text-kapwa-text-inverse absolute top-0 right-0 rounded-bl-xl px-3 py-1 text-[10px] font-bold'>
-                        CURRENT TERM
+                        {t('person.currentTerm')}
                       </div>
                     )}
                     <div className='flex flex-col gap-4 md:flex-row md:items-start md:justify-between'>
@@ -476,13 +478,15 @@ export default function PersonDetail() {
                               <div className='border-kapwa-border-weak flex items-center gap-2 border-b pb-2'>
                                 <Users className='text-kapwa-text-disabled h-4 w-4' />
                                 <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-                                  Committee Assignments
+                                  {t('person.committeeAssignments')}
                                 </span>
                                 <span className='text-kapwa-text-disabled ml-auto text-xs'>
-                                  {committeesByRole.chairperson.length +
-                                    committeesByRole.viceChairperson.length +
-                                    committeesByRole.member.length}{' '}
-                                  total
+                                  {t('person.total', {
+                                    count:
+                                      committeesByRole.chairperson.length +
+                                      committeesByRole.viceChairperson.length +
+                                      committeesByRole.member.length,
+                                  })}
                                 </span>
                               </div>
 
@@ -502,7 +506,7 @@ export default function PersonDetail() {
                                         {c.name}
                                       </p>
                                       <p className='text-[10px] font-medium tracking-wide text-kapwa-text-warning uppercase'>
-                                        Chairperson
+                                        {t('person.chairperson')}
                                       </p>
                                     </div>
                                   </div>
@@ -521,7 +525,7 @@ export default function PersonDetail() {
                                         {c.name}
                                       </p>
                                       <p className='text-kapwa-text-info text-[10px] font-medium tracking-wide uppercase'>
-                                        Vice Chairperson
+                                        {t('person.viceChairperson')}
                                       </p>
                                     </div>
                                   </div>
@@ -540,7 +544,7 @@ export default function PersonDetail() {
                                         {c.name}
                                       </p>
                                       <p className='text-kapwa-text-disabled text-[10px] font-medium tracking-wide uppercase'>
-                                        Member
+                                        {t('person.member')}
                                       </p>
                                     </div>
                                   </div>
@@ -564,7 +568,9 @@ export default function PersonDetail() {
                                       : 'text-kapwa-text-support'
                                   }
                                 >
-                                  {membership.attendanceRate}% attendance
+                                  {t('common.attendance', {
+                                    rate: membership.attendanceRate,
+                                  })}
                                   <span className='text-kapwa-text-disabled font-normal'>
                                     {' '}
                                     ({membership.presentCount}/
@@ -577,19 +583,19 @@ export default function PersonDetail() {
                                 <span className='text-kapwa-text-brand font-semibold'>
                                   {membership.termStats?.ordinances || 0}
                                 </span>{' '}
-                                ord,
+                                {t('person.ordShort')}
                                 <span className='text-kapwa-text-accent-orange font-semibold'>
                                   {' '}
                                   {membership.termStats?.resolutions || 0}
                                 </span>{' '}
-                                res
+                                {t('person.resShort')}
                                 {membership.termStats?.executiveOrders ? (
                                   <span>
                                     ,{' '}
                                     <span className='text-kapwa-yellow-700 font-semibold'>
                                       {membership.termStats.executiveOrders}
                                     </span>{' '}
-                                    EO
+                                    {t('person.eoShort')}
                                   </span>
                                 ) : (
                                   ''
@@ -601,7 +607,7 @@ export default function PersonDetail() {
                               <span className='text-kapwa-yellow-700 font-semibold'>
                                 {membership.executiveOrdersSigned || 0}
                               </span>{' '}
-                              Executive Orders signed
+                              {t('person.eosSignedInline')}
                             </span>
                           )}
                         </div>
@@ -612,7 +618,9 @@ export default function PersonDetail() {
                         <Link
                           to={`/openlgu/term/${membership.term.id}`}
                           className='group-hover:text-kapwa-text-brand text-kapwa-text-support shrink-0 transition-colors'
-                          aria-label={`View details for ${membership.term.name}`}
+                          aria-label={t('person.viewTermDetails', {
+                            term: membership.term.name,
+                          })}
                         >
                           <ChevronRight className='h-6 w-6' />
                         </Link>
@@ -630,15 +638,15 @@ export default function PersonDetail() {
               <div className='flex items-center justify-between gap-4'>
                 <span>
                   {hasExecutiveRole && !hasLegislativeRole
-                    ? 'Recent Executive Orders'
-                    : 'Recent Legislation'}
+                    ? t('person.recentExecutiveOrders')
+                    : t('person.recentLegislation')}
                 </span>
                 {authoredDocs.length > 6 && (
                   <Link
                     to={`/openlgu?search=${encodeURIComponent(officialName)}`}
                     className='text-kapwa-text-brand hover:text-kapwa-text-brand shrink-0 text-sm font-medium'
                   >
-                    View all {authoredDocs.length} →
+                    {t('person.viewAllCount', { count: authoredDocs.length })}
                   </Link>
                 )}
               </div>
@@ -649,7 +657,7 @@ export default function PersonDetail() {
               {recentLegislation.length > 0 ? (
                 recentLegislation.map(doc => {
                   const termBadge = (doc as any).term_id
-                    ? terms.find(t => t.id === (doc as any).term_id)
+                    ? terms.find(item => item.id === (doc as any).term_id)
                     : null;
 
                   return (
@@ -700,7 +708,7 @@ export default function PersonDetail() {
                 })
               ) : (
                 <p className='text-kapwa-text-disabled py-8 text-center text-sm italic'>
-                  No legislation authored yet.
+                  {t('person.noLegislation')}
                 </p>
               )}
             </div>
@@ -714,9 +722,11 @@ export default function PersonDetail() {
             <DetailSection
               title={
                 <div className='flex items-center justify-between gap-4'>
-                  <span>Attendance Log</span>
+                  <span>{t('person.attendanceLog')}</span>
                   <span className='text-kapwa-text-disabled shrink-0 text-xs font-medium'>
-                    {allAttendanceRecords.length} sessions
+                    {t('person.sessionCount', {
+                      count: allAttendanceRecords.length,
+                    })}
                   </span>
                 </div>
               }
@@ -738,14 +748,14 @@ export default function PersonDetail() {
                             <div className='rounded-full bg-kapwa-bg-success-weak p-1'>
                               <CheckCircle2
                                 className='h-3.5 w-3.5 text-kapwa-text-success'
-                                aria-label='Present'
+                                aria-label={t('common.present')}
                               />
                             </div>
                           ) : (
                             <div className='bg-kapwa-bg-accent-orange-weak rounded-full p-1'>
                               <XCircle
                                 className='text-kapwa-text-accent-orange h-3.5 w-3.5'
-                                aria-label='Absent'
+                                aria-label={t('common.absent')}
                               />
                             </div>
                           )}
@@ -765,7 +775,7 @@ export default function PersonDetail() {
                 </div>
               ) : (
                 <p className='text-kapwa-text-disabled py-4 text-center text-sm italic'>
-                  No attendance records found.
+                  {t('person.noAttendance')}
                 </p>
               )}
             </DetailSection>
@@ -774,9 +784,9 @@ export default function PersonDetail() {
               <DetailSection
                 title={
                   <div className='flex items-center justify-between gap-4'>
-                    <span>Executive Orders Summary</span>
+                    <span>{t('person.eoSummary')}</span>
                     <span className='text-kapwa-text-disabled shrink-0 text-xs font-medium'>
-                      {totalExecutiveOrdersSigned} total
+                      {t('person.total', { count: totalExecutiveOrdersSigned })}
                     </span>
                   </div>
                 }
@@ -784,17 +794,22 @@ export default function PersonDetail() {
               >
                 <div className='space-y-3'>
                   <p className='text-kapwa-text-support text-sm'>
-                    As {latestMembership?.role || 'Executive'}, this official
-                    has signed {totalExecutiveOrdersSigned} executive order
-                    {totalExecutiveOrdersSigned !== 1 ? 's' : ''} across their
-                    term{totalTermsServed > 1 ? 's' : ''}.
+                    {t(
+                      totalTermsServed > 1
+                        ? 'person.eoSummaryBodyTerms'
+                        : 'person.eoSummaryBody',
+                      {
+                        role: latestMembership?.role || t('person.executive'),
+                        count: totalExecutiveOrdersSigned,
+                      }
+                    )}
                   </p>
                   {totalExecutiveOrdersSigned > 0 && (
                     <Link
                       to={`/openlgu?search=${encodeURIComponent(officialName)}&type=executive_order`}
                       className='text-kapwa-text-brand hover:text-kapwa-text-brand inline-flex items-center gap-2 text-sm font-medium'
                     >
-                      View all executive orders →
+                      {t('person.viewAllEos')}
                     </Link>
                   )}
                 </div>
@@ -805,11 +820,13 @@ export default function PersonDetail() {
           {/* Quick summary card */}
           <div className='border-kapwa-border-weak rounded-xl border bg-linear-to-br from-slate-50 to-kapwa-bg-surface p-6'>
             <h3 className='text-kapwa-text-disabled mb-4 text-sm font-bold tracking-widest uppercase'>
-              Career Summary
+              {t('person.careerSummary')}
             </h3>
             <dl className='space-y-3'>
               <div className='flex items-center justify-between'>
-                <dt className='text-kapwa-text-support text-sm'>Total Terms</dt>
+                <dt className='text-kapwa-text-support text-sm'>
+                  {t('person.totalTerms')}
+                </dt>
                 <dd className='text-kapwa-text-strong text-lg font-bold'>
                   {totalTermsServed}
                 </dd>
@@ -817,7 +834,7 @@ export default function PersonDetail() {
               {hasLegislativeRole && (
                 <div className='flex items-center justify-between'>
                   <dt className='text-kapwa-text-support text-sm'>
-                    Overall Attendance
+                    {t('person.overallAttendance')}
                   </dt>
                   <dd
                     className={`text-lg font-bold ${
@@ -835,7 +852,7 @@ export default function PersonDetail() {
               {hasExecutiveRole && totalExecutiveOrdersSigned > 0 && (
                 <div className='flex items-center justify-between'>
                   <dt className='text-kapwa-text-support text-sm'>
-                    Executive Orders Signed
+                    {t('person.executiveOrdersSigned')}
                   </dt>
                   <dd className='text-kapwa-yellow-700 text-lg font-bold'>
                     {totalExecutiveOrdersSigned}
@@ -844,7 +861,7 @@ export default function PersonDetail() {
               )}
               <div className='flex items-center justify-between'>
                 <dt className='text-kapwa-text-support text-sm'>
-                  Total Documents
+                  {t('person.totalDocuments')}
                 </dt>
                 <dd className='text-kapwa-text-strong text-lg font-bold'>
                   {authoredDocs.length}

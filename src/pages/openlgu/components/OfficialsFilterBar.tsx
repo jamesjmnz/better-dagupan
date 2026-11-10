@@ -1,5 +1,6 @@
 import { Button } from '@bettergov/kapwa/button';
 import { X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 import SelectPicker from '@/components/ui/SelectPicker';
@@ -17,10 +18,10 @@ interface OfficialsFilterBarProps {
 }
 
 const roleOptions = [
-  { label: 'All Roles', value: '' },
-  { label: 'Mayor', value: 'mayor' },
-  { label: 'Vice Mayor', value: 'vice_mayor' },
-  { label: 'Councilor', value: 'councilor' },
+  { labelKey: 'filters.allRoles', value: '' },
+  { labelKey: 'filters.mayor', value: 'mayor' },
+  { labelKey: 'filters.viceMayor', value: 'vice_mayor' },
+  { labelKey: 'filters.councilor', value: 'councilor' },
 ];
 
 export default function OfficialsFilterBar({
@@ -32,8 +33,13 @@ export default function OfficialsFilterBar({
   setTermFilter,
   terms,
 }: OfficialsFilterBarProps) {
+  const { t } = useTranslation('openlgu');
+  const localizedRoleOptions = roleOptions.map(option => ({
+    label: t(option.labelKey),
+    value: option.value,
+  }));
   const termOptions = [
-    { label: 'All Terms', value: '' },
+    { label: t('filters.allTerms'), value: '' },
     ...terms
       .sort((a, b) => b.term_number - a.term_number)
       .map(term => ({
@@ -59,7 +65,7 @@ export default function OfficialsFilterBar({
           type='text'
           value={searchQuery}
           onChange={e => setSearchQuery(e.target.value)}
-          placeholder='Search officials by name...'
+          placeholder={t('filters.searchOfficials')}
           className='focus:border-kapwa-border-brand focus:ring-kapwa-border-brand/20 border-kapwa-border-weak bg-kapwa-bg-surface w-full rounded-lg border px-4 py-2.5 pl-10 text-sm focus:ring-2 focus:outline-none'
         />
         <svg
@@ -79,7 +85,7 @@ export default function OfficialsFilterBar({
           <button
             onClick={() => setSearchQuery('')}
             className='text-kapwa-text-disabled hover:text-kapwa-text-support absolute top-1/2 right-3 -translate-y-1/2'
-            aria-label='Clear search'
+            aria-label={t('filters.clearSearch')}
           >
             <X className='h-4 w-4' />
           </button>
@@ -91,10 +97,10 @@ export default function OfficialsFilterBar({
         {/* Role Filter - Single Select */}
         <div className='min-w-[180px] flex-1 sm:flex-none'>
           <SelectPicker
-            options={roleOptions}
+            options={localizedRoleOptions}
             selectedValues={roleFilter ? [roleFilter] : []}
             onSelect={selected => setRoleFilter(selected[0]?.value || '')}
-            placeholder='Role'
+            placeholder={t('filters.role')}
             size='md'
             searchable={false}
             clearable={true}
@@ -107,7 +113,7 @@ export default function OfficialsFilterBar({
             options={termOptions}
             selectedValues={termFilter ? [termFilter] : []}
             onSelect={selected => setTermFilter(selected[0]?.value || '')}
-            placeholder='Term'
+            placeholder={t('filters.term')}
             size='md'
             searchable={true}
             clearable={true}
@@ -122,7 +128,7 @@ export default function OfficialsFilterBar({
             onClick={handleClearAll}
             leftIcon={<X className='h-4 w-4' />}
           >
-            Clear all
+            {t('common.clearAll')}
           </Button>
         )}
       </div>
@@ -136,7 +142,7 @@ export default function OfficialsFilterBar({
               className='cursor-pointer hover:opacity-80'
               onClick={() => setSearchQuery('')}
             >
-              Search: &quot;{searchQuery}&quot;
+              {t('filters.searchBadge', { query: searchQuery })}
             </Badge>
           )}
           {roleFilter && (
@@ -145,7 +151,10 @@ export default function OfficialsFilterBar({
               className='cursor-pointer hover:opacity-80'
               onClick={() => setRoleFilter('')}
             >
-              Role: {roleOptions.find(o => o.value === roleFilter)?.label}
+              {t('filters.roleBadge', {
+                role: localizedRoleOptions.find(o => o.value === roleFilter)
+                  ?.label,
+              })}
             </Badge>
           )}
           {termFilter && (
@@ -154,7 +163,9 @@ export default function OfficialsFilterBar({
               className='cursor-pointer hover:opacity-80'
               onClick={() => setTermFilter('')}
             >
-              Term: {terms.find(t => t.id === termFilter)?.ordinal}
+              {t('filters.termBadge', {
+                term: terms.find(term => term.id === termFilter)?.ordinal,
+              })}
             </Badge>
           )}
         </div>

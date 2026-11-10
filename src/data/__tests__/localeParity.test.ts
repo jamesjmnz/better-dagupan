@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
@@ -6,7 +6,14 @@ import { describe, expect, it } from 'vitest';
 import lguConfig from '../../../config/lgu.config.json';
 import { getEnabledLanguages } from '../../i18n/languages';
 
-const NAMESPACES = ['common', 'about'] as const;
+/** Every namespace file English ships; the other locales must match it. */
+const namespacesOf = (lang: string) =>
+  readdirSync(join(process.cwd(), `public/locales/${lang}`))
+    .filter(file => file.endsWith('.json'))
+    .map(file => file.replace(/\.json$/, ''))
+    .sort();
+
+const NAMESPACES = namespacesOf('en');
 const LANGUAGES = ['en', 'fil'] as const;
 const INHERITED = /betterlb|los ba(ñ|n)os|losbanos/i;
 
@@ -59,12 +66,57 @@ const stringsOf = (
 const placeholdersOf = (text: string): string[] =>
   [...text.matchAll(/\{\{\s*([^}]+?)\s*\}\}/g)].map(m => m[1]).sort();
 
+/** The <tag> and </tag> markers a <Trans> string carries, sorted. */
+const tagsOf = (text: string): string[] =>
+  [...text.matchAll(/<\/?([a-zA-Z0-9]+)>/g)].map(m => m[0]).sort();
+
 describe('locale files', () => {
+  it('ships the same namespace files in every locale', () => {
+    expect(NAMESPACES.length).toBeGreaterThan(0);
+    expect(namespacesOf('fil')).toEqual(NAMESPACES);
+    expect(namespacesOf('pag')).toEqual(NAMESPACES);
+  });
+
+  it.each(NAMESPACES)('%s is registered with i18next', ns => {
+    // A namespace missing from the init list is fetched lazily on first use,
+    // and the page renders before it arrives.
+    const setup = readFileSync(join(process.cwd(), 'src/i18n.ts'), 'utf8');
+    const list = setup.match(/ns:\s*\[([^\]]*)\]/)?.[1] ?? '';
+
+    expect(list).toContain(`'${ns}'`);
+  });
+
   it.each(NAMESPACES)('%s has identical keys in English and Filipino', ns => {
     const en = shapeOf(load('en', ns)).sort();
     const fil = shapeOf(load('fil', ns)).sort();
 
     expect(fil).toEqual(en);
+  });
+
+  it.each(NAMESPACES)('%s keeps the same placeholders in Filipino', ns => {
+    const en = stringsOf(load('en', ns));
+    const fil = stringsOf(load('fil', ns));
+
+    for (const [key, text] of Object.entries(fil)) {
+      expect(placeholdersOf(text), key).toEqual(placeholdersOf(en[key] ?? ''));
+    }
+  });
+
+  it.each(NAMESPACES)('%s keeps the same markup tags in Filipino', ns => {
+    // <Trans> maps these tags to elements; a renamed or dropped tag renders
+    // as literal text or loses its link.
+    const en = stringsOf(load('en', ns));
+    const fil = stringsOf(load('fil', ns));
+
+    for (const [key, text] of Object.entries(fil)) {
+      expect(tagsOf(text), key).toEqual(tagsOf(en[key] ?? ''));
+    }
+  });
+
+  it.each(NAMESPACES)('%s has no empty Filipino strings', ns => {
+    for (const [key, text] of Object.entries(stringsOf(load('fil', ns)))) {
+      expect(text.trim(), key).not.toBe('');
+    }
   });
 
   it.each(LANGUAGES)('%s carries no inherited portal or LGU name', lang => {
@@ -137,14 +189,20 @@ describe('Pangasinan locale', () => {
     }
   });
 
-  it.each(NAMESPACES)('%s keeps the same placeholders as English', ns => {
-    const en = stringsOf(load('en', ns));
-    const pag = stringsOf(load('pag', ns));
+  it.each(NAMESPACES)(
+    '%s keeps the same placeholders and tags as English',
+    ns => {
+      const en = stringsOf(load('en', ns));
+      const pag = stringsOf(load('pag', ns));
 
-    for (const [key, text] of Object.entries(pag)) {
-      expect(placeholdersOf(text), key).toEqual(placeholdersOf(en[key] ?? ''));
+      for (const [key, text] of Object.entries(pag)) {
+        expect(placeholdersOf(text), key).toEqual(
+          placeholdersOf(en[key] ?? '')
+        );
+        expect(tagsOf(text), key).toEqual(tagsOf(en[key] ?? ''));
+      }
     }
-  });
+  );
 
   it('carries no inherited portal or LGU name', () => {
     for (const ns of NAMESPACES) {

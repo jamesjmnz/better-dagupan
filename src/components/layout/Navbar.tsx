@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@bettergov/kapwa/button';
 
 import { config } from '@/lib/lguConfig';
+import { useLguTerms } from '@/lib/useLguTerms';
 import { cn } from '@/lib/utils';
 
 import { mainNavigation } from '../../data/navigation';
@@ -20,7 +21,10 @@ export const Navbar: FC = () => {
     null
   );
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation(['common', 'navigation', 'services']);
+  const terms = useLguTerms();
+  const childLabel = (child: { label: string; labelKey?: string }) =>
+    child.labelKey ? t(child.labelKey, terms) : child.label;
   const location = useLocation();
 
   const toggleMenu = () => {
@@ -57,13 +61,13 @@ export const Navbar: FC = () => {
               to='/join-us'
               className='text-kapwa-text-brand hover:text-kapwa-text-link-hover hidden text-[10px] font-bold tracking-widest whitespace-nowrap uppercase md:inline-flex md:text-xs'
             >
-              🚀 Join Us
+              {t('navigation:topBar.joinUs')}
             </Link>
             <Link
               to='/about'
               className='hover:text-kapwa-text-brand hidden text-[10px] font-bold tracking-widest whitespace-nowrap text-kapwa-text-support uppercase md:inline-flex md:text-xs'
             >
-              About
+              {t('navigation:topBar.about')}
             </Link>
             <a
               href={config.lgu.officialWebsite}
@@ -71,18 +75,22 @@ export const Navbar: FC = () => {
               rel='noreferrer'
               className='hover:text-kapwa-text-brand inline-flex text-[9px] font-bold tracking-widest whitespace-nowrap text-kapwa-text-support uppercase sm:text-[10px] md:text-xs'
             >
-              <span className='inline sm:hidden'>Gov.ph</span>
-              <span className='hidden sm:inline'>Official Gov.ph</span>
+              <span className='inline sm:hidden'>
+                {t('navigation:topBar.officialShort')}
+              </span>
+              <span className='hidden sm:inline'>
+                {t('navigation:topBar.official')}
+              </span>
             </a>
             <Link
               to={`https://hotlines.bettergov.ph/?city=${encodeURIComponent(config.lgu.name)}&province=${encodeURIComponent(config.lgu.province)}`}
               className='hover:text-kapwa-text-brand inline-flex text-[9px] font-bold tracking-widest whitespace-nowrap text-kapwa-text-support uppercase sm:text-[10px] md:text-xs'
             >
-              Hotlines
+              {t('navigation:topBar.hotlines')}
             </Link>
             <div className='flex items-center pl-2 border-l shrink-0 border-kapwa-border-weak'>
               <select
-                aria-label='Select Language'
+                aria-label={t('navigation:topBar.selectLanguage')}
                 value={i18n.language}
                 onChange={e => changeLanguage(e.target.value as LanguageType)}
                 className='cursor-pointer bg-transparent text-[9px] font-bold tracking-widest text-kapwa-text-support uppercase outline-none sm:text-[10px] md:text-xs'
@@ -109,7 +117,7 @@ export const Navbar: FC = () => {
           >
             <img
               src={config.portal.navbarLogoPath}
-              alt={`${config.portal.name} Logo`}
+              alt={t('navigation:brand.logoAlt', terms)}
               className='mr-3 w-10 h-10 transition-transform shrink-0 group-hover:scale-105 md:h-12 md:w-12'
             />
             <div className='flex flex-col justify-center min-w-0'>
@@ -117,7 +125,7 @@ export const Navbar: FC = () => {
                 {config.portal.name}
               </div>
               <div className='line-clamp-2 text-[9px] leading-tight font-medium text-kapwa-text-support md:line-clamp-1 md:text-xs md:leading-normal'>
-                Community Portal for the {config.lgu.fullName}
+                {t('navigation:brand.tagline', terms)}
               </div>
             </div>
           </Link>
@@ -167,7 +175,7 @@ export const Navbar: FC = () => {
                           className='block px-5 py-3 text-xs font-bold tracking-wider uppercase transition-colors hover:bg-kapwa-bg-surface-raised hover:text-kapwa-text-link-hover text-kapwa-text-strong'
                           onClick={closeMenu}
                         >
-                          {child.label}
+                          {childLabel(child)}
                         </Link>
                       ))}
                     </div>
@@ -178,7 +186,7 @@ export const Navbar: FC = () => {
             <Link
               to='/search'
               className='p-3 ml-4 transition-colors hover:text-kapwa-text-brand text-kapwa-text-strong'
-              aria-label='Search'
+              aria-label={t('navigation:search')}
             >
               <SearchIcon className='w-5 h-5' />
             </Link>
@@ -189,14 +197,14 @@ export const Navbar: FC = () => {
             <Link
               to='/search'
               className='p-3 text-kapwa-text-strong'
-              aria-label='Search'
+              aria-label={t('navigation:search')}
             >
               <SearchIcon className='w-6 h-6' />
             </Link>
             <Button
               onClick={toggleMenu}
               variant='ghost'
-              aria-label='Toggle Menu'
+              aria-label={t('navigation:toggleMenu')}
               className='p-3 rounded-xl bg-kapwa-bg-surface-raised text-kapwa-text-strong'
             >
               {isOpen ? (
@@ -264,7 +272,7 @@ export const Navbar: FC = () => {
                           onClick={closeMenu}
                           className='block p-4 text-sm font-bold border-b border-kapwa-bg-surface text-kapwa-text-strong last:border-0'
                         >
-                          {child.label}
+                          {childLabel(child)}
                         </Link>
                       ))}
                     </div>
@@ -280,21 +288,21 @@ export const Navbar: FC = () => {
                 onClick={closeMenu}
                 className='block p-4 text-xs font-black tracking-widest uppercase text-kapwa-text-brand'
               >
-                🚀 Join the Revolution
+                {t('navigation:mobile.joinUs')}
               </Link>
               <Link
                 to='/about'
                 onClick={closeMenu}
                 className='block p-4 text-xs font-bold tracking-widest uppercase text-kapwa-text-support'
               >
-                About {config.portal.name}
+                {t('navigation:mobile.about', terms)}
               </Link>
               <Link
                 to='/contact'
                 onClick={closeMenu}
                 className='block p-4 text-xs font-bold tracking-widest uppercase text-kapwa-text-support'
               >
-                Contact Us
+                {t('navigation:mobile.contact')}
               </Link>
             </div>
           </div>

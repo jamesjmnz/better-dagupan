@@ -1,0 +1,15 @@
+{
+  "layout": {
+    "title": "Pamahalaan",
+    "description": "Alamin ang tungkol sa mga halal na pinuno, mga departamento ng {{adjectiveLower}}, at mga barangay na bumubuo sa {{lgu}}.",
+    "categories": {
+      "leadership": "Pamunuan",
+      "administrative": "Administratibo",
+      "localUnits": "Mga Lokal na Yunit"
+    }
+  },
+  "barangays": {
+    "sidebarTitle": "Mga Barangay",
+    "notFound": "Hindi nahanap ang barangay"
+  }
+}

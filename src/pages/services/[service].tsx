@@ -21,6 +21,7 @@ import {
   LucideIcon,
   Users,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { DetailSection, useBreadcrumbs } from '@/components/layout';
 import {
@@ -61,17 +62,24 @@ import type { QuickInfo, Source } from '@/types/servicesTypes';
 
 const QUICK_INFO_CONFIG: Record<
   keyof QuickInfo,
-  { label: string; icon: LucideIcon }
+  { labelKey: string; icon: LucideIcon }
 > = {
-  processingTime: { label: 'Processing Time', icon: Clock },
-  fee: { label: 'Fee', icon: Banknote },
-  whoCanApply: { label: 'Who Can Apply', icon: Users },
-  appointmentType: { label: 'Appointment Type', icon: Calendar },
-  validity: { label: 'Validity Period', icon: CalendarCheck },
-  documents: { label: 'Documents Required', icon: FileText },
+  processingTime: {
+    labelKey: 'detail.quickInfo.processingTime',
+    icon: Clock,
+  },
+  fee: { labelKey: 'detail.quickInfo.fee', icon: Banknote },
+  whoCanApply: { labelKey: 'detail.quickInfo.whoCanApply', icon: Users },
+  appointmentType: {
+    labelKey: 'detail.quickInfo.appointmentType',
+    icon: Calendar,
+  },
+  validity: { labelKey: 'detail.quickInfo.validity', icon: CalendarCheck },
+  documents: { labelKey: 'detail.quickInfo.documents', icon: FileText },
 };
 
 export default function ServiceDetail() {
+  const { t } = useTranslation('services');
   const { service: serviceSlug } = useParams<{ service: string }>();
 
   // Auto-generate breadcrumbs using the hook (must be called before early returns)
@@ -83,7 +91,7 @@ export default function ServiceDetail() {
   if (!service)
     return (
       <div className='text-kapwa-text-disabled p-20 text-center font-bold tracking-widest uppercase'>
-        Service not found
+        {t('detail.notFound')}
       </div>
     );
 
@@ -126,7 +134,9 @@ export default function ServiceDetail() {
   const quickInfoArray = service.quickInfo
     ? (Object.entries(service.quickInfo) as [keyof QuickInfo, string][]).map(
         ([key, value]) => ({
-          label: QUICK_INFO_CONFIG[key]?.label || key,
+          label: QUICK_INFO_CONFIG[key]
+            ? t(QUICK_INFO_CONFIG[key].labelKey)
+            : key,
           icon: QUICK_INFO_CONFIG[key]?.icon || FileText,
           value,
         })
@@ -137,21 +147,21 @@ export default function ServiceDetail() {
   const ccInfoItems: { label: string; value: string; icon: LucideIcon }[] = [];
   if (service.processingTime) {
     ccInfoItems.push({
-      label: 'Processing Time',
+      label: t('detail.quickInfo.processingTime'),
       value: service.processingTime,
       icon: Clock,
     });
   }
   if (service.whoMayAvail) {
     ccInfoItems.push({
-      label: 'Who Can Apply',
+      label: t('detail.quickInfo.whoCanApply'),
       value: service.whoMayAvail,
       icon: Users,
     });
   }
   if (service.classification) {
     ccInfoItems.push({
-      label: 'Classification',
+      label: t('detail.classification'),
       value: service.classification,
       icon: FileText,
     });
@@ -201,19 +211,21 @@ export default function ServiceDetail() {
           <div className='mb-6 flex flex-wrap items-center gap-2'>
             <Badge variant='primary'>{service.category.name}</Badge>
             <Badge variant={isTransaction ? 'success' : 'secondary'} dot>
-              {isTransaction ? 'Transactional' : 'Resource'}
+              {isTransaction ? t('detail.transactional') : t('detail.resource')}
             </Badge>
             <Badge variant={isOfficialSource ? 'success' : 'secondary'} dot>
-              {isOfficialSource ? 'Official (CC)' : 'Community'}
+              {isOfficialSource
+                ? t('source.officialCc')
+                : t('source.community')}
             </Badge>
             {service.serviceNumber && (
               <Badge variant='outline'>
-                Service No. {service.serviceNumber}
+                {t('card.serviceNo', { number: service.serviceNumber })}
               </Badge>
             )}
             {needsVerification && (
               <Badge variant='warning' dot>
-                Pending Verification
+                {t('card.pendingVerification')}
               </Badge>
             )}
           </div>
@@ -233,7 +245,7 @@ export default function ServiceDetail() {
             <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised mb-8 rounded-xl border p-4'>
               <p className='text-kapwa-text-support text-sm font-medium'>
                 <span className='text-kapwa-text-brand font-semibold'>
-                  Who may avail:{' '}
+                  {t('detail.whoMayAvail')}{' '}
                 </span>
                 {service.whoMayAvail}
               </p>
@@ -248,7 +260,7 @@ export default function ServiceDetail() {
               rel='noreferrer'
               className='bg-kapwa-bg-brand-default hover:bg-kapwa-bg-brand-weak text-kapwa-text-inverse inline-flex min-h-[48px] items-center gap-3 rounded-xl px-6 py-3 font-semibold shadow-sm transition-all'
             >
-              Access Online Portal
+              {t('detail.accessPortal')}
               <ExternalLink className='h-4 w-4 transition-transform group-hover:translate-x-0.5' />
             </a>
           )}
@@ -259,7 +271,9 @@ export default function ServiceDetail() {
               rel='noreferrer'
               className='bg-kapwa-bg-brand-default hover:bg-kapwa-bg-brand-weak text-kapwa-text-inverse inline-flex min-h-[48px] items-center gap-3 rounded-xl px-6 py-3 font-semibold shadow-sm transition-all'
             >
-              {isTransaction ? 'Access Online Portal' : 'View Full Document'}
+              {isTransaction
+                ? t('detail.accessPortal')
+                : t('detail.viewDocument')}
               <ExternalLink className='h-4 w-4 transition-transform group-hover:translate-x-0.5' />
             </a>
           )}
@@ -302,13 +316,10 @@ export default function ServiceDetail() {
               <Info className='text-kapwa-text-warning h-5 w-5 shrink-0' />
               <div>
                 <p className='text-kapwa-text-strong mb-1 text-sm font-bold'>
-                  Detailed Information Pending Verification
+                  {t('detail.pendingTitle')}
                 </p>
                 <p className='text-kapwa-text-support text-xs leading-relaxed'>
-                  This service data is from the Citizens Charter document.
-                  Detailed requirements, steps, and fee information will be
-                  added as we verify and extract data from the official
-                  document.
+                  {t('detail.pendingBody')}
                 </p>
               </div>
             </div>
@@ -342,7 +353,11 @@ export default function ServiceDetail() {
           {/* Regular Steps (community services) */}
           {!isOfficialSource && service.steps && service.steps.length > 0 && (
             <DetailSection
-              title={isTransaction ? 'Process Steps' : 'Information Details'}
+              title={
+                isTransaction
+                  ? t('detail.processSteps')
+                  : t('detail.informationDetails')
+              }
               icon={ClipboardList}
             >
               <div className='space-y-6'>
@@ -392,7 +407,7 @@ export default function ServiceDetail() {
 
           {/* Sources and References */}
           {service.sources && service.sources.length > 0 && (
-            <DetailSection title='Sources & References' icon={BookOpen}>
+            <DetailSection title={t('detail.sources')} icon={BookOpen}>
               <ul className='grid grid-cols-1 gap-3' role='list'>
                 {service.sources.map((source: Source, idx: number) => (
                   <li
@@ -404,7 +419,7 @@ export default function ServiceDetail() {
                     </div>
                     <div className='flex flex-col'>
                       <p className='text-kapwa-text-disabled mb-1 text-[10px] font-bold tracking-widest uppercase'>
-                        Reference
+                        {t('detail.reference')}
                       </p>
                       {source.url ? (
                         <a
@@ -442,7 +457,7 @@ export default function ServiceDetail() {
           >
             <div className='flex items-center justify-between'>
               <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-                Data Integrity
+                {t('detail.dataIntegrity')}
               </p>
               {isOfficialSource || isVerified ? (
                 <CheckCircle2Icon className='h-4 w-4 text-kapwa-text-success' />
@@ -467,17 +482,19 @@ export default function ServiceDetail() {
                   }`}
                 >
                   {isOfficialSource
-                    ? 'Official Data'
+                    ? t('detail.officialData')
                     : isVerified
-                      ? 'Verified Information'
-                      : 'Unverified Data'}
+                      ? t('detail.verifiedInformation')
+                      : t('detail.unverifiedData')}
                 </p>
                 <p className='text-kapwa-text-disabled text-[11px] font-medium'>
                   {isOfficialSource
-                    ? 'From Citizens Charter document'
+                    ? t('detail.fromCharter')
                     : isVerified
-                      ? `Last Audit: ${format(updatedAtDate!, 'MMMM yyyy')}`
-                      : 'Awaiting official verification'}
+                      ? t('detail.lastAudit', {
+                          date: format(updatedAtDate!, 'MMMM yyyy'),
+                        })
+                      : t('detail.awaitingVerification')}
                 </p>
               </div>
             </div>
@@ -485,7 +502,10 @@ export default function ServiceDetail() {
 
           {/* Involved Offices */}
           {involvedOffices.length > 0 && (
-            <DetailSection title='Responsible Offices' icon={Building2}>
+            <DetailSection
+              title={t('detail.responsibleOffices')}
+              icon={Building2}
+            >
               <div className='space-y-6'>
                 {involvedOffices.map((off, idx) => {
                   const officePath =
@@ -507,7 +527,7 @@ export default function ServiceDetail() {
                           {toTitleCase(off.name)}
                         </h3>
                         <span className='text-kapwa-text-brand mt-2 flex items-center gap-1 text-[10px] font-bold tracking-widest uppercase'>
-                          View Profile{' '}
+                          {t('detail.viewProfile')}{' '}
                           <ArrowRight className='h-3 w-3 transition-transform group-hover:translate-x-1' />
                         </span>
                       </Link>
@@ -525,12 +545,11 @@ export default function ServiceDetail() {
                 <HeartHandshake className='h-5 w-5' />
               </div>
               <h4 className='text-kapwa-text-strong text-sm leading-tight font-bold'>
-                Help improve this data
+                {t('detail.helpTitle')}
               </h4>
             </div>
             <p className='text-kapwa-text-disabled text-xs leading-relaxed'>
-              Find an error or outdated info? Our community helps keep this
-              portal accurate.
+              {t('detail.helpBody')}
             </p>
             <a
               href={`${config.portal.githubUrl}/issues/new?template=contribution.yml&title=${encodeURIComponent(`[Edit] ${service.service}`)}`}
@@ -539,7 +558,7 @@ export default function ServiceDetail() {
               className='group border-kapwa-border-weak text-kapwa-text-support hover:border-kapwa-border-weak hover:bg-kapwa-bg-surface-raised flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-bold transition-all'
             >
               <Edit3 className='group-hover:text-kapwa-text-accent-orange text-kapwa-text-disabled h-3.5 w-3.5 transition-colors' />
-              Suggest an Edit
+              {t('detail.suggestEdit')}
             </a>
           </Card>
         </aside>

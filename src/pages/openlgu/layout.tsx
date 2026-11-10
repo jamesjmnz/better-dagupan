@@ -56,7 +56,7 @@ export default function OpenLGULayout() {
   });
 
   const legislation = useOpenLGU();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'openlgu']);
 
   // The loaders return empty lists when the legislative API is unavailable.
   const hasNoRecords =
@@ -73,11 +73,13 @@ export default function OpenLGULayout() {
         isIndexPage ? (
           <PageHeader
             variant='hero'
-            title='OpenLGU Portal'
-            description={`Browse official local ordinances, resolutions, and executive orders of ${lguLabels.name}.`}
+            title={t('openlgu:common.portal')}
+            description={t('openlgu:layout.description', {
+              lgu: lguLabels.name,
+            })}
             actions={
               <SearchInput
-                placeholder='Search by title, number, or author...'
+                placeholder={t('openlgu:layout.searchPlaceholder')}
                 value={searchQuery}
                 onChangeValue={setSearchQuery}
                 size='md'
@@ -87,12 +89,14 @@ export default function OpenLGULayout() {
         ) : (
           <PageHeader
             variant='compact'
-            title='OpenLGU Document'
-            description={`Official record from the ${lguLabels.body}.`}
+            title={t('openlgu:layout.documentTitle')}
+            description={t('openlgu:layout.documentDescription', {
+              body: lguLabels.body,
+            })}
             autoBreadcrumbs={true}
             actions={
               <SearchInput
-                placeholder='Search by title, number, or author...'
+                placeholder={t('openlgu:layout.searchPlaceholder')}
                 value={searchQuery}
                 onChangeValue={setSearchQuery}
                 size='sm'

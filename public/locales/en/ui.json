@@ -1,0 +1,30 @@
+{
+  "lgu": {
+    "fullName": "{{name}}",
+    "fullName_city": "City of {{name}}",
+    "fullName_municipality": "Municipality of {{name}}",
+    "fullName_province": "Province of {{name}}",
+    "adjective": "Local",
+    "adjective_city": "City",
+    "adjective_municipality": "Municipal",
+    "adjective_province": "Provincial",
+    "adjectiveLower": "local",
+    "adjectiveLower_city": "city",
+    "adjectiveLower_municipality": "municipal",
+    "adjectiveLower_province": "provincial",
+    "head": "Local Chief Executive",
+    "head_city": "Mayor",
+    "head_municipality": "Mayor",
+    "head_province": "Governor"
+  },
+  "emptyState": {
+    "title": "No results found",
+    "message": "Try adjusting your search or filters.",
+    "goBack": "Go Back"
+  },
+  "sidebar": {
+    "menu": "Menu",
+    "expand": "Expand Menu",
+    "hide": "Hide Menu"
+  }
+}

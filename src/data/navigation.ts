@@ -14,6 +14,7 @@ export const mainNavigation: NavigationItem[] = [
     href: '/services',
     children: (serviceCategories.categories as Category[]).map(category => ({
       label: category.name,
+      labelKey: `services:categories.${category.slug}`,
       href: `/services?category=${category.slug}`,
     })),
   },
@@ -21,19 +22,40 @@ export const mainNavigation: NavigationItem[] = [
     label: 'Government',
     href: '/government',
     children: [
-      { label: 'Elected Officials', href: '/government/elected-officials' },
-      { label: 'Departments', href: '/government/departments' },
-      { label: 'Barangays', href: '/government/barangays' },
+      {
+        label: 'Elected Officials',
+        labelKey: 'navigation:menu.electedOfficials',
+        href: '/government/elected-officials',
+      },
+      {
+        label: 'Departments',
+        labelKey: 'navigation:menu.departments',
+        href: '/government/departments',
+      },
+      {
+        label: 'Barangays',
+        labelKey: 'navigation:menu.barangays',
+        href: '/government/barangays',
+      },
     ],
   },
   {
     label: 'Statistics',
     href: '/statistics',
     children: [
-      { label: 'Demographics', href: '/statistics' },
-      { label: 'Competitiveness', href: '/statistics/competitiveness' },
+      {
+        label: 'Demographics',
+        labelKey: 'navigation:menu.demographics',
+        href: '/statistics',
+      },
+      {
+        label: 'Competitiveness',
+        labelKey: 'navigation:menu.competitiveness',
+        href: '/statistics/competitiveness',
+      },
       {
         label: `${lguLabels.adjective} Income`,
+        labelKey: 'navigation:menu.income',
         href: '/statistics/municipal-income',
       },
     ],
@@ -43,9 +65,21 @@ export const mainNavigation: NavigationItem[] = [
     label: 'OpenLGU',
     href: '/openlgu',
     children: [
-      { label: 'Ordinances', href: '/openlgu?type=ordinance' },
-      { label: 'Resolutions', href: '/openlgu?type=resolution' },
-      { label: 'Executive Orders', href: '/openlgu?type=executive_order' },
+      {
+        label: 'Ordinances',
+        labelKey: 'navigation:menu.ordinances',
+        href: '/openlgu?type=ordinance',
+      },
+      {
+        label: 'Resolutions',
+        labelKey: 'navigation:menu.resolutions',
+        href: '/openlgu?type=resolution',
+      },
+      {
+        label: 'Executive Orders',
+        labelKey: 'navigation:menu.executiveOrders',
+        href: '/openlgu?type=executive_order',
+      },
     ],
     ...(config.features.openLGU ? {} : { hidden: true }),
   },
@@ -53,13 +87,19 @@ export const mainNavigation: NavigationItem[] = [
     label: 'Transparency',
     href: '/transparency',
     children: [
-      { label: 'Financial Reports', href: '/transparency/financial' },
+      {
+        label: 'Financial Reports',
+        labelKey: 'navigation:menu.financialReports',
+        href: '/transparency/financial',
+      },
       {
         label: 'Procurement',
+        labelKey: 'navigation:menu.procurement',
         href: '/transparency/procurement',
       },
       {
         label: 'DPWH Projects',
+        labelKey: 'navigation:menu.dpwhProjects',
         href: '/transparency/infrastructure',
       },
     ],
@@ -78,66 +118,103 @@ export const footerNavigation = {
   mainSections: [
     {
       title: 'Local Services',
+      titleKey: 'navigation:footer.sections.localServices',
       links: [
-        { label: 'All Services', href: '/services' },
+        {
+          label: 'All Services',
+          labelKey: 'navigation:footer.links.allServices',
+          href: '/services',
+        },
         {
           label: 'Business, Trade & Investment',
+          labelKey: 'navigation:footer.links.business',
           href: '/services?category=business-trade-investment',
         },
         {
           label: 'Health & Wellness',
+          labelKey: 'navigation:footer.links.health',
           href: '/services?category=health-wellness',
         },
         {
           label: 'Social Services',
+          labelKey: 'navigation:footer.links.social',
           href: '/services?category=social-services-assistance',
         },
         {
           label: 'Agriculture & Economic Development',
+          labelKey: 'navigation:footer.links.agriculture',
           href: '/services?category=agriculture-economic-development',
         },
       ],
     },
     {
       title: 'Local Government',
+      titleKey: 'navigation:footer.sections.localGovernment',
       links: [
-        { label: 'Elected Officials', href: '/government/elected-officials' },
-        { label: 'Departments', href: '/government/departments' },
-        { label: 'Barangay Directory', href: '/government/barangays' },
-        { label: 'OpenLGU Portal', href: '/openlgu' },
-        { label: 'Transparency', href: '/transparency/financial' },
+        {
+          label: 'Elected Officials',
+          labelKey: 'navigation:footer.links.electedOfficials',
+          href: '/government/elected-officials',
+        },
+        {
+          label: 'Departments',
+          labelKey: 'navigation:footer.links.departments',
+          href: '/government/departments',
+        },
+        {
+          label: 'Barangay Directory',
+          labelKey: 'navigation:footer.links.barangayDirectory',
+          href: '/government/barangays',
+        },
+        {
+          label: 'OpenLGU Portal',
+          labelKey: 'navigation:footer.links.openlgu',
+          href: '/openlgu',
+        },
+        {
+          label: 'Transparency',
+          labelKey: 'navigation:footer.links.transparency',
+          href: '/transparency/financial',
+        },
       ],
     },
     {
       title: 'BetterGov Network',
+      titleKey: 'navigation:footer.sections.network',
       links: [
         {
           label: 'Transparency Portal',
+          labelKey: 'navigation:footer.links.transparencyPortal',
           href: 'https://transparency.bettergov.ph',
           target: '_blank',
         },
         {
           label: 'Open Data Portal',
+          labelKey: 'navigation:footer.links.openData',
           href: 'https://data.bettergov.ph',
           target: '_blank',
         },
         {
           label: 'Petitions PH',
+          labelKey: 'navigation:footer.links.petitions',
           href: 'https://petition.ph',
           target: '_blank',
         },
         {
           label: 'SALN Tracker',
+          labelKey: 'navigation:footer.links.saln',
           href: 'https://saln.bettergov.ph',
           target: '_blank',
         },
         {
           label: 'Budget Tracker',
+          labelKey: 'navigation:footer.links.budget',
           href: 'https://budget.bettergov.ph',
           target: '_blank',
         },
         {
           label: 'Philgeps Tracker',
+          labelKey: 'navigation:footer.links.philgeps',
           href: 'https://philgeps.bettergov.ph',
           target: '_blank',
         },
@@ -145,9 +222,11 @@ export const footerNavigation = {
     },
     {
       title: 'Resources',
+      titleKey: 'navigation:footer.sections.resources',
       links: [
         {
           label: `${config.lgu.name} Gov.ph`,
+          labelKey: 'navigation:footer.links.lguSite',
           href: config.lgu.officialWebsite,
           target: '_blank',
         },
@@ -158,15 +237,21 @@ export const footerNavigation = {
         // },
         {
           label: 'Freedom of Information',
+          labelKey: 'navigation:footer.links.foi',
           href: 'https://www.foi.gov.ph',
           target: '_blank',
         },
         {
           label: `Province of ${config.lgu.province}`,
+          labelKey: 'navigation:footer.links.province',
           href: config.lgu.provinceWebsite,
           target: '_blank',
         },
-        { label: 'Report an Error', href: '/report-an-error' },
+        {
+          label: 'Report an Error',
+          labelKey: 'navigation:footer.links.reportError',
+          href: '/report-an-error',
+        },
         // { label: 'Privacy Policy', href: '/privacy' },
         // { label: 'Accessibility', href: '/accessibility' },
       ],

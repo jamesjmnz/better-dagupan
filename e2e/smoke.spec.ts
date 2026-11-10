@@ -44,9 +44,12 @@ test.describe('Smoke', () => {
     page,
   }) => {
     await page.goto('/');
-    await page.keyboard.press('Tab');
 
+    // Tab only once the app has rendered; pressing it while the translation
+    // loader is still up lands focus on the empty document instead.
     const skipLink = page.locator('a[href="#main-content"]').first();
+    await skipLink.waitFor({ state: 'attached' });
+    await page.keyboard.press('Tab');
     await expect(skipLink).toBeFocused();
 
     await page.keyboard.press('Enter');

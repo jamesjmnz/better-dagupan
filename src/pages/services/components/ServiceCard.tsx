@@ -17,6 +17,7 @@ import {
   ShieldIcon,
   UsersIcon,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -50,6 +51,7 @@ interface ServiceCardProps {
 }
 
 export default function ServiceCard({ service }: ServiceCardProps) {
+  const { t } = useTranslation('services');
   const CategoryIcon = categoryIcons[service.category.slug] || FileTextIcon;
   const hasValidDate =
     service.updatedAt && isValid(new Date(service.updatedAt));
@@ -63,7 +65,9 @@ export default function ServiceCard({ service }: ServiceCardProps) {
       className='group min-h-[200px]'
       data-testid='service-card'
       data-service-slug={service.slug}
-      aria-label={`View details for ${service.plainLanguageName || service.service}`}
+      aria-label={t('card.viewDetails', {
+        name: service.plainLanguageName || service.service,
+      })}
     >
       <Card
         hover
@@ -78,16 +82,18 @@ export default function ServiceCard({ service }: ServiceCardProps) {
             <div className='flex flex-wrap items-center justify-end gap-1.5'>
               {/* Source Badge */}
               <Badge variant={isOfficialSource ? 'success' : 'secondary'} dot>
-                {isOfficialSource ? 'Official' : 'Community'}
+                {isOfficialSource
+                  ? t('source.official')
+                  : t('source.community')}
               </Badge>
               {/* Online/Walk-in Badge */}
               {service.url ? (
                 <Badge variant='success' dot>
-                  Online
+                  {t('card.online')}
                 </Badge>
               ) : isTransaction ? (
                 <Badge variant='slate' dot>
-                  Walk-in
+                  {t('card.walkIn')}
                 </Badge>
               ) : null}
             </div>
@@ -97,7 +103,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           {service.serviceNumber && (
             <div className='mb-2'>
               <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-                Service No. {service.serviceNumber}
+                {t('card.serviceNo', { number: service.serviceNumber })}
               </span>
             </div>
           )}
@@ -126,7 +132,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
                 <>
                   <AlertCircle className='h-3 w-3 text-kapwa-text-warning' />
                   <span className='text-kapwa-text-warning'>
-                    Pending Verification
+                    {t('card.pendingVerification')}
                   </span>
                 </>
               ) : hasValidDate ? (
@@ -139,13 +145,15 @@ export default function ServiceCard({ service }: ServiceCardProps) {
               ) : isOfficialSource ? (
                 <>
                   <ShieldCheck className='h-3 w-3 text-kapwa-text-success' />
-                  <span className='text-kapwa-text-success'>Official Data</span>
+                  <span className='text-kapwa-text-success'>
+                    {t('card.officialData')}
+                  </span>
                 </>
               ) : (
                 <>
                   <span className='bg-kapwa-bg-disabled h-1.5 w-1.5 shrink-0 rounded-full' />
                   <span className='text-kapwa-text-inverse-subtle italic'>
-                    Unverified
+                    {t('card.unverified')}
                   </span>
                 </>
               )}
@@ -153,7 +161,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
 
             {/* View Link */}
             <span className='text-kapwa-text-brand flex items-center gap-1 text-xs font-bold transition-transform group-hover:translate-x-1'>
-              View <ArrowRightIcon className='h-3 w-3' />
+              {t('card.view')} <ArrowRightIcon className='h-3 w-3' />
             </span>
           </div>
 
@@ -161,7 +169,9 @@ export default function ServiceCard({ service }: ServiceCardProps) {
           {service.classification && (
             <div className='mt-3 border-t border-kapwa-border-weak pt-3'>
               <Badge variant='outline' className='text-[9px]'>
-                {service.classification} Transaction
+                {t('card.transaction', {
+                  classification: service.classification,
+                })}
               </Badge>
             </div>
           )}

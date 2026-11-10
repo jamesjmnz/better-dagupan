@@ -8,11 +8,16 @@ import {
   Scale,
   Shield,
 } from 'lucide-react';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { config } from '@/lib/lguConfig';
 import { SEO } from '@/components/layout/SEO';
 
 const TermsOfService: FC = () => {
+  const { t } = useTranslation('pages');
+  const list = (key: string) =>
+    t(`terms.${key}`, { returnObjects: true }) as string[];
+  const publicDomain = list('publicDomain');
   const currentDate = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -22,8 +27,8 @@ const TermsOfService: FC = () => {
   return (
     <div className='bg-kapwa-bg-surface-raised min-h-screen'>
       <SEO
-        title='Terms of Service'
-        description='Public domain content, volunteer operation, and user responsibilities for accessing government information.'
+        title={t('terms.seoTitle')}
+        description={t('terms.seoDescription')}
       />
 
       {/* Header Section */}
@@ -36,9 +41,11 @@ const TermsOfService: FC = () => {
               </div>
             </div>
             <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold'>
-              Terms of Service
+              {t('terms.title')}
             </h1>
-            <p className='text-xl opacity-90'>Last Updated: {currentDate}</p>
+            <p className='text-xl opacity-90'>
+              {t('terms.lastUpdated', { date: currentDate })}
+            </p>
           </div>
         </div>
       </section>
@@ -51,12 +58,11 @@ const TermsOfService: FC = () => {
             <div className='mb-4 flex items-center gap-3'>
               <FileText className='text-kapwa-text-brand h-6 w-6' />
               <h2 className='text-kapwa-text-strong kapwa-heading-lg font-bold'>
-                Acceptance of Terms
+                {t('terms.acceptanceTitle')}
               </h2>
             </div>
             <p className='text-kapwa-text-support leading-relaxed'>
-              By accessing and using this website, you accept and agree to be
-              bound by the terms and provisions of this agreement.
+              {t('terms.acceptance')}
             </p>
           </section>
 
@@ -65,22 +71,13 @@ const TermsOfService: FC = () => {
             <div className='mb-4 flex items-center gap-3'>
               <Shield className='text-kapwa-text-brand h-6 w-6' />
               <h2 className='text-kapwa-text-strong kapwa-heading-lg font-bold'>
-                Public Domain Content and Volunteer Operation
+                {t('terms.publicDomainTitle')}
               </h2>
             </div>
             <div className='text-kapwa-text-support space-y-4 leading-relaxed'>
-              <p>
-                This website and all its content are in the public domain and
-                operated entirely by volunteers. All information, data,
-                documents, and materials provided on this website are in the
-                public domain unless otherwise noted. Public domain content may
-                be freely used, copied, distributed, and modified without
-                permission or attribution, though attribution is appreciated.
-              </p>
-              <p>
-                As a volunteer-operated resource, we encourage users to conduct
-                their own independent research and verification of information.
-              </p>
+              {publicDomain.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
           </section>
 
@@ -89,23 +86,17 @@ const TermsOfService: FC = () => {
             <div className='mb-4 flex items-center gap-3'>
               <AlertTriangle className='h-6 w-6 text-kapwa-text-warning' />
               <h2 className='text-kapwa-text-strong kapwa-heading-lg font-bold'>
-                &quot;AS IS&quot; Disclaimer
+                {t('terms.asIsTitle')}
               </h2>
             </div>
             <div className='mb-4 border-l-4 border-kapwa-border-warning bg-kapwa-bg-warning-weak p-4'>
               <p className='mb-2 font-semibold text-kapwa-text-warning'>
-                ALL INFORMATION ON THIS WEBSITE IS PROVIDED &quot;AS IS&quot;
-                WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED,
-                INCLUDING BUT NOT LIMITED TO:
+                {t('terms.asIsLead')}
               </p>
               <ul className='list-inside list-disc space-y-1 text-kapwa-text-warning'>
-                <li>Warranties of merchantability</li>
-                <li>Fitness for a particular purpose</li>
-                <li>Non-infringement of intellectual property rights</li>
-                <li>Accuracy, completeness, or reliability of information</li>
-                <li>
-                  Freedom from errors, viruses, or other harmful components
-                </li>
+                {list('asIsList').map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </div>
           </section>
@@ -113,87 +104,46 @@ const TermsOfService: FC = () => {
           {/* Limitation of Liability */}
           <section>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              Limitation of Liability
+              {t('terms.liabilityTitle')}
             </h2>
             <div className='text-kapwa-text-support space-y-4 leading-relaxed'>
-              <p>
-                Under no circumstances shall the website operators,
-                contributors, or affiliated parties be liable for any direct,
-                indirect, incidental, special, consequential, or punitive
-                damages arising from:
-              </p>
+              <p>{t('terms.liabilityLead')}</p>
               <ul className='ml-4 list-inside list-disc space-y-1'>
-                <li>Your use of this website</li>
-                <li>Any errors or omissions in the content</li>
-                <li>
-                  Any interruption or cessation of transmission to or from the
-                  website
-                </li>
-                <li>Any bugs, viruses, or other harmful components</li>
-                <li>Loss of data or information</li>
+                {list('liabilityList').map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
-              <p>
-                This limitation applies regardless of whether such damages arise
-                from contract, tort, negligence, strict liability, or any other
-                legal theory or otherwise.
-              </p>
+              <p>{t('terms.liabilityScope')}</p>
             </div>
           </section>
 
           {/* User Responsibilities */}
           <section>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              User Responsibilities and Research Guidelines
+              {t('terms.responsibilitiesTitle')}
             </h2>
             <div className='text-kapwa-text-support space-y-4 leading-relaxed'>
-              <p className='font-semibold'>Users are solely responsible for:</p>
+              <p className='font-semibold'>{t('terms.responsibilitiesLead')}</p>
               <ul className='ml-4 list-inside list-disc space-y-1'>
-                <li>
-                  <strong>Independent Verification:</strong> Conducting their
-                  own research and verification of all information obtained from
-                  this website
-                </li>
-                <li>
-                  <strong>Following Source Links:</strong> Reviewing and
-                  visiting the original source links and references provided on
-                  our pages for complete and authoritative information
-                </li>
-                <li>
-                  <strong>Cross-Referencing:</strong> Comparing information with
-                  multiple reliable sources before making decisions
-                </li>
-                <li>
-                  Determining the suitability of information for their intended
-                  use
-                </li>
-                <li>Compliance with all applicable laws and regulations</li>
-                <li>
-                  Any consequences resulting from their use of the website
-                  content
-                </li>
+                {list('responsibilitiesList').map((_, index) => (
+                  <li key={index}>
+                    <Trans
+                      t={t}
+                      i18nKey={`terms.responsibilitiesList.${index}`}
+                      components={{ strong: <strong /> }}
+                    />
+                  </li>
+                ))}
               </ul>
 
               <div className='bg-kapwa-bg-info-weak mt-4 border-l-4 border-kapwa-border-info p-4'>
                 <p className='mb-2 font-semibold text-kapwa-text-info'>
-                  We strongly encourage users to:
+                  {t('terms.encourageLead')}
                 </p>
                 <ul className='text-kapwa-text-info list-inside list-disc space-y-1'>
-                  <li>
-                    Use the source links and references provided on each page to
-                    access primary documents and official sources
-                  </li>
-                  <li>
-                    Conduct independent research beyond the information
-                    presented here
-                  </li>
-                  <li>
-                    Consult official government websites and agencies for the
-                    most current information
-                  </li>
-                  <li>
-                    Verify dates, figures, and details through multiple
-                    reputable sources
-                  </li>
+                  {list('encourageList').map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -202,13 +152,10 @@ const TermsOfService: FC = () => {
           {/* No Professional Advice */}
           <section>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              No Professional Advice
+              {t('terms.adviceTitle')}
             </h2>
             <p className='text-kapwa-text-support leading-relaxed'>
-              Information on this website is not intended as professional advice
-              (legal, medical, financial, or otherwise). Users should consult
-              qualified professionals for specific advice related to their
-              situations.
+              {t('terms.advice')}
             </p>
           </section>
 
@@ -217,43 +164,31 @@ const TermsOfService: FC = () => {
             <div className='mb-4 flex items-center gap-3'>
               <ExternalLink className='text-kapwa-text-brand h-6 w-6' />
               <h2 className='text-kapwa-text-strong kapwa-heading-lg font-bold'>
-                Source Links and External References
+                {t('terms.sourcesTitle')}
               </h2>
             </div>
             <div className='text-kapwa-text-support space-y-4 leading-relaxed'>
-              <p>
-                This website provides links to official sources, government
-                documents, and other authoritative materials. Users are strongly
-                encouraged to:
-              </p>
+              <p>{t('terms.sourcesLead')}</p>
               <ul className='ml-4 list-inside list-disc space-y-1'>
-                <li>Click through and review all source links provided</li>
-                <li>
-                  Access primary documents and official publications referenced
-                </li>
-                <li>Verify information through the original sources</li>
-                <li>Check for updates or amendments to referenced materials</li>
+                {list('sourcesList').map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
-              <p>
-                We make no guarantee as to the continued availability of
-                external links, and users should always verify information
-                through official channels.
-              </p>
+              <p>{t('terms.sourcesNote')}</p>
             </div>
           </section>
 
           {/* Website Availability */}
           <section>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              Website Availability
+              {t('terms.availabilityTitle')}
             </h2>
             <div className='text-kapwa-text-support space-y-4 leading-relaxed'>
-              <p>We make no guarantee that this website will be:</p>
+              <p>{t('terms.availabilityLead')}</p>
               <ul className='ml-4 list-inside list-disc space-y-1'>
-                <li>Available at all times</li>
-                <li>Error-free or uninterrupted</li>
-                <li>Free from technical problems</li>
-                <li>Compatible with your equipment</li>
+                {list('availabilityList').map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </div>
           </section>
@@ -261,81 +196,66 @@ const TermsOfService: FC = () => {
           {/* Indemnification */}
           <section>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              Indemnification
+              {t('terms.indemnificationTitle')}
             </h2>
             <p className='text-kapwa-text-support leading-relaxed'>
-              Users agree to indemnify and hold harmless the website operators
-              from any claims, damages, losses, or expenses arising from their
-              use of the website.
+              {t('terms.indemnification')}
             </p>
           </section>
 
           {/* Modifications */}
           <section>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              Modifications
+              {t('terms.modificationsTitle')}
             </h2>
             <p className='text-kapwa-text-support leading-relaxed'>
-              These terms may be modified at any time without notice. Continued
-              use of the website constitutes acceptance of any modifications.
+              {t('terms.modifications')}
             </p>
           </section>
 
           {/* Governing Law */}
           <section>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              Governing Law
+              {t('terms.lawTitle')}
             </h2>
             <p className='text-kapwa-text-support leading-relaxed'>
-              These terms are governed by the laws of the Republic of the
-              Philippines without regard to conflict of law principles.
+              {t('terms.law')}
             </p>
           </section>
 
           {/* Severability */}
           <section>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              Severability
+              {t('terms.severabilityTitle')}
             </h2>
             <p className='text-kapwa-text-support leading-relaxed'>
-              If any provision of these terms is found to be unenforceable, the
-              remaining provisions will continue in full force and effect.
+              {t('terms.severability')}
             </p>
           </section>
 
           {/* Content Concerns */}
           <section>
             <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
-              Content Concerns and Takedown Requests
+              {t('terms.concernsTitle')}
             </h2>
             <div className='text-kapwa-text-support space-y-4 leading-relaxed'>
-              <p>
-                While we strive to provide accurate public domain information,
-                we recognize that errors, outdated information, or other
-                concerns may arise.
-              </p>
+              <p>{t('terms.concernsLead')}</p>
 
               <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised rounded-lg border p-4'>
                 <h3 className='text-kapwa-text-strong mb-2 font-semibold'>
-                  Reporting Concerning Content:
+                  {t('terms.reportingTitle')}
                 </h3>
-                <p className='mb-2'>
-                  If you believe content on this website is:
-                </p>
+                <p className='mb-2'>{t('terms.reportingLead')}</p>
                 <ul className='mb-4 ml-4 list-inside list-disc space-y-1'>
-                  <li>Factually incorrect or misleading</li>
-                  <li>Potentially harmful or dangerous</li>
-                  <li>Violates applicable laws</li>
-                  <li>
-                    Contains personal information that should not be public
-                  </li>
-                  <li>Infringes on legitimate rights</li>
+                  {list('reportingList').map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </ul>
 
                 <div className='mb-2 flex items-center gap-2'>
                   <Mail className='text-kapwa-text-brand h-5 w-5' />
                   <p className='font-semibold'>
-                    Please contact us at:{' '}
+                    {t('terms.contactUs')}{' '}
                     <a
                       href={`mailto:${config.portal.contactEmail}`}
                       className='text-kapwa-text-brand hover:text-kapwa-text-brand'
@@ -345,42 +265,32 @@ const TermsOfService: FC = () => {
                   </p>
                 </div>
 
-                <p className='mb-2'>Please include:</p>
+                <p className='mb-2'>{t('terms.includeLead')}</p>
                 <ul className='ml-4 list-inside list-disc space-y-1'>
-                  <li>Specific URL or page location</li>
-                  <li>Clear description of the concern</li>
-                  <li>Supporting documentation or evidence where applicable</li>
-                  <li>Your contact information for follow-up</li>
+                  {list('includeList').map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </div>
 
               <div className='bg-kapwa-bg-success-weak rounded-lg border border-kapwa-border-success p-4'>
                 <h3 className='mb-2 font-semibold text-kapwa-text-success'>
-                  Our Response Process:
+                  {t('terms.responseTitle')}
                 </h3>
                 <ul className='list-inside list-disc space-y-1 text-kapwa-text-success'>
-                  <li>We will review all legitimate concerns in good faith</li>
-                  <li>Response time may vary due to our volunteer nature</li>
-                  <li>
-                    We may remove, modify, or add disclaimers to content as
-                    appropriate
-                  </li>
-                  <li>
-                    We reserve the right to make editorial decisions about
-                    content
-                  </li>
-                  <li>
-                    We are not obligated to remove content but will consider all
-                    reasonable requests
-                  </li>
+                  {list('responseList').map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </div>
 
               <div className='bg-kapwa-bg-danger-weak rounded-lg border border-kapwa-border-danger p-4'>
                 <p className='text-kapwa-text-danger'>
-                  <strong>False or Frivolous Complaints:</strong> Submitting
-                  knowingly false takedown requests or complaints may result in
-                  being blocked from contacting our volunteers.
+                  <Trans
+                    t={t}
+                    i18nKey='terms.frivolous'
+                    components={{ strong: <strong /> }}
+                  />
                 </p>
               </div>
             </div>
@@ -391,12 +301,12 @@ const TermsOfService: FC = () => {
             <div className='mb-4 flex items-center gap-3'>
               <Mail className='text-kapwa-text-brand h-6 w-6' />
               <h2 className='text-kapwa-text-strong kapwa-heading-lg font-bold'>
-                Contact Information
+                {t('terms.contactTitle')}
               </h2>
             </div>
             <div className='bg-kapwa-bg-surface border-kapwa-border-brand rounded-lg border p-6'>
               <p className='text-kapwa-text-brand-bold mb-2'>
-                For questions about these terms or content concerns, contact:
+                {t('terms.contactLead')}
               </p>
               <p className='text-kapwa-text-brand-bold text-xl font-semibold'>
                 <a
@@ -407,13 +317,12 @@ const TermsOfService: FC = () => {
                 </a>
               </p>
               <p className='text-kapwa-text-brand-bold mt-4 italic'>
-                This website provides public domain information for educational
-                and informational purposes only.
+                {t('terms.educational')}
               </p>
             </div>
             <div>
               <p className='text-kapwa-text-strong mt-4 font-semibold'>
-                Effective as of September 23, 2025
+                {t('terms.effective')}
               </p>
             </div>
           </section>
