@@ -540,6 +540,100 @@ Dagupan at (075) 529-5604". `toTelUri()` previously recognised only the 049
 area code inherited from the template, so every (075) landline — including the
 office directory's — produced no link at all; it now accepts any area code.
 
+## Worked example: the history timeline (November 2026)
+
+Every other dataset describes the present. A timeline describes the past, and
+the past of a city is where official fact and retold story sit closest
+together. The rule here is narrower than anywhere else in the portal: an entry
+is published only when the **official text of a law or order** states it, and
+the timeline begins where those texts begin.
+
+### Sources
+
+| Instrument | Date it states | Official text read | Gazette citation printed on it |
+|---|---|---|---|
+| Republic Act No. 170, the city charter | 20 June 1947 | Supreme Court E-Library | 43 OG No. 7, 2690 (July 1947) |
+| Executive Order No. 96 | 15 October 1947 | Supreme Court E-Library | 43 OG No. 11, 4554 (November 1947) |
+| Executive Order No. 115 | 31 December 1947 | Supreme Court E-Library | 44 OG No. 1, 12 (January 1948) |
+| Republic Act No. 484 | 10 June 1950 | Supreme Court E-Library | 46 OG No. 7, 2990 (July 1950) |
+| Republic Act No. 2259 | 19 June 1959 | Supreme Court E-Library | 55 OG No. 30, 5705 (27 July 1959) |
+| Republic Act No. 4291 | 19 June 1965 | Supreme Court E-Library | 62 OG No. 25, 4375 (20 June 1966) |
+| Presidential Decree No. 235 | 6 July 1973 | Supreme Court E-Library | none printed |
+
+The E-Library is the Supreme Court's own library of statutes and issuances,
+so the agency recorded is the **Supreme Court of the Philippines**, and each
+source notes the Gazette edition the text cites. The Official Gazette's own
+website refused the request (HTTP 403), so the Gazette editions were not read
+directly and are not catalogued as sources. Each source's `data_as_of` is the
+date the instrument states for itself. The E-Library gives no date for its own
+edition, so `published` is null.
+
+lawphil.net was used only to **find** documents. Every text cited was then
+read on the E-Library. Nothing rests on lawphil alone.
+
+The city-published account is the Sangguniang Panlungsod's "History of
+Dagupan" page (`dagupan-sp-about-us`). It is cited on one entry, the charter,
+for the one statement it shares with the charter's own text: Republic Act
+No. 170, 20 June 1947. The city government's own history page returned HTTP
+504 on every attempt and was not read.
+
+### Each entry is pinned to its instrument
+
+The first source of every milestone is the official text of the instrument
+the entry names. `aboutProvenance.test.ts` requires that source's title to
+begin with that instrument's name and its `data_as_of` to equal the
+milestone's date, so a date typed into the timeline cannot drift from the
+document that establishes it. Dates are stored only as precisely as the source
+states them (`YYYY`, `YYYY-MM` or `YYYY-MM-DD`), and `formatHistoryDate()`
+never pads a year into a day.
+
+### What was published
+
+| Date | Entry |
+|---|---|
+| 1947-06-20 | City of Dagupan created (RA 170) |
+| 1947-10-15 | Date of the city's organization fixed as 1 January 1948; Calasiao to be joined (EO 96) |
+| 1947-12-31 | Same date restated; territory to be that of the municipality of Dagupan (EO 115) |
+| 1950-06-10 | Municipal Board reconstituted; city voters qualified to vote for provincial officials (RA 484) |
+| 1959-06-19 | City offices made elective; Dagupan named among the cities whose voters "shall not vote for provincial officials" (RA 2259) |
+| 1965-06-19 | Four assistant city fiscals created, effective 2 January 1966 (RA 4291) |
+| 1973-07-06 | City court expanded to three branches and an auxiliary judge (PD 235) |
+
+Three highlights sit beside the timeline: chartered since 1947 (RA 170),
+31 barangays (PSGC), and 174,777 residents (2024 POPCEN). The two figures
+repeat values that `directory/barangays.json` and `statistics/population.json`
+already publish, so the test requires them to agree with those datasets and to
+cite sources those datasets also cite.
+
+### Withheld, and why
+
+| Withheld | Why |
+|---|---|
+| "City government organized on 1 January 1948" | Both executive orders **fix** that date; neither records that the organization took place. The Supreme Court decision that says it did (*Mejia v. Balolong*, G.R. No. L-1925, 16 September 1948) was found only on lawphil, not on the E-Library, so the date is published as fixed, not as having happened. |
+| Placement in Pangasinan's fourth legislative district (1987) | It rests on the Ordinance appended to the 1987 Constitution. The E-Library's and the Official Gazette's copies of the Constitution do not include the Ordinance, and no other official copy was found. |
+| "Independent component city" | The PSA's 2020 Region I release calls Dagupan one, but the PSA is not the classifying authority, and no classifying document was found. RA 484 (1950) made the city's voters qualified to vote for provincial officials; RA 2259 (1959) later says Dagupan's voters "shall not vote for provincial officials". Both statements are published as the laws make them. **No classification is inferred from them.** |
+| Origin of the settlers, the names "Bacnotan" and "Nandaragupan" and their meaning, the colonial and revolutionary history, the 1945 landings, the charter's authorship | Stated only on the city-published page, or in unofficial retellings. Some could be published if clearly attributed to the city, but none is a legal or civic milestone, and a timeline that mixes attributed stories with statutes invites a reader to treat them as equally established. |
+| The 16 July 1990 earthquake | The city page gives a magnitude. The national authority for it (PHIVOLCS) was not read, so neither the magnitude nor the entry is published. |
+
+The section ends with `NotVerified`: the timeline begins in 1947 because
+that is where official texts were found, not because the city has no earlier
+history.
+
+### Noted, not asserted
+
+- EO 115 calls EO 96 "dated October 1, 1947". EO 96's own heading and
+  signature both say 15 October, and that is the date published.
+- A search-result summary attributed a different date for PD 235 to the
+  Senate's Legislative Digital Resources. That page refused the request (HTTP
+  403) and was not read. The decree states 6 July 1973 twice, so no conflict is
+  recorded.
+- RA 484's title reads "An Act to Amend the **Chapter** of the City of Dagupan"
+  on the E-Library. It is kept as printed.
+- While checking the PSGC on 2026-11-10, the PSA page showed a newer release,
+  "Philippine Standard Geographic Code as of 30 September 2026" (released 12
+  October 2026). It still lists 31 barangays and 174,777, but the barangay
+  index cites the 2Q 2026 release and should be re-verified against the new one.
+
 ## Note on retrieval
 
 The city pages were read directly from their HTML rather than through a
@@ -558,3 +652,9 @@ site's `/councilor` type), which return the same content as the pages with its
 CMS dates. The COMELEC results website is a JavaScript application; its figures
 were read from the public data file the application itself loads. Only
 read-only GET requests were made, to public URLs, with no form submitted.
+
+For the history timeline, the Supreme Court E-Library's documents were read
+directly from their HTML, found through its monthly listings
+(`/thebookshelf/docmonth/<Mon>/<year>/<category>`). The council's history page
+was read through its WordPress REST endpoint. The PSGC pages and the Official
+Gazette's copy of the Constitution were read in an ordinary browser window.

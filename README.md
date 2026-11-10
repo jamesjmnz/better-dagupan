@@ -34,7 +34,8 @@ source, and the pages show the source and its last verification date:
 | Elected officials (`executive.json`, `legislative.json`) | Empty on `main`; in review in [#11](https://github.com/jamesjmnz/better-dagupan/pull/11). |
 | Procurement (PhilGEPS) | The page shows a "source pending" state on `main` because no PhilGEPS entity name is configured; the entity names are in review in [#9](https://github.com/jamesjmnz/better-dagupan/pull/9), and a list of the city's own procurement notices in [#12](https://github.com/jamesjmnz/better-dagupan/pull/12). |
 | Infrastructure (DPWH) | Live from the shared BetterGov search index, filtered by the values in `config/lgu.config.json`. |
-| Services, citizens charter, statistics, financial reports, about/history | Empty. These sections show an honest empty state. |
+| City history (`src/data/about/history.json`, `highlights.json`) | **Published.** Seven legal milestones from 1947 to 1973, each from the official text of the law or order in the Supreme Court E-Library, and three cited highlights. Earlier history is marked as not yet verified. |
+| Services, citizens charter, statistics, financial reports | Empty. These sections show an honest empty state. |
 | Legislation (ordinances, resolutions, executive orders) | Not published. No legislative database is bound yet, so the OpenLGU API answers `503` and the pages say the records are not published yet. |
 
 Nothing in the portal should be read as official Dagupan government
