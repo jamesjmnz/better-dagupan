@@ -1,4 +1,3 @@
-import { optimize } from '@tailwindcss/node';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
@@ -12,11 +11,29 @@ import { defineConfig, type Plugin } from 'vite';
  * same optimize step the production build uses, unminified, on the dev server.
  */
 function flattenCssInDev(): Plugin {
+  // @tailwindcss/node arrives through @tailwindcss/vite rather than as a
+  // declared dependency, so load it lazily and skip the step if it is absent
+  // instead of breaking the dev server or the build.
+  type Optimize = (
+    css: string,
+    options: { file: string; minify: boolean }
+  ) => { code: string };
+  let optimize: Optimize | null = null;
   return {
     name: 'better-dagupan:flatten-css-in-dev',
     apply: 'serve',
     enforce: 'pre',
+    async configResolved() {
+      try {
+        ({ optimize } = (await import('@tailwindcss/node')) as {
+          optimize: Optimize;
+        });
+      } catch {
+        optimize = null;
+      }
+    },
     transform(code, id) {
+      if (!optimize) return;
       if (!/\.css(?:$|\?)/.test(id) || /[?&](?:raw|url)\b/.test(id)) return;
       return { code: optimize(code, { file: id, minify: false }).code };
     },
