@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "slug": "city-mayor",
+    "role": "City Mayor",
+    "isElected": true,
+    "name_status": "published",
+    "name": "Belen T. Fernandez",
+    "office": "City Mayor's Office",
+    "term": "2025–2028",
+    "address": null,
+    "phone": null,
+    "email": null,
+    "website": null,
+    "sources": [
+      "dagupan-lgu-city-mayor-profile",
+      "dagupan-lgu-2025-local-election-results",
+      "dagupan-lgu-2026-world-teachers-day",
+      "comelec-2025-nle-results-dagupan"
+    ]
+  },
+  {
+    "slug": "city-vice-mayor",
+    "role": "City Vice Mayor",
+    "isElected": true,
+    "name_status": "published",
+    "name": "Dean Bryan L. Kua",
+    "office": "Office of the Vice Mayor",
+    "term": "2025–2028",
+    "address": null,
+    "phone": null,
+    "email": null,
+    "website": null,
+    "sources": [
+      "dagupan-lgu-vice-mayor-profile",
+      "dagupan-sp-vice-mayor-profile",
+      "dagupan-sp-2025-inauguration",
+      "dagupan-lgu-2025-local-election-results",
+      "dagupan-lgu-2026-world-teachers-day",
+      "comelec-2025-nle-results-dagupan"
+    ]
+  }
+]

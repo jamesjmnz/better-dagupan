@@ -31,14 +31,13 @@ const INHERITED =
   /los ba(ñ|n)os|losbanos\.gov\.ph|sangguniang bayan|betterlb|municipality of/i;
 
 /**
- * Datasets that are still empty. directory/barangays and directory/departments
- * have left this list: they now hold verified Dagupan records, checked by
- * src/data/__tests__/barangayProvenance.test.ts and
- * src/data/__tests__/departmentProvenance.test.ts. Both are still asserted
- * below to be free of inherited content.
+ * Datasets that are still empty. directory/barangays, directory/departments
+ * and directory/executive have left this list: they now hold verified Dagupan
+ * records, checked by src/data/__tests__/barangayProvenance.test.ts,
+ * departmentProvenance.test.ts and electedOfficialsProvenance.test.ts. All
+ * are still asserted below to be free of inherited content.
  */
 const recordSets: [string, unknown[]][] = [
-  ['directory/executive', executive],
   ['directory/legislative', legislative],
   ['about/highlights', highlights],
   ['about/history', history],
@@ -83,6 +82,16 @@ describe('inherited civic records', () => {
     expect(Array.isArray(departments)).toBe(true);
     expect(departments.length).toBeGreaterThan(0);
     expect(JSON.stringify(departments)).not.toMatch(INHERITED);
+  });
+
+  it('directory/executive holds verified Dagupan records, not inherited ones', () => {
+    // The inherited file named another LGU's mayor and vice mayor. The seats
+    // are generic, so the guarantee that matters is that the names now are
+    // Dagupan's, which electedOfficialsProvenance.test.ts checks against the
+    // sources seat by seat.
+    expect(Array.isArray(executive)).toBe(true);
+    expect(executive.length).toBeGreaterThan(0);
+    expect(JSON.stringify(executive)).not.toMatch(INHERITED);
   });
 
   it('keeps the nationwide datasets that are not LGU-specific', () => {
