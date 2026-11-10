@@ -3,14 +3,14 @@ import { readData } from '../utils/data';
 
 /*
  * Each statistics page's chart tests run only while its dataset holds
- * verified records: population (PSA census) and city income (BLGF) do.
+ * verified records: population (PSA census), city income (BLGF) and
+ * competitiveness (DTI) do.
  * An empty dataset's page shows NotYetAvailable instead, which
  * e2e/statistics/index.spec.ts asserts, and its chart tests skip.
  */
 const hasIncome = readData<unknown[]>('statistics/ari.json').length > 0;
 const hasCmci =
-  readData<{ overall_score: unknown[] }>('statistics/cmci.json').overall_score
-    .length > 0;
+  readData<{ editions: unknown[] }>('statistics/cmci.json').editions.length > 0;
 const NO_INCOME = 'No verified city income records (ari.json) yet.';
 const NO_CMCI = 'No verified CMCI scores (cmci.json) yet.';
 
@@ -326,10 +326,9 @@ test.describe('Statistics Page Charts', () => {
       const lines = page.locator('.recharts-line-curve');
       await expect(lines.first()).toBeVisible();
 
-      // Check for data points
+      // Check for data points, which draw once the line has animated in
       const dots = page.locator('.recharts-line-dot');
-      const dotCount = await dots.count();
-      expect(dotCount).toBeGreaterThan(0);
+      await expect.poll(() => dots.count()).toBeGreaterThan(0);
     });
 
     test('competitiveness page tab switching works', async ({ page }) => {
@@ -340,13 +339,17 @@ test.describe('Statistics Page Charts', () => {
       const tabCount = await tabs.count();
 
       if (tabCount >= 2) {
-        // Click on Pillars tab
+        // Click on Pillars tab: it lists the pillars and their indicators
+        // instead of the trend chart.
         await tabs.nth(1).click();
-        await page.waitForTimeout(500);
+        await expect(
+          page.getByRole('button', { name: /Economic Dynamism/ })
+        ).toBeVisible();
+        await expect(page.locator('.recharts-wrapper')).toHaveCount(0);
 
-        // Chart should still be visible
-        const chart = page.locator('.recharts-wrapper');
-        await expect(chart).toBeVisible();
+        // And back to the chart
+        await tabs.nth(0).click();
+        await expect(page.locator('.recharts-wrapper')).toBeVisible();
       }
     });
 
@@ -380,8 +383,9 @@ test.describe('Statistics Page Charts', () => {
       const tooltipCount = await tooltip.count();
 
       if (tooltipCount > 0) {
-        const tooltipContent = page.locator('.recharts-tooltip-content');
-        await expect(tooltipContent).toBeVisible();
+        // The page renders its own ChartTooltip, which has no
+        // .recharts-tooltip-content element; check its year label.
+        await expect(tooltip.first()).toContainText(/Year/);
       }
     });
 
@@ -508,7 +512,9 @@ test.describe('Statistics Page Charts', () => {
         if (hasCmci) {
           await page.goto('/statistics/competitiveness');
           await page.waitForLoadState('networkidle');
-          await expect(page.locator('.recharts-line-curve')).toBeVisible();
+          await expect(
+            page.locator('.recharts-line-curve').first()
+          ).toBeVisible();
         }
       }
       // Successfully rendered all charts across 3 navigation cycles
@@ -549,12 +555,9 @@ test.describe('Statistics Page Charts', () => {
       await page.goto('/statistics/competitiveness');
       await page.waitForLoadState('networkidle');
 
-      // Check for data points
+      // Should have multiple data points (multiple years), once drawn
       const dots = page.locator('.recharts-line-dot');
-      const dotCount = await dots.count();
-
-      // Should have multiple data points (multiple years)
-      expect(dotCount).toBeGreaterThanOrEqual(3);
+      await expect.poll(() => dots.count()).toBeGreaterThanOrEqual(3);
     });
   });
 

@@ -66,7 +66,31 @@
       "pillars": "pillars"
     },
     "pillarTrends": "Pillar Trends",
-    "indicators": "{{pillar}} Indicators"
+    "indicators": "{{pillar}} Indicators",
+    "yearPicker": "CMCI edition",
+    "overallRank": "Overall rank",
+    "ofPeers": "Of {{count}} {{group}}",
+    "amongCategory": "Category: {{category}}",
+    "methodologyNote": "Scores are shown for each year as DTI published them. DTI scored three pillars up to 2016, added Resiliency in 2017 and Innovation in 2022, and changes the indicators within pillars between editions, so the overall score is a sum over a different set of measures before and after each change.",
+    "byYearCaption": "Overall score and rank by CMCI edition, with the DTI page for each year",
+    "columns": {
+      "year": "Year",
+      "score": "Overall score",
+      "rank": "Rank",
+      "pillars": "Pillars",
+      "source": "DTI page"
+    },
+    "profileLink": "Profile, {{year}}",
+    "indicatorsWithheld": "Indicator scores withheld for this pillar",
+    "indicatorsWithheldDetail": "DTI's {{year}} profile lists indicator scores for this pillar that do not add up to its pillar score, and its chart names an indicator the table leaves out. The pillar score and rank are shown; the breakdown is not.",
+    "rank": {
+      "zero": "{{rank}}th",
+      "one": "{{rank}}st",
+      "two": "{{rank}}nd",
+      "few": "{{rank}}rd",
+      "many": "{{rank}}th",
+      "other": "{{rank}}th"
+    }
   },
   "footer": {
     "verified": "Verified Data Audit",

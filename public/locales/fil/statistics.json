@@ -66,7 +66,31 @@
       "pillars": "mga haligi"
     },
     "pillarTrends": "Mga Trend ng Bawat Haligi",
-    "indicators": "Mga Indicator ng {{pillar}}"
+    "indicators": "Mga Indicator ng {{pillar}}",
+    "yearPicker": "Edisyon ng CMCI",
+    "overallRank": "Kabuuang ranggo",
+    "ofPeers": "Sa {{count}} {{group}}",
+    "amongCategory": "Kategorya: {{category}}",
+    "methodologyNote": "Ipinapakita ang iskor ng bawat taon ayon sa pagkakalathala ng DTI. Tatlong haligi ang sinukat ng DTI hanggang 2016, idinagdag ang Resiliency noong 2017 at ang Innovation noong 2022, at binabago nito ang mga indicator sa loob ng mga haligi sa bawat edisyon, kaya ang kabuuang iskor ay kabuuan ng magkakaibang sukatan bago at pagkatapos ng bawat pagbabago.",
+    "byYearCaption": "Kabuuang iskor at ranggo kada edisyon ng CMCI, kasama ang pahina ng DTI para sa bawat taon",
+    "columns": {
+      "year": "Taon",
+      "score": "Kabuuang iskor",
+      "rank": "Ranggo",
+      "pillars": "Mga haligi",
+      "source": "Pahina ng DTI"
+    },
+    "profileLink": "Profile, {{year}}",
+    "indicatorsWithheld": "Hindi muna ipinapakita ang mga iskor ng indicator para sa haliging ito",
+    "indicatorsWithheldDetail": "Ang mga iskor ng indicator para sa haliging ito sa {{year}} na profile ng DTI ay hindi tumutugma sa iskor ng haligi, at may indicator sa chart nito na wala sa talahanayan. Ipinapakita ang iskor at ranggo ng haligi, ngunit hindi ang detalye.",
+    "rank": {
+      "zero": "ika-{{rank}}",
+      "one": "ika-{{rank}}",
+      "two": "ika-{{rank}}",
+      "few": "ika-{{rank}}",
+      "many": "ika-{{rank}}",
+      "other": "ika-{{rank}}"
+    }
   },
   "footer": {
     "verified": "Beripikadong Pagsusuri ng Datos",

@@ -228,8 +228,9 @@ indicator (overall score, the five pillars, then indicators), one column per
 year from 2014 to 2024. Missing values were written as `0.0000` or `-`: the
 2018 overall and pillar scores are all `0.0000`, which meant "not
 available", not a score of zero. It was converted by hand into the shape of
-`src/data/statistics/cmci.json` (`meta.years`, `overall_score`, `pillars`),
-which is now empty and guarded by `inheritedRecords.test.ts`.
+`src/data/statistics/cmci.json` (`meta.years`, `overall_score`, `pillars`).
+That file now holds Dagupan's scores from DTI, one record per edition; see
+[`civic-data-verification.md`](../civic-data-verification.md).
 
 ## 4. Citizen's Charter snapshots (`.backups/citizens-charter/`)
 

@@ -775,6 +775,89 @@ published whole. Asking BLGF's Local Financial Data Analysis Division
   permission. Each source records this as its `licence`, and every figure is
   shown with a SourceNote naming BLGF.
 
+## Worked example: competitiveness scores (November 2026)
+
+The Cities and Municipalities Competitiveness Index (CMCI) is DTI's own
+index, so there is one publisher and no second agency to corroborate it. As
+with the census and the fiscal data, the checks are arithmetic and two DTI
+presentations agreeing.
+
+### Sources
+
+| Page | Editions | Ids | Gives |
+|---|---|---|---|
+| LGU profile, `cmci.dti.gov.ph/lgu-profile.php?lgu=Dagupan&year=…` | 2014–2024 | `dti-cmci-dagupan-profile-<year>` | Category, overall rank, overall score to two decimals, each pillar's and indicator's rank and score |
+| Rankings data, `…/rankings-data.php?unit=Component%20Cities&year=…` | 2015–2024 | `dti-cmci-rankings-component-cities-<year>` | Overall rank, overall score to four decimals, each pillar's rank and score |
+
+The profile list has one "Dagupan", and every page read places it in
+"REGION I (Ilocos Region)", Pangasinan, category "Component City". DTI's year
+selector offers 2013, but its own page says the 2013 dataset has "rankings data
+at the pillar level" only and redirects; the rankings-data page starts at
+2015. So 2014 rests on the profile alone. No page states a publication date,
+so `published` and `data_as_of` are null, and `coverage` is the edition
+("CMCI 2024"), which the page shows beside every figure.
+
+The two pages present **one database**. Their agreement — on every overall
+rank and every pillar rank and score, for all ten shared years — checks the
+transcription; it is not independent corroboration, and the notes say so. The
+rankings table is cited for the four-decimal overall score; the profile's
+two-decimal dial is that figure rounded in every year.
+
+### Per edition, not per indicator
+
+The inherited `cmci.json` mirrored a CSV of indicator rows across years. That
+shape joins indicators across editions by name, and DTI's editions do not
+support the join: it scored three pillars to 2016, added Resiliency in 2017
+and Innovation in 2022, and renames, merges and redefines indicators between
+editions ("Jobs", "Increase in Employment", "Employment Generation"). A shared
+name in two years is not evidence of the same measure. So the file now holds
+one record per edition, exactly as DTI published it, and the page shows the
+methodology change in words beside the chart. The overall-score line is drawn
+across all years because DTI publishes it for all of them; the note explains
+that it sums a different set of measures before and after each change.
+
+### Checks
+
+`cmciProvenance.test.ts` asserts that:
+
+- the overall score and rank equal pinned values for all eleven editions;
+- the pillar scores add up to the overall score: within a unit in the fourth
+  decimal per pillar (2018 sums to 48.4875 against DTI's 48.4876, 2017 and
+  2021 likewise), and to two decimals for 2014;
+- every published indicator breakdown adds up to its pillar score, within a
+  unit in the fourth decimal per indicator;
+- each edition carries exactly the pillars DTI scored that year;
+- every rank is a positive whole number, and no larger than the peer count
+  where DTI states one;
+- every edition cites its own year's DTI pages.
+
+### Withheld
+
+**The 2014 Government Efficiency indicators.** The profile's table lists nine
+indicators summing to 14.8815 against a pillar score of 17.3893, and the
+chart on the same page names ten indicators — including "Business Registration
+Efficiency", which the table omits — against nine values. DTI's own figures do
+not reconcile, so that breakdown is withheld (`indicators_status:
+inconsistent_in_source`) and the page says so; the pillar score and rank,
+which agree with the overall score, are published.
+
+**Peer counts for 2014–2016 and 2021.** The profile heads its indicator charts
+"Component Cities (116)" in most years but prints "()" in those four. The
+rankings tables could be counted, but a row count is this portal's arithmetic,
+not DTI's statement, so those years show the category instead of "of N".
+
+### Noted, not asserted
+
+- DTI's category for Dagupan is "Component City". It is the peer group DTI
+  ranks the city in, and is shown as DTI's category, not as a legal
+  classification.
+- Four Innovation indicators carry a score of 0.0000 with a rank of 2nd:
+  "Online Payment Facilities" in 2022, 2023 and 2024, and "ICT Use: E-BPLS
+  Software" in 2023. They are published as DTI states them, and they do not
+  break the pillar sums; no reason for them is inferred.
+- The 2024 profile also names a mayor and a 2024 population. Neither is taken
+  from it; both are published elsewhere from their own authorities.
+
 ## Note on retrieval
 
 The city pages were read directly from their HTML rather than through a
@@ -806,3 +889,9 @@ page with a plain same-origin request, exactly as a click on the link would.
 The workbooks were then read cell by cell, including their number formats and
 Metadata sheets, and the raw files were not committed. Only read-only GET
 requests to public URLs were made.
+
+DTI's CMCI portal also refuses command-line fetchers. Each profile and
+rankings page was opened in an ordinary browser with the page's own year
+selector, and read from the rendered tables and the chart data embedded in
+the page; the rankings tables were read in full, not from a summary. Only
+read-only GET requests to public URLs were made.

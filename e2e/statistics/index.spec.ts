@@ -4,7 +4,7 @@ import { assertKapwaTokens } from '../utils/kapwa';
 import { openSidebar } from '../utils/layout';
 
 const incomeRecords = readData<unknown[]>('statistics/ari.json');
-const cmci = readData<{ overall_score: unknown[] }>('statistics/cmci.json');
+const cmci = readData<{ editions: unknown[] }>('statistics/cmci.json');
 
 test.describe('Statistics Pages', () => {
   test.beforeEach(async ({ page }) => {
@@ -124,10 +124,10 @@ test.describe('Statistics Pages', () => {
   });
 
   /*
-   * Population is published from the PSA census and income (ari.json) from
-   * BLGF. Each page is tested for what its dataset supports: an empty page
-   * must say the data is not available, and switches to the chart checks on
-   * its own once records land.
+   * Population is published from the PSA census, income (ari.json) from BLGF
+   * and competitiveness (cmci.json) from DTI. Each page is tested for what its
+   * dataset supports: an empty page must say the data is not available, and
+   * switches to the chart checks on its own once records land.
    */
   for (const route of [
     {
@@ -138,7 +138,7 @@ test.describe('Statistics Pages', () => {
     {
       path: '/statistics/competitiveness',
       title: 'Competitiveness',
-      hasData: cmci.overall_score.length > 0,
+      hasData: cmci.editions.length > 0,
     },
   ]) {
     test(`${route.path} displays correctly`, async ({ page }) => {
