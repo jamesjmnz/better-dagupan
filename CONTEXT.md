@@ -1,6 +1,6 @@
-# BetterLB OpenLGU
+# Better Dagupan OpenLGU
 
-This context describes the civic-legislative data language used by BetterLB's OpenLGU portal. It distinguishes source intake, review, and canonical public records for municipal legislation.
+This context describes the civic-legislative data language used by Better Dagupan's OpenLGU portal. It distinguishes source intake, review, and canonical public records for local legislation.
 
 ## Language
 
@@ -13,7 +13,7 @@ The separate workflow that merges service data into public Citizens Charter serv
 _Avoid_: OpenLGU pipeline, legislative pipeline
 
 **Source Record**:
-A raw observation from an upstream source, such as a website table row, Facebook post, or OCR result. A source record records what was seen, not what BetterLB believes is true.
+A raw observation from an upstream source, such as a website table row, Facebook post, or OCR result. A source record records what was seen, not what the portal believes is true.
 _Avoid_: Document, canonical record
 
 **Raw-Preserving Collection**:
@@ -141,7 +141,7 @@ The policy of preserving raw source snapshots only for changed, anomalous, or ex
 _Avoid_: Full snapshot archive, keep everything
 
 **Scrape Source**:
-An upstream location monitored by the pipeline, such as a Los Baños website table or Facebook source. A scrape source defines what is checked, not what was found.
+An upstream location monitored by the pipeline, such as an LGU website table or Facebook source. A scrape source defines what is checked, not what was found.
 _Avoid_: Source record, data source row
 
 **Scrape Run**:
@@ -161,7 +161,7 @@ A source-level scrape failure where the expected upstream table or column layout
 _Avoid_: Row validation error, missing source record
 
 **Website Table Row**:
-A source kind from losbanos.gov.ph HTML tables. It is the primary source for document metadata such as type, number, title, enacted date, PDF URL, ordinance author, and committees.
+A source kind from the official LGU website's HTML tables. It is the primary source for document metadata such as type, number, title, enacted date, PDF URL, ordinance author, and committees.
 _Avoid_: Website document, PDF record
 
 **Source Row Identity**:
@@ -173,11 +173,11 @@ The observed fetchability of a PDF URL, such as reachable, dead, redirected, mis
 _Avoid_: Source identity, publication status
 
 **PDF Mirror**:
-A BetterLB-controlled archived copy of an official LGU PDF, usually stored outside D1. A PDF mirror preserves evidence when official links rot, but it does not replace the official source URL.
+A portal-controlled archived copy of an official LGU PDF, usually stored outside D1. A PDF mirror preserves evidence when official links rot, but it does not replace the official source URL.
 _Avoid_: Official PDF URL, canonical source
 
 **Archived Copy Fallback**:
-A future public display mode where BetterLB can show a preserved PDF mirror when the official PDF URL is dead. Archived copy fallback is not the initial public behavior.
+A future public display mode where the portal can show a preserved PDF mirror when the official PDF URL is dead. Archived copy fallback is not the initial public behavior.
 _Avoid_: Primary source, official record
 
 **Facebook Post**:
@@ -257,7 +257,7 @@ The derivation of a term from a reliable session or document date matched agains
 _Avoid_: Facebook term, inferred administration
 
 **Canonical Term**:
-Manually maintained reference data describing a Sangguniang Bayan term and its date range. Canonical terms are read by the pipeline for term assignment but are not produced by source ingestion.
+Manually maintained reference data describing a Sanggunian term (for Dagupan, a Sangguniang Panlungsod term) and its date range. Canonical terms are read by the pipeline for term assignment but are not produced by source ingestion.
 _Avoid_: Scraped term, imported term
 
 **Principal Author**:

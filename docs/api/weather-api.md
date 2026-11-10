@@ -1,20 +1,21 @@
 # Weather API
 
-The Weather API provides current weather conditions and 3-hour forecasts for Los Baños, Philippines using the OpenWeatherMap API.
+The Weather API provides current weather conditions and 3-hour forecasts for Dagupan, Pangasinan using the OpenWeatherMap API.
 
 ## Overview
 
-- **Base URL:** `https://betterlb.gov.ph/api/weather`
+- **Base URL:** `https://<your-pages-domain>/api/weather` (Better Dagupan has no production domain yet; locally `http://localhost:8788/api/weather`)
+- **Current state:** needs a bound `WEATHER_KV` namespace and an `OPENWEATHERMAP_API_KEY`, neither of which is configured yet
 - **Authentication:** None required
 - **Data Source:** OpenWeatherMap API
 - **Cache Duration:** 1 hour (3,600 seconds)
-- **Auto-Update:** Scheduled function refreshes data every hour
+- **Auto-Update:** A scheduled handler can refresh the data; no schedule is configured yet
 
 ## Features
 
 - Current weather conditions (temperature, humidity, wind, visibility)
 - 3-hour forecast for the next 24 hours (8 data points)
-- Multi-city support (currently Los Baños, extensible to other municipalities)
+- Multi-city support (currently Dagupan, extensible to other LGUs)
 - KV caching with automatic refresh
 - CORS-protected for authorized origins
 - Force update option for manual refresh
@@ -44,11 +45,11 @@ Retrieves current weather and 3-hour forecast data. Returns cached data if avail
 
 ```json
 {
-  "los_banos": {
-    "name": "Los Baños",
+  "dagupan": {
+    "name": "Dagupan",
     "coordinates": {
-      "lat": 14.1763,
-      "lon": 121.2219
+      "lat": 16.0433,
+      "lon": 120.3333
     },
     "weather": [
       {
@@ -145,7 +146,7 @@ Retrieves current weather and 3-hour forecast data. Returns cached data if avail
 
 ```json
 {
-  "los_banos": {}
+  "dagupan": {}
 }
 ```
 
@@ -164,42 +165,42 @@ Retrieves current weather and 3-hour forecast data. Returns cached data if avail
 ### Get All Cities
 
 ```bash
-curl https://betterlb.gov.ph/api/weather
+curl https://<your-pages-domain>/api/weather
 ```
 
 ### Get Specific City
 
 ```bash
-curl "https://betterlb.gov.ph/api/weather?city=Los Baños"
+curl "https://<your-pages-domain>/api/weather?city=Dagupan"
 ```
 
 ### Force Update (Bypass Cache)
 
 ```bash
-curl "https://betterlb.gov.ph/api/weather?update=true"
+curl "https://<your-pages-domain>/api/weather?update=true"
 ```
 
 ### Get Specific City with Force Update
 
 ```bash
-curl "https://betterlb.gov.ph/api/weather?city=Los Baños&update=true"
+curl "https://<your-pages-domain>/api/weather?city=Dagupan&update=true"
 ```
 
 ### JavaScript/TypeScript Example
 
 ```typescript
 // Fetch weather data
-const response = await fetch('https://betterlb.gov.ph/api/weather');
+const response = await fetch('https://<your-pages-domain>/api/weather');
 const weather = await response.json();
 
-// Access Los Baños weather
-const losBanos = weather.los_banos;
-console.log(`Temperature: ${losBanos.main.temp}°C`);
-console.log(`Humidity: ${losBanos.main.humidity}%`);
-console.log(`Description: ${losBanos.weather[0].description}`);
+// Access Dagupan weather
+const dagupan = weather.dagupan;
+console.log(`Temperature: ${dagupan.main.temp}°C`);
+console.log(`Humidity: ${dagupan.main.humidity}%`);
+console.log(`Description: ${dagupan.weather[0].description}`);
 
 // Access hourly forecast
-losBanos.hourly.forEach((hour, index) => {
+dagupan.hourly.forEach((hour, index) => {
   console.log(`Hour ${index + 1}: ${hour.temp}°C - ${hour.description}`);
 });
 ```
@@ -210,7 +211,7 @@ losBanos.hourly.forEach((hour, index) => {
 import { useState, useEffect } from 'react';
 
 interface WeatherData {
-  los_banos: {
+  dagupan: {
     main: { temp: number; humidity: number };
     weather: Array<{ description: string; icon: string }>;
     hourly: Array<{ temp: number; description: string }>;
@@ -224,7 +225,7 @@ export function WeatherWidget() {
   useEffect(() => {
     async function fetchWeather() {
       try {
-        const response = await fetch('https://betterlb.gov.ph/api/weather');
+        const response = await fetch('https://<your-pages-domain>/api/weather');
         const data = await response.json();
         setWeather(data);
       } catch (error) {
@@ -240,11 +241,11 @@ export function WeatherWidget() {
   if (loading) return <div>Loading weather...</div>;
   if (!weather) return <div>Weather unavailable</div>;
 
-  const current = weather.los_banos;
+  const current = weather.dagupan;
 
   return (
     <div>
-      <h2>Los Baños Weather</h2>
+      <h2>Dagupan Weather</h2>
       <p>Temperature: {current.main.temp}°C</p>
       <p>Humidity: {current.main.humidity}%</p>
       <p>Conditions: {current.weather[0].description}</p>
@@ -268,20 +269,23 @@ export function WeatherWidget() {
 
 ### Supported Cities
 
-The API is configured for **Los Baños** by default. Additional cities can be added in `functions/api/weather.ts`:
+The API is configured for **Dagupan** by default. The city is set in `functions/api/weather.ts` itself, not read from `config/lgu.config.json`, so keep it in step with `location.coordinates` there. Additional cities can be added in the same file:
 
 ```typescript
 const DEFAULT_CITY: CityCoordinates = {
-  name: 'Los Baños',
-  lat: 14.1763,
-  lon: 121.2219,
+  name: 'Dagupan',
+  lat: 16.0433,
+  lon: 120.3333,
 };
 
 const ADDITIONAL_CITIES: CityCoordinates[] = [
-  // { name: 'Bay', lat: 14.1833, lon: 121.2833 },
-  // { name: 'Calamba', lat: 14.2167, lon: 121.1667 },
+  // { name: 'Neighbouring LGU', lat: 0, lon: 0 },
 ];
 ```
+
+The response key is the lower-cased city name with spaces replaced by
+underscores (`dagupan`). The frontend derives the same key from `lgu.name` in
+`src/lib/weather.ts`.
 
 ### Environment Variables
 
@@ -317,7 +321,7 @@ Cache-Control: max-age=3600
 
 ## Scheduled Auto-Update
 
-The API includes a scheduled handler that automatically refreshes weather data every hour:
+The API includes a scheduled handler (exported from `functions/index.ts`) that refreshes the weather data when a schedule invokes it:
 
 ```typescript
 export async function scheduled(controller: ScheduledController, env: Env) {
@@ -328,15 +332,8 @@ export async function scheduled(controller: ScheduledController, env: Env) {
 }
 ```
 
-**Configuration:** Set up in `wrangler.jsonc`:
-
-```json
-{
-  "triggers_cron": {
-    "weather": "0 * * * *" // Every hour
-  }
-}
-```
+**Configuration:** `wrangler.jsonc` defines no schedule yet, so the cache is
+filled only by requests to the endpoint.
 
 ---
 
@@ -345,8 +342,7 @@ export async function scheduled(controller: ScheduledController, env: Env) {
 The API implements CORS protection for security:
 
 **Allowed Origins:**
-- `https://betterlb.pages.dev` (production)
-- `https://betterlb.gov.ph` (custom domain)
+- No production origin yet; add the portal's domain to `ALLOWED_ORIGINS` in `functions/api/weather.ts` once one is assigned
 - `http://localhost:5173` (Vite dev server)
 - `http://localhost:8788` (Wrangler dev server)
 
@@ -427,19 +423,19 @@ The API is designed to support multiple cities:
 
 ```bash
 # Test basic request
-curl https://betterlb.gov.ph/api/weather
+curl https://<your-pages-domain>/api/weather
 
 # Test city filtering
-curl "https://betterlb.gov.ph/api/weather?city=Los Baños"
+curl "https://<your-pages-domain>/api/weather?city=Dagupan"
 
 # Test force update
-curl "https://betterlb.gov.ph/api/weather?update=true"
+curl "https://<your-pages-domain>/api/weather?update=true"
 
 # Test case insensitivity
-curl "https://betterlb.gov.ph/api/weather?city=los_banos"
+curl "https://<your-pages-domain>/api/weather?city=DAGUPAN"
 
 # Test OPTIONS preflight
-curl -X OPTIONS https://betterlb.gov.ph/api/weather \
+curl -X OPTIONS https://<your-pages-domain>/api/weather \
   -H "Origin: http://localhost:5173" \
   -v
 ```
@@ -451,9 +447,9 @@ curl -X OPTIONS https://betterlb.gov.ph/api/weather \
 const response = await fetch('http://localhost:8788/api/weather');
 const data = await response.json();
 
-assert(data.los_banos);
-assert(data.los_banos.main.temp > 0);
-assert(data.los_banos.hourly.length === 8);
+assert(data.dagupan);
+assert(data.dagupan.main.temp > 0);
+assert(data.dagupan.hourly.length === 8);
 ```
 
 ---
@@ -468,4 +464,4 @@ assert(data.los_banos.hourly.length === 8);
 
 **Last Updated:** 2026-02-28
 **API Version:** 1.0.0
-**Maintained By:** BetterLB Development Team
+**Maintained By:** Better Dagupan contributors

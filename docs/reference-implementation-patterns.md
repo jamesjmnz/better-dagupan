@@ -1,6 +1,6 @@
-# BetterLB Reference Implementation Patterns
+# Reference Implementation Patterns
 
-Reusable architecture, patterns, and conventions extracted from the BetterLB civic tech portal. Each section includes rationale and source file references for copying into new projects.
+Reusable architecture, patterns, and conventions extracted from the [BetterLB](https://github.com/BetterLosBanos/betterlb) civic tech portal, the template Better Dagupan is built on. Each section includes rationale and source file references for copying into new projects. Examples have been updated to this repository's files where they differ.
 
 ---
 
@@ -48,7 +48,8 @@ project-root/
     hooks/                    # Custom React hooks
     lib/                      # Business logic, API client, utilities
     data/                     # Static JSON data (per-entity subdirectories)
-      lgu/losbanos/           # Config-driven data paths
+      directory/              # Barangays, departments, elected officials
+      sources/                # Civic source citations
     types/                    # TypeScript type definitions
       index.ts
   functions/                  # Cloudflare Pages Functions (backend)
@@ -97,38 +98,34 @@ A single JSON file parameterizes the entire portal. Swap this file and the porta
 ```json
 {
   "lgu": {
-    "name": "Los Baños",
-    "fullName": "Municipality of Los Baños",
-    "province": "Laguna",
-    "region": "Region IV-A",
-    "regionCode": "CALABARZON",
-    "type": "municipality",
-    "logoPath": "/logos/png/betterlb-blue.png",
-    "officialWebsite": "https://losbanos.gov.ph"
+    "name": "Dagupan",
+    "fullName": "City of Dagupan",
+    "province": "Pangasinan",
+    "districtEngineeringOffice": "Pangasinan 2nd DEO",
+    "region": "Region I",
+    "regionCode": "Ilocos Region",
+    "type": "city",
+    "officialWebsite": "https://www.dagupan.gov.ph"
   },
   "portal": {
-    "name": "BetterLB",
-    "domain": "betterlb.org",
+    "name": "Better Dagupan",
+    "domain": "",
     "brandColor": "#0066eb",
-    "tagline": "Community Powered Los Baños Portal"
+    "navbarLogoPath": "/logos/svg/better-dagupan-icon.svg"
   },
   "location": {
-    "coordinates": { "lat": 14.1763, "lon": 121.2219 },
-    "weather": { "defaultCity": "Los Baños" }
-  },
-  "dataPaths": {
-    "departments": "src/data/lgu/losbanos/directory/departments.json",
-    "barangays": "src/data/lgu/losbanos/directory/barangays.json",
-    "services": "src/data/lgu/losbanos/services/categories"
+    "coordinates": { "lat": 16.0433, "lon": 120.3333 },
+    "weather": { "defaultCity": "Dagupan" }
   },
   "features": {
     "openLGU": true,
     "transparency": true,
-    "tourism": true,
     "statistics": true
   }
 }
 ```
+
+(Abridged from this repository's `config/lgu.config.json`.)
 
 **Typed accessor**:
 
@@ -139,9 +136,8 @@ import lguConfig from '../../config/lgu.config.json';
 export interface LGUConfig {
   lgu: { name: string; fullName: string; province: string; /* ... */ };
   portal: { name: string; domain: string; brandColor: string; /* ... */ };
-  features: Record<string, boolean>;
-  dataPaths: Record<string, string>;
-  // ... other sections
+  features: { openLGU: boolean; transparency: boolean; statistics: boolean };
+  // ... location, transparency
 }
 
 export const config = lguConfig as LGUConfig;
@@ -150,7 +146,7 @@ export default config;
 
 **Why it works**:
 - `features` object acts as a feature flag system — entire modules toggle on/off
-- `dataPaths` maps to per-entity data subtrees — each LGU gets its own data
+- Datasets live at fixed paths under `src/data/` and are imported directly; the template's old `dataPaths` block was removed because nothing read it
 - `location.coordinates` drives weather and geographic features
 - Typed accessor prevents runtime errors from typos
 
@@ -793,6 +789,9 @@ module.exports = {
 ## 16. Claude Code Skills and Agents
 
 **Source**: `.claude/skills/`, `.claude/agents/`
+
+> These directories belong to the upstream template and are not included in
+> this repository; the section describes the pattern only.
 
 Project-specific quality standards encoded as AI-checkable checklists.
 

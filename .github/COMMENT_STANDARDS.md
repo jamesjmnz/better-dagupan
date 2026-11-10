@@ -50,7 +50,7 @@ This document outlines the standardized comment format used throughout the Bette
  *
  * @example
  * ```tsx
- * const weather = await fetchWeather('Los Baños');
+ * const weather = await fetchWeather('Dagupan');
  * ```
  */
 ```

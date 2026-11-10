@@ -16,7 +16,7 @@ The initial schema (migrations 001-004) accumulated technical debt: duplicate ma
 
 - Executive session (`sb_11_2025-01-01_executive`) dissolved; 157 documents get `session_id = NULL`
 - `sb_09` FK references fixed to `sb_9` (terms PK)
-- Duplicate membership `perez-muriel-laisa-b` removed
+- Duplicate membership with a wrong `person_id` removed (the row with the correct `person_id` kept)
 - `document_authors.author_type` migrated from `primary` to `principal`
 - `admin_audit_log` rows merged into `audit_log`
 

@@ -2,6 +2,14 @@
 
 This is a **breaking migration**. The OpenLGU D1 schema is rebuilt from scratch with proper constraints, clean column sets, and pipeline tables.
 
+> **Better Dagupan context:** this guide records a migration of the BetterLB
+> template's original database. Better Dagupan has no D1 database yet, so there
+> is nothing to migrate: a new database only needs the files in `db/migrations/`
+> applied. The data transformations and expected counts below describe the
+> template's dataset, not Dagupan's. `002_baseline_data.sql` still seeds the
+> template's Sangguniang Bayan terms; replace them with verified Sangguniang
+> Panlungsod terms before applying it to a Better Dagupan database.
+
 ## Why
 
 Migrations 001-004 accumulated technical debt that D1 cannot fix incrementally (no DROP COLUMN, no ALTER COLUMN, no ADD CONSTRAINT). Migration 006-007 added pipeline tables but were never applied. Rather than maintain 7 fragmented migrations with misleading comments, we squash into 2 clean files.
@@ -57,7 +65,7 @@ NOT NULL
 
 1. **Executive session dissolved** — `sb_11_2025-01-01_executive` had 157 documents. These get `session_id = NULL`. Executive orders don't belong to sessions.
 2. **FK fix** — memberships referenced `sb_09` but terms PK is `sb_9`. Fixed to `sb_9`.
-3. **Duplicate removed** — `perez-muriel-laisa-b` (wrong person_id) removed from memberships. Correct entry `dizon-muriel-laisa-b` kept.
+3. **Duplicate removed** — a membership row pointing at a wrong `person_id` (`<wrong-person-id>`) was removed; the row with the correct `person_id` (`<correct-person-id>`) was kept.
 4. **author_type renamed** — `primary` → `principal` in document_authors.
 5. **Admin audit merged** — rows from `admin_audit_log` inserted into `audit_log`.
 6. **Mover/seconder preserved** — `documents.moved_by`/`seconded_by` values preserved in `staged_document_person_refs` during migration (not canonical, staging evidence only).
@@ -73,7 +81,7 @@ NOT NULL
 ### Step 1: Backup existing data
 
 ```bash
-wrangler d1 export betterlb_openlgu --remote --output=backup_$(date +%Y%m%d).sql
+wrangler d1 export <your-d1-database> --remote --output=backup_$(date +%Y%m%d).sql
 ```
 
 Also already exported to `pipeline/openlgu/reference/remote-*.json`.
@@ -82,8 +90,8 @@ Also already exported to `pipeline/openlgu/reference/remote-*.json`.
 
 ```bash
 # Drop and recreate — this is destructive
-wrangler d1 execute betterlb_openlgu --remote --file=db/migrations/001_initial_schema.sql
-wrangler d1 execute betterlb_openlgu --remote --file=db/migrations/002_baseline_data.sql
+wrangler d1 execute <your-d1-database> --remote --file=db/migrations/001_initial_schema.sql
+wrangler d1 execute <your-d1-database> --remote --file=db/migrations/002_baseline_data.sql
 ```
 
 ### Step 3: Migrate data
@@ -97,12 +105,12 @@ This reads from `pipeline/openlgu/reference/remote-*.json`, transforms, and inse
 ### Step 4: Verify
 
 ```bash
-wrangler d1 execute betterlb_openlgu --remote --command="SELECT type, COUNT(*) FROM documents GROUP BY type"
-wrangler d1 execute betterlb_openlgu --remote --command="SELECT COUNT(*) FROM persons"
-wrangler d1 execute betterlb_openlgu --remote --command="SELECT COUNT(*) FROM memberships"
+wrangler d1 execute <your-d1-database> --remote --command="SELECT type, COUNT(*) FROM documents GROUP BY type"
+wrangler d1 execute <your-d1-database> --remote --command="SELECT COUNT(*) FROM persons"
+wrangler d1 execute <your-d1-database> --remote --command="SELECT COUNT(*) FROM memberships"
 ```
 
-Expected: 2430 documents, 27+ persons, 38+ memberships.
+For the template's original dataset this check returned 2,430 documents, 27 or more persons, and 38 or more memberships. For a new database, expect the counts of whatever verified records you have loaded.
 
 ## Schema reference
 

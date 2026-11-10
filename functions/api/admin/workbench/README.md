@@ -1,15 +1,15 @@
 # OpenLGU Review Workbench (D1 Functions)
 
-Cloudflare Pages Functions backing the admin **Review Workbench** — the tool LGU staff use to
+Cloudflare Pages Functions backing the admin **Review Workbench** — the tool portal reviewers use to
 resolve missing/ambiguous metadata on staged civic documents (ordinances, resolutions) before
 publication. Decisions are recorded as an append-only audit trail and replayed into a per-field
 **review projection**.
 
 This directory is the **deployed (D1) adapter**. A second adapter,
 `scripts/openlgu/review-workbench-server.mjs`, serves the same UI locally from JSONL pipeline
-output. The two share semantics but currently duplicate logic — see the
-[shared review modules plan](../../../../docs/superpowers/plans/2026-06-12-openlgu-shared-review-modules.md)
-for the planned unification.
+output. The two share semantics but currently duplicate logic. Unifying them is planned; the
+plan document that described it was not carried over from the upstream template. See
+[ADR 0004](../../../../docs/adr/0004-local-review-workbench.md) for the local workbench decision.
 
 ## Architecture
 
@@ -38,7 +38,7 @@ token (`X-CSRF-Token` header).
 |--------|------|-----------|------|---------|
 | GET | `/health` | `workbench:read` | — | Row counts + latest capture timestamp |
 | GET | `/stats` | `workbench:read` | — | Per-tab totals (active/resolved/blocked) |
-| GET | `/terms` | `workbench:read` | — | Sangguniang Bayan terms (for term inference) |
+| GET | `/terms` | `workbench:read` | — | Sanggunian terms (for term inference) |
 | GET | `/staged-documents` | `workbench:read` | — | Paginated list; `?tab=&status=&page=&limit=&search=` |
 | GET | `/staged-documents/:id` | `workbench:read` | — | Single doc + decisions + review projection |
 | GET | `/review-decisions?source_record_id=` | `workbench:read` | — | List decisions for a record |
@@ -107,6 +107,5 @@ node scripts/openlgu/review-workbench-server.mjs   # serves :8789
 
 ## Known divergences (deployed vs local)
 
-Tracked in the [shared review modules plan](../../../../docs/superpowers/plans/2026-06-12-openlgu-shared-review-modules.md).
-Notable: the list view (`queryStagedDocuments`) returns placeholder `projected_fields`/empty
+Not yet tracked in a committed plan. Notable: the list view (`queryStagedDocuments`) returns placeholder `projected_fields`/empty
 `review_decisions` — only the single-document endpoint computes the full projection.
