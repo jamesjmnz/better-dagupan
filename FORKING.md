@@ -75,7 +75,12 @@ Most LGU-specific values live here. This is Better Dagupan's file, abridged:
       "exactMatchTargets": ["dagupan", "dagupan city"]
     }
   },
-  "features": { "openLGU": true, "transparency": true, "statistics": true }
+  "features": {
+    "openLGU": true,
+    "transparency": true,
+    "statistics": true,
+    "pangasinan": false
+  }
 }
 ```
 
@@ -182,12 +187,17 @@ Enable or disable entire sections in `config/lgu.config.json`:
   "features": {
     "openLGU": true,
     "transparency": true,
-    "statistics": true
+    "statistics": true,
+    "pangasinan": false
   }
 }
 ```
 
-Routes for disabled features are not registered in `src/App.tsx`.
+Routes for disabled sections are not registered in `src/App.tsx`.
+`pangasinan` only controls whether the Pangasinan (`pag`) locale appears in the
+language switcher; keep it off until the locale has human-reviewed translations
+(see `src/i18n/README.md`). Replace it with your own regional language if you
+need one.
 
 ---
 

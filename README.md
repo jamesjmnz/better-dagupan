@@ -32,7 +32,7 @@ source, and the pages show the source and its last verification date:
 | Barangays (`src/data/directory/barangays.json`) | **Published.** 31 barangays from the PSA Philippine Standard Geographic Code (PSGC). |
 | City offices (`src/data/directory/departments.json`) | **Published.** 34 offices from the City Government of Dagupan's own pages. 11 office heads are deliberately withheld because the sources disagree or only one source names them. |
 | Elected officials (`executive.json`, `legislative.json`) | Empty on `main`; in review in [#11](https://github.com/jamesjmnz/better-dagupan/pull/11). |
-| Procurement (PhilGEPS) | The page shows a "source pending" state on `main` because no PhilGEPS entity name is configured; the entity names are in review in [#9](https://github.com/jamesjmnz/better-dagupan/pull/9). |
+| Procurement (PhilGEPS) | The page shows a "source pending" state on `main` because no PhilGEPS entity name is configured; the entity names are in review in [#9](https://github.com/jamesjmnz/better-dagupan/pull/9), and a list of the city's own procurement notices in [#12](https://github.com/jamesjmnz/better-dagupan/pull/12). |
 | Infrastructure (DPWH) | Live from the shared BetterGov search index, filtered by the values in `config/lgu.config.json`. |
 | Services, citizens charter, statistics, financial reports, about/history | Empty. These sections show an honest empty state. |
 | Legislation (ordinances, resolutions, executive orders) | Not published. No legislative database is bound yet, so the OpenLGU API answers `503` and the pages say the records are not published yet. |
@@ -54,7 +54,8 @@ Better Dagupan is being built to provide:
 - **Legislative Portal (OpenLGU)**: Ordinances, resolutions, and executive orders from the Sangguniang Panlungsod (not yet populated)
 - **Transparency Dashboard**: DPWH infrastructure projects, PhilGEPS procurement, and financial reports
 - **Open Data**: Weather and foreign-exchange pages under `/data`
-- **Multi-language Support**: English and Filipino translations
+- **Report an Error**: A `/report-an-error` page and GitHub issue form for correcting civic information, linked from every source note
+- **Multi-language Support**: English and Filipino translations; a Pangasinan locale is scaffolded but stays hidden (`features.pangasinan: false`) until human translations exist
 
 Sections without verified records stay in the interface and show an empty state.
 
@@ -132,7 +133,7 @@ better-dagupan/
 │   ├── api/                     # API endpoints: weather, openlgu, admin
 │   └── utils/                   # Shared middleware (auth, CSRF, rate limits, cache)
 ├── public/                      # Static public assets
-│   ├── locales/                 # Translation files (en, fil)
+│   ├── locales/                 # Translation files (en, fil; pag scaffolded, empty)
 │   └── logos/                   # Logo exports
 ├── scripts/                     # Automation, maintenance, and build scripts
 │   └── openlgu/                 # OpenLGU Legislative Source Pipeline
@@ -309,10 +310,10 @@ repeated here so that there is only one copy to keep accurate.
 We are looking for volunteers passionate about making Dagupan a better place. You don't need to be a developer to help!
 
 ### How You Can Contribute:
-1.  **Non-Developers**: Use the portal's `/contribute` page to suggest new services or fix outdated information via GitHub Issues (requires a free GitHub account).
+1.  **Non-Developers**: Use the portal's `/report-an-error` page to correct civic information, or `/contribute` to suggest new services, via GitHub Issues (requires a free GitHub account).
 2.  **Developers**: Check the [Issues](https://github.com/jamesjmnz/better-dagupan/issues) tab for "Help Wanted" or "Good First Issue" labels, and read [`CONTRIBUTING.md`](./CONTRIBUTING.md).
 3.  **Data Auditors**: Help verify records against primary government sources, following [`docs/civic-data-verification.md`](./docs/civic-data-verification.md).
-4.  **Translators**: Help translate the portal to Filipino and other Philippine languages by working on `public/locales/` files.
+4.  **Translators**: Help translate the portal to Filipino and Pangasinan by working on `public/locales/` files; see [`src/i18n/README.md`](./src/i18n/README.md).
 
 ### Development Workflow
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) (enforced via commitlint)

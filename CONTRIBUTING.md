@@ -248,6 +248,16 @@ first. In short:
 Never add officials, offices, contacts, services, budgets, or legislation from
 memory or from an unofficial source.
 
+To report a wrong fact without editing data yourself, use the portal's
+`/report-an-error` page or the "Incorrect civic information" issue form
+(`.github/ISSUE_TEMPLATE/incorrect-civic-info.yml`).
+
+### Contributing Translations
+
+English and Filipino must stay in step; `localeParity.test.ts` checks it.
+Pangasinan strings must come from a human translator. See
+[`src/i18n/README.md`](./src/i18n/README.md).
+
 ### Adding a New Service
 
 1. Update service data in `src/data/services/categories/` or `src/data/citizens-charter/`, following the data rules above
