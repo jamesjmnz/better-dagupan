@@ -2,6 +2,11 @@ import { FC, useEffect, useState } from 'react';
 
 import { Trans, useTranslation } from 'react-i18next';
 
+import { CloudSun } from 'lucide-react';
+
+import { EmptyState } from '@/components/ui/EmptyState';
+import { lguLabels } from '@/lib/lguLabels';
+
 import { fetchWeatherData, weatherIcons } from '../../lib/weather';
 import { WeatherData } from '../../types';
 
@@ -91,6 +96,12 @@ const WeatherPage: FC = () => {
             <p className='font-bold'>{t('weather.error')}</p>
             <p>{error}</p>
           </div>
+        ) : weatherData.length === 0 ? (
+          <EmptyState
+            icon={CloudSun}
+            title={t('weather.unavailableTitle')}
+            message={t('weather.unavailableMessage', { lgu: lguLabels.name })}
+          />
         ) : (
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-3'>
             {/* City Selection Panel */}

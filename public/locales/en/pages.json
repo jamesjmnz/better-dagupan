@@ -338,6 +338,8 @@
   },
   "weather": {
     "error": "Error",
+    "unavailableTitle": "Weather is not available right now",
+    "unavailableMessage": "Current conditions for {{lgu}} will appear here once the weather service is connected.",
     "cities": "Cities",
     "humidity": "Humidity",
     "wind": "Wind",
@@ -345,7 +347,7 @@
     "visibility": "Visibility",
     "forecast": "5-Day Forecast",
     "aboutTitle": "About Weather Data",
-    "aboutBody": "The weather data displayed on this page is sourced from the Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) and other reliable weather services. The information is updated regularly to provide you with the most accurate and current weather conditions across major Philippine cities.",
+    "aboutBody": "The weather shown on this page comes from OpenWeatherMap, a commercial weather service, and is refreshed about once an hour. It is not an official PAGASA forecast.",
     "understandingTitle": "Understanding the Data",
     "understandingBody": "Temperature is displayed in Celsius (°C). Weather conditions are categorized based on current atmospheric observations. The forecast provides a 5-day outlook to help you plan ahead.",
     "advisoriesTitle": "Weather Advisories",

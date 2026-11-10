@@ -11,6 +11,13 @@ interface CachedResponse<T> {
 
 const cache = new Map<string, CachedResponse<unknown>>();
 
+/** A non-2xx response, with its status kept for callers that branch on it. */
+export class HttpError extends Error {
+  constructor(public readonly status: number) {
+    super(`HTTP error! status: ${status}`);
+  }
+}
+
 export async function fetchWithCache<T>(
   url: string,
   options?: RequestInit
@@ -24,7 +31,7 @@ export async function fetchWithCache<T>(
 
   const response = await fetch(url, options);
   if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+    throw new HttpError(response.status);
   }
 
   const data = await response.json();

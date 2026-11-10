@@ -98,6 +98,15 @@ export function getPersonName(person: Person): string {
 
 import type { BadgeVariant } from '@/components/ui/Badge';
 
+import { HttpError } from './api';
+
+// A 503 means no legislative database is bound yet. The layout already shows
+// an empty state for that, so it is not worth logging as an error.
+function reportLoadError(resource: string, error: unknown) {
+  if (error instanceof HttpError && error.status === 503) return;
+  console.error(`Failed to load ${resource} from API:`, error);
+}
+
 export function getDocTypeBadgeVariant(type: string): BadgeVariant {
   switch (type) {
     case 'ordinance':
@@ -158,7 +167,7 @@ export async function loadPersonsFromAPI(): Promise<Person[]> {
   try {
     const response = await fetch('/api/openlgu/persons?limit=100');
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      throw new HttpError(response.status);
     }
     const data = await response.json();
     return (data.persons || []).map((p: APIPerson) => ({
@@ -179,7 +188,7 @@ export async function loadPersonsFromAPI(): Promise<Person[]> {
       })),
     }));
   } catch (error) {
-    console.error('Failed to load persons from API:', error);
+    reportLoadError('persons', error);
     return [];
   }
 }
@@ -196,7 +205,7 @@ export async function loadDocumentsFromAPI(): Promise<DocumentItem[]> {
         `/api/openlgu/documents?limit=${pageSize}&offset=${offset}`
       );
       if (!response.ok) {
-        throw new Error(`API error: ${response.status}`);
+        throw new HttpError(response.status);
       }
 
       const data = await response.json();
@@ -222,7 +231,7 @@ export async function loadDocumentsFromAPI(): Promise<DocumentItem[]> {
 
     return documents;
   } catch (error) {
-    console.error('Failed to load documents from API:', error);
+    reportLoadError('documents', error);
     return [];
   }
 }
@@ -231,7 +240,7 @@ export async function loadSessionsFromAPI(): Promise<Session[]> {
   try {
     const response = await fetch('/api/openlgu/sessions?limit=1000');
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      throw new HttpError(response.status);
     }
     const data = await response.json();
     return (data.sessions || []).map((s: any) => ({
@@ -245,7 +254,7 @@ export async function loadSessionsFromAPI(): Promise<Session[]> {
       absent: s.absent || [],
     }));
   } catch (error) {
-    console.error('Failed to load sessions from API:', error);
+    reportLoadError('sessions', error);
     return [];
   }
 }
@@ -254,7 +263,7 @@ export async function loadTermsFromAPI(): Promise<Term[]> {
   try {
     const response = await fetch('/api/openlgu/terms?limit=10');
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      throw new HttpError(response.status);
     }
     const data = await response.json();
     return (data.terms || []).map((t: APITerm) => ({
@@ -273,7 +282,7 @@ export async function loadTermsFromAPI(): Promise<Term[]> {
       },
     }));
   } catch (error) {
-    console.error('Failed to load terms from API:', error);
+    reportLoadError('terms', error);
     return [];
   }
 }
@@ -282,7 +291,7 @@ export async function loadCommitteesFromAPI(): Promise<Committee[]> {
   try {
     const response = await fetch('/api/openlgu/committees');
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      throw new HttpError(response.status);
     }
     const data = await response.json();
     return (data.committees || []).map(
@@ -294,7 +303,7 @@ export async function loadCommitteesFromAPI(): Promise<Committee[]> {
       })
     );
   } catch (error) {
-    console.error('Failed to load committees from API:', error);
+    reportLoadError('committees', error);
     return [];
   }
 }
@@ -303,7 +312,7 @@ export async function loadTermFromAPI(): Promise<Term | null> {
   try {
     const response = await fetch('/api/openlgu/terms?limit=10');
     if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+      throw new HttpError(response.status);
     }
     const data = await response.json();
     const apiTerms: APITerm[] = data.terms || [];
@@ -339,7 +348,7 @@ export async function loadTermFromAPI(): Promise<Term | null> {
       },
     };
   } catch (error) {
-    console.error('Failed to load term from API:', error);
+    reportLoadError('term', error);
     return null;
   }
 }
