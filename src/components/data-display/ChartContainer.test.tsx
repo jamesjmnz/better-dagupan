@@ -195,10 +195,13 @@ describe('ChartTooltip Component', () => {
     });
 
     it('handles null values', () => {
+      // Recharts passes null for a missing data point even though its
+      // payload type only admits numbers.
+      const missing = null as unknown as number;
       render(
         <ChartTooltip
           active={true}
-          payload={[{ name: 'Null', value: null, color: '#059669' }]}
+          payload={[{ name: 'Null', value: missing, color: '#059669' }]}
           label={2020}
         />
       );
