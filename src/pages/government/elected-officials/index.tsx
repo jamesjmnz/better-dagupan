@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 import { SiFacebook } from '@icons-pack/react-simple-icons';
-import { Button } from '@bettergov/kapwa/button';
 import {
   ArrowRight,
   BookOpenIcon,
@@ -48,6 +47,14 @@ const legislativeData = legislativeDataRaw as LegislativeChamber[];
  * which matched nothing here, so the whole council section silently vanished
  * instead of saying that no roster had been published.
  */
+/**
+ * A plain styled link. These used to be a kapwa <Button> inside a <Link>,
+ * which nested one interactive element in another and brought the button's
+ * raw gray utility classes into a page that must use semantic tokens only.
+ */
+const OUTLINE_LINK =
+  'border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-strong hover:bg-kapwa-bg-surface-raised focus-visible:ring-kapwa-border-focus inline-flex items-center gap-2 rounded-md border px-3 py-2 text-[10px] font-bold tracking-widest uppercase transition-colors focus-visible:ring-2 focus-visible:outline-none';
+
 const council: LegislativeChamber | null = legislativeData[0] ?? null;
 
 /** The council's presiding officer, recorded once in executive.json. */
@@ -484,15 +491,12 @@ export default function ElectedOfficialsPage() {
                   </p>
                 </div>
               </div>
-              <Link to='/government/elected-officials/committees'>
-                <Button
-                  variant='outline'
-                  size='sm'
-                  className='text-[10px] font-bold tracking-widest uppercase'
-                  rightIcon={<ArrowRight className='h-3 w-3' />}
-                >
-                  {t('electedOfficials.viewCommittees')}
-                </Button>
+              <Link
+                to='/government/elected-officials/committees'
+                className={OUTLINE_LINK}
+              >
+                {t('electedOfficials.viewCommittees')}
+                <ArrowRight aria-hidden='true' className='h-3 w-3' />
               </Link>
             </div>
           </>
@@ -523,15 +527,9 @@ export default function ElectedOfficialsPage() {
             </p>
           </div>
         </div>
-        <Link to='/government/departments'>
-          <Button
-            variant='outline'
-            size='sm'
-            className='text-[10px] font-bold tracking-widest uppercase'
-            rightIcon={<ArrowRight className='h-3 w-3' />}
-          >
-            {t('electedOfficials.goToDepartments')}
-          </Button>
+        <Link to='/government/departments' className={OUTLINE_LINK}>
+          {t('electedOfficials.goToDepartments')}
+          <ArrowRight aria-hidden='true' className='h-3 w-3' />
         </Link>
       </div>
     </div>
