@@ -1,6 +1,7 @@
 // Enhanced Weather API - Path: functions/api/weather.ts
 // Merges forecast capability with robust error handling
 // Supports single city focus with easy configuration for other municipalities
+import { ALLOWED_ORIGINS } from '../utils/origins';
 import type {
   CityCoordinates,
   Env,
@@ -13,14 +14,9 @@ import type {
 /**
  * CORS Configuration
  * Restricts API access to trusted origins only (security fix for T-059)
- * Production: no domain assigned yet
+ * Production: the better-dagupan Pages domain
  * Development: localhost for local development
  */
-const ALLOWED_ORIGINS = [
-  // Better Dagupan has no production domain yet; add it here once assigned.
-  'http://localhost:5173', // Vite dev server
-  'http://localhost:8788', // Wrangler dev server
-];
 
 /**
  * Get appropriate CORS headers based on request origin
