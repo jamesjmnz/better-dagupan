@@ -93,7 +93,7 @@ export default function ProcurementPage() {
   // Helper function to get badge variant based on business category
   const getBusinessCategoryBadgeVariant = (
     category: string | undefined
-  ): 'primary' | 'secondary' | 'warning' | 'success' => {
+  ): 'primary' | 'secondary' | 'warning' | 'success' | 'slate' => {
     if (!category) return 'slate';
     const cat = category.toLowerCase();
     if (
