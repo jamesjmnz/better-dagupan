@@ -84,38 +84,40 @@ const GovernmentSection: FC = () => {
         {/* Using documented CardGrid pattern */}
         <CardGrid columns={3}>
           {branches.map(branch => (
-            <Card key={branch.id} hover className='text-center'>
-              <CardContent className='p-6'>
-                <div className='mb-4 flex justify-center'>{branch.icon}</div>
-                <h3 className='text-kapwa-text-strong mb-2 text-xl font-semibold'>
-                  {branch.title}
-                </h3>
-                <p className='text-kapwa-text-support mb-4'>
-                  {branch.description}
-                </p>
-                <Button
-                  onClick={() => navigate(branch.link)}
-                  variant='link'
-                  size='sm'
-                  rightIcon={
-                    <svg
-                      className='h-4 w-4'
-                      viewBox='0 0 24 24'
-                      fill='none'
-                      stroke='currentColor'
-                      strokeWidth='2'
-                      strokeLinecap='round'
-                      strokeLinejoin='round'
-                    >
-                      <line x1='5' y1='12' x2='19' y2='12'></line>
-                      <polyline points='12 5 19 12 12 19'></polyline>
-                    </svg>
-                  }
-                >
-                  {t('government.learnMore')}
-                </Button>
-              </CardContent>
-            </Card>
+            <div key={branch.id} role='listitem'>
+              <Card hover className='h-full text-center'>
+                <CardContent className='p-6'>
+                  <div className='mb-4 flex justify-center'>{branch.icon}</div>
+                  <h3 className='text-kapwa-text-strong mb-2 text-xl font-semibold'>
+                    {branch.title}
+                  </h3>
+                  <p className='text-kapwa-text-support mb-4'>
+                    {branch.description}
+                  </p>
+                  <Button
+                    onClick={() => navigate(branch.link)}
+                    variant='link'
+                    size='sm'
+                    rightIcon={
+                      <svg
+                        className='h-4 w-4'
+                        viewBox='0 0 24 24'
+                        fill='none'
+                        stroke='currentColor'
+                        strokeWidth='2'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                      >
+                        <line x1='5' y1='12' x2='19' y2='12'></line>
+                        <polyline points='12 5 19 12 12 19'></polyline>
+                      </svg>
+                    }
+                  >
+                    {t('government.learnMore')}
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           ))}
         </CardGrid>
 
