@@ -1,11 +1,16 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
 import { parseAsStringEnum, useQueryState } from 'nuqs';
+import { useTranslation } from 'react-i18next';
+
+import { Landmark } from 'lucide-react';
 
 import { PageHeader } from '@/components/layout';
 import { lguLabels } from '@/lib/lguLabels';
 import { SidebarLayout } from '@/components/layout/SidebarLayout';
 import SearchInput from '@/components/ui/SearchInput';
+import { EmptyState } from '@/components/ui/EmptyState';
+import { config } from '@/lib/lguConfig';
 
 import useOpenLGU from '@/hooks/useOpenLGU';
 
@@ -51,6 +56,13 @@ export default function OpenLGULayout() {
   });
 
   const legislation = useOpenLGU();
+  const { t } = useTranslation('common');
+
+  // The loaders return empty lists when the legislative API is unavailable.
+  const hasNoRecords =
+    !legislation.isLoading &&
+    legislation.terms.length === 0 &&
+    legislation.documents.length === 0;
 
   return (
     <SidebarLayout
@@ -101,19 +113,32 @@ export default function OpenLGULayout() {
         />
       }
     >
-      <Outlet
-        context={{
-          searchQuery,
-          setSearchQuery,
-          filterType,
-          setFilterType,
-          authorIds,
-          setAuthorIds,
-          year,
-          setYear,
-          ...legislation,
-        }}
-      />
+      {hasNoRecords ? (
+        <EmptyState
+          icon={Landmark}
+          title={t('openlgu.unavailable.title')}
+          message={t('openlgu.unavailable.message', {
+            body: lguLabels.body,
+            lgu: lguLabels.fullName,
+          })}
+          actionHref={config.lgu.officialWebsite}
+          actionLabel={t('openlgu.unavailable.action')}
+        />
+      ) : (
+        <Outlet
+          context={{
+            searchQuery,
+            setSearchQuery,
+            filterType,
+            setFilterType,
+            authorIds,
+            setAuthorIds,
+            year,
+            setYear,
+            ...legislation,
+          }}
+        />
+      )}
     </SidebarLayout>
   );
 }
