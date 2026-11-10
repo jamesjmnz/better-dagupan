@@ -1,130 +1,131 @@
+import type { Page } from '@playwright/test';
+
 import { test, expect } from '../test-config';
 import { assertKapwaTokens } from '../utils/kapwa';
 
+/**
+ * The infrastructure page queries the shared BetterGov Meilisearch instance
+ * for DPWH projects, filtered by the config strings for Dagupan. That is live
+ * upstream data, so these tests do not fix a project count. They assert the
+ * page's structure and that the result area settles into one of its three
+ * honest states: a project table, "No Records Found", or "Unavailable" when
+ * the search engine cannot be reached.
+ */
+
+async function gotoInfrastructure(page: Page) {
+  await page.goto('/transparency/infrastructure');
+  await expect(
+    page.getByRole('heading', { level: 2, name: 'Infrastructure Projects' })
+  ).toBeVisible();
+}
+
+/** The project table, or whichever empty state replaced it. */
+const resultArea = (page: Page) =>
+  page
+    .locator('#layout-content table')
+    .or(page.getByRole('heading', { name: 'No Records Found' }))
+    .or(page.getByRole('heading', { name: 'No Active Projects' }))
+    .or(page.getByRole('heading', { name: 'Unavailable' }));
+
 test.describe('Infrastructure Transparency Page', () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to infrastructure page before each test
-    await page.goto('/transparency/infrastructure');
+    await gotoInfrastructure(page);
   });
 
   test('infrastructure page uses Kapwa semantic tokens', async ({ page }) => {
-    // Check page title is visible
-    await expect(
-      page.locator('h1').filter({ hasText: /Infrastructure/i })
-    ).toBeVisible();
-
-    // Verify Kapwa semantic tokens are used
     await assertKapwaTokens(page);
   });
 
   test('infrastructure page displays stats cards', async ({ page }) => {
-    // Check that stats cards are displayed
-    const statsCards = page
-      .locator('[class*="stats-card"]')
-      .or(page.locator('[class*="StatsCard"]'));
+    const content = page.locator('#layout-content');
 
-    // Should have multiple stats cards
-    const count = await statsCards.count();
-    expect(count).toBeGreaterThan(0);
+    for (const label of [
+      'Total Allocation',
+      'Avg Progress',
+      'Project Count',
+      'Fiscal Year',
+    ]) {
+      await expect(content.getByText(label, { exact: true })).toBeVisible();
+    }
+  });
 
-    // Check first card is visible
-    const firstCard = statsCards.first();
-    await expect(firstCard).toBeVisible();
+  test('the results settle into a table or an honest empty state', async ({
+    page,
+  }) => {
+    await expect(resultArea(page).first()).toBeVisible({ timeout: 15_000 });
   });
 
   test('infrastructure search functionality works', async ({ page }) => {
-    // Check search input exists
-    const searchInput = page
-      .locator('input[placeholder*="Search"]')
-      .or(page.locator('input[type="search"]'));
+    const searchInput = page.getByRole('textbox', {
+      name: 'Search projects...',
+    });
     await expect(searchInput).toBeVisible();
+    await expect(resultArea(page).first()).toBeVisible({ timeout: 15_000 });
 
-    // Type a search query
+    // The box feeds the upstream query. Meilisearch drops unmatched words, so
+    // the result count is not a reliable signal; the request itself is.
+    const searched = page.waitForRequest(
+      request =>
+        request.method() === 'POST' &&
+        request.url().includes('/search') &&
+        (request.postData() ?? '').includes('school')
+    );
     await searchInput.fill('school');
+    await searched;
 
-    // Wait for search to apply
-    await page.waitForTimeout(500);
-
-    // Check that some interaction occurred (results updated or empty state shown)
-    const bodyHTML = await page.locator('body').innerHTML();
-    // The page should either show results or an empty state
-    const hasResults =
-      bodyHTML.includes('school') ||
-      bodyHTML.includes('No results') ||
-      bodyHTML.includes('0 projects');
-
-    expect(hasResults).toBeTruthy();
+    await expect(resultArea(page).first()).toBeVisible({ timeout: 15_000 });
   });
 
   test('infrastructure page has external links to DPWH and BISTO', async ({
     page,
   }) => {
-    // Check for external links to DPWH dashboard
     const dpwhLink = page.locator('a[href*="transparency.bettergov.ph/dpwh"]');
-    await expect(dpwhLink).toBeVisible();
-
-    // Check for external links to BISTO
     const bistoLink = page.locator('a[href*="bisto.ph"]');
-    await expect(bistoLink).toBeVisible();
 
-    // Verify external links have appropriate attributes
-    await expect(dpwhLink).toHaveAttribute('target', '_blank');
-    await expect(dpwhLink).toHaveAttribute('rel', 'noopener noreferrer');
-  });
-
-  test('infrastructure page displays filter options', async ({ page }) => {
-    // Check for status filters
-    const filterButtons = page
-      .locator('button')
-      .filter({ hasText: /Status|All|Active|Completed/i });
-    const filterCount = await filterButtons.count();
-
-    // Should have filter options
-    expect(filterCount).toBeGreaterThan(0);
-  });
-
-  test('infrastructure page has accessible skip link', async ({ page }) => {
-    // Check for skip link
-    const skipLink = page.locator('a[href="#main-content"]');
-    await expect(skipLink).toBeVisible();
-  });
-
-  test('infrastructure project cards have proper structure', async ({
-    page,
-  }) => {
-    // Wait for projects to load
-    await page.waitForTimeout(1000);
-
-    // Check for project cards or empty state
-    const projectCards = page
-      .locator('a[href*="/infrastructure/"]')
-      .or(page.locator('[class*="project"]'));
-    const cardCount = await projectCards.count();
-
-    if (cardCount > 0) {
-      // Check first card has proper elements
-      const firstCard = projectCards.first();
-      await expect(firstCard).toBeVisible();
-
-      // Should have project title or name
-      const cardText = await firstCard.textContent();
-      expect(cardText?.length).toBeGreaterThan(0);
-    } else {
-      // Should show empty state if no projects
-      const emptyState = page
-        .locator('[class*="empty"]')
-        .or(page.locator('text=/No results|0 projects/i'));
-      await expect(emptyState).toBeVisible();
+    for (const link of [dpwhLink, bistoLink]) {
+      await expect(link).toBeVisible();
+      await expect(link).toHaveAttribute('target', '_blank');
+      // noreferrer implies noopener in every supported browser.
+      await expect(link).toHaveAttribute('rel', /noreferrer/);
     }
   });
 
+  test('infrastructure page displays filter options', async ({ page }) => {
+    const statusPicker = page.getByRole('button', { name: 'Select status...' });
+    await expect(statusPicker).toBeVisible();
+
+    await statusPicker.click();
+    for (const status of ['Active', 'Completed', 'Terminated']) {
+      await expect(page.getByRole('option', { name: status })).toBeVisible();
+    }
+  });
+
+  test('infrastructure page has accessible skip link', async ({ page }) => {
+    const skipLink = page.getByRole('link', { name: 'Skip to main content' });
+    await expect(skipLink).toHaveAttribute('href', '#main-content');
+  });
+
+  test('infrastructure project rows have proper structure', async ({
+    page,
+  }) => {
+    await expect(resultArea(page).first()).toBeVisible({ timeout: 15_000 });
+
+    const rows = page.locator('#layout-content table tbody tr');
+    test.skip((await rows.count()) === 0, 'No DPWH projects were returned.');
+
+    await expect(
+      page.getByRole('columnheader', { name: 'Description' })
+    ).toBeVisible();
+    await expect(rows.first().getByRole('cell').nth(1)).not.toBeEmpty();
+  });
+
   test('infrastructure page breadcrumbs are present', async ({ page }) => {
-    // Check for breadcrumbs
-    const breadcrumbs = page
-      .locator('nav[aria-label*="Breadcrumb"]')
-      .or(page.locator('[class*="breadcrumb"]'));
+    const breadcrumbs = page.getByRole('navigation', { name: /breadcrumb/i });
 
     await expect(breadcrumbs).toBeVisible();
+    await expect(
+      breadcrumbs.getByRole('link', { name: 'Transparency' })
+    ).toHaveAttribute('href', '/transparency');
   });
 });
 
@@ -132,35 +133,23 @@ test.describe('Infrastructure Detail Page', () => {
   test('infrastructure detail page displays project information', async ({
     page,
   }) => {
-    // Navigate to infrastructure index first
-    await page.goto('/transparency/infrastructure');
+    await gotoInfrastructure(page);
+    await expect(resultArea(page).first()).toBeVisible({ timeout: 15_000 });
 
-    // Wait for projects to load
-    await page.waitForTimeout(1000);
+    const rows = page.locator('#layout-content table tbody tr');
+    test.skip((await rows.count()) === 0, 'No DPWH projects were returned.');
 
-    // Try to find a project link and navigate to detail page
-    const projectLinks = page.locator('a[href*="/infrastructure/"]');
-    const linkCount = await projectLinks.count();
+    await rows.first().click();
 
-    if (linkCount > 0) {
-      // Click first project link
-      await projectLinks.first().click();
-
-      // Check we're on a detail page
-      await expect(page).toHaveURL(/\/infrastructure\/.+/);
-
-      // Verify Kapwa semantic tokens
-      await assertKapwaTokens(page);
-
-      // Check for project details (title, description, etc.)
-      const heading = page.locator('h1, h2').first();
-      await expect(heading).toBeVisible();
-    }
+    await expect(page).toHaveURL(/\/transparency\/infrastructure\/.+/);
+    await expect(page.locator('h1, h2').first()).toBeVisible();
+    await assertKapwaTokens(page);
   });
 
   test('infrastructure transparency page visual snapshot @visual', async ({
     page,
   }) => {
+    await page.goto('/transparency/infrastructure');
     // Wait for page to fully load
     await page.waitForLoadState('networkidle');
 
