@@ -31,6 +31,7 @@ i18n
       'openlgu',
       'transparency',
       'statistics',
+      'government',
     ],
 
     backend: {
