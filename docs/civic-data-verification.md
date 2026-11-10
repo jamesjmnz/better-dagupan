@@ -466,6 +466,80 @@ three agree, which also confirms the reference dates.
   per-city annexes were not reproduced, so they are recorded in source notes
   rather than cited for Dagupan's figure.
 
+## Worked example: city emergency hotlines (November 2026)
+
+A wrong digit here sends someone in an emergency to the wrong place, so the
+office-directory rule is tightened rather than relaxed.
+
+### One list on two pages
+
+The city publishes a 14-row emergency list twice: as the second table on
+`/directories/` (headed "Office | Mobile Number/s | Landline") and as
+"Emergency Services" on `/contact-us/`. The entries, numbers and order are the
+same. Under the office directory's contact rule — two of four *pages* — every
+number on it would pass, with the list corroborating itself. So corroboration
+is counted in **lists**, as it was for department heads:
+
+| List | Pages |
+|---|---|
+| L1 emergency list | `/directories/` second table, `/contact-us/` |
+| L2 roster A | `/directories/` first table, `/officials/department-heads/` |
+| L3 roster B | `/the-city/department-heads/` |
+
+A number is published only when **two of the three lists** state it.
+
+### What was published
+
+Ten entries, 25 numbers, every number on the city's list for those rows:
+
+- PNP, BFP, CDRRMO, City Health Office and CSWDO — all three lists agree.
+- PESO / OFW Desk — the landline is on all three; the mobile on L1 and L3.
+- POSO — both mobiles are on L1 and L3. Roster A gives POSO only
+  "(075) 529-9890", which is not on the emergency list and is not added.
+- PANDA Volunteers, Red Cross Dagupan, DECORP — L1 and L2, but L2's evidence
+  for these three is the first table of the same `/directories/` page; no other
+  roster lists them. They are published on that basis and named as an
+  exception in `hotlinesProvenance.test.ts`, so a fourth cannot slip in.
+
+Names are the short forms on Contact Us ("PNP Dagupan"); `full_name` is the
+second line printed in the Directory table, **as published**, including the
+city's "Bureau of Fire" and "Public Employment and Services Office". Landlines
+are written with the (075) area code that roster A prints. The `category` field
+is a display grouping chosen by this portal, not something the city publishes.
+
+### What was withheld
+
+| Row | Number | Why |
+|---|---|---|
+| PAMANA (Dagupan City Water District) | 515-3140 | The same number is CSWDO's, which all three lists confirm; roster A writes it "(075 515-3140" with an unclosed parenthesis. A number cannot belong to both offices. |
+| Anti-VAWC Helpline | 0933-378-8888 | L1 only. A site-wide search finds it on no other page. |
+| Anti-Bullying Helpline | 0960-260-6036 | L1 only. |
+| Anti-Suicide Helpline | 0969-045-1111 | L1 only. |
+
+Withholding a crisis line is not a neutral choice, which is why the widget says
+that some of the city's numbers are held back, and why the national hotlines,
+including the NCMH mental-health crisis line, stay directly beneath the city
+group. A second official source — a city
+article, a CSWDO or health-office page, a DSWD or DOH listing — would release
+each one.
+
+### Re-verifying the source pages
+
+The four city pages were already catalogued for the office directory. They were
+re-read on 2026-11-10: each page's `article:modified_time` is unchanged from the
+August reading, and every published department head and contact number was
+re-checked against them. Only then were their `retrieved` and `verified` dates
+moved forward, because `verified` speaks for every record citing a source, not
+just the new one.
+
+### Display
+
+The numbers render in `CriticalHotlinesWidget`, now on the home page, as a
+city group above the national hotlines, each a `tel:` link named "Call PNP
+Dagupan at (075) 529-5604". `toTelUri()` previously recognised only the 049
+area code inherited from the template, so every (075) landline — including the
+office directory's — produced no link at all; it now accepts any area code.
+
 ## Note on retrieval
 
 The city pages were read directly from their HTML rather than through a

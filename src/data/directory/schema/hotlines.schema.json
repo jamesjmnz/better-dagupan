@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "City Emergency Hotlines",
+  "description": "Emergency and public-service numbers the city government publishes, each cited to civic sources by id (src/data/sources/civic-sources.json). A number is listed only when at least two independent official lists state it; see docs/civic-data-verification.md. Mirrors CityHotline in src/types/directoryTypes.ts.",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["slug", "name", "full_name", "category", "numbers", "sources"],
+    "properties": {
+      "slug": {
+        "description": "Stable identifier, unique in the file.",
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "name": {
+        "description": "Short name as the city publishes it, e.g. \"PNP Dagupan\".",
+        "type": "string",
+        "minLength": 1
+      },
+      "full_name": {
+        "description": "The longer name the city's directory prints beneath the short one, as published. Null when the directory prints none.",
+        "type": ["string", "null"],
+        "minLength": 1
+      },
+      "category": {
+        "description": "Display grouping assigned by this portal, not a field published by the city.",
+        "type": "string",
+        "enum": [
+          "police",
+          "fire",
+          "disaster",
+          "health",
+          "rescue",
+          "utility",
+          "employment",
+          "social-welfare",
+          "public-order"
+        ]
+      },
+      "numbers": {
+        "description": "Numbers in the order the city lists them. Landlines carry the (075) area code; mobiles are 11-digit 09xx numbers.",
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "pattern": "^(\\(075\\) [0-9]{3}-[0-9]{4}|09[0-9]{2}-[0-9]{3}-[0-9]{4})$"
+        }
+      },
+      "sources": {
+        "description": "Civic-source ids of the official pages that state these numbers. At least two.",
+        "type": "array",
+        "minItems": 2,
+        "uniqueItems": true,
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        }
+      }
+    }
+  }
+}

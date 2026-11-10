@@ -11,6 +11,7 @@ import TimelineSection from '@/components/home/TimelineSection';
 import WeatherMapSection from '@/components/home/WeatherMapSection';
 import { DisclaimerNotice } from '@/components/layout/Disclaimer';
 import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
+import CriticalHotlinesWidget from '@/components/widgets/CriticalHotlinesWidget';
 
 const Home: FC = () => {
   return (
@@ -29,6 +30,12 @@ const Home: FC = () => {
         <div className='space-y-16 py-12'>
           <ErrorBoundary name='Services'>
             <ServicesSection />
+          </ErrorBoundary>
+
+          <ErrorBoundary name='Hotlines'>
+            <div className='container mx-auto px-4'>
+              <CriticalHotlinesWidget />
+            </div>
           </ErrorBoundary>
 
           <ErrorBoundary name='Timeline'>

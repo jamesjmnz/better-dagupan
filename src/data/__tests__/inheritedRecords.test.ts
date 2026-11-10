@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import barangays from '@/data/directory/barangays.json';
 import departments from '@/data/directory/departments.json';
+import cityHotlines from '@/data/directory/hotlines.json';
 import executive from '@/data/directory/executive.json';
 import legislative from '@/data/directory/legislative.json';
 import highlights from '@/data/about/highlights.json';
@@ -116,6 +117,17 @@ describe('inherited civic records', () => {
     for (const record of population.barangays) {
       expect(slugs.has(record.slug), record.slug).toBe(true);
     }
+  });
+
+  it('directory/hotlines holds verified Dagupan numbers, not inherited ones', () => {
+    // A new dataset rather than a repopulated one, but held to the same
+    // guarantee from the start: present, and Dagupan's. The template's area
+    // code (049) must not reappear; Dagupan landlines are (075).
+    // hotlinesProvenance.test.ts pins every number against its sources.
+    expect(Array.isArray(cityHotlines)).toBe(true);
+    expect(cityHotlines.length).toBeGreaterThan(0);
+    expect(JSON.stringify(cityHotlines)).not.toMatch(INHERITED);
+    expect(JSON.stringify(cityHotlines)).not.toMatch(/\(049\)/);
   });
 
   it('keeps the nationwide datasets that are not LGU-specific', () => {

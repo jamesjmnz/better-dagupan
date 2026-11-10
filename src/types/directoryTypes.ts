@@ -242,3 +242,36 @@ export interface LegislativeChamber {
   /** Civic-source ids backing the chamber: its name, address, website, term. */
   sources: string[];
 }
+
+/** Display grouping for a city hotline, assigned by this portal. */
+export type CityHotlineCategory =
+  | 'police'
+  | 'fire'
+  | 'disaster'
+  | 'health'
+  | 'rescue'
+  | 'utility'
+  | 'employment'
+  | 'social-welfare'
+  | 'public-order';
+
+/**
+ * An emergency or public-service number the city government publishes.
+ *
+ * Mirrors src/data/directory/schema/hotlines.schema.json. A number appears
+ * only when at least two independent official lists state it; entries the
+ * city lists but this portal could not corroborate are left out entirely and
+ * documented in docs/civic-data-verification.md.
+ */
+export interface CityHotline {
+  slug: string;
+  /** Short name as the city publishes it, e.g. "PNP Dagupan". */
+  name: string;
+  /** Longer name printed beneath it in the city directory, as published. */
+  full_name: string | null;
+  category: CityHotlineCategory;
+  /** "(075) 529-5604" landlines and "0916-525-6802" mobiles, in city order. */
+  numbers: string[];
+  /** Civic-source ids, see src/data/sources/civic-sources.json. */
+  sources: string[];
+}

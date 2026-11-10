@@ -1,0 +1,121 @@
+[
+  {
+    "slug": "pnp-dagupan",
+    "name": "PNP Dagupan",
+    "full_name": "Philippine National Police",
+    "category": "police",
+    "numbers": ["0916-525-6802", "0933-502-4899", "(075) 529-5604"],
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-contact-us",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "bfp-dagupan",
+    "name": "BFP Dagupan",
+    "full_name": "Bureau of Fire",
+    "category": "fire",
+    "numbers": ["0917-184-2611", "(075) 522-2772"],
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-contact-us",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "cdrrmo",
+    "name": "CDRRMO",
+    "full_name": "City Disaster Risk Reduction & Management Office",
+    "category": "disaster",
+    "numbers": ["0968-444-9598", "(075) 540-0363"],
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-contact-us",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "cho",
+    "name": "CHO",
+    "full_name": "City Health Office",
+    "category": "health",
+    "numbers": ["0933-861-6088", "0997-840-1377", "(075) 522-8206"],
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-contact-us",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "panda-volunteers",
+    "name": "PANDA Volunteers",
+    "full_name": null,
+    "category": "rescue",
+    "numbers": ["0932-548-1545", "(075) 522-2808", "(075) 522-8202"],
+    "sources": ["dagupan-lgu-directories", "dagupan-lgu-contact-us"]
+  },
+  {
+    "slug": "red-cross-dagupan",
+    "name": "Red Cross Dagupan",
+    "full_name": "Philippine Red Cross",
+    "category": "rescue",
+    "numbers": ["0928-559-2701", "(075) 632-3296"],
+    "sources": ["dagupan-lgu-directories", "dagupan-lgu-contact-us"]
+  },
+  {
+    "slug": "decorp",
+    "name": "DECORP",
+    "full_name": "Dagupan Electric Corporation",
+    "category": "utility",
+    "numbers": [
+      "0925-726-9546",
+      "(075) 522-5433",
+      "(075) 522-4145",
+      "(075) 515-2870"
+    ],
+    "sources": ["dagupan-lgu-directories", "dagupan-lgu-contact-us"]
+  },
+  {
+    "slug": "peso-ofw-desk",
+    "name": "PESO / OFW Desk",
+    "full_name": "Public Employment and Services Office",
+    "category": "employment",
+    "numbers": ["0915-421-6885", "(075) 505-6256"],
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-contact-us",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "cswdo",
+    "name": "CSWDO",
+    "full_name": "City Social Welfare & Development Office",
+    "category": "social-welfare",
+    "numbers": ["(075) 515-3140", "(075) 632-2566"],
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-contact-us",
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  },
+  {
+    "slug": "poso",
+    "name": "POSO",
+    "full_name": "Public Order & Safety Office",
+    "category": "public-order",
+    "numbers": ["0967-435-7097", "0919-248-2531"],
+    "sources": [
+      "dagupan-lgu-directories",
+      "dagupan-lgu-contact-us",
+      "dagupan-lgu-department-heads-the-city"
+    ]
+  }
+]

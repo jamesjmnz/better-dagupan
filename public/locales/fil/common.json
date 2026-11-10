@@ -297,5 +297,26 @@
     "readTitle": "Paano basahin ang datos na ito",
     "readCity": "Bawat bilang ay bilang ng senso ng PSA sa petsa ng sanggunian ng senso ({{dates}}). Hindi pantay ang pagitan ng mga senso, kaya gamitin ang taunang antas ng PSA sa paghahambing ng paglaki sa halip na ang hilig ng linya sa pagitan ng mga punto. Wala sa mga bilang na ito ang tantiya o projection.",
     "readBarangays": "Ipinapakita ang bilang bawat barangay para sa {{years}}, ang mga sensong napatunayan na ang talaan ng PSA bawat barangay. Sumusunod ang mga pangalan ng barangay sa kasalukuyang PSGC; sa bawat senso, eksaktong tumutugma ang kabuuan ng mga barangay sa kabuuan ng lungsod."
+  },
+  "hotlines": {
+    "title": "Mga emergency hotline",
+    "cityGroup": "{{lgu}}",
+    "nationalGroup": "Mga pambansang hotline",
+    "call": "Tawagan ang {{name}} sa {{number}}",
+    "viewAll": "Tingnan ang lahat ng hotline",
+    "cityNotVerified": "Wala pang napapatunayang hotline ng lungsod",
+    "cityWithheld": "May mga numerong inilista ng lungsod na hindi pa ipinapakita",
+    "cityWithheldHint": "Inililista lamang ng Better Dagupan ang isang numero kapag dalawang magkahiwalay na opisyal na listahan ang nagsasaad nito. Ang mga numerong nasa iisang listahan lamang ng lungsod, o ibinigay sa dalawang magkaibang tanggapan, ay hindi muna ipinapakita hanggang may ikalawang sangguniang magpapatunay. Hindi ito pahayag na wala ang mga linyang iyon.",
+    "categories": {
+      "police": "Pulisya",
+      "fire": "Sunog",
+      "disaster": "Pagtugon sa sakuna",
+      "health": "Kalusugan",
+      "rescue": "Pagsagip at tulong",
+      "utility": "Serbisyong pampubliko",
+      "employment": "Trabaho",
+      "social-welfare": "Kapakanang panlipunan",
+      "public-order": "Kaayusan at kaligtasang pampubliko"
+    }
   }
 }

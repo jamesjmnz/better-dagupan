@@ -49,10 +49,10 @@
     "published": null,
     "data_as_of": null,
     "coverage": null,
-    "retrieved": "2026-08-23",
-    "verified": "2026-08-23",
+    "retrieved": "2026-11-10",
+    "verified": "2026-11-10",
     "licence": "Copyright © 2023 City Government of Dagupan. All Rights Reserved. (site footer)",
-    "notes": "One of three department rosters the city publishes simultaneously, all of them live and none carrying a date in its content. Its table is headed \"Contact Person | Office/Department | Contact Number\" and lists 33 city offices plus PNP, BFP, Red Cross, PANDA Volunteers, DECORP and PAMANA, followed by a second table of 14 emergency hotlines. It is the only page publishing an office address: \"2F Dagupan City Hall Complex, AB Fernandez Ave., Dagupan City\" for the City Mayor's Office and the City Information Office. The CMS reports article:modified_time 2026-07-14T06:16:03Z, but every department page on the site was re-saved within 70 minutes that day and the newest stamp belongs to the most obviously superseded roster, so that timestamp records a bulk re-save rather than editorial currency and is deliberately NOT recorded as `published`. Agrees with the Officials-section roster except on the City Information Office head and four City Health Office numbers.",
+    "notes": "One of three department rosters the city publishes simultaneously, all of them live and none carrying a date in its content. Its table is headed \"Contact Person | Office/Department | Contact Number\" and lists 33 city offices plus PNP, BFP, Red Cross, PANDA Volunteers, DECORP and PAMANA, followed by a second table of 14 emergency hotlines. It is the only page publishing an office address: \"2F Dagupan City Hall Complex, AB Fernandez Ave., Dagupan City\" for the City Mayor's Office and the City Information Office. The CMS reports article:modified_time 2026-07-14T06:16:03Z, but every department page on the site was re-saved within 70 minutes that day and the newest stamp belongs to the most obviously superseded roster, so that timestamp records a bulk re-save rather than editorial currency and is deliberately NOT recorded as `published`. Agrees with the Officials-section roster except on the City Information Office head and four City Health Office numbers. Re-read 2026-11-10: article:modified_time is unchanged from the August reading, and every published department head and contact number was re-checked against it. Its second table, headed \"Office | Mobile Number/s | Landline\", is the 14-row emergency hotline list transcribed in src/data/directory/hotlines.json; that list is repeated on the Contact Us page, so the two count as one list for corroboration. One row is internally inconsistent: PAMANA (Dagupan City Water District) is given \"515-3140\", the City Social Welfare and Development Office's number, and this page's first table writes it \"(075 515-3140\" with an unclosed parenthesis.",
     "derives_from": null
   },
   {
@@ -63,10 +63,10 @@
     "published": null,
     "data_as_of": null,
     "coverage": null,
-    "retrieved": "2026-08-23",
-    "verified": "2026-08-23",
+    "retrieved": "2026-11-10",
+    "verified": "2026-11-10",
     "licence": "Copyright © 2023 City Government of Dagupan. All Rights Reserved. (site footer)",
-    "notes": "A near-clone of the Directory page in markup and wording, listing three offices the Directory omits: the General Services Office, the Youth and Sports Development Program and the Bids and Awards Committee. It omits the four non-government entities the Directory carries. Two disagreements with the Directory: it names the City Information Office head \"Dave M. Paragas\" where the Directory says \"Divino M. Paragas\", and gives the City Health Office \"(075) 637-4920\" where the Directory gives \"(075) 522-8206\" and \"0933-861-6088\". Its title as published is simply \"Department Heads\"; \"Officials section\" is appended here only to distinguish it from the identically titled page under /the-city/. CMS article:modified_time 2026-07-14T05:27:30Z, not treated as a publication date for the reason recorded on dagupan-lgu-directories.",
+    "notes": "A near-clone of the Directory page in markup and wording, listing three offices the Directory omits: the General Services Office, the Youth and Sports Development Program and the Bids and Awards Committee. It omits the four non-government entities the Directory carries. Two disagreements with the Directory: it names the City Information Office head \"Dave M. Paragas\" where the Directory says \"Divino M. Paragas\", and gives the City Health Office \"(075) 637-4920\" where the Directory gives \"(075) 522-8206\" and \"0933-861-6088\". Its title as published is simply \"Department Heads\"; \"Officials section\" is appended here only to distinguish it from the identically titled page under /the-city/. CMS article:modified_time 2026-07-14T05:27:30Z, not treated as a publication date for the reason recorded on dagupan-lgu-directories. Re-read 2026-11-10: article:modified_time unchanged, and every published department head and contact number re-checked. Corroborates the PNP, BFP, CDRRMO, City Health, PESO and CSWDO emergency numbers; lists the Public Order and Safety Office only with \"(075) 529-9890\", which is not on the emergency list.",
     "derives_from": null
   },
   {
@@ -77,10 +77,10 @@
     "published": null,
     "data_as_of": null,
     "coverage": null,
-    "retrieved": "2026-08-23",
-    "verified": "2026-08-23",
+    "retrieved": "2026-11-10",
+    "verified": "2026-11-10",
     "licence": "Copyright © 2023 City Government of Dagupan. All Rights Reserved. (site footer)",
-    "notes": "The third live roster, in an older table format: no honorifics, no (075) area-code prefix, and a different Management Information System Office email. It names a different person from the other two pages at seven offices (City Health, City Human Resource Management, City Tourism, City Agriculture, Office of Senior Citizens Affairs, One-Stop Business Center, City Information). It is deliberately NOT given a `coverage` period: the only evidence that it is superseded is inferential, and labelling it historical without a document saying so would overstate what is known. It is cited here as corroboration wherever it agrees with the other pages, and as evidence of disagreement wherever it does not. Two of its values are demonstrably wrong against the rest of the site: the City Nutrition Office number \"636-9483\" transposes the \"636-9843\" the other two pages give, and the Office of Senior Citizens Affairs is listed with \"615-1416\", the City Planning and Development Office's own number. CMS article:modified_time 2026-07-14T06:35:24Z — the LATEST of the three rosters, which is why that timestamp cannot be used to rank currency.",
+    "notes": "The third live roster, in an older table format: no honorifics, no (075) area-code prefix, and a different Management Information System Office email. It names a different person from the other two pages at seven offices (City Health, City Human Resource Management, City Tourism, City Agriculture, Office of Senior Citizens Affairs, One-Stop Business Center, City Information). It is deliberately NOT given a `coverage` period: the only evidence that it is superseded is inferential, and labelling it historical without a document saying so would overstate what is known. It is cited here as corroboration wherever it agrees with the other pages, and as evidence of disagreement wherever it does not. Two of its values are demonstrably wrong against the rest of the site: the City Nutrition Office number \"636-9483\" transposes the \"636-9843\" the other two pages give, and the Office of Senior Citizens Affairs is listed with \"615-1416\", the City Planning and Development Office's own number. CMS article:modified_time 2026-07-14T06:35:24Z — the LATEST of the three rosters, which is why that timestamp cannot be used to rank currency. Re-read 2026-11-10: article:modified_time unchanged, and every published department head and contact number re-checked. As the independent roster family it corroborates the PNP, BFP, CDRRMO, City Health, PESO, CSWDO and POSO emergency numbers, including the two POSO mobiles and the PESO mobile that the other roster omits.",
     "derives_from": null
   },
   {
@@ -91,10 +91,10 @@
     "published": null,
     "data_as_of": null,
     "coverage": null,
-    "retrieved": "2026-08-23",
-    "verified": "2026-08-23",
+    "retrieved": "2026-11-10",
+    "verified": "2026-11-10",
     "licence": "Copyright © 2023 City Government of Dagupan. All Rights Reserved. (site footer)",
-    "notes": "Publishes the city hall address \"Dagupan City Hall Complex, AB Fernandez Ave., Dagupan City\", the general inquiries email dagupanlgu@gmail.com, office hours \"Monday – Friday, 8:00 AM – 5:00 PM\" for city hall and for the Mayor's Office, and an emergency-services list that independently corroborates several office numbers. Cited here as a corroborating source for contact numbers only. The office hours are published for city hall as a whole and for the Mayor's Office; applying them to individual offices would be inference, so no office record carries them. CMS article:modified_time 2026-07-14T05:24:06Z, not treated as a publication date.",
+    "notes": "Publishes the city hall address \"Dagupan City Hall Complex, AB Fernandez Ave., Dagupan City\", the general inquiries email dagupanlgu@gmail.com, office hours \"Monday – Friday, 8:00 AM – 5:00 PM\" for city hall and for the Mayor's Office, and an emergency-services list that independently corroborates several office numbers. Cited here as a corroborating source for contact numbers only. The office hours are published for city hall as a whole and for the Mayor's Office; applying them to individual offices would be inference, so no office record carries them. CMS article:modified_time 2026-07-14T05:24:06Z, not treated as a publication date. Re-read 2026-11-10: article:modified_time unchanged. Its \"Emergency Services\" list carries the same 14 entries and numbers as the Directory page's hotline table, so it repeats that list rather than independently confirming it.",
     "derives_from": null
   },
   {
