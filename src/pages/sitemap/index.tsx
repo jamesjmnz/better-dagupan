@@ -193,6 +193,11 @@ const SitemapPage: FC = () => {
           description: 'Foreign exchange rates',
         },
         {
+          title: 'Report an Error',
+          url: '/report-an-error',
+          description: 'Tell us about information that is wrong or out of date',
+        },
+        {
           title: 'Contribute',
           url: '/contribute',
           description: 'Help improve the data on this portal',

@@ -9,7 +9,8 @@
 
 export type LanguageType =
   | 'en' // English
-  | 'fil'; // Filipino (standardized Tagalog)
+  | 'fil' // Filipino (standardized Tagalog)
+  | 'pag'; // Pangasinan, offered only when features.pangasinan is enabled
 
 export interface Country {
   name: string;

@@ -30,6 +30,7 @@ const JoinUs = lazy(() => import('@/pages/JoinUs'));
 const TermsOfService = lazy(() => import('@/pages/TermsOfService'));
 const SitemapPage = lazy(() => import('@/pages/sitemap'));
 const Discord = lazy(() => import('@/pages/Discord'));
+const ReportAnError = lazy(() => import('@/pages/ReportAnError'));
 
 // Data Utilities
 const WeatherPage = lazy(() => import('@/pages/data/weather'));
@@ -172,6 +173,7 @@ function AppContent() {
             <Route path='/join-us' element={<JoinUs />} />
             <Route path='/terms-of-service' element={<TermsOfService />} />
             <Route path='/sitemap' element={<SitemapPage />} />
+            <Route path='/report-an-error' element={<ReportAnError />} />
             {config.portal.discordUrl && (
               <Route path='/discord' element={<Discord />} />
             )}

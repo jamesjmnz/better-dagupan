@@ -1,0 +1,64 @@
+name: Incorrect Civic Information
+description: Report a fact on the portal that is wrong or out of date
+title: '[Data correction] '
+labels: [data-correction]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping keep the portal accurate.
+
+        A fact is published only when a primary government source states it,
+        so a correction needs a link to where the correct information is
+        officially published. See `docs/civic-data-verification.md` for the
+        source rules.
+
+        Please do not include personal information such as your phone number
+        or home address. This issue is public.
+
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      description: The page on the portal where the incorrect information appears
+      placeholder: e.g., /government/departments/city-legal-office
+    validations:
+      required: true
+
+  - type: textarea
+    id: incorrect-fact
+    attributes:
+      label: What is wrong
+      description: Quote or describe the specific fact that is incorrect
+      placeholder: e.g., The office address listed on this page is outdated.
+    validations:
+      required: true
+
+  - type: textarea
+    id: correct-information
+    attributes:
+      label: Correct information
+      description: What the page should say instead
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Source URL
+      description: >-
+        Link to where the correct information is officially published.
+        Official government sources (the City Government, PSA, DILG, COA, DBM,
+        PhilGEPS, the Official Gazette) are preferred. Wikipedia, blogs, social
+        media posts and search snippets cannot be used to establish a fact.
+      placeholder: https://www.dagupan.gov.ph/...
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Anything else that helps verify the correction
+    validations:
+      required: false

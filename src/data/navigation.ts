@@ -166,6 +166,7 @@ export const footerNavigation = {
           href: config.lgu.provinceWebsite,
           target: '_blank',
         },
+        { label: 'Report an Error', href: '/report-an-error' },
         // { label: 'Privacy Policy', href: '/privacy' },
         // { label: 'Accessibility', href: '/accessibility' },
       ],
