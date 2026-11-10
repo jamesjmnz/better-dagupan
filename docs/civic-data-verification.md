@@ -274,6 +274,119 @@ dated city article lists a "Karlos Reyna" among the councillors elected in May
 not treated as corroborating. **No claim is made that they are the same person**,
 and no document establishing it was found.
 
+## Worked example: the elected officials (November 2026)
+
+An office exists whoever runs it. A name on the elected-officials page is a
+different kind of claim: that this person holds this seat **now**. That is the
+claim a reader is most likely to repeat, so it carries the strictest rule in the
+portal.
+
+### Four source families
+
+| Family | Sources | Dated? |
+|---|---|---|
+| City officials pages | `/officials/city-mayor/`, `/officials/vice-mayor/` on dagupan.gov.ph, and the council site's `/vice-mayor/` | No. CMS stamps from 2023–2024, before the 2025 election |
+| Council site | sp.dagupan.gov.ph `/councilor/` roster; "A New Era Begins: Welcoming Dagupan's 2025 Sangguniang Panlungsod" | Roster no; article 2025-08-18 |
+| City news | The 2025 election report; articles of 28 January, 26 August and 8 October 2026 | Yes |
+| COMELEC | 2025 results data for the City of Dagupan (region code 5518000) | Describes 2025-05-12 |
+
+Two placements need explaining.
+
+- The council site's vice-mayor page is published by a different body, but its
+  profile text is the city page's, word for word. Two copies of one text are one
+  statement, so it is counted in the **city officials pages** family.
+- The city's news articles are separate, dated editorial acts, but they come
+  from one newsroom, so they are counted as **one** family, not four.
+
+### The name rule, and why nicknames do not count
+
+A person is published in a seat only when two families name them there,
+matched on surname **and** a given name, as for department heads.
+
+Philippine election sources make this harder than it looks. COMELEC lists
+candidates under their **ballot names**, and the city's election report follows
+the campaign: "TAMAYO, ATTY JOEY", "SEEN, JIGS", "Dada Reyna". A nickname is not
+a given name, so those mentions are **not counted**, however obvious the match
+looks. Only five people appear in COMELEC under a given name the other sources
+also use (Belen Fernandez, Bryan Kua, Michael Fernandez, Karlos Reyna, Marvin
+Fabia), and COMELEC is cited for those five only.
+
+The rule is encoded, not just described. `NAMED_AS` in
+`electedOfficialsProvenance.test.ts` records every name exactly as each cited
+source prints it. A record may cite a source only if its rendering is recorded
+there and agrees with the published name; the test fails on a nickname, on a
+shared surname alone (two Reynas and three Fernandezes sit in this government),
+and on a citation with no recorded evidence behind it.
+
+### What was published
+
+| Seat | Name | Families agreeing |
+|---|---|---|
+| City Mayor | Belen T. Fernandez | City officials pages, city news (2025, 2026), COMELEC |
+| City Vice Mayor, presiding officer | Dean Bryan L. Kua | City officials pages, council site, city news, COMELEC |
+| Councilor (×10, elected) | Canto, Cayabyab, Fabia, M. B. Fernandez, Paras, K. L. E. Reyna IV, M. L. F. M. Reyna, Samson Jr., Seen, Tamayo | Council site (roster and 2025 article), city news (26 August 2026); COMELEC and the election report as well for Fabia, Fernandez and Reyna IV |
+| Councilor, ex officio (Liga ng mga Barangay President) | Marcelino D. Fernandez | Council site, city news |
+| Councilor, ex officio (SK Federation President) | Bradley Claude C. Benavides | Council site, city news |
+
+**Spelling.** Names follow the council's own roster for its members and the
+city's own profile page for the executive. Where a city article spells a name
+differently ("Marvin V. Fabia" for "Marvin DV. Fabia", "Maria" for "Ma.", an
+added middle initial "U." for Paras), the other spelling is kept in
+`name_variants` against that source. Names are stored without honorifics and
+rendered verbatim: `toTitleCase()` turned "DV." into "Dv." and "IV" into "Iv".
+
+**Term.** "2025–2028" is recorded for the mayor, the vice mayor and the ten
+elected members. No source prints that range. It follows from the 12 May 2025
+election, which COMELEC and the city establish, and the three-year term of local
+elective office; the council's 2025 article is what ties each member's full name
+to that election. The test requires every stated term to cite one of those
+sources.
+
+**The vice mayor is recorded once.** The chamber's `presiding_officer` is the
+slug of his `executive.json` seat, rather than a second copy of him in the
+council roster that could drift from the first.
+
+### What was withheld, and why
+
+| Withheld | Why |
+|---|---|
+| All committee chairs and memberships (`committees_status: conflicting_sources`) | Only the council's member profiles list them, for five of twelve members, and they conflict: two profiles each claim the chair of the Committee on Health and Sanitation, and one claims the Committee on Environmental and Natural Resources, which a dated city article gives to a third councilor. One profile also dates its holder's service "2013 – Present" though the city reported her as a first-time councilor in 2025. |
+| Terms of the two ex-officio seats | They follow the Liga and SK federation terms, which no cited source states. Borrowing the elected members' term would be inference. |
+| Every phone number, email address and personal website | No source states one for an official. The office numbers are published on the department pages, against the office. |
+| Biographies, photographs, office hours | Not needed to establish who holds a seat. The vice-mayor profile text, the only biography for him, describes him as a serving barangay captain and Liga president, which no longer fits his seat. |
+
+The schema keeps `name_status` for every seat, so a seat whose holder the
+sources disagree about can be published with its name withheld, exactly as an
+office is published without its head. In this edition every seat is
+corroborated, so the state is unused, but the interface already renders it.
+
+### Assignments that rest on one family
+
+The council's roster lists all twelve as "Councilor" and says only that two of
+its seats come "from the ranks of barangay chairmen and the Sangguniang
+Kabataan". **Which** two members hold those seats is stated by the city news
+family alone, in two dated articles that name "Liga ng Barangay President Kap.
+Marcelino Fernandez" and "Sangguniang Kabataan Federation President Bradley
+Benavides". Their membership of the council is corroborated by two families;
+the seat assignment is not, and is recorded here rather than presented as
+stronger than it is.
+
+### Noted, not asserted
+
+City articles of August 2025 and August–September 2026 refer to "Acting Mayor"
+Dean Bryan Kua. An acting mayor serves while the mayor is temporarily away, and
+the city's other articles from the same days, and from October 2026, again
+describe Belen Fernandez as Mayor. **No change in the seat is inferred.**
+
+The ex-officio seats change hands with the barangay and SK federation cycle,
+independently of the council term. The most recent source naming the current
+holders is dated **8 October 2026**. Re-verify both seats after the next
+barangay and Sangguniang Kabataan elections.
+
+The councilor published as "Karlos Liberato E. Reyna IV" is the "Karlos Reyna"
+in the office-directory note above. That remains suggestive about the stale
+tourism-office roster, and remains unasserted there.
+
 ## Note on retrieval
 
 The city pages were read directly from their HTML rather than through a
@@ -283,3 +396,10 @@ summariser, because the reconciliation turns on exact digits and spellings.
 read in an ordinary browser, where it serves normally. Nothing was bypassed and
 no credentials were used; both sources are public government pages. If you
 automate any of this, respect the publisher's terms and rate limits.
+
+For the elected officials, both city sites were also read through their public
+WordPress REST endpoints (`/wp-json/wp/v2/pages`, `/posts`, and the council
+site's `/councilor` type), which return the same content as the pages with its
+CMS dates. The COMELEC results website is a JavaScript application; its figures
+were read from the public data file the application itself loads. Only
+read-only GET requests were made, to public URLs, with no form submitted.
