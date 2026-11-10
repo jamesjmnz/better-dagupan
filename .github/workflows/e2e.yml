@@ -24,7 +24,7 @@ permissions:
 jobs:
   e2e:
     name: E2E Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # Generous because nothing waits on this run; two shards were cut off at 30.
     timeout-minutes: 60
 
@@ -70,7 +70,7 @@ jobs:
 
   e2e-report:
     name: E2E Report
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     needs: [e2e]
     if: always()
@@ -110,7 +110,7 @@ jobs:
 
   e2e-visual:
     name: E2E Visual Regression Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
 
     steps:
@@ -158,7 +158,7 @@ jobs:
 
   e2e-accessibility:
     name: E2E Accessibility Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
 
     steps:
