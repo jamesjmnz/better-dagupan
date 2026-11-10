@@ -5,6 +5,7 @@ import {
   ReceiptText,
   ShieldCheck,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Breadcrumb,
@@ -29,9 +30,11 @@ import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
 import { useFinancialData } from '@/hooks/useFinancialData';
 
 import { formatLabel } from '@/lib/budgetUtils';
-import { lguLabels } from '@/lib/lguLabels';
+import { useLguTerms } from '@/lib/useLguTerms';
 
 export default function FinancialPage() {
+  const { t } = useTranslation('transparency');
+  const terms = useLguTerms();
   const {
     years,
     selectedYear,
@@ -56,7 +59,7 @@ export default function FinancialPage() {
       <div className='space-y-6'>
         <h1 className='text-kapwa-text-strong kapwa-heading-xl flex items-center gap-3 font-extrabold'>
           <BarChart2Icon className='text-kapwa-text-success h-8 w-8' />
-          Financial Performance
+          {t('financial.title')}
         </h1>
         <NotYetAvailable />
       </div>
@@ -229,11 +232,13 @@ export default function FinancialPage() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbLink href='/transparency'>Transparency</BreadcrumbLink>
+            <BreadcrumbLink href='/transparency'>
+              {t('financial.breadcrumbTransparency')}
+            </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Financial Report</BreadcrumbPage>
+            <BreadcrumbPage>{t('financial.breadcrumb')}</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
@@ -243,21 +248,22 @@ export default function FinancialPage() {
         <div className='space-y-4'>
           <div className='flex flex-wrap items-center gap-2'>
             <Badge variant='primary' dot>
-              Verified Audit
+              {t('financial.verifiedAudit')}
             </Badge>
-            <Badge variant='slate'>FY {selectedYear}</Badge>
+            <Badge variant='slate'>
+              {t('financial.fiscalYear', { year: selectedYear })}
+            </Badge>
             <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase'>
               <Info className='text-kapwa-text-disabled h-3.5 w-3.5' />
-              <span>Millions (PHP)</span>
+              <span>{t('financial.millions')}</span>
             </div>
           </div>
           <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold flex items-center gap-3'>
             <BarChart2Icon className='h-8 w-8 text-kapwa-text-success' />
-            Financial Performance
+            {t('financial.title')}
           </h1>
           <p className='text-kapwa-text-disabled max-w-xl text-sm leading-relaxed font-medium'>
-            Independent visualization of the {lguLabels.adjective.toLowerCase()}{' '}
-            budget, including current operating income and expenditures.
+            {t('financial.description', terms)}
           </p>
         </div>
 
@@ -281,7 +287,7 @@ export default function FinancialPage() {
       </div>
 
       {/* 3. KPI Cards - Uses established card patterns inside SummaryCards */}
-      <div role='region' aria-label='Financial Summary Cards'>
+      <div role='region' aria-label={t('financial.summaryCards')}>
         <SummaryCards
           income={displayedIncome}
           expenditure={displayedExpenditure}
@@ -293,7 +299,7 @@ export default function FinancialPage() {
       {/* 4. Charts Grid - Standardized Color Palettes */}
       <div className='grid grid-cols-1 gap-8 lg:grid-cols-2'>
         <FinancialPieChart
-          title='Income Composition'
+          title={t('financial.incomeComposition')}
           icon={Landmark}
           data={incomeChartData}
           // BetterGov: Brand for local, Blue for national, Gray for others
@@ -306,7 +312,7 @@ export default function FinancialPage() {
         />
 
         <FinancialPieChart
-          title='Expenditure Allocation'
+          title={t('financial.expenditureAllocation')}
           icon={ReceiptText}
           data={expenditureChartData}
           // BetterGov: Red for services, Orange for economic, Yellow for debt
@@ -324,7 +330,7 @@ export default function FinancialPage() {
         <div className='border-kapwa-border-weak bg-kapwa-bg-surface inline-flex items-center gap-2 rounded-full border px-4 py-2 shadow-sm'>
           <ShieldCheck className='h-4 w-4 text-kapwa-text-success' />
           <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-            Source: LGU SRE via BLGF and Full Disclosure Policy Portal
+            {t('financial.source')}
           </span>
         </div>
       </footer>

@@ -1,0 +1,72 @@
+{
+  "layout": {
+    "title": "Transparency Portal",
+    "description": "A community-led initiative to make {{lgu}} public data accessible, readable, and verifiable for every citizen.",
+    "compactDescription": "Track {{adjectiveLower}} funds, infrastructure projects, and procurement records."
+  },
+  "sidebar": {
+    "title": "Transparency",
+    "financial": "Budget & Finances",
+    "procurement": "Procurement",
+    "infrastructure": "DPWH Projects"
+  },
+  "index": {
+    "funds": {
+      "title": "Public Funds",
+      "description": "Independent visualization of {{adjectiveLower}} income and where your taxes are being allocated.",
+      "badge": "Financials"
+    },
+    "works": {
+      "title": "Public Works",
+      "description": "Community tracking of road repairs, building constructions, and local infrastructure projects.",
+      "badge": "Monitoring"
+    },
+    "procurement": {
+      "title": "Procurement",
+      "description": "Audit of {{adjectiveLower}} bidding and awarded contracts to ensure fair and open competition.",
+      "badge": "Contracts"
+    },
+    "analyze": "Analyze Data",
+    "helpTitle": "Help Our Audit",
+    "helpBody": "Our data depends on volunteers like you. If you find a project that is missing or an expense that seems incorrect, please let us know.",
+    "reportIssue": "Report an Issue",
+    "sourcesTitle": "Data Sources",
+    "sourcesBody": "We mirror and verify data from the following platforms:",
+    "dashboard": "Transparency Dashboard",
+    "dataPortal": "BetterGov Data Portal"
+  },
+  "financial": {
+    "title": "Financial Performance",
+    "breadcrumbTransparency": "Transparency",
+    "breadcrumb": "Financial Report",
+    "verifiedAudit": "Verified Audit",
+    "fiscalYear": "FY {{year}}",
+    "millions": "Millions (PHP)",
+    "description": "Independent visualization of the {{adjectiveLower}} budget, including current operating income and expenditures.",
+    "summaryCards": "Financial Summary Cards",
+    "incomeComposition": "Income Composition",
+    "expenditureAllocation": "Expenditure Allocation",
+    "source": "Source: LGU SRE via BLGF and Full Disclosure Policy Portal"
+  },
+  "summary": {
+    "revenue": "Total Revenue (M)",
+    "expenditure": "Total Expenditure (M)",
+    "netIncome": "Net Operating Income (M)",
+    "treasury": "Treasury Balance (M)"
+  },
+  "quarter": {
+    "quarterly": "Quarterly",
+    "annual": "Annual",
+    "period": "Period"
+  },
+  "chart": {
+    "percentOfTotal": "{{percent}}% of total",
+    "clickToView": "Click to view breakdown",
+    "breakdownView": "Breakdown View",
+    "back": "Back",
+    "toggleLabels": "Toggle Labels",
+    "toggleList": "Toggle List",
+    "return": "Return",
+    "total": "Total"
+  }
+}

@@ -8,6 +8,7 @@ import {
   Undo2,
   ZoomIn,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import {
   Cell,
   Pie,
@@ -55,6 +56,8 @@ interface CustomLabelProps {
 // --- Custom Tooltip ---
 
 const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
+  const { t } = useTranslation('transparency');
+
   if (active && payload && payload.length) {
     const data = payload[0];
     const isDetail = !data.payload.details; // Detail items don't have sub-details
@@ -72,11 +75,13 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
           {formatPesoAdaptive(data.value as number).fullString}
         </p>
         <p className='text-kapwa-text-disabled mt-1 pl-4 text-xs'>
-          {((data.payload.percent || 0) * 100).toFixed(1)}% of total
+          {t('chart.percentOfTotal', {
+            percent: ((data.payload.percent || 0) * 100).toFixed(1),
+          })}
         </p>
         {!isDetail && data.payload.details?.length > 0 && (
           <p className='mt-2 flex items-center gap-1 pl-4 text-[10px] font-medium text-kapwa-text-brand'>
-            <ZoomIn className='h-3 w-3' /> Click to view breakdown
+            <ZoomIn className='h-3 w-3' /> {t('chart.clickToView')}
           </p>
         )}
       </div>
@@ -157,6 +162,7 @@ export default function FinancialPieChart({
   data,
   colors,
 }: FinancialPieChartProps) {
+  const { t } = useTranslation('transparency');
   // State
   const [drillDownItem, setDrillDownItem] = useState<ChartDataPoint | null>(
     null
@@ -197,7 +203,7 @@ export default function FinancialPieChart({
             </span>
             {drillDownItem && (
               <span className='animate-in fade-in text-kapwa-text-disabled mt-1 text-[10px] font-medium tracking-wide uppercase'>
-                Breakdown View
+                {t('chart.breakdownView')}
               </span>
             )}
           </div>
@@ -209,13 +215,13 @@ export default function FinancialPieChart({
               onClick={resetView}
               className='animate-in fade-in slide-in-from-right-2 border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support hover:bg-kapwa-bg-surface-raised mr-2 flex items-center gap-1 rounded-md border px-2 py-1 text-xs font-medium'
             >
-              <Undo2 className='h-3 w-3' /> Back
+              <Undo2 className='h-3 w-3' /> {t('chart.back')}
             </button>
           )}
 
           <button
             onClick={() => setShowLabels(!showLabels)}
-            title='Toggle Labels'
+            title={t('chart.toggleLabels')}
             className={`rounded-md p-1.5 transition-colors ${
               showLabels
                 ? 'bg-kapwa-bg-brand-weak text-kapwa-text-brand'
@@ -228,7 +234,7 @@ export default function FinancialPieChart({
           <button
             onClick={() => setShowBreakdownList(!showBreakdownList)}
             className='text-kapwa-text-disabled hover:text-kapwa-text-strong p-1 transition-colors'
-            title='Toggle List'
+            title={t('chart.toggleList')}
           >
             {showBreakdownList ? (
               <ChevronUp className='h-4 w-4' />
@@ -295,13 +301,13 @@ export default function FinancialPieChart({
               >
                 <Undo2 className='text-kapwa-text-disabled group-hover:text-kapwa-text-support mb-1 h-5 w-5' />
                 <span className='text-kapwa-text-disabled group-hover:text-kapwa-text-strong text-[10px] font-semibold tracking-widest uppercase'>
-                  Return
+                  {t('chart.return')}
                 </span>
               </button>
             ) : (
               <div className='flex flex-col items-center justify-center'>
                 <span className='text-kapwa-text-disabled text-[10px] font-medium tracking-widest uppercase'>
-                  Total
+                  {t('chart.total')}
                 </span>
                 <span className='text-kapwa-text-support mt-1 text-xs font-bold'>
                   {

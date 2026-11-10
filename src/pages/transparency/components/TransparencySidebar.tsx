@@ -1,4 +1,5 @@
 import { CreditCard, Hammer, Truck } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import {
   SidebarContainer,
@@ -7,29 +8,31 @@ import {
 
 const sections = [
   {
-    name: 'Budget & Finances',
+    nameKey: 'sidebar.financial',
     slug: 'financial',
     icon: CreditCard,
   },
   {
-    name: 'Procurement',
+    nameKey: 'sidebar.procurement',
     slug: 'procurement',
     icon: Hammer,
   },
   {
-    name: 'DPWH Projects',
+    nameKey: 'sidebar.infrastructure',
     slug: 'infrastructure',
     icon: Truck,
   },
 ];
 
 export default function TransparencySidebar() {
+  const { t } = useTranslation('transparency');
+
   return (
-    <SidebarContainer title='Transparency'>
+    <SidebarContainer title={t('sidebar.title')}>
       {sections.map(section => (
         <SidebarItem
           key={section.slug}
-          label={section.name}
+          label={t(section.nameKey)}
           icon={section.icon}
           path={`${section.slug}`}
         />

@@ -1,4 +1,5 @@
 import { Landmark, ReceiptText, Scale, Vault } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { StatCard } from '@/components/ui/StatCard';
 
@@ -42,6 +43,7 @@ export default function SummaryCards({
   fundSummary,
   prevYear,
 }: SummaryCardsProps) {
+  const { t } = useTranslation('transparency');
   const totalIncome = computeTotalIncome(income);
   const totalExpenditure = computeTotalExpenditure(expenditure);
   const netIncome = computeNetIncome(income, expenditure);
@@ -49,28 +51,28 @@ export default function SummaryCards({
 
   const cards = [
     {
-      label: 'Total Revenue (M)',
+      label: t('summary.revenue'),
       value: totalIncome,
       trend: calculateTrend(totalIncome, prevYear?.totalIncome),
       icon: Landmark,
       iconBg: 'bg-kapwa-green-50 text-kapwa-green-600',
     },
     {
-      label: 'Total Expenditure (M)',
+      label: t('summary.expenditure'),
       value: totalExpenditure,
       trend: calculateTrend(totalExpenditure, prevYear?.totalExpenditure),
       icon: ReceiptText,
       iconBg: 'bg-kapwa-red-50 text-kapwa-red-600',
     },
     {
-      label: 'Net Operating Income (M)',
+      label: t('summary.netIncome'),
       value: netIncome,
       trend: calculateTrend(netIncome, prevYear?.netIncome),
       icon: Scale,
       iconBg: 'bg-kapwa-bg-brand-weak text-kapwa-text-brand',
     },
     {
-      label: 'Treasury Balance (M)',
+      label: t('summary.treasury'),
       value: fundBalance,
       trend: calculateTrend(fundBalance, prevYear?.fundCashEnd),
       icon: Vault,

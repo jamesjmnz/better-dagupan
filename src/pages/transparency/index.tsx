@@ -18,37 +18,37 @@ import { DetailSection } from '@/components/layout';
 import { config } from '@/lib/lguConfig';
 import { Badge } from '@/components/ui/Badge';
 import { Card, CardContent, CardGrid } from '@/components/ui/Card';
-import { lguLabels } from '@/lib/lguLabels';
+import { useLguTerms } from '@/lib/useLguTerms';
 
 export default function TransparencyIndex() {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['transparency', 'common']);
+  const terms = useLguTerms();
   const disclaimer = { portal: config.portal.name, lgu: config.lgu.name };
 
   const sections = [
     {
-      title: 'Public Funds',
-      description: `Independent visualization of ${lguLabels.adjective.toLowerCase()} income and where your taxes are being allocated.`,
+      title: t('index.funds.title'),
+      description: t('index.funds.description', terms),
       icon: Landmark,
       href: '/transparency/financial',
       color: 'blue',
-      badge: 'Financials',
+      badge: t('index.funds.badge'),
     },
     {
-      title: 'Public Works',
-      description:
-        'Community tracking of road repairs, building constructions, and local infrastructure projects.',
+      title: t('index.works.title'),
+      description: t('index.works.description'),
       icon: HardHat,
       href: '/transparency/infrastructure',
       color: 'orange',
-      badge: 'Monitoring',
+      badge: t('index.works.badge'),
     },
     {
-      title: 'Procurement',
-      description: `Audit of ${lguLabels.adjective.toLowerCase()} bidding and awarded contracts to ensure fair and open competition.`,
+      title: t('index.procurement.title'),
+      description: t('index.procurement.description', terms),
       icon: ShoppingBag,
       href: '/transparency/procurement',
       color: 'blue',
-      badge: 'Contracts',
+      badge: t('index.procurement.badge'),
     },
   ];
 
@@ -62,10 +62,10 @@ export default function TransparencyIndex() {
           </div>
           <div className='flex-1 space-y-2 text-center md:text-left'>
             <h3 className='text-[10px] font-bold tracking-widest text-kapwa-orange-600 uppercase'>
-              {t('disclaimer.noticeTitle', disclaimer)}
+              {t('common:disclaimer.noticeTitle', disclaimer)}
             </h3>
             <p className='text-sm leading-relaxed text-kapwa-orange-600'>
-              {t('disclaimer.noticeBody', disclaimer)}
+              {t('common:disclaimer.noticeBody', disclaimer)}
             </p>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function TransparencyIndex() {
 
                 <div className='mt-8 flex items-center justify-between border-t border-kapwa-border-weak pt-4 transition-transform group-hover:translate-x-1'>
                   <span className='text-kapwa-text-brand text-[10px] font-black tracking-widest uppercase'>
-                    Analyze Data
+                    {t('index.analyze')}
                   </span>
                   <ChevronRight className='text-kapwa-text-support h-4 w-4' />
                 </div>
@@ -127,15 +127,13 @@ export default function TransparencyIndex() {
       {/* 3. Community Engagement Block */}
       <div className='mt-10 grid grid-cols-1 gap-8 md:grid-cols-2'>
         <DetailSection
-          title='Help Our Audit'
+          title={t('index.helpTitle')}
           icon={Search}
           className='bg-kapwa-bg-surface-raised border-kapwa-border-weak flex h-full flex-col'
         >
           <div className='flex h-full flex-col justify-between'>
             <p className='text-kapwa-text-support mb-6 text-sm leading-relaxed'>
-              Our data depends on volunteers like you. If you find a project
-              that is missing or an expense that seems incorrect, please let us
-              know.
+              {t('index.helpBody')}
             </p>
             <a
               href={`${config.portal.githubUrl}/issues`}
@@ -143,19 +141,19 @@ export default function TransparencyIndex() {
               rel='noreferrer'
               className='text-kapwa-text-inverse bg-kapwa-brand-600 hover:bg-kapwa-brand-700 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold transition-colors'
             >
-              <Users className='h-4 w-4' /> Report an Issue
+              <Users className='h-4 w-4' /> {t('index.reportIssue')}
             </a>
           </div>
         </DetailSection>
 
         <DetailSection
-          title='Data Sources'
+          title={t('index.sourcesTitle')}
           icon={FileText}
           className='flex h-full flex-col'
         >
           <div className='flex h-full flex-col justify-between'>
             <p className='text-kapwa-text-disabled mb-6 text-[11px] font-medium italic'>
-              We mirror and verify data from the following platforms:
+              {t('index.sourcesBody')}
             </p>
             <div className='flex flex-col gap-3'>
               <a
@@ -164,7 +162,7 @@ export default function TransparencyIndex() {
                 rel='noreferrer'
                 className='text-kapwa-text-inverse bg-kapwa-brand-600 hover:bg-kapwa-brand-700 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold transition-colors'
               >
-                Transparency Dashboard <ExternalLink className='h-3 w-3' />
+                {t('index.dashboard')} <ExternalLink className='h-3 w-3' />
               </a>
               <a
                 href='https://data.bettergov.ph/'
@@ -172,7 +170,7 @@ export default function TransparencyIndex() {
                 rel='noreferrer'
                 className='text-kapwa-text-inverse bg-kapwa-brand-600 hover:bg-kapwa-brand-700 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold transition-colors'
               >
-                BetterGov Data Portal <ExternalLink className='h-3 w-3' />
+                {t('index.dataPortal')} <ExternalLink className='h-3 w-3' />
               </a>
             </div>
           </div>
