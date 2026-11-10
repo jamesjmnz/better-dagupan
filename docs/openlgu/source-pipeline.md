@@ -598,6 +598,8 @@ Source freshness metadata, PDF reachability, and mirror status may update routin
 
 `pipeline/data/documents.csv` was the `legacy_manual_documents_csv` staging input from the original pipeline. It is now deprecated. The website collector is the primary source path. The legacy CSV script (`collect-source-records.cjs`) remains in the repo for reference but is removed from the pipeline chain.
 
+The shape of that CSV, and of the other data inherited from BetterLB, is recorded in [`docs/reference/betterlb-data-model.md`](../reference/betterlb-data-model.md).
+
 ## Commands
 
 From the repo root:
