@@ -5,10 +5,11 @@ import { openSidebar } from '../utils/layout';
 
 /**
  * The services directory renders from citizens-charter/merged-services.json,
- * which holds no verified Dagupan records yet. The first describe covers what
- * the page does today: it says the directory is not available yet, instead of
- * a "no results" message that blames the visitor's filters. The second covers
- * the card and filter behaviour, and only runs once records are published.
+ * which holds the city's Citizen's Charter services. The empty-state describe
+ * covers what the page does if that dataset is ever emptied again: it says the
+ * directory is not available yet, instead of a "no results" message that
+ * blames the visitor's filters. The published describe covers the card and
+ * filter behaviour, and runs while records are published.
  */
 const services = readData<unknown[]>('citizens-charter/merged-services.json');
 const categories = readData<{ categories: { slug: string; name: string }[] }>(
