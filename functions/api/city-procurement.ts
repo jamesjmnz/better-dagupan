@@ -18,6 +18,8 @@ import {
 } from '../utils/city-notices';
 
 const CACHE_SECONDS = 1800;
+// Give up on a slow city server so the page can fall back to its own link.
+const UPSTREAM_TIMEOUT_MS = 8000;
 
 const feed = (
   lguConfig.transparency.procurement as { cityNotices?: CityNoticesConfig }
@@ -37,6 +39,7 @@ function json(body: unknown, status = 200, maxAge = CACHE_SECONDS) {
 async function fetchJson(url: string) {
   const response = await fetch(url, {
     headers: { Accept: 'application/json' },
+    signal: AbortSignal.timeout(UPSTREAM_TIMEOUT_MS),
     cf: { cacheTtl: CACHE_SECONDS, cacheEverything: true },
   } as RequestInit);
   if (!response.ok) throw new Error(`Upstream ${response.status}`);
