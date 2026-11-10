@@ -858,6 +858,198 @@ not DTI's statement, so those years show the category instead of "of N".
 - The 2024 profile also names a mayor and a 2024 population. Neither is taken
   from it; both are published elsewhere from their own authorities.
 
+## Worked example: the Citizen's Charter services (November 2026)
+
+Every dataset before this one says who or what something is. The services
+directory tells a reader what to do: which documents to bring, which counter to
+pay at, how long to expect. A wrong requirement sends someone home from city
+hall, so the rule here is the strictest form of "publish only what the source
+states": every published field is the city's own wording, and nothing is
+derived from it.
+
+### The source: one page per service, one family
+
+The city's Citizen's Charter index (`/residents/citizens-charter/`) links ten
+service pages under `/residents/`. Each prints the same structure: a header
+(Office Division, Classification, Type of Transaction, Who may Avail?), a
+"Checklist of Requirements | Where to Secure" table, a "Client Steps | Agency
+Action | Fees to be Paid | Time | Person Responsible" table, and a "TOTAL
+PROCESSING TIME" line. Each page is catalogued as its own civic source
+(`dagupan-lgu-charter-<page slug>`), and each record cites exactly the page it
+was transcribed from. The index is catalogued too, but cited by no record: it
+states the charter's schedule and a general note, not any service's details.
+
+| | |
+|---|---|
+| Publisher | City Government of Dagupan |
+| Pages | 10 service pages and the index |
+| Date in the content | none |
+| CMS `datePublished` | 2023-05-18 to 2023-05-25 |
+| CMS `article:modified_time` | 2023-05-25 for nine pages; 2026-07-14 for one (a re-save, below) |
+| Read from | Internet Archive captures of April–July 2026 (below) |
+| Retrieved and verified | 2026-11-10, against those captures |
+
+**One family, by construction.** The ten pages are one editorial act: the
+city's charter, written in one week by one office. They cannot corroborate one
+another, and nothing else publishes the One-Stop Business Center's procedure.
+
+**Why one family is enough for this record type, and where that is an open
+question.** The two-family rule in this document was written for claims a city
+page can state wrongly while another page states them rightly: who holds an
+office, which number reaches it. A charter is different in kind. It is the city's
+own statement of its own procedure, and no other body is in a position to say
+what the One-Stop Business Center requires. That is the position the PSA is in
+for the PSGC and for census counts, and the closest precedents are those: the
+barangay index publishes from one authoritative source, and the census worked
+example says plainly that "one agency cannot corroborate itself independently,
+so the check has to come from arithmetic". The same check is applied here, and
+it is the one that matters:
+
+**Parts sum to the whole.** Nine of the ten pages print step times that add up
+exactly to the page's total processing time, from 8 minutes (Community Tax
+Certificate) to "1 hour and 16 minutes" (tricycle operator's permit). The
+renewal page does not: its fourteen step times add up to **27 minutes** and it
+prints **"TOTAL PROCESSING TIME: 30 minutes"**. One of the two is wrong and the
+page does not say which, so the renewal service is published with
+`processing_time: null` and `processing_time_status: "conflicting"`, and the
+page says why. Its step times stay, as printed, because each is a separate
+statement and the reader is told the conflict.
+
+This document does not yet state, as a rule, that a self-published procedure
+may be published from its publisher alone. It has been applied here on the
+PSGC and census precedent, with the arithmetic check as the corroboration, and
+is **flagged as an open question** for the maintainers: if the answer is no,
+these records should wait for a second source (a printed charter, an ARTA
+listing, a city ordinance on fees), and `servicesProvenance.test.ts` is where
+that rule would be encoded.
+
+**Age.** The pages carry no date. Their CMS stamps say they were written
+between 18 and 25 May 2023, and nine were last modified on 25 May 2023. The
+tenth, the certified-copy page, shows `article:modified_time` 2026-07-14
+05:38Z: the day the office-directory example records every department page
+being re-saved within 70 minutes. Its capture from that day differs from its
+July 2023 capture only in markup (the column headings moved into a table row);
+the transcribed text is identical, so the stamp records a re-save, not an edit.
+As with the department rosters, the stamps are recorded in each source's
+`notes` and not as `published`. A 2023 procedure is still a 2023 procedure, and
+a fee may have changed since: re-verify against the city's next charter
+edition.
+
+### Read from captures, because the city's server was down
+
+On 2026-11-10 `www.dagupan.gov.ph` answered every request with HTTP 504 or not
+at all, from 21:03 until after 22:45 PHT: pages, `robots.txt`, static uploads
+and the WordPress REST API alike. The same server had served the office
+directory pages normally that afternoon. Rather than wait indefinitely or
+transcribe from memory, the ten pages and the index were read from the
+**Internet Archive's most recent readable captures** of them, taken between
+17 April and 14 July 2026 (each source's notes give its capture; four pages
+have later captures, but those record the city's server refusing the archive
+with HTTP 403), and
+each was compared, field by field after transcription, with the same page's
+July 2023 capture. All ten are identical.
+
+The civic-source `url` is "the exact URL the data was read from", so each one
+is the capture's URL, not the live page's; the live URL is named in the notes.
+A capture is the city's page as the city served it, not a summary, so the
+agency is still the City Government of Dagupan and no `derives_from` is set.
+The service page says in words that its link opens an archived copy, and
+`civicSources.test.ts` now accepts a capture URL only when it copies a
+`gov.ph` page that its notes name. **Re-verify against the live pages** as
+soon as the server answers, and point each `url` back at the city; if the live
+text differs, the live text wins. Not done for the same reason: the WordPress
+searches for other charter, permit, clearance and certificate pages, and for a
+downloadable charter PDF.
+
+### What was published
+
+| Service | Fee | Total time |
+|---|---|---|
+| Applying for a New Business Permit | not stated | 30 minutes |
+| Applying for Renewal of Business Permit | not stated | **withheld** |
+| Applying for Amendment to Existing Business Permit | not stated | 31 minutes |
+| Retiring a Business Operation | not stated | 42 minutes |
+| Securing Certification of Business Record | Php 200.00 | 17 minutes |
+| Issuance of Certified Copy of Business Permit | Php 100.00 | 12 minutes |
+| Securing Mayor's Clearance | Php 50.00 | 16 minutes |
+| Issuance of Tricycle Operator's Permit | not stated | 1 hour and 16 minutes |
+| Securing Mayor's Permit for the Following Activities or Undertakings | not stated | 40 minutes |
+| Issuance of Community Tax Certificate | not stated | 8 minutes |
+
+For every service: the name as titled, the office division, classification
+(all ten print "Simple"), type of transaction and who may avail as printed, the
+full requirements checklist with where to secure each, and every client step
+with its agency actions and the fee and time printed beside each.
+
+**Fees.** A service-level fee is published only where the fee column prints a
+single peso amount and every other row says "None": three services. The other
+seven print "Please Refer to Table of Taxes, Fees and Charges" (or, for the
+Community Tax Certificate, "The amount depends on the income of the taxpayer.
+Please refer to the Table of Taxes and Fees."). That table is not on the
+charter pages and was not found, so those services carry `fees: null`, the page
+says the amount is not verified, and the fee column is still shown step by step
+exactly as printed. No amount is computed, summed or carried from elsewhere.
+
+**Office.** All ten pages print "Office Division: One Stop Business Center
+(OSBC)", which maps to `one-stop-business-center` in the office directory. The
+steps also involve the City Engineer's Office, the City Health Office, the City
+Planning and Development Office, the City Treasurer's real-property-tax desk and
+the City Mayor's Office; they are not linked as responsible offices, because
+the charter names one office division and linking the others would be this
+portal's reading of the steps.
+
+### Transcription conventions
+
+- Text is verbatim, including the charter's third-person client steps
+  ("Submits the OR"). The template asked for plain-language rewrites; a
+  rewritten procedure is a different procedure, so none were made.
+- The only normalisations: whitespace; action numbers written as the charter
+  evidently means them ("1. 1" as "1.1", "3.3." as "3.3"); line breaks inside a
+  cell kept as `\n`; and a stray `/p>` markup fragment after "Rally" removed
+  from one requirement.
+- A blank "where to secure", fee or time cell is `null`, never `""` and never
+  filled from the row above. The interface says "not verified".
+- A step is one client-step cell and the agency rows beneath it. Each agency
+  row keeps its own fee and time cells, so a "5 minutes / 2 minutes" cell stays
+  attached to the two actions it was printed against.
+- The Mayor's Permit page prints, under "Who may Avail?", the list of
+  activities the permit covers. It is published as printed rather than
+  reinterpreted.
+- `category` is a display grouping chosen by this portal (eight business
+  services, the Mayor's Clearance under certificates, the activities permit
+  under public safety, the Community Tax Certificate under taxation), not
+  something the city publishes.
+
+### What was withheld
+
+| Withheld | Why |
+|---|---|
+| The whole "Person Responsible" column | It names more than thirty individual staff members, and the mayor as signatory, on a page last edited in May 2023. A name in it claims that this person does this job **now**, which is the claim the elected-officials and department-head examples require two families for; the charter is one. The names are not needed to use the service. The page says that the column exists and is not republished. The schemas reject a `person_responsible` field outright. |
+| The renewal total | Its step times add up to 27 minutes against a printed 30. |
+| Seven service-level fees | The pages refer to a table of taxes, fees and charges that was not found. |
+| The "Table of Special Requirements" | The new and renewal checklists end with "Other Special Requirements (Please see Table of Special Requirements)". No table by that name is on the charter pages. A table headed "Special Requirements for business falling under the following categories" is on the separate Business Permit Processing page, but nothing ties the two, so it is not linked or transcribed. |
+| The index's schedule | "Monday – Fridays 8:00 am to 5:00 pm", a peak-season schedule, and "the transaction can be completed within three (3) working days" are stated once for the whole charter. Attaching them to each service would be this portal's inference about which services they govern; they are recorded in the index source's `notes`. |
+
+### Noted, not asserted
+
+The city also publishes a **Business Permit Processing** page
+(`/business-permit-processing/`, read from its January 2025 capture), an
+older, undated summary that lists
+different requirements: for business retirement it adds "Original Mayor's
+Permit and Plate" and "Market Clearance for Market Stall Stallholders", which
+the charter page does not list. The charter is the city's formal statement of
+the procedure, so it is what is published; the summary is not cited, and the
+difference is recorded here rather than resolved. A resident retiring a market
+stall business should be prepared for both lists.
+
+The withheld staff column names an "Angelinda Ngilay" against the steps where
+the One-Stop Business Center's certifications and permits are signed, and one
+retirement step reads "Prepares Certification for signature of the Office
+Manager". The office directory withholds that office's head because the
+rosters name different people, one of them an "Angelinda M. Ngilay". This is
+suggestive, and it is **not used**: the charter states no title for anyone, it
+dates from 2023, and it is one family. The office head stays withheld.
+
 ## Note on retrieval
 
 The city pages were read directly from their HTML rather than through a
