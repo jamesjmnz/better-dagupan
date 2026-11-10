@@ -1,13 +1,14 @@
 # Admin API Overview
 
-The Admin API provides endpoints for managing the BetterLB municipal government portal. All admin endpoints require authentication and implement CSRF protection for state-changing operations.
+The Admin API provides endpoints for managing the Better Dagupan community portal's legislative data. All admin endpoints require authentication and implement CSRF protection for state-changing operations.
 
 ## Overview
 
-- **Base URL:** `https://betterlb.gov.ph/api/admin/`
+- **Base URL:** `https://<your-pages-domain>/api/admin/`
 - **Authentication:** GitHub OAuth (required for all endpoints)
 - **CSRF Protection:** Required for all state-changing operations (POST/PUT/PATCH/DELETE)
-- **Rate Limiting:** 100 requests per minute per session
+- **Rate Limiting:** none of its own; every request needs a valid session
+- **Current state:** Better Dagupan has no D1 database or KV namespace bound yet, so these endpoints cannot run until both exist
 
 ---
 
@@ -18,7 +19,7 @@ The Admin API provides endpoints for managing the BetterLB municipal government 
 All admin endpoints use GitHub OAuth for authentication:
 
 1. **Redirect to Login:** User visits `/api/admin/auth/login`
-2. **GitHub Authorization:** User authorizes the BetterLB app
+2. **GitHub Authorization:** User authorizes the portal's GitHub OAuth app
 3. **Callback Handler:** GitHub redirects to `/api/admin/auth/callback`
 4. **Session Creation:** Server creates session and sets `admin_session` cookie
 5. **Authenticated Requests:** Include session cookie in subsequent requests
@@ -99,12 +100,12 @@ Cross-Site Request Forgery (CSRF) is an attack that forces an end user to execut
 **1. Login:**
 ```typescript
 // Redirect to GitHub OAuth
-window.location.href = 'https://betterlb.gov.ph/api/admin/auth/login';
+window.location.href = 'https://<your-pages-domain>/api/admin/auth/login';
 ```
 
 **2. Check Session:**
 ```typescript
-const response = await fetch('https://betterlb.gov.ph/api/admin/auth/session', {
+const response = await fetch('https://<your-pages-domain>/api/admin/auth/session', {
   credentials: 'include', // Include session cookie
 });
 
@@ -116,7 +117,7 @@ if (data.authenticated) {
 
 **3. Make Authenticated Request (GET):**
 ```typescript
-const response = await fetch('https://betterlb.gov.ph/api/admin/documents', {
+const response = await fetch('https://<your-pages-domain>/api/admin/documents', {
   credentials: 'include',
 });
 
@@ -126,13 +127,13 @@ const data = await response.json();
 **4. Make Authenticated Request (POST with CSRF):**
 ```typescript
 // Get CSRF token first
-const csrfResponse = await fetch('https://betterlb.gov.ph/api/admin/auth/csrf', {
+const csrfResponse = await fetch('https://<your-pages-domain>/api/admin/auth/csrf', {
   credentials: 'include',
 });
 const { csrfToken } = await csrfResponse.json();
 
 // Make CSRF-protected request
-const response = await fetch('https://betterlb.gov.ph/api/admin/documents', {
+const response = await fetch('https://<your-pages-domain>/api/admin/documents', {
   method: 'POST',
   credentials: 'include',
   headers: {
@@ -172,7 +173,7 @@ const data = await response.json();
 | `/api/admin/documents/resolve-duplicate` | POST | Resolve duplicate documents | Yes | Yes |
 | `/api/admin/documents/bulk` | POST | Bulk operations on documents | Yes | Yes |
 
-**Documentation:** [Documents API](./documents.md)
+**Handlers:** `functions/api/admin/documents/`
 
 ### Review Queue Endpoints
 
@@ -183,18 +184,18 @@ const data = await response.json();
 | `/api/admin/review-queue/assign` | POST | Assign item to user | Yes | Yes |
 | `/api/admin/review-queue/status` | POST | Update item status | Yes | Yes |
 
-**Documentation:** [Review Queue API](./review-queue.md)
+**Handlers:** `functions/api/admin/review-queue/`
 
 ### Person Management Endpoints
 
 | Endpoint | Method | Description | Auth Required | CSRF Required |
 |----------|--------|-------------|---------------|---------------|
-| `/api/admin/persons/merge` | POST | Merge duplicate persons | Yes | Yes |
+| `/api/admin/persons-merge` | POST | Merge duplicate persons | Yes | Yes |
 | `/api/admin/persons-deletion-queue` | GET | List soft-deleted persons | Yes | No |
 | `/api/admin/persons-deletion-queue` | POST | Restore or permanently delete | Yes | Yes |
 | `/api/admin/persons-search` | GET | Search persons by name | Yes | No |
 
-**Documentation:** [Persons API](./persons.md)
+**Handlers:** `functions/api/admin/persons-merge.ts`, `persons-deletion-queue.ts`, `persons-search.ts`
 
 ### Data Reconciliation Endpoints
 
@@ -203,7 +204,7 @@ const data = await response.json();
 | `/api/admin/reconcile` | GET | List data conflicts | Yes | No |
 | `/api/admin/reconcile` | POST | Resolve data conflict | Yes | Yes |
 
-**Documentation:** [Data Reconciliation API](./data-reconciliation.md)
+**Handler:** `functions/api/admin/reconcile.ts`
 
 ### Audit Logging Endpoints
 
@@ -211,7 +212,7 @@ const data = await response.json();
 |----------|--------|-------------|---------------|---------------|
 | `/api/admin/audit-logs` | GET | Query audit logs | Yes | No |
 
-**Documentation:** [Audit Logging API](./audit-logging.md)
+**Handler:** `functions/api/admin/audit-logs.ts`
 
 ### Statistics Endpoints
 
@@ -224,7 +225,7 @@ const data = await response.json();
 | `/api/admin/sessions` | GET | List sessions | Yes | No |
 | `/api/admin/sessions` | POST | Create session | Yes | Yes |
 
-**Documentation:** [Statistics API](./statistics.md)
+**Handlers:** `functions/api/admin/stats.ts`, `recent-activity.ts`, `terms.ts`, `subjects-search.ts`, `sessions/`
 
 ### Error Management Endpoints
 
@@ -234,7 +235,7 @@ const data = await response.json();
 | `/api/admin/errors/:id/retry` | POST | Retry failed document parse | Yes | Yes |
 | `/api/admin/errors/:id` | DELETE | Delete error log | Yes | Yes |
 
-**Documentation:** [Error Management API](./errors.md)
+**Handler:** `functions/api/admin/errors.ts`. The `:id` routes are declared in that file's comments, but no route file serves `/api/admin/errors/:id` yet.
 
 ### Data Import Endpoints
 
@@ -243,7 +244,7 @@ const data = await response.json();
 | `/api/admin/parse-facebook-post` | POST | Parse Facebook session posts | Yes | Yes |
 | `/api/admin/parse-legislative-post` | POST | Parse Facebook legislative posts | Yes | Yes |
 
-**Documentation:** [Data Import API](./data-import.md)
+**Handlers:** `functions/api/admin/parse-facebook-post.ts`, `parse-legislative-post.ts`
 
 ---
 
@@ -317,7 +318,10 @@ const data = await response.json();
 
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `ADMIN_REDIRECT_URI` | Custom OAuth redirect URI | `https://custom.domain/admin/auth/callback` |
+| `ADMIN_USERS` | JSON array of logins with the admin role | `["user1"]` |
+| `EDITOR_USERS` | JSON array of logins with the editor role | `["user2"]` |
+
+Signed-in users in neither role list are viewers (read-only).
 
 ---
 
@@ -347,9 +351,7 @@ const data = await response.json();
 
 ### Rate Limiting
 
-- **Per-Session Limits:** 100 requests per minute
-- **Automatic:** Enforced at the session level
-- **Headers Included:** `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`
+- **Not enforced on admin endpoints.** The KV-backed limiter in `functions/utils/rate-limit.ts` is applied to the public OpenLGU endpoints only.
 
 ---
 
@@ -359,21 +361,21 @@ const data = await response.json();
 
 ```bash
 # 1. Login (opens browser)
-# Navigate to: https://betterlb.gov.ph/api/admin/auth/login
+# Navigate to: https://<your-pages-domain>/api/admin/auth/login
 
 # 2. Get session cookie from browser dev tools
 # Application > Cookies > admin_session
 
 # 3. Test authenticated endpoint
-curl https://betterlb.gov.ph/api/admin/auth/session \
+curl https://<your-pages-domain>/api/admin/auth/session \
   -H "Cookie: admin_session=<your-session-cookie>"
 
 # 4. Get CSRF token
-curl https://betterlb.gov.ph/api/admin/auth/csrf \
+curl https://<your-pages-domain>/api/admin/auth/csrf \
   -H "Cookie: admin_session=<your-session-cookie>"
 
 # 5. Make CSRF-protected request
-curl -X POST https://betterlb.gov.ph/api/admin/documents \
+curl -X POST https://<your-pages-domain>/api/admin/documents \
   -H "Content-Type: application/json" \
   -H "X-CSRF-Token: <csrf-token>" \
   -H "Cookie: admin_session=<your-session-cookie>" \
@@ -388,7 +390,7 @@ curl -X POST https://betterlb.gov.ph/api/admin/documents \
 
 **Authenticated Request:**
 ```typescript
-const response = await fetch('https://betterlb.gov.ph/api/admin/documents', {
+const response = await fetch('https://<your-pages-domain>/api/admin/documents', {
   credentials: 'include', // Include session cookie
 });
 const data = await response.json();
@@ -397,13 +399,13 @@ const data = await response.json();
 **CSRF-Protected Request:**
 ```typescript
 // Get CSRF token
-const csrfResponse = await fetch('https://betterlb.gov.ph/api/admin/auth/csrf', {
+const csrfResponse = await fetch('https://<your-pages-domain>/api/admin/auth/csrf', {
   credentials: 'include',
 });
 const { csrfToken } = await csrfResponse.json();
 
 // Make request
-const response = await fetch('https://betterlb.gov.ph/api/admin/documents', {
+const response = await fetch('https://<your-pages-domain>/api/admin/documents', {
   method: 'POST',
   credentials: 'include',
   headers: {
@@ -416,7 +418,7 @@ const response = await fetch('https://betterlb.gov.ph/api/admin/documents', {
 
 **Logout:**
 ```typescript
-const response = await fetch('https://betterlb.gov.ph/api/admin/auth/logout', {
+const response = await fetch('https://<your-pages-domain>/api/admin/auth/logout', {
   method: 'POST',
   credentials: 'include',
 });
@@ -436,4 +438,4 @@ const response = await fetch('https://betterlb.gov.ph/api/admin/auth/logout', {
 
 **Last Updated:** 2026-02-28
 **API Version:** 1.0.0
-**Maintained By:** BetterLB Development Team
+**Maintained By:** Better Dagupan contributors

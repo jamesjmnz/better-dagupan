@@ -1,6 +1,6 @@
 # API Integration Tests
 
-This directory contains integration tests for the BetterLB API endpoints (Cloudflare Pages Functions).
+This directory contains integration tests for the Better Dagupan API endpoints (Cloudflare Pages Functions). The fixtures in `fixtures/` are synthetic test data, not real legislative records.
 
 ## Overview
 
