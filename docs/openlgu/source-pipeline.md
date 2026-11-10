@@ -596,7 +596,9 @@ Source freshness metadata, PDF reachability, and mirror status may update routin
 
 ## Transitional Input
 
-`pipeline/data/documents.csv` was the `legacy_manual_documents_csv` staging input from the original pipeline. It is now deprecated. The website collector is the primary source path. The legacy CSV script (`collect-source-records.cjs`) remains in the repo for reference but is removed from the pipeline chain.
+`pipeline/data/documents.csv` was the `legacy_manual_documents_csv` staging input from the original pipeline. It is deprecated, and the inherited Los Baños copy is no longer shipped with the repository. The website collector is the primary source path. The legacy CSV script (`collect-source-records.cjs`) remains in the repo for reference but is removed from the pipeline chain; it exits with an error unless `--input` names a CSV that exists.
+
+The shape of that CSV, and of the other data inherited from BetterLB, is recorded in [`docs/reference/betterlb-data-model.md`](../reference/betterlb-data-model.md).
 
 ## Commands
 

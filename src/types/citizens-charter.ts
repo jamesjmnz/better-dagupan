@@ -1,8 +1,8 @@
 /**
  * Citizen's Charter Service Types
  *
- * Types for the Citizen's Charter service data extracted from
- * raw_data/citizens_charter2026.pdf
+ * Types for the Citizen's Charter service data extracted from the
+ * LGU's published Citizen's Charter document.
  */
 
 /**
