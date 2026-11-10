@@ -1,5 +1,6 @@
 import { test, expect } from '../test-config';
 import { assertKapwaTokens } from '../utils/kapwa';
+import { openSidebar } from '../utils/layout';
 
 /**
  * The barangay index is the first dataset published under the Better Dagupan
@@ -241,13 +242,15 @@ test.describe('Barangays Pages', () => {
   test('sidebar navigation works on detail pages', async ({ page }) => {
     await gotoDetail(page, 'bonuan-gueset');
 
-    // The layout collapses the sidebar on detail pages by design, so it is
-    // present but hidden until the toggle is used.
+    // The layout collapses the sidebar on detail pages by design (and folds
+    // it behind the Menu disclosure on small screens), so it is present but
+    // hidden until the toggle is used.
     const sidebar = page.locator('aside').first();
     await expect(sidebar).toHaveCount(1);
     await expect(sidebar).toContainText('Bonuan Gueset');
+    await expect(sidebar).toBeHidden();
 
-    await page.getByRole('button', { name: /menu/i }).first().click();
+    await openSidebar(page);
     await expect(sidebar).toBeVisible();
   });
 

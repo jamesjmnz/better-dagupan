@@ -26,15 +26,15 @@ export const Footer: FC = () => {
   const getSocialIcon = (label: string) => {
     switch (label) {
       case 'Facebook':
-        return <SiFacebook className='w-5 h-5' />;
+        return <SiFacebook className='w-5 h-5' aria-hidden='true' />;
       case 'Instagram':
-        return <SiInstagram className='w-5 h-5' />;
+        return <SiInstagram className='w-5 h-5' aria-hidden='true' />;
       case 'YouTube':
-        return <SiYoutube className='w-5 h-5' />;
+        return <SiYoutube className='w-5 h-5' aria-hidden='true' />;
       case 'Discord':
-        return <SiDiscord className='w-5 h-5' />;
+        return <SiDiscord className='w-5 h-5' aria-hidden='true' />;
       case 'GitHub':
-        return <SiGithub className='w-5 h-5' />;
+        return <SiGithub className='w-5 h-5' aria-hidden='true' />;
       default:
         return null;
     }
@@ -72,6 +72,9 @@ export const Footer: FC = () => {
                   className='transition-colors text-kapwa-text-disabled hover:text-kapwa-text-inverse'
                   target='_blank'
                   rel='noopener noreferrer'
+                  // Icon-only, so name the link itself: an SVG <title> is not a
+                  // dependable link name across engines, and WebKit gets none.
+                  aria-label={link.label}
                 >
                   {getSocialIcon(link.label)}
                 </Link>

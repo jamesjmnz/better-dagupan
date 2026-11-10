@@ -1,6 +1,7 @@
 import { test, expect } from '../test-config';
 import { readData } from '../utils/data';
 import { assertKapwaTokens } from '../utils/kapwa';
+import { openSidebar } from '../utils/layout';
 
 /**
  * The services directory renders from citizens-charter/merged-services.json,
@@ -30,6 +31,7 @@ test.describe('Services Index Page', () => {
   });
 
   test('the sidebar lists every service category', async ({ page }) => {
+    await openSidebar(page);
     const nav = page.getByRole('navigation', { name: 'Categories' });
 
     await expect(nav.getByRole('button')).toHaveCount(categories.length + 1);
@@ -46,6 +48,7 @@ test.describe('Services Index Page', () => {
   test('choosing a category updates the URL and the active item', async ({
     page,
   }) => {
+    await openSidebar(page);
     const nav = page.getByRole('navigation', { name: 'Categories' });
     const [category] = categories;
     const item = nav.getByRole('button', { name: category.name, exact: true });
@@ -102,6 +105,7 @@ test.describe('Services Index Page', () => {
       await expect(page).toHaveURL(/search=xyznonexistent123/);
       await expect(notYetAvailable).toBeVisible();
 
+      await openSidebar(page);
       await page
         .getByRole('navigation', { name: 'Categories' })
         .getByRole('button', { name: categories[0].name, exact: true })

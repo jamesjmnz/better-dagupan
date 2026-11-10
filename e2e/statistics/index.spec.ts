@@ -1,6 +1,7 @@
 import { test, expect } from '../test-config';
 import { readData } from '../utils/data';
 import { assertKapwaTokens } from '../utils/kapwa';
+import { openSidebar } from '../utils/layout';
 
 const incomeRecords = readData<unknown[]>('statistics/ari.json');
 const cmci = readData<{ overall_score: unknown[] }>('statistics/cmci.json');
@@ -40,13 +41,12 @@ test.describe('Statistics Pages', () => {
       page.locator('p:has-text("Data-driven insights")')
     ).toBeVisible();
 
-    // Check StatisticsSidebar is present (the layout renders more than one
-    // <aside>, so take the first).
-    const sidebar = page
-      .locator('aside')
-      .or(page.locator('[data-testid="sidebar"]'))
-      .first();
-    await expect(sidebar).toBeVisible();
+    // Check StatisticsSidebar is present, opening it first on viewports that
+    // fold it behind the Menu disclosure.
+    const sidebar = await openSidebar(page);
+    await expect(
+      sidebar.getByRole('navigation', { name: 'City Statistics' })
+    ).toBeVisible();
   });
 
   test('population page displays KPI cards', async ({ page }) => {
@@ -220,29 +220,20 @@ test.describe('Statistics Pages', () => {
     await page.goto('/statistics');
     await page.waitForLoadState('networkidle');
 
-    // Check sidebar is visible
-    const sidebar = page
-      .locator('aside')
-      .or(page.locator('[data-testid="sidebar"]'));
-    await expect(sidebar).toBeVisible();
+    const sidebar = await openSidebar(page);
 
-    // Look for collapse button
-    const collapseButton = page.locator('button').filter({
-      hasText: /Collapse|Hide|Toggle/i,
-    });
-
-    const collapseButtonCount = await collapseButton.count();
-    if (collapseButtonCount > 0) {
-      // Click collapse button
-      await collapseButton.first().click();
-      await page.waitForTimeout(300);
-
-      // Main content should still be visible
-      const mainContent = page
-        .locator('main')
-        .or(page.locator('[role="main"]'));
-      await expect(mainContent).toBeVisible();
+    // Desktop collapses the sidebar with the layout's Hide control, which
+    // small screens hide; there the Menu disclosure folds it away.
+    const hide = page.getByRole('button', { name: 'Hide Menu' });
+    if (await hide.isVisible()) {
+      await hide.click();
+    } else {
+      await page.locator('button[aria-controls="layout-sidebar"]').click();
     }
+
+    await expect(sidebar).toBeHidden();
+    // The content stays put.
+    await expect(page.locator('#layout-content')).toBeVisible();
   });
 
   test('statistics pages have consistent breadcrumb navigation', async ({
