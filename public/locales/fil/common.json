@@ -318,5 +318,15 @@
       "social-welfare": "Kapakanang panlipunan",
       "public-order": "Kaayusan at kaligtasang pampubliko"
     }
+  },
+  "history": {
+    "title": "Kasaysayan ng {{lgu}}",
+    "intro": "Mga mahalagang pangyayaring legal sa buhay ng lungsod, bawat isa ay hango sa opisyal na teksto ng batas o kautusang pinagbabatayan nito. Ang mga petsa ay kasintiyak lamang ng nakasaad sa mga dokumentong iyon.",
+    "timelineLabel": "Timeline ng mga mahalagang pangyayaring legal",
+    "highlightsTitle": "Sa isang sulyap",
+    "showMore": "Ipakita ang {{count}} pa",
+    "showLess": "Ipakita ang mas kaunti",
+    "earlierNotVerified": "Hindi pa naberipika ang naunang kasaysayan",
+    "earlierNotVerifiedHint": "Nagsisimula ang timeline na ito sa karta ng lungsod noong 1947 dahil doon nakatagpo ang Better Dagupan ng mga opisyal na teksto. Hindi pa naitutugma sa isang opisyal na pinagkunan ang mga salaysay tungkol sa naunang kasaysayan ng bayan at sa pinagmulan ng pangalan nito. Hindi ito pahayag na hindi alam ang kasaysayang iyon."
   }
 }

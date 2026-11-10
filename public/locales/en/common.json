@@ -318,5 +318,15 @@
       "social-welfare": "Social welfare",
       "public-order": "Public order and safety"
     }
+  },
+  "history": {
+    "title": "History of {{lgu}}",
+    "intro": "Legal milestones in the life of the city, each taken from the official text of the law or order it rests on. Dates are given as precisely as those documents state them.",
+    "timelineLabel": "Timeline of legal milestones",
+    "highlightsTitle": "At a glance",
+    "showMore": "Show {{count}} more",
+    "showLess": "Show less",
+    "earlierNotVerified": "Earlier history not yet verified",
+    "earlierNotVerifiedHint": "This timeline begins with the 1947 city charter because that is where Better Dagupan has found official texts. Accounts of the town's earlier history and of its name have not yet been matched to an authoritative source. It is not a statement that that history is unknown."
   }
 }
