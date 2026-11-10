@@ -94,7 +94,7 @@ export default function CouncilOrdinances() {
       aria-labelledby='council-ordinances-heading'
       className='border-kapwa-border-weak bg-kapwa-bg-surface mb-10 rounded-xl border p-4 shadow-sm sm:p-6'
     >
-      <div className='mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between'>
+      <div className='mb-6 flex flex-col gap-4'>
         <div>
           <h2
             id='council-ordinances-heading'
@@ -106,7 +106,7 @@ export default function CouncilOrdinances() {
             {t('councilOrdinances.description', { body })}
           </p>
         </div>
-        <div className='flex flex-col gap-2 sm:flex-row lg:shrink-0'>
+        <div className='flex flex-col gap-2 sm:flex-row'>
           {classifications.length > 0 && (
             <>
               <label className='sr-only' htmlFor='council-ordinances-class'>
@@ -122,7 +122,7 @@ export default function CouncilOrdinances() {
                   setClassification(event.target.value);
                   setPage(1);
                 }}
-                className={`border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-strong min-h-11 rounded-lg border px-3 py-2 text-sm ${controlClassName}`}
+                className={`border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-strong min-h-11 rounded-lg border px-3 py-2 text-sm sm:max-w-xs ${controlClassName}`}
               >
                 <option value=''>
                   {t('councilOrdinances.allClassifications')}
@@ -145,7 +145,7 @@ export default function CouncilOrdinances() {
               setPage(1);
             }}
             size='md'
-            className='sm:w-72'
+            className='sm:flex-1'
           />
         </div>
       </div>
