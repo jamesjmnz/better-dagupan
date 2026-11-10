@@ -58,7 +58,11 @@ export default function CityNotices() {
           signal: controller.signal,
         });
         if (!response.ok) throw new Error(String(response.status));
-        setData((await response.json()) as NoticesResponse);
+        const body = (await response.json()) as Partial<NoticesResponse>;
+        // A 200 with some other shape (a proxy page, a stub) would otherwise
+        // crash the whole procurement page on `items.length`.
+        if (!Array.isArray(body?.items)) throw new Error('unexpected response');
+        setData(body as NoticesResponse);
         setStatus('ready');
       } catch (error) {
         if ((error as Error).name !== 'AbortError') setStatus('error');
