@@ -26,32 +26,34 @@ export default function ServicesSidebar({
   return (
     <div className='space-y-6'>
       <SidebarContainer title={t('sidebar.categories')}>
-        {/* Special "All Services" item */}
-        <SidebarItem
-          label={t('sidebar.allServices')}
-          icon={FileText}
-          isActive={selectedCategorySlug === 'all'}
-          onClick={() => {
-            scrollToTop();
-            handleCategoryChange('all');
-          }}
-        />
-
-        {/* Dynamic Categories */}
-        {serviceCategories.categories.map(category => (
+        <ul className='space-y-1'>
+          {/* Special "All Services" item */}
           <SidebarItem
-            key={category.slug}
-            label={t(`categories.${category.slug}`, {
-              defaultValue: category.name,
-            })}
-            icon={getCategoryIconBySlug(category.slug)}
-            isActive={selectedCategorySlug === category.slug}
+            label={t('sidebar.allServices')}
+            icon={FileText}
+            isActive={selectedCategorySlug === 'all'}
             onClick={() => {
               scrollToTop();
-              handleCategoryChange(category.slug);
+              handleCategoryChange('all');
             }}
           />
-        ))}
+
+          {/* Dynamic Categories */}
+          {serviceCategories.categories.map(category => (
+            <SidebarItem
+              key={category.slug}
+              label={t(`categories.${category.slug}`, {
+                defaultValue: category.name,
+              })}
+              icon={getCategoryIconBySlug(category.slug)}
+              isActive={selectedCategorySlug === category.slug}
+              onClick={() => {
+                scrollToTop();
+                handleCategoryChange(category.slug);
+              }}
+            />
+          ))}
+        </ul>
       </SidebarContainer>
       <div className='p-5 mt-8 space-y-4 rounded-2xl border-2 shadow-sm border-kapwa-orange-100 bg-kapwa-bg-accent-orange-weak/30'>
         <div className='flex gap-3 items-center'>
@@ -63,7 +65,7 @@ export default function ServicesSidebar({
           </h4>
         </div>
 
-        <p className='text-xs leading-relaxed text-kapwa-text-on-disabled'>
+        <p className='text-xs leading-relaxed text-kapwa-text-support'>
           {t('sidebar.missingBody', { portal: config.portal.name })}
         </p>
 
@@ -71,7 +73,7 @@ export default function ServicesSidebar({
           href={`${config.portal.githubUrl}/issues/new?template=contribution.yml`}
           target='_blank'
           rel='noopener noreferrer'
-          className='bg-kapwa-bg-accent-orange-default hover:bg-kapwa-orange-700 shadow-md text-kapwa-text-inverse flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all'
+          className='bg-kapwa-bg-warning-active hover:bg-kapwa-orange-900 shadow-md text-kapwa-text-inverse flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all'
         >
           {t('sidebar.suggest')}
         </a>

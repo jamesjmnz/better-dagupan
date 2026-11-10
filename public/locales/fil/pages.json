@@ -204,7 +204,7 @@
     "seoDescription": "Kumpletong sitemap — hanapin ang lahat ng pahina at serbisyong makukuha sa portal na ito.",
     "title": "Sitemap",
     "intro": "Kumpletong gabay sa lahat ng pahina at serbisyong makukuha sa {{portal}}",
-    "notFound": "Hindi mo makita ang hinahanap mo? Subukan ang aming <link>paghahanap</link>.",
+    "notFound": "Hindi mo makita ang hinahanap mo? Subukan ang aming <anchor>paghahanap</anchor>.",
     "subdivisions": "Mga Barangay",
     "subdivisions_province": "Mga Bayan at Lungsod",
     "sections": {
@@ -349,8 +349,8 @@
     "understandingTitle": "Pag-unawa sa Datos",
     "understandingBody": "Ipinapakita ang temperatura sa Celsius (°C). Inuuri ang lagay ng panahon batay sa kasalukuyang obserbasyon sa atmospera. Nagbibigay ang taya ng panahon ng tanaw sa loob ng 5 araw para makatulong sa iyong pagpaplano.",
     "advisoriesTitle": "Mga Abiso sa Panahon",
-    "advisoriesBody": "Para sa mga opisyal na abiso, babala, at detalyadong taya ng panahon, bisitahin ang <link>opisyal na website ng PAGASA</link> o sundan ang kanilang mga social media channel para sa real-time na update.",
-    "providedBy": "Ang datos ng panahon ay mula sa <link>OpenWeather</link>"
+    "advisoriesBody": "Para sa mga opisyal na abiso, babala, at detalyadong taya ng panahon, bisitahin ang <anchor>opisyal na website ng PAGASA</anchor> o sundan ang kanilang mga social media channel para sa real-time na update.",
+    "providedBy": "Ang datos ng panahon ay mula sa <anchor>OpenWeather</anchor>"
   },
   "forex": {
     "error": "Error",
@@ -374,7 +374,7 @@
     "understandingTitle": "Pag-unawa sa Palitan ng Pera",
     "understandingBody": "Ipinapakita ng halaga ng palitan kung gaano karami ng isang pera ang maipapalit sa iba. Ang mga halagang nakikita rito ay ang dami ng Piso (PHP) na kailangan para makabili ng isang yunit ng dayuhang pera.",
     "officialTitle": "Opisyal na Halaga mula sa BSP",
-    "officialBody": "Para sa mga opisyal na reference rate ng dayuhang pera at mas detalyadong impormasyon, bisitahin ang <link>website ng Bangko Sentral ng Pilipinas</link>."
+    "officialBody": "Para sa mga opisyal na reference rate ng dayuhang pera at mas detalyadong impormasyon, bisitahin ang <anchor>website ng Bangko Sentral ng Pilipinas</anchor>."
   },
   "accessibility": {
     "seoTitle": "Pahayag sa Accessibility",

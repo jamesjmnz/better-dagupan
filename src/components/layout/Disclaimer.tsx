@@ -60,7 +60,7 @@ export const DisclaimerNotice: FC = () => {
             href={config.lgu.officialWebsite}
             target='_blank'
             rel='noopener noreferrer'
-            className='text-kapwa-text-link hover:text-kapwa-text-link-hover inline-block pt-1 text-sm font-semibold underline underline-offset-2'
+            className='text-kapwa-text-brand hover:text-kapwa-text-brand-bold inline-block pt-1 text-sm font-semibold underline underline-offset-2'
           >
             {t('disclaimer.officialSiteLabel', values)}
           </a>

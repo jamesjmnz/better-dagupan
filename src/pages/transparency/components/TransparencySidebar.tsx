@@ -29,14 +29,17 @@ export default function TransparencySidebar() {
 
   return (
     <SidebarContainer title={t('sidebar.title')}>
-      {sections.map(section => (
-        <SidebarItem
-          key={section.slug}
-          label={t(section.nameKey)}
-          icon={section.icon}
-          path={`${section.slug}`}
-        />
-      ))}
+      <ul className='space-y-1'>
+        {sections.map(section => (
+          <SidebarItem
+            key={section.slug}
+            label={t(section.nameKey)}
+            icon={section.icon}
+            // Absolute, so SidebarItem can match it against the current pathname.
+            path={`/transparency/${section.slug}`}
+          />
+        ))}
+      </ul>
     </SidebarContainer>
   );
 }

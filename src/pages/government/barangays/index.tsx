@@ -95,7 +95,7 @@ export default function BarangaysIndex() {
                       <h3 className='group-hover:text-kapwa-text-brand text-kapwa-text-strong text-base leading-tight font-bold transition-colors'>
                         {barangay.barangay_name}
                       </h3>
-                      <p className='text-kapwa-text-disabled mt-0.5 font-mono text-[10px] tracking-wider'>
+                      <p className='text-kapwa-text-support mt-0.5 font-mono text-[10px] tracking-wider'>
                         {barangay.psgc_10_digit_code}
                       </p>
                     </div>
@@ -108,7 +108,7 @@ export default function BarangaysIndex() {
                       <Users2 className='h-3.5 w-3.5' />
                     </div>
                     <div className='min-w-0'>
-                      <p className='text-kapwa-text-disabled mb-0.5 text-[9px] leading-none font-bold tracking-tighter uppercase'>
+                      <p className='text-kapwa-text-support mb-0.5 text-[9px] leading-none font-bold tracking-tighter uppercase'>
                         {t('barangays.population')}
                       </p>
                       <p className='text-kapwa-text-support truncate text-xs leading-tight font-bold'>
@@ -121,7 +121,7 @@ export default function BarangaysIndex() {
 
                   {/* Bottom Row: classification & action */}
                   <div className='border-kapwa-border-weak mt-auto flex items-center justify-between gap-4 border-t pt-3'>
-                    <span className='text-kapwa-text-disabled text-[11px] font-medium'>
+                    <span className='text-kapwa-text-support text-[11px] font-medium'>
                       {t(`barangays.${barangay.urban_rural}`)}
                     </span>
 

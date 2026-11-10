@@ -63,6 +63,8 @@
   },
   "detail": {
     "notFound": "Service not found",
+    "notFoundBody": "No service is listed at this address.",
+    "backToServices": "Back to all services",
     "quickInfo": {
       "processingTime": "Processing Time",
       "fee": "Fee",

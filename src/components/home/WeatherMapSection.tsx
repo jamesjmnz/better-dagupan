@@ -176,7 +176,7 @@ export default function WeatherMapSection() {
           <Card className='w-full flex-1 md:min-w-[200px]'>
             <CardContent className='p-4 md:p-6'>
               {loading ? (
-                <div className='text-kapwa-text-disabled flex items-center gap-2'>
+                <div className='text-kapwa-text-support flex items-center gap-2'>
                   <LoaderIcon className='h-5 w-5 animate-spin' />
                   Loading weather...
                 </div>
@@ -191,10 +191,10 @@ export default function WeatherMapSection() {
                       <div className='text-kapwa-text-strong text-5xl font-bold'>
                         {weather.temperature}°C
                       </div>
-                      <div className='text-kapwa-text-on-disabled text-center text-base capitalize'>
+                      <div className='text-kapwa-text-support text-center text-base capitalize'>
                         {weather.condition}
                       </div>
-                      <div className='text-kapwa-text-disabled mt-1 flex items-center gap-2 text-sm'>
+                      <div className='text-kapwa-text-support mt-1 flex items-center gap-2 text-sm'>
                         <MapPin className='h-4 w-4' />
                         {config.lgu.name}, {config.lgu.province}
                       </div>
@@ -226,7 +226,7 @@ export default function WeatherMapSection() {
                           <div className='text-base font-bold'>
                             {h.temperature}°
                           </div>
-                          <div className='text-kapwa-text-disabled text-xs'>
+                          <div className='text-kapwa-text-support text-xs'>
                             {h.hour}
                           </div>
                         </div>
@@ -251,7 +251,7 @@ export default function WeatherMapSection() {
               aria-label={`Interactive map of ${config.lgu.fullName} ${lguLabels.adjective} Hall`}
             >
               <noscript>
-                <div className='text-kapwa-text-disabled p-4 text-sm'>
+                <div className='text-kapwa-text-support p-4 text-sm'>
                   JavaScript is required to view the interactive map.
                   <a
                     href={`https://www.openstreetmap.org/?mlat=${config.location.coordinates.lat}&mlon=${config.location.coordinates.lon}#map=15/${config.location.coordinates.lat}/${config.location.coordinates.lon}`}

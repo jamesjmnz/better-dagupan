@@ -160,7 +160,8 @@ function AppContent() {
       {!isAdminRoute && <Ticker />}
       <ScrollToTop />
 
-      <main id='main-content' className='flex-1'>
+      {/* tabIndex -1 lets the skip link move focus here in every browser. */}
+      <main id='main-content' tabIndex={-1} className='flex-1 outline-none'>
         <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* Standard Global Pages */}

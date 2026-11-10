@@ -1,311 +1,289 @@
+import type { Page } from '@playwright/test';
+
 import { test, expect } from '../test-config';
+
+/**
+ * SidebarLayout (src/components/layout/SidebarLayout.tsx), exercised through
+ * the services index, which renders it with a collapsible sidebar.
+ *
+ * Locators go through roles and the toggle's aria-controls rather than bare
+ * `aside`/`button` selectors: the layout also renders "Hide Menu" and
+ * "Expand Menu" buttons, and the page can hold other landmarks.
+ */
+
+const MOBILE = { width: 375, height: 667 };
+const DESKTOP = { width: 1280, height: 720 };
+
+const menuToggle = (page: Page) =>
+  page.getByRole('button', { name: 'Menu', exact: true });
+
+const sidebar = (page: Page) => page.locator('#layout-sidebar');
+
+async function openServices(page: Page, viewport: typeof MOBILE) {
+  await page.setViewportSize(viewport);
+  await page.goto('/services');
+  // The content panel renders with the layout, so its presence means the
+  // lazy route has mounted.
+  await expect(page.locator('#layout-content')).toBeVisible();
+}
 
 test.describe('SidebarLayout Component', () => {
   test.describe('Mobile Responsiveness', () => {
-    test.beforeEach(async ({ page }) => {
-      // Navigate to a page that uses SidebarLayout (e.g., Services)
-      await page.goto('/services');
-    });
-
     test('mobile menu button is visible on mobile viewport', async ({
       page,
     }) => {
-      // Set mobile viewport
-      await page.setViewportSize({ width: 375, height: 667 });
+      await openServices(page, MOBILE);
 
-      // Mobile menu button should be visible
-      const mobileMenuButton = page
-        .locator('button')
-        .filter({ hasText: 'Menu' });
-      await expect(mobileMenuButton).toBeVisible();
+      await expect(menuToggle(page)).toBeVisible();
+      await expect(menuToggle(page)).toHaveAttribute(
+        'aria-controls',
+        'layout-sidebar'
+      );
     });
 
     test('mobile menu button is hidden on desktop viewport', async ({
       page,
     }) => {
-      // Set desktop viewport
-      await page.setViewportSize({ width: 1280, height: 720 });
+      await openServices(page, DESKTOP);
 
-      // Mobile menu button should not be visible
-      const mobileMenuButton = page
-        .locator('button')
-        .filter({ hasText: 'Menu' });
-      const count = await mobileMenuButton.count();
-      expect(count).toBe(0);
+      await expect(menuToggle(page)).toBeHidden();
     });
 
     test('sidebar is hidden by default on mobile', async ({ page }) => {
-      // Set mobile viewport
-      await page.setViewportSize({ width: 375, height: 667 });
+      await openServices(page, MOBILE);
 
-      // Sidebar should be hidden (has 'hidden' class when menu is closed)
-      const sidebar = page.locator('aside');
-      await expect(sidebar).toBeHidden();
+      await expect(menuToggle(page)).toHaveAttribute('aria-expanded', 'false');
+      await expect(sidebar(page)).toBeHidden();
     });
 
     test('sidebar is visible on desktop by default', async ({ page }) => {
-      // Set desktop viewport
-      await page.setViewportSize({ width: 1280, height: 720 });
+      await openServices(page, DESKTOP);
 
-      // Sidebar should be visible on desktop
-      const sidebar = page.locator('aside');
-      await expect(sidebar).toBeVisible();
+      await expect(sidebar(page)).toBeVisible();
+      await expect(
+        sidebar(page).getByRole('heading', { name: 'Categories' })
+      ).toBeVisible();
     });
 
     test('toggling mobile menu shows and hides sidebar', async ({ page }) => {
-      // Set mobile viewport
-      await page.setViewportSize({ width: 375, height: 667 });
+      await openServices(page, MOBILE);
+      const toggle = menuToggle(page);
 
-      // Get the mobile menu button
-      const mobileMenuButton = page
-        .locator('button')
-        .filter({ hasText: 'Menu' });
-      await expect(mobileMenuButton).toBeVisible();
+      await expect(sidebar(page)).toBeHidden();
 
-      // Sidebar should be hidden initially
-      const sidebar = page.locator('aside');
-      await expect(sidebar).toBeHidden();
+      await toggle.click();
+      await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+      await expect(sidebar(page)).toBeVisible();
 
-      // Click to open menu
-      await mobileMenuButton.click();
-      await page.waitForTimeout(300); // Wait for transition
-
-      // Sidebar should now be visible
-      await expect(sidebar).toBeVisible();
-
-      // Click to close menu (button should now show X icon)
-      await mobileMenuButton.click();
-      await page.waitForTimeout(300); // Wait for transition
-
-      // Sidebar should be hidden again
-      await expect(sidebar).toBeHidden();
+      await toggle.click();
+      await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+      await expect(sidebar(page)).toBeHidden();
     });
 
-    test('mobile menu button shows correct icon based on state', async ({
+    test('mobile menu button swaps its icon with the menu state', async ({
       page,
     }) => {
-      // Set mobile viewport
-      await page.setViewportSize({ width: 375, height: 667 });
+      await openServices(page, MOBILE);
+      const toggle = menuToggle(page);
 
-      const mobileMenuButton = page
-        .locator('button')
-        .filter({ hasText: 'Menu' });
+      // lucide-react tags each icon with a lucide-<name> class.
+      await expect(toggle.locator('svg.lucide-menu')).toBeVisible();
+      await expect(toggle.locator('svg.lucide-x')).toHaveCount(0);
 
-      // Initially should show Menu icon
-      await expect(mobileMenuButton).toBeVisible();
+      await toggle.click();
 
-      // Note: Lucide icons are rendered as SVGs, check for Menu icon presence
-      const buttonHTML = await mobileMenuButton.innerHTML();
-      expect(buttonHTML).toContain('Menu');
-
-      // Click to open
-      await mobileMenuButton.click();
-      await page.waitForTimeout(300);
-
-      // After opening, should have X icon (close)
-      const openedButtonHTML = await mobileMenuButton.innerHTML();
-      expect(openedButtonHTML.length).toBeGreaterThan(0); // Button still exists
+      await expect(toggle.locator('svg.lucide-x')).toBeVisible();
+      await expect(toggle.locator('svg.lucide-menu')).toHaveCount(0);
     });
 
     test('sidebar uses correct width classes on desktop', async ({ page }) => {
-      // Set desktop viewport
-      await page.setViewportSize({ width: 1280, height: 720 });
+      await openServices(page, DESKTOP);
+      await expect(sidebar(page)).toBeVisible();
 
-      const sidebar = page.locator('aside');
-      await expect(sidebar).toBeVisible();
-
-      // Check that sidebar has appropriate width styling
-      const sidebarBox = await sidebar.boundingBox();
-      expect(sidebarBox).toBeTruthy();
-      expect(sidebarBox!.width).toBeGreaterThan(200); // Should have substantial width on desktop
-      expect(sidebarBox!.width).toBeLessThan(400); // But not too wide
+      // The width transitions in, so poll until it settles in range.
+      await expect
+        .poll(async () => (await sidebar(page).boundingBox())?.width ?? 0)
+        .toBeGreaterThan(200);
+      const box = await sidebar(page).boundingBox();
+      expect(box!.width).toBeLessThan(400);
     });
 
     test('sidebar content is accessible on mobile when menu is open', async ({
       page,
     }) => {
-      // Set mobile viewport
-      await page.setViewportSize({ width: 375, height: 667 });
+      await openServices(page, MOBILE);
+      await menuToggle(page).click();
 
-      // Open mobile menu
-      const mobileMenuButton = page
-        .locator('button')
-        .filter({ hasText: 'Menu' });
-      await mobileMenuButton.click();
-      await page.waitForTimeout(300);
-
-      // Sidebar should be visible
-      const sidebar = page.locator('aside');
-      await expect(sidebar).toBeVisible();
-
-      // Check that sidebar has content (links, buttons, etc.)
-      const sidebarLinks = sidebar.locator('a');
-      const linkCount = await sidebarLinks.count();
-      expect(linkCount).toBeGreaterThan(0);
-
-      // First link should be visible
-      const firstLink = sidebarLinks.first();
-      await expect(firstLink).toBeVisible();
+      const categories = sidebar(page).getByRole('navigation', {
+        name: 'Categories',
+      });
+      await expect(categories).toBeVisible();
+      await expect(
+        categories.getByRole('button', { name: 'All Services' })
+      ).toBeVisible();
+      await expect(
+        sidebar(page).getByRole('link', { name: 'Suggest New Service' })
+      ).toBeVisible();
     });
 
     test('main content area is always visible regardless of viewport', async ({
       page,
     }) => {
-      // Test on mobile
-      await page.setViewportSize({ width: 375, height: 667 });
-      const mainContentMobile = page.locator('main').first();
-      await expect(mainContentMobile).toBeVisible();
+      await openServices(page, MOBILE);
+      await expect(page.locator('#layout-content')).toBeVisible();
 
-      // Test on desktop
-      await page.setViewportSize({ width: 1280, height: 720 });
-      const mainContentDesktop = page.locator('main').first();
-      await expect(mainContentDesktop).toBeVisible();
+      await page.setViewportSize(DESKTOP);
+      await expect(page.locator('#layout-content')).toBeVisible();
+    });
+
+    test('the layout renders a single main landmark', async ({ page }) => {
+      await openServices(page, DESKTOP);
+
+      // App.tsx owns the page's main landmark; the layout must not nest one.
+      await expect(page.getByRole('main')).toHaveCount(1);
+      await expect(page.getByRole('complementary')).toHaveCount(1);
     });
 
     test('sidebar uses Kapwa semantic tokens', async ({ page }) => {
-      // Set desktop viewport to ensure sidebar is visible
-      await page.setViewportSize({ width: 1280, height: 720 });
+      await openServices(page, DESKTOP);
+      await expect(sidebar(page)).toBeVisible();
 
-      const sidebar = page.locator('aside');
-      await expect(sidebar).toBeVisible();
-
-      // Check for Kapwa semantic tokens in sidebar
-      const sidebarHTML = await sidebar.innerHTML();
+      const sidebarHTML = await sidebar(page).innerHTML();
       expect(sidebarHTML).toMatch(/kapwa/);
     });
 
     test('mobile menu button has accessible styling', async ({ page }) => {
-      // Set mobile viewport
-      await page.setViewportSize({ width: 375, height: 667 });
+      await openServices(page, MOBILE);
+      const toggle = menuToggle(page);
+      await expect(toggle).toBeVisible();
 
-      const mobileMenuButton = page
-        .locator('button')
-        .filter({ hasText: 'Menu' });
-
-      // Check button is visible and has proper styling
-      await expect(mobileMenuButton).toBeVisible();
-
-      // Check button has appropriate size for touch targets (min 44px for mobile)
-      const buttonBox = await mobileMenuButton.boundingBox();
-      expect(buttonBox).toBeTruthy();
-      expect(buttonBox!.height).toBeGreaterThanOrEqual(44); // Touch target minimum
+      // Touch target minimum.
+      const box = await toggle.boundingBox();
+      expect(box!.height).toBeGreaterThanOrEqual(44);
     });
 
     test('sidebar collapse/expand works on desktop when collapsible', async ({
       page,
     }) => {
-      // Set desktop viewport
-      await page.setViewportSize({ width: 1280, height: 720 });
+      await openServices(page, DESKTOP);
+      const hide = page.getByRole('button', { name: 'Hide Menu' });
+      const expand = page.getByRole('button', { name: 'Expand Menu' });
 
-      // Navigate to a page with collapsible sidebar if available
-      // For now, we'll just verify the sidebar is visible
-      const sidebar = page.locator('aside');
-      await expect(sidebar).toBeVisible();
+      await expect(hide).toBeVisible();
+      await hide.click();
 
-      // Check initial width
-      const initialBox = await sidebar.boundingBox();
-      expect(initialBox).toBeTruthy();
+      // Collapsed: the sidebar shrinks to nothing and the expand control
+      // becomes the only way back.
+      await expect
+        .poll(async () => (await sidebar(page).boundingBox())?.width ?? 0)
+        .toBeLessThan(1);
+      await expect(expand).toBeVisible();
 
-      // Note: Some pages may not have collapsible sidebar enabled
-      // This test verifies that when visible, sidebar has appropriate dimensions
-      expect(initialBox!.width).toBeGreaterThan(0);
+      await expand.click();
+      await expect
+        .poll(async () => (await sidebar(page).boundingBox())?.width ?? 0)
+        .toBeGreaterThan(200);
+    });
+
+    test('the expand control is out of the tab order while expanded', async ({
+      page,
+    }) => {
+      await openServices(page, DESKTOP);
+
+      // Invisible (opacity 0) while the sidebar is open, so it must not take
+      // keyboard focus either.
+      const expand = page.locator('button[title="Expand Menu"]');
+      await expect(expand).toHaveAttribute('tabindex', '-1');
+      await expect(expand).toHaveAttribute('aria-hidden', 'true');
+
+      // Once the sidebar collapses it is the way back, so it rejoins both.
+      await page.getByRole('button', { name: 'Hide Menu' }).click();
+      await expect(expand).not.toHaveAttribute('tabindex', '-1');
+      await expect(
+        page.getByRole('button', { name: 'Expand Menu' })
+      ).toBeVisible();
     });
 
     test('layout adapts to different screen sizes', async ({ page }) => {
-      // Test multiple viewport sizes
+      await openServices(page, MOBILE);
+
       const viewports = [
-        { width: 375, height: 667 }, // Mobile
+        MOBILE,
         { width: 768, height: 1024 }, // Tablet
-        { width: 1280, height: 720 }, // Desktop
+        DESKTOP,
         { width: 1920, height: 1080 }, // Large Desktop
       ];
 
       for (const viewport of viewports) {
         await page.setViewportSize(viewport);
-        await page.waitForTimeout(200); // Wait for responsive adjustments
 
-        // Main content should always be visible
-        const mainContent = page.locator('main').first();
-        await expect(mainContent).toBeVisible();
+        const content = page.locator('#layout-content');
+        await expect(content).toBeVisible();
 
-        // Content should be within viewport bounds
-        const contentBox = await mainContent.boundingBox();
-        expect(contentBox).toBeTruthy();
-        expect(contentBox!.x).toBeGreaterThanOrEqual(0);
-        expect(contentBox!.x).toBeLessThanOrEqual(viewport.width);
+        // No horizontal overflow at any breakpoint.
+        const box = await content.boundingBox();
+        expect(box!.x).toBeGreaterThanOrEqual(0);
+        expect(box!.x + box!.width).toBeLessThanOrEqual(viewport.width + 1);
       }
     });
 
     test('sidebar maintains functionality across breakpoints', async ({
       page,
     }) => {
-      // Start on mobile
-      await page.setViewportSize({ width: 375, height: 667 });
+      await openServices(page, MOBILE);
+      await menuToggle(page).click();
 
-      // Open mobile menu
-      const mobileMenuButton = page
-        .locator('button')
-        .filter({ hasText: 'Menu' });
-      await mobileMenuButton.click();
-      await page.waitForTimeout(300);
+      const category = sidebar(page).getByRole('button', {
+        name: 'Health & Wellness',
+      });
+      await category.click();
 
-      // Click a link in the sidebar
-      const sidebarLinks = page.locator('aside a');
-      const firstLink = sidebarLinks.first();
-      await firstLink.click();
+      await expect(page).toHaveURL(/category=health-wellness/);
+      await expect(category).toHaveAttribute('aria-current', 'page');
 
-      // Should navigate
-      await page.waitForTimeout(500);
-      const currentUrl = page.url();
-      expect(currentUrl).toBeTruthy();
-
-      // Sidebar should still work after navigation
-      const sidebarAfterNav = page.locator('aside');
-      const exists = await sidebarAfterNav.count();
-      expect(exists).toBeGreaterThanOrEqual(0);
+      // Growing to desktop keeps the sidebar and the selection.
+      await page.setViewportSize(DESKTOP);
+      await expect(sidebar(page)).toBeVisible();
+      await expect(category).toHaveAttribute('aria-current', 'page');
     });
   });
 
   test.describe('Accessibility', () => {
     test('mobile menu button is keyboard accessible', async ({ page }) => {
-      await page.setViewportSize({ width: 375, height: 667 });
+      await openServices(page, MOBILE);
+      const toggle = menuToggle(page);
 
-      // Tab to the button
-      await page.keyboard.press('Tab');
-      await page.waitForTimeout(100);
+      // Reachable through the tab order, not only by clicking.
+      let reached = false;
+      for (let i = 0; i < 40 && !reached; i++) {
+        await page.keyboard.press('Tab');
+        reached = await toggle.evaluate(el => el === document.activeElement);
+      }
+      expect(reached, 'Tab reaches the menu toggle').toBe(true);
 
-      // Button should be focused
-      const focusedElement = await page.evaluate(
-        () => document.activeElement?.tagName
-      );
-      expect(focusedElement).toBe('BUTTON');
+      await page.keyboard.press('Enter');
+      await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+      await expect(sidebar(page)).toBeVisible();
+
+      await page.keyboard.press('Space');
+      await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     });
 
     test('sidebar links are accessible when menu is open on mobile', async ({
       page,
     }) => {
-      await page.setViewportSize({ width: 375, height: 667 });
+      await openServices(page, MOBILE);
+      const toggle = menuToggle(page);
+      await toggle.focus();
+      await page.keyboard.press('Enter');
+      await expect(sidebar(page)).toBeVisible();
 
-      // Open mobile menu
-      const mobileMenuButton = page
-        .locator('button')
-        .filter({ hasText: 'Menu' });
-      await mobileMenuButton.click();
-      await page.waitForTimeout(300);
-
-      // Check sidebar has accessible links
-      const sidebarLinks = page.locator('aside a');
-      const count = await sidebarLinks.count();
-      expect(count).toBeGreaterThan(0);
-
-      // First link should be focusable
+      // The next stop after the toggle is inside the sidebar it opened.
       await page.keyboard.press('Tab');
-      await page.keyboard.press('Tab'); // Tab past the menu button
-
-      const focusedElement = await page.evaluate(
-        () => document.activeElement?.tagName
+      const focusedInSidebar = await sidebar(page).evaluate(el =>
+        el.contains(document.activeElement)
       );
-      expect(['A', 'BUTTON']).toContain(focusedElement);
+      expect(focusedInSidebar).toBe(true);
     });
   });
 });

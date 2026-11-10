@@ -49,10 +49,14 @@ test.describe('Smoke', () => {
     // loader is still up lands focus on the empty document instead.
     const skipLink = page.locator('a[href="#main-content"]').first();
     await skipLink.waitFor({ state: 'attached' });
+    await expect(page.locator('main#main-content')).toBeVisible();
+
     await page.keyboard.press('Tab');
     await expect(skipLink).toBeFocused();
+    await expect(skipLink).toBeInViewport();
 
     await page.keyboard.press('Enter');
     await expect(page).toHaveURL(/#main-content$/);
+    await expect(page.locator('main#main-content')).toBeFocused();
   });
 });

@@ -65,7 +65,7 @@ export function BarangayHeader({ barangay }: BarangayHeaderProps) {
               return (
                 <li
                   key={variant.name}
-                  className='text-kapwa-text-disabled text-xs italic'
+                  className='text-kapwa-text-support text-xs italic'
                 >
                   {t('civic.historicalSpelling', {
                     period: source.coverage ?? '',
@@ -77,7 +77,7 @@ export function BarangayHeader({ barangay }: BarangayHeaderProps) {
               );
             })}
           </ul>
-          <p className='text-kapwa-text-disabled mt-1 text-[11px] not-italic'>
+          <p className='text-kapwa-text-support mt-1 text-[11px] not-italic'>
             {t('civic.historicalSpellingNote')}
           </p>
         </div>
@@ -86,7 +86,7 @@ export function BarangayHeader({ barangay }: BarangayHeaderProps) {
       {/* Verified PSGC figures */}
       <dl className='mb-4 flex flex-wrap gap-x-8 gap-y-2 text-sm'>
         <div>
-          <dt className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+          <dt className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
             {t('barangays.psgcCode')}
           </dt>
           <dd className='text-kapwa-text-support font-mono'>
@@ -94,12 +94,12 @@ export function BarangayHeader({ barangay }: BarangayHeaderProps) {
           </dd>
         </div>
         <div>
-          <dt className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+          <dt className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
             {t('barangays.population')}
           </dt>
           <dd className='text-kapwa-text-support'>
             {barangay.population_2024_popcen.toLocaleString('en-PH')}{' '}
-            <span className='text-kapwa-text-disabled text-xs'>
+            <span className='text-kapwa-text-support text-xs'>
               ({t('barangays.populationNote')})
             </span>
           </dd>

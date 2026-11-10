@@ -35,30 +35,32 @@ export default function DepartmentsSidebar() {
 
   return (
     <SidebarContainer title={t('departments.title')}>
-      {sortedDepartments.map(dept => {
-        // 2. Get the specific icon or fallback to a default building icon
-        const IconComponent = officeIcons[dept.slug] || Building2Icon;
+      <ul className='space-y-1'>
+        {sortedDepartments.map(dept => {
+          // 2. Get the specific icon or fallback to a default building icon
+          const IconComponent = officeIcons[dept.slug] || Building2Icon;
 
-        return (
-          <SidebarItem
-            key={dept.slug}
-            /*
+          return (
+            <SidebarItem
+              key={dept.slug}
+              /*
               Rendered verbatim. formatGovName() lowercases a whole word before
               recapitalising it, which turned acronyms in these names to
               sentence case in this sidebar.
             */
-            label={dept.office_name}
-            tooltip={dept.office_name}
-            icon={IconComponent} // Use the specific icon
-            isActive={activeSlug === dept.slug}
-            onClick={() =>
-              navigate(`/government/departments/${dept.slug}`, {
-                state: { scrollToContent: true },
-              })
-            }
-          />
-        );
-      })}
+              label={dept.office_name}
+              tooltip={dept.office_name}
+              icon={IconComponent} // Use the specific icon
+              isActive={activeSlug === dept.slug}
+              onClick={() =>
+                navigate(`/government/departments/${dept.slug}`, {
+                  state: { scrollToContent: true },
+                })
+              }
+            />
+          );
+        })}
+      </ul>
     </SidebarContainer>
   );
 }

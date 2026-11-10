@@ -204,7 +204,7 @@
     "seoDescription": "Complete sitemap — find all pages and services available on this portal.",
     "title": "Sitemap",
     "intro": "A complete guide to all pages and services available on {{portal}}",
-    "notFound": "Can't find what you're looking for? Try using our <link>search feature</link>.",
+    "notFound": "Can't find what you're looking for? Try using our <anchor>search feature</anchor>.",
     "subdivisions": "Barangays",
     "subdivisions_province": "Municipalities & Cities",
     "sections": {
@@ -349,8 +349,8 @@
     "understandingTitle": "Understanding the Data",
     "understandingBody": "Temperature is displayed in Celsius (°C). Weather conditions are categorized based on current atmospheric observations. The forecast provides a 5-day outlook to help you plan ahead.",
     "advisoriesTitle": "Weather Advisories",
-    "advisoriesBody": "For official weather advisories, warnings, and detailed forecasts, please visit the <link>PAGASA official website</link> or follow their social media channels for real-time updates.",
-    "providedBy": "Weather data provided by <link>OpenWeather</link>"
+    "advisoriesBody": "For official weather advisories, warnings, and detailed forecasts, please visit the <anchor>PAGASA official website</anchor> or follow their social media channels for real-time updates.",
+    "providedBy": "Weather data provided by <anchor>OpenWeather</anchor>"
   },
   "forex": {
     "error": "Error",
@@ -374,7 +374,7 @@
     "understandingTitle": "Understanding Exchange Rates",
     "understandingBody": "Exchange rates indicate how much of one currency can be exchanged for another. The rates shown here represent the amount of Philippine Pesos (PHP) needed to purchase one unit of the foreign currency.",
     "officialTitle": "Official BSP Rates",
-    "officialBody": "For official foreign exchange reference rates and more detailed information, please visit the <link>Bangko Sentral ng Pilipinas website</link>."
+    "officialBody": "For official foreign exchange reference rates and more detailed information, please visit the <anchor>Bangko Sentral ng Pilipinas website</anchor>."
   },
   "accessibility": {
     "seoTitle": "Accessibility Statement",

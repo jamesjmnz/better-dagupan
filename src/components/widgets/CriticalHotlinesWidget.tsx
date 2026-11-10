@@ -47,7 +47,7 @@ const NumberLink: FC<{ name: string; number: string; href: string }> = ({
     <a
       href={href}
       aria-label={t('hotlines.call', { name, number })}
-      className='text-kapwa-text-link hover:text-kapwa-text-link-hover flex items-center gap-1 text-sm hover:underline'
+      className='text-kapwa-text-brand hover:text-kapwa-text-brand-bold flex items-center gap-1 text-sm hover:underline'
     >
       <PhoneIcon aria-hidden='true' className='h-3 w-3 shrink-0' />
       <span className='tabular-nums'>{number}</span>
@@ -167,7 +167,7 @@ const CriticalHotlinesWidget: FC<CriticalHotlinesWidgetProps> = ({
             href={directoryUrl}
             target='_blank'
             rel='noreferrer'
-            className='text-kapwa-text-link hover:text-kapwa-text-link-hover inline-flex items-center text-sm font-medium'
+            className='text-kapwa-text-brand hover:text-kapwa-text-brand-bold inline-flex items-center text-sm font-medium'
           >
             {t('hotlines.viewAll')}
             <ChevronRightIcon aria-hidden='true' className='ml-1 h-4 w-4' />

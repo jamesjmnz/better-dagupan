@@ -73,7 +73,9 @@ and a pull request is merged only after a Pangasinan speaker has reviewed it.
 3. Keep every placeholder exactly as it is, including the double braces:
    `{{portal}}`, `{{lgu}}`, `{{date}}` and so on. They are filled in by the
    portal; translating or dropping one breaks the sentence. Keep tags such as
-   `<strong>` and `<link>` too: translate the words between them, not the tags.
+   `<strong>` and `<anchor>` too: translate the words between them, not the tags.
+   Never name a tag after an HTML void element (`link`, `img`, `br`, `input`
+   and so on): `<Trans>` parses it as empty and the words fall outside it.
 4. Translate lists whole. A list in Pangasinan replaces the English one rather
    than merging with it, so it needs the same number of items.
 5. Do not add empty strings. Leave a key out instead, and English will show.

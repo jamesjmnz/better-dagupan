@@ -35,6 +35,7 @@ import {
 } from '@/components/navigation/Breadcrumb';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
+import { EmptyState } from '@/components/ui/EmptyState';
 import { RequirementGrid } from './components/RequirementGrid';
 import { ProcessTimeline } from './components/ProcessTimeline';
 import { SupportingDocumentsDetail } from './components/SupportingDocumentsDetail';
@@ -90,9 +91,12 @@ export default function ServiceDetail() {
   const service = getServiceBySlug(decodeURIComponent(serviceSlug));
   if (!service)
     return (
-      <div className='text-kapwa-text-disabled p-20 text-center font-bold tracking-widest uppercase'>
-        {t('detail.notFound')}
-      </div>
+      <EmptyState
+        title={t('detail.notFound')}
+        message={t('detail.notFoundBody')}
+        actionHref='/services'
+        actionLabel={t('detail.backToServices')}
+      />
     );
 
   const officeSlugs = Array.isArray(service.officeSlug)

@@ -8,8 +8,9 @@ import { useTranslation } from 'react-i18next';
 import { Badge } from '@/components/ui/Badge';
 import { CardGrid } from '@/components/ui/Card';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
 import { config } from '@/lib/lguConfig';
-import { filterServices } from '@/lib/services';
+import { filterServices, getMergedServices } from '@/lib/services';
 
 import ServiceCard from './components/ServiceCard';
 import FilterBar from './components/FilterBar';
@@ -80,7 +81,13 @@ export default function ServicesPage() {
     return () => observer.disconnect();
   }, [handleLoadMore]);
 
-  // 3. EMPTY STATE
+  // 3. EMPTY STATES
+  // No verified services are published at all: say so, rather than implying
+  // that the visitor's filters hid them.
+  if (getMergedServices().length === 0) {
+    return <NotYetAvailable />;
+  }
+
   if (filteredServices.length === 0) {
     return (
       <EmptyState

@@ -1,5 +1,6 @@
 import {
   ComponentType,
+  Fragment,
   ReactNode,
   createContext,
   useContext,
@@ -360,11 +361,12 @@ export function PageHeader({
           {generatedBreadcrumbs.map((crumb, index) => {
             const isLast = index === generatedBreadcrumbs.length - 1;
             return (
-              <div key={crumb.href} className='flex gap-2 items-center'>
+              // A Fragment, not a wrapper div: the <ol> may only hold <li>s.
+              <Fragment key={crumb.href}>
                 {index === 0 ? (
                   <BreadcrumbItem>
-                    <BreadcrumbLink href={crumb.href}>
-                      <HomeIcon className='w-4 h-4' />
+                    <BreadcrumbLink href={crumb.href} aria-label={crumb.label}>
+                      <HomeIcon className='w-4 h-4' aria-hidden='true' />
                     </BreadcrumbLink>
                   </BreadcrumbItem>
                 ) : (
@@ -381,7 +383,7 @@ export function PageHeader({
                     </BreadcrumbItem>
                   </>
                 )}
-              </div>
+              </Fragment>
             );
           })}
         </BreadcrumbList>
@@ -404,7 +406,7 @@ export function PageHeader({
               {title}
             </h1>
             {description && (
-              <p className='mx-auto max-w-2xl text-sm leading-relaxed text-kapwa-text-disabled md:text-base'>
+              <p className='mx-auto max-w-2xl text-sm leading-relaxed text-kapwa-text-support md:text-base'>
                 {description}
               </p>
             )}
@@ -432,7 +434,7 @@ export function PageHeader({
               {title}
             </h1>
             {description && (
-              <p className='mx-auto max-w-2xl text-sm leading-relaxed text-kapwa-text-disabled md:text-base'>
+              <p className='mx-auto max-w-2xl text-sm leading-relaxed text-kapwa-text-support md:text-base'>
                 {description}
               </p>
             )}
@@ -460,7 +462,7 @@ export function PageHeader({
               {title}
             </h1>
             {description && (
-              <p className='mt-1 text-sm text-kapwa-text-disabled md:text-base'>
+              <p className='mt-1 text-sm text-kapwa-text-support md:text-base'>
                 {description}
               </p>
             )}

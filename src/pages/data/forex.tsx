@@ -469,7 +469,7 @@ const ForexPage: FC = () => {
                   t={t}
                   i18nKey='forex.officialBody'
                   components={{
-                    link: (
+                    anchor: (
                       <a
                         href='https://www.bsp.gov.ph/SitePages/Statistics/ExchangeRate.aspx'
                         className='text-kapwa-text-brand hover:underline'

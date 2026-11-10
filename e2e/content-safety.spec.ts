@@ -43,8 +43,9 @@ test.describe('Inherited civic records', () => {
 });
 
 test.describe('Honest empty states', () => {
+  // /statistics (population) is no longer empty: PSA census figures are
+  // published, and e2e/statistics/population.spec.ts covers them.
   const emptyRoutes = [
-    '/statistics',
     '/statistics/competitiveness',
     '/statistics/municipal-income',
     '/transparency/financial',

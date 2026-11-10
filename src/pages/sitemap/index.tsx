@@ -204,10 +204,10 @@ const SitemapPage: FC = () => {
                 t={t}
                 i18nKey='sitemap.notFound'
                 components={{
-                  link: (
+                  anchor: (
                     <Link
                       to='/search'
-                      className='text-kapwa-text-brand hover:underline'
+                      className='text-kapwa-text-brand underline underline-offset-2 hover:no-underline'
                     />
                   ),
                 }}

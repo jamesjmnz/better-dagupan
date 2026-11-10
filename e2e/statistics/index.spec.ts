@@ -1,5 +1,9 @@
 import { test, expect } from '../test-config';
+import { readData } from '../utils/data';
 import { assertKapwaTokens } from '../utils/kapwa';
+
+const incomeRecords = readData<unknown[]>('statistics/ari.json');
+const cmci = readData<{ overall_score: unknown[] }>('statistics/cmci.json');
 
 test.describe('Statistics Pages', () => {
   test.beforeEach(async ({ page }) => {
@@ -119,81 +123,54 @@ test.describe('Statistics Pages', () => {
     }
   });
 
-  test('municipal income page displays correctly', async ({ page }) => {
-    // Navigate directly to municipal income page
-    await page.goto('/statistics/municipal-income');
-    await page.waitForLoadState('networkidle');
+  /*
+   * Population is published from the PSA census; income (ari.json) and
+   * competitiveness (cmci.json) have no verified Dagupan records yet. Each
+   * page is tested for what its dataset supports: the empty pages must say
+   * the data is not available, and switch to the chart checks on their own
+   * once records land.
+   */
+  for (const route of [
+    {
+      path: '/statistics/municipal-income',
+      title: 'City Income',
+      hasData: incomeRecords.length > 0,
+    },
+    {
+      path: '/statistics/competitiveness',
+      title: 'Competitiveness',
+      hasData: cmci.overall_score.length > 0,
+    },
+  ]) {
+    test(`${route.path} displays correctly`, async ({ page }) => {
+      await page.goto(route.path);
+      await expect(
+        page.getByRole('heading', { level: 1, name: route.title })
+      ).toBeVisible();
 
-    // Check page title
-    await expect(
-      page.locator('h1').filter({ hasText: /Municipal Income/i })
-    ).toBeVisible();
+      const content = page.locator('#layout-content');
+      if (route.hasData) {
+        await expect(
+          content.locator('.recharts-wrapper').first()
+        ).toBeVisible();
+      } else {
+        await expect(
+          content.getByRole('heading', { name: 'Not yet available' })
+        ).toBeVisible();
+        // No chart or figures without a verified source.
+        await expect(content.locator('.recharts-wrapper')).toHaveCount(0);
+      }
+    });
+  }
 
-    // Check for StatCard components
-    const statCards = page
-      .locator('[data-testid="stat-card"]')
-      .or(page.locator('.stat-card'));
-    await expect(statCards.first()).toBeVisible();
-
-    // Check for chart
-    const chart = page
-      .locator('.recharts-wrapper')
-      .or(page.locator('[data-testid="chart"]'));
-    await expect(chart).toBeVisible();
-  });
-
-  test('competitiveness page displays correctly', async ({ page }) => {
-    // Navigate directly to competitiveness page
-    await page.goto('/statistics/competitiveness');
-    await page.waitForLoadState('networkidle');
-
-    // Check page title
-    await expect(
-      page.locator('h1').filter({ hasText: /Competitiveness/i })
-    ).toBeVisible();
-
-    // Check for StatCard components
-    const statCards = page
-      .locator('[data-testid="stat-card"]')
-      .or(page.locator('.stat-card'));
-    await expect(statCards.first()).toBeVisible();
-
-    // Check for chart or data display
-    const chart = page
-      .locator('.recharts-wrapper')
-      .or(page.locator('[data-testid="chart"]'));
-    await expect(chart).toBeVisible();
-  });
-
-  test('statistics pages use StatCard component consistently', async ({
-    page,
-  }) => {
-    const pages = [
-      '/statistics',
-      '/statistics/municipal-income',
-      '/statistics/competitiveness',
-    ];
-
-    for (const url of pages) {
-      await page.goto(url);
-      await page.waitForLoadState('networkidle');
-
-      // Check for StatCard components
-      const statCards = page
-        .locator('[data-testid="stat-card"]')
-        .or(page.locator('.stat-card'));
-      const count = await statCards.count();
-
-      // Each page should have at least 2 StatCards
-      expect(count).toBeGreaterThanOrEqual(2);
-
-      // Check cards have proper structure
-      const firstCard = statCards.first();
-      await expect(firstCard).toBeVisible();
-
-      // Check card has label and value
-      const cardHTML = await firstCard.innerHTML();
-      expect(cardHTML.length).toBeGreaterThan(0);
+  test('the population page shows its KPI cards', async ({ page }) => {
+    // StatCard renders no test id or marker class; its labels are what a
+    // reader sees. The other statistics pages have no verified figures, so
+    // they are covered by the not-yet-available checks above.
+    await page.goto('/statistics');
+    const content = page.locator('#layout-content');
+    for (const label of ['Total population', 'Annual growth rate']) {
+      await expect(content.getByText(label, { exact: true })).toBeVisible();
     }
   });
 
@@ -218,37 +195,25 @@ test.describe('Statistics Pages', () => {
   });
 
   test('statistics pages are mobile responsive', async ({ page }) => {
-    // Set mobile viewport
     await page.setViewportSize({ width: 375, height: 667 });
     await page.goto('/statistics');
-    await page.waitForLoadState('networkidle');
 
-    // Check page is still functional on mobile
     await expect(
       page.locator('h1').filter({ hasText: /Population/i })
     ).toBeVisible();
 
-    // Check sidebar is collapsible on mobile
-    const sidebar = page
-      .locator('aside')
-      .or(page.locator('[data-testid="sidebar"]'));
+    // The section sidebar folds behind the layout's Menu toggle on small
+    // screens. (The navbar's own "Open main menu" button is a different menu.)
+    const sidebar = page.locator('#layout-sidebar');
+    const toggle = page.getByRole('button', { name: 'Menu', exact: true });
+    await expect(sidebar).toBeHidden();
 
-    // Check for mobile menu button
-    const menuButton = page
-      .locator('button[aria-label*="menu" i]')
-      .or(page.locator('[data-testid="mobile-menu-button"]'));
-
-    const menuButtonCount = await menuButton.count();
-    if (menuButtonCount > 0) {
-      await expect(menuButton.first()).toBeVisible();
-
-      // Toggle menu
-      await menuButton.first().click();
-      await page.waitForTimeout(300);
-
-      // Sidebar should be visible after toggle
-      await expect(sidebar).toBeVisible();
-    }
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(sidebar).toBeVisible();
+    await expect(
+      sidebar.getByRole('navigation', { name: 'City Statistics' })
+    ).toBeVisible();
   });
 
   test('statistics sidebar is collapsible', async ({ page }) => {

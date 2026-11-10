@@ -1,231 +1,214 @@
 import { test, expect } from '../test-config';
+import { readData } from '../utils/data';
 import { assertKapwaTokens } from '../utils/kapwa';
+
+/**
+ * The services directory renders from citizens-charter/merged-services.json,
+ * which holds no verified Dagupan records yet. The first describe covers what
+ * the page does today: it says the directory is not available yet, instead of
+ * a "no results" message that blames the visitor's filters. The second covers
+ * the card and filter behaviour, and only runs once records are published.
+ */
+const services = readData<unknown[]>('citizens-charter/merged-services.json');
+const categories = readData<{ categories: { slug: string; name: string }[] }>(
+  'service_categories.json'
+).categories;
+const hasServices = services.length > 0;
+
+const serviceCards = '[data-testid="service-card"]';
 
 test.describe('Services Index Page', () => {
   test.beforeEach(async ({ page }) => {
-    // Navigate to services index before each test
     await page.goto('/services');
+    await expect(
+      page.getByRole('heading', { level: 1, name: /Services/i })
+    ).toBeVisible();
   });
 
   test('services page uses Kapwa semantic tokens', async ({ page }) => {
-    // Check page title is visible
-    await expect(
-      page.locator('h1').filter({ hasText: /Services/i })
-    ).toBeVisible();
-
-    // Verify Kapwa semantic tokens are used
     await assertKapwaTokens(page);
+  });
+
+  test('the sidebar lists every service category', async ({ page }) => {
+    const nav = page.getByRole('navigation', { name: 'Categories' });
+
+    await expect(nav.getByRole('button')).toHaveCount(categories.length + 1);
+    await expect(
+      nav.getByRole('button', { name: 'All Services' })
+    ).toHaveAttribute('aria-current', 'page');
+    for (const category of categories) {
+      await expect(
+        nav.getByRole('button', { name: category.name, exact: true })
+      ).toBeVisible();
+    }
+  });
+
+  test('choosing a category updates the URL and the active item', async ({
+    page,
+  }) => {
+    const nav = page.getByRole('navigation', { name: 'Categories' });
+    const [category] = categories;
+    const item = nav.getByRole('button', { name: category.name, exact: true });
+
+    await item.click();
+
+    await expect(page).toHaveURL(new RegExp(`category=${category.slug}`));
+    await expect(item).toHaveAttribute('aria-current', 'page');
+    await expect(
+      nav.getByRole('button', { name: 'All Services' })
+    ).not.toHaveAttribute('aria-current', 'page');
+  });
+
+  test('search is labelled and kept in the URL', async ({ page }) => {
+    await page
+      .getByRole('textbox', { name: /Search for services/i })
+      .fill('business');
+
+    await expect(page).toHaveURL(/search=business/);
+  });
+
+  test.describe('with no verified services published', () => {
+    test.skip(hasServices, 'Verified services are published.');
+
+    test('the directory says it is not available yet', async ({ page }) => {
+      const content = page.locator('#layout-content');
+
+      await expect(
+        content.getByRole('heading', { name: 'Not yet available' })
+      ).toBeVisible();
+      await expect(
+        content.getByRole('link', { name: 'Suggest a source' })
+      ).toHaveAttribute('href', /\/issues\/new\?template=contribution\.yml$/);
+
+      // Nothing to list, so neither cards nor the filter bar render, and the
+      // copy does not pretend a search came back empty.
+      await expect(page.locator(serviceCards)).toHaveCount(0);
+      await expect(
+        page.locator('[data-testid="filter-bar-toggle"]')
+      ).toHaveCount(0);
+      await expect(content.getByText('No services found')).toHaveCount(0);
+    });
+
+    test('searching and filtering keep the same honest empty state', async ({
+      page,
+    }) => {
+      const notYetAvailable = page
+        .locator('#layout-content')
+        .getByRole('heading', { name: 'Not yet available' });
+
+      await page
+        .getByRole('textbox', { name: /Search for services/i })
+        .fill('xyznonexistent123');
+      await expect(page).toHaveURL(/search=xyznonexistent123/);
+      await expect(notYetAvailable).toBeVisible();
+
+      await page
+        .getByRole('navigation', { name: 'Categories' })
+        .getByRole('button', { name: categories[0].name, exact: true })
+        .click();
+      await expect(page).toHaveURL(/category=/);
+      await expect(notYetAvailable).toBeVisible();
+    });
+  });
+});
+
+/**
+ * Card and filter behaviour. These need records to act on, so they are
+ * skipped until verified services are published.
+ */
+test.describe('Services Index Page with published services', () => {
+  test.skip(!hasServices, 'No verified services are published yet.');
+
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/services');
+    await expect(page.locator(serviceCards).first()).toBeVisible();
   });
 
   test('services index displays service cards', async ({ page }) => {
-    // Check that service cards are displayed
-    const cards = page.locator('[data-testid="service-card"]');
-    const count = await cards.count();
-
-    // Should have multiple services
-    expect(count).toBeGreaterThan(0);
-
-    // Check first card has proper structure
-    const firstCard = cards.first();
+    const firstCard = page.locator(serviceCards).first();
     await expect(firstCard).toBeVisible();
-
-    // Check that cards have links
-    const cardLinks = page.locator('a[href*="/services/"]');
-    expect(await cardLinks.count()).toBeGreaterThan(0);
+    await expect(firstCard).toHaveAttribute('aria-label', /View details for/);
+    await expect(
+      page.locator('#layout-content a[href*="/services/"]').first()
+    ).toBeVisible();
   });
 
-  test('services search functionality works', async ({ page }) => {
-    // Get initial count of all cards
-    const allCards = page.locator('[data-testid="service-card"]');
-    const initialCount = await allCards.count();
+  test('services search narrows and restores the list', async ({ page }) => {
+    const cards = page.locator(serviceCards);
+    const initialCount = await cards.count();
+    const searchInput = page.getByRole('textbox', {
+      name: /Search for services/i,
+    });
 
-    // Search for a specific service
-    const searchInput = page.locator('input[placeholder*="Search"]');
-    await searchInput.fill('business');
+    await searchInput.fill('xyznonexistent123');
+    await expect(
+      page.getByRole('heading', { name: 'No services found' })
+    ).toBeVisible();
 
-    // Wait for filtering to apply
-    await page.waitForTimeout(500);
-
-    // Should have different results
-    const filteredCards = page.locator('[data-testid="service-card"]');
-    const filteredCount = await filteredCards.count();
-
-    // Filtered results should be different from initial count
-    // (either fewer or same, but not more)
-    expect(filteredCount).toBeLessThanOrEqual(initialCount);
-
-    // Clear search
     await searchInput.fill('');
-    await page.waitForTimeout(500);
-
-    // Should show all cards again
-    const resetCards = page.locator('[data-testid="service-card"]');
-    const resetCount = await resetCards.count();
-    expect(resetCount).toBe(initialCount);
+    await expect(cards).toHaveCount(initialCount);
   });
 
-  test('filter by source works', async ({ page }) => {
-    // Open filter bar
-    const filterToggle = page.locator('[data-testid="filter-bar-toggle"]');
-    await filterToggle.click();
+  test('filter by source never adds results', async ({ page }) => {
+    const cards = page.locator(serviceCards);
+    const initialCount = await cards.count();
 
-    // Wait for filter content to expand
-    await page.waitForTimeout(300);
+    await page.locator('[data-testid="filter-bar-toggle"]').click();
+    await page.locator('[data-testid="filter-source-official"]').click();
 
-    // Get initial count
-    const allCards = page.locator('[data-testid="service-card"]');
-    const initialCount = await allCards.count();
-
-    // Click Official filter
-    const officialFilter = page.locator(
-      '[data-testid="filter-source-official"]'
-    );
-    await officialFilter.click();
-
-    // Wait for filtering to apply
-    await page.waitForTimeout(500);
-
-    // Should have filtered results
-    const filteredCards = page.locator('[data-testid="service-card"]');
-    const filteredCount = await filteredCards.count();
-
-    // Filtered count should be different
-    expect(filteredCount).toBeLessThanOrEqual(initialCount);
+    await expect.poll(() => cards.count()).toBeLessThanOrEqual(initialCount);
   });
 
-  test('filter by classification works', async ({ page }) => {
-    // Open filter bar
-    const filterToggle = page.locator('[data-testid="filter-bar-toggle"]');
-    await filterToggle.click();
+  test('filter by classification never adds results', async ({ page }) => {
+    const cards = page.locator(serviceCards);
+    const initialCount = await cards.count();
 
-    // Wait for filter content to expand
-    await page.waitForTimeout(300);
+    await page.locator('[data-testid="filter-bar-toggle"]').click();
+    await page.locator('[data-testid="filter-classification-simple"]').click();
 
-    // Get initial count
-    const allCards = page.locator('[data-testid="service-card"]');
-    const initialCount = await allCards.count();
-
-    // Click Simple classification filter
-    const simpleFilter = page.locator(
-      '[data-testid="filter-classification-simple"]'
-    );
-    await simpleFilter.click();
-
-    // Wait for filtering to apply
-    await page.waitForTimeout(500);
-
-    // Should have filtered results
-    const filteredCards = page.locator('[data-testid="service-card"]');
-    const filteredCount = await filteredCards.count();
-
-    // Filtered count should be different
-    expect(filteredCount).toBeLessThanOrEqual(initialCount);
+    await expect.poll(() => cards.count()).toBeLessThanOrEqual(initialCount);
   });
 
-  test('filter by office works', async ({ page }) => {
-    // Open filter bar
-    const filterToggle = page.locator('[data-testid="filter-bar-toggle"]');
-    await filterToggle.click();
+  test('filter by office never adds results', async ({ page }) => {
+    const cards = page.locator(serviceCards);
+    const initialCount = await cards.count();
 
-    // Wait for filter content to expand
-    await page.waitForTimeout(300);
+    await page.locator('[data-testid="filter-bar-toggle"]').click();
+    await page
+      .locator('[data-testid="filter-office-select"]')
+      .selectOption({ index: 1 });
 
-    // Get initial count
-    const allCards = page.locator('[data-testid="service-card"]');
-    const initialCount = await allCards.count();
-
-    // Select an office from dropdown
-    const officeSelect = page.locator('[data-testid="filter-office-select"]');
-    await officeSelect.selectOption({ index: 1 }); // Select first office (not "All")
-
-    // Wait for filtering to apply
-    await page.waitForTimeout(500);
-
-    // Should have filtered results
-    const filteredCards = page.locator('[data-testid="service-card"]');
-    const filteredCount = await filteredCards.count();
-
-    // Filtered count should be different
-    expect(filteredCount).toBeLessThanOrEqual(initialCount);
+    await expect.poll(() => cards.count()).toBeLessThanOrEqual(initialCount);
   });
 
-  test('clear all filters button works', async ({ page }) => {
-    // Open filter bar
-    const filterToggle = page.locator('[data-testid="filter-bar-toggle"]');
-    await filterToggle.click();
+  test('clear all filters button restores the list', async ({ page }) => {
+    const cards = page.locator(serviceCards);
+    const initialCount = await cards.count();
 
-    // Wait for filter content to expand
-    await page.waitForTimeout(300);
+    await page.locator('[data-testid="filter-bar-toggle"]').click();
+    await page.locator('[data-testid="filter-source-official"]').click();
+    await page.locator('[data-testid="filter-clear-all"]').click();
 
-    // Apply a filter
-    const officialFilter = page.locator(
-      '[data-testid="filter-source-official"]'
-    );
-    await officialFilter.click();
-
-    // Wait for filtering to apply
-    await page.waitForTimeout(500);
-
-    // Get filtered count
-    const filteredCards = page.locator('[data-testid="service-card"]');
-    const filteredCount = await filteredCards.count();
-
-    // Click Clear All button
-    const clearButton = page.locator('[data-testid="filter-clear-all"]');
-    await clearButton.click();
-
-    // Wait for reset
-    await page.waitForTimeout(500);
-
-    // Should show all cards again (count should be >= filtered count)
-    const resetCards = page.locator('[data-testid="service-card"]');
-    const resetCount = await resetCards.count();
-    expect(resetCount).toBeGreaterThanOrEqual(filteredCount);
+    await expect(cards).toHaveCount(initialCount);
   });
 
   test('navigation to service detail page works', async ({ page }) => {
-    // Click first service card
-    const firstCard = page.locator('[data-testid="service-card"]').first();
-    await firstCard.click();
+    await page.locator(serviceCards).first().click();
 
-    // Should navigate to detail page
     await page.waitForURL(/\/services\/.+/);
-    expect(page.url()).toMatch(/\/services\/.+/);
-
-    // Verify Kapwa design tokens are present on detail page
     await assertKapwaTokens(page);
   });
 
-  test('empty state shows when no results', async ({ page }) => {
-    // Search for something that won't exist
-    const searchInput = page.locator('input[placeholder*="Search"]');
-    await searchInput.fill('xyznonexistent123');
-
-    // Wait for filtering to apply
-    await page.waitForTimeout(500);
-
-    // Should show empty state or no results
-    const bodyHTML = await page.locator('body').innerHTML();
-    const hasEmptyState =
-      bodyHTML.includes('No services found') ||
-      bodyHTML.includes('No results') ||
-      bodyHTML.includes("couldn't find");
-
-    // Either empty state shown or no cards displayed
-    const cards = page.locator('[data-testid="service-card"]');
-    const cardCount = await cards.count();
-
-    expect(hasEmptyState || cardCount === 0).toBeTruthy();
+  test('filter toggle is a button', async ({ page }) => {
+    await expect(
+      page.locator('[data-testid="filter-bar-toggle"]')
+    ).toHaveAttribute('type', 'button');
   });
+});
 
-  test('services page has accessibility features', async ({ page }) => {
-    // Check that service cards have proper ARIA labels
-    const cards = page.locator('[aria-label*="View details for"]');
-    expect(await cards.count()).toBeGreaterThan(0);
-
-    // Check that filter toggle is a button
-    const filterToggle = page.locator('[data-testid="filter-bar-toggle"]');
-    await expect(filterToggle).toHaveAttribute('type', 'button');
+test.describe('Services Index Page - Visual Regression', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/services');
   });
 
   test('services index page visual snapshot @visual', async ({ page }) => {

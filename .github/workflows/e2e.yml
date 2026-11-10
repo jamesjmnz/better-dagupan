@@ -55,8 +55,10 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
 
+      # Visual snapshots run in e2e-visual; their baselines are not committed,
+      # so they would fail every shard here.
       - name: Run E2E tests
-        run: npx playwright test --shard=${{ matrix.shard }}/4
+        run: npx playwright test --grep-invert @visual --shard=${{ matrix.shard }}/4
         env:
           CI: true
 
@@ -179,27 +181,23 @@ jobs:
       - name: Merge service data
         run: python3 scripts/merge_services.py
 
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
 
-      # There is no e2e/accessibility directory, so this previously exited 1 with
-      # "No tests found" on every run and was masked by continue-on-error. The
-      # tagged tests live alongside the feature specs, so select them by tag.
-      #
-      # TODO(phase-7): the only @a11y test calls page.accessibility.scan(), which
-      # is not a Playwright API, so it throws. Rewrite it with AxeBuilder from
-      # @axe-core/playwright (already used in e2e/reference-implementation.spec.ts)
-      # and then remove continue-on-error so this becomes a real gate.
+      # e2e/a11y.spec.ts scans the key public routes with axe-core
+      # (@axe-core/playwright) against WCAG 2.0 A and AA. Contrast and markup
+      # do not differ by engine, so one browser is enough, and the job is a
+      # real gate: any violation fails it.
       - name: Run accessibility tests
-        run: npx playwright test --grep @a11y
+        run: npx playwright test --project=chromium --grep @a11y
         env:
           CI: true
-        continue-on-error: true
 
+      # Under CI the reporter writes a blob report, not playwright-report/.
       - name: Upload accessibility report
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: accessibility-report
-          path: playwright-report/
+          path: blob-report/
           retention-days: 7

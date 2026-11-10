@@ -54,34 +54,35 @@ const ServicesSection: FC = () => {
           {displayedCategories.map(category => {
             const Icon = getCategoryIcon(category.name);
             return (
-              <Link
-                key={category.slug}
-                to={`/services?category=${category.slug}`}
-                className='group h-full'
-              >
-                <Card hover className='h-full'>
-                  <CardContent className='flex h-full flex-col p-6'>
-                    <div className='mb-4 flex items-start'>
-                      <div className='bg-kapwa-bg-surface text-kapwa-text-brand group-hover:bg-kapwa-bg-brand-default group-hover:text-kapwa-text-inverse rounded-lg p-3 transition-colors'>
-                        <Icon className='h-6 w-6' />
+              <div key={category.slug} role='listitem'>
+                <Link
+                  to={`/services?category=${category.slug}`}
+                  className='group block h-full'
+                >
+                  <Card hover className='h-full'>
+                    <CardContent className='flex h-full flex-col p-6'>
+                      <div className='mb-4 flex items-start'>
+                        <div className='bg-kapwa-bg-surface text-kapwa-text-brand group-hover:bg-kapwa-bg-brand-default group-hover:text-kapwa-text-inverse rounded-lg p-3 transition-colors'>
+                          <Icon className='h-6 w-6' />
+                        </div>
                       </div>
-                    </div>
 
-                    <h3 className='group-hover:text-kapwa-text-brand text-kapwa-text-strong mb-2 text-lg font-bold'>
-                      {category.name}
-                    </h3>
+                      <h3 className='group-hover:text-kapwa-text-brand text-kapwa-text-strong mb-2 text-lg font-bold'>
+                        {category.name}
+                      </h3>
 
-                    <p className='text-kapwa-text-support mb-6 line-clamp-3 flex-1 text-sm'>
-                      {category.description}
-                    </p>
+                      <p className='text-kapwa-text-support mb-6 line-clamp-3 flex-1 text-sm'>
+                        {category.description}
+                      </p>
 
-                    <div className='text-kapwa-text-link group-hover:text-kapwa-text-link-hover flex items-center text-sm font-medium group-hover:underline'>
-                      {t('services.viewAllCategory')}
-                      <LucideIcons.ArrowRight className='ml-1 h-4 w-4 transition-transform group-hover:translate-x-1' />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+                      <div className='text-kapwa-text-brand group-hover:text-kapwa-text-brand-bold flex items-center text-sm font-medium group-hover:underline'>
+                        {t('services.viewAllCategory')}
+                        <LucideIcons.ArrowRight className='ml-1 h-4 w-4 transition-transform group-hover:translate-x-1' />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </div>
             );
           })}
         </CardGrid>

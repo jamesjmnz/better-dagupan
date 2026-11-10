@@ -63,6 +63,8 @@
   },
   "detail": {
     "notFound": "Hindi nahanap ang serbisyo",
+    "notFoundBody": "Walang serbisyong nakalista sa address na ito.",
+    "backToServices": "Bumalik sa lahat ng serbisyo",
     "quickInfo": {
       "processingTime": "Tagal ng Pagproseso",
       "fee": "Bayad",
