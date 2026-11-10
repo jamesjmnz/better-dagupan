@@ -79,12 +79,14 @@ export default function OpenLGULayout() {
               lgu: lguLabels.name,
             })}
             actions={
-              <SearchInput
-                placeholder={t('openlgu:layout.searchPlaceholder')}
-                value={searchQuery}
-                onChangeValue={setSearchQuery}
-                size='md'
-              />
+              hasNoRecords ? undefined : (
+                <SearchInput
+                  placeholder={t('openlgu:layout.searchPlaceholder')}
+                  value={searchQuery}
+                  onChangeValue={setSearchQuery}
+                  size='md'
+                />
+              )
             }
           />
         ) : (
@@ -96,12 +98,14 @@ export default function OpenLGULayout() {
             })}
             autoBreadcrumbs={true}
             actions={
-              <SearchInput
-                placeholder={t('openlgu:layout.searchPlaceholder')}
-                value={searchQuery}
-                onChangeValue={setSearchQuery}
-                size='sm'
-              />
+              hasNoRecords ? undefined : (
+                <SearchInput
+                  placeholder={t('openlgu:layout.searchPlaceholder')}
+                  value={searchQuery}
+                  onChangeValue={setSearchQuery}
+                  size='sm'
+                />
+              )
             }
           />
         )
