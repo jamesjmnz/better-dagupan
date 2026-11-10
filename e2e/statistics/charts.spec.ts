@@ -1,4 +1,18 @@
 import { test, expect } from '../test-config';
+import { readData } from '../utils/data';
+
+/*
+ * Only the population page has verified data (PSA census). City income
+ * (ari.json) and competitiveness (cmci.json) have none yet, so their pages
+ * show NotYetAvailable, which e2e/statistics/index.spec.ts asserts. Their
+ * chart tests below skip until records are published.
+ */
+const hasIncome = readData<unknown[]>('statistics/ari.json').length > 0;
+const hasCmci =
+  readData<{ overall_score: unknown[] }>('statistics/cmci.json').overall_score
+    .length > 0;
+const NO_INCOME = 'No verified city income records (ari.json) yet.';
+const NO_CMCI = 'No verified CMCI scores (cmci.json) yet.';
 
 test.describe('Statistics Page Charts', () => {
   test.describe('Population Page Charts', () => {
@@ -163,6 +177,8 @@ test.describe('Statistics Page Charts', () => {
   });
 
   test.describe('Municipal Income Page Charts', () => {
+    test.skip(!hasIncome, NO_INCOME);
+
     test.beforeEach(async ({ page }) => {
       await page.goto('/statistics/municipal-income');
       await page.waitForLoadState('networkidle');
@@ -264,6 +280,8 @@ test.describe('Statistics Page Charts', () => {
   });
 
   test.describe('Competitiveness Page Charts', () => {
+    test.skip(!hasCmci, NO_CMCI);
+
     test.beforeEach(async ({ page }) => {
       await page.goto('/statistics/competitiveness');
       await page.waitForLoadState('networkidle');
@@ -431,20 +449,25 @@ test.describe('Statistics Page Charts', () => {
       }
     });
 
-    test('charts are keyboard navigable', async ({ page }) => {
+    test('chart view controls are keyboard operable', async ({ page }) => {
       await page.goto('/statistics');
-      await page.waitForLoadState('networkidle');
+      const byBarangay = page
+        .getByRole('group', { name: 'Population view' })
+        .getByRole('button', { name: 'By barangay' });
+      await expect(byBarangay).toHaveAttribute('aria-pressed', 'false');
 
-      // Tab to chart area
-      await page.keyboard.press('Tab');
-      await page.waitForTimeout(100);
+      // Reachable through the tab order, not only by clicking.
+      let reached = false;
+      for (let i = 0; i < 80 && !reached; i++) {
+        await page.keyboard.press('Tab');
+        reached = await byBarangay.evaluate(
+          el => el === document.activeElement
+        );
+      }
+      expect(reached, 'Tab reaches the chart view toggle').toBe(true);
 
-      // Check if chart or chart container receives focus
-      const focusedElement = page.locator(':focus');
-      const focusedTag = await focusedElement.evaluate(el => el.tagName);
-
-      // Chart containers should be focusable or have interactive elements
-      expect(['DIV', 'BUTTON', 'SVG']).toContain(focusedTag);
+      await page.keyboard.press('Enter');
+      await expect(byBarangay).toHaveAttribute('aria-pressed', 'true');
     });
   });
 
@@ -476,17 +499,18 @@ test.describe('Statistics Page Charts', () => {
         const chart = page.locator('.recharts-wrapper');
         await expect(chart).toBeVisible();
 
-        await page.goto('/statistics/municipal-income');
-        await page.waitForLoadState('networkidle');
+        // Pages without verified data render no chart to cycle through.
+        if (hasIncome) {
+          await page.goto('/statistics/municipal-income');
+          await page.waitForLoadState('networkidle');
+          await expect(page.locator('.recharts-pie')).toBeVisible();
+        }
 
-        const pieChart = page.locator('.recharts-pie');
-        await expect(pieChart).toBeVisible();
-
-        await page.goto('/statistics/competitiveness');
-        await page.waitForLoadState('networkidle');
-
-        const lineChart = page.locator('.recharts-line-curve');
-        await expect(lineChart).toBeVisible();
+        if (hasCmci) {
+          await page.goto('/statistics/competitiveness');
+          await page.waitForLoadState('networkidle');
+          await expect(page.locator('.recharts-line-curve')).toBeVisible();
+        }
       }
       // Successfully rendered all charts across 3 navigation cycles
     });
@@ -508,6 +532,7 @@ test.describe('Statistics Page Charts', () => {
     test('municipal income page chart displays all income categories', async ({
       page,
     }) => {
+      test.skip(!hasIncome, NO_INCOME);
       await page.goto('/statistics/municipal-income');
       await page.waitForLoadState('networkidle');
 
@@ -522,6 +547,7 @@ test.describe('Statistics Page Charts', () => {
     test('competitiveness page chart displays multi-year data', async ({
       page,
     }) => {
+      test.skip(!hasCmci, NO_CMCI);
       await page.goto('/statistics/competitiveness');
       await page.waitForLoadState('networkidle');
 
