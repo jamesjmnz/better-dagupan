@@ -200,5 +200,23 @@
     "emailSubjectPage": "Data correction: {{page}}",
     "sourceNoteLink": "Report an error",
     "sourceNoteLinkLabel": "Report an error in this information"
+  },
+  "cityNotices": {
+    "title": "Notices posted by the City Government",
+    "description": "Bid invitations, awards and other procurement notices the {{lgu}} publishes on its own website.",
+    "typeLabel": "Procurement mode",
+    "allTypes": "All procurement modes",
+    "searchPlaceholder": "Search notices…",
+    "unavailableTitle": "The city's notices could not be loaded",
+    "unavailableMessage": "The City Government's website did not respond. You can browse the notices there directly.",
+    "openCityPage": "Open the city's procurement page",
+    "noMatchesTitle": "No notices match",
+    "noMatchesMessage": "Try a different search or procurement mode.",
+    "opensCityPage": "(opens the city's page)",
+    "pagination": "City notices pages",
+    "previous": "Previous",
+    "next": "Next",
+    "pageOf": "Page {{page}} of {{totalPages}} · {{total}} notices",
+    "attribution": "Titles and links come from the {{lgu}}'s website and are shown as published."
   }
 }
