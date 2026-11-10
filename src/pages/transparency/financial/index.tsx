@@ -1,10 +1,4 @@
-import {
-  BarChart2Icon,
-  Info,
-  Landmark,
-  ReceiptText,
-  ShieldCheck,
-} from 'lucide-react';
+import { BarChart2Icon, Info, Landmark, ReceiptText } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -18,6 +12,8 @@ import {
 } from '@/components/navigation/Breadcrumb';
 // UI Components
 import { Badge } from '@/components/ui/Badge';
+import { NotVerified } from '@/components/civic/NotVerified';
+import { SourceNote } from '@/components/civic/SourceNote';
 
 import FinancialPieChart, {
   ChartDataPoint,
@@ -36,6 +32,7 @@ export default function FinancialPage() {
   const { t } = useTranslation('transparency');
   const terms = useLguTerms();
   const {
+    hasData,
     years,
     selectedYear,
     setSelectedYear,
@@ -44,17 +41,13 @@ export default function FinancialPage() {
     quartersInYear,
     selectedQuarter,
     setSelectedQuarter,
-    displayedIncome,
-    displayedExpenditure,
-    displayedFundSummary,
+    displayedStatement,
     comparisonBaseline,
     getQuarter,
   } = useFinancialData();
 
-  // The inherited Los Banos statements were removed and Dagupan's are not
-  // sourced yet, so there may be no quarter to render. Bail out before the
-  // chart transforms rather than reading fields off an absent record.
-  if (!selectedQuarter || !displayedIncome || !displayedExpenditure) {
+  // No statements published yet: say so rather than render empty charts.
+  if (!hasData || !selectedYear) {
     return (
       <div className='space-y-6'>
         <h1 className='text-kapwa-text-strong kapwa-heading-xl flex items-center gap-3 font-extrabold'>
@@ -65,162 +58,6 @@ export default function FinancialPage() {
       </div>
     );
   }
-
-  // --- Transform Data for Charts ---
-  const calcPct = (val: number, total: number) => (total > 0 ? val / total : 0);
-
-  // ---------------- INCOME DATA PREP ---------------- //
-  const localTotal = displayedIncome.local_sources.total_local_sources;
-  const externalTotal = displayedIncome.external_sources.total_external_sources;
-  const grandTotalIncome =
-    displayedIncome.total_current_operating_income ||
-    localTotal + externalTotal;
-
-  const incomeChartData: ChartDataPoint[] = [
-    {
-      name: 'Local Sources',
-      value: localTotal,
-      percent: calcPct(localTotal, grandTotalIncome),
-      details: [
-        {
-          name: 'Real Property Tax',
-          value:
-            displayedIncome.local_sources.tax_revenue.real_property_tax.total,
-          percent: calcPct(
-            displayedIncome.local_sources.tax_revenue.real_property_tax.total,
-            localTotal
-          ),
-        },
-        {
-          name: 'Business Tax',
-          value: displayedIncome.local_sources.tax_revenue.tax_on_business,
-          percent: calcPct(
-            displayedIncome.local_sources.tax_revenue.tax_on_business,
-            localTotal
-          ),
-        },
-        {
-          name: 'Other Taxes',
-          value: displayedIncome.local_sources.tax_revenue.other_taxes,
-          percent: calcPct(
-            displayedIncome.local_sources.tax_revenue.other_taxes,
-            localTotal
-          ),
-        },
-        {
-          name: 'Regulatory Fees',
-          value: displayedIncome.local_sources.non_tax_revenue.regulatory_fees,
-          percent: calcPct(
-            displayedIncome.local_sources.non_tax_revenue.regulatory_fees,
-            localTotal
-          ),
-        },
-        {
-          name: 'Economic Ent.',
-          value:
-            displayedIncome.local_sources.non_tax_revenue
-              .receipts_from_economic_enterprises,
-          percent: calcPct(
-            displayedIncome.local_sources.non_tax_revenue
-              .receipts_from_economic_enterprises,
-            localTotal
-          ),
-        },
-        {
-          name: 'Service Charges',
-          value:
-            displayedIncome.local_sources.non_tax_revenue.service_user_charges,
-          percent: calcPct(
-            displayedIncome.local_sources.non_tax_revenue.service_user_charges,
-            localTotal
-          ),
-        },
-      ],
-    },
-    {
-      name: 'External Sources',
-      value: externalTotal,
-      percent: calcPct(externalTotal, grandTotalIncome),
-      details: [
-        {
-          name: 'NTA',
-          value: displayedIncome.external_sources.national_tax_allotment,
-          percent: calcPct(
-            displayedIncome.external_sources.national_tax_allotment,
-            externalTotal
-          ),
-        },
-        {
-          name: 'Other Shares',
-          value:
-            displayedIncome.external_sources
-              .other_shares_from_national_tax_collection,
-          percent: calcPct(
-            displayedIncome.external_sources
-              .other_shares_from_national_tax_collection,
-            externalTotal
-          ),
-        },
-        {
-          name: 'Grants/Aids',
-          value:
-            displayedIncome.external_sources
-              .extraordinary_receipts_grants_donations_aids,
-          percent: calcPct(
-            displayedIncome.external_sources
-              .extraordinary_receipts_grants_donations_aids,
-            externalTotal
-          ),
-        },
-      ],
-    },
-  ];
-
-  // ---------------- EXPENDITURE DATA PREP ---------------- //
-  const socialTotal =
-    displayedExpenditure.social_services.total_social_services;
-  const grandTotalExp =
-    displayedExpenditure.total_current_operating_expenditures ||
-    displayedExpenditure.general_public_services +
-      socialTotal +
-      displayedExpenditure.economic_services +
-      displayedExpenditure.debt_service_interest_expense;
-
-  const expenditureChartData: ChartDataPoint[] = [
-    {
-      name: 'General Public Services',
-      value: displayedExpenditure.general_public_services,
-      percent: calcPct(
-        displayedExpenditure.general_public_services,
-        grandTotalExp
-      ),
-    },
-    {
-      name: 'Social Services',
-      value: socialTotal,
-      percent: calcPct(socialTotal, grandTotalExp),
-      details: Object.entries(displayedExpenditure.social_services)
-        .filter(([key]) => key !== 'total_social_services')
-        .map(([key, value]) => ({
-          name: formatLabel(key),
-          value,
-          percent: calcPct(value, socialTotal),
-        })),
-    },
-    {
-      name: 'Economic Services',
-      value: displayedExpenditure.economic_services,
-      percent: calcPct(displayedExpenditure.economic_services, grandTotalExp),
-    },
-    {
-      name: 'Debt Service',
-      value: displayedExpenditure.debt_service_interest_expense,
-      percent: calcPct(
-        displayedExpenditure.debt_service_interest_expense,
-        grandTotalExp
-      ),
-    },
-  ];
 
   return (
     <div className='animate-in fade-in mx-auto max-w-7xl space-y-6 pb-20 duration-500'>
@@ -247,15 +84,17 @@ export default function FinancialPage() {
       <div className='border-kapwa-border-weak bg-kapwa-bg-surface flex flex-col gap-8 rounded-3xl border p-8 shadow-sm xl:flex-row xl:items-center xl:justify-between'>
         <div className='space-y-4'>
           <div className='flex flex-wrap items-center gap-2'>
-            <Badge variant='primary' dot>
-              {t('financial.verifiedAudit')}
-            </Badge>
+            {displayedStatement?.status && (
+              <Badge variant='primary' dot>
+                {t(`financial.status.${displayedStatement.status}`)}
+              </Badge>
+            )}
             <Badge variant='slate'>
               {t('financial.fiscalYear', { year: selectedYear })}
             </Badge>
             <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase'>
               <Info className='text-kapwa-text-disabled h-3.5 w-3.5' />
-              <span>{t('financial.millions')}</span>
+              <span>{t('financial.pesos')}</span>
             </div>
           </div>
           <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold flex items-center gap-3'>
@@ -269,31 +108,198 @@ export default function FinancialPage() {
 
         <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised shrink-0 rounded-2xl border p-4'>
           <QuarterToggle
-            quarters={quartersInYear.map(q => getQuarter(q.period))}
+            quarters={quartersInYear.map(getQuarter)}
             years={years}
             viewMode={viewMode}
             selectedYear={selectedYear}
-            selectedQuarter={getQuarter(selectedQuarter.period)}
+            selectedQuarter={selectedQuarter ? getQuarter(selectedQuarter) : ''}
             onYearChange={setSelectedYear}
             onViewModeChange={setViewMode}
             onQuarterChange={q => {
-              const found = quartersInYear.find(
-                x => getQuarter(x.period) === q
-              );
+              const found = quartersInYear.find(x => getQuarter(x) === q);
               if (found) setSelectedQuarter(found);
             }}
           />
         </div>
       </div>
 
+      {displayedStatement ? (
+        <StatementView
+          statement={displayedStatement}
+          baseline={comparisonBaseline}
+        />
+      ) : (
+        <NotVerified
+          label={t(
+            viewMode === 'year'
+              ? 'financial.noAnnual'
+              : 'financial.noYearToDate',
+            { year: selectedYear }
+          )}
+          detail={t(
+            viewMode === 'year'
+              ? 'financial.noAnnualDetail'
+              : 'financial.noYearToDateDetail'
+          )}
+        />
+      )}
+    </div>
+  );
+}
+
+function StatementView({
+  statement,
+  baseline,
+}: {
+  statement: NonNullable<
+    ReturnType<typeof useFinancialData>['displayedStatement']
+  >;
+  baseline: ReturnType<typeof useFinancialData>['comparisonBaseline'];
+}) {
+  const { t } = useTranslation('transparency');
+  const income = statement.current_operating_income;
+  const expenditure = statement.current_operating_expenditures;
+
+  // --- Transform Data for Charts ---
+  const calcPct = (val: number, total: number) => (total > 0 ? val / total : 0);
+
+  // ---------------- INCOME DATA PREP ---------------- //
+  // Every value and total below is as BLGF states it on the statement.
+  const local = income.local_sources;
+  const external = income.external_sources;
+  const localTotal = local.total_local_sources;
+  const externalTotal = external.total_external_sources;
+  const grandTotalIncome = income.total_current_operating_income;
+
+  const detail = (name: string, value: number, of: number) => ({
+    name,
+    value,
+    percent: calcPct(value, of),
+  });
+
+  const incomeChartData: ChartDataPoint[] = [
+    {
+      name: 'Local Sources',
+      value: localTotal,
+      percent: calcPct(localTotal, grandTotalIncome),
+      details: [
+        detail(
+          'Real Property Tax',
+          local.tax_revenue.real_property_tax.total,
+          localTotal
+        ),
+        detail('Business Tax', local.tax_revenue.tax_on_business, localTotal),
+        detail('Other Taxes', local.tax_revenue.other_taxes, localTotal),
+        detail(
+          'Regulatory Fees',
+          local.non_tax_revenue.regulatory_fees,
+          localTotal
+        ),
+        detail(
+          'Economic Ent.',
+          local.non_tax_revenue.receipts_from_economic_enterprises,
+          localTotal
+        ),
+        detail(
+          'Service Charges',
+          local.non_tax_revenue.service_user_charges,
+          localTotal
+        ),
+        detail(
+          'Other Receipts',
+          local.non_tax_revenue.other_receipts,
+          localTotal
+        ),
+      ],
+    },
+    {
+      name: 'External Sources',
+      value: externalTotal,
+      percent: calcPct(externalTotal, grandTotalIncome),
+      details: [
+        detail('NTA', external.national_tax_allotment, externalTotal),
+        detail(
+          'Other Shares',
+          external.other_shares_from_national_tax_collection,
+          externalTotal
+        ),
+        detail(
+          'Inter-Local Transfers',
+          external.inter_local_transfers,
+          externalTotal
+        ),
+        detail(
+          'Grants/Aids',
+          external.extraordinary_receipts_grants_donations_aids,
+          externalTotal
+        ),
+      ],
+    },
+  ];
+
+  // ---------------- EXPENDITURE DATA PREP ---------------- //
+  const socialTotal = expenditure.social_services.total_social_services;
+  const grandTotalExp = expenditure.total_current_operating_expenditures;
+
+  const expenditureChartData: ChartDataPoint[] = [
+    {
+      name: 'General Public Services',
+      value: expenditure.general_public_services,
+      percent: calcPct(expenditure.general_public_services, grandTotalExp),
+    },
+    {
+      name: 'Social Services',
+      value: socialTotal,
+      percent: calcPct(socialTotal, grandTotalExp),
+      // A withheld line is null: it is left out of the breakdown rather than
+      // drawn as zero, and the notice below says why.
+      details: Object.entries(expenditure.social_services)
+        .filter(
+          (entry): entry is [string, number] =>
+            entry[0] !== 'total_social_services' && entry[1] !== null
+        )
+        .map(([key, value]) => detail(formatLabel(key), value, socialTotal)),
+    },
+    {
+      name: 'Economic Services',
+      value: expenditure.economic_services,
+      percent: calcPct(expenditure.economic_services, grandTotalExp),
+    },
+    {
+      name: 'Debt Service',
+      value: expenditure.debt_service_interest_expense,
+      percent: calcPct(
+        expenditure.debt_service_interest_expense,
+        grandTotalExp
+      ),
+    },
+  ];
+
+  const period =
+    statement.basis === 'annual'
+      ? t('financial.periodAnnual', { year: statement.fiscal_year })
+      : t('financial.periodYearToDate', {
+          months: t(`quarter.months.Q${statement.quarter}`),
+          year: statement.fiscal_year,
+        });
+
+  return (
+    <>
+      <div className='space-y-1'>
+        <p className='text-kapwa-text-strong text-sm font-bold'>{period}</p>
+        <p className='text-kapwa-text-support text-xs'>
+          {t('financial.blgfLabel', { label: statement.blgf_label })}
+        </p>
+        {statement.basis === 'year_to_date' && (
+          <p className='text-kapwa-text-support max-w-3xl text-xs leading-relaxed'>
+            {t('financial.yearToDateNote')}
+          </p>
+        )}
+      </div>
+
       {/* 3. KPI Cards - Uses established card patterns inside SummaryCards */}
       <div role='region' aria-label={t('financial.summaryCards')}>
-        <SummaryCards
-          income={displayedIncome}
-          expenditure={displayedExpenditure}
-          fundSummary={displayedFundSummary}
-          prevYear={comparisonBaseline}
-        />
+        <SummaryCards statement={statement} prevYear={baseline} />
       </div>
 
       {/* 4. Charts Grid - Standardized Color Palettes */}
@@ -325,15 +331,17 @@ export default function FinancialPage() {
         />
       </div>
 
-      {/* 5. Accessibility Footer */}
-      <footer className='pt-10 text-center'>
-        <div className='border-kapwa-border-weak bg-kapwa-bg-surface inline-flex items-center gap-2 rounded-full border px-4 py-2 shadow-sm'>
-          <ShieldCheck className='h-4 w-4 text-kapwa-text-success' />
-          <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-            {t('financial.source')}
-          </span>
-        </div>
-      </footer>
-    </div>
+      {statement.withheld.length > 0 && (
+        <NotVerified
+          label={t('financial.withheldLabel', {
+            count: statement.withheld.length,
+          })}
+          detail={t('financial.withheldSocialServices')}
+        />
+      )}
+
+      {/* 5. Provenance */}
+      <SourceNote sources={statement.sources} />
+    </>
   );
 }

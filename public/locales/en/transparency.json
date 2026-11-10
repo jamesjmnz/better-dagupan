@@ -39,25 +39,49 @@
     "title": "Financial Performance",
     "breadcrumbTransparency": "Transparency",
     "breadcrumb": "Financial Report",
-    "verifiedAudit": "Verified Audit",
+    "status": {
+      "final": "BLGF: final",
+      "preliminary": "BLGF: preliminary"
+    },
     "fiscalYear": "FY {{year}}",
-    "millions": "Millions (PHP)",
-    "description": "Independent visualization of the {{adjectiveLower}} budget, including current operating income and expenditures.",
+    "pesos": "Amounts in pesos",
+    "description": "The {{adjectiveLower}} government's Statements of Receipts and Expenditures, as reported to the Bureau of Local Government Finance.",
     "summaryCards": "Financial Summary Cards",
     "incomeComposition": "Income Composition",
     "expenditureAllocation": "Expenditure Allocation",
-    "source": "Source: LGU SRE via BLGF and Full Disclosure Policy Portal"
+    "periodAnnual": "Fiscal year {{year}}, January to December",
+    "periodYearToDate": "{{months}} {{year}}, year to date",
+    "blgfLabel": "Period as labelled by BLGF: {{label}}",
+    "yearToDateNote": "Quarterly figures are year to date: each runs from January to the end of the quarter shown, and BLGF's fourth-quarter figures match its full-year statement. Quarters are never added together here.",
+    "noAnnual": "No full-year statement for FY {{year}} yet",
+    "noAnnualDetail": "Better Dagupan has not found a full-year BLGF statement for this fiscal year. Quarterly figures are not added together to make one; switch to the quarterly view to see the latest published period.",
+    "noYearToDate": "No quarterly statement for FY {{year}} yet",
+    "noYearToDateDetail": "Better Dagupan has not found a quarterly BLGF statement for this fiscal year. Switch to the annual view to see the full-year statement.",
+    "withheldLabel": "Some lines are withheld for this period",
+    "withheldSocialServices": "BLGF's 2024 quarterly workbook and its final FY 2024 statement give the Labor and Employment and the Housing and Community Development figures the other way round, so neither is shown for the 2024 quarters. The social-services total, on which both agree, is shown."
   },
   "summary": {
-    "revenue": "Total Revenue (M)",
-    "expenditure": "Total Expenditure (M)",
-    "netIncome": "Net Operating Income (M)",
-    "treasury": "Treasury Balance (M)"
+    "revenue": "Total Current Operating Income",
+    "expenditure": "Total Current Operating Expenditures",
+    "netIncome": "Net Operating Income",
+    "treasury": "Fund/Cash Balance, End"
   },
   "quarter": {
     "quarterly": "Quarterly",
     "annual": "Annual",
-    "period": "Period"
+    "period": "Period",
+    "yearToDate": {
+      "Q1": "Q1: January to March, year to date",
+      "Q2": "Q2: January to June, year to date",
+      "Q3": "Q3: January to September, year to date",
+      "Q4": "Q4: January to December, year to date"
+    },
+    "months": {
+      "Q1": "January to March",
+      "Q2": "January to June",
+      "Q3": "January to September",
+      "Q4": "January to December"
+    }
   },
   "chart": {
     "percentOfTotal": "{{percent}}% of total",

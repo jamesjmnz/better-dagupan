@@ -50,12 +50,19 @@ export interface CurrentOperatingIncome {
 
 // --- Expenditures ---
 
+/**
+ * The five social-services lines and their total.
+ *
+ * A line is null when Better Dagupan withholds it for a period because two
+ * BLGF releases disagree about it (see FinancialStatement.withheld). The
+ * total is still published when the releases agree on it.
+ */
 export interface SocialServices {
-  education_culture_sports_manpower_development: number;
-  health_nutrition_population_control: number;
-  labor_and_employment: number;
-  housing_and_community_development: number;
-  social_services_and_social_welfare: number;
+  education_culture_sports_manpower_development: number | null;
+  health_nutrition_population_control: number | null;
+  labor_and_employment: number | null;
+  housing_and_community_development: number | null;
+  social_services_and_social_welfare: number | null;
   total_social_services: number;
 }
 
@@ -122,17 +129,44 @@ export interface FundSummary {
   continuing_appropriation?: number;
 }
 
-// --- Financial Quarter ---
+// --- Financial Statement ---
 
-export interface FinancialQuarter {
+/** Why a published statement leaves a line out. */
+export type WithheldReason = 'conflicting_sources';
+
+/**
+ * One Statement of Receipts and Expenditures (SRE) as the Bureau of Local
+ * Government Finance publishes it for the city, transcribed cell for cell.
+ *
+ * Amounts are in pesos, to the centavo: BLGF's workbooks hold peso values and
+ * only display them in millions. Every total is BLGF's own, never summed here.
+ *
+ * BLGF's quarterly statements are year to date. A `year_to_date` statement for
+ * quarter 3 covers January to September, not July to September, so quarters
+ * must never be added together; the full year is its own `annual` statement.
+ */
+export interface FinancialStatement {
+  /** "Q3-2025" for a year-to-date statement, "FY-2025" for a full year. */
   period: string;
+  fiscal_year: number;
+  /** 1-4 for a year-to-date statement, null for a full-year one. */
+  quarter: 1 | 2 | 3 | 4 | null;
+  basis: 'year_to_date' | 'annual';
+  /** The period heading exactly as the BLGF sheet prints it. */
+  blgf_label: string;
+  /** "final" or "preliminary" only when BLGF labels the sheet so. */
+  status: 'final' | 'preliminary' | null;
   location_info: LocationInfo;
   current_operating_income: CurrentOperatingIncome;
   current_operating_expenditures: CurrentOperatingExpenditures;
   net_operating_income_loss_from_current_operations: number;
   non_income_receipts: NonIncomeReceipts;
   non_operating_expenditures: NonOperatingExpenditures;
-  fund_summary?: FundSummary;
+  fund_summary: FundSummary;
+  /** Lines left out of this statement, by dotted path, and why. */
+  withheld: { field: string; reason: WithheldReason }[];
+  /** Civic-source ids (src/data/sources/civic-sources.json). */
+  sources: string[];
 }
 
 // --- Empty helpers ---
@@ -232,17 +266,3 @@ export const emptyNonOperatingExpenditures = (): NonOperatingExpenditures => ({
   other_non_operating_expenditures: 0,
   total_non_operating_expenditures: 0,
 });
-// ... (Keep existing export interfaces)
-
-// --- Raw JSON Types (for safe parsing) ---
-// This mirrors the structure of your sre.json exactly so TypeScript knows what to expect
-export interface RawFinancialQuarter {
-  period: string;
-  location_info: LocationInfo;
-  current_operating_income?: Partial<CurrentOperatingIncome>; // JSON fields might be missing
-  total_current_operating_expenditures?: Partial<CurrentOperatingExpenditures>; // Note the key mismatch in JSON
-  net_operating_income_loss_from_current_operations?: number;
-  non_income_receipts?: Partial<NonIncomeReceipts>;
-  non_operating_expenditures?: Partial<NonOperatingExpenditures>;
-  fund_summary?: Partial<FundSummary>;
-}

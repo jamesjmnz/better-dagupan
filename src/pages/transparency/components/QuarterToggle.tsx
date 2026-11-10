@@ -106,6 +106,11 @@ export default function QuarterToggle({
                   key={q}
                   disabled={!isAvailable}
                   onClick={() => onQuarterChange(q)}
+                  // BLGF's quarterly statements are year to date, so "Q3"
+                  // alone would read as July to September. Say what it spans.
+                  aria-label={t(`quarter.yearToDate.${q}`)}
+                  aria-pressed={isSelected}
+                  title={t(`quarter.yearToDate.${q}`)}
                   className={`relative rounded-md px-4 py-1.5 text-xs font-medium transition-all duration-200 ${
                     !isAvailable
                       ? 'text-kapwa-text-support cursor-not-allowed bg-transparent' // Greyed out

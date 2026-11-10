@@ -3,29 +3,16 @@ import { useTranslation } from 'react-i18next';
 
 import { StatCard } from '@/components/ui/StatCard';
 
-import {
-  computeNetIncome,
-  computeTotalExpenditure,
-  computeTotalIncome,
-} from '@/lib/budgetUtils';
+import { formatPesoAdaptive } from '@/lib/format';
 
-import type {
-  CurrentOperatingExpenditures,
-  CurrentOperatingIncome,
-  FundSummary,
-} from '@/types/budgetTypes';
+import type { ComparisonBaseline } from '@/hooks/useFinancialData';
+
+import type { FinancialStatement } from '@/types/budgetTypes';
 
 // --- Types ---
 interface SummaryCardsProps {
-  income: CurrentOperatingIncome;
-  expenditure: CurrentOperatingExpenditures;
-  fundSummary?: Partial<FundSummary>;
-  prevYear?: {
-    totalIncome: number;
-    totalExpenditure: number;
-    netIncome: number;
-    fundCashEnd: number;
-  };
+  statement: FinancialStatement;
+  prevYear?: ComparisonBaseline;
 }
 
 // Helper to calculate YoY trend
@@ -36,44 +23,50 @@ const calculateTrend = (current: number, previous?: number) => {
   return { value: Math.abs(pct), positive: diff >= 0 };
 };
 
-// --- Summary Cards Component ---
+/**
+ * The four headline figures of a statement.
+ *
+ * Each is a total BLGF states on the statement itself, read as published
+ * rather than re-added from its parts, and shown in pesos.
+ */
 export default function SummaryCards({
-  income,
-  expenditure,
-  fundSummary,
+  statement,
   prevYear,
 }: SummaryCardsProps) {
   const { t } = useTranslation('transparency');
-  const totalIncome = computeTotalIncome(income);
-  const totalExpenditure = computeTotalExpenditure(expenditure);
-  const netIncome = computeNetIncome(income, expenditure);
-  const fundBalance = fundSummary?.fund_cash_balance_end ?? 0;
+  const totalIncome =
+    statement.current_operating_income.total_current_operating_income;
+  const totalExpenditure =
+    statement.current_operating_expenditures
+      .total_current_operating_expenditures;
+  const netIncome = statement.net_operating_income_loss_from_current_operations;
+  const fundBalance = statement.fund_summary.fund_cash_balance_end;
 
   const cards = [
     {
       label: t('summary.revenue'),
-      value: totalIncome,
+      amount: totalIncome,
       trend: calculateTrend(totalIncome, prevYear?.totalIncome),
       icon: Landmark,
       iconBg: 'bg-kapwa-green-50 text-kapwa-green-600',
     },
     {
       label: t('summary.expenditure'),
-      value: totalExpenditure,
+      amount: totalExpenditure,
       trend: calculateTrend(totalExpenditure, prevYear?.totalExpenditure),
       icon: ReceiptText,
       iconBg: 'bg-kapwa-red-50 text-kapwa-red-600',
     },
     {
       label: t('summary.netIncome'),
-      value: netIncome,
+      amount: netIncome,
       trend: calculateTrend(netIncome, prevYear?.netIncome),
       icon: Scale,
       iconBg: 'bg-kapwa-bg-brand-weak text-kapwa-text-brand',
     },
     {
       label: t('summary.treasury'),
-      value: fundBalance,
+      amount: fundBalance,
       trend: calculateTrend(fundBalance, prevYear?.fundCashEnd),
       icon: Vault,
       iconBg: 'bg-kapwa-orange-50 text-kapwa-orange-600',
@@ -82,8 +75,14 @@ export default function SummaryCards({
 
   return (
     <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4'>
-      {cards.map(card => (
-        <StatCard key={card.label} {...card} hover={true} />
+      {cards.map(({ amount, ...card }) => (
+        <StatCard
+          key={card.label}
+          {...card}
+          value={formatPesoAdaptive(amount).fullString}
+          subtext={formatPesoAdaptive(amount).raw}
+          hover={true}
+        />
       ))}
     </div>
   );
