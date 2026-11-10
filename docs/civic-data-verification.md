@@ -634,6 +634,147 @@ history.
   October 2026). It still lists 31 barangays and 174,777, but the barangay
   index cites the 2Q 2026 release and should be re-verified against the new one.
 
+## Worked example: the city's receipts and expenditures (November 2026)
+
+The census series had one agency stating each figure in several documents.
+The fiscal data has one agency and one underlying system: every figure comes
+from the Bureau of Local Government Finance (BLGF), compiled from the reports
+the city treasurer files through BLGF's LIFT system. Nobody else publishes
+them, so corroboration again comes from arithmetic and from separately issued
+BLGF workbooks agreeing.
+
+### Sources
+
+All from BLGF's "LGU Fiscal Data" statistics page
+(`blgf.gov.ph/lgu-fiscal-data/`), which links one XLSX per year and edition:
+
+| Workbook | Editions read | Ids |
+|---|---|---|
+| Statement of Receipts and Expenditures (SRE) by LGU, annual | FY 2022, FY 2023, FY 2024 (Final), FY 2025 (Preliminary) | `blgf-sre-by-lgu-fy2022` … `-fy2025` |
+| SRE by LGU, quarterly | FY 2022 to FY 2025 (four sheets each), FY 2026 third quarter | `blgf-sre-quarterly-fy2022` … `-fy2025`, `blgf-sre-quarterly-fy2026-q3` |
+| Annual Regular Income (ARI) and Dependencies by LGU | FY 2022 to FY 2025 | `blgf-ari-by-lgu-fy2022` … `-fy2025` |
+
+Each workbook has one row named "Dagupan City" (Region I, Pangasinan, LGU type
+City) and no other row mentioning Dagupan. The window starts at FY 2022 by
+choice, not because earlier years are missing: BLGF publishes SRE back to 1992
+and ARI back to 2009, and any of them can be added the same way.
+
+### The dates
+
+- **`published` is null everywhere.** No workbook states a release date. Each
+  carries an "Extraction date" on its Metadata sheet, which is when the data
+  were pulled from LIFT, not when BLGF released them, and the HTTP
+  `Last-Modified` header is an upload time. Both are recorded in `notes`,
+  neither in a date field, as with the city's CMS timestamps.
+- **`data_as_of` is null.** BLGF states no reference date; it states a fiscal
+  period.
+- **`coverage` holds that period** ("FY 2024", or "FY 2024, Q1 to Q4, each
+  year to date"). This is the field's definition — the period a document
+  covers — and the rule that goes with it, that anything taken from such a
+  source is labelled with the period wherever it appears, is met: the pages
+  print the fiscal year and quarter beside every figure. The barangay rule
+  that a record must never cite a source with a `coverage` exists because
+  those records describe the present; a fiscal statement describes only its
+  period, and says so on screen. The tests assert the opposite rule here: a
+  statement must cite the workbook whose coverage is its own year.
+- **One extraction date is not relied on.** The FY 2025 ARI workbook's
+  Metadata sheet says "November 27, 2025", the same as the FY 2024 edition and
+  earlier than the FY 2025 SRE it is built from ("March 03, 2026"). It looks
+  carried over, and the note says so.
+
+### Units: pesos, not millions
+
+Every sheet is headed "In Php Million", but the cells hold peso amounts that a
+`#,##0.00,,` number format displays in millions. The records carry the cell
+values, rounded to the centavo. The inherited Los Baños file stored rounded
+millions, and the pages multiplied some figures by a million and not others;
+both pages now format pesos throughout.
+
+### Quarterly figures are year to date
+
+BLGF's quarterly sheets are not three-month figures. Each covers January to
+the end of the quarter:
+
+- every Q4 sheet equals the full-year statement cell for cell (FY 2022, 2023
+  and 2025; FY 2024 with the exception below);
+- every statement opens with the same cash balance in all four quarters, and
+  that balance is the previous year's closing balance.
+
+The inherited financial page offered an "annual" view that **added the four
+quarters together**, which would have counted January four times. It now shows
+BLGF's full-year statement instead, or says that none exists (FY 2026), and
+labels each quarter with what it spans ("Q3: January to September, year to
+date"). Nothing is summed anywhere: every total on both pages is the one BLGF
+states, and the inherited loader that recomputed totals from their parts is
+gone.
+
+### Checks
+
+`sreProvenance.test.ts` and `ariProvenance.test.ts` assert, for all 21
+statements and 4 ARI records:
+
+- every total equals its parts, to half a centavo per part (local sources,
+  external sources, current operating income and expenditures, net operating
+  income, non-income receipts, non-operating expenditures, and the fund
+  summary down to the closing balance);
+- each Q4 statement equals its full-year statement;
+- each year opens with the previous year's closing balance;
+- ARI adds up by BLGF's own definition (LSR = RPT general fund + business tax
+  + other taxes + regulatory fees + service charges + economic enterprises;
+  ARI = LSR + allotment + other shares + interest income);
+- BLGF's stored dependency ratios equal LSR, allotment and other shares over
+  ARI, to 1e-8 — read, not computed, and checked;
+- the eight lines ARI shares with the SRE are identical in the two workbooks
+  for every year (interest income has no SRE column of its own);
+- the full-year totals and ARI figures equal pinned values.
+
+All pass.
+
+### Conflict: two social-services lines, FY 2024 quarterly
+
+Against the final FY 2024 statement, the FY 2024 quarterly workbook gives
+**Labor and Employment** and **Housing and Community Development** the other
+way round: Dagupan's Q4 reads 60,230,033.71 and 4,367,432.49 where the final
+statement reads 4,367,432.49 and 60,230,033.71. Every other cell agrees. The
+column headings are identical in both workbooks, and the swap is not
+Dagupan's: it holds for 605 of the 1,716 LGUs in the file — every one whose
+two values differ.
+
+The final statement is very likely right — its order matches every other year
+read for Dagupan, where housing is the larger line — but both are BLGF's own
+releases, neither is a correction of the other, and "very likely" is
+inference. So the two lines are **withheld for all four 2024 quarters**
+(`withheld: conflicting_sources`, values `null`), the social-services total
+both agree on is published, and the page says why with `NotVerified`. The
+FY 2024 full-year statement, which has no rival edition of its own, is
+published whole. Asking BLGF's Local Financial Data Analysis Division
+(`lfdad@blgf.gov.ph`) which workbook is correct would settle it.
+
+### Noted, not asserted
+
+- **Status labels** are BLGF's only: "(Final)" on the FY 2024 sheets and
+  "(Preliminary)" on FY 2025. The other editions say neither, so their status
+  is null. The FY 2025 ARI is marked preliminary from BLGF's file name
+  (`…2025Preliminary.xlsx`); the sheet heading says only "FY 2025". The
+  inherited "Verified Audit" badge is gone: these are treasurer-filed reports,
+  not audited statements, and nothing here is a COA finding.
+- **The allotment's name.** The FY 2022 ARI heads the column "Internal Revenue
+  Allotment (IRA)"; later editions "National Tax Allotment (NTA)". The page
+  uses each edition's own name.
+- **Income class.** The FY 2022 ARI workbook carries an "INCOME CLASS" column
+  reading "2nd" for Dagupan. It describes that edition, not necessarily the
+  city's class today, so it is recorded in the source note and not published.
+  BLGF's "LGU Income Class" page links DOF Department Order No. 074-2024, the
+  schedule under the first general reclassification under Republic Act
+  No. 11964, but the copy linked is a 36-page scanned image; it was not
+  transcribed here, so no current income class is published.
+- **Use constraints.** Each workbook's Metadata sheet asks that BLGF be
+  acknowledged as the source, allows citing or reproducing the data in whole
+  or in part provided BLGF is "duly informed and/or recognized", and restricts
+  reselling or redistributing it for viable purposes without written
+  permission. Each source records this as its `licence`, and every figure is
+  shown with a SourceNote naming BLGF.
+
 ## Note on retrieval
 
 The city pages were read directly from their HTML rather than through a
@@ -658,3 +799,10 @@ directly from their HTML, found through its monthly listings
 (`/thebookshelf/docmonth/<Mon>/<year>/<category>`). The council's history page
 was read through its WordPress REST endpoint. The PSGC pages and the Official
 Gazette's copy of the Constitution were read in an ordinary browser window.
+
+BLGF's site returns HTTP 403 to command-line fetchers. Its statistics page was
+read in an ordinary browser, and each workbook was downloaded by that same
+page with a plain same-origin request, exactly as a click on the link would.
+The workbooks were then read cell by cell, including their number formats and
+Metadata sheets, and the raw files were not committed. Only read-only GET
+requests to public URLs were made.
