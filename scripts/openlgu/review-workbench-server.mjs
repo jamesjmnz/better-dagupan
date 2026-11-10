@@ -11,6 +11,9 @@ const ROOT = path.resolve(__dirname, '../..');
 const PORT = Number(process.env.OPENLGU_REVIEW_PORT || 8789);
 const HOST = '127.0.0.1';
 const API_PREFIX = '/api/workbench';
+const OFFICIAL_WEBSITE = JSON.parse(
+  fs.readFileSync(path.join(ROOT, 'config/lgu.config.json'), 'utf8')
+).lgu.officialWebsite.replace(/\/+$/, '');
 
 const PATHS = {
   stagedDocuments: path.join(ROOT, 'pipeline/openlgu/staged-documents.jsonl'),
@@ -187,7 +190,7 @@ function fieldState(doc, field, projection) {
 function officialPdfUrl(pdfUrl) {
   if (!pdfUrl) return '';
   if (/^https?:\/\//i.test(pdfUrl)) return pdfUrl;
-  return `https://losbanos.gov.ph/${String(pdfUrl).replace(/^\/+/, '')}`;
+  return `${OFFICIAL_WEBSITE}/${String(pdfUrl).replace(/^\/+/, '')}`;
 }
 
 function localMirrorPath(pdfUrl) {

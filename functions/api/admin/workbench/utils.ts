@@ -4,6 +4,7 @@
  */
 
 import type { D1Database } from '@cloudflare/workers-types';
+import { officialWebsite } from '../../../utils/lgu';
 
 export interface WorkbenchStats {
   staged_documents: number;
@@ -672,5 +673,5 @@ function inferTerm(
 export function officialPdfUrl(pdfUrl: string): string {
   if (!pdfUrl) return '';
   if (/^https?:\/\//i.test(pdfUrl)) return pdfUrl;
-  return `https://losbanos.gov.ph/${pdfUrl.replace(/^\/+/, '')}`;
+  return `${officialWebsite}/${pdfUrl.replace(/^\/+/, '')}`;
 }
