@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "slug": "chartered-city",
+    "title": "Chartered city since 1947",
+    "description": "Created by Republic Act No. 170, approved on 20 June 1947.",
+    "icon": "Scroll",
+    "sources": ["sc-elibrary-ra-170-1947"]
+  },
+  {
+    "slug": "barangays",
+    "title": "31 barangays",
+    "description": "As listed in the Philippine Standard Geographic Code.",
+    "icon": "MapPin",
+    "sources": ["psa-psgc-dagupan-2026q2"]
+  },
+  {
+    "slug": "population-2024",
+    "title": "174,777 residents",
+    "description": "Counted in the 2024 Census of Population, as of 1 July 2024.",
+    "icon": "Users",
+    "sources": ["psa-2024-popcen-table-b-by-region", "psa-psgc-dagupan-2026q2"]
+  }
+]

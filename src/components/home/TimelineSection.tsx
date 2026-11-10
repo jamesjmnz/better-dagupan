@@ -17,6 +17,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 
 import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
 
+import { historyDateYear } from '@/lib/historyDates';
 import { config } from '@/lib/lguConfig';
 
 import highlightsRaw from '@/data/about/highlights.json';
@@ -94,7 +95,7 @@ export default function TimelineSection() {
                   <Card className='shadow-sm transition-all hover:border-kapwa-border-brand border-kapwa-border-weak hover:shadow-md'>
                     <CardContent className='flex flex-col gap-4 items-start p-4 sm:flex-row sm:p-5'>
                       <span className='inline-flex justify-center items-center px-3 py-1 text-xs font-bold rounded-lg shadow-sm bg-kapwa-bg-brand-default text-kapwa-text-inverse shrink-0'>
-                        {event.year}
+                        {historyDateYear(event.date)}
                       </span>
                       <div>
                         <h3 className='mb-1 text-base font-bold leading-tight text-kapwa-text-strong'>
