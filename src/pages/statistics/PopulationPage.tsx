@@ -26,11 +26,7 @@ import { cn } from '@/lib/utils';
 // Data Import
 import { NotYetAvailable } from '@/components/ui/NotYetAvailable';
 
-import populationRaw from '@/data/statistics/population.json';
-
-import type { PopulationData } from '@/types/populationTypes';
-
-const populationData = populationRaw as PopulationData;
+import { populationData } from '@/lib/populationStatistics';
 
 // 14 Highly Distinct Colors (Top 3 mapped to Brand Primaries)
 const BRGY_COLORS = [
