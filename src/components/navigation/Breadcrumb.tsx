@@ -9,6 +9,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import { ChevronRightIcon, HomeIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '../../lib/utils';
 
@@ -45,10 +46,11 @@ interface BreadcrumbSeparatorProps extends HTMLAttributes<HTMLLIElement> {
 
 const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(
   ({ className, children, ...props }, ref) => {
+    const { t } = useTranslation('ui');
     return (
       <nav
         ref={ref}
-        aria-label='breadcrumb'
+        aria-label={t('breadcrumb.label')}
         className={cn('py-2', className)}
         {...props}
       >
@@ -138,22 +140,25 @@ const BreadcrumbSeparator = ({
 BreadcrumbSeparator.displayName = 'BreadcrumbSeparator';
 
 const BreadcrumbHome = forwardRef<HTMLAnchorElement, BreadcrumbLinkProps>(
-  ({ className, href, children, ...props }, ref) => (
-    <Link
-      ref={ref}
-      to={href}
-      className={cn(
-        'hover:text-kapwa-text-strong text-kapwa-text-support flex items-center gap-1.5 font-medium transition-colors',
-        className
-      )}
-      // Icon-only by default, so it needs a name of its own.
-      aria-label={children ? undefined : 'Home'}
-      {...props}
-    >
-      <HomeIcon className='h-4 w-4' aria-hidden='true' />
-      {children}
-    </Link>
-  )
+  ({ className, href, children, ...props }, ref) => {
+    const { t } = useTranslation('ui');
+    return (
+      <Link
+        ref={ref}
+        to={href}
+        className={cn(
+          'hover:text-kapwa-text-strong text-kapwa-text-support flex items-center gap-1.5 font-medium transition-colors',
+          className
+        )}
+        // Icon-only by default, so it needs a name of its own.
+        aria-label={children ? undefined : t('breadcrumb.home')}
+        {...props}
+      >
+        <HomeIcon className='h-4 w-4' aria-hidden='true' />
+        {children}
+      </Link>
+    );
+  }
 );
 BreadcrumbHome.displayName = 'BreadcrumbHome';
 

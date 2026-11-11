@@ -2,6 +2,7 @@
 import { InputHTMLAttributes, ReactNode } from 'react';
 
 import { SearchIcon, XIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '../../lib/utils';
 
@@ -22,7 +23,7 @@ const SearchInput = ({
   value,
   onChangeValue,
   className,
-  placeholder = 'Search...',
+  placeholder,
   icon = <SearchIcon className='text-kapwa-text-disabled h-4 w-4' />,
   size = 'md',
   clearable = true,
@@ -34,6 +35,8 @@ const SearchInput = ({
   role,
   ...props
 }: SearchInputProps) => {
+  const { t } = useTranslation('ui');
+  const placeholderText = placeholder ?? t('search.placeholder');
   const handleClear = () => {
     onChangeValue('');
   };
@@ -55,7 +58,7 @@ const SearchInput = ({
         role={role}
         value={value}
         onChange={e => onChangeValue(e.target.value)}
-        aria-label={ariaLabel ?? placeholder}
+        aria-label={ariaLabel ?? placeholderText}
         aria-controls={ariaControls}
         aria-expanded={ariaExpanded}
         aria-autocomplete={ariaAutocomplete}
@@ -67,13 +70,13 @@ const SearchInput = ({
           'pl-11',
           clearable && value ? 'pr-10' : 'pr-4'
         )}
-        placeholder={placeholder}
+        placeholder={placeholderText}
         {...props}
       />
       {clearable && value && (
         <button
           type='button'
-          aria-label='Clear search'
+          aria-label={t('search.clear')}
           className='text-kapwa-text-disabled hover:text-kapwa-text-strong focus-visible:ring-kapwa-border-focus absolute inset-y-0 right-0 flex items-center pr-3 transition-colors focus-visible:ring-2 focus-visible:outline-none'
           onClick={handleClear}
         >

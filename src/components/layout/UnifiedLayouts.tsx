@@ -12,6 +12,7 @@ import {
 } from 'react';
 
 import { HomeIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 import { cn } from '@/lib/utils';
@@ -83,16 +84,17 @@ export interface PageHeaderProps {
 /**
  * Default breadcrumb label overrides for common routes.
  */
-const DEFAULT_BREADCRUMB_CONFIG: Record<string, string> = {
-  '/government/elected-officials': 'Elected Officials',
-  '/government/departments': 'Departments & Offices',
-  '/government/barangays': 'Barangays',
-  '/services': 'Services',
-  '/openlgu': 'OpenLGU Portal',
-  '/transparency': 'Transparency',
-  '/statistics': 'Statistics',
-  '/about': 'About',
-  '/accessibility': 'Accessibility',
+/** Route labels, as keys under `breadcrumb.routes` in the `ui` namespace. */
+const DEFAULT_BREADCRUMB_KEYS: Record<string, string> = {
+  '/government/elected-officials': 'electedOfficials',
+  '/government/departments': 'departments',
+  '/government/barangays': 'barangays',
+  '/services': 'services',
+  '/openlgu': 'openlgu',
+  '/transparency': 'transparency',
+  '/statistics': 'statistics',
+  '/about': 'about',
+  '/accessibility': 'accessibility',
 };
 
 /**
@@ -130,10 +132,17 @@ export function useBreadcrumbs(
   config: Record<string, string> = {}
 ): BreadcrumbItemType[] {
   const location = useLocation();
-  const mergedConfig = { ...DEFAULT_BREADCRUMB_CONFIG, ...config };
+  const { t } = useTranslation('ui');
+  const defaults = Object.fromEntries(
+    Object.entries(DEFAULT_BREADCRUMB_KEYS).map(([href, key]) => [
+      href,
+      t(`breadcrumb.routes.${key}`),
+    ])
+  );
+  const mergedConfig = { ...defaults, ...config };
 
   return [
-    { label: 'Home', href: '/' },
+    { label: t('breadcrumb.home'), href: '/' },
     ...location.pathname
       .split('/')
       .filter(Boolean)

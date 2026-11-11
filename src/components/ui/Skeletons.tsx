@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 export function CardSkeleton() {
   return (
     <div className='border-kapwa-border-weak bg-kapwa-bg-surface animate-pulse rounded-xl border p-6'>
@@ -25,15 +27,14 @@ interface PageLoadingStateProps {
   message?: string;
 }
 
-export function PageLoadingState({
-  message = 'Loading...',
-}: PageLoadingStateProps) {
+export function PageLoadingState({ message }: PageLoadingStateProps) {
+  const { t } = useTranslation('ui');
   return (
     <div className='flex items-center justify-center p-kapwa-3xl'>
       <div className='text-kapwa-text-disabled flex items-center gap-kapwa-md'>
         <div className='border-kapwa-border-brand border-t-kapwa-bg-brand-default h-5 w-5 animate-spin rounded-full border-2' />
         <span className='kapwa-body-sm-default kapwa-body-sm-strong'>
-          {message}
+          {message ?? t('loading.default')}
         </span>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 
 import { CHART_THEME } from '@/constants/charts';
+import { useTranslation } from 'react-i18next';
 import { ResponsiveContainer, TooltipProps } from 'recharts';
 
 import { cn } from '@/lib/utils';
@@ -32,6 +33,7 @@ export function ChartTooltip({
   label,
   formatter,
 }: ChartTooltipProps) {
+  const { t } = useTranslation('ui');
   if (active && payload && payload.length) {
     // Sort descending: highest values at the top
     const sortedPayload = [...payload].sort(
@@ -45,7 +47,7 @@ export function ChartTooltip({
           style={{ color: CHART_THEME.text }}
           className='mb-2 border-b border-kapwa-border-weak pb-1 text-[10px] font-bold tracking-widest uppercase'
         >
-          Year: {label}
+          {t('chart.year', { year: label })}
         </p>
 
         <div className='scrollbar-thin max-h-[320px] space-y-1.5 overflow-y-auto pr-1'>
@@ -82,7 +84,7 @@ export function ChartTooltip({
         </div>
 
         <div className='text-kapwa-text-support mt-2 flex items-center justify-between border-t border-kapwa-border-weak pt-2 text-[9px] font-bold tracking-tight uppercase'>
-          <span>Ranked by Value</span>
+          <span>{t('chart.rankedByValue')}</span>
           <div className='w-1 h-1 rounded-full bg-kapwa-bg-active' />
         </div>
       </div>
@@ -100,6 +102,7 @@ export function ChartContainer({
   className,
   title,
 }: ChartContainerProps) {
+  const { t } = useTranslation('ui');
   return (
     <div
       className={cn(
@@ -107,7 +110,7 @@ export function ChartContainer({
         className
       )}
       role='region'
-      aria-label={`Statistical chart showing ${title}`}
+      aria-label={t('chart.regionLabel', { title })}
     >
       {/*
           Standardized Chart Inner Spacing

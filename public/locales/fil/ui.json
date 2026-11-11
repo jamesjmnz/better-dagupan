@@ -26,5 +26,68 @@
     "menu": "Menu",
     "expand": "Ipakita ang Menu",
     "hide": "Itago ang Menu"
+  },
+  "loading": {
+    "page": "Naglo-load…",
+    "default": "Naglo-load...",
+    "data": "Naglo-load ang datos...",
+    "weather": "Naglo-load ang lagay ng panahon..."
+  },
+  "skipLink": "Lumaktaw sa pangunahing nilalaman",
+  "weatherUnavailable": "Hindi makuha ang lagay ng panahon",
+  "pagination": {
+    "showing": "Ipinapakita ang <bold>{{start}}-{{end}}</bold> sa <bold>{{total}}</bold>",
+    "rows": "Hilera:",
+    "previous": "Nakaraang pahina",
+    "next": "Susunod na pahina"
+  },
+  "search": {
+    "placeholder": "Maghanap...",
+    "clear": "Burahin ang hinahanap"
+  },
+  "select": {
+    "placeholder": "Pumili...",
+    "clear": "Burahin ang napili",
+    "search": "Maghanap ng opsiyon...",
+    "noOptions": "Walang nahanap na opsiyon"
+  },
+  "dialog": {
+    "close": "Isara"
+  },
+  "errorBoundary": {
+    "message": "Nagkaproblema sa pag-load ng seksiyong ito.",
+    "retry": "Subukang muli"
+  },
+  "breadcrumb": {
+    "label": "Breadcrumb",
+    "home": "Home",
+    "routes": {
+      "electedOfficials": "Mga Halal na Opisyal",
+      "departments": "Mga Departamento at Opisina",
+      "barangays": "Mga Barangay",
+      "services": "Mga Serbisyo",
+      "openlgu": "OpenLGU Portal",
+      "transparency": "Transparency",
+      "statistics": "Istatistika",
+      "about": "Tungkol",
+      "accessibility": "Accessibility"
+    }
+  },
+  "card": {
+    "officialWebsite": "Opisyal na Website",
+    "imageAlt": "Larawan ng card"
+  },
+  "chart": {
+    "year": "Taon: {{year}}",
+    "rankedByValue": "Nakaayos ayon sa Halaga",
+    "regionLabel": "Tsart ng istatistika para sa {{title}}"
+  },
+  "contact": {
+    "title": "Impormasyon sa Pakikipag-ugnayan",
+    "email": "Email",
+    "phone": "Telepono",
+    "address": "Address",
+    "website": "Website",
+    "hours": "Oras"
   }
 }
