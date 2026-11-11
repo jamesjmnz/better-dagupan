@@ -3,13 +3,16 @@
     "slug": "bids-and-awards-committee",
     "office_name": "Bids and Awards Committee",
     "name_variants": [],
-    "address": null,
-    "trunkline": [],
+    "address": "BAC Office, 2nd Floor, City Hall Complex, A.B. Fernandez Ave., Dagupan City",
+    "trunkline": ["0917-855-3267"],
     "website": null,
     "email": null,
     "department_head_status": "uncorroborated",
     "department_head": null,
-    "sources": ["dagupan-lgu-department-heads-officials"]
+    "sources": [
+      "dagupan-lgu-department-heads-officials",
+      "dagupan-lgu-bac-itb-goods-113cb-2026"
+    ]
   },
   {
     "slug": "city-accounting-office",
@@ -839,7 +842,7 @@
     ],
     "address": null,
     "trunkline": ["(075) 529-6184"],
-    "website": null,
+    "website": "https://sp.dagupan.gov.ph/",
     "email": null,
     "department_head_status": "published",
     "department_head": {
@@ -856,7 +859,9 @@
     "sources": [
       "dagupan-lgu-directories",
       "dagupan-lgu-department-heads-officials",
-      "dagupan-lgu-department-heads-the-city"
+      "dagupan-lgu-department-heads-the-city",
+      "dagupan-lgu-home",
+      "dagupan-sp-councilors"
     ]
   },
   {

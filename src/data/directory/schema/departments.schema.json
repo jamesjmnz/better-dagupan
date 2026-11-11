@@ -43,7 +43,7 @@
         }
       },
       "address": {
-        "description": "Null until an authoritative address is sourced. The city publishes an address for only two of its offices.",
+        "description": "Null until an authoritative address for this office is sourced: stated by two source families, or by the office itself in its own dated issuance. Never copied from city hall's address or from another office in the same building.",
         "type": ["string", "null"]
       },
       "trunkline": {
@@ -52,7 +52,7 @@
         "items": { "type": "string", "minLength": 1 }
       },
       "website": {
-        "description": "Null until an authoritative page is sourced.",
+        "description": "Null until two source families point to the office's own site.",
         "type": ["string", "null"],
         "format": "uri"
       },
