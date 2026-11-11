@@ -168,9 +168,8 @@ async function fetchCityWeather(
 
     // Format the response data based on the comprehensive structure
     return {
-      name:
-        currentData.name ||
-        cityName.charAt(0).toUpperCase() + cityName.slice(1),
+      // The configured name, not the nearest station OpenWeatherMap reports
+      name: cityName,
       coordinates: currentData.coord || { lat, lon },
       weather: currentData.weather || [],
       main: currentData.main || {
@@ -248,7 +247,7 @@ async function fetchWeatherData(
 export async function onRequest(context: {
   request: Request;
   env: Env;
-  ctx: ExecutionContext;
+  waitUntil: (promise: Promise<unknown>) => void;
 }): Promise<Response> {
   const url = new URL(context.request.url);
   const origin = url.origin;
@@ -270,7 +269,7 @@ export async function onRequest(context: {
       const weatherData = await fetchWeatherData(context.env, cityParam);
 
       // Fire-and-forget cache write
-      context.ctx.waitUntil(cacheWeather(context.env, weatherData, cityParam));
+      context.waitUntil(cacheWeather(context.env, weatherData, cityParam));
 
       // Return the fresh data with secure CORS headers
       return new Response(JSON.stringify(weatherData), {
@@ -321,7 +320,7 @@ export async function onRequest(context: {
     const weatherData = await fetchWeatherData(context.env, cityParam);
 
     // Fire-and-forget cache write
-    context.ctx.waitUntil(cacheWeather(context.env, weatherData, cityParam));
+    context.waitUntil(cacheWeather(context.env, weatherData, cityParam));
 
     // Return the response
     return new Response(JSON.stringify(weatherData), {

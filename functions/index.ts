@@ -68,7 +68,11 @@ export default {
 
     // Route API requests to the appropriate handler
     if (path === '/api/weather') {
-      const response = await weatherRequest({ request, env, ctx });
+      const response = await weatherRequest({
+        request,
+        env,
+        waitUntil: promise => ctx.waitUntil(promise),
+      });
       // Add CORS headers to the response
       const newHeaders = new Headers(response.headers);
       const corsHeaders = getCorsHeaders(origin);
