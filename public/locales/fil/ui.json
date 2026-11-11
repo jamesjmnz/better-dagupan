@@ -36,6 +36,8 @@
   "skipLink": "Lumaktaw sa pangunahing nilalaman",
   "weatherUnavailable": "Hindi makuha ang lagay ng panahon",
   "pagination": {
+    "label": "Paglipat ng pahina",
+    "page": "Pahina {{page}}",
     "showing": "Ipinapakita ang <bold>{{start}}-{{end}}</bold> sa <bold>{{total}}</bold>",
     "rows": "Hilera:",
     "previous": "Nakaraang pahina",

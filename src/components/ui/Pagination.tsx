@@ -94,7 +94,10 @@ export function PaginationControls({
       </div>
 
       {/* Right: Navigation Buttons */}
-      <nav className='isolate flex items-center gap-1 rounded-md shadow-sm'>
+      <nav
+        aria-label={t('pagination.label')}
+        className='isolate flex items-center gap-1 rounded-md shadow-sm'
+      >
         <Button
           variant='outline'
           size='sm'
@@ -111,6 +114,7 @@ export function PaginationControls({
             page === '...' ? (
               <span
                 key={`ellipsis-${idx}`}
+                aria-hidden='true'
                 className='text-kapwa-text-support px-2 py-1 text-xs'
               >
                 ...
@@ -118,7 +122,10 @@ export function PaginationControls({
             ) : (
               <button
                 key={idx}
+                type='button'
                 onClick={() => onPageChange(page as number)}
+                aria-label={t('pagination.page', { page })}
+                aria-current={currentPage === page ? 'page' : undefined}
                 className={`h-8 w-8 rounded-lg text-xs font-bold transition-colors ${
                   currentPage === page
                     ? 'bg-kapwa-bg-brand-default text-kapwa-text-inverse'
