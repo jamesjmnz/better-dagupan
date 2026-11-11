@@ -133,6 +133,9 @@ npx playwright test --debug
 # Run unit tests
 npm run test -- --run
 
+# Type-check the app, the Node config, and the functions
+npm run typecheck
+
 # Check linting
 npm run lint
 
@@ -144,21 +147,27 @@ npm run format
 
 ### What CI runs on a pull request
 
-Pull requests are gated by four checks:
+Pull requests are gated by these checks:
 
 | Check | Command |
 |---|---|
-| Code Quality Checks | `npm run lint` (plus `tsc --noEmit` and a Prettier check) |
+| Code Quality Checks | `npm run typecheck`, `npm run lint`, and `npx prettier --check .` |
 | Unit Tests | `npm run test -- --run` |
 | Production Build Check | `npm run build` |
 | E2E Smoke Tests | `npx playwright test --project=chromium --grep @smoke` |
+| Validate JSON files against schema | `scripts/validate-json-schema.js`; runs only when `src/data/**/*.json` or a schema changes |
 
-The full cross-browser Playwright suite (`.github/workflows/e2e.yml`) does
-**not** run on pull requests. It takes longer than the job timeout allows and
-still fails in bulk, mostly in specs that expect data Better Dagupan has not
-published yet, so it runs weekly and on demand via `workflow_dispatch` while it
-is being repaired. Trigger it from
-the Actions tab before merging anything that touches rendering broadly.
+The full cross-browser Playwright suite and the axe accessibility suite
+(`@a11y`) live in `.github/workflows/e2e.yml` and do **not** run on pull
+requests: across five browser projects the suite takes longer than a pull
+request should wait. They run weekly and on demand via `workflow_dispatch`.
+Trigger them from the Actions tab before merging anything that touches
+rendering broadly, or run them locally:
+
+```bash
+npm run test:e2e                                          # every project, excluding @visual
+npx playwright test --project=chromium --grep @a11y       # accessibility only
+```
 
 Tag a test `@smoke` only if it must hold for any LGU — the smoke suite has to
 survive the Dagupan adaptation without edits. Assertions about specific
@@ -248,9 +257,24 @@ first. In short:
 Never add officials, offices, contacts, services, budgets, or legislation from
 memory or from an unofficial source.
 
-To report a wrong fact without editing data yourself, use the portal's
-`/report-an-error` page or the "Incorrect civic information" issue form
-(`.github/ISSUE_TEMPLATE/incorrect-civic-info.yml`).
+### Reporting an Error
+
+You do not need to edit data to fix a wrong fact:
+
+1. Follow the "Report an error" link in the source note on the page, or open
+   `/report-an-error` from the footer. The link carries the page's path, without
+   its query string or fragment.
+2. The page links to the "Incorrect Civic Information" issue form
+   (`.github/ISSUE_TEMPLATE/incorrect-civic-info.yml`) with the page URL filled
+   in. The form asks what is wrong, the correct information, and a link to
+   where it is officially published. It is labelled `data-correction`.
+3. A maintainer checks the official source and, if it holds, corrects the
+   record in a `data:` commit following the verification guide.
+
+Issues are public, so leave out personal information such as phone numbers or
+home addresses. To suggest a new service instead, use the "Service
+Contribution" form (`.github/ISSUE_TEMPLATE/contribution.yml`) linked from the
+`/contribute` page and the services pages.
 
 ### Contributing Translations
 
