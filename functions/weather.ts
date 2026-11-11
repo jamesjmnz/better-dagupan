@@ -3,16 +3,7 @@
  * This endpoint is a simplified version that only reads from KV
  */
 import { Env } from './types';
-
-/**
- * CORS Configuration
- * Restricts API access to trusted origins only (security fix for T-059)
- */
-const ALLOWED_ORIGINS = [
-  // Better Dagupan has no production domain yet; add it here once assigned.
-  'http://localhost:5173', // Vite dev server
-  'http://localhost:8788', // Wrangler dev server
-];
+import { ALLOWED_ORIGINS } from './utils/origins';
 
 /**
  * Get appropriate CORS headers based on request origin

@@ -3,6 +3,8 @@ import { describe, expect, it } from 'vitest';
 import { config } from '@/lib/lguConfig';
 import { lguLabels } from '@/lib/lguLabels';
 
+import { ALLOWED_ORIGINS } from '../../../functions/utils/origins';
+
 /** Anything that would put the inherited portal or LGU back on screen. */
 const INHERITED = /betterlb|los ba(ñ|n)os|losbanos/i;
 
@@ -33,11 +35,13 @@ describe('Better Dagupan public identity', () => {
     ]);
   });
 
-  it('claims no domain or social account it does not own', () => {
-    // Deliberately unset until a production domain is assigned. An empty
-    // baseUrl keeps SEO canonicals root-relative instead of inventing a host.
-    expect(config.portal.domain).toBe('');
-    expect(config.portal.baseUrl).toBe('');
+  it('serves from its own Pages project and claims no social account', () => {
+    // The Cloudflare Pages project named in wrangler.jsonc. No custom domain
+    // is assigned; a later one replaces both values together.
+    expect(config.portal.domain).toBe('better-dagupan.pages.dev');
+    expect(config.portal.baseUrl).toBe(`https://${config.portal.domain}`);
+    // The APIs only answer browsers on an allowed origin.
+    expect(ALLOWED_ORIGINS).toContain(config.portal.baseUrl);
     expect(config.portal.discordUrl).toBe('');
     expect(config.portal.facebookUrl).toBe('');
     expect(config.portal.githubUrl).toBe(

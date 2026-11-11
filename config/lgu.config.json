@@ -12,8 +12,8 @@
   },
   "portal": {
     "name": "Better Dagupan",
-    "domain": "",
-    "baseUrl": "",
+    "domain": "better-dagupan.pages.dev",
+    "baseUrl": "https://better-dagupan.pages.dev",
     "description": "Community-powered portal of the City of Dagupan.",
     "brandColor": "#0066eb",
     "footerBrandName": "Better Dagupan",
