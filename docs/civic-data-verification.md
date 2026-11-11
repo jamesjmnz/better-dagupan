@@ -274,6 +274,94 @@ dated city article lists a "Karlos Reyna" among the councillors elected in May
 not treated as corroborating. **No claim is made that they are the same person**,
 and no document establishing it was found.
 
+### Revisited: contacts and withheld heads (November 2026)
+
+On 2026-11-11 the city site answered normally, and the directory's gaps were
+worked through office by office. The four roster pages were re-read first;
+their `article:modified_time` stamps are unchanged from August. The city site
+has no per-office pages: its 54 pages and its `directory` post type (which
+holds restaurants and hotels) were listed through the REST API, so the new
+evidence came from three other places — dated city articles, the Bids and
+Awards Committee's own procurement notices, and the council's website.
+
+**Heads: four conflicts settled by dated articles.** The roster families
+disagreed because one of them is older, not because the city is unsure who runs
+its offices. A dated city article is a separate family (the city newsroom, as
+in the elected-officials example) and says who held a post *on a date*. Where
+the most recent article naming anyone in the post names the person the
+Directory-family rosters name — surname and given name, as before — two
+families agree and the head is published, cited to those sources only:
+
+| Office | Published | Dated article | The City roster's name, and what the articles say |
+|---|---|---|---|
+| City Health Office | Ma. Julita P. De Venecia, City Health Officer | 8 Oct 2026 ("City Health Officer Dra. Julita De Venecia") | Ophelia T. Rivera, named City Health Officer in city articles to December 2024 |
+| City Agriculture Office | Mary Ann A. Salomon, City Agriculturist | 23 Dec 2025 ("led by Chief Mary Ann Salomon") | John Patrick Dizon, named agriculture officer-in-charge in articles from 2023 to July 2024 |
+| City Human Resource Management Office | Froiland Jover F. Fermill, City Human Resource Management Officer | 20 Jan 2026 ("Human Resource Management Officer Atty. Froiland Fermill") | Lana Q. Balolong; no article names her |
+| City Tourism Office | Sharon M. Maramba, Officer-in-charge | 13 Aug 2025 ("Tourism Officer-in-Charge Sharon Maramba") | Karlos Reyna IV; no article names him as tourism head |
+
+The older roster's name is never published and its page is never cited for
+these heads. `SETTLED_BY_DATED_NEWS` in `departmentProvenance.test.ts` records
+each name exactly as each cited source prints it and fails if a cited source
+does not print the surname and a shared given name, if no dated article is
+cited, or if the older name reaches the record. Articles that spell the
+agriculturist "Mae Ann" are not cited.
+
+**Still withheld (7).**
+
+| Office | Status | Why |
+|---|---|---|
+| City Information Office | `conflicting_sources` | The Directory says "Divino M. Paragas", the Officials page and the older roster "Dave M. Paragas"; no article names the head. "Dave" is not established to be a form of "Divino". |
+| Office of Senior Citizens Affairs | `conflicting_sources` | Alena Minette S. Ferrer against Zenaida Sinlao; no article names either. |
+| One-Stop Business Center | `conflicting_sources` | Angelinda M. Ngilay against Helen Ngilay; no article names either. |
+| Bids and Awards Committee | `uncorroborated` | The roster names the secretariat, not a head. The committee's notices are signed by its chairperson, but its notices are one family and nothing else names her in that post. |
+| City Administrator's Office | `uncorroborated` | Only the older roster lists it, in one row with the City Mayor's Office; no article names an administrator. |
+| Dagupan City Public Library & Information Center | `uncorroborated` | Marilyn P. Caguioa on the Directory-family rosters only. |
+| Youth and Sports Development Program | `uncorroborated` | The Officials page names Finnela T. Sim, "Sports Development Officer". Articles of 2024–2026 name her as Sports Development Officer IV leading the "Dagupan City Sports Commission", never this program, so the second family ties her to a different office name. |
+
+**Contacts.** One rule carried over and one was added:
+
+- A number or a website needs **two families**. The committee's mobile
+  `0917-855-3267` is on the Officials-section roster and on its own Invitations
+  to Bid. The council's site, `https://sp.dagupan.gov.ph/`, is linked as
+  "Legislative" by the city site's own navigation and names itself the
+  Sangguniang Panlungsod. That is the only website published, and the one
+  record allowed to cite a source published by the council rather than by the
+  city government.
+- An **address** may also rest on **the office's own dated issuance**. The
+  committee's Invitations to Bid of July and October 2026 each require bids to
+  be delivered to "BAC Office, 2nd Floor, City Hall Complex, A.B. Fernandez
+  Ave., Dagupan City"; it is the committee stating, on a dated procurement
+  notice, where its own office is. The test allows this basis for that one
+  record and requires two families for any other address.
+
+| Field | Before | After | Still missing |
+|---|---|---|---|
+| Address | 1 | 2 | 32 |
+| Contact number | 28 | 29 | 5 |
+| Email | 2 | 2 | 32 |
+| Website | 0 | 1 | 33 |
+| Head | 23 | 27 | 7 |
+
+**Contacts still withheld, and why.**
+
+| Office | Value | Why |
+|---|---|---|
+| Bids and Awards Committee | email | The roster gives `bacdagupan@gmail.com`; the committee's notices give `asi_aaron@yahoo.com`, which reads as an individual's address. They disagree. |
+| Sangguniang Panlungsod | address | "2nd Floor SP Building, …" is in the council site's footer only, undated. The council's news of a "regular session on the third floor of SP building" places the session hall, not the office. |
+| City Information Office | address | The Directory page's side panel only. |
+| General Services Office, Youth and Sports Development Program | emails, numbers | Officials page only (GSO's other number, "523 0743", is on the older roster only and malformed). |
+| City Assessor's Office, Management Information System Office, City Administrator's Office | numbers | One roster each, or none. |
+| City Mayor's Office | email | `dagupanlgu@gmail.com` is on Contact Us only, where it is also city hall's general inquiries address. |
+
+**Not used.** `online.dagupan.gov.ph`, linked from the city's navigation as
+"Online Services", lists the One-Stop Business Center's two numbers for
+inquiries, but no page says it is that office's site. Facebook pages are not
+among this document's acceptable sources and were not read. Searches of BLGF,
+DOLE and DILG Region I for per-office directories found none covering Dagupan's
+offices. Two subdomains in the city's certificate records,
+`alerto.dagupan.gov.ph` and `safetyseal.dagupan.gov.ph`, now serve unrelated
+spam; nothing is taken from them.
+
 ## Worked example: the elected officials (November 2026)
 
 An office exists whoever runs it. A name on the elected-officials page is a
@@ -539,6 +627,35 @@ city group above the national hotlines, each a `tel:` link named "Call PNP
 Dagupan at (075) 529-5604". `toTelUri()` previously recognised only the 049
 area code inherited from the template, so every (075) landline — including the
 office directory's — produced no link at all; it now accepts any area code.
+
+### Revisited (November 2026)
+
+On 2026-11-11 the four withheld numbers were looked for again: in all 263 city
+news posts, every page of the city site, the council site's 58 posts, and the
+city's national-agencies table. None of the three helplines appears anywhere
+but the emergency list, so all three stay withheld for the same reason.
+
+The search turned up one new conflict. The city's **National Agencies** page
+(`/the-city/national-agencies/`, undated, CMS stamp May 2023) gives
+**"632 – 3296" to the Philippine National Bank** and lists the Philippine
+National Red Cross at "523 – 1468" and "515 – 1111". The emergency list gives
+632-3296 to Red Cross Dagupan. Under the rule this example already applied to
+PAMANA — a number cannot belong to two entities — the Red Cross landline is
+**withdrawn** and the entry keeps its mobile, `0928-559-2701`. The same page
+gives the Dagupan City Water District "529 – 0467", which is one more reason
+the 515-3140 shown for PAMANA stays withheld. The page looks older than the
+rosters, so none of its own numbers is published either; it is catalogued
+(`dagupan-lgu-national-agencies`), cited by no record, so the reason can be
+traced. Every other published hotline and office number was checked against its
+56 rows: only BFP's (075) 522-2772 appears, under the BFP.
+
+| Withheld | Number | Why |
+|---|---|---|
+| PAMANA (Dagupan City Water District) | 515-3140 | As above: CSWDO's number on three lists; the national-agencies page gives the water district another number. |
+| Anti-VAWC, Anti-Bullying and Anti-Suicide helplines | 0933-378-8888, 0960-260-6036, 0969-045-1111 | Still on the emergency list only. |
+| Red Cross Dagupan landline | (075) 632-3296 | New: another city page gives the number to the Philippine National Bank. |
+
+The city group now shows 10 entries and 24 numbers.
 
 ## Worked example: the history timeline (November 2026)
 
@@ -1220,4 +1337,13 @@ live pages on 2026-11-11; the roster's history was read from the Internet
 Archive's CDX listing and its captures. The statutes were read on the Supreme
 Court E-Library, found through its monthly listings, and the COMELEC minute
 resolution as the signed PDF its resolutions page links. Only read-only GET
+requests to public URLs were made.
+
+For the November revisit of the office directory and hotlines, the city site
+and the council site were read through their public WordPress REST endpoints
+(`/wp-json/wp/v2/pages`, `/posts`, `/media`, and the city's `bac` and
+`directory` types), with the page HTML read where content sits outside the
+post body, as the Directory page's address panel does. The Invitations to Bid
+were downloaded from the city's own uploads and read in full. Subdomains were
+listed from public certificate-transparency records. Only read-only GET
 requests to public URLs were made.

@@ -8,7 +8,13 @@ import { test, expect } from '../test-config';
  * page. Every assertion is unconditional.
  */
 const CITY_ENTRY_COUNT = 10;
-const WITHHELD_NUMBERS = ['0933-378-8888', '0960-260-6036', '0969-045-1111'];
+const WITHHELD_NUMBERS = [
+  '0933-378-8888',
+  '0960-260-6036',
+  '0969-045-1111',
+  // Another city page gives this Red Cross landline to a bank.
+  '632-3296',
+];
 
 async function gotoHotlines(page: import('@playwright/test').Page) {
   await page.goto('/');
@@ -47,7 +53,7 @@ test.describe('Emergency hotlines', () => {
       .getByRole('list')
       .first()
       .locator('a[href^="tel:+63"]');
-    await expect(cityLinks).toHaveCount(25);
+    await expect(cityLinks).toHaveCount(24);
   });
 
   test('cites the city pages and says some numbers are held back', async ({
