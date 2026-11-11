@@ -150,15 +150,8 @@ export default function WeatherMapSection() {
     };
   }, [hall, hallLocation]);
 
-  // Safe hourly forecast
-  const hourlyForecast: HourlyForecast[] =
-    weather?.hourly && weather.hourly.length > 0
-      ? weather.hourly.slice(0, 4)
-      : Array.from({ length: 4 }, (_, i) => ({
-          hour: `${i + 1}PM`,
-          temperature: weather?.temperature ?? 30,
-          icon: weather?.icon ?? 'Sun',
-        }));
+  // Only real forecast entries: no stand-in hours when the API sends none.
+  const hourlyForecast: HourlyForecast[] = weather?.hourly?.slice(0, 4) ?? [];
 
   const WeatherIcon = weather ? weatherIcons[weather.icon || 'Sun'] : Sun;
 
@@ -217,25 +210,27 @@ export default function WeatherMapSection() {
                   </div>
 
                   {/* Bottom: Hourly forecast */}
-                  <div className='flex justify-between gap-2'>
-                    {hourlyForecast.map((h, idx) => {
-                      const IconComp = weatherIcons[h.icon] || Sun;
-                      return (
-                        <div
-                          key={idx}
-                          className='hover:bg-kapwa-bg-surface-brand bg-kapwa-bg-hover flex w-full flex-col items-center gap-1.5 rounded-xl p-2 transition-all duration-200 hover:-translate-y-0.5 sm:flex-1 sm:p-3'
-                        >
-                          <IconComp className='text-kapwa-text-brand h-6 w-6' />
-                          <div className='text-base font-bold'>
-                            {h.temperature}°
+                  {hourlyForecast.length > 0 && (
+                    <div className='flex justify-between gap-2'>
+                      {hourlyForecast.map((h, idx) => {
+                        const IconComp = weatherIcons[h.icon] || Sun;
+                        return (
+                          <div
+                            key={idx}
+                            className='hover:bg-kapwa-bg-surface-brand bg-kapwa-bg-hover flex w-full flex-col items-center gap-1.5 rounded-xl p-2 transition-all duration-200 hover:-translate-y-0.5 sm:flex-1 sm:p-3'
+                          >
+                            <IconComp className='text-kapwa-text-brand h-6 w-6' />
+                            <div className='text-base font-bold'>
+                              {h.temperature}°
+                            </div>
+                            <div className='text-kapwa-text-support text-xs'>
+                              {h.hour}
+                            </div>
                           </div>
-                          <div className='text-kapwa-text-support text-xs'>
-                            {h.hour}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
+                        );
+                      })}
+                    </div>
+                  )}
                 </>
               ) : (
                 <p className='text-kapwa-text-strong'>

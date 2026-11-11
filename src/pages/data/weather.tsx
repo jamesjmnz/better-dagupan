@@ -11,7 +11,7 @@ import { fetchWeatherData, weatherIcons } from '../../lib/weather';
 import { WeatherData } from '../../types';
 
 const WeatherPage: FC = () => {
-  const { t, i18n } = useTranslation('pages');
+  const { t } = useTranslation('pages');
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -194,53 +194,6 @@ const WeatherPage: FC = () => {
                         {selectedCityData.visibility} km
                       </div>
                     </div>
-                  </div>
-                </div>
-
-                {/* Weather Forecast */}
-                <div className='bg-kapwa-bg-surface mt-8 hidden rounded-lg p-6 shadow-md'>
-                  <h3 className='text-kapwa-text-support mb-4 text-xl font-bold'>
-                    {t('weather.forecast')}
-                  </h3>
-                  <div className='grid grid-cols-1 gap-4 sm:grid-cols-5'>
-                    {[...Array(5)].map((_, index) => {
-                      const date = new Date();
-                      date.setDate(date.getDate() + index);
-                      const dayName = date.toLocaleDateString(i18n.language, {
-                        weekday: 'short',
-                      });
-                      const dayNum = date.getDate();
-
-                      // Generate some mock forecast data
-                      const mockTemp = Math.round(
-                        selectedCityData.temperature + (Math.random() * 6 - 3)
-                      );
-                      const mockIcon =
-                        index % 2 === 0 ? selectedCityData.icon : 'Cloud';
-
-                      return (
-                        <div
-                          key={index}
-                          className='bg-kapwa-bg-surface-raised rounded-lg p-4 text-center'
-                        >
-                          <p className='text-kapwa-text-support font-medium'>
-                            {dayName}
-                          </p>
-                          <p className='text-kapwa-text-support mb-2 text-sm'>
-                            {dayNum}
-                          </p>
-                          <div className='my-2 flex justify-center'>
-                            {getWeatherIcon(
-                              mockIcon,
-                              'h-8 w-8 text-kapwa-text-support'
-                            )}
-                          </div>
-                          <p className='text-kapwa-text-support text-lg font-semibold'>
-                            {mockTemp}°C
-                          </p>
-                        </div>
-                      );
-                    })}
                   </div>
                 </div>
               </div>
