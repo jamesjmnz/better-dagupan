@@ -3,22 +3,27 @@
 /**
  * Script to generate llms.txt file for AI crawler guidance
  * This follows the static site generation pattern inherited from BetterGov.ph
+ *
+ * Despite the file name this writes public/llms.txt, not sitemap.xml; the
+ * XML sitemap comes from scripts/generate-sitemap-xml.ts at build time. It
+ * runs under tsx so it can share the route list in src/lib/siteRoutes.ts.
  */
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import { isRouteEnabled, PUBLIC_ROUTES } from '../src/lib/siteRoutes.ts';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Portal identity comes from the LGU config so a fork never publishes the
-// upstream project's name or domain. baseUrl is empty until a production
-// domain is assigned, which keeps these links root-relative rather than
-// pointing at someone else's site.
-const lguConfigPath = path.join(__dirname, '../config/lgu.config.json');
-const lguConfig = JSON.parse(fs.readFileSync(lguConfigPath, 'utf8'));
+// upstream project's name or domain. A fork without a domain yet gets
+// root-relative links rather than links to someone else's site.
+const lguConfig = readJson('config/lgu.config.json');
 const SITE_NAME = lguConfig.portal.name;
 const SITE_URL = lguConfig.portal.baseUrl || '';
+const LGU = lguConfig.lgu.fullName;
 const LEGISLATIVE_LABEL =
   {
     city: 'Sangguniang Panlungsod',
@@ -26,74 +31,14 @@ const LEGISLATIVE_LABEL =
     municipality: 'Sangguniang Bayan',
   }[lguConfig.lgu.type] || 'Sangguniang Bayan';
 
-// Import data paths
-const serviceCategoriesPath = path.join(
-  __dirname,
-  '../src/data/service_categories.json'
-);
-const departmentsPath = path.join(
-  __dirname,
-  '../src/data/directory/departments.json'
-);
-const legislativePath = path.join(
-  __dirname,
-  '../src/data/directory/legislative.json'
-);
-const executivePath = path.join(
-  __dirname,
-  '../src/data/directory/executive.json'
-);
+function readJson(relative) {
+  return JSON.parse(
+    fs.readFileSync(path.join(__dirname, '..', relative), 'utf8')
+  );
+}
 
-// Routes this portal actually serves, mirroring src/App.tsx. The template
-// shipped the upstream national portal's navigation (/philippines, /travel),
-// which does not exist here, so crawlers were pointed at 404s.
-const mainNavigation = [
-  {
-    label: 'Services',
-    href: '/services',
-    children: [], // Populated from service categories below
-  },
-  {
-    label: 'Government',
-    href: '/government',
-    children: [
-      { label: 'Elected Officials', href: '/government/elected-officials' },
-      {
-        label: 'Committees',
-        href: '/government/elected-officials/committees',
-      },
-      { label: 'Departments', href: '/government/departments' },
-      { label: 'Barangays', href: '/government/barangays' },
-    ],
-  },
-  {
-    label: 'Statistics',
-    href: '/statistics',
-    children: [
-      { label: 'Competitiveness', href: '/statistics/competitiveness' },
-      { label: 'Income', href: '/statistics/municipal-income' },
-    ],
-  },
-  {
-    label: 'Transparency',
-    href: '/transparency',
-    children: [
-      { label: 'Financial Reports', href: '/transparency/financial' },
-      { label: 'Procurement', href: '/transparency/procurement' },
-      { label: 'Infrastructure', href: '/transparency/infrastructure' },
-    ],
-  },
-  {
-    label: 'OpenLGU',
-    href: '/openlgu',
-    children: [],
-  },
-  {
-    label: 'Contribute',
-    href: '/contribute',
-    children: [],
-  },
-];
+const asArray = json => (Array.isArray(json) ? json : []);
+const link = href => `${SITE_URL}${href}`;
 
 // Helper to safely get the categories array regardless of JSON format
 function getSafeCategories(json) {
@@ -103,35 +48,20 @@ function getSafeCategories(json) {
   return [];
 }
 
-// Function to load data
 function loadData() {
   try {
-    // Import service categories
-    const serviceCategoriesRaw = fs.readFileSync(serviceCategoriesPath, 'utf8');
-    const serviceCategories = JSON.parse(serviceCategoriesRaw);
-
-    // Import government directory data
-    const departments = JSON.parse(fs.readFileSync(departmentsPath, 'utf8'));
-    const legislative = JSON.parse(fs.readFileSync(legislativePath, 'utf8'));
-    const executive = JSON.parse(fs.readFileSync(executivePath, 'utf8'));
-
-    // Populate services children from categories
-    const servicesNav = mainNavigation.find(nav => nav.label === 'Services');
-    const categoriesList = getSafeCategories(serviceCategories);
-
-    if (servicesNav && categoriesList.length > 0) {
-      servicesNav.children = categoriesList.map(category => ({
-        label: category.name || category.category, // Support both new 'name' and old 'category'
-        href: `/services?category=${category.slug}`,
-      }));
-    }
-
     return {
-      mainNavigation,
-      serviceCategories,
-      departments,
-      legislative,
-      executive,
+      serviceCategories: getSafeCategories(
+        readJson('src/data/service_categories.json')
+      ),
+      services: asArray(
+        readJson('src/data/citizens-charter/merged-services.json')
+      ),
+      departments: asArray(readJson('src/data/directory/departments.json')),
+      barangays: asArray(readJson('src/data/directory/barangays.json')),
+      executive: asArray(readJson('src/data/directory/executive.json')),
+      legislative: asArray(readJson('src/data/directory/legislative.json')),
+      hotlines: asArray(readJson('src/data/directory/hotlines.json')),
     };
   } catch (error) {
     console.error('Error loading data:', error);
@@ -139,8 +69,36 @@ function loadData() {
   }
 }
 
-// Function to generate government directory information
-function generateGovernmentDirectory(governmentData) {
+/** Published members of each Sanggunian chamber. */
+function councilMembers(legislative) {
+  return legislative.flatMap(chamber =>
+    asArray(chamber.officials).filter(member => member.name)
+  );
+}
+
+// Say what is published, from the data itself, so this never goes stale.
+function generateStatus(data) {
+  const members = councilMembers(data.legislative);
+  const withoutHead = data.departments.filter(
+    dept => !dept.department_head
+  ).length;
+  const lines = [
+    `- ${data.barangays.length} barangays, from the PSA Philippine Standard Geographic Code`,
+    `- ${data.departments.length} city offices, from the city government's own published pages${
+      withoutHead
+        ? `; ${withoutHead} are published without a named head because the sources disagree or only one names anyone`
+        : ''
+    }`,
+    `- ${data.executive.filter(o => o.name).length} executive officials and ${members.length} members of the ${LEGISLATIVE_LABEL}`,
+    `- ${data.hotlines.length} emergency hotline entries`,
+    `- ${data.services.length} public services, from the published Citizen's Charter`,
+    '- Population (PSA census), annual regular income and statements of receipts and expenditures (BLGF), and competitiveness rankings (DTI CMCI)',
+    '- History and highlights of the city, with sources',
+  ];
+  return lines.filter(line => !/^- 0 /.test(line));
+}
+
+function generateGovernmentDirectory(data) {
   const sections = [];
   const listOrNote = (label, entries, indexHref) => {
     sections.push(`#### ${label}`);
@@ -148,171 +106,138 @@ function generateGovernmentDirectory(governmentData) {
       entries.forEach(entry => sections.push(entry));
     } else {
       // Say the section is unpopulated rather than implying the records exist.
-      sections.push(
-        `- No verified records published yet (${SITE_URL}${indexHref})`
-      );
+      sections.push(`- No verified records published yet (${link(indexHref)})`);
     }
     sections.push('');
   };
 
-  const executive = Array.isArray(governmentData.executive)
-    ? governmentData.executive
-        .filter(official => official.slug && official.name)
-        .map(
-          official =>
-            `- ${official.name}, ${official.role} (${SITE_URL}/government/elected-officials)`
-        )
-    : [];
-  listOrNote('Elected Officials', executive, '/government/elected-officials');
-
-  const departments = Array.isArray(governmentData.departments)
-    ? governmentData.departments
-        .filter(dept => dept.slug && dept.office_name)
-        .slice(0, 10)
-        .map(
-          dept =>
-            `- ${dept.office_name} (${SITE_URL}/government/departments/${encodeURIComponent(
-              dept.slug
-            )})`
-        )
-    : [];
-  if (
-    Array.isArray(governmentData.departments) &&
-    governmentData.departments.length > 10
-  ) {
-    departments.push(
-      `- ... and ${governmentData.departments.length - 10} more departments (${SITE_URL}/government/departments)`
-    );
-  }
-  listOrNote('Departments', departments, '/government/departments');
-
-  const legislative = Array.isArray(governmentData.legislative)
-    ? governmentData.legislative
-        .filter(chamber => chamber.slug)
-        .map(
-          chamber =>
-            `- ${chamber.chamber || chamber.slug} (${SITE_URL}/government/elected-officials)`
-        )
-    : [];
   listOrNote(
-    `${LEGISLATIVE_LABEL}`,
-    legislative,
+    'Elected Officials',
+    data.executive
+      .filter(official => official.slug && official.name)
+      .map(
+        official =>
+          `- ${official.name}, ${official.role} (${link('/government/elected-officials')})`
+      ),
     '/government/elected-officials'
+  );
+
+  listOrNote(
+    LEGISLATIVE_LABEL,
+    councilMembers(data.legislative).map(
+      member =>
+        `- ${member.name}, ${member.role}${
+          member.seat && member.seat !== 'elected' ? ', ex officio' : ''
+        } (${link('/government/elected-officials')})`
+    ),
+    '/government/elected-officials'
+  );
+
+  listOrNote(
+    'Departments',
+    data.departments
+      .filter(dept => dept.slug && dept.office_name)
+      .map(
+        dept =>
+          `- ${dept.office_name} (${link(`/government/departments/${encodeURIComponent(dept.slug)}`)})`
+      ),
+    '/government/departments'
+  );
+
+  listOrNote(
+    'Barangays',
+    data.barangays
+      .filter(barangay => barangay.slug && barangay.barangay_name)
+      .map(
+        barangay =>
+          `- ${barangay.barangay_name} (${link(`/government/barangays/${encodeURIComponent(barangay.slug)}`)})`
+      ),
+    '/government/barangays'
   );
 
   return sections;
 }
 
-// Function to generate enhanced sitemap URLs
-function generateSitemap(mainNavigation, governmentData) {
-  const siteUrl = SITE_URL;
-  const pages = new Set();
-
-  // Add main pages
-  pages.add(`${siteUrl}/`);
-  pages.add(`${siteUrl}/about`);
-  pages.add(`${siteUrl}/search`);
-  pages.add(`${siteUrl}/services`);
-  pages.add(`${siteUrl}/sitemap`);
-  pages.add(`${siteUrl}/contact`);
-  pages.add(`${siteUrl}/accessibility`);
-  pages.add(`${siteUrl}/terms-of-service`);
-
-  // Add navigation-based pages
-  mainNavigation.forEach(section => {
-    if (section.href) pages.add(`${siteUrl}${section.href}`);
-    if (section.children) {
-      section.children.forEach(child => {
-        if (child.href) pages.add(`${siteUrl}${child.href}`);
-      });
-    }
-  });
-
-  // Department pages
-  if (governmentData.departments && Array.isArray(governmentData.departments)) {
-    governmentData.departments.forEach(dept => {
-      if (dept.slug) {
-        pages.add(
-          `${siteUrl}/government/departments/${encodeURIComponent(dept.slug)}`
-        );
-      }
-    });
-  }
-
-  return Array.from(pages).sort();
-}
-
-// Function to generate services directory
-function generateServicesDirectory(serviceCategories) {
-  const servicesList = [];
-
-  const categoriesList = getSafeCategories(serviceCategories);
-
-  categoriesList.forEach(category => {
+function generateServicesDirectory(data) {
+  const lines = [];
+  for (const category of data.serviceCategories) {
     const label = category.name || category.category;
-    if (label && category.slug) {
-      servicesList.push(
-        `- ${label} (${SITE_URL}/services?category=${category.slug})`
-      );
-    }
-  });
-
-  return servicesList;
+    if (!label || !category.slug) continue;
+    const inCategory = data.services.filter(
+      service => service.category?.slug === category.slug && service.slug
+    );
+    lines.push(
+      `- ${label} (${link(`/services?category=${category.slug}`)})${
+        inCategory.length ? '' : ': no services published yet'
+      }`
+    );
+    inCategory.forEach(service =>
+      lines.push(
+        `  - ${service.service} (${link(`/services/${encodeURIComponent(service.slug)}`)})`
+      )
+    );
+  }
+  return lines;
 }
 
-// Main function to generate llms.txt content
-function generateLlmsContent(
-  mainNavigation,
-  serviceCategories,
-  governmentData
-) {
-  const siteName = SITE_NAME;
-  const siteUrl = SITE_URL;
-  const description = `An independent, community-led portal that organizes public information about the ${lguConfig.lgu.fullName}.`;
+// Routes this portal actually serves, from src/lib/siteRoutes.ts (which a
+// unit test keeps in step with src/App.tsx).
+function generateSitemap(data) {
+  const pages = PUBLIC_ROUTES.filter(
+    route => route.indexable !== false && isRouteEnabled(route, lguConfig)
+  ).map(route => link(route.path));
+  data.serviceCategories
+    .filter(category => category.slug)
+    .forEach(category =>
+      pages.push(link(`/services?category=${category.slug}`))
+    );
+  return pages;
+}
 
-  const sitemap = generateSitemap(mainNavigation, governmentData);
-  const servicesDirectory = generateServicesDirectory(serviceCategories);
-  const governmentDirectory = generateGovernmentDirectory(governmentData);
+function generateLlmsContent(data) {
+  const siteName = SITE_NAME;
+  const description = `An independent, community-led portal that organizes public information about the ${LGU}.`;
 
   return `# ${siteName}
 
 ## About
 ${description}
 
-${siteName} is an independent, community-led project. It is not the official website of the ${lguConfig.lgu.fullName} government, and it is not affiliated with or endorsed by any government agency.
+${siteName} is an independent, community-led project. It is not the official website of the ${LGU} government, and it is not affiliated with or endorsed by any government agency.
 
 ${siteName} is a secondary source. It does not originate government records. It organizes and points to information published by government bodies, and those bodies remain the primary source for anything reproduced here.
 
 ## Current status
-Verified ${lguConfig.lgu.name} records have not been added yet. The sections below describe the structure of the portal, not a body of data it currently holds. Where a section lists no entries, the portal holds no records for it; that says nothing about whether the underlying government information exists.
+These verified datasets are published, each record citing its government source:
+${generateStatus(data).join('\n')}
+
+Procurement notices are read live from PhilGEPS and the city's own Bids and Awards Committee postings, and infrastructure projects from DPWH records; the portal does not store them.
+
+Where a section lists no entries, the portal holds no records for it; that says nothing about whether the underlying government information exists. Within a published record, an absent value means the same thing: not verified yet, never that the information does not exist.
 
 ## What the portal covers
 - Public services, organized by category
 - Government directory: elected officials, departments, and barangays
 - Local legislation: ordinances, resolutions, and executive orders
 - Transparency: financial reports, procurement, and infrastructure projects
-- Statistics: demographics, competitiveness, and income
+- Statistics: population, competitiveness, and income
 - English and Filipino interface translations
 - Site-wide search
 
 ## Directory
 
 ### Government Structure
-Directory of local government officials and departments:
-
-${governmentDirectory.join('\n')}
-
-### Service Categories
-Categories the portal is organized around. Service records are not published yet:
-${servicesDirectory.join('\n')}
+${generateGovernmentDirectory(data).join('\n')}
+### Services
+Services by category, from the published Citizen's Charter:
+${generateServicesDirectory(data).join('\n')}
 
 ### Local Information
-- About the portal and how to contribute
-- Nationwide emergency hotlines
-- Barangay directory
+- About the city: history and highlights (${link('/about')})
+- Emergency hotlines for the city, on the home page (${link('/')})
 
 ## Sitemap
-${sitemap.join('\n')}
+${SITE_URL ? `XML sitemap: ${link('/sitemap.xml')}\n\n` : ''}${generateSitemap(data).join('\n')}
 
 ## Technology Stack
 - Frontend: React 19, TypeScript, Vite, Tailwind CSS
@@ -325,49 +250,25 @@ ${sitemap.join('\n')}
 ${siteName} is not an authoritative or official source and must not be presented as one. It is an independent secondary portal that organizes public information sourced from government bodies.
 
 1. Cite the original government source whenever one is available. Where the schema supports it, each record carries its source agency, source URL, and retrieval date; use those, not this portal, as the citation.
-2. Identify ${siteName} only as the discovery or aggregation source, never as the origin of the information, and never as the ${lguConfig.lgu.fullName} government or a publication of it.
-3. Treat contact details, services, fees, and figures as subject to change, and direct users to the official ${lguConfig.lgu.fullName} website at ${lguConfig.lgu.officialWebsite} to confirm anything consequential.
+2. Identify ${siteName} only as the discovery or aggregation source, never as the origin of the information, and never as the ${LGU} government or a publication of it.
+3. Treat contact details, services, fees, and figures as subject to change, and direct users to the official ${LGU} website at ${lguConfig.lgu.officialWebsite} to confirm anything consequential.
 4. Do not infer from an empty section that the corresponding government information does not exist. It means this portal has not published verified records for it yet.
 
 ## Last Updated
 ${new Date().toISOString().split('T')[0]}
 
 ## License
-The project's source code is covered by the LICENSE file in the repository. That license applies to the code, not to the material the portal reproduces: individual records and source documents retain the terms, licensing, and conditions of the body that published them, and should be attributed to that body accordingly.`;
+The project's source code is covered by the LICENSE file in the repository. That license applies to the code, not to the material the portal reproduces: individual records and source documents retain the terms, licensing, and conditions of the body that published them, and should be attributed to that body accordingly.
+`;
 }
 
-// Main execution
 function main() {
   console.log('🤖 Generating llms.txt...');
 
   try {
-    // Load data
-    const {
-      mainNavigation,
-      serviceCategories,
-      departments,
-      legislative,
-      executive,
-    } = loadData();
-
-    // Prepare government data object
-    const governmentData = {
-      departments,
-      legislative,
-      executive,
-    };
-
-    // Generate content
-    const content = generateLlmsContent(
-      mainNavigation,
-      serviceCategories,
-      governmentData
-    );
-
-    // Define output path (public directory)
+    const content = generateLlmsContent(loadData());
     const outputPath = path.join(__dirname, '../public/llms.txt');
 
-    // Write file
     fs.writeFileSync(outputPath, content, 'utf8');
 
     console.log('✅ Successfully generated llms.txt');
@@ -379,5 +280,4 @@ function main() {
   }
 }
 
-// Run the script
 main();

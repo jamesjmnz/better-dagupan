@@ -28,7 +28,7 @@
     "openlgu:reconcile": "npm run openlgu:pipeline:shadow",
     "wrangler": "wrangler",
     "functions:dev": "npx wrangler pages dev --proxy 5173",
-    "generate:sitemap": "node ./scripts/generate-sitemap.js",
+    "generate:sitemap": "tsx ./scripts/generate-sitemap.js",
     "generate:sitemap-xml": "tsx scripts/generate-sitemap-xml.ts",
     "db:migrate": "./scripts/migrate.sh local",
     "db:migrate:remote": "./scripts/migrate.sh remote",
