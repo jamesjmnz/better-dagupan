@@ -7,12 +7,56 @@
       type="image/svg+xml"
       href="/logos/svg/better-dagupan-icon.svg"
     />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/logos/png/better-dagupan-apple-touch-icon.png"
+    />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#0066eb" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Better Dagupan</title>
+    <!--
+      Link previews (Facebook, X, Slack, Discord) read this HTML without
+      running the app, so the share card has to be here. data-rh hands each
+      tag to react-helmet-async, which replaces it with the page's own value
+      once the app loads instead of leaving a duplicate.
+    -->
     <meta
       name="description"
       content="Better Dagupan is an independent, community-led portal for public information about the City of Dagupan. It is not the official website of the City Government of Dagupan."
+      data-rh="true"
+    />
+    <meta property="og:type" content="website" data-rh="true" />
+    <meta property="og:site_name" content="Better Dagupan" data-rh="true" />
+    <meta
+      property="og:title"
+      content="Better Dagupan | Public information about the City of Dagupan"
+      data-rh="true"
+    />
+    <meta
+      property="og:description"
+      content="An independent, community-led portal for public information about the City of Dagupan, Pangasinan. It is not an official government website."
+      data-rh="true"
+    />
+    <meta
+      property="og:image"
+      content="https://better-dagupan.pages.dev/logos/png/better-dagupan-og.png"
+      data-rh="true"
+    />
+    <meta property="og:image:width" content="1200" data-rh="true" />
+    <meta property="og:image:height" content="630" data-rh="true" />
+    <meta
+      property="og:image:alt"
+      content="Better Dagupan: public information about the City of Dagupan, Pangasinan"
+      data-rh="true"
+    />
+    <meta name="twitter:card" content="summary_large_image" data-rh="true" />
+    <meta
+      name="twitter:image"
+      content="https://better-dagupan.pages.dev/logos/png/better-dagupan-og.png"
+      data-rh="true"
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,8 +65,6 @@
       href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-
-    <meta property="og:type" content="website" />
   </head>
 
   <body>
