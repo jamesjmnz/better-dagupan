@@ -1050,6 +1050,132 @@ rosters name different people, one of them an "Angelinda M. Ngilay". This is
 suggestive, and it is **not used**: the charter states no title for anyone, it
 dates from 2023, and it is one family. The office head stays withheld.
 
+## Worked example: the barangay officials (November 2026)
+
+The barangay index left every barangay's officials empty because the only
+roster then found was headed "2018– 2020". This edition fills the two elective
+seats of each barangay that a reader most needs, the Punong Barangay and the
+Sangguniang Kabataan (SK) Chairperson, under the elected officials' rule. Before
+any name, though, it had to settle a prior question: **which election's winners
+are in office now.**
+
+### Which term is current
+
+| Instrument | What it says | Read on |
+|---|---|---|
+| RA 11935 (10 October 2022) | Election "on the last Monday of October 2023", i.e. 30 October 2023; terms "commence at noon of November 30 next following their election" | Supreme Court E-Library |
+| RA 12232 (13 August 2025) | Next regular election "on the first Monday of November 2026"; incumbents "shall remain in the office ... until their successors shall have been elected and qualified"; successors' terms begin "on the first day of December next following their election" | Supreme Court E-Library |
+| RA 12326 (24 September 2026) | Five-year term; next regular election "on the second Monday of November 2028"; "Considering the extension of their terms by two (2) years, incumbent elective barangay officials shall be regarded as having completed one (1) term" | Supreme Court E-Library |
+| COMELEC Minute Resolution No. 26-0842 (25 September 2026) | "All activities relating to the conduct of the November 2, 2026 BSKE ... be stopped and discontinued, including the scheduled filing of the certificates of candidacy" | COMELEC, signed PDF |
+
+So **no barangay or SK election has been held since 30 October 2023**, and none
+is due before 13 November 2028. The officials elected in 2023, and anyone who
+has since succeeded to a seat, are the incumbents. Every seat carries the term
+**"2023–2028"**: it began at noon on 30 November 2023 and runs until the
+successors elected in November 2028 take office on 1 December 2028. As with the
+city's own elected officials, no source prints that range; it follows from the
+four instruments above, which every seat cites in `term_sources`, separately
+from the sources that name its holder.
+
+Not relied on: the Supreme Court decision on a petition against RA 12326,
+reported in November 2026. The Court's website returned HTTP 403 and the
+decision was not read. lawphil.net was used only to find the statutes, as for
+the history timeline.
+
+### Sources: three families
+
+| Family | Source | Dated? |
+|---|---|---|
+| City officials pages | `/officials/barangay-captains/`, "BARANGAY CAPTAINS AND SK CHAIRPERSONS 2022– 2025" | No. CMS modified 2026-07-14 (the bulk re-save) |
+| City news | Eleven articles, 7 February 2024 to 5 May 2026 | Yes |
+| Council site | Councilor Marcelino D. Fernandez's profile | No. CMS modified 2025-08-26 |
+
+**The roster's heading is not a coverage period.** "2022– 2025" is the term as
+scheduled before RA 12232 and RA 12326 extended it. The Internet Archive shows
+the table changing under it: the 2018 names until at least April 2025; the
+present names from a capture of July 2025 (CMS modified 5 May 2025), still under
+the old "2018– 2020" heading; the present heading from October 2025. The live
+page read on 2026-11-11 is identical to the October 2025 capture. Since no
+election has intervened, the page describes the current term, and it is not
+given a `coverage` value, which would bar it from being cited. That is a
+judgement, and it is flagged for review. It is also why the page is never
+enough on its own.
+
+**Two rows changed between captures**, which is the clearest evidence that one
+undated page is not enough. In July 2025 the roster gave Bonuan Gueset's SK
+chair as "Christel Hilary Paras" and Caranglaan's as "Allen Gabriel Claveria";
+from October 2025 it gives "Jomar Vidal Abalos" and "Bradley Claude Benavides".
+
+### The rule
+
+A name is published only when **two families** name the same person **in the
+same seat**:
+
+- matched on surname and a given name, never a nickname ("Julie Perez" is not
+  counted for "Julita F. Perez"; "Kap. Noel Bumanglag" does not match "Manuel B.
+  Bumanglag");
+- in words that put the person in the seat: "Punong Barangay", "Barangay
+  Captain", "Kap.", "SK Chairman", "Chair". "Barangay officials led by Nestor
+  Victorio" does not, and neither does "SK Federation President", which is a
+  city post, not a barangay's;
+- from an article dated on or after 30 November 2023. An earlier article
+  describes the previous term's officials, however familiar the name.
+
+All three are encoded in `barangayProvenance.test.ts`: `NAMED_AS` records every
+cited rendering, `SEAT_WORDING` the seat words, and `NOT_COUNTED` the three
+near-misses, so the reason each is withheld is checked rather than remembered.
+
+**Spelling** follows the roster, the city's own list, and is rendered verbatim,
+including "Arsenio DV. Santillan, Sr." and the roster's quoted nickname in
+"Generoso “Richie” Gomez". The roster's rows are matched to the PSGC names the
+barangay index publishes: "Herrero-Perez" to Herrero, "Pugaro" to Pugaro Suit.
+**Titles** are the statutory "Punong Barangay" and "Sangguniang Kabataan
+Chairperson"; the roster heads its columns "Barangay Captain" and "SK Chairman".
+
+### What was published
+
+| Seat | Published | Barangays |
+|---|---|---|
+| Punong Barangay | 11 of 31 | Bolosan, Bonuan Binloc, Bonuan Boquig, Caranglaan, Herrero, Lasip Chico, Lomboy, Lucao, Malued, Mayombo, Pantal |
+| SK Chairperson | 6 of 31 | Bonuan Binloc, Bonuan Boquig, Bonuan Gueset, Herrero, Lasip Chico, Pugaro Suit |
+
+Each published name cites the roster and one corroborating source: sixteen of
+them a city article, and Lucao's the council profile, which reads "Brgy.
+Captain, Lucao Dagupan City 2013 – Present". The test also requires Lucao's
+Punong Barangay to be the same person `legislative.json` seats ex officio as
+Liga president, so the two datasets cannot drift apart.
+
+### What was withheld
+
+| Withheld | Count | `name_status` | Why |
+|---|---|---|---|
+| Bonuan Gueset Punong Barangay | 1 | `conflicting_sources` | The roster says "Manuel B. Bumanglag"; four city articles from 2024 to 2026 say "Noel Bumanglag". Different given names are not established to be one person. |
+| Other Punong Barangay seats | 19 | `uncorroborated` | Only the roster names anyone. For Pugaro Suit, a city article names "Nestor Victorio" without a title. |
+| SK Chairperson seats | 25 | `uncorroborated` | Only the roster names anyone. For Caranglaan, city articles name Bradley Benavides only as SK Federation President, and the roster gave the row to someone else until September 2025. |
+| Sangguniang Barangay members (kagawad) | all | none | No official source found lists any barangay council. The page says so. |
+| Addresses, telephone numbers, websites | all | none | No city-government or DILG page found states one. No personal number is published. |
+
+Every seat is still listed with its term. A withheld seat cites nothing: citing
+the one source that names someone would publish the name by another route.
+
+### Not found, and not used
+
+- **COMELEC** publishes no barangay-level results for the 2023 election: its
+  2023 BSKE page lists resolutions only, and no certified list of winners was
+  found.
+- **DILG** Region I and Pangasinan pages were searched for a directory of
+  barangay officials; none was found.
+- **Third-party barangay directories** list names for every barangay, some
+  with full middle names. They are crowdsourced, so they were not used even to
+  corroborate.
+- A city article of June 2025 names "Bonuan Gueset SK Chairperson Christel
+  Hillary “Tala” Paras" among the newly sworn-in councilors. That is consistent
+  with the roster's change of Bonuan Gueset SK chair, but no document stating
+  how the seat passed was found, so **no succession is asserted**.
+
+Re-verify after any change in the roster, and in full after the November 2028
+election.
+
 ## Note on retrieval
 
 The city pages were read directly from their HTML rather than through a
@@ -1087,3 +1213,11 @@ rankings page was opened in an ordinary browser with the page's own year
 selector, and read from the rendered tables and the chart data embedded in
 the page; the rankings tables were read in full, not from a summary. Only
 read-only GET requests to public URLs were made.
+
+For the barangay officials, the city's roster, news articles and the council
+profile were read through the same WordPress REST endpoints and then re-read as
+live pages on 2026-11-11; the roster's history was read from the Internet
+Archive's CDX listing and its captures. The statutes were read on the Supreme
+Court E-Library, found through its monthly listings, and the COMELEC minute
+resolution as the signed PDF its resolutions page links. Only read-only GET
+requests to public URLs were made.
