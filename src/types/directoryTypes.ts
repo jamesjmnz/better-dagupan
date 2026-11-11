@@ -8,13 +8,6 @@
  * src/data/directory/schema/*.schema.json.
  */
 
-export interface DirectoryOfficial {
-  role: string;
-  name: string;
-  website?: string;
-  personId?: string;
-}
-
 /**
  * An alternative spelling of a barangay name observed on another authoritative
  * source, kept with the id of the source that spells it that way so the
@@ -24,6 +17,39 @@ export interface BarangayNameVariant {
   name: string;
   /** Civic-source id, see src/data/sources/civic-sources.json. */
   source: string;
+}
+
+/** The elective seats a barangay record publishes. */
+export type BarangaySeat = 'punong_barangay' | 'sk_chairperson';
+
+/**
+ * An elective seat in a barangay.
+ *
+ * Mirrors the `officials` items in
+ * src/data/directory/schema/barangays.schema.json. The seat is published
+ * whoever holds it, so a withheld name reads as a fact about this portal
+ * rather than an empty office, as for the city's own elected seats.
+ */
+export interface BarangayOfficial {
+  seat: BarangaySeat;
+  /** The title of the seat, e.g. "Punong Barangay". */
+  role: string;
+  name_status: OfficialNameStatus;
+  /**
+   * The holder as the city's roster prints it, without honorifics. Render
+   * verbatim: toTitleCase() lowercases initials such as "DV.". null unless two
+   * independent source families name the same person in this seat.
+   */
+  name: string | null;
+  /**
+   * e.g. "2023–2028". A fact about the seat, so it is stated even when the
+   * holder is withheld. null unless term_sources establish it.
+   */
+  term: string | null;
+  /** Civic-source ids establishing the term: the laws it follows from. */
+  term_sources: string[];
+  /** Civic-source ids naming this person in this seat. Empty when withheld. */
+  sources: string[];
 }
 
 /**
@@ -57,8 +83,11 @@ export interface Barangay {
   trunkline: string[];
   /** null until an authoritative page is sourced. */
   website: string | null;
-  /** Empty until a current roster is sourced. Never populated from a stale one. */
-  officials: DirectoryOfficial[];
+  /**
+   * One entry per elective seat: the Punong Barangay, then the Sangguniang
+   * Kabataan Chairperson. Never populated from a superseded term.
+   */
+  officials: BarangayOfficial[];
   /** Civic-source ids backing this record. At least one, enforced by tests. */
   sources: string[];
 }
