@@ -37,7 +37,7 @@ describe('weather endpoint', () => {
     vi.stubGlobal(
       'fetch',
       vi.fn(async () =>
-        Response.json({ name: 'Dagupan', weather: [], list: [] })
+        Response.json({ name: 'Canaoalan', weather: [], list: [] })
       )
     );
     const res = await onRequest({
@@ -46,7 +46,9 @@ describe('weather endpoint', () => {
       waitUntil,
     });
     expect(res.status).toBe(200);
-    expect(Object.keys((await res.json()) as object)).toHaveLength(1);
+    const body = (await res.json()) as Record<string, { name: string }>;
+    expect(Object.keys(body)).toHaveLength(1);
+    expect(body.dagupan.name).toBe('Dagupan');
     expect(waitUntil).toHaveBeenCalledOnce();
   });
 });

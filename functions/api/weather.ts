@@ -168,9 +168,8 @@ async function fetchCityWeather(
 
     // Format the response data based on the comprehensive structure
     return {
-      name:
-        currentData.name ||
-        cityName.charAt(0).toUpperCase() + cityName.slice(1),
+      // The configured name, not the nearest station OpenWeatherMap reports
+      name: cityName,
       coordinates: currentData.coord || { lat, lon },
       weather: currentData.weather || [],
       main: currentData.main || {
