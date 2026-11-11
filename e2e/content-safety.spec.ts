@@ -24,6 +24,12 @@ const routes = [
   '/transparency',
   '/transparency/financial',
   '/search',
+  '/about',
+  '/contact',
+  '/join-us',
+  '/ideas',
+  '/accessibility',
+  '/terms-of-service',
 ];
 
 const INHERITED = /Los Ba(ñ|n)os|BetterLB|Better LB|losbanos\.gov\.ph/i;
@@ -40,6 +46,8 @@ test.describe('Inherited civic records', () => {
       const body = await page.locator('body').innerText();
       expect(body.length).toBeGreaterThan(0);
       expect(body).not.toMatch(INHERITED);
+      // An interpolation the page forgot to fill would show as raw braces.
+      expect(body).not.toMatch(/\{\{\s*\w+\s*\}\}/);
     });
   }
 });
