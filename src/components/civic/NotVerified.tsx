@@ -26,7 +26,7 @@ export const NotVerified: FC<{
     >
       <HelpCircle
         aria-hidden='true'
-        className='text-kapwa-text-disabled mt-0.5 h-3.5 w-3.5 shrink-0'
+        className='text-kapwa-text-support mt-0.5 h-3.5 w-3.5 shrink-0'
       />
       <div className='min-w-0'>
         <p className='text-kapwa-text-support text-xs font-semibold'>

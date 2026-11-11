@@ -33,7 +33,7 @@ export default function ServiceFilters({
       {/* Source Filter */}
       <div>
         <div className='mb-3 flex items-center gap-2'>
-          <CheckCircle2 className='text-kapwa-text-disabled h-4 w-4' />
+          <CheckCircle2 className='text-kapwa-text-support h-4 w-4' />
           <h4 className='text-kapwa-text-strong text-xs font-bold uppercase tracking-wider'>
             {t('filters.dataSource')}
           </h4>
@@ -60,7 +60,7 @@ export default function ServiceFilters({
       {/* Classification Filter (only for Citizens Charter services) */}
       <div>
         <div className='mb-3 flex items-center gap-2'>
-          <Layers className='text-kapwa-text-disabled h-4 w-4' />
+          <Layers className='text-kapwa-text-support h-4 w-4' />
           <h4 className='text-kapwa-text-strong text-xs font-bold uppercase tracking-wider'>
             {t('filters.classification')}
           </h4>
@@ -87,7 +87,7 @@ export default function ServiceFilters({
       {/* Office Division Filter */}
       <div>
         <div className='mb-3 flex items-center gap-2'>
-          <Building2 className='text-kapwa-text-disabled h-4 w-4' />
+          <Building2 className='text-kapwa-text-support h-4 w-4' />
           <h4 className='text-kapwa-text-strong text-xs font-bold uppercase tracking-wider'>
             {t('filters.officeDivision')}
           </h4>

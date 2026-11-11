@@ -40,7 +40,7 @@ export function Badge({
     success:
       'bg-kapwa-bg-success-weak text-kapwa-text-success border-kapwa-border-success',
     warning:
-      'bg-kapwa-bg-warning-weak text-kapwa-text-warning border-kapwa-border-warning',
+      'bg-kapwa-bg-warning-weak text-kapwa-orange-800 border-kapwa-border-warning',
     error:
       'bg-kapwa-bg-danger-weak text-kapwa-text-danger border-kapwa-border-danger',
     slate:

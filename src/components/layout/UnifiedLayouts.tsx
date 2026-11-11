@@ -1,4 +1,5 @@
 import {
+  Children,
   ComponentType,
   Fragment,
   ReactNode,
@@ -537,17 +538,16 @@ export function StaggeredGrid({
 
   return (
     <div className={cn('grid gap-6', cols[columns], className)} role='list'>
-      {Array.isArray(children)
-        ? children.map((child, index) => (
-            <div
-              key={(isValidElement(child) && child.key) || index}
-              className='duration-500 animate-in fade-in slide-in-from-bottom-4'
-              style={{ animationDelay: `${baseDelay + index * delayStep}ms` }}
-            >
-              {child}
-            </div>
-          ))
-        : children}
+      {Children.toArray(children).map((child, index) => (
+        <div
+          key={(isValidElement(child) && child.key) || index}
+          role='listitem'
+          className='duration-500 animate-in fade-in slide-in-from-bottom-4'
+          style={{ animationDelay: `${baseDelay + index * delayStep}ms` }}
+        >
+          {child}
+        </div>
+      ))}
     </div>
   );
 }

@@ -182,7 +182,7 @@ const SitemapPage: FC = () => {
                             <h3 className='font-medium group-hover:text-kapwa-text-brand text-kapwa-text-strong'>
                               {link.title}
                             </h3>
-                            <ChevronRight className='w-4 h-4 group-hover:text-kapwa-text-link text-kapwa-text-disabled' />
+                            <ChevronRight className='w-4 h-4 group-hover:text-kapwa-text-link text-kapwa-text-support' />
                           </div>
                           {link.description && (
                             <p className='text-sm text-kapwa-text-support'>

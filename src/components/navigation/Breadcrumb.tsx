@@ -131,7 +131,7 @@ const BreadcrumbSeparator = ({
   <li
     role='presentation'
     aria-hidden='true'
-    className={cn('text-kapwa-text-disabled', className)}
+    className={cn('text-kapwa-text-support', className)}
     {...props}
   >
     {children || <ChevronRightIcon className='h-3.5 w-3.5' />}

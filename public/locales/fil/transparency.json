@@ -89,7 +89,8 @@
     "toggleLabels": "Ipakita o Itago ang mga Label",
     "toggleList": "Ipakita o Itago ang Listahan",
     "return": "Bumalik",
-    "total": "Kabuuan"
+    "total": "Kabuuan",
+    "sliceLabel": "{{name}}: {{amount}} ({{percent}}% ng kabuuan)"
   },
   "infrastructure": {
     "title": "Mga Proyektong Pang-imprastraktura",

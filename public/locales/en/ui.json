@@ -36,6 +36,8 @@
   "skipLink": "Skip to main content",
   "weatherUnavailable": "Weather unavailable",
   "pagination": {
+    "label": "Pagination",
+    "page": "Page {{page}}",
     "showing": "Showing <bold>{{start}}-{{end}}</bold> of <bold>{{total}}</bold>",
     "rows": "Rows:",
     "previous": "Previous page",

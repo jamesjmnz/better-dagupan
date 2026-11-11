@@ -42,7 +42,7 @@ export function RequirementCard({ requirement }: RequirementCardProps) {
           ) : (
             // A blank cell in the charter is not a statement that the
             // document can be had anywhere, so say what this portal knows.
-            <p className='text-kapwa-text-disabled mt-1 text-xs italic'>
+            <p className='text-kapwa-text-support mt-1 text-xs italic'>
               {t('requirements.whereNotVerified')}
             </p>
           )}

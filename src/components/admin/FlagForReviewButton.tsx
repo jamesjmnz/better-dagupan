@@ -215,9 +215,7 @@ export default function FlagForReviewButton({
                   Flag for Review
                 </h3>
                 {itemTitle && (
-                  <p className='text-kapwa-text-disabled text-sm'>
-                    {itemTitle}
-                  </p>
+                  <p className='text-kapwa-text-support text-sm'>{itemTitle}</p>
                 )}
               </div>
             </div>
@@ -262,7 +260,7 @@ export default function FlagForReviewButton({
                   rows={3}
                   disabled={submitting || submitted}
                 />
-                <p className='text-kapwa-text-disabled mt-1 text-xs'>
+                <p className='text-kapwa-text-support mt-1 text-xs'>
                   Provide details about what needs to be reviewed or corrected.
                 </p>
               </div>

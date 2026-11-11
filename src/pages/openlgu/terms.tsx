@@ -109,14 +109,14 @@ export default function TermsIndex() {
                   <h3 className='group-hover:text-kapwa-text-brand text-kapwa-text-strong text-xl font-bold transition-colors'>
                     {term.name}
                   </h3>
-                  <p className='text-kapwa-text-disabled mt-1 text-sm'>
+                  <p className='text-kapwa-text-support mt-1 text-sm'>
                     {term.year_range}
                   </p>
                 </div>
                 <ChevronRight className='group-hover:text-kapwa-text-brand text-kapwa-text-support h-5 w-5 transition-colors' />
               </header>
 
-              <div className='text-kapwa-text-disabled mb-4 flex items-center gap-2 text-xs'>
+              <div className='text-kapwa-text-support mb-4 flex items-center gap-2 text-xs'>
                 <Calendar className='h-3.5 w-3.5' />
                 <span>
                   {term.start_date} — {term.end_date}
@@ -131,7 +131,7 @@ export default function TermsIndex() {
                       {term.legislativeCount}
                     </span>
                   </div>
-                  <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
+                  <p className='text-kapwa-text-support mt-1 text-[10px] font-bold tracking-widest uppercase'>
                     {t('terms.councilors')}
                   </p>
                 </div>
@@ -142,7 +142,7 @@ export default function TermsIndex() {
                       {term.documentCount}
                     </span>
                   </div>
-                  <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
+                  <p className='text-kapwa-text-support mt-1 text-[10px] font-bold tracking-widest uppercase'>
                     {t('terms.documents')}
                   </p>
                 </div>

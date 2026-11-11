@@ -103,7 +103,7 @@ export default function PersonDetail() {
   if (!person) {
     return (
       <div
-        className='text-kapwa-text-disabled p-12 text-center font-bold tracking-widest uppercase'
+        className='text-kapwa-text-support p-12 text-center font-bold tracking-widest uppercase'
         role='alert'
       >
         {t('person.notFound')}
@@ -277,7 +277,7 @@ export default function PersonDetail() {
                   </Badge>
                 )}
               </div>
-              <p className='text-kapwa-text-disabled text-sm'>
+              <p className='text-kapwa-text-support text-sm'>
                 {t('person.termsServed', { count: totalTermsServed })}
                 {latestMembership?.term && (
                   <> • {latestMembership.term.year_range}</>
@@ -308,7 +308,7 @@ export default function PersonDetail() {
                 {overallAttendanceRate}%
               </span>
             </div>
-            <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+            <p className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
               {t('person.attendanceRate')}
             </p>
           </div>
@@ -323,7 +323,7 @@ export default function PersonDetail() {
                 {ordCount}
               </span>
             </div>
-            <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
+            <p className='text-kapwa-text-support mt-1 text-[10px] font-bold tracking-widest uppercase'>
               {t('common.ordinances')}
             </p>
           </div>
@@ -334,7 +334,7 @@ export default function PersonDetail() {
                 {resCount}
               </span>
             </div>
-            <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
+            <p className='text-kapwa-text-support mt-1 text-[10px] font-bold tracking-widest uppercase'>
               {t('common.resolutions')}
             </p>
           </div>
@@ -345,7 +345,7 @@ export default function PersonDetail() {
                 {eoCount}
               </span>
             </div>
-            <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
+            <p className='text-kapwa-text-support mt-1 text-[10px] font-bold tracking-widest uppercase'>
               {t('common.execOrders')}
             </p>
           </div>
@@ -357,7 +357,7 @@ export default function PersonDetail() {
                   {totalExecutiveOrdersSigned}
                 </span>
               </div>
-              <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
+              <p className='text-kapwa-text-support mt-1 text-[10px] font-bold tracking-widest uppercase'>
                 {t('person.eosSigned')}
               </p>
             </div>
@@ -369,7 +369,7 @@ export default function PersonDetail() {
                   {allAttendanceRecords.length}
                 </span>
               </div>
-              <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
+              <p className='text-kapwa-text-support mt-1 text-[10px] font-bold tracking-widest uppercase'>
                 {t('person.sessions')}
               </p>
             </div>
@@ -476,11 +476,11 @@ export default function PersonDetail() {
                             <div className='space-y-3'>
                               {/* Section header */}
                               <div className='border-kapwa-border-weak flex items-center gap-2 border-b pb-2'>
-                                <Users className='text-kapwa-text-disabled h-4 w-4' />
-                                <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+                                <Users className='text-kapwa-text-support h-4 w-4' />
+                                <span className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
                                   {t('person.committeeAssignments')}
                                 </span>
-                                <span className='text-kapwa-text-disabled ml-auto text-xs'>
+                                <span className='text-kapwa-text-support ml-auto text-xs'>
                                   {t('person.total', {
                                     count:
                                       committeesByRole.chairperson.length +
@@ -536,14 +536,14 @@ export default function PersonDetail() {
                                     key={`member-${c.id}`}
                                     className='group border-kapwa-border-weak bg-kapwa-bg-surface-raised hover:border-kapwa-border-weak flex items-center gap-3 rounded-lg border px-3 py-2.5 transition-all hover:shadow-sm'
                                   >
-                                    <div className='bg-kapwa-bg-hover text-kapwa-text-disabled flex h-8 w-8 shrink-0 items-center justify-center rounded-lg'>
+                                    <div className='bg-kapwa-bg-hover text-kapwa-text-support flex h-8 w-8 shrink-0 items-center justify-center rounded-lg'>
                                       <User className='h-4 w-4' />
                                     </div>
                                     <div className='min-w-0 flex-1'>
                                       <p className='text-kapwa-text-support truncate text-sm font-medium'>
                                         {c.name}
                                       </p>
-                                      <p className='text-kapwa-text-disabled text-[10px] font-medium tracking-wide uppercase'>
+                                      <p className='text-kapwa-text-support text-[10px] font-medium tracking-wide uppercase'>
                                         {t('person.member')}
                                       </p>
                                     </div>
@@ -559,7 +559,7 @@ export default function PersonDetail() {
                             <>
                               <div className='flex items-center gap-2'>
                                 <CalendarCheck
-                                  className={`h-4 w-4 ${membership.attendanceRate >= 90 ? 'text-kapwa-text-success' : 'text-kapwa-text-disabled'}`}
+                                  className={`h-4 w-4 ${membership.attendanceRate >= 90 ? 'text-kapwa-text-success' : 'text-kapwa-text-support'}`}
                                 />
                                 <span
                                   className={
@@ -571,7 +571,7 @@ export default function PersonDetail() {
                                   {t('common.attendance', {
                                     rate: membership.attendanceRate,
                                   })}
-                                  <span className='text-kapwa-text-disabled font-normal'>
+                                  <span className='text-kapwa-text-support font-normal'>
                                     {' '}
                                     ({membership.presentCount}/
                                     {membership.totalCount})
@@ -679,7 +679,7 @@ export default function PersonDetail() {
                         </Badge>
                         <div className='min-w-0 flex-1'>
                           <div className='mb-1 flex items-center gap-2'>
-                            <span className='text-kapwa-text-disabled font-mono text-[10px] font-bold uppercase'>
+                            <span className='text-kapwa-text-support font-mono text-[10px] font-bold uppercase'>
                               {doc.number}
                             </span>
                             <span className='text-kapwa-text-support'>•</span>
@@ -691,7 +691,7 @@ export default function PersonDetail() {
                                 <span className='text-kapwa-text-support'>
                                   •
                                 </span>
-                                <span className='text-kapwa-text-disabled text-[10px] font-medium'>
+                                <span className='text-kapwa-text-support text-[10px] font-medium'>
                                   {termBadge.ordinal}
                                 </span>
                               </>
@@ -707,7 +707,7 @@ export default function PersonDetail() {
                   );
                 })
               ) : (
-                <p className='text-kapwa-text-disabled py-8 text-center text-sm italic'>
+                <p className='text-kapwa-text-support py-8 text-center text-sm italic'>
                   {t('person.noLegislation')}
                 </p>
               )}
@@ -723,7 +723,7 @@ export default function PersonDetail() {
               title={
                 <div className='flex items-center justify-between gap-4'>
                   <span>{t('person.attendanceLog')}</span>
-                  <span className='text-kapwa-text-disabled shrink-0 text-xs font-medium'>
+                  <span className='text-kapwa-text-support shrink-0 text-xs font-medium'>
                     {t('person.sessionCount', {
                       count: allAttendanceRecords.length,
                     })}
@@ -763,7 +763,7 @@ export default function PersonDetail() {
                             <p className='text-kapwa-text-support font-semibold'>
                               {s.date}
                             </p>
-                            <p className='text-kapwa-text-disabled text-[10px]'>
+                            <p className='text-kapwa-text-support text-[10px]'>
                               {s.ordinal_number}
                             </p>
                           </div>
@@ -774,7 +774,7 @@ export default function PersonDetail() {
                   })}
                 </div>
               ) : (
-                <p className='text-kapwa-text-disabled py-4 text-center text-sm italic'>
+                <p className='text-kapwa-text-support py-4 text-center text-sm italic'>
                   {t('person.noAttendance')}
                 </p>
               )}
@@ -785,7 +785,7 @@ export default function PersonDetail() {
                 title={
                   <div className='flex items-center justify-between gap-4'>
                     <span>{t('person.eoSummary')}</span>
-                    <span className='text-kapwa-text-disabled shrink-0 text-xs font-medium'>
+                    <span className='text-kapwa-text-support shrink-0 text-xs font-medium'>
                       {t('person.total', { count: totalExecutiveOrdersSigned })}
                     </span>
                   </div>
@@ -819,7 +819,7 @@ export default function PersonDetail() {
 
           {/* Quick summary card */}
           <div className='border-kapwa-border-weak rounded-xl border bg-linear-to-br from-slate-50 to-kapwa-bg-surface p-6'>
-            <h3 className='text-kapwa-text-disabled mb-4 text-sm font-bold tracking-widest uppercase'>
+            <h3 className='text-kapwa-text-support mb-4 text-sm font-bold tracking-widest uppercase'>
               {t('person.careerSummary')}
             </h3>
             <dl className='space-y-3'>

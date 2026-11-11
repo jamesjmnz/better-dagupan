@@ -109,7 +109,7 @@ export default function MunicipalIncomePage() {
   const itemGroups = [
     {
       title: t('income.groups.localTax'),
-      className: 'text-kapwa-text-accent-orange',
+      className: 'text-kapwa-orange-800',
       items: [
         [
           t('income.items.realPropertyGeneralFund'),

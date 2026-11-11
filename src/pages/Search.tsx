@@ -39,7 +39,7 @@ const Hit: FC<HitProps> = ({ hit }) => {
             {hit.type}
           </Badge>
           {hit.classification && (
-            <span className='text-kapwa-text-disabled'>
+            <span className='text-kapwa-text-support'>
               {hit.classification}
             </span>
           )}
@@ -93,7 +93,7 @@ const SearchPage: FC = () => {
 
       <div className='mb-6'>
         <div className='relative'>
-          <SearchIcon className='absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-kapwa-text-disabled' />
+          <SearchIcon className='absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-kapwa-text-support' />
           <Input
             type='text'
             placeholder={t('search.placeholder')}
@@ -107,7 +107,7 @@ const SearchPage: FC = () => {
       {/* Active Filters */}
       {activeFiltersCount > 0 && (
         <div className='mb-6 flex flex-wrap items-center gap-2'>
-          <span className='text-kapwa-text-disabled text-sm'>
+          <span className='text-kapwa-text-support text-sm'>
             {t('search.activeFilters')}
           </span>
           {typeFilter && (
@@ -156,7 +156,7 @@ const SearchPage: FC = () => {
             </h3>
 
             <div className='mb-6'>
-              <h4 className='mb-3 kapwa-label-sm text-kapwa-text-disabled'>
+              <h4 className='mb-3 kapwa-label-sm text-kapwa-text-support'>
                 {t('search.type')}
               </h4>
               <select
@@ -171,7 +171,7 @@ const SearchPage: FC = () => {
             </div>
 
             <div>
-              <h4 className='mb-3 kapwa-label-sm text-kapwa-text-disabled'>
+              <h4 className='mb-3 kapwa-label-sm text-kapwa-text-support'>
                 {t('search.category')}
               </h4>
               <select
@@ -219,7 +219,7 @@ const SearchPage: FC = () => {
             ) : (
               <>
                 <div className='border-kapwa-border-weak border-b p-4'>
-                  <p className='text-kapwa-text-disabled text-sm'>
+                  <p className='text-kapwa-text-support text-sm'>
                     {t('search.resultsFound', {
                       count: filteredResults.length,
                     })}

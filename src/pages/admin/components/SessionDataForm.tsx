@@ -378,7 +378,7 @@ export default function SessionDataForm({
           </div>
 
           {loading ? (
-            <div className='text-kapwa-text-disabled py-8 text-center'>
+            <div className='text-kapwa-text-support py-8 text-center'>
               Loading members...
             </div>
           ) : members.length === 0 ? (
@@ -419,7 +419,7 @@ export default function SessionDataForm({
                           {member.last_name}
                         </p>
                         {member.role && (
-                          <p className='text-kapwa-text-disabled text-xs'>
+                          <p className='text-kapwa-text-support text-xs'>
                             {member.role}
                           </p>
                         )}

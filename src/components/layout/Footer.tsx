@@ -56,12 +56,12 @@ export const Footer: FC = () => {
                 <div className='text-xl font-black tracking-tighter'>
                   {config.portal.footerBrandName}
                 </div>
-                <div className='text-[10px] font-bold tracking-widest text-kapwa-text-disabled uppercase'>
+                <div className='text-[10px] font-bold tracking-widest text-kapwa-text-inverse-subtle uppercase'>
                   {t('navigation:footer.tagline')}
                 </div>
               </div>
             </div>
-            <p className='max-w-sm text-sm leading-relaxed text-kapwa-text-disabled'>
+            <p className='max-w-sm text-sm leading-relaxed text-kapwa-text-inverse-subtle'>
               {t('navigation:footer.description', terms)}
             </p>
             <div className='flex space-x-4'>
@@ -69,7 +69,7 @@ export const Footer: FC = () => {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className='transition-colors text-kapwa-text-disabled hover:text-kapwa-text-inverse'
+                  className='transition-colors text-kapwa-text-inverse-subtle hover:text-kapwa-text-inverse'
                   target='_blank'
                   rel='noopener noreferrer'
                   // Icon-only, so name the link itself: an SVG <title> is not a
@@ -85,7 +85,7 @@ export const Footer: FC = () => {
           {/* Navigation Columns */}
           {footerNavigation.mainSections.map(section => (
             <div key={section.title} className='col-span-1'>
-              <h3 className='mb-6 text-[10px] font-bold tracking-[0.2em] text-kapwa-text-disabled uppercase'>
+              <h3 className='mb-6 text-[10px] font-bold tracking-[0.2em] text-kapwa-text-inverse-subtle uppercase'>
                 {t(section.titleKey)}
               </h3>
               <ul className='space-y-4'>
@@ -133,7 +133,7 @@ export const Footer: FC = () => {
         <div className='flex flex-col gap-6 justify-between items-center pt-8 mt-16 border-t border-kapwa-border-strong md:flex-row'>
           <div className='space-y-3 text-center md:text-left'>
             <DisclaimerLine />
-            <p className='text-[10px] font-bold tracking-widest text-kapwa-text-disabled uppercase'>
+            <p className='text-[10px] font-bold tracking-widest text-kapwa-text-inverse-subtle uppercase'>
               {t('footer.copyright')}
             </p>
           </div>
@@ -142,17 +142,17 @@ export const Footer: FC = () => {
               href={config.portal.githubUrl}
               target='_blank'
               rel='noreferrer'
-              className='text-[10px] font-bold tracking-widest text-kapwa-text-disabled uppercase hover:text-kapwa-text-inverse'
+              className='text-[10px] font-bold tracking-widest text-kapwa-text-inverse-subtle uppercase hover:text-kapwa-text-inverse'
             >
               {t('navigation:footer.github')}
             </a>
             <Link
               to='/sitemap'
-              className='text-[10px] font-bold tracking-widest text-kapwa-text-disabled uppercase hover:text-kapwa-text-inverse'
+              className='text-[10px] font-bold tracking-widest text-kapwa-text-inverse-subtle uppercase hover:text-kapwa-text-inverse'
             >
               {t('navigation:footer.sitemap')}
             </Link>
-            {/* <Link to='/accessibility' className='text-[10px] font-bold text-kapwa-text-disabled hover:text-kapwa-text-inverse uppercase tracking-widest'>Accessibility</Link> */}
+            {/* <Link to='/accessibility' className='text-[10px] font-bold text-kapwa-text-inverse-subtle hover:text-kapwa-text-inverse uppercase tracking-widest'>Accessibility</Link> */}
           </div>
         </div>
       </div>

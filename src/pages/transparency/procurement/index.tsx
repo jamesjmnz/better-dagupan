@@ -376,7 +376,7 @@ export default function ProcurementPage() {
         <div className='border-kapwa-border-weak bg-kapwa-bg-surface overflow-hidden rounded-xl border shadow-sm'>
           <div className='overflow-x-auto'>
             <table className='w-full text-left text-sm'>
-              <thead className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled border-b text-xs font-bold tracking-wider uppercase'>
+              <thead className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-support border-b text-xs font-bold tracking-wider uppercase'>
                 <tr>
                   <th className='hidden w-32 px-3 py-3 md:table-cell md:px-6 md:py-4'>
                     {t('procurement.table.refId')}
@@ -401,7 +401,7 @@ export default function ProcurementPage() {
                     key={row.id}
                     className='group hover:bg-kapwa-bg-surface-raised/50 transition-colors'
                   >
-                    <td className='group-hover:text-kapwa-text-brand text-kapwa-text-disabled hidden px-3 py-3 font-mono text-xs transition-colors md:table-cell md:px-6 md:py-4'>
+                    <td className='group-hover:text-kapwa-text-brand text-kapwa-text-support hidden px-3 py-3 font-mono text-xs transition-colors md:table-cell md:px-6 md:py-4'>
                       {row.reference_id}
                     </td>
                     <td className='px-3 py-3 sm:px-6 sm:py-4'>
@@ -424,7 +424,7 @@ export default function ProcurementPage() {
                         </Badge>
                         {row.awardee_name && (
                           <span
-                            className='text-kapwa-text-disabled max-w-[150px] truncate text-xs sm:max-w-[200px]'
+                            className='text-kapwa-text-support max-w-[150px] truncate text-xs sm:max-w-[200px]'
                             title={row.awardee_name}
                           >
                             • {row.awardee_name}
@@ -484,7 +484,7 @@ export default function ProcurementPage() {
                 <h4 className='text-kapwa-text-strong mb-1 font-bold'>
                   {t('procurement.analyticsTitle')}
                 </h4>
-                <p className='text-kapwa-text-disabled text-xs leading-relaxed'>
+                <p className='text-kapwa-text-support text-xs leading-relaxed'>
                   {t('procurement.analyticsBody', { lgu: terms.lgu })}
                 </p>
               </div>
@@ -511,7 +511,7 @@ export default function ProcurementPage() {
               <h4 className='text-kapwa-text-strong mb-1 font-bold'>
                 {t('procurement.dashboardTitle')}
               </h4>
-              <p className='text-kapwa-text-disabled text-xs leading-relaxed'>
+              <p className='text-kapwa-text-support text-xs leading-relaxed'>
                 {t('procurement.dashboardBody')}
               </p>
             </div>

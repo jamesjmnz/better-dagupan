@@ -13,6 +13,7 @@
   },
   "search": "Maghanap",
   "toggleMenu": "Buksan o Isara ang Menu",
+  "toggleSubmenu": "Submenu ng {{section}}",
   "mobile": {
     "joinUs": "🚀 Sumali sa Rebolusyon",
     "about": "Tungkol sa {{portal}}",

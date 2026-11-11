@@ -20,13 +20,14 @@ const disclaimerValues = () => ({
 
 /**
  * Compact single line for the global footer, so the statement is present on
- * every route rather than only where someone thought to add it.
+ * every route rather than only where someone thought to add it. It sits on the
+ * footer's dark surface, hence the inverse text token.
  */
 export const DisclaimerLine: FC = () => {
   const { t } = useTranslation('common');
 
   return (
-    <p className='max-w-xl text-[11px] leading-relaxed text-kapwa-text-disabled'>
+    <p className='max-w-xl text-[11px] leading-relaxed text-kapwa-text-inverse-subtle'>
       {t('disclaimer.short', disclaimerValues())}
     </p>
   );

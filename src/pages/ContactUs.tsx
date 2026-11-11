@@ -174,9 +174,9 @@ const ContactUs: FC = () => {
                       {faq.question}
                     </h3>
                     {openFaq === index ? (
-                      <ChevronUpIcon className='text-kapwa-text-disabled h-5 w-5' />
+                      <ChevronUpIcon className='text-kapwa-text-support h-5 w-5' />
                     ) : (
-                      <ChevronDownIcon className='text-kapwa-text-disabled h-5 w-5' />
+                      <ChevronDownIcon className='text-kapwa-text-support h-5 w-5' />
                     )}
                   </button>
                   {openFaq === index && (

@@ -91,7 +91,7 @@ export function SidebarItem({
     <>
       {Icon && (
         <Icon
-          className={`mt-0.5 h-4 w-4 shrink-0 ${active ? 'text-kapwa-text-brand' : 'group-hover:text-kapwa-text-on-disabled text-kapwa-text-disabled'}`}
+          className={`mt-0.5 h-4 w-4 shrink-0 ${active ? 'text-kapwa-text-brand' : 'group-hover:text-kapwa-text-on-disabled text-kapwa-text-support'}`}
         />
       )}
       <div className='flex flex-col overflow-hidden text-left'>

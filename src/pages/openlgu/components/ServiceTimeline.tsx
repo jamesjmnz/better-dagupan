@@ -75,7 +75,7 @@ export default function ServiceTimeline({
 
   if (sortedMemberships.length === 0) {
     return (
-      <div className='text-kapwa-text-disabled py-4 text-center text-sm'>
+      <div className='text-kapwa-text-support py-4 text-center text-sm'>
         {t('officials.noServiceHistory')}
       </div>
     );

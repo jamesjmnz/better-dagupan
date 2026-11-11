@@ -93,7 +93,7 @@ const DialogDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={`text-kapwa-text-disabled text-sm ${className}`}
+    className={`text-kapwa-text-support text-sm ${className}`}
     {...props}
   />
 ));

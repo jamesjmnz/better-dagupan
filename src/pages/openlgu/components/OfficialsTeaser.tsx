@@ -149,7 +149,7 @@ export default function OfficialsTeaser({
   return (
     <div className='space-y-4'>
       <div className='flex items-center justify-between'>
-        <h2 className='text-kapwa-text-disabled text-sm font-bold tracking-widest uppercase'>
+        <h2 className='text-kapwa-text-support text-sm font-bold tracking-widest uppercase'>
           {t('common.officials')}
         </h2>
         <Link

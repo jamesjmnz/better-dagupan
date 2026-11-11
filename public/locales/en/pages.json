@@ -337,6 +337,7 @@
     "resultsFound_other": "{{count}} results found"
   },
   "weather": {
+    "title": "Weather",
     "error": "Error",
     "unavailableTitle": "Weather is not available right now",
     "unavailableMessage": "Current conditions for {{lgu}} will appear here once the weather service is connected.",

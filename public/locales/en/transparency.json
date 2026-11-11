@@ -89,7 +89,8 @@
     "toggleLabels": "Toggle Labels",
     "toggleList": "Toggle List",
     "return": "Return",
-    "total": "Total"
+    "total": "Total",
+    "sliceLabel": "{{name}}: {{amount}} ({{percent}}% of total)"
   },
   "infrastructure": {
     "title": "Infrastructure Projects",

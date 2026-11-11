@@ -140,7 +140,7 @@ export default function PersonMergeTool() {
   if (loading) {
     return (
       <div className='flex items-center justify-center py-12'>
-        <RefreshCw className='text-kapwa-text-disabled h-8 w-8 animate-spin' />
+        <RefreshCw className='text-kapwa-text-support h-8 w-8 animate-spin' />
       </div>
     );
   }
@@ -232,7 +232,7 @@ export default function PersonMergeTool() {
                     }`}
                   >
                     <div className='mb-3 flex items-center justify-between'>
-                      <span className='text-kapwa-text-disabled text-xs font-bold uppercase'>
+                      <span className='text-kapwa-text-support text-xs font-bold uppercase'>
                         {person.id}
                       </span>
                       {isKeep && (
@@ -245,11 +245,11 @@ export default function PersonMergeTool() {
                       {getPersonName(person)}
                     </h3>
                     {person.suffix && (
-                      <p className='text-kapwa-text-disabled text-xs'>
+                      <p className='text-kapwa-text-support text-xs'>
                         Suffix: {person.suffix}
                       </p>
                     )}
-                    <div className='text-kapwa-text-disabled mt-2 text-xs'>
+                    <div className='text-kapwa-text-support mt-2 text-xs'>
                       ID: {person.id}
                     </div>
                   </div>
@@ -264,28 +264,28 @@ export default function PersonMergeTool() {
               </h4>
               <div className='grid gap-2 sm:grid-cols-2'>
                 <div className='flex items-center gap-2 text-sm'>
-                  <Users className='text-kapwa-text-disabled h-4 w-4' />
+                  <Users className='text-kapwa-text-support h-4 w-4' />
                   <span>
                     Memberships:{' '}
                     <strong>{currentGroup.membership_count}</strong>
                   </span>
                 </div>
                 <div className='flex items-center gap-2 text-sm'>
-                  <CheckCircle className='text-kapwa-text-disabled h-4 w-4' />
+                  <CheckCircle className='text-kapwa-text-support h-4 w-4' />
                   <span>
                     Committee Memberships:{' '}
                     <strong>{currentGroup.committee_count}</strong>
                   </span>
                 </div>
                 <div className='flex items-center gap-2 text-sm'>
-                  <Users className='text-kapwa-text-disabled h-4 w-4' />
+                  <Users className='text-kapwa-text-support h-4 w-4' />
                   <span>
                     Documents Authored:{' '}
                     <strong>{currentGroup.document_count}</strong>
                   </span>
                 </div>
               </div>
-              <p className='text-kapwa-text-disabled mt-2 text-xs'>
+              <p className='text-kapwa-text-support mt-2 text-xs'>
                 When merged, all records will be transferred to the person you
                 select to keep.
               </p>
@@ -305,7 +305,7 @@ export default function PersonMergeTool() {
                   Keep selected person&apos;s data (most conservative)
                 </option>
               </select>
-              <p className='text-kapwa-text-disabled mt-1 text-xs'>
+              <p className='text-kapwa-text-support mt-1 text-xs'>
                 More strategies coming soon. Currently uses all data from the
                 kept person record.
               </p>
@@ -414,7 +414,7 @@ export default function PersonMergeTool() {
                     <p className='font-bold text-emerald-700'>
                       Merge completed successfully!
                     </p>
-                    <p className='text-kapwa-text-disabled text-xs'>
+                    <p className='text-kapwa-text-support text-xs'>
                       {mergeResults.merged_count} person(s) merged
                     </p>
                     {Object.entries(mergeResults.updated_tables).map(
@@ -422,7 +422,7 @@ export default function PersonMergeTool() {
                         count > 0 ? (
                           <p
                             key={table}
-                            className='text-kapwa-text-disabled text-xs'
+                            className='text-kapwa-text-support text-xs'
                           >
                             {count} {table.replace('_', ' ')} updated
                           </p>
@@ -479,7 +479,7 @@ export default function PersonMergeTool() {
                   <p className='text-kapwa-text-strong font-medium'>
                     {group.persons.map(p => getPersonName(p)).join(' vs ')}
                   </p>
-                  <div className='text-kapwa-text-disabled mt-1 flex gap-3 text-xs'>
+                  <div className='text-kapwa-text-support mt-1 flex gap-3 text-xs'>
                     <span>{group.person_ids.length} records</span>
                     <span>•</span>
                     <span>{group.membership_count} memberships</span>
@@ -489,7 +489,7 @@ export default function PersonMergeTool() {
                     <span>{group.document_count} documents</span>
                   </div>
                 </div>
-                <ChevronRight className='text-kapwa-text-disabled h-5 w-5' />
+                <ChevronRight className='text-kapwa-text-support h-5 w-5' />
               </div>
             ))}
           </CardContent>

@@ -85,7 +85,7 @@ export default function ReferenceImplementation() {
                 <p className='kapwa-body-md text-kapwa-text-support'>
                   Body Medium standard text
                 </p>
-                <p className='kapwa-body-sm text-kapwa-text-disabled'>
+                <p className='kapwa-body-sm text-kapwa-text-support'>
                   Body Small muted text
                 </p>
               </div>

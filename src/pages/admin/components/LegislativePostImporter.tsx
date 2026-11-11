@@ -787,7 +787,7 @@ Seconded By: Hon. Miko C. Pelegrina
               <Card variant='default'>
                 <CardContent className='space-y-4 p-4'>
                   <div className='flex items-center gap-2'>
-                    <Calendar className='text-kapwa-text-disabled h-4 w-4' />
+                    <Calendar className='text-kapwa-text-support h-4 w-4' />
                     <h4 className='text-kapwa-text-strong text-sm font-semibold'>
                       Session Information (Required)
                     </h4>
@@ -863,7 +863,7 @@ Seconded By: Hon. Miko C. Pelegrina
                     </div>
                   </div>
                   {parsedData?.session_info.type && (
-                    <p className='text-kapwa-text-disabled text-xs'>
+                    <p className='text-kapwa-text-support text-xs'>
                       Detected from post: {parsedData.session_info.ordinal}th{' '}
                       {parsedData.session_info.type} session
                     </p>
@@ -916,7 +916,7 @@ Seconded By: Hon. Miko C. Pelegrina
                         <div className='flex items-center gap-2'>
                           <button
                             onClick={() => toggleExpanded(index)}
-                            className='text-kapwa-text-disabled hover:text-kapwa-text-support p-1'
+                            className='text-kapwa-text-support hover:text-kapwa-text-strong p-1'
                           >
                             {expandedItems.has(index) ? (
                               <ChevronUp className='h-4 w-4' />
@@ -1144,7 +1144,7 @@ Seconded By: Hon. Miko C. Pelegrina
                                       </Badge>
                                     ))
                                   ) : (
-                                    <span className='text-kapwa-text-disabled italic'>
+                                    <span className='text-kapwa-text-support italic'>
                                       No authors
                                     </span>
                                   )}
@@ -1167,7 +1167,7 @@ Seconded By: Hon. Miko C. Pelegrina
                                       </Badge>
                                     ))
                                   ) : (
-                                    <span className='text-kapwa-text-disabled italic'>
+                                    <span className='text-kapwa-text-support italic'>
                                       No authors
                                     </span>
                                   )}

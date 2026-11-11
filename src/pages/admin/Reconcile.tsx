@@ -215,7 +215,7 @@ export default function Reconcile() {
   if (loading && items.length === 0) {
     return (
       <div className='flex items-center justify-center py-12'>
-        <RefreshCw className='text-kapwa-text-disabled h-8 w-8 animate-spin' />
+        <RefreshCw className='text-kapwa-text-support h-8 w-8 animate-spin' />
       </div>
     );
   }
@@ -251,11 +251,10 @@ export default function Reconcile() {
             options={conflictTypeOptions}
             selectedValues={[conflictTypeFilter]}
             onSelect={selected => {
-              setConflictTypeFilter(
-                selected[selected.length - 1]?.value ?? 'all'
-              );
+              setConflictTypeFilter(selected[0]?.value ?? 'all');
               setPage(0);
             }}
+            multiple={false}
             searchable={false}
             className='w-40'
           />
@@ -263,9 +262,10 @@ export default function Reconcile() {
             options={statusOptions}
             selectedValues={[statusFilter]}
             onSelect={selected => {
-              setStatusFilter(selected[selected.length - 1]?.value ?? 'all');
+              setStatusFilter(selected[0]?.value ?? 'all');
               setPage(0);
             }}
+            multiple={false}
             searchable={false}
             className='w-40'
           />
@@ -574,7 +574,7 @@ export default function Reconcile() {
           ) : (
             <Card variant='default'>
               <CardContent className='py-12 text-center'>
-                <GitMerge className='text-kapwa-text-disabled mx-auto mb-4 h-12 w-12' />
+                <GitMerge className='text-kapwa-text-support mx-auto mb-4 h-12 w-12' />
                 <p className='text-kapwa-text-support'>
                   Select a conflict from the list to view details and resolve
                 </p>

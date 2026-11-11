@@ -688,7 +688,7 @@ export default function DocumentEditModal({
               {formData.pdf_url && (
                 <Card variant='default'>
                   <CardContent className='flex items-center gap-3 p-4'>
-                    <FileText className='text-kapwa-text-disabled h-5 w-5' />
+                    <FileText className='text-kapwa-text-support h-5 w-5' />
                     <a
                       href={formData.pdf_url}
                       target='_blank'

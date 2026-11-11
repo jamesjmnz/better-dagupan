@@ -370,7 +370,7 @@ export default function CompetitivenessPage() {
                       key={ind.name}
                       className='border-kapwa-border-weak bg-kapwa-bg-surface flex min-h-[100px] flex-col justify-between rounded-xl border p-4 shadow-xs'
                     >
-                      <span className='text-kapwa-text-disabled text-[10px] leading-tight font-bold tracking-widest uppercase'>
+                      <span className='text-kapwa-text-support text-[10px] leading-tight font-bold tracking-widest uppercase'>
                         {ind.name}
                       </span>
                       <span className='flex gap-2 justify-between items-baseline mt-2'>

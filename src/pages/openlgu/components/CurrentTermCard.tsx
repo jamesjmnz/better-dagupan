@@ -54,7 +54,7 @@ export default function CurrentTermCard({
           <h3 className='text-kapwa-text-strong mb-1 text-lg font-extrabold'>
             {term.name}
           </h3>
-          <p className='text-kapwa-text-disabled mb-4 flex items-center gap-2 text-xs font-medium'>
+          <p className='text-kapwa-text-support mb-4 flex items-center gap-2 text-xs font-medium'>
             <Calendar className='h-3.5 w-3.5' />
             {term.year_range}
           </p>

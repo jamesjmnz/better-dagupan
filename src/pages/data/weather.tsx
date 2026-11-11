@@ -87,6 +87,9 @@ const WeatherPage: FC = () => {
   return (
     <div className='bg-kapwa-bg-surface-raised min-h-screen'>
       <div className='container mx-auto px-4 py-8 md:py-12'>
+        <h1 className='text-kapwa-text-strong mb-8 text-3xl font-bold'>
+          {t('weather.title')}
+        </h1>
         {isLoading ? (
           <div className='flex h-64 items-center justify-center'>
             <div className='border-kapwa-border-brand h-12 w-12 animate-spin rounded-full border-t-2 border-b-2'></div>
@@ -230,7 +233,7 @@ const WeatherPage: FC = () => {
                     anchor: (
                       <a
                         href='https://bagong.pagasa.dost.gov.ph/'
-                        className='text-kapwa-text-brand hover:underline'
+                        className='text-kapwa-text-brand underline hover:no-underline'
                         target='_blank'
                         rel='noopener noreferrer'
                       />

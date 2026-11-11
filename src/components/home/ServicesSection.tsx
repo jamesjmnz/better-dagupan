@@ -54,7 +54,7 @@ const ServicesSection: FC = () => {
           {displayedCategories.map(category => {
             const Icon = getCategoryIcon(category.name);
             return (
-              <div key={category.slug} role='listitem'>
+              <div key={category.slug}>
                 <Link
                   to={`/services?category=${category.slug}`}
                   className='group block h-full'
