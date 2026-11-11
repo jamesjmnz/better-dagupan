@@ -98,8 +98,7 @@
     "needs": {
       "database": "Needs a database",
       "volunteer": "Needs a volunteer",
-      "source": "Needs an official source",
-      "key": "Needs a service key"
+      "source": "Needs an official source"
     },
     "plans": {
       "legislation": {
@@ -117,10 +116,6 @@
       "moreServices": {
         "title": "More city services",
         "description": "Add services from other city offices as their Citizen's Charter pages are published, and re-check the current ones against the live city website."
-      },
-      "weather": {
-        "title": "Live weather",
-        "description": "Show current conditions for the {{lgu}} once the weather service is connected."
       }
     },
     "ctaTitle": "Have an idea?",

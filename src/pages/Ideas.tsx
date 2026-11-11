@@ -12,21 +12,19 @@ import { config } from '@/lib/lguConfig';
   The project's open plans. Each one says what it is waiting on, so no
   status here is a promise of when it will ship.
 */
-type Need = 'database' | 'volunteer' | 'source' | 'key';
+type Need = 'database' | 'volunteer' | 'source';
 
 const PLANS: { key: string; need: Need }[] = [
   { key: 'legislation', need: 'database' },
   { key: 'pangasinan', need: 'volunteer' },
   { key: 'barangayCouncils', need: 'source' },
   { key: 'moreServices', need: 'source' },
-  { key: 'weather', need: 'key' },
 ];
 
 const NEED_STYLES: Record<Need, string> = {
   database: 'bg-kapwa-bg-info-weak text-kapwa-text-info',
   volunteer: 'bg-kapwa-bg-accent-purple-weak text-kapwa-text-accent-purple',
   source: 'bg-kapwa-bg-warning-weak text-kapwa-orange-800',
-  key: 'bg-kapwa-bg-surface-raised text-kapwa-text-strong',
 };
 
 const Ideas: FC = () => {

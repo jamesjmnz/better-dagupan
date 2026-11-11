@@ -98,8 +98,7 @@
     "needs": {
       "database": "Kailangan ng database",
       "volunteer": "Kailangan ng boluntaryo",
-      "source": "Kailangan ng opisyal na sanggunian",
-      "key": "Kailangan ng service key"
+      "source": "Kailangan ng opisyal na sanggunian"
     },
     "plans": {
       "legislation": {
@@ -117,10 +116,6 @@
       "moreServices": {
         "title": "Higit pang serbisyo ng lungsod",
         "description": "Idagdag ang mga serbisyo ng iba pang tanggapan ng lungsod habang inilalathala ang kanilang mga pahina ng Citizen's Charter, at suriing muli ang mga kasalukuyan laban sa live na website ng lungsod."
-      },
-      "weather": {
-        "title": "Live na lagay ng panahon",
-        "description": "Ipakita ang kasalukuyang lagay ng panahon sa {{lgu}} kapag nakakonekta na ang serbisyo ng panahon."
       }
     },
     "ctaTitle": "May ideya ka ba?",
