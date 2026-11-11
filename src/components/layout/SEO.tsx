@@ -161,6 +161,12 @@ export function SEO({
       : baseUrl
         ? `${baseUrl}${ogImage}`
         : undefined;
+  // The default card is rendered at a known size by
+  // scripts/render-brand-images.ts; a page's own image may not be.
+  const isDefaultOgImage = ogImage === config.portal.defaultOgImagePath;
+  const ogImageAlt = isDefaultOgImage
+    ? `${config.portal.name}: public information about the ${config.lgu.fullName}, ${config.lgu.province}`
+    : fullTitle;
 
   // Generate breadcrumb structured data
   const breadcrumbJsonLd = breadcrumbs
@@ -196,6 +202,13 @@ export function SEO({
       <meta property='og:description' content={finalDescription} />
       <meta property='og:type' content={ogType} />
       {fullOgImage && <meta property='og:image' content={fullOgImage} />}
+      {fullOgImage && isDefaultOgImage && (
+        <meta property='og:image:width' content='1200' />
+      )}
+      {fullOgImage && isDefaultOgImage && (
+        <meta property='og:image:height' content='630' />
+      )}
+      {fullOgImage && <meta property='og:image:alt' content={ogImageAlt} />}
       <meta property='og:site_name' content={siteTitle} />
       {fullCanonical && <meta property='og:url' content={fullCanonical} />}
 
@@ -207,6 +220,7 @@ export function SEO({
       <meta name='twitter:title' content={fullTitle} />
       <meta name='twitter:description' content={finalDescription} />
       {fullOgImage && <meta name='twitter:image' content={fullOgImage} />}
+      {fullOgImage && <meta name='twitter:image:alt' content={ogImageAlt} />}
 
       {/* Government Specific Meta Tags */}
       <meta name='geo.country' content='PH' />

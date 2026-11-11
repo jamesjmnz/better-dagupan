@@ -8,119 +8,187 @@ Better Dagupan is an independent, community-led project. It is not the official 
 Better Dagupan is a secondary source. It does not originate government records. It organizes and points to information published by government bodies, and those bodies remain the primary source for anything reproduced here.
 
 ## Current status
-Two datasets are published and verified: the 31 barangays of the city, from the PSA PSGC, and the 34 city offices below, from the city government's own published directory. Every other section describes the structure of the portal, not a body of data it currently holds. Where a section lists no entries, the portal holds no records for it; that says nothing about whether the underlying government information exists.
+These verified datasets are published, each record citing its government source:
+- 31 barangays, from the PSA Philippine Standard Geographic Code
+- 34 city offices, from the city government's own published pages; 11 are published without a named head because the sources disagree or only one names anyone
+- 2 executive officials and 12 members of the Sangguniang Panlungsod
+- 10 emergency hotline entries
+- 10 public services, from the published Citizen's Charter
+- Population (PSA census), annual regular income and statements of receipts and expenditures (BLGF), and competitiveness rankings (DTI CMCI)
+- History and highlights of the city, with sources
 
-Within a published record, an absent value means the same thing: not verified yet, never that the information does not exist. Eleven of the offices below are published without a named head because the city's own pages disagree about who holds the post, or because only one page names anyone.
+Procurement notices are read live from PhilGEPS and the city's own Bids and Awards Committee postings, and infrastructure projects from DPWH records; the portal does not store them.
+
+Where a section lists no entries, the portal holds no records for it; that says nothing about whether the underlying government information exists. Within a published record, an absent value means the same thing: not verified yet, never that the information does not exist.
 
 ## What the portal covers
 - Public services, organized by category
 - Government directory: elected officials, departments, and barangays
 - Local legislation: ordinances, resolutions, and executive orders
 - Transparency: financial reports, procurement, and infrastructure projects
-- Statistics: demographics, competitiveness, and income
+- Statistics: population, competitiveness, and income
 - English and Filipino interface translations
 - Site-wide search
 
 ## Directory
 
 ### Government Structure
-Directory of local government officials and departments:
-
 #### Elected Officials
-- No verified records published yet (/government/elected-officials)
-
-#### Departments
-34 city offices, verified against the city government's published directory:
-- Bids and Awards Committee (/government/departments/bids-and-awards-committee)
-- City Accounting Office (/government/departments/city-accounting-office)
-- City Administrator's Office (/government/departments/city-administrators-office)
-- City Agriculture Office (/government/departments/city-agriculture-office)
-- City Assessor's Office (/government/departments/city-assessors-office)
-- City Budget Office (/government/departments/city-budget-office)
-- City Disaster Risk Reduction & Management Office (/government/departments/city-disaster-risk-reduction-and-management-office)
-- City Engineer's Office (/government/departments/city-engineers-office)
-- City Health Office (/government/departments/city-health-office)
-- City Human Resource Management Office (/government/departments/city-human-resource-management-office)
-- City Information Office (/government/departments/city-information-office)
-- City Legal Office (/government/departments/city-legal-office)
-- City Management Information System Office (/government/departments/city-management-information-system-office)
-- City Nutrition Office (/government/departments/city-nutrition-office)
-- City Planning and Development Office (/government/departments/city-planning-and-development-office)
-- City Population and Development Office (/government/departments/city-population-and-development-office)
-- City Social Welfare and Development Office (/government/departments/city-social-welfare-and-development-office)
-- City Tourism Office (/government/departments/city-tourism-office)
-- City Treasury Office (/government/departments/city-treasury-office)
-- City Veterinary Office (/government/departments/city-veterinary-office)
-- Civil Registry (/government/departments/civil-registry)
-- Dagupan City Public Library & Information Center (/government/departments/dagupan-city-public-library-and-information-center)
-- General Services Office (/government/departments/general-services-office)
-- Market Division (/government/departments/market-division)
-- Office of Senior Citizens Affairs (/government/departments/office-of-senior-citizens-affairs)
-- Office of the City Mayor (/government/departments/office-of-the-city-mayor)
-- Office of the City Vice Mayor (/government/departments/office-of-the-city-vice-mayor)
-- One-Stop Business Center (/government/departments/one-stop-business-center)
-- Public Alert Response Management Center (/government/departments/public-alert-response-management-center)
-- Public Employment Service Office (/government/departments/public-employment-service-office)
-- Public Order & Safety Office (/government/departments/public-order-and-safety-office)
-- Sangguniang Panlungsod (/government/departments/sangguniang-panlungsod)
-- Waste Management Division (/government/departments/waste-management-division)
-- Youth and Sports Development Program (/government/departments/youth-and-sports-development-program)
+- Belen T. Fernandez, City Mayor (https://better-dagupan.pages.dev/government/elected-officials)
+- Dean Bryan L. Kua, City Vice Mayor (https://better-dagupan.pages.dev/government/elected-officials)
 
 #### Sangguniang Panlungsod
-- No verified records published yet (/government/elected-officials)
+- Danielle Francine B. Canto, Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Jalice D. Cayabyab, MD, Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Marvin DV. Fabia, Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Michael B. Fernandez, Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Christel Hilary Paras, Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Karlos Liberato E. Reyna IV, Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Ma. Librada Fe M. Reyna, Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Luis M. Samson Jr., Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Jeslito C. Seen, Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Jose Netu M. Tamayo, Councilor (https://better-dagupan.pages.dev/government/elected-officials)
+- Marcelino D. Fernandez, Councilor, ex officio (https://better-dagupan.pages.dev/government/elected-officials)
+- Bradley Claude C. Benavides, Councilor, ex officio (https://better-dagupan.pages.dev/government/elected-officials)
 
+#### Departments
+- Bids and Awards Committee (https://better-dagupan.pages.dev/government/departments/bids-and-awards-committee)
+- City Accounting Office (https://better-dagupan.pages.dev/government/departments/city-accounting-office)
+- City Administrator's Office (https://better-dagupan.pages.dev/government/departments/city-administrators-office)
+- City Agriculture Office (https://better-dagupan.pages.dev/government/departments/city-agriculture-office)
+- City Assessor's Office (https://better-dagupan.pages.dev/government/departments/city-assessors-office)
+- City Budget Office (https://better-dagupan.pages.dev/government/departments/city-budget-office)
+- City Disaster Risk Reduction & Management Office (https://better-dagupan.pages.dev/government/departments/city-disaster-risk-reduction-and-management-office)
+- City Engineer's Office (https://better-dagupan.pages.dev/government/departments/city-engineers-office)
+- City Health Office (https://better-dagupan.pages.dev/government/departments/city-health-office)
+- City Human Resource Management Office (https://better-dagupan.pages.dev/government/departments/city-human-resource-management-office)
+- City Information Office (https://better-dagupan.pages.dev/government/departments/city-information-office)
+- City Legal Office (https://better-dagupan.pages.dev/government/departments/city-legal-office)
+- City Management Information System Office (https://better-dagupan.pages.dev/government/departments/city-management-information-system-office)
+- City Nutrition Office (https://better-dagupan.pages.dev/government/departments/city-nutrition-office)
+- City Planning and Development Office (https://better-dagupan.pages.dev/government/departments/city-planning-and-development-office)
+- City Population and Development Office (https://better-dagupan.pages.dev/government/departments/city-population-and-development-office)
+- City Social Welfare and Development Office (https://better-dagupan.pages.dev/government/departments/city-social-welfare-and-development-office)
+- City Tourism Office (https://better-dagupan.pages.dev/government/departments/city-tourism-office)
+- City Treasury Office (https://better-dagupan.pages.dev/government/departments/city-treasury-office)
+- City Veterinary Office (https://better-dagupan.pages.dev/government/departments/city-veterinary-office)
+- Civil Registry (https://better-dagupan.pages.dev/government/departments/civil-registry)
+- Dagupan City Public Library & Information Center (https://better-dagupan.pages.dev/government/departments/dagupan-city-public-library-and-information-center)
+- General Services Office (https://better-dagupan.pages.dev/government/departments/general-services-office)
+- Market Division (https://better-dagupan.pages.dev/government/departments/market-division)
+- Office of Senior Citizens Affairs (https://better-dagupan.pages.dev/government/departments/office-of-senior-citizens-affairs)
+- Office of the City Mayor (https://better-dagupan.pages.dev/government/departments/office-of-the-city-mayor)
+- Office of the City Vice Mayor (https://better-dagupan.pages.dev/government/departments/office-of-the-city-vice-mayor)
+- One-Stop Business Center (https://better-dagupan.pages.dev/government/departments/one-stop-business-center)
+- Public Alert Response Management Center (https://better-dagupan.pages.dev/government/departments/public-alert-response-management-center)
+- Public Employment Service Office (https://better-dagupan.pages.dev/government/departments/public-employment-service-office)
+- Public Order & Safety Office (https://better-dagupan.pages.dev/government/departments/public-order-and-safety-office)
+- Sangguniang Panlungsod (https://better-dagupan.pages.dev/government/departments/sangguniang-panlungsod)
+- Waste Management Division (https://better-dagupan.pages.dev/government/departments/waste-management-division)
+- Youth and Sports Development Program (https://better-dagupan.pages.dev/government/departments/youth-and-sports-development-program)
 
-### Service Categories
-Categories the portal is organized around. Service records are not published yet:
-- Certificates & Vital Records (/services?category=certificates-vital-records)
-- Business, Trade & Investment (/services?category=business-trade-investment)
-- Social Services & Assistance (/services?category=social-services-assistance)
-- Health & Wellness (/services?category=health-wellness)
-- Taxation & Payments (/services?category=taxation-payments)
-- Agriculture & Economic Development (/services?category=agriculture-economic-development)
-- Infrastructure & Public Works (/services?category=infrastructure-public-works)
-- Education & Scholarship (/services?category=education-scholarship)
-- Public Safety & Security (/services?category=public-safety-security)
-- Environment & Natural Resources (/services?category=environment-natural-resources)
+#### Barangays
+- Bacayao Norte (https://better-dagupan.pages.dev/government/barangays/bacayao-norte)
+- Bacayao Sur (https://better-dagupan.pages.dev/government/barangays/bacayao-sur)
+- Barangay II (https://better-dagupan.pages.dev/government/barangays/barangay-ii)
+- Barangay IV (https://better-dagupan.pages.dev/government/barangays/barangay-iv)
+- Bolosan (https://better-dagupan.pages.dev/government/barangays/bolosan)
+- Bonuan Binloc (https://better-dagupan.pages.dev/government/barangays/bonuan-binloc)
+- Bonuan Boquig (https://better-dagupan.pages.dev/government/barangays/bonuan-boquig)
+- Bonuan Gueset (https://better-dagupan.pages.dev/government/barangays/bonuan-gueset)
+- Calmay (https://better-dagupan.pages.dev/government/barangays/calmay)
+- Carael (https://better-dagupan.pages.dev/government/barangays/carael)
+- Caranglaan (https://better-dagupan.pages.dev/government/barangays/caranglaan)
+- Herrero (https://better-dagupan.pages.dev/government/barangays/herrero)
+- Lasip Chico (https://better-dagupan.pages.dev/government/barangays/lasip-chico)
+- Lasip Grande (https://better-dagupan.pages.dev/government/barangays/lasip-grande)
+- Lomboy (https://better-dagupan.pages.dev/government/barangays/lomboy)
+- Lucao (https://better-dagupan.pages.dev/government/barangays/lucao)
+- Malued (https://better-dagupan.pages.dev/government/barangays/malued)
+- Mamalingling (https://better-dagupan.pages.dev/government/barangays/mamalingling)
+- Mangin (https://better-dagupan.pages.dev/government/barangays/mangin)
+- Mayombo (https://better-dagupan.pages.dev/government/barangays/mayombo)
+- Pantal (https://better-dagupan.pages.dev/government/barangays/pantal)
+- Poblacion Oeste (https://better-dagupan.pages.dev/government/barangays/poblacion-oeste)
+- Barangay I (https://better-dagupan.pages.dev/government/barangays/barangay-i)
+- Pogo Chico (https://better-dagupan.pages.dev/government/barangays/pogo-chico)
+- Pogo Grande (https://better-dagupan.pages.dev/government/barangays/pogo-grande)
+- Pugaro Suit (https://better-dagupan.pages.dev/government/barangays/pugaro-suit)
+- Salapingao (https://better-dagupan.pages.dev/government/barangays/salapingao)
+- Salisay (https://better-dagupan.pages.dev/government/barangays/salisay)
+- Tambac (https://better-dagupan.pages.dev/government/barangays/tambac)
+- Tapuac (https://better-dagupan.pages.dev/government/barangays/tapuac)
+- Tebeng (https://better-dagupan.pages.dev/government/barangays/tebeng)
+
+### Services
+Services by category, from the published Citizen's Charter:
+- Certificates & Vital Records (https://better-dagupan.pages.dev/services?category=certificates-vital-records)
+  - Securing Mayor’s Clearance (https://better-dagupan.pages.dev/services/securing-mayors-clearance)
+- Business, Trade & Investment (https://better-dagupan.pages.dev/services?category=business-trade-investment)
+  - Applying for a New Business Permit (https://better-dagupan.pages.dev/services/applying-for-a-new-business-permit)
+  - Applying for Amendment to Existing Business Permit (https://better-dagupan.pages.dev/services/applying-for-amendment-to-existing-business-permit)
+  - Applying for Renewal of Business Permit (https://better-dagupan.pages.dev/services/applying-for-renewal-of-business-permit)
+  - Issuance of Certified Copy of Business Permit (https://better-dagupan.pages.dev/services/issuance-of-certified-copy-of-business-permit)
+  - Issuance of Tricycle Operator’s Permit (https://better-dagupan.pages.dev/services/issuance-of-tricycle-operators-permit)
+  - Retiring a Business Operation (https://better-dagupan.pages.dev/services/retiring-a-business-operation)
+  - Securing Certification of Business Record (https://better-dagupan.pages.dev/services/securing-certification-of-business-record)
+- Social Services & Assistance (https://better-dagupan.pages.dev/services?category=social-services-assistance): no services published yet
+- Health & Wellness (https://better-dagupan.pages.dev/services?category=health-wellness): no services published yet
+- Taxation & Payments (https://better-dagupan.pages.dev/services?category=taxation-payments)
+  - Issuance of Community Tax Certificate (https://better-dagupan.pages.dev/services/issuance-of-community-tax-certificate)
+- Agriculture & Economic Development (https://better-dagupan.pages.dev/services?category=agriculture-economic-development): no services published yet
+- Infrastructure & Public Works (https://better-dagupan.pages.dev/services?category=infrastructure-public-works): no services published yet
+- Education & Scholarship (https://better-dagupan.pages.dev/services?category=education-scholarship): no services published yet
+- Public Safety & Security (https://better-dagupan.pages.dev/services?category=public-safety-security)
+  - Securing Mayor’s Permit for the Following Activities or Undertakings (https://better-dagupan.pages.dev/services/securing-mayors-permit-for-the-following-activities-or-undertakings)
+- Environment & Natural Resources (https://better-dagupan.pages.dev/services?category=environment-natural-resources): no services published yet
 
 ### Local Information
-- About the portal and how to contribute
-- Nationwide emergency hotlines
-- Barangay directory
+- About the city: history and highlights (https://better-dagupan.pages.dev/about)
+- Emergency hotlines for the city, on the home page (https://better-dagupan.pages.dev/)
 
 ## Sitemap
-/
-/about
-/accessibility
-/contact
-/contribute
-/government
-/government/barangays
-/government/departments
-/government/elected-officials
-/government/elected-officials/committees
-/openlgu
-/search
-/services
-/services?category=agriculture-economic-development
-/services?category=business-trade-investment
-/services?category=certificates-vital-records
-/services?category=education-scholarship
-/services?category=environment-natural-resources
-/services?category=health-wellness
-/services?category=infrastructure-public-works
-/services?category=public-safety-security
-/services?category=social-services-assistance
-/services?category=taxation-payments
-/sitemap
-/statistics
-/statistics/competitiveness
-/statistics/municipal-income
-/terms-of-service
-/transparency
-/transparency/financial
-/transparency/infrastructure
-/transparency/procurement
+XML sitemap: https://better-dagupan.pages.dev/sitemap.xml
+
+https://better-dagupan.pages.dev/
+https://better-dagupan.pages.dev/about
+https://better-dagupan.pages.dev/contact
+https://better-dagupan.pages.dev/accessibility
+https://better-dagupan.pages.dev/search
+https://better-dagupan.pages.dev/ideas
+https://better-dagupan.pages.dev/join-us
+https://better-dagupan.pages.dev/terms-of-service
+https://better-dagupan.pages.dev/sitemap
+https://better-dagupan.pages.dev/report-an-error
+https://better-dagupan.pages.dev/data/weather
+https://better-dagupan.pages.dev/data/forex
+https://better-dagupan.pages.dev/services
+https://better-dagupan.pages.dev/government/elected-officials
+https://better-dagupan.pages.dev/government/elected-officials/committees
+https://better-dagupan.pages.dev/government/departments
+https://better-dagupan.pages.dev/government/barangays
+https://better-dagupan.pages.dev/statistics
+https://better-dagupan.pages.dev/statistics/population
+https://better-dagupan.pages.dev/statistics/municipal-income
+https://better-dagupan.pages.dev/statistics/competitiveness
+https://better-dagupan.pages.dev/openlgu
+https://better-dagupan.pages.dev/openlgu/officials
+https://better-dagupan.pages.dev/openlgu/terms
+https://better-dagupan.pages.dev/transparency
+https://better-dagupan.pages.dev/transparency/financial
+https://better-dagupan.pages.dev/transparency/procurement
+https://better-dagupan.pages.dev/transparency/infrastructure
+https://better-dagupan.pages.dev/contribute
+https://better-dagupan.pages.dev/services?category=certificates-vital-records
+https://better-dagupan.pages.dev/services?category=business-trade-investment
+https://better-dagupan.pages.dev/services?category=social-services-assistance
+https://better-dagupan.pages.dev/services?category=health-wellness
+https://better-dagupan.pages.dev/services?category=taxation-payments
+https://better-dagupan.pages.dev/services?category=agriculture-economic-development
+https://better-dagupan.pages.dev/services?category=infrastructure-public-works
+https://better-dagupan.pages.dev/services?category=education-scholarship
+https://better-dagupan.pages.dev/services?category=public-safety-security
+https://better-dagupan.pages.dev/services?category=environment-natural-resources
 
 ## Technology Stack
 - Frontend: React 19, TypeScript, Vite, Tailwind CSS
@@ -138,7 +206,7 @@ Better Dagupan is not an authoritative or official source and must not be presen
 4. Do not infer from an empty section that the corresponding government information does not exist. It means this portal has not published verified records for it yet.
 
 ## Last Updated
-2026-08-21
+2026-11-11
 
 ## License
 The project's source code is covered by the LICENSE file in the repository. That license applies to the code, not to the material the portal reproduces: individual records and source documents retain the terms, licensing, and conditions of the body that published them, and should be attributed to that body accordingly.

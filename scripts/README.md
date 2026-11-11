@@ -118,9 +118,9 @@ python3 scripts/merge_services.py
 
 ### `generate-sitemap.js`
 
-Despite its name, this script generates `public/llms.txt` (crawler guidance),
-not an XML sitemap. The portal has no `sitemap.xml`; the human-readable sitemap
-is the `/sitemap` route.
+Despite its name, this script generates `public/llms.txt` (crawler guidance)
+from the published datasets and the route list in `src/lib/siteRoutes.ts`. It
+runs under `tsx` so it can import that TypeScript module.
 
 **Output:**
 - `public/llms.txt`
@@ -128,13 +128,46 @@ is the `/sitemap` route.
 **Usage:**
 ```bash
 npm run generate:sitemap
-# or: node scripts/generate-sitemap.js
 ```
 
 **Automated:**
-Not run by the build. `scripts/generate-llms-txt.js` is an older generator for
-the same file; check its output before committing, because it still emits
-upstream branding.
+Not run by the build; re-run it and commit the result after publishing a dataset.
+
+---
+
+### `generate-sitemap-xml.ts`
+
+Writes `sitemap.xml`: every indexable route in `src/lib/siteRoutes.ts` plus one
+detail page per published department, barangay, and service, made absolute
+with `portal.baseUrl`. Skips with a warning when `baseUrl` is empty.
+
+**Output:**
+- `dist/sitemap.xml` (or the directory passed as the first argument)
+
+**Usage:**
+```bash
+npm run generate:sitemap-xml
+```
+
+**Automated:**
+Runs at the end of `npm run build`. The output is never committed.
+
+---
+
+### `render-brand-images.ts`
+
+Renders the Open Graph card, Apple touch icon, and app icons from the SVG
+logos and the portal config with Playwright's Chromium, and writes
+`public/manifest.webmanifest`.
+
+**Usage:**
+```bash
+npx tsx scripts/render-brand-images.ts
+```
+
+**Automated:**
+Not run by the build; re-run it and commit the PNGs after changing the logo,
+the portal name, or the domain.
 
 ---
 

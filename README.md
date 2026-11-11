@@ -108,11 +108,12 @@ This portal, like the BetterLB template it comes from, is designed to be adapted
 | `lgu.districtEngineeringOffice` | DPWH district office used by the infrastructure filter | "Pangasinan 2nd DEO" |
 | `lgu.officialWebsite` | Official LGU website | "https://www.dagupan.gov.ph" |
 | `portal.name` | Portal name | "Better Dagupan" |
-| `portal.baseUrl` | Portal base URL | "" — unset until a domain is assigned |
+| `portal.baseUrl` | Portal base URL | "https://better-dagupan.pages.dev" |
 
-`portal.domain`, `portal.baseUrl`, and the social URLs are deliberately empty.
-Leaving them unset keeps SEO canonicals root-relative and stops the portal
-advertising a domain or account that does not exist.
+`portal.domain` and `portal.baseUrl` name the Cloudflare Pages project in
+`wrangler.jsonc`; canonical URLs, the share image, `sitemap.xml`, and
+`public/robots.txt` are built on them. The social URLs are deliberately empty
+so the portal does not advertise an account that does not exist.
 
 **Note:** See [`FORKING.md`](./FORKING.md) for comprehensive forking instructions including database setup for legislative data.
 
@@ -376,9 +377,13 @@ The deployment setup targets **Cloudflare Pages**:
 5. **Secrets and variables**: `OPENWEATHERMAP_API_KEY` for weather, and
    `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `AUTHORIZED_USERS`, `ADMIN_USERS`
    for the admin area (see `.dev.vars.example`).
-6. **Domain**: Once assigned, set `portal.domain` and `portal.baseUrl` in
-   `config/lgu.config.json` and add the origin to the CORS allow-lists in
-   `functions/utils/origins.ts` and `functions/weather.ts`.
+6. **Domain**: The portal is served from `better-dagupan.pages.dev`. If a
+   custom domain is assigned, change `portal.domain` and `portal.baseUrl` in
+   `config/lgu.config.json`, add the origin to `functions/utils/origins.ts`,
+   update the `Sitemap:` line in `public/robots.txt` and the share-image URLs
+   in `index.html`, and re-run `npx tsx scripts/render-brand-images.ts` so the
+   card shows the new domain. The unit tests catch a stale origin,
+   `robots.txt`, or `index.html`.
 
 **Note:** The deployment workflow uses Wrangler 4.70.0 (pinned in both `.github/workflows/deploy.yml` and `package.json`). If upgrading, ensure compatibility with the Wrangler Action and test thoroughly.
 
