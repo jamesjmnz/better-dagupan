@@ -1,4 +1,10 @@
+import { readFileSync } from 'node:fs';
+
 import { expect, test } from './test-config';
+
+const { contactEmail } = JSON.parse(
+  readFileSync(new URL('../config/lgu.config.json', import.meta.url), 'utf8')
+).portal as { contactEmail: string };
 
 /**
  * Readers report a wrong civic fact through a public GitHub issue form; the
@@ -57,13 +63,21 @@ test.describe('Report an error', () => {
     ).not.toContain('page-url=');
   });
 
-  test('the email fallback pre-fills only a subject', async ({ page }) => {
+  test('the email fallback appears only when an address is configured', async ({
+    page,
+  }) => {
     await page.goto('/report-an-error');
+    await expect(page.getByTestId('report-error-github')).toBeVisible();
 
-    const href = await page
-      .getByTestId('report-error-email')
-      .getAttribute('href');
-    expect(href).toMatch(/^mailto:[^?]+\?subject=[^&]+$/);
+    const email = page.getByTestId('report-error-email');
+    if (!contactEmail) {
+      await expect(email).toHaveCount(0);
+      return;
+    }
+    // When present it pre-fills only a subject.
+    expect(await email.getAttribute('href')).toMatch(
+      /^mailto:[^?]+\?subject=[^&]+$/
+    );
   });
 
   test('a citation links to the report page for its own page', async ({
