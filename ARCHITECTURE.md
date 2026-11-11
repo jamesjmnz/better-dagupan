@@ -24,13 +24,17 @@ Better Dagupan is not deployed yet and has no production domain.
 │  Pages Functions (/api)  │    │  • Meilisearch           │
 └──────────────────────────┘    │    (PhilGEPS, DPWH)      │
        │            │           │  • DPWH project API      │
-       ▼            ▼           │  • Forex API             │
-┌─────────────┐ ┌────────────┐  └──────────────────────────┘
-│ Cloudflare  │ │ External   │
-│ D1 + KV     │ │ • OpenWeatherMap
-│ (not bound  │ │ • GitHub OAuth
-│  yet)       │ └────────────┘
-└─────────────┘
+       │            │           │  • Forex API             │
+       │            │           └──────────────────────────┘
+       ▼            ▼
+┌─────────────┐ ┌─────────────────────────────┐
+│ Cloudflare  │ │ External                    │
+│ D1 + KV     │ │ • OpenWeatherMap            │
+│ (not bound  │ │ • GitHub OAuth              │
+│  yet)       │ │ • LGU WordPress feeds       │
+└─────────────┘ │   (city BAC notices,        │
+                │    council ordinances)      │
+                └─────────────────────────────┘
 ```
 
 **Architecture Type:** JAMstack (Static Frontend + Serverless Backend)
@@ -101,10 +105,15 @@ import { Card, Badge } from '@/components/ui';
 
 ### Static Data (Version Controlled)
 Located in `src/data/`:
-- **Directory:** Barangays (31, published) and city offices (34, published); elected officials (empty)
+- **Directory:** Barangays (31), city offices (34), executive officials, the Sangguniang Panlungsod roster, and city hotlines, all published
+- **About:** The city's legal timeline and highlights (published)
 - **Sources:** `sources/civic-sources.json`, the citations every published record refers to
-- **Services:** Category files and the citizens charter (empty)
-- **Statistics and transparency:** Population, income, competitiveness, and SRE data (empty)
+- **Services:** The Citizen's Charter (10 services, published) and the community category files (empty), merged into `citizens-charter/merged-services.json` and `services/services.json` by `npm run merge:services`
+- **Statistics:** Census population, annual regular income (BLGF), and competitiveness (DTI CMCI), published
+- **Transparency:** BLGF Statements of Receipts and Expenditures in `transparency/sre.json`, published
+
+Each published dataset has a provenance test in `src/data/__tests__/`, and the
+JSON Schemas next to the data are checked in CI.
 
 Publishing rules are in
 [`docs/civic-data-verification.md`](./docs/civic-data-verification.md).
@@ -136,8 +145,15 @@ render those instead.
 | BetterGov Meilisearch (`search2.bettergov.ph`) | PhilGEPS procurement and DPWH infrastructure search. `src/lib/meilisearch.ts` defaults to BetterGov's public search-only key |
 | BetterGov DPWH API (`api.dpwh.bettergov.ph`) | Infrastructure project detail |
 | BetterGov forex API (`api.bettergov.ph/forex`) | Foreign-exchange rates |
-| OpenWeatherMap | Weather data, cached in the `WEATHER_KV` namespace |
+| OpenWeatherMap | Weather data, cached in the `WEATHER_KV` namespace once one is bound |
 | GitHub OAuth | Admin sign-in |
+| City WordPress feed (`transparency.procurement.cityNotices`) | The city's bid and award notices, proxied by `/api/city-procurement` |
+| Council WordPress feed (`openlgu.councilFeed`) | The Sangguniang Panlungsod's posted ordinances, proxied by `/api/council-ordinances` |
+
+The two WordPress feeds are read by Pages Functions, never by the browser.
+Responses are cached at the edge for 30 minutes, upstream requests give up
+after 8 seconds, and a failure answers `502` so the page can link to the LGU's
+own page instead. The shared code is in `functions/utils/wordpress-feed.ts`.
 
 ---
 
@@ -149,10 +165,13 @@ functions/
 ├── index.ts          # Workers entry: CORS, security headers, scheduled weather job
 ├── weather.ts        # Weather read straight from KV
 ├── api/
-│   ├── weather.ts    # /api/weather — OpenWeatherMap, cached in KV
-│   ├── openlgu/      # /api/openlgu/* — public legislative data (D1)
-│   └── admin/        # /api/admin/* — auth, documents, review queue, workbench
-└── utils/            # withAuth, RBAC, CSRF, rate limiting, caching, audit log
+│   ├── weather.ts            # /api/weather — OpenWeatherMap, cached in KV when bound
+│   ├── city-procurement.ts   # /api/city-procurement — the city's posted bid notices
+│   ├── council-ordinances.ts # /api/council-ordinances — the council's posted ordinances
+│   ├── openlgu/              # /api/openlgu/* — public legislative data (D1)
+│   └── admin/                # /api/admin/* — auth, documents, review queue, workbench
+└── utils/            # withAuth, RBAC, CSRF, rate limiting, caching, audit log,
+                      # WordPress feed helpers, shared CORS origins
 ```
 
 ### Security
@@ -201,6 +220,7 @@ for the shape of the data inherited from BetterLB.
 ### E2E Tests (Playwright)
 Located in `e2e/`:
 - Smoke suite (`@smoke`) that must hold for any LGU
+- Accessibility suite (`@a11y`, `e2e/a11y.spec.ts`) running axe against key routes
 - Content safety and disclaimer checks
 - Government directory, services, statistics, and transparency pages
 - Admin dashboard operations
@@ -210,8 +230,10 @@ Located in `e2e/`:
 - `e2e/utils/kapwa.ts` - Validates Kapwa design token usage and prevents raw Tailwind colors
 
 ### Unit Tests (Vitest)
-Component tests, library tests, and data tests in `src/data/__tests__/` that
-enforce provenance and keep inherited records out.
+Component tests, library tests, functions tests, and data tests in
+`src/data/__tests__/` that enforce provenance, keep English and Filipino locales
+in parity, and keep inherited records out. `npm run typecheck` type-checks the
+app, the Node config, and the functions, and CI enforces it.
 
 ---
 
@@ -221,7 +243,7 @@ enforce provenance and keep inherited records out.
 - **Platform:** Cloudflare Pages, project `better-dagupan` (`wrangler.jsonc`)
 - **Workflow:** `.github/workflows/deploy.yml`, Node from `.nvmrc`; the deploy job is skipped until `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` are set
 - **Database:** none bound yet
-- **KV:** none bound yet (`WEATHER_KV` is needed for weather and admin sessions)
+- **KV:** none bound yet (`WEATHER_KV` is needed for admin sessions; weather runs uncached without it)
 - **Search:** Shared BetterGov Meilisearch
 - **Domain:** not yet assigned
 - **Wrangler:** 4.70.0 (pinned for compatibility)

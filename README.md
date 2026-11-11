@@ -20,23 +20,33 @@ below `5f3f25c` are the work of the upstream BetterLB contributors; see
 
 ### Current status
 
-The Dagupan adaptation is in progress. Branding, localisation, and the
-independent-project disclaimer are in place, and the inherited Los Baños civic
-records have been removed rather than shown under a Dagupan heading.
-
-Two verified Dagupan datasets are published. Every record cites a government
-source, and the pages show the source and its last verification date:
+Branding, localisation, and the independent-project disclaimer are in place,
+and the inherited Los Baños civic records have been removed rather than shown
+under a Dagupan heading. Most of the directory, statistics, and financial
+sections now hold verified Dagupan records. Every record cites a government
+source, and the pages show the agency, a link to the document, and its last
+verification date:
 
 | Dataset | State |
 |---|---|
 | Barangays (`src/data/directory/barangays.json`) | **Published.** 31 barangays from the PSA Philippine Standard Geographic Code (PSGC). |
-| City offices (`src/data/directory/departments.json`) | **Published.** 34 offices from the City Government of Dagupan's own pages. 11 office heads are deliberately withheld because the sources disagree or only one source names them. |
-| Elected officials (`executive.json`, `legislative.json`) | Empty on `main`; in review in [#11](https://github.com/jamesjmnz/better-dagupan/pull/11). |
-| Procurement (PhilGEPS) | The page shows a "source pending" state on `main` because no PhilGEPS entity name is configured; the entity names are in review in [#9](https://github.com/jamesjmnz/better-dagupan/pull/9), and a list of the city's own procurement notices in [#12](https://github.com/jamesjmnz/better-dagupan/pull/12). |
-| Infrastructure (DPWH) | Live from the shared BetterGov search index, filtered by the values in `config/lgu.config.json`. |
-| City history (`src/data/about/history.json`, `highlights.json`) | **Published.** Seven legal milestones from 1947 to 1973, each from the official text of the law or order in the Supreme Court E-Library, and three cited highlights. Earlier history is marked as not yet verified. |
-| Services, citizens charter, statistics, financial reports | Empty. These sections show an honest empty state. |
-| Legislation (ordinances, resolutions, executive orders) | Not published. No legislative database is bound yet, so the OpenLGU API answers `503` and the pages say the records are not published yet. |
+| City offices (`src/data/directory/departments.json`) | **Published.** 34 offices from the City Government of Dagupan's own pages. 11 office heads are withheld because the sources disagree or only one source names them. |
+| Executive officials (`src/data/directory/executive.json`) | **Published.** The City Mayor and Vice Mayor, each from two or more independent source families. |
+| Sangguniang Panlungsod (`src/data/directory/legislative.json`) | **Published.** 12 members: 10 elected councilors and 2 ex officio. Committee assignments are withheld because the council's own profiles contradict each other. |
+| Emergency hotlines (`src/data/directory/hotlines.json`) | **Published.** 10 city entries with 25 numbers, each stated by two independent city lists. 4 entries are withheld. |
+| Population (`src/data/statistics/population.json`) | **Published.** PSA census counts for 2010, 2015, 2020, and 2024, with barangay counts for 2015–2024. |
+| Annual regular income (`src/data/statistics/ari.json`) | **Published.** BLGF figures for FY 2022–2025. |
+| Competitiveness (`src/data/statistics/cmci.json`) | **Published.** DTI CMCI editions 2014–2024, one record per year. |
+| Financial statements (`src/data/transparency/sre.json`) | **Published.** BLGF Statements of Receipts and Expenditures, quarterly from Q1 2022 to Q3 2026 and full-year for FY 2022–2025. |
+| City history (`src/data/about/history.json`, `highlights.json`) | **Published.** Seven legal milestones from 1947 to 1973, each from the official text in the Supreme Court E-Library, and three cited highlights. Earlier history is marked as not yet verified. |
+| Citizen's Charter services (`src/data/citizens-charter/citizens-charter.json`) | **Published.** 10 One Stop Business Center services from the city's Citizen's Charter, read from archived copies while the city site was down; they need re-checking against the live pages. |
+| Community services (`src/data/services/`) | Empty. No community-contributed service has been verified yet. |
+| Procurement | **Live.** PhilGEPS records from the shared BetterGov search index, filtered by the two exact entity names in `transparency.procurement.organizationNames`, plus the bid and award notices the city posts on its own site (`/api/city-procurement`). |
+| Infrastructure (DPWH) | **Live.** From the shared BetterGov search index, filtered by the values in `config/lgu.config.json`. |
+| Legislation | **Interim.** No legislative database is bound, so the OpenLGU API answers `503`. Until the OpenLGU pipeline is re-keyed for Dagupan, the OpenLGU page lists the ordinances the Sangguniang Panlungsod posts on its own WordPress site (`/api/council-ordinances`), linking back to the council's pages. |
+
+The per-dataset verification notes, including what was withheld and why, are in
+[`docs/civic-data-verification.md`](./docs/civic-data-verification.md).
 
 Nothing in the portal should be read as official Dagupan government
 information. Always check with the city government.
@@ -50,10 +60,11 @@ Betterlocalgov https://github.com/iyanski/betterlocalgov
 
 ### Portal Features
 Better Dagupan is being built to provide:
-- **Government Directory**: City offices and barangays, with sources (published); elected officials (in review)
-- **Public Services Directory**: Guide to city services with requirements, fees, and step-by-step processes (not yet populated)
-- **Legislative Portal (OpenLGU)**: Ordinances, resolutions, and executive orders from the Sangguniang Panlungsod (not yet populated)
-- **Transparency Dashboard**: DPWH infrastructure projects, PhilGEPS procurement, and financial reports
+- **Government Directory**: City offices, barangays, elected officials, and emergency hotlines, each with sources
+- **Public Services Directory**: City services with requirements, fees, and step-by-step processes, starting with 10 Citizen's Charter services
+- **Legislative Portal (OpenLGU)**: For now, the ordinances the Sangguniang Panlungsod posts on its own site; the full portal of ordinances, resolutions, executive orders, sessions, and attendance waits for the re-keyed pipeline
+- **Transparency Dashboard**: DPWH infrastructure projects, PhilGEPS procurement and the city's own bid notices, and BLGF financial statements
+- **Statistics**: Census population, annual regular income, and DTI competitiveness scores
 - **Open Data**: Weather and foreign-exchange pages under `/data`
 - **Report an Error**: A `/report-an-error` page and GitHub issue form for correcting civic information, linked from every source note
 - **Multi-language Support**: English and Filipino translations; a Pangasinan locale is scaffolded but stays hidden (`features.pangasinan: false`) until human translations exist
@@ -81,7 +92,8 @@ This portal, like the BetterLB template it comes from, is designed to be adapted
 | `/public/locales/en/common.json`, `/public/locales/fil/common.json` | UI text strings (hero title, footer copyright, government section) |
 | `/src/data/directory/departments.json` | City or municipal departments and offices |
 | `/src/data/directory/barangays.json` | Barangay information |
-| `/src/data/services/categories/*.json` | Public services data by category |
+| `/src/data/citizens-charter/citizens-charter.json` | Services from the LGU's Citizen's Charter |
+| `/src/data/services/categories/*.json` | Community-contributed services by category |
 
 ### Key Configuration Fields
 
@@ -131,7 +143,7 @@ better-dagupan/
 ├── e2e/                         # End-to-end tests
 │   └── utils/                   # Test helpers and shared testing logic
 ├── functions/                   # Serverless / backend functions (Cloudflare Pages)
-│   ├── api/                     # API endpoints: weather, openlgu, admin
+│   ├── api/                     # weather, city-procurement, council-ordinances, openlgu, admin
 │   └── utils/                   # Shared middleware (auth, CSRF, rate limits, cache)
 ├── public/                      # Static public assets
 │   ├── locales/                 # Translation files (en, fil; pag scaffolded, empty)
@@ -182,10 +194,10 @@ better-dagupan/
 ```
 
 ### Key Components
-- **Government Directory**: Barangays and city offices, each record citing sources from `src/data/sources/civic-sources.json`
-- **Service Directory**: Categorized services from `src/data/services/categories/`
-- **Legislative Portal**: Ordinances, resolutions, and executive orders served from Cloudflare D1 through `functions/api/openlgu/`
-- **Transparency Portal**: Financial reports, PhilGEPS procurement, and DPWH infrastructure projects
+- **Government Directory**: Barangays, city offices, elected officials, and hotlines, each record citing sources from `src/data/sources/civic-sources.json`
+- **Service Directory**: The Citizen's Charter and the category files in `src/data/services/categories/`, merged by `npm run merge:services`
+- **Legislative Portal**: Ordinances, resolutions, and executive orders served from Cloudflare D1 through `functions/api/openlgu/`; until a database is bound, the council's posted ordinances through `functions/api/council-ordinances.ts`
+- **Transparency Portal**: BLGF financial statements, PhilGEPS procurement, the city's bid notices (`functions/api/city-procurement.ts`), and DPWH infrastructure projects
 - **Search Integration**: Procurement and infrastructure queries against the shared BetterGov Meilisearch instance
 - **Internationalization**: Multi-language support with i18next
 
@@ -195,12 +207,14 @@ better-dagupan/
 |-----------|----------|-------|
 | **Barangays** | `/src/data/directory/barangays.json` | Published — 31 records |
 | **Departments** | `/src/data/directory/departments.json` | Published — 34 offices |
-| **Elected officials** | `/src/data/directory/executive.json`, `legislative.json` | Empty (in review) |
+| **Elected officials** | `/src/data/directory/executive.json`, `legislative.json` | Published — Mayor, Vice Mayor, 12 council members |
+| **Hotlines** | `/src/data/directory/hotlines.json` | Published — 10 entries |
+| **History** | `/src/data/about/history.json`, `highlights.json` | Published — 7 milestones, 3 highlights |
+| **Statistics** | `/src/data/statistics/population.json`, `ari.json`, `cmci.json` | Published |
+| **Financial reports** | `/src/data/transparency/sre.json` | Published — Q1 2022 to Q3 2026 |
+| **Citizens Charter** | `/src/data/citizens-charter/citizens-charter.json` | Published — 10 services |
 | **Services** | `/src/data/services/categories/*.json` | Empty |
-| **Citizens Charter** | `/src/data/citizens-charter/citizens-charter.json` | Empty |
-| **Statistics** | `/src/data/statistics/` | Empty |
-| **Financial reports** | `/src/data/transparency/sre.json` | Empty |
-| **Legislation** | Cloudflare D1 database | Not bound yet |
+| **Legislation** | Cloudflare D1 database | Not bound yet; the council's posted ordinances are shown meanwhile |
 
 Before adding or changing a dataset, read
 [`docs/civic-data-verification.md`](./docs/civic-data-verification.md). It sets
@@ -224,6 +238,11 @@ Facebook posts and assume Sangguniang Bayan terms. Re-keying them to Dagupan's
 Sangguniang Panlungsod (for example the WordPress JSON feed at
 `sp.dagupan.gov.ph`) is planned for a later phase. Do not run the pipeline
 against a Dagupan database until then.
+
+Meanwhile `/api/council-ordinances` proxies that same feed live, so the OpenLGU
+page can list the council's posted ordinances with links back to its pages.
+This list is not part of the pipeline: its items are not source records, and
+nothing from it is stored.
 
 See [`docs/openlgu/source-pipeline.md`](./docs/openlgu/source-pipeline.md) for
 the pipeline and
@@ -269,12 +288,15 @@ in a second terminal:
 npm run functions:dev   # wrangler pages dev, proxying to Vite on port 5173
 ```
 Wrangler serves the combined app at `http://localhost:8788`. With no D1
-database bound, the OpenLGU endpoints answer `503`.
+database bound, the OpenLGU endpoints answer `503`, and without
+`OPENWEATHERMAP_API_KEY` so does `/api/weather`; the pages show an empty state
+for both.
 
 ### 5. Running Tests
 ```bash
 npm run test            # Vitest unit tests
-npm run test:e2e        # Run all end-to-end tests
+npm run typecheck       # Type-check the app, Node config, and functions
+npm run test:e2e        # Run all end-to-end tests (excluding @visual)
 npm run lint            # Check code quality (max warnings = 0)
 npm run format          # Format code with Prettier
 ```
@@ -294,9 +316,11 @@ npm run build           # tsc, npm run merge:services, then vite build
 - **City Departments**: Administrative offices implementing city programs
 
 ### Legislative Branch (Sangguniang Panlungsod)
-The Sangguniang Panlungsod is the legislative body of the City of Dagupan. Its
-composition, membership, and committee structure are not documented here until
-they have been verified against primary sources.
+The Sangguniang Panlungsod is the legislative body of the City of Dagupan,
+presided over by the Vice Mayor. Its verified roster is in
+`src/data/directory/legislative.json` and on the portal's
+`/government/elected-officials` page. Committee assignments are not published
+yet, because the council's own profiles contradict each other.
 
 ### Departments
 
@@ -318,8 +342,8 @@ We are looking for volunteers passionate about making Dagupan a better place. Yo
 
 ### Development Workflow
 - Follow [Conventional Commits](https://www.conventionalcommits.org/) (enforced via commitlint)
-- All PRs run ESLint, Prettier, unit tests, a production build, and the E2E smoke suite
-- The full cross-browser E2E suite runs weekly and on demand
+- All PRs run the type check, ESLint, Prettier, unit tests, a production build, and the E2E smoke suite; changes to `src/data/**/*.json` are also validated against their JSON Schemas
+- The full cross-browser E2E suite and the axe accessibility suite run weekly and on demand
 
 ---
 
@@ -334,7 +358,7 @@ The deployment setup targets **Cloudflare Pages**:
 - **Workflow**: `.github/workflows/deploy.yml` builds on every push and pull request to `main`, then deploys `dist/` with `wrangler pages deploy dist --project-name=better-dagupan`
 - **Backend**: Cloudflare Pages Functions for the API endpoints
 - **Database**: Cloudflare D1 for legislative data — **not bound yet**
-- **KV**: Weather caching and admin sessions — **not bound yet**
+- **KV**: Admin sessions and the weather cache — **not bound yet**
 - **Search**: The shared BetterGov Meilisearch instance (`search2.bettergov.ph`); nothing to host
 - **Wrangler**: Version 4.70.0 (pinned for compatibility)
 
@@ -345,7 +369,8 @@ The deployment setup targets **Cloudflare Pages**:
    the deploy job is skipped.
 2. **Pages project**: Create the `better-dagupan` Pages project in that Cloudflare account.
 3. **KV namespace**: Create one and bind it as `WEATHER_KV` in `wrangler.jsonc`.
-   The weather endpoint and the admin sign-in both depend on it.
+   The admin sign-in depends on it; the weather endpoint works without it but
+   then caches nothing.
 4. **D1 database** (only when legislative data is ready): Create it, bind it as
    `BETTERLB_DB`, and apply `db/migrations/`. Never bind another LGU's database.
 5. **Secrets and variables**: `OPENWEATHERMAP_API_KEY` for weather, and
@@ -353,7 +378,7 @@ The deployment setup targets **Cloudflare Pages**:
    for the admin area (see `.dev.vars.example`).
 6. **Domain**: Once assigned, set `portal.domain` and `portal.baseUrl` in
    `config/lgu.config.json` and add the origin to the CORS allow-lists in
-   `functions/index.ts` and `functions/api/weather.ts`.
+   `functions/utils/origins.ts` and `functions/weather.ts`.
 
 **Note:** The deployment workflow uses Wrangler 4.70.0 (pinned in both `.github/workflows/deploy.yml` and `package.json`). If upgrading, ensure compatibility with the Wrangler Action and test thoroughly.
 
@@ -371,11 +396,16 @@ retrieval date, and last verification date.
 
 | Data Source | Used for | State |
 |-------------|----------|-------|
-| **Philippine Statistics Authority (PSA)** | Barangay names, PSGC codes, classification, 2024 population | Published |
-| **City Government of Dagupan** | City office directory | Published |
-| **Philippine Government Electronic Procurement System (PhilGEPS)**, via BetterGov.ph | Procurement awards | In review (#9) |
+| **Philippine Statistics Authority (PSA)** | Barangay names, PSGC codes, classification, census population | Published |
+| **City Government of Dagupan** | City offices, elected officials, hotlines, Citizen's Charter services, bid and award notices | Published / live |
+| **Sangguniang Panlungsod, Dagupan City** | Council roster; posted ordinances | Published / live |
+| **Commission on Elections (COMELEC)** | 2025 election results, as a corroborating source for elected officials | Published |
+| **Bureau of Local Government Finance (BLGF)** | Statements of Receipts and Expenditures, annual regular income | Published |
+| **Department of Trade and Industry (DTI)** | Cities and Municipalities Competitiveness Index | Published |
+| **Supreme Court E-Library** | Official texts of the city charter and its amendments | Published |
+| **Philippine Government Electronic Procurement System (PhilGEPS)**, via BetterGov.ph | Procurement awards | Live |
 | **Department of Public Works and Highways (DPWH)**, via BetterGov.ph | Infrastructure projects | Live |
-| **Department of Budget and Management (DBM)**, **Commission on Audit (COA)**, **Official Gazette** | Financial and legislative references | Planned |
+| **Commission on Audit (COA)**, **Department of Budget and Management (DBM)**, **Official Gazette** | Audit, budget, and legislative references | Planned |
 
 **Note**: Data is presented as-is and may not reflect the most current information. Always verify with official LGU sources.
 

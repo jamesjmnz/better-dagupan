@@ -12,8 +12,9 @@ The backend is built using Cloudflare Pages Functions, which provide:
 - TypeScript support
 
 Better Dagupan is not deployed yet. `wrangler.jsonc` binds no KV namespace and
-no D1 database, so the endpoints below that need them cannot serve data until
-those resources are created. Endpoint reference pages live in
+no D1 database. The weather endpoint runs uncached without KV, and the two
+WordPress feed proxies need neither; the OpenLGU API and the admin API cannot
+serve data until those resources are created. Endpoint reference pages live in
 [`docs/api/`](../docs/api/README.md).
 
 ---
@@ -26,10 +27,13 @@ functions/
 ├── weather.ts        # Weather read straight from KV
 ├── types.ts          # Env interface (KV, D1 bindings, secrets)
 ├── api/
-│   ├── weather.ts    # /api/weather
-│   ├── openlgu/      # /api/openlgu/* — public legislative data
-│   └── admin/        # /api/admin/* — GitHub OAuth admin API and review workbench
-├── utils/            # withAuth, RBAC, CSRF, rate limiting, caching, audit log
+│   ├── weather.ts            # /api/weather
+│   ├── city-procurement.ts   # /api/city-procurement — the city's posted bid notices
+│   ├── council-ordinances.ts # /api/council-ordinances — the council's posted ordinances
+│   ├── openlgu/              # /api/openlgu/* — public legislative data
+│   └── admin/                # /api/admin/* — GitHub OAuth admin API and review workbench
+├── utils/            # withAuth, RBAC, CSRF, rate limiting, caching, audit log,
+│                     # WordPress feed helpers (wordpress-feed.ts), CORS origins (origins.ts)
 └── test/             # Integration test utilities and fixtures
 ```
 
@@ -39,7 +43,8 @@ functions/
 
 ### `/api/weather`
 
-Current weather and a 3-hour forecast from OpenWeatherMap, cached in KV.
+Current weather and a 3-hour forecast from OpenWeatherMap, cached in KV when a
+namespace is bound.
 
 **Method:** `GET`
 
@@ -56,8 +61,72 @@ The city is set by `DEFAULT_CITY` in `functions/api/weather.ts` (Dagupan,
 **Caching:**
 - Responses are cached in `WEATHER_KV` under `philippines_weather` for 1 hour
 - The scheduled handler writes the same key with a 6-hour expiry
+- With no `WEATHER_KV` bound, every request goes straight to OpenWeatherMap
+
+**Unavailable:** without `OPENWEATHERMAP_API_KEY` the endpoint answers
+`503 {"error": "weather_unavailable"}`, and the weather ticker and
+`/data/weather` show nothing instead of an error.
 
 **Implementation:** `functions/api/weather.ts`
+
+---
+
+### `/api/city-procurement`
+
+The bid and award notices the city posts on its own website, listed on the
+procurement page next to the PhilGEPS records.
+
+**Method:** `GET`
+
+**Query Parameters:**
+- `page` (optional) — page number; 20 notices per page
+- `search` (optional) — free-text search, up to 100 characters
+- `type` (optional) — a procurement mode id from the feed's `typeTaxonomy`
+
+**Source:** `transparency.procurement.cityNotices` in `config/lgu.config.json`;
+for Dagupan, the `bac` post type at `https://www.dagupan.gov.ph/wp-json/wp/v2`.
+
+**Response:** `{ items, page, pageSize, total, totalPages, types }`. Each item has
+an `id`, posting `date`, decoded `title`, `link` back to the city's page, and
+`type` (its procurement mode, or `null`).
+
+**Implementation:** `functions/api/city-procurement.ts`, with helpers in
+`functions/utils/city-notices.ts`
+
+---
+
+### `/api/council-ordinances`
+
+The ordinances the Sangguniang Panlungsod posts on its own website, listed on
+the OpenLGU page while no legislative database is bound. The items are not
+source records, and nothing from the feed reaches D1.
+
+**Method:** `GET`
+
+**Query Parameters:**
+- `page` (optional) — page number; 20 ordinances per page
+- `search` (optional) — free-text search, up to 100 characters
+- `classification` (optional) — a classification id from the feed's taxonomy
+
+**Source:** `openlgu.councilFeed` in `config/lgu.config.json`; for Dagupan, the
+`ordinance` post type at `https://sp.dagupan.gov.ph/wp-json/wp/v2`.
+
+**Response:** `{ items, page, pageSize, total, totalPages, classifications }`.
+Each item has an `id`, `postedAt`, decoded `title`, `link` back to the council's
+page, and its `classifications`. The feed has no ordinance number or enactment
+date, so `postedAt` is when the council posted it.
+
+**Implementation:** `functions/api/council-ordinances.ts`, with helpers in
+`functions/utils/council-ordinances.ts`
+
+**Both feed proxies:**
+- Responses are cached at the edge for 30 minutes; nothing is stored
+- Upstream requests give up after 8 seconds
+- A failure answers `502` (`city_notices_unavailable` or
+  `council_ordinances_unavailable`), and the page links to the LGU's own page
+  instead
+- With no feed configured, they answer `404` (`city_notices_not_configured` or
+  `council_ordinances_not_configured`)
 
 ---
 
@@ -85,7 +154,7 @@ and [`api/admin/workbench/README.md`](./api/admin/workbench/README.md).
 
 | Binding | Type | Used for |
 |---|---|---|
-| `WEATHER_KV` | KV namespace | Weather cache, admin sessions, OAuth state, CSRF tokens, rate-limit counters |
+| `WEATHER_KV` | KV namespace | Admin sessions, OAuth state, CSRF tokens, rate-limit counters, and the optional weather cache |
 | `BETTERLB_DB` | D1 database | OpenLGU legislative data and the admin API (binding name inherited from the template) |
 
 Add them to `wrangler.jsonc` once Better Dagupan's own resources exist. Never
@@ -159,19 +228,22 @@ Functions return JSON error responses:
 - `200` - Success
 - `400` - Bad Request
 - `401` - Unauthorized
-- `404` - Not Found
+- `404` - Not Found (also a feed proxy with no feed configured)
 - `429` - Too Many Requests
 - `500` - Server Error
-- `503` - Service Unavailable (for example, no D1 database bound)
+- `502` - Bad Gateway (an LGU feed failed or timed out)
+- `503` - Service Unavailable (no D1 database bound, or no weather API key)
 
 ---
 
 ## CORS Configuration
 
-CORS headers are sent only to allowed origins. `functions/index.ts` allows
-`https://better-dagupan.pages.dev` and the local dev servers;
-`functions/api/weather.ts` keeps its own list with only the local dev servers.
-Add the production domain to both once one is assigned.
+CORS headers are sent only to allowed origins. `functions/index.ts` and
+`functions/api/weather.ts` share the list in `functions/utils/origins.ts`:
+`https://better-dagupan.pages.dev` and the local dev servers. The KV-only
+`functions/weather.ts` keeps its own list with only the local dev servers. Add
+the production domain to both lists once one is assigned. The feed proxies are
+called from the portal's own origin and send no CORS headers.
 
 ```typescript
 'Access-Control-Allow-Origin': origin,

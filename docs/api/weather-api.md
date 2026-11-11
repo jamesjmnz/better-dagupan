@@ -5,7 +5,7 @@ The Weather API provides current weather conditions and 3-hour forecasts for Dag
 ## Overview
 
 - **Base URL:** `https://<your-pages-domain>/api/weather` (Better Dagupan has no production domain yet; locally `http://localhost:8788/api/weather`)
-- **Current state:** needs a bound `WEATHER_KV` namespace and an `OPENWEATHERMAP_API_KEY`, neither of which is configured yet
+- **Current state:** needs an `OPENWEATHERMAP_API_KEY`, which is not configured yet, so the endpoint answers `503`. A `WEATHER_KV` namespace is optional; without one, nothing is cached
 - **Authentication:** None required
 - **Data Source:** OpenWeatherMap API
 - **Cache Duration:** 1 hour (3,600 seconds)
@@ -150,13 +150,15 @@ Retrieves current weather and 3-hour forecast data. Returns cached data if avail
 }
 ```
 
-**500 Internal Server Error (API key missing):**
+**503 Service Unavailable (API key missing):**
 
 ```json
 {
-  "error": "OpenWeatherMap API key not found in environment variables"
+  "error": "weather_unavailable"
 }
 ```
+
+The weather ticker and `/data/weather` treat this as "nothing to show".
 
 ---
 
@@ -292,7 +294,7 @@ underscores (`dagupan`). The frontend derives the same key from `lgu.name` in
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `OPENWEATHERMAP_API_KEY` | Yes | OpenWeatherMap API key |
-| `WEATHER_KV` | Yes | Cloudflare KV namespace for caching |
+| `WEATHER_KV` | No | Cloudflare KV namespace for caching; without it every request goes to OpenWeatherMap |
 
 ---
 
@@ -342,7 +344,7 @@ filled only by requests to the endpoint.
 The API implements CORS protection for security:
 
 **Allowed Origins:**
-- No production origin yet; add the portal's domain to `ALLOWED_ORIGINS` in `functions/api/weather.ts` once one is assigned
+- `https://better-dagupan.pages.dev`, from the shared list in `functions/utils/origins.ts`; add the portal's domain there once one is assigned
 - `http://localhost:5173` (Vite dev server)
 - `http://localhost:8788` (Wrangler dev server)
 
