@@ -18,7 +18,8 @@ import type { CityHotline, Department } from '@/types/directoryTypes';
  * publishes: a wrong digit sends someone in an emergency to the wrong place.
  * These tests pin the published numbers exactly, hold each one to the
  * two-list corroboration rule, and assert that the four rows the city lists
- * but this portal could not corroborate stay out.
+ * but this portal could not corroborate stay out, along with the Red Cross
+ * landline another city page gives to a bank.
  *
  * See docs/civic-data-verification.md, "Worked example: city emergency
  * hotlines".
@@ -40,7 +41,7 @@ const EXPECTED: Record<string, string[]> = {
   cdrrmo: ['0968-444-9598', '(075) 540-0363'],
   cho: ['0933-861-6088', '0997-840-1377', '(075) 522-8206'],
   'panda-volunteers': ['0932-548-1545', '(075) 522-2808', '(075) 522-8202'],
-  'red-cross-dagupan': ['0928-559-2701', '(075) 632-3296'],
+  'red-cross-dagupan': ['0928-559-2701'],
   decorp: [
     '0925-726-9546',
     '(075) 522-5433',
@@ -74,7 +75,21 @@ const DIRECTORY_TABLE_ONLY = [
 ];
 
 /** On the city's list, but stated by only one list or in conflict. */
-const WITHHELD_NUMBERS = ['0933-378-8888', '0960-260-6036', '0969-045-1111'];
+const WITHHELD_NUMBERS = [
+  '0933-378-8888',
+  '0960-260-6036',
+  '0969-045-1111',
+  '632-3296',
+];
+
+/**
+ * The city's National Agencies page gives "632 – 3296" to the Philippine
+ * National Bank. The emergency list gives it to Red Cross Dagupan, so the
+ * number belongs to two entities on the city's own pages and is withheld, as
+ * the PAMANA number was. The page is catalogued so the reason is traceable,
+ * but it backs no published number.
+ */
+const CROSS_ATTRIBUTION_SOURCE = 'dagupan-lgu-national-agencies';
 
 const INHERITED =
   /los ba(ñ|n)os|losbanos\.gov\.ph|sangguniang bayan|betterlb|municipality of|laguna|\(049\)/i;
@@ -125,6 +140,20 @@ describe('city emergency hotlines', () => {
       expect(serialised).not.toContain(number);
     }
     expect(serialised).not.toMatch(/helpline|pamana|water district/i);
+  });
+
+  it('withholds a number the city attributes to another entity', () => {
+    expect(hasCivicSource(CROSS_ATTRIBUTION_SOURCE)).toBe(true);
+    expect(getCivicSource(CROSS_ATTRIBUTION_SOURCE).notes).toMatch(
+      /632 – 3296.*Philippine National Bank/
+    );
+
+    const redCross = hotlines.find(h => h.slug === 'red-cross-dagupan');
+    expect(redCross?.numbers).toEqual(['0928-559-2701']);
+
+    for (const hotline of hotlines) {
+      expect(hotline.sources).not.toContain(CROSS_ATTRIBUTION_SOURCE);
+    }
   });
 
   it('formats every number so it can be dialled', () => {
