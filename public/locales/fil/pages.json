@@ -337,6 +337,7 @@
     "resultsFound_other": "{{count}} resulta ang nahanap"
   },
   "weather": {
+    "errorBody": "Hindi ma-load ang lagay ng panahon. Pakisubukang muli mamaya.",
     "title": "Panahon",
     "error": "Error",
     "unavailableTitle": "Hindi pa available ang lagay ng panahon",
@@ -355,6 +356,8 @@
     "providedBy": "Ang datos ng panahon ay mula sa <anchor>OpenWeather</anchor>"
   },
   "forex": {
+    "title": "Palitan ng Pera",
+    "errorBody": "Hindi ma-load ang mga halaga ng palitan. Pakisubukang muli mamaya.",
     "error": "Error",
     "currencies": "Mga Pera",
     "searchPlaceholder": "Maghanap ng pera...",

@@ -37,6 +37,7 @@ export default function ContributePage() {
       </Breadcrumb>
 
       <ModuleHeader
+        as='h1'
         title={t('contribute.title', { portal: config.portal.name })}
         description={t('contribute.description')}
       />
@@ -95,7 +96,7 @@ export default function ContributePage() {
           </div>
 
           <div className='flex gap-4 rounded-2xl border border-kapwa-border-warning bg-kapwa-bg-warning-weak p-5'>
-            <p className='text-xs leading-relaxed text-kapwa-text-warning'>
+            <p className='text-xs leading-relaxed text-kapwa-orange-800'>
               <Trans
                 t={t}
                 i18nKey='contribute.note'

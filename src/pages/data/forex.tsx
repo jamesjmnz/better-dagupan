@@ -145,14 +145,17 @@ const ForexPage: FC = () => {
   return (
     <div className='bg-kapwa-bg-surface-raised min-h-screen'>
       <div className='container mx-auto px-4 py-8 md:py-12'>
+        <h1 className='text-kapwa-text-strong mb-8 text-3xl font-bold'>
+          {t('forex.title')}
+        </h1>
         {isLoading ? (
           <div className='flex h-64 items-center justify-center'>
             <div className='border-kapwa-border-brand h-12 w-12 animate-spin rounded-full border-t-2 border-b-2'></div>
           </div>
         ) : error ? (
-          <div className='bg-kapwa-bg-danger-weak text-kapwa-text-danger rounded-sm border-l-4 border-red-500 p-4 shadow-md'>
+          <div className='bg-kapwa-bg-danger-weak text-kapwa-red-800 rounded-sm border-l-4 border-red-500 p-4 shadow-md'>
             <p className='font-bold'>{t('forex.error')}</p>
-            <p>{error}</p>
+            <p>{t('forex.errorBody')}</p>
           </div>
         ) : (
           <div className='grid grid-cols-1 gap-8 lg:grid-cols-4'>
@@ -165,10 +168,15 @@ const ForexPage: FC = () => {
                       {t('forex.currencies')}
                     </h2>
                     <button
+                      type='button'
                       onClick={() => setIsSearchOpen(true)}
+                      aria-label={t('forex.searchPlaceholder')}
                       className='text-kapwa-text-support hover:bg-kapwa-bg-hover hover:text-kapwa-text-support rounded-md p-2 transition-colors'
                     >
-                      <LucideIcons.Search className='h-5 w-5' />
+                      <LucideIcons.Search
+                        aria-hidden='true'
+                        className='h-5 w-5'
+                      />
                     </button>
                   </div>
                 ) : (
@@ -375,7 +383,10 @@ const ForexPage: FC = () => {
                   </h3>
                   <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
                     <div>
-                      <label className='text-kapwa-text-support mb-2 block text-sm font-medium'>
+                      <label
+                        htmlFor='forex-php-amount'
+                        className='text-kapwa-text-support mb-2 block text-sm font-medium'
+                      >
                         {t('forex.pesoCode')}
                       </label>
                       <div className='relative rounded-md shadow-xs'>
@@ -385,6 +396,7 @@ const ForexPage: FC = () => {
                           </span>
                         </div>
                         <input
+                          id='forex-php-amount'
                           type='number'
                           className='focus:ring-kapwa-border-brand focus:border-kapwa-border-brand border-kapwa-border-weak block w-full rounded-md py-3 pr-12 pl-7 sm:text-sm'
                           placeholder='0.00'
@@ -394,7 +406,10 @@ const ForexPage: FC = () => {
                       </div>
                     </div>
                     <div>
-                      <label className='text-kapwa-text-support mb-2 block text-sm font-medium'>
+                      <label
+                        htmlFor='forex-converted-amount'
+                        className='text-kapwa-text-support mb-2 block text-sm font-medium'
+                      >
                         {selectedCurrencyData.code} (
                         {formatCurrencyName(selectedCurrencyData.currency)})
                       </label>
@@ -413,6 +428,7 @@ const ForexPage: FC = () => {
                           </span>
                         </div>
                         <input
+                          id='forex-converted-amount'
                           type='text'
                           className='focus:ring-kapwa-border-brand focus:border-kapwa-border-brand border-kapwa-border-weak bg-kapwa-bg-surface-raised block w-full rounded-md py-3 pr-12 pl-7 sm:text-sm'
                           readOnly
@@ -472,7 +488,7 @@ const ForexPage: FC = () => {
                     anchor: (
                       <a
                         href='https://www.bsp.gov.ph/SitePages/Statistics/ExchangeRate.aspx'
-                        className='text-kapwa-text-brand hover:underline'
+                        className='text-kapwa-text-brand underline hover:no-underline'
                         target='_blank'
                         rel='noopener noreferrer'
                       />

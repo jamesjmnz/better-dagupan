@@ -97,7 +97,7 @@ const WeatherPage: FC = () => {
         ) : error ? (
           <div className='bg-kapwa-bg-danger-weak text-kapwa-text-danger rounded-sm border-l-4 border-red-500 p-4 shadow-md'>
             <p className='font-bold'>{t('weather.error')}</p>
-            <p>{error}</p>
+            <p>{t('weather.errorBody')}</p>
           </div>
         ) : weatherData.length === 0 ? (
           <EmptyState
