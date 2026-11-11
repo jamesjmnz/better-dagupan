@@ -12,6 +12,7 @@ import {
   Tags,
   TrendingUp,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { StatCard } from '@/components/ui/StatCard';
 import { ModuleHeader } from '@/components/layout/PageLayouts';
@@ -23,7 +24,7 @@ import SearchInput from '@/components/ui/SearchInput';
 
 import { formatPesoAdaptive } from '@/lib/format';
 import { config } from '@/lib/lguConfig';
-import { lguLabels } from '@/lib/lguLabels';
+import { useLguTerms } from '@/lib/useLguTerms';
 import { INDICES, PhilgepsDoc, client } from '@/lib/meilisearch';
 
 import CityNotices from './CityNotices';
@@ -36,6 +37,8 @@ interface AggregateStats {
 }
 
 export default function ProcurementPage() {
+  const { t, i18n } = useTranslation('transparency');
+  const terms = useLguTerms();
   // --- State (Aligned with EnhancedSearchInterface) ---
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<PhilgepsDoc[]>([]);
@@ -246,7 +249,7 @@ export default function ProcurementPage() {
   // --- Helpers ---
   const formatDate = (dateStr: string) =>
     dateStr
-      ? new Date(dateStr).toLocaleDateString('en-PH', {
+      ? new Date(dateStr).toLocaleDateString(i18n.language, {
           month: 'short',
           day: 'numeric',
           year: 'numeric',
@@ -282,14 +285,16 @@ export default function ProcurementPage() {
   return (
     <div className='animate-in fade-in mx-auto max-w-full space-y-8 px-4 pb-20 duration-500 md:px-8'>
       <ModuleHeader
-        title='Procurement Transparency'
-        description={`Real-time database of bids and awards from the ${lguLabels.fullName}.`}
+        title={t('procurement.title')}
+        description={t('procurement.description', {
+          fullName: terms.fullName,
+        })}
       >
         <div className='flex w-full flex-col items-center gap-4 md:w-auto md:flex-row'>
           <SearchInput
             value={query}
             onChangeValue={setQuery}
-            placeholder='Search contracts...'
+            placeholder={t('procurement.searchPlaceholder')}
             className='w-full md:w-80'
           />
           <div className='flex shrink-0 gap-2'>
@@ -297,9 +302,10 @@ export default function ProcurementPage() {
               variant='outline'
               onClick={downloadCSV}
               className='h-11 px-3'
-              title='Download CSV'
+              title={t('procurement.downloadCsv')}
+              aria-label={t('procurement.downloadCsv')}
             >
-              <Download className='h-4 w-4' />
+              <Download className='h-4 w-4' aria-hidden='true' />
             </Button>
           </div>
         </div>
@@ -309,35 +315,35 @@ export default function ProcurementPage() {
       <CardGrid columns={4}>
         <StatCard
           icon={Tags}
-          label='Categories'
+          label={t('procurement.stats.categories')}
           value={detailedStats.uniqueCategories}
-          subtext='Business Sectors'
+          subtext={t('procurement.stats.businessSectors')}
           iconBg='bg-kapwa-bg-surface-raised text-kapwa-text-strong'
         />
 
         <StatCard
           icon={Briefcase}
-          label='Total Value'
+          label={t('procurement.stats.totalValue')}
           value={
             formatPesoAdaptive(detailedStats.totalContractAmount).fullString
           }
-          subtext='Accumulated Contract Value'
+          subtext={t('procurement.stats.accumulatedValue')}
           iconBg='bg-kapwa-green-50 text-kapwa-green-600'
         />
 
         <StatCard
           icon={TrendingUp}
-          label='Average'
+          label={t('procurement.stats.average')}
           value={formatPesoAdaptive(detailedStats.averageCost).fullString}
-          subtext='Per Contract'
+          subtext={t('procurement.stats.perContract')}
           iconBg='bg-kapwa-bg-brand-weak text-kapwa-text-brand'
         />
 
         <StatCard
           icon={FileText}
-          label='Volume'
+          label={t('procurement.stats.volume')}
           value={detailedStats.totalContractCount.toLocaleString()}
-          subtext='Total Contracts'
+          subtext={t('procurement.stats.totalContracts')}
           iconBg='bg-kapwa-bg-surface-raised text-kapwa-text-strong'
         />
       </CardGrid>
@@ -355,12 +361,14 @@ export default function ProcurementPage() {
       ) : results.length === 0 ? (
         <EmptyState
           title={
-            ORG_CONFIGURED ? 'No Records Found' : 'Procurement Source Pending'
+            ORG_CONFIGURED
+              ? t('procurement.noRecordsTitle')
+              : t('procurement.pendingTitle')
           }
           message={
             ORG_CONFIGURED
-              ? 'Try adjusting your search terms.'
-              : `The PhilGEPS entity name for ${lguLabels.fullName} has not been confirmed yet, so no procurement records are shown.`
+              ? t('procurement.noRecordsMessage')
+              : t('procurement.pendingMessage', { fullName: terms.fullName })
           }
           icon={Search}
         />
@@ -371,17 +379,19 @@ export default function ProcurementPage() {
               <thead className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled border-b text-xs font-bold tracking-wider uppercase'>
                 <tr>
                   <th className='hidden w-32 px-3 py-3 md:table-cell md:px-6 md:py-4'>
-                    Ref ID
+                    {t('procurement.table.refId')}
                   </th>
-                  <th className='px-3 py-3 sm:px-6 sm:py-4'>Contract Title</th>
+                  <th className='px-3 py-3 sm:px-6 sm:py-4'>
+                    {t('procurement.table.contractTitle')}
+                  </th>
                   <th className='px-3 py-3 text-right sm:px-6 sm:py-4'>
-                    Amount
+                    {t('procurement.table.amount')}
                   </th>
                   <th className='hidden px-3 py-3 md:table-cell md:px-6 md:py-4'>
-                    Date
+                    {t('procurement.table.date')}
                   </th>
                   <th className='px-3 py-3 text-center sm:px-6 sm:py-4'>
-                    Status
+                    {t('procurement.table.status')}
                   </th>
                 </tr>
               </thead>
@@ -472,11 +482,10 @@ export default function ProcurementPage() {
               </div>
               <div>
                 <h4 className='text-kapwa-text-strong mb-1 font-bold'>
-                  Advanced Analytics
+                  {t('procurement.analyticsTitle')}
                 </h4>
                 <p className='text-kapwa-text-disabled text-xs leading-relaxed'>
-                  View detailed spending charts, top supplier breakdowns, and
-                  historical procurement trends for {lguLabels.name}.
+                  {t('procurement.analyticsBody', { lgu: terms.lgu })}
                 </p>
               </div>
             </div>
@@ -486,7 +495,8 @@ export default function ProcurementPage() {
               rel='noreferrer'
               className='text-kapwa-text-inverse bg-kapwa-brand-600 hover:bg-kapwa-brand-700 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold transition-colors'
             >
-              View {lguLabels.name} Charts <ExternalLink className='h-3 w-3' />
+              {t('procurement.analyticsAction', { lgu: terms.lgu })}{' '}
+              <ExternalLink className='h-3 w-3' />
             </a>
           </div>
         )}
@@ -499,11 +509,10 @@ export default function ProcurementPage() {
             </div>
             <div>
               <h4 className='text-kapwa-text-strong mb-1 font-bold'>
-                Transparency Dashboard
+                {t('procurement.dashboardTitle')}
               </h4>
               <p className='text-kapwa-text-disabled text-xs leading-relaxed'>
-                Access the full Philippine procurement database to compare local
-                spending against national averages.
+                {t('procurement.dashboardBody')}
               </p>
             </div>
           </div>
@@ -513,7 +522,8 @@ export default function ProcurementPage() {
             rel='noreferrer'
             className='text-kapwa-text-inverse bg-kapwa-brand-600 hover:bg-kapwa-brand-700 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold transition-colors'
           >
-            View Dashboard <ExternalLink className='h-3 w-3' />
+            {t('procurement.dashboardAction')}{' '}
+            <ExternalLink className='h-3 w-3' />
           </a>
         </div>
       </div>

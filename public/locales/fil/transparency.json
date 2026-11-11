@@ -206,5 +206,38 @@
     "searchBisto": "Hanapin sa Bisto.ph",
     "source": "Pinagkunan:",
     "sourceLink": "DPWH Infrastructure Transparency Interface sa pamamagitan ng {{portal}}"
+  },
+  "procurement": {
+    "title": "Transparency sa Procurement",
+    "description": "Real-time na database ng mga bid at award mula sa {{fullName}}.",
+    "searchPlaceholder": "Maghanap ng kontrata...",
+    "downloadCsv": "I-download ang CSV",
+    "stats": {
+      "categories": "Mga Kategorya",
+      "businessSectors": "Mga Sektor ng Negosyo",
+      "totalValue": "Kabuuang Halaga",
+      "accumulatedValue": "Kabuuang Halaga ng mga Kontrata",
+      "average": "Karaniwan",
+      "perContract": "Bawat Kontrata",
+      "volume": "Dami",
+      "totalContracts": "Kabuuang Kontrata"
+    },
+    "noRecordsTitle": "Walang Nahanap na Rekord",
+    "noRecordsMessage": "Subukang baguhin ang mga salitang hinahanap.",
+    "pendingTitle": "Hinihintay pa ang Pinagkunan ng Procurement",
+    "pendingMessage": "Hindi pa nakukumpirma ang pangalan ng {{fullName}} bilang entity sa PhilGEPS, kaya walang ipinapakitang rekord ng procurement.",
+    "table": {
+      "refId": "Ref ID",
+      "contractTitle": "Pamagat ng Kontrata",
+      "amount": "Halaga",
+      "date": "Petsa",
+      "status": "Status"
+    },
+    "analyticsTitle": "Mas Malalim na Pagsusuri",
+    "analyticsBody": "Tingnan ang detalyadong tsart ng gastusin, hati ng mga pangunahing supplier, at kasaysayan ng procurement ng {{lgu}}.",
+    "analyticsAction": "Tingnan ang mga Tsart ng {{lgu}}",
+    "dashboardTitle": "Transparency Dashboard",
+    "dashboardBody": "Buksan ang buong database ng procurement ng Pilipinas para ihambing ang lokal na gastusin sa pambansang average.",
+    "dashboardAction": "Tingnan ang Dashboard"
   }
 }

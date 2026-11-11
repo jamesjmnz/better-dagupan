@@ -206,5 +206,38 @@
     "searchBisto": "Search on Bisto.ph",
     "source": "Source:",
     "sourceLink": "DPWH Infrastructure Transparency Interface via {{portal}}"
+  },
+  "procurement": {
+    "title": "Procurement Transparency",
+    "description": "Real-time database of bids and awards from the {{fullName}}.",
+    "searchPlaceholder": "Search contracts...",
+    "downloadCsv": "Download CSV",
+    "stats": {
+      "categories": "Categories",
+      "businessSectors": "Business Sectors",
+      "totalValue": "Total Value",
+      "accumulatedValue": "Accumulated Contract Value",
+      "average": "Average",
+      "perContract": "Per Contract",
+      "volume": "Volume",
+      "totalContracts": "Total Contracts"
+    },
+    "noRecordsTitle": "No Records Found",
+    "noRecordsMessage": "Try adjusting your search terms.",
+    "pendingTitle": "Procurement Source Pending",
+    "pendingMessage": "The PhilGEPS entity name for {{fullName}} has not been confirmed yet, so no procurement records are shown.",
+    "table": {
+      "refId": "Ref ID",
+      "contractTitle": "Contract Title",
+      "amount": "Amount",
+      "date": "Date",
+      "status": "Status"
+    },
+    "analyticsTitle": "Advanced Analytics",
+    "analyticsBody": "View detailed spending charts, top supplier breakdowns, and historical procurement trends for {{lgu}}.",
+    "analyticsAction": "View {{lgu}} Charts",
+    "dashboardTitle": "Transparency Dashboard",
+    "dashboardBody": "Access the full Philippine procurement database to compare local spending against national averages.",
+    "dashboardAction": "View Dashboard"
   }
 }
