@@ -129,6 +129,38 @@ test.describe('Infrastructure Transparency Page', () => {
   });
 });
 
+test.describe('Infrastructure Transparency Page - Filipino', () => {
+  test('the page renders in Filipino when the language is switched', async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('i18nextLng', 'fil');
+    });
+    await page.goto('/transparency/infrastructure');
+
+    await expect(
+      page.getByRole('heading', {
+        level: 2,
+        name: 'Mga Proyektong Pang-imprastraktura',
+      })
+    ).toBeVisible();
+    await expect(
+      page.getByRole('textbox', { name: 'Maghanap ng proyekto...' })
+    ).toBeVisible();
+
+    const content = page.locator('#layout-content');
+    for (const label of ['Kabuuang Alokasyon', 'Bilang ng Proyekto']) {
+      await expect(content.getByText(label, { exact: true })).toBeVisible();
+    }
+
+    // The option labels are translated; the values stay the DPWH strings.
+    await page.getByRole('button', { name: 'Pumili ng status...' }).click();
+    await expect(
+      page.getByRole('option', { name: 'Kasalukuyang Ginagawa' })
+    ).toBeVisible();
+  });
+});
+
 test.describe('Infrastructure Detail Page', () => {
   test('infrastructure detail page displays project information', async ({
     page,

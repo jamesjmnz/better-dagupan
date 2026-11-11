@@ -144,6 +144,40 @@ test.describe('Procurement Transparency Page', () => {
     });
   });
 
+  test('the page renders in Filipino when the language is switched', async ({
+    page,
+  }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('i18nextLng', 'fil');
+    });
+    await page.goto('/transparency/procurement');
+
+    await expect(
+      page.getByRole('heading', {
+        level: 2,
+        name: 'Transparency sa Procurement',
+      })
+    ).toBeVisible();
+    await expect(
+      page.getByRole('textbox', { name: 'Maghanap ng kontrata...' })
+    ).toBeVisible();
+    await expect(
+      page.getByRole('button', { name: 'I-download ang CSV' })
+    ).toBeVisible();
+
+    const content = page.locator('#layout-content');
+    for (const label of ['Mga Kategorya', 'Kabuuang Halaga']) {
+      await expect(content.getByText(label, { exact: true })).toBeVisible();
+    }
+    if (!orgConfigured) {
+      await expect(
+        page.getByRole('heading', {
+          name: 'Hinihintay pa ang Pinagkunan ng Procurement',
+        })
+      ).toBeVisible();
+    }
+  });
+
   test('procurement transparency page visual snapshot @visual', async ({
     page,
   }) => {
