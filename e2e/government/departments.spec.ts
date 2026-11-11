@@ -102,6 +102,11 @@ test.describe('Departments Pages', () => {
     await expect(page.getByText(/No office name matches/)).toBeVisible();
   });
 
+  test('an office page is titled with the office name', async ({ page }) => {
+    await gotoDetail(page, 'city-health-office');
+    await expect(page).toHaveTitle(/^City Health Office \| /);
+  });
+
   test('an office with an agreed head shows the name and its citation', async ({
     page,
   }) => {

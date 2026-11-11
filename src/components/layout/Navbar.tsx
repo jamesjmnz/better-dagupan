@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 
 import { Link, useLocation } from 'react-router-dom';
 
@@ -21,6 +21,8 @@ export const Navbar: FC = () => {
     null
   );
   const [hoveredDropdown, setHoveredDropdown] = useState<string | null>(null);
+  // Set while Escape returns focus to the top link, so that focus doesn't reopen it.
+  const keepClosedOnFocus = useRef(false);
   const { t, i18n } = useTranslation(['common', 'navigation', 'services']);
   const terms = useLguTerms();
   const childLabel = (child: { label: string; labelKey?: string }) =>
@@ -144,6 +146,31 @@ export const Navbar: FC = () => {
                     hasChildren && setHoveredDropdown(item.label)
                   }
                   onMouseLeave={() => setHoveredDropdown(null)}
+                  // Keyboard users get the same dropdown: it opens when focus
+                  // enters the item and closes when focus leaves or on Escape.
+                  onFocus={() => {
+                    if (keepClosedOnFocus.current) {
+                      keepClosedOnFocus.current = false;
+                      return;
+                    }
+                    if (hasChildren) setHoveredDropdown(item.label);
+                  }}
+                  onBlur={event => {
+                    if (
+                      !event.currentTarget.contains(
+                        event.relatedTarget as Node | null
+                      )
+                    ) {
+                      setHoveredDropdown(null);
+                    }
+                  }}
+                  onKeyDown={event => {
+                    if (event.key === 'Escape' && hoveredDropdown) {
+                      setHoveredDropdown(null);
+                      keepClosedOnFocus.current = true;
+                      event.currentTarget.querySelector('a')?.focus();
+                    }
+                  }}
                 >
                   <Link
                     to={item.href}

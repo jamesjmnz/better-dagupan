@@ -26,6 +26,8 @@ import { DetailSection } from '@/components/layout';
 import { Badge } from '@/components/ui/Badge';
 import { Card } from '@/components/ui/Card';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { SEO } from '@/components/layout/SEO';
+import { lguLabels } from '@/lib/lguLabels';
 import { RequirementGrid } from './components/RequirementGrid';
 import { ProcessTimeline } from './components/ProcessTimeline';
 import { SupportingDocumentsDetail } from './components/SupportingDocumentsDetail';
@@ -173,6 +175,13 @@ export default function ServiceDetail() {
 
   return (
     <div className='animate-in fade-in mx-auto max-w-7xl space-y-6 duration-500'>
+      <SEO
+        title={service.service}
+        description={t('detail.seoDescription', {
+          service: service.service,
+          lgu: lguLabels.fullName,
+        })}
+      />
       {/*
         The trail is the services layout's header breadcrumb, which names this
         service. A second trail here gave the page two breadcrumb landmarks.
@@ -391,7 +400,7 @@ export default function ServiceDetail() {
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-sm font-bold transition-colors ${
                         isTransaction
                           ? 'bg-kapwa-bg-surface text-kapwa-text-brand border-kapwa-border-brand'
-                          : 'text-kapwa-text-accent-orange bg-kapwa-bg-accent-orange-weak border-kapwa-border-weak'
+                          : 'text-kapwa-orange-800 bg-kapwa-bg-accent-orange-weak border-kapwa-border-weak'
                       }`}
                     >
                       {idx + 1}

@@ -26,6 +26,7 @@
     "suggest": "Magmungkahi ng Bagong Serbisyo"
   },
   "index": {
+    "removeFilter": "Alisin ang filter: {{filter}}",
     "emptyTitle": "Walang nahanap na serbisyo",
     "emptyMessage": "Wala kaming nahanap na serbisyong tumutugma sa iyong mga filter. Subukang baguhin ang iyong paghahanap o mga filter.",
     "results": "{{total}} Resulta"
@@ -62,6 +63,7 @@
     "transaction": "{{classification}} na Transaksiyon"
   },
   "detail": {
+    "seoDescription": "Mga kinakailangan, hakbang, bayarin at tagal ng pagproseso para sa {{service}} sa {{lgu}}.",
     "notFound": "Hindi nahanap ang serbisyo",
     "notFoundBody": "Walang serbisyong nakalista sa address na ito.",
     "backToServices": "Bumalik sa lahat ng serbisyo",

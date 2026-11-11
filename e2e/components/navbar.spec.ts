@@ -71,3 +71,26 @@ test.describe('Navbar mobile disclosures', () => {
     await expectNoAxeViolations(page);
   });
 });
+
+test.describe('Navbar desktop dropdowns', () => {
+  test('a dropdown opens on keyboard focus and closes on Escape', async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/');
+
+    const nav = page.locator('nav').first();
+    const government = nav.getByRole('link', {
+      name: 'Government',
+      exact: true,
+    });
+    const departments = nav.getByRole('link', { name: 'Departments' });
+
+    await government.focus();
+    await expect(departments).toBeVisible();
+
+    await page.keyboard.press('Escape');
+    await expect(departments).toHaveCount(0);
+    await expect(government).toBeFocused();
+  });
+});

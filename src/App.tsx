@@ -157,7 +157,7 @@ function AppContent() {
   return (
     <div className='flex flex-col min-h-screen'>
       <SkipLink />
-      <SEO />
+      <SEO fallback />
       {!isAdminRoute && <Navbar />}
       {!isAdminRoute && <Ticker />}
       <ScrollToTop />

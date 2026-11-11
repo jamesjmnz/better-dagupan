@@ -133,8 +133,11 @@ export default function ServicesPage() {
                   type='button'
                   onClick={() => setOfficeDivision('all')}
                   className='hover:text-kapwa-text-inverse ml-1'
+                  aria-label={t('index.removeFilter', {
+                    filter: selectedOfficeDivision,
+                  })}
                 >
-                  ×
+                  <span aria-hidden='true'>×</span>
                 </button>
               </Badge>
             )}
@@ -147,8 +150,14 @@ export default function ServicesPage() {
                   type='button'
                   onClick={() => setSource('all')}
                   className='hover:text-kapwa-text-inverse ml-1'
+                  aria-label={t('index.removeFilter', {
+                    filter:
+                      selectedSource === 'citizens-charter'
+                        ? t('source.official')
+                        : t('source.community'),
+                  })}
                 >
-                  ×
+                  <span aria-hidden='true'>×</span>
                 </button>
               </Badge>
             )}
@@ -159,8 +168,11 @@ export default function ServicesPage() {
                   type='button'
                   onClick={() => setClassification('all')}
                   className='hover:text-kapwa-text-inverse ml-1'
+                  aria-label={t('index.removeFilter', {
+                    filter: selectedClassification,
+                  })}
                 >
-                  ×
+                  <span aria-hidden='true'>×</span>
                 </button>
               </Badge>
             )}

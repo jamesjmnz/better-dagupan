@@ -26,6 +26,7 @@
     "suggest": "Suggest New Service"
   },
   "index": {
+    "removeFilter": "Remove filter: {{filter}}",
     "emptyTitle": "No services found",
     "emptyMessage": "We couldn't find any services matching your filters. Try adjusting your search or filters.",
     "results": "{{total}} Results"
@@ -62,6 +63,7 @@
     "transaction": "{{classification}} Transaction"
   },
   "detail": {
+    "seoDescription": "Requirements, steps, fees and processing time for {{service}} in the {{lgu}}.",
     "notFound": "Service not found",
     "notFoundBody": "No service is listed at this address.",
     "backToServices": "Back to all services",

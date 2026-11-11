@@ -80,18 +80,21 @@ export function ModuleHeader({
   title,
   description,
   children,
+  as: Heading = 'h2',
 }: {
   title: string;
   description?: string;
   children?: ReactNode;
+  /** Use 'h1' when this header is the page's main title. */
+  as?: 'h1' | 'h2';
 }) {
   return (
     <div className='border-kapwa-border-weak mb-8 border-b pb-6'>
       <div className='flex flex-col justify-between gap-4 md:flex-row md:items-end'>
         <div className='max-w-2xl'>
-          <h2 className='text-kapwa-text-strong kapwa-heading-lg font-extrabold tracking-tight'>
+          <Heading className='text-kapwa-text-strong kapwa-heading-lg font-extrabold tracking-tight'>
             {title}
-          </h2>
+          </Heading>
           {description && (
             <p className='text-kapwa-text-support mt-1 text-sm md:text-base'>
               {description}

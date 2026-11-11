@@ -337,6 +337,7 @@
     "resultsFound_other": "{{count}} results found"
   },
   "weather": {
+    "errorBody": "The weather could not be loaded. Please try again later.",
     "title": "Weather",
     "error": "Error",
     "unavailableTitle": "Weather is not available right now",
@@ -355,6 +356,8 @@
     "providedBy": "Weather data provided by <anchor>OpenWeather</anchor>"
   },
   "forex": {
+    "title": "Exchange Rates",
+    "errorBody": "The exchange rates could not be loaded. Please try again later.",
     "error": "Error",
     "currencies": "Currencies",
     "searchPlaceholder": "Search currencies...",

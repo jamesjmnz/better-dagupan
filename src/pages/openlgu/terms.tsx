@@ -156,7 +156,7 @@ export default function TermsIndex() {
                     </span>
                   )}
                   {term.resCount > 0 && (
-                    <span className='bg-kapwa-bg-accent-orange-weak text-kapwa-text-accent-orange rounded-full px-2 py-1 text-[10px] font-bold'>
+                    <span className='bg-kapwa-bg-accent-orange-weak text-kapwa-orange-800 rounded-full px-2 py-1 text-[10px] font-bold'>
                       {t('terms.resShort', { count: term.resCount })}
                     </span>
                   )}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
@@ -13,6 +13,26 @@ import {
 
 import routeMeta from '@/data/seo-metadata.json';
 
+/*
+  How many page-level <SEO> elements are mounted. The site-wide fallback in
+  App steps aside while any are, so a page's own title always wins. Relying
+  on Helmet's instance order instead was racy: instances register during
+  render, which lazy routes and StrictMode can reorder.
+*/
+let pageSeoCount = 0;
+const listeners = new Set<() => void>();
+const pageSeoStore = {
+  subscribe(listener: () => void) {
+    listeners.add(listener);
+    return () => listeners.delete(listener);
+  },
+  getSnapshot: () => pageSeoCount,
+  change(delta: number) {
+    pageSeoCount += delta;
+    listeners.forEach(listener => listener());
+  },
+};
+
 export interface SEOProps {
   title?: string;
   description?: string;
@@ -26,6 +46,8 @@ export interface SEOProps {
     name: string;
     url: string;
   }>;
+  /** The site-wide default; renders nothing while a page sets its own. */
+  fallback?: boolean;
 }
 
 export function SEO({
@@ -37,8 +59,19 @@ export function SEO({
   keywords = [],
   jsonLd,
   breadcrumbs,
+  fallback = false,
 }: SEOProps) {
   const location = useLocation();
+  const pageSeoMounted = useSyncExternalStore(
+    pageSeoStore.subscribe,
+    pageSeoStore.getSnapshot
+  );
+
+  useEffect(() => {
+    if (fallback) return;
+    pageSeoStore.change(1);
+    return () => pageSeoStore.change(-1);
+  }, [fallback]);
   const [, forceUpdate] = useState({});
 
   const routeMetaMap = routeMeta as Record<string, unknown>;
@@ -182,8 +215,10 @@ export function SEO({
       }
     : null;
 
+  if (fallback && pageSeoMounted > 0) return null;
+
   return (
-    <Helmet key={`${location.pathname}${location.search}`}>
+    <Helmet>
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name='description' content={finalDescription} />

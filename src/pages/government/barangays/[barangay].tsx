@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import { NotVerified, SourceNote } from '@/components/civic';
 import { BarangayHeader } from '@/components/government/BarangayHeader';
+import { SEO } from '@/components/layout/SEO';
+import { lguLabels } from '@/lib/lguLabels';
 import {
   Breadcrumb,
   BreadcrumbHome,
@@ -66,6 +68,13 @@ export default function BarangayDetail() {
 
   return (
     <div className='animate-in fade-in space-y-6 pb-20 duration-500'>
+      <SEO
+        title={t('barangays.seoTitle', { barangay: barangay.barangay_name })}
+        description={t('barangays.seoDescription', {
+          barangay: barangay.barangay_name,
+          lgu: lguLabels.fullName,
+        })}
+      />
       {/* --- BREADCRUMBS --- */}
       <Breadcrumb>
         <BreadcrumbList>
