@@ -582,5 +582,16 @@
     "contactLead": "Para sa mga tanong tungkol sa mga tuntuning ito o mga alalahanin sa nilalaman, makipag-ugnayan sa:",
     "educational": "Nagbibigay ang website na ito ng impormasyong nasa public domain para lamang sa layuning pang-edukasyon at pang-impormasyon.",
     "effective": "Epektibo simula Setyembre 23, 2025"
+  },
+  "notFound": {
+    "seoTitle": "Hindi Nahanap ang Pahina!",
+    "seoDescription": "Baka naligaw ka, tulad ng ilang serbisyo ng pamahalaan na parang multo.",
+    "title": "Naligaw sa Digital na Burukrasya?",
+    "body": "Relaks lang, kahit ang pinakamahusay na sistema ay may mga sandaling parang maze. Mukhang naipit sa pagpoproseso ang pahinang ito... malamang naghihintay pa ng pag-apruba mula sa tatlo (o higit pang) magkakaibang departamento.",
+    "home": "Bumalik sa Homepage",
+    "back": "Bumalik"
+  },
+  "discord": {
+    "redirecting": "Inililipat ka sa Discord invite link ng {{portal}}..."
   }
 }

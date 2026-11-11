@@ -582,5 +582,16 @@
     "contactLead": "For questions about these terms or content concerns, contact:",
     "educational": "This website provides public domain information for educational and informational purposes only.",
     "effective": "Effective as of September 23, 2025"
+  },
+  "notFound": {
+    "seoTitle": "Page Not Found!",
+    "seoDescription": "You might be lost, like some of our government (ghost) services.",
+    "title": "Lost in the Digital Bureaucracy?",
+    "body": "Relax, even the best systems have their maze-like moments. This page seems to have gotten stuck in processing... probably waiting for approval from three (or more) different departments.",
+    "home": "Return to Homepage",
+    "back": "Go Back"
+  },
+  "discord": {
+    "redirecting": "Redirecting to {{portal}} Discord Invite Link..."
   }
 }
