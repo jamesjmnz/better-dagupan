@@ -10,7 +10,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -24,7 +53,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -43,7 +101,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -57,7 +144,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -71,7 +187,39 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Nancy P. Morris",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2025-child-friendly-city"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -85,7 +233,42 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Wilmer Castanares",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2024-brigada-eskwela"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "published",
+        "name": "Klee Alcaide",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2024-saving-max"
+        ]
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -99,7 +282,42 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Joseph O. Maramba",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2024-bonuan-boquig-multipurpose-building"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "published",
+        "name": "Ava Jel De Guzman",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2024-bonuan-boquig-multipurpose-building"
+        ]
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -113,7 +331,39 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "conflicting_sources",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "published",
+        "name": "Jomar Vidal Abalos",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2026-bonuan-gueset-health-services"
+        ]
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -127,7 +377,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -141,7 +420,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -155,7 +463,39 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Gregorio Claveria",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2025-child-friendly-city"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -174,7 +514,42 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Generoso “Richie” Gomez",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2024-speaker-perez-birthday"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "published",
+        "name": "Jean Paul Casaclang",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2024-speaker-perez-birthday"
+        ]
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -188,7 +563,42 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Aldwin Dexter M. Meneses",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2026-lechonan-lasip-chico"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "published",
+        "name": "Jenica Venice Ang",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2026-lechonan-lasip-chico"
+        ]
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -202,7 +612,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -216,7 +655,39 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Arsenio DV. Santillan, Sr.",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2025-lomboy-school-building"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -230,7 +701,39 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Marcelino D. Fernandez",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-sp-councilor-marcelino-d-fernandez"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -244,7 +747,39 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Filipina S. Delos Santos",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2025-womens-month"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -258,7 +793,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -277,7 +841,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -291,7 +884,39 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Arsenio Curameng",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2024-purokalusugan"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -305,7 +930,39 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "published",
+        "name": "Julita F. Perez",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2025-womens-month"
+        ]
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -319,7 +976,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -333,7 +1019,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -347,7 +1062,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -361,7 +1105,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -380,7 +1153,39 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "published",
+        "name": "Dolly V. Camacho",
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": [
+          "dagupan-lgu-barangay-captains-sk-chairpersons",
+          "dagupan-lgu-2025-pugaro-covered-court"
+        ]
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -394,7 +1199,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -408,7 +1242,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -422,7 +1285,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -436,7 +1328,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   },
   {
@@ -450,7 +1371,36 @@
     "address": null,
     "trunkline": [],
     "website": null,
-    "officials": [],
+    "officials": [
+      {
+        "seat": "punong_barangay",
+        "role": "Punong Barangay",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      },
+      {
+        "seat": "sk_chairperson",
+        "role": "Sangguniang Kabataan Chairperson",
+        "name_status": "uncorroborated",
+        "name": null,
+        "term": "2023–2028",
+        "term_sources": [
+          "sc-elibrary-ra-11935-2022",
+          "sc-elibrary-ra-12232-2025",
+          "sc-elibrary-ra-12326-2026",
+          "comelec-mr-26-0842-2026"
+        ],
+        "sources": []
+      }
+    ],
     "sources": ["psa-psgc-dagupan-2026q2"]
   }
 ]

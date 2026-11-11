@@ -17,9 +17,40 @@ import {
 
 import barangaysDataRaw from '@/data/directory/barangays.json';
 
-import type { Barangay } from '@/types/directoryTypes';
+import type {
+  Barangay,
+  BarangayOfficial,
+  BarangaySeat,
+  OfficialNameStatus,
+} from '@/types/directoryTypes';
 
 const barangaysData = barangaysDataRaw as Barangay[];
+
+/** The i18n key naming each seat, so the title follows the reader's language. */
+const SEAT_LABEL: Record<BarangaySeat, string> = {
+  punong_barangay: 'barangays.punongBarangay',
+  sk_chairperson: 'barangays.skChairperson',
+};
+
+/** The i18n key explaining why a seat's holder is withheld. */
+function withheldNameKey(status: OfficialNameStatus): string {
+  return status === 'conflicting_sources'
+    ? 'barangays.nameNotVerifiedConflict'
+    : 'barangays.nameNotVerifiedUncorroborated';
+}
+
+/**
+ * Every citation behind the officials section, deduplicated in first-seen
+ * order: the sources naming each holder, then the laws establishing the term.
+ */
+function officialsSources(officials: BarangayOfficial[]): string[] {
+  return [
+    ...new Set([
+      ...officials.flatMap(official => official.sources),
+      ...officials.flatMap(official => official.term_sources),
+    ]),
+  ];
+}
 
 export default function BarangayDetail() {
   const { t } = useTranslation(['common', 'government']);
@@ -82,18 +113,53 @@ export default function BarangayDetail() {
           </div>
 
           {/*
-            officials is empty for every record. The only city-government
-            roster found covers the 2018-2020 term, so rendering it would
-            present former officials as current ones. The section says that
-            outright rather than rendering nothing, which would read as though
-            the barangay has no officials.
+            Every seat is listed whether or not its holder is published. A
+            withheld name says why, so the seat never reads as vacant.
           */}
-          {barangay.officials.length === 0 ? (
-            <NotVerified
-              label={t('barangays.officialsNotVerified')}
-              detail={t('barangays.officialsNotVerifiedWhy')}
-            />
-          ) : null}
+          <ul className='grid grid-cols-1 gap-3 md:grid-cols-2'>
+            {barangay.officials.map(official => (
+              <li
+                key={official.seat}
+                className='border-kapwa-border-weak bg-kapwa-bg-surface rounded-xl border p-4'
+              >
+                <p className='text-kapwa-text-brand text-[10px] font-bold tracking-widest uppercase'>
+                  {t(SEAT_LABEL[official.seat])}
+                </p>
+                {official.name ? (
+                  /*
+                    Rendered verbatim, as the city's roster prints it.
+                    toTitleCase() would turn "DV." into "Dv.".
+                  */
+                  <p className='text-kapwa-text-strong mt-1 text-lg leading-tight font-bold'>
+                    {official.name}
+                  </p>
+                ) : (
+                  <NotVerified
+                    label={t('barangays.nameNotVerified')}
+                    detail={t(withheldNameKey(official.name_status))}
+                    className='mt-2'
+                  />
+                )}
+                {official.term && (
+                  <p className='text-kapwa-text-support mt-2 text-xs font-medium'>
+                    {t('barangays.term', { term: official.term })}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          <NotVerified
+            label={t('barangays.councilNotVerified')}
+            detail={t('barangays.councilNotVerifiedWhy')}
+          />
+
+          <p className='text-kapwa-text-support text-xs leading-relaxed'>
+            {t('barangays.termNote')}
+          </p>
+
+          {/* Who names each holder, and the laws the term follows from. */}
+          <SourceNote sources={officialsSources(barangay.officials)} />
         </section>
 
         {/* --- CONTACT --- */}
@@ -113,10 +179,16 @@ export default function BarangayDetail() {
 
           <div className='grid grid-cols-1 gap-3 md:grid-cols-2'>
             {barangay.address === null && (
-              <NotVerified label={t('barangays.addressNotVerified')} />
+              <NotVerified
+                label={t('barangays.addressNotVerified')}
+                detail={t('barangays.contactNotVerifiedWhy')}
+              />
             )}
             {barangay.trunkline.length === 0 && (
-              <NotVerified label={t('barangays.contactNotVerified')} />
+              <NotVerified
+                label={t('barangays.contactNotVerified')}
+                detail={t('barangays.contactNotVerifiedWhy')}
+              />
             )}
           </div>
         </section>

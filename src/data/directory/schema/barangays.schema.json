@@ -72,15 +72,85 @@
         "format": "uri"
       },
       "officials": {
-        "description": "Empty until a current roster is sourced. Never filled from a superseded term.",
+        "description": "One entry per elective seat: the Punong Barangay and the Sangguniang Kabataan Chairperson, in that order. The seat is published whoever holds it; a name appears only when two independent source families name the same person in that seat, and is never filled from a superseded term.",
         "type": "array",
         "items": {
           "type": "object",
-          "required": ["role", "name"],
+          "additionalProperties": false,
+          "required": [
+            "seat",
+            "role",
+            "name_status",
+            "name",
+            "term",
+            "term_sources",
+            "sources"
+          ],
           "properties": {
-            "role": { "type": "string" },
-            "name": { "type": "string" }
-          }
+            "seat": {
+              "type": "string",
+              "enum": ["punong_barangay", "sk_chairperson"]
+            },
+            "role": {
+              "description": "The title of the seat, e.g. \"Punong Barangay\".",
+              "type": "string",
+              "minLength": 1
+            },
+            "name_status": {
+              "description": "Why the name is or is not published. `published` requires a name and at least two sources. `conflicting_sources`: sources name different people. `uncorroborated`: fewer than two independent source families name anyone. Both withheld states require name to be null and sources to be empty.",
+              "type": "string",
+              "enum": ["published", "conflicting_sources", "uncorroborated"]
+            },
+            "name": {
+              "description": "The holder as the city's roster prints it, without honorifics. Render verbatim.",
+              "type": ["string", "null"],
+              "minLength": 1
+            },
+            "term": {
+              "description": "Term of the seat, e.g. \"2023–2028\". A fact about the seat, so it is stated even when the holder is withheld. Null unless term_sources establish it.",
+              "type": ["string", "null"],
+              "pattern": "^\\d{4}–\\d{4}$"
+            },
+            "term_sources": {
+              "description": "Civic-source ids establishing the term: the laws and election-body issuances it follows from.",
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            },
+            "sources": {
+              "description": "Civic-source ids naming this person in this seat. At least two, from at least two independent source families; the provenance test enforces the independence. Empty when the name is withheld.",
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1 }
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": { "name_status": { "const": "published" } }
+              },
+              "then": {
+                "properties": {
+                  "name": { "type": "string" },
+                  "sources": { "type": "array", "minItems": 2 }
+                }
+              },
+              "else": {
+                "properties": {
+                  "name": { "type": "null" },
+                  "sources": { "type": "array", "maxItems": 0 }
+                }
+              }
+            },
+            {
+              "if": { "properties": { "term": { "type": "string" } } },
+              "then": {
+                "properties": {
+                  "term_sources": { "type": "array", "minItems": 1 }
+                }
+              }
+            }
+          ]
         }
       },
       "sources": {
