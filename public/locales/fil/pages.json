@@ -345,7 +345,6 @@
     "wind": "Hangin",
     "pressure": "Presyon",
     "visibility": "Visibility",
-    "forecast": "Taya ng Panahon sa Loob ng 5 Araw",
     "aboutTitle": "Tungkol sa Datos ng Panahon",
     "aboutBody": "Ang lagay ng panahon sa pahinang ito ay mula sa OpenWeatherMap, isang komersyal na serbisyo sa panahon, at ina-update humigit-kumulang isang beses bawat oras. Hindi ito opisyal na taya ng PAGASA.",
     "understandingTitle": "Pag-unawa sa Datos",

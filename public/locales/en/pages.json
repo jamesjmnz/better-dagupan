@@ -345,7 +345,6 @@
     "wind": "Wind",
     "pressure": "Pressure",
     "visibility": "Visibility",
-    "forecast": "5-Day Forecast",
     "aboutTitle": "About Weather Data",
     "aboutBody": "The weather shown on this page comes from OpenWeatherMap, a commercial weather service, and is refreshed about once an hour. It is not an official PAGASA forecast.",
     "understandingTitle": "Understanding the Data",
