@@ -1,93 +1,44 @@
 {
-  "title": "About BetterGov.ph",
-  "whyBuilding": {
-    "title": "Why We're Building This Project",
-    "intro": "The current state of Philippine government websites, particularly the main portal",
-    "govPhLink": "www.gov.ph",
-    "challenges": ", presents numerous challenges for citizens:",
-    "challengesList": [
-      "It would benefit from regular content updates to ensure citizens have access to the most current information and services.",
-      "There's an opportunity to improve user navigation by reviewing and updating links, as well as streamlining pathways to help visitors find what they need more easily.",
-      "Implementing consistent design standards and formatting across all pages could create a more cohesive and professional user experience.",
-      "Enhancing accessibility features and overall user experience would make government services more inclusive and user-friendly for all citizens.",
-      "These improvements could serve as a model for other government agency websites, creating a more unified and effective digital government presence."
-    ],
-    "conclusion": "These issues create barriers for citizens trying to access essential government services and information."
-  },
-  "mission": {
-    "title": "Our Mission",
-    "intro": "We are a volunteer-led initiative with a clear mission: to provide a 'better' website for the Philippines.",
-    "goalsIntro": "Our goals include",
-    "goalsList": [
-      "Building a volunteer-run website that reflects Filipino values and culture",
-      "Open Source and Open Data projects for better collaboration",
-      "Creating intuitive navigation and search functionality",
-      "Ensuring accessibility for all citizens, including those with disabilities",
-      "Providing accurate, up-to-date information about government services",
-      "Establishing a model for how government digital services can and should work"
+  "seoTitle": "About",
+  "seoDescription": "What {{portal}} is, where its information comes from, and how it is checked.",
+  "title": "About {{portal}}",
+  "intro": "{{portal}} is an independent, community-led website that gathers public information about the {{lgu}} in one place, and says where each piece of it comes from.",
+  "notOfficial": "It is not the official website of the {{lgu}}, and it is not run by or affiliated with the City Government. For official transactions, go to the City Government's own offices and channels.",
+  "coverage": {
+    "title": "What you can find here",
+    "items": [
+      "Elected officials, city offices and barangays",
+      "City services from the Citizen's Charter",
+      "Population, income and competitiveness statistics",
+      "Receipts and expenditures, procurement notices and public works",
+      "Ordinances posted by the Sangguniang Panlungsod",
+      "Emergency hotlines"
     ]
   },
-  "features": {
-    "title": "Features",
-    "list": [
-      "Modern, responsive design that works on all devices",
-      "Comprehensive directory of government services and agencies",
-      "User-friendly navigation and search",
-      "Accessibility features for users with disabilities",
-      "Regular updates and maintenance"
-    ]
-  },
-  "volunteer": {
-    "title": "Join Us as a Volunteer",
-    "intro": "We're always looking for passionate individuals to help improve BetterGov.ph. We need volunteers with various skills:",
-    "technical": {
-      "title": "Technical",
-      "skills": [
-        "Frontend and backend developers",
-        "UX/UI designers",
-        "Accessibility experts",
-        "QA testers"
-      ]
-    },
-    "content": {
-      "title": "Content",
-      "skills": [
-        "Content writers and editors",
-        "Translators (for Filipino and other local languages)",
-        "Project managers",
-        "Researchers"
-      ]
-    },
-    "callToAction": {
-      "title": "Ready to make a difference?",
-      "description": "If you're interested in contributing, please reach out to us at",
-      "email": "volunteers@bettergov.ph",
-      "alternative": "or open an issue in our repository."
-    }
-  },
-  "bugReport": {
-    "title": "Report a Bug",
-    "intro": "Found a problem with the website? Help us improve by reporting it!",
-    "steps": [
-      "Open an issue in our repository",
-      "Use the bug report template",
-      "Provide as much detail as possible, including:"
+  "sources": {
+    "title": "How the information is checked",
+    "items": [
+      "Every record cites the official document or page it comes from, and the date it was last checked.",
+      "Where official sources disagree, or only one source names something, the field is marked as not verified instead of guessed.",
+      "Nothing is made up. If you spot something wrong, you can report it."
     ],
-    "bugDetails": [
-      "What you were trying to do",
-      "What you expected to happen",
-      "What actually happened",
-      "Screenshots if applicable"
-    ],
-    "alternative": {
-      "text": "Alternatively, email us at",
-      "email": "bugs@bettergov.ph"
-    }
+    "guideLink": "Read the verification guide"
+  },
+  "origin": {
+    "title": "How it is built",
+    "body": "{{portal}} is open source. It is built on a template first made for another town's community portal, and it is listed in the Better LGU directory alongside portals for other towns and cities.",
+    "codeLink": "See the code on GitHub"
   },
   "license": {
     "title": "License",
-    "description": "This project is released under the",
+    "description": "The site's code and content are released under the",
     "ccLink": "Creative Commons CC0",
-    "explanation": "dedication. This means the work is dedicated to the public domain and can be freely used by anyone for any purpose without restriction under copyright law."
+    "explanation": "dedication, so anyone may reuse them for any purpose."
+  },
+  "cta": {
+    "title": "Help improve it",
+    "body": "Corrections, official sources, translations and code are all welcome.",
+    "report": "Report an error",
+    "help": "Ways to help"
   }
 }
