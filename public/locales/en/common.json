@@ -137,6 +137,8 @@
     "notVerifiedHint": "Better Dagupan has not found an authoritative source for this detail yet. It is not a statement that the information does not exist."
   },
   "barangays": {
+    "seoTitle": "Barangay {{barangay}}",
+    "seoDescription": "Officials, population and sources for Barangay {{barangay}}, {{lgu}}.",
     "title": "Barangays",
     "count": "{{count}} barangays of the {{lgu}}, as published by the Philippine Statistics Authority.",
     "searchPlaceholder": "Search by name (e.g. Bonuan Gueset)…",
@@ -166,6 +168,7 @@
     "headerLabel": "Barangay information header"
   },
   "departments": {
+    "seoDescription": "Contact details, office head and sources for the {{office}}, {{lgu}}.",
     "title": "City Departments",
     "count": "{{count}} offices of the {{lgu}}, as published by the city government.",
     "searchPlaceholder": "Search by office name (e.g. City Treasury)…",

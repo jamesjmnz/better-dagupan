@@ -63,6 +63,7 @@
     "transaction": "{{classification}} na Transaksiyon"
   },
   "detail": {
+    "seoDescription": "Mga kinakailangan, hakbang, bayarin at tagal ng pagproseso para sa {{service}} sa {{lgu}}.",
     "notFound": "Hindi nahanap ang serbisyo",
     "notFoundBody": "Walang serbisyong nakalista sa address na ito.",
     "backToServices": "Bumalik sa lahat ng serbisyo",

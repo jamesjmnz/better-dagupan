@@ -63,6 +63,7 @@
     "transaction": "{{classification}} Transaction"
   },
   "detail": {
+    "seoDescription": "Requirements, steps, fees and processing time for {{service}} in the {{lgu}}.",
     "notFound": "Service not found",
     "notFoundBody": "No service is listed at this address.",
     "backToServices": "Back to all services",

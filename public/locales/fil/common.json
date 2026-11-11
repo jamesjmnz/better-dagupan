@@ -137,6 +137,8 @@
     "notVerifiedHint": "Wala pang natagpuang opisyal na pinagkunan ang Better Dagupan para sa detalyeng ito. Hindi ito nangangahulugang wala ang impormasyon."
   },
   "barangays": {
+    "seoTitle": "Barangay {{barangay}}",
+    "seoDescription": "Mga opisyal, populasyon at sanggunian ng Barangay {{barangay}}, {{lgu}}.",
     "title": "Mga Barangay",
     "count": "{{count}} barangay ng {{lgu}}, ayon sa inilathala ng Philippine Statistics Authority.",
     "searchPlaceholder": "Maghanap ayon sa pangalan (hal. Bonuan Gueset)…",
@@ -166,6 +168,7 @@
     "headerLabel": "Panimulang impormasyon ng barangay"
   },
   "departments": {
+    "seoDescription": "Mga detalye ng kontak, pinuno at sanggunian ng {{office}}, {{lgu}}.",
     "title": "Mga Kagawaran ng Lungsod",
     "count": "{{count}} opisina ng {{lgu}}, ayon sa inilathala ng pamahalaang lungsod.",
     "searchPlaceholder": "Maghanap ayon sa pangalan ng opisina (hal. City Treasury)…",

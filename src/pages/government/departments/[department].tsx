@@ -24,6 +24,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { useTranslation } from 'react-i18next';
 
 import { NotVerified, SourceNote } from '@/components/civic';
+import { SEO } from '@/components/layout/SEO';
 
 import { toTitleCase } from '@/lib/stringUtils';
 import { toTelUri } from '@/lib/utils';
@@ -70,6 +71,13 @@ export default function DepartmentDetail() {
 
   return (
     <div className='animate-in fade-in space-y-6 pb-20 duration-500'>
+      <SEO
+        title={dept.office_name}
+        description={t('departments.seoDescription', {
+          office: dept.office_name,
+          lgu: lguLabels.fullName,
+        })}
+      />
       {/* --- BREADCRUMBS --- */}
       <Breadcrumb>
         <BreadcrumbList>
