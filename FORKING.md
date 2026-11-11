@@ -130,7 +130,9 @@ Notes on individual fields:
   it, `/api/council-ordinances` answers `404` and the page shows its empty
   state.
 - **`portal.domain`** and **`portal.baseUrl`** can stay empty until you have a
-  domain. SEO canonical URLs are then root-relative.
+  domain. The portal then emits no canonical URL or share image, and the build
+  skips `sitemap.xml`. Better Dagupan uses its Pages project,
+  `better-dagupan.pages.dev`.
 
 See [`docs/MEILISEARCH_INTEGRATION_GUIDE.md`](./docs/MEILISEARCH_INTEGRATION_GUIDE.md)
 for how to find the procurement and infrastructure filter values.
@@ -167,9 +169,17 @@ Put your marks in `public/logos/` and point the `portal.*Path` fields in
 - `svg/better-dagupan-icon.svg` — navbar logo and favicon
 - `svg/better-dagupan-icon-white.svg` — logo on dark backgrounds (footer)
 
-`defaultOgImagePath` is empty, so `src/components/layout/SEO.tsx` leaves out the
-Open Graph image instead of pointing at a missing file. `appleTouchIconPath` is
-declared in the config type but not read anywhere yet.
+The raster assets are rendered from those SVGs and the config by
+`npx tsx scripts/render-brand-images.ts`, which uses the Chromium Playwright
+installs for the e2e suite:
+
+- `png/<slug>-og.png` — 1200x630 Open Graph and Twitter card (`defaultOgImagePath`)
+- `png/<slug>-apple-touch-icon.png` — 180x180 (`appleTouchIconPath`)
+- `png/<slug>-icon-192.png`, `-icon-512.png`, `-icon-maskable-512.png` — app icons
+- `public/manifest.webmanifest` — web app manifest
+
+`index.html` repeats the share-card tags for link previews that do not run
+JavaScript; update its URLs if the domain or image path changes.
 
 ### 4. SEO Metadata
 
@@ -184,7 +194,11 @@ declared in the config type but not read anywhere yet.
 }
 ```
 
-Available tokens: `{{portal.name}}`, `{{portal.domain}}`, `{{portal.baseUrl}}`, `{{lgu.name}}`, `{{lgu.fullName}}`, `{{lgu.province}}`, `{{lgu.type}}`, `{{lgu.adjective}}`
+Available tokens: `{{portal.name}}`, `{{portal.domain}}`, `{{portal.baseUrl}}`, `{{lgu.name}}`, `{{lgu.fullName}}`, `{{lgu.province}}`, `{{lgu.type}}`, `{{lgu.adjective}}`, `{{lgu.body}}`, `{{lgu.subdivisions}}`
+
+Keys are the routes in `src/lib/siteRoutes.ts`, which a unit test keeps in step
+with `src/App.tsx`; a new public route needs an entry here. `/services` takes
+`category=<slug>` keys for each service category.
 
 To regenerate with concrete values: `node scripts/generate-seo.cjs`
 
