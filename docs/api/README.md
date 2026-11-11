@@ -29,8 +29,12 @@ Locally, `npm run functions:dev` serves the functions at
 - **No D1 database is bound.** Every `/api/openlgu/*` endpoint answers
   `503 {"error": "legislative_data_unavailable"}` until one is, and the admin
   endpoints that read D1 cannot work either.
-- **No KV namespace is bound.** `/api/weather` and the admin sign-in both need
-  `WEATHER_KV`.
+- **No KV namespace is bound.** The admin sign-in needs `WEATHER_KV`.
+  `/api/weather` works without it but caches nothing, and answers
+  `503 {"error": "weather_unavailable"}` while no `OPENWEATHERMAP_API_KEY` is set.
+- **The LGU feed proxies need no binding.** `/api/city-procurement` and
+  `/api/council-ordinances` read the city's and the council's WordPress feeds
+  live; see [`functions/README.md`](../../functions/README.md#apicity-procurement).
 
 ## Quick Start
 
@@ -41,7 +45,17 @@ Locally, `npm run functions:dev` serves the functions at
    curl https://<your-pages-domain>/api/weather
    ```
 
-2. **Contribution Flow** - Community contributions are submitted as [GitHub Issues](https://github.com/jamesjmnz/better-dagupan/issues/new?template=contribution.yml) using the contribution issue template (`.github/ISSUE_TEMPLATE/contribution.yml`). The `/contribute` page on the site links users directly to GitHub; there is no contribution endpoint.
+2. **City procurement notices** - The bid and award notices the city posts on its own site
+   ```bash
+   curl "https://<your-pages-domain>/api/city-procurement?page=1&search=market"
+   ```
+
+3. **Council ordinances** - The ordinances the Sangguniang Panlungsod posts on its own site
+   ```bash
+   curl "https://<your-pages-domain>/api/council-ordinances?page=1"
+   ```
+
+4. **Contribution Flow** - Community contributions are submitted as [GitHub Issues](https://github.com/jamesjmnz/better-dagupan/issues/new?template=contribution.yml) using the contribution issue template (`.github/ISSUE_TEMPLATE/contribution.yml`). The `/contribute` page on the site links users directly to GitHub; there is no contribution endpoint.
 
 ### Admin APIs (Authentication Required)
 
@@ -91,6 +105,8 @@ curl https://<your-pages-domain>/api/openlgu/terms
 | API | Description | Authentication |
 |-----|-------------|----------------|
 | [Weather API](./weather-api.md) | Current weather and 3-hour forecast for Dagupan | None |
+| City procurement (`functions/api/city-procurement.ts`) | The city's posted bid and award notices, proxied and cached for 30 minutes | None |
+| Council ordinances (`functions/api/council-ordinances.ts`) | The council's posted ordinances, proxied and cached for 30 minutes | None |
 | OpenLGU API (`functions/api/openlgu/`) | Legislative documents, persons, terms, sessions, committees | None |
 
 ### Admin APIs
@@ -247,7 +263,8 @@ curl "https://<your-pages-domain>/api/admin/audit-logs?action=create_document&li
 | 415 | Unsupported Media Type | Wrong Content-Type header |
 | 429 | Too Many Requests | Rate limit exceeded |
 | 500 | Internal Server Error | Server-side error |
-| 503 | Service Unavailable | OpenLGU endpoint called while no D1 database is bound |
+| 502 | Bad Gateway | An LGU feed behind `/api/city-procurement` or `/api/council-ordinances` failed or timed out |
+| 503 | Service Unavailable | OpenLGU endpoint called while no D1 database is bound, or weather requested with no API key |
 
 ---
 
@@ -261,7 +278,7 @@ for local development, in `.dev.vars` (copy `.dev.vars.example`).
 | Name | Description | Used by |
 |------|-------------|---------|
 | `BETTERLB_DB` | D1 database binding (name inherited from the template) | OpenLGU and admin APIs |
-| `WEATHER_KV` | KV namespace | Weather cache, admin sessions, OAuth state, CSRF tokens, rate limits |
+| `WEATHER_KV` | KV namespace | Admin sessions, OAuth state, CSRF tokens, rate limits, and the optional weather cache |
 
 Neither is bound yet in this repository.
 
@@ -338,7 +355,7 @@ Neither is bound yet in this repository.
 
 Public APIs send CORS headers only to allowed origins:
 
-- **Production:** `https://better-dagupan.pages.dev` (in `functions/index.ts`); no custom domain yet. `functions/api/weather.ts` keeps its own list, which has no production origin yet.
+- **Production:** `https://better-dagupan.pages.dev`, in `functions/utils/origins.ts`, which `functions/index.ts` and `functions/api/weather.ts` share; no custom domain yet. The KV-only `functions/weather.ts` keeps its own list, which has no production origin yet.
 - **Development:** `http://localhost:5173`, `http://localhost:8788`
 
 **CORS Headers:**
