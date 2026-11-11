@@ -11,7 +11,7 @@ import { fetchWeatherData, weatherIcons } from '../../lib/weather';
 import { WeatherData } from '../../types';
 
 const WeatherPage: FC = () => {
-  const { t } = useTranslation('pages');
+  const { t, i18n } = useTranslation('pages');
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -206,7 +206,7 @@ const WeatherPage: FC = () => {
                     {[...Array(5)].map((_, index) => {
                       const date = new Date();
                       date.setDate(date.getDate() + index);
-                      const dayName = date.toLocaleDateString('en-US', {
+                      const dayName = date.toLocaleDateString(i18n.language, {
                         weekday: 'short',
                       });
                       const dayNum = date.getDate();

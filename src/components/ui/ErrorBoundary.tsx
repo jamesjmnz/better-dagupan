@@ -1,5 +1,7 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
 
+import { ErrorFallback } from './ErrorFallback';
+
 interface ErrorBoundaryProps {
   children: ReactNode;
   /** Optional label for debugging — appears in console errors */
@@ -36,18 +38,9 @@ export class ErrorBoundary extends Component<
   render(): ReactNode {
     if (this.state.hasError) {
       return (
-        <div className='rounded-lg border border-kapwa-border-danger bg-kapwa-bg-danger-weak p-6 text-center'>
-          <p className='text-kapwa-text-danger text-sm font-medium'>
-            Something went wrong loading this section.
-          </p>
-          <button
-            type='button'
-            onClick={() => this.setState({ hasError: false, error: null })}
-            className='mt-2 text-xs text-kapwa-text-link hover:underline'
-          >
-            Try again
-          </button>
-        </div>
+        <ErrorFallback
+          onRetry={() => this.setState({ hasError: false, error: null })}
+        />
       );
     }
 

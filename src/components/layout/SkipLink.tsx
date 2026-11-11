@@ -1,12 +1,15 @@
 import { FC } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 export const SkipLink: FC = () => {
+  const { t } = useTranslation('ui');
   return (
     <a
       href='#main-content'
       className='bg-kapwa-bg-surface text-kapwa-text-strong ring-kapwa-border-focus fixed top-4 left-4 z-100 rounded-md px-4 py-2 ring-2 transition-transform -translate-y-[200%] focus:translate-y-0 focus:outline-none'
     >
-      Skip to main content
+      {t('skipLink')}
     </a>
   );
 };

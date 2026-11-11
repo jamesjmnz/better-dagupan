@@ -7,6 +7,7 @@ import {
   GlobeIcon,
   ClockIcon,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { PageHero, DetailSection } from './PageLayouts';
 import {
@@ -63,6 +64,7 @@ export function DetailPageLayout({
   related,
   className = '',
 }: DetailPageLayoutProps) {
+  const { t } = useTranslation('ui');
   return (
     <div className={`bg-kapwa-bg-surface min-h-screen space-y-6 ${className}`}>
       {/* Hero Section */}
@@ -77,12 +79,12 @@ export function DetailPageLayout({
 
       {/* Contact Section */}
       {contact && (
-        <DetailSection title='Contact Information'>
+        <DetailSection title={t('contact.title')}>
           <ContactContainer variant='stack'>
             {contact.email && (
               <ContactItem
                 icon={MailIcon}
-                label='Email'
+                label={t('contact.email')}
                 value={contact.email}
                 href={`mailto:${contact.email}`}
               />
@@ -90,7 +92,7 @@ export function DetailPageLayout({
             {contact.phone && (
               <ContactItem
                 icon={PhoneIcon}
-                label='Phone'
+                label={t('contact.phone')}
                 value={contact.phone}
                 href={`tel:${contact.phone}`}
               />
@@ -98,14 +100,14 @@ export function DetailPageLayout({
             {contact.address && (
               <ContactItem
                 icon={MapPinIcon}
-                label='Address'
+                label={t('contact.address')}
                 value={contact.address}
               />
             )}
             {contact.website && (
               <ContactItem
                 icon={GlobeIcon}
-                label='Website'
+                label={t('contact.website')}
                 value={contact.website}
                 href={contact.website}
                 isExternal
@@ -114,7 +116,7 @@ export function DetailPageLayout({
             {contact.hours && (
               <ContactItem
                 icon={ClockIcon}
-                label='Hours'
+                label={t('contact.hours')}
                 value={contact.hours}
               />
             )}

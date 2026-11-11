@@ -16,10 +16,12 @@ import {
 import { useTranslation } from 'react-i18next';
 
 import { config } from '@/lib/lguConfig';
+import { useLguTerms } from '@/lib/useLguTerms';
 import { SEO } from '@/components/layout/SEO';
 
 const ContactUs: FC = () => {
   const { t } = useTranslation('pages');
+  const terms = useLguTerms();
   const contactMethods = [
     {
       icon: <MailIcon className='h-8 w-8' />,
@@ -57,13 +59,13 @@ const ContactUs: FC = () => {
 
   const faqs = [
     {
-      question: t('contact.faqs.volunteer.question'),
+      question: t('contact.faqs.volunteer.question', terms),
       answer: t('contact.faqs.volunteer.answer'),
       link: { text: t('contact.faqs.volunteer.link'), href: '/join-us' },
     },
     {
-      question: t('contact.faqs.affiliation.question'),
-      answer: t('contact.faqs.affiliation.answer'),
+      question: t('contact.faqs.affiliation.question', terms),
+      answer: t('contact.faqs.affiliation.answer', terms),
     },
     {
       question: t('contact.faqs.bugs.question'),
@@ -74,11 +76,11 @@ const ContactUs: FC = () => {
       },
     },
     {
-      question: t('contact.faqs.reuse.question'),
-      answer: t('contact.faqs.reuse.answer'),
+      question: t('contact.faqs.reuse.question', terms),
+      answer: t('contact.faqs.reuse.answer', terms),
     },
     {
-      question: t('contact.faqs.data.question'),
+      question: t('contact.faqs.data.question', terms),
       answer: t('contact.faqs.data.answer'),
     },
   ];
@@ -156,7 +158,9 @@ const ContactUs: FC = () => {
               <h2 className='text-kapwa-text-strong mb-4 kapwa-heading-lg font-bold'>
                 {t('contact.faqTitle')}
               </h2>
-              <p className='text-kapwa-text-support'>{t('contact.faqIntro')}</p>
+              <p className='text-kapwa-text-support'>
+                {t('contact.faqIntro', terms)}
+              </p>
             </div>
 
             <div className='space-y-4'>

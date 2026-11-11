@@ -2,15 +2,17 @@ import { Link } from 'react-router-dom';
 
 import { Button } from '@bettergov/kapwa/button';
 import { AlertTriangleIcon, HomeIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { SEO } from '@/components/layout/SEO';
 
 export default function NotFound() {
+  const { t } = useTranslation('pages');
   return (
     <div className='min-h-screen bg-linear-to-br from-kapwa-brand-600 via-kapwa-brand-700 to-kapwa-brand-800'>
       <SEO
-        title='Page Not Found!'
-        description='You might be lost, like some of our government (ghost) services..'
+        title={t('notFound.seoTitle')}
+        description={t('notFound.seoDescription')}
         keywords={['Not Found', '404', 'Page Not Found']}
         noIndex
       />
@@ -27,12 +29,10 @@ export default function NotFound() {
             </h1>
             <div className='mb-8 space-y-4'>
               <h2 className='text-kapwa-text-inverse kapwa-heading-lg font-semibold'>
-                Lost in the Digital Bureaucracy?
+                {t('notFound.title')}
               </h2>
               <p className='mx-auto max-w-2xl text-lg leading-relaxed text-kapwa-text-inverse/80'>
-                Relax, even the best systems have their maze-like moments. This
-                page seems to have gotten stuck in processing... probably
-                waiting for approval from three (or more) different departments.
+                {t('notFound.body')}
               </p>
             </div>
             {/* Actions */}
@@ -43,7 +43,7 @@ export default function NotFound() {
                   className='text-kapwa-text-info hover:bg-kapwa-bg-info-weak bg-kapwa-bg-surface px-8 font-semibold'
                 >
                   <HomeIcon className='mr-2 h-5 w-5' />
-                  Return to Homepage
+                  {t('notFound.home')}
                 </Button>
               </Link>
               <Button
@@ -52,7 +52,7 @@ export default function NotFound() {
                 className='text-kapwa-text-inverse hover:bg-kapwa-bg-surface/10 border-white px-8'
                 onClick={() => window.history.back()}
               >
-                Go Back
+                {t('notFound.back')}
               </Button>
             </div>
           </div>

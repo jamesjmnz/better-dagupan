@@ -7,6 +7,7 @@ import {
   LoaderIcon,
   PoundSterlingIcon,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { fetchForexData, getCurrencyIconName } from '../../lib/forex';
 import { fetchWeatherData } from '../../lib/weather';
@@ -29,6 +30,7 @@ const getCurrencyIcon = (code: string) => {
 };
 
 const Ticker: FC = () => {
+  const { t } = useTranslation('ui');
   const [forexRates, setForexRates] = useState<ForexRate[]>([]);
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [currentRateIndex, setCurrentRateIndex] = useState(0);
@@ -104,7 +106,7 @@ const Ticker: FC = () => {
       <div className='py-1 bg-kapwa-bg-surface-bold px-kapwa-md text-kapwa-text-inverse'>
         <div className='container flex justify-center items-center mx-auto'>
           <LoaderIcon className='mr-2 w-4 h-4 animate-spin' />
-          <span className='kapwa-body-xs-default'>Loading data...</span>
+          <span className='kapwa-body-xs-default'>{t('loading.data')}</span>
         </div>
       </div>
     );
@@ -156,13 +158,13 @@ const Ticker: FC = () => {
               <div className='flex items-center space-x-2'>
                 <LoaderIcon className='w-3 h-3 opacity-80 animate-spin text-kapwa-text-inverse' />
                 <span className='opacity-80 text-kapwa-text-inverse kapwa-body-xs-default'>
-                  Loading weather...
+                  {t('loading.weather')}
                 </span>
               </div>
             ) : weatherError ? (
               <div className='flex items-center space-x-2'>
                 <span className='opacity-80 text-kapwa-text-inverse kapwa-body-xs-default'>
-                  Weather unavailable
+                  {t('weatherUnavailable')}
                 </span>
               </div>
             ) : (

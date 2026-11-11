@@ -74,16 +74,16 @@
       }
     },
     "faqTitle": "Frequently Asked Questions",
-    "faqIntro": "Find answers to common questions about BetterGov",
+    "faqIntro": "Find answers to common questions about {{portal}}",
     "faqs": {
       "volunteer": {
-        "question": "How can I volunteer for BetterGov?",
+        "question": "How can I volunteer for {{portal}}?",
         "answer": "We welcome volunteers with various skills! Check out our Join Us page to see current opportunities and fill out our volunteer form.",
         "link": "Join Us page"
       },
       "affiliation": {
-        "question": "Is BetterGov affiliated with the Philippine government?",
-        "answer": "No, BetterGov is an independent volunteer-led initiative. We work alongside government agencies but are not officially part of the Philippine government."
+        "question": "Is {{portal}} affiliated with the government?",
+        "answer": "No, {{portal}} is an independent volunteer-led initiative. It is not the official website of the {{fullName}} and is not part of the Philippine government."
       },
       "bugs": {
         "question": "How do I report a bug or request a feature?",
@@ -91,11 +91,11 @@
         "link": "GitHub repository"
       },
       "reuse": {
-        "question": "Can I use BetterGov content for my project?",
-        "answer": "Yes! BetterGov is released under Creative Commons CC0, meaning our content is in the public domain and can be used freely for any purpose."
+        "question": "Can I use {{portal}} content for my project?",
+        "answer": "Yes! {{portal}} is released under Creative Commons CC0, meaning our content is in the public domain and can be used freely for any purpose."
       },
       "data": {
-        "question": "Where does the data on BetterGov come from?",
+        "question": "Where does the data on {{portal}} come from?",
         "answer": "Our data is aggregated from various publicly available government sources. We use custom scripts and tools to collect, process, and display this information in a way that is easy for citizens to access and understand."
       }
     },
@@ -582,5 +582,16 @@
     "contactLead": "For questions about these terms or content concerns, contact:",
     "educational": "This website provides public domain information for educational and informational purposes only.",
     "effective": "Effective as of September 23, 2025"
+  },
+  "notFound": {
+    "seoTitle": "Page Not Found!",
+    "seoDescription": "You might be lost, like some of our government (ghost) services.",
+    "title": "Lost in the Digital Bureaucracy?",
+    "body": "Relax, even the best systems have their maze-like moments. This page seems to have gotten stuck in processing... probably waiting for approval from three (or more) different departments.",
+    "home": "Return to Homepage",
+    "back": "Go Back"
+  },
+  "discord": {
+    "redirecting": "Redirecting to {{portal}} Discord Invite Link..."
   }
 }

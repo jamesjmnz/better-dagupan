@@ -1,5 +1,7 @@
 import { ComponentType, ReactNode } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 import { cn } from '@/lib/utils';
 import type { BreadcrumbItem } from '@/types/components';
 
@@ -21,10 +23,11 @@ export function PageHero({
   breadcrumb?: BreadcrumbItem[];
   metadata?: ReactNode;
 }) {
+  const { t } = useTranslation('ui');
   return (
     <header className='animate-in fade-in flex flex-col justify-center py-8 text-center duration-700 md:py-12'>
       {breadcrumb && breadcrumb.length > 0 && (
-        <nav className='mb-4' aria-label='Breadcrumb'>
+        <nav className='mb-4' aria-label={t('breadcrumb.label')}>
           <ol className='flex items-center justify-center gap-2 text-sm'>
             {breadcrumb.map((crumb, index) => (
               <li key={crumb.href} className='flex items-center gap-2'>

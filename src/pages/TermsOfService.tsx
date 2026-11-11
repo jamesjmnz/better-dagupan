@@ -14,11 +14,11 @@ import { config } from '@/lib/lguConfig';
 import { SEO } from '@/components/layout/SEO';
 
 const TermsOfService: FC = () => {
-  const { t } = useTranslation('pages');
+  const { t, i18n } = useTranslation('pages');
   const list = (key: string) =>
     t(`terms.${key}`, { returnObjects: true }) as string[];
   const publicDomain = list('publicDomain');
-  const currentDate = new Date().toLocaleDateString('en-US', {
+  const currentDate = new Date().toLocaleDateString(i18n.language, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
@@ -310,10 +310,10 @@ const TermsOfService: FC = () => {
               </p>
               <p className='text-kapwa-text-brand-bold text-xl font-semibold'>
                 <a
-                  href='mailto:volunteers@bettergov.ph'
+                  href={`mailto:${config.portal.contactEmail}`}
                   className='hover:text-kapwa-text-brand transition-colors'
                 >
-                  volunteers@bettergov.ph
+                  {config.portal.contactEmail}
                 </a>
               </p>
               <p className='text-kapwa-text-brand-bold mt-4 italic'>

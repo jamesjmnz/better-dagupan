@@ -71,13 +71,13 @@ const GovernmentSection: FC = () => {
         {/* Quick stats using documented Badge component */}
         <div className='flex flex-wrap justify-center gap-4 mb-8'>
           <Badge variant='primary' className='px-4 py-2 text-sm'>
-            {barangayCount} Barangays
+            {t('government.barangayCount', { count: barangayCount })}
           </Badge>
           <Badge variant='secondary' className='px-4 py-2 text-sm'>
-            {departmentCount} Departments
+            {t('government.departmentCount', { count: departmentCount })}
           </Badge>
           <Badge variant='slate' className='px-4 py-2 text-sm'>
-            Elected Officials
+            {t('government.electedOfficialsBadge')}
           </Badge>
         </div>
 

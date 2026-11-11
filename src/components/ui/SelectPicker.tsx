@@ -8,6 +8,7 @@ import {
 } from 'react';
 
 import { ChevronDownIcon, SearchIcon, XIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '../../lib/utils';
 
@@ -31,7 +32,7 @@ export interface SelectPickerProps<T extends string = string> {
 const SelectPicker = <T extends string = string>({
   options,
   onSelect,
-  placeholder = 'Select...',
+  placeholder,
   className,
   size = 'md',
   disabled = false,
@@ -40,6 +41,7 @@ const SelectPicker = <T extends string = string>({
   selectedValues = [],
   ...props
 }: SelectPickerProps<T>) => {
+  const { t } = useTranslation('ui');
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedOptions, setSelectedOptions] = useState<
@@ -168,7 +170,7 @@ const SelectPicker = <T extends string = string>({
         >
           {selectedOptions.length > 0
             ? selectedOptions.map(o => o.label).join(', ')
-            : placeholder}
+            : (placeholder ?? t('select.placeholder'))}
         </span>
         <div className='flex items-center space-x-1'>
           {clearable && selectedOptions.length > 0 && !disabled && (
@@ -176,7 +178,7 @@ const SelectPicker = <T extends string = string>({
               type='button'
               className='hover:bg-kapwa-bg-hover rounded-full p-1 transition-colors'
               onClick={handleClear}
-              aria-label='Clear selection'
+              aria-label={t('select.clear')}
             >
               <XIcon className='text-kapwa-text-disabled h-4 w-4' />
             </button>
@@ -205,7 +207,8 @@ const SelectPicker = <T extends string = string>({
                   ref={searchInputRef}
                   type='text'
                   className='focus:ring-kapwa-border-brand focus:border-kapwa-border-brand border-kapwa-border-weak w-full rounded-md border py-2 pr-3 pl-9 text-sm focus:ring-2 focus:outline-none'
-                  placeholder='Search options...'
+                  placeholder={t('select.search')}
+                  aria-label={t('select.search')}
                   value={searchTerm}
                   onChange={handleSearchChange}
                   onKeyDown={handleSearchKeyDown}
@@ -237,7 +240,7 @@ const SelectPicker = <T extends string = string>({
               </ul>
             ) : (
               <div className='text-kapwa-text-disabled px-3 py-2 text-center text-sm'>
-                No options found
+                {t('select.noOptions')}
               </div>
             )}
           </div>

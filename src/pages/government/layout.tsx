@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { PageHeader, SectionBlock } from '@/components/layout';
 
 import { cn } from '@/lib/utils';
-import { lguLabels } from '@/lib/lguLabels';
 import { useLguTerms } from '@/lib/useLguTerms';
 
 export default function GovernmentRootLayout() {
@@ -17,31 +16,22 @@ export default function GovernmentRootLayout() {
 
   const branches = [
     {
-      title: t('government.electedofficialsTitle', 'Elected Officials'),
-      description: t(
-        'government.electedofficialsDescription',
-        'Meet your Mayor, Vice Mayor, and Councilors.'
-      ),
+      title: t('government.electedofficialsTitle'),
+      description: t('government.electedofficialsDescription'),
       icon: UsersIcon,
       path: '/government/elected-officials',
       category: t('government:layout.categories.leadership'),
     },
     {
-      title: t('government.departmentsTitle', 'Departments'),
-      description: t(
-        'government.departmentsDescription',
-        'Services and offices under the Executive branch.'
-      ),
+      title: t('government.departmentsTitle'),
+      description: t('government.departmentsDescription'),
       icon: Building2Icon,
       path: '/government/departments',
       category: t('government:layout.categories.administrative'),
     },
     {
-      title: t('government.barangaysTitle', 'Barangays'),
-      description: t(
-        'government.barangaysDescription',
-        `The 14 local component units of ${lguLabels.name}.`
-      ),
+      title: t('government.barangaysTitle'),
+      description: t('government.barangaysDescription'),
       icon: HomeIcon,
       path: '/government/barangays',
       category: t('government:layout.categories.localUnits'),

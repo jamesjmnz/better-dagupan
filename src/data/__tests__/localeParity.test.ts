@@ -145,6 +145,18 @@ describe('locale files', () => {
     expect(common.emptyState.body).toMatch(/\{\{lgu\}\}/);
   });
 
+  it.each(LANGUAGES)('%s names this portal in the contact FAQ', lang => {
+    const { contact } = load(lang, 'pages');
+
+    // The FAQ was inherited from the upstream template and named it instead.
+    expect(
+      JSON.stringify({ intro: contact.faqIntro, faqs: contact.faqs })
+    ).not.toMatch(/BetterGov/);
+    expect(contact.faqs.reuse.answer).toMatch(/\{\{portal\}\}/);
+    // The repository is released under CC0 1.0.
+    expect(contact.faqs.reuse.answer).toMatch(/CC0/);
+  });
+
   it('uses city terminology rather than municipality', () => {
     expect(JSON.stringify(load('en', 'common'))).not.toMatch(
       /Sangguniang Bayan|Municipal Departments|Municipality of/i

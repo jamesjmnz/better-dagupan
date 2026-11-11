@@ -11,6 +11,7 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { cn } from '@/lib/utils';
 
@@ -208,19 +209,22 @@ export const CardFooter = ({
 export const CardImage = ({
   className,
   ...props
-}: ImgHTMLAttributes<HTMLImageElement>) => (
-  <div className='bg-kapwa-bg-hover relative h-48 w-full overflow-hidden'>
-    <img
-      className={cn(
-        'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105',
-        className
-      )}
-      loading='lazy'
-      {...props}
-      alt={props.alt || 'Card visualization'}
-    />
-  </div>
-);
+}: ImgHTMLAttributes<HTMLImageElement>) => {
+  const { t } = useTranslation('ui');
+  return (
+    <div className='bg-kapwa-bg-hover relative h-48 w-full overflow-hidden'>
+      <img
+        className={cn(
+          'h-full w-full object-cover transition-transform duration-500 group-hover:scale-105',
+          className
+        )}
+        loading='lazy'
+        {...props}
+        alt={props.alt || t('card.imageAlt')}
+      />
+    </div>
+  );
+};
 
 /**
  * CardAvatar - Avatar/Initials Display
@@ -378,6 +382,7 @@ export const CardContactInfo = ({
   /** Use smaller spacing and icons */
   compact?: boolean;
 }) => {
+  const { t } = useTranslation('ui');
   const iconSize = compact ? 'h-3 w-3' : 'h-4 w-4';
   const spacing = compact ? 'space-y-1' : 'space-y-3';
 
@@ -435,7 +440,7 @@ export const CardContactInfo = ({
             rel='noreferrer'
             className='text-kapwa-text-brand truncate font-bold hover:underline'
           >
-            Official Website
+            {t('card.officialWebsite')}
           </a>
         </div>
       )}

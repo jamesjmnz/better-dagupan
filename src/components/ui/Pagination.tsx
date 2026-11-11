@@ -1,5 +1,6 @@
 import { Button } from '@bettergov/kapwa/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Trans, useTranslation } from 'react-i18next';
 
 interface PaginationProps {
   currentPage: number;
@@ -18,6 +19,7 @@ export function PaginationControls({
   onPageChange,
   onResultsPerPageChange,
 }: PaginationProps) {
+  const { t } = useTranslation('ui');
   // Helper to generate page numbers with ellipsis
   const getPageNumbers = () => {
     const pages = [];
@@ -60,19 +62,24 @@ export function PaginationControls({
       {/* Left: Info & Selector */}
       <div className='text-kapwa-text-disabled flex flex-wrap items-center justify-center gap-4 text-xs font-medium'>
         <span>
-          Showing{' '}
-          <span className='text-kapwa-text-strong font-bold'>
-            {Math.max(0, start)}-{Math.max(0, end)}
-          </span>{' '}
-          of{' '}
-          <span className='text-kapwa-text-strong font-bold'>
-            {totalItems.toLocaleString()}
-          </span>
+          <Trans
+            t={t}
+            i18nKey='pagination.showing'
+            values={{
+              start: Math.max(0, start),
+              end: Math.max(0, end),
+              total: totalItems.toLocaleString(),
+            }}
+            components={{
+              bold: <span className='text-kapwa-text-strong font-bold' />,
+            }}
+          />
         </span>
 
         <div className='flex items-center gap-2'>
-          <span>Rows:</span>
+          <span aria-hidden='true'>{t('pagination.rows')}</span>
           <select
+            aria-label={t('pagination.rows')}
             value={resultsPerPage}
             onChange={e => onResultsPerPageChange(Number(e.target.value))}
             className='focus:border-kapwa-border-brand focus:ring-kapwa-border-brand border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support h-8 rounded-lg text-xs font-medium'
@@ -94,8 +101,9 @@ export function PaginationControls({
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
           className='h-8 w-8 p-0'
+          aria-label={t('pagination.previous')}
         >
-          <ChevronLeft className='h-4 w-4' />
+          <ChevronLeft className='h-4 w-4' aria-hidden='true' />
         </Button>
 
         <div className='hidden gap-1 sm:flex'>
@@ -129,8 +137,9 @@ export function PaginationControls({
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
           className='h-8 w-8 p-0'
+          aria-label={t('pagination.next')}
         >
-          <ChevronRight className='h-4 w-4' />
+          <ChevronRight className='h-4 w-4' aria-hidden='true' />
         </Button>
       </nav>
     </div>

@@ -18,7 +18,10 @@
     "government": "Pamahalaan",
     "governmentDesc": "Mga opisyal at departamento",
     "statistics": "Istatistika",
-    "statisticsDesc": "Populasyon at demograpiya"
+    "statisticsDesc": "Populasyon at demograpiya",
+    "resultCount_one": "{{count}} resulta",
+    "resultCount_other": "{{count}} resulta",
+    "matchingServices": "Mga tumutugmang serbisyo"
   },
   "services": {
     "title": "Mga Sikat na Serbisyo",
@@ -103,7 +106,12 @@
     "learnMore": "Alamin pa",
     "directoryTitle": "Opisyal na Direktoryo",
     "directoryDescription": "Maghanap ng impormasyon ng kontak para sa mga opisyal ng pamahalaan, ahensya, at opisina sa pambansa at lokal na antas.",
-    "viewDirectory": "Tingnan ang Direktoryo"
+    "viewDirectory": "Tingnan ang Direktoryo",
+    "barangayCount_one": "{{count}} Barangay",
+    "barangayCount_other": "{{count}} Barangay",
+    "departmentCount_one": "{{count}} Departamento",
+    "departmentCount_other": "{{count}} Departamento",
+    "electedOfficialsBadge": "Mga Halal na Opisyal"
   },
   "disclaimer": {
     "short": "Ang {{portal}} ay isang malaya at pinamumunuan ng komunidad na proyekto. Hindi ito ang opisyal na website ng Pamahalaang Lungsod ng {{lgu}}.",
@@ -147,7 +155,8 @@
     "addressNotVerified": "Walang beripikadong address",
     "punongBarangay": "Punong Barangay",
     "viewProfile": "Tingnan ang profile",
-    "profileOf": "Tingnan ang profile ng {{name}}"
+    "profileOf": "Tingnan ang profile ng {{name}}",
+    "headerLabel": "Panimulang impormasyon ng barangay"
   },
   "departments": {
     "title": "Mga Kagawaran ng Lungsod",
@@ -328,5 +337,19 @@
     "showLess": "Ipakita ang mas kaunti",
     "earlierNotVerified": "Hindi pa naberipika ang naunang kasaysayan",
     "earlierNotVerifiedHint": "Nagsisimula ang timeline na ito sa karta ng lungsod noong 1947 dahil doon nakatagpo ang Better Dagupan ng mga opisyal na teksto. Hindi pa naitutugma sa isang opisyal na pinagkunan ang mga salaysay tungkol sa naunang kasaysayan ng bayan at sa pinagmulan ng pangalan nito. Hindi ito pahayag na hindi alam ang kasaysayang iyon."
+  },
+  "weatherMap": {
+    "title": "Lagay ng Panahon at Mapa ng {{lgu}}",
+    "loading": "Naglo-load ang lagay ng panahon...",
+    "unavailable": "Pansamantalang hindi makuha ang datos ng lagay ng panahon.",
+    "noData": "Walang datos ng lagay ng panahon.",
+    "hall": "Bulwagan ng {{lgu}}",
+    "hall_city": "Bulwagang Panlungsod ng {{lgu}}",
+    "hall_municipality": "Bulwagang Pambayan ng {{lgu}}",
+    "hall_province": "Kapitolyo ng {{lgu}}",
+    "location": "{{province}}, Pilipinas",
+    "mapLabel": "Interactive na mapa ng {{hall}}",
+    "noscript": "Kailangan ang JavaScript para makita ang interactive na mapa.",
+    "viewOnMap": "Tingnan ang {{hall}} sa OpenStreetMap"
   }
 }

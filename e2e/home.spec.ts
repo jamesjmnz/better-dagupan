@@ -157,6 +157,53 @@ test.describe('Home Page', () => {
   });
 });
 
+test.describe('Home Page - Filipino', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('i18nextLng', 'fil');
+    });
+    await page.goto('/');
+    await expect(page.locator('h1')).toBeVisible();
+  });
+
+  test('the shell and home sections render in Filipino', async ({ page }) => {
+    await expect(
+      page.getByRole('link', { name: 'Lumaktaw sa pangunahing nilalaman' })
+    ).toHaveAttribute('href', '#main-content');
+    await expect(
+      page.getByRole('heading', {
+        level: 2,
+        name: /Lagay ng Panahon at Mapa ng/,
+      })
+    ).toBeVisible();
+    await expect(
+      page.getByRole('application', {
+        name: /Interactive na mapa ng Bulwagang Panlungsod/,
+      })
+    ).toBeVisible();
+  });
+
+  test('the hero search announces its results in Filipino', async ({
+    page,
+  }) => {
+    const searchInput = page.getByRole('combobox', {
+      name: 'Maghanap ng mga serbisyo ng pamahalaan',
+    });
+    await searchInput.fill('health');
+
+    if (services.length === 0) {
+      await expect(page.getByRole('status').first()).toHaveText('0 resulta');
+    } else {
+      await expect(
+        page.getByRole('listbox', { name: 'Mga tumutugmang serbisyo' })
+      ).toBeVisible();
+      await expect(page.getByRole('status').first()).toHaveText(
+        /^\d+ resulta$/
+      );
+    }
+  });
+});
+
 test.describe('Home Page - Console', () => {
   test('No console errors', async ({ page }) => {
     // With a healthy backend the page must log nothing. Mocking here rather

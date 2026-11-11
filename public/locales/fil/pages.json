@@ -74,16 +74,16 @@
       }
     },
     "faqTitle": "Mga Madalas Itanong",
-    "faqIntro": "Hanapin ang mga sagot sa mga karaniwang tanong tungkol sa BetterGov",
+    "faqIntro": "Hanapin ang mga sagot sa mga karaniwang tanong tungkol sa {{portal}}",
     "faqs": {
       "volunteer": {
-        "question": "Paano ako makakapagboluntaryo sa BetterGov?",
+        "question": "Paano ako makakapagboluntaryo sa {{portal}}?",
         "answer": "Tinatanggap namin ang mga boluntaryong may iba't ibang kasanayan! Tingnan ang aming Join Us page para makita ang mga kasalukuyang pagkakataon at sagutan ang aming volunteer form.",
         "link": "Join Us page"
       },
       "affiliation": {
-        "question": "Kaanib ba ng pamahalaan ng Pilipinas ang BetterGov?",
-        "answer": "Hindi. Ang BetterGov ay isang malayang inisyatibang pinamumunuan ng mga boluntaryo. Nakikipagtulungan kami sa mga ahensya ng pamahalaan pero hindi kami opisyal na bahagi ng pamahalaan ng Pilipinas."
+        "question": "Kaanib ba ng pamahalaan ang {{portal}}?",
+        "answer": "Hindi. Ang {{portal}} ay isang malayang inisyatibang pinamumunuan ng mga boluntaryo. Hindi ito ang opisyal na website ng {{fullName}} at hindi ito bahagi ng pamahalaan ng Pilipinas."
       },
       "bugs": {
         "question": "Paano ako mag-uulat ng bug o hihiling ng bagong feature?",
@@ -91,11 +91,11 @@
         "link": "GitHub repository"
       },
       "reuse": {
-        "question": "Puwede ko bang gamitin ang nilalaman ng BetterGov sa aking proyekto?",
-        "answer": "Oo! Inilabas ang BetterGov sa ilalim ng Creative Commons CC0, kaya ang aming nilalaman ay nasa public domain at malayang magagamit para sa anumang layunin."
+        "question": "Puwede ko bang gamitin ang nilalaman ng {{portal}} sa aking proyekto?",
+        "answer": "Oo! Inilabas ang {{portal}} sa ilalim ng Creative Commons CC0, kaya ang aming nilalaman ay nasa public domain at malayang magagamit para sa anumang layunin."
       },
       "data": {
-        "question": "Saan nagmumula ang datos sa BetterGov?",
+        "question": "Saan nagmumula ang datos sa {{portal}}?",
         "answer": "Tinitipon ang aming datos mula sa iba't ibang pampublikong pinagkukunan ng pamahalaan. Gumagamit kami ng sariling mga script at kagamitan para kolektahin, iproseso, at ipakita ang impormasyong ito sa paraang madaling ma-access at maunawaan ng mamamayan."
       }
     },
@@ -582,5 +582,16 @@
     "contactLead": "Para sa mga tanong tungkol sa mga tuntuning ito o mga alalahanin sa nilalaman, makipag-ugnayan sa:",
     "educational": "Nagbibigay ang website na ito ng impormasyong nasa public domain para lamang sa layuning pang-edukasyon at pang-impormasyon.",
     "effective": "Epektibo simula Setyembre 23, 2025"
+  },
+  "notFound": {
+    "seoTitle": "Hindi Nahanap ang Pahina!",
+    "seoDescription": "Baka naligaw ka, tulad ng ilang serbisyo ng pamahalaan na parang multo.",
+    "title": "Naligaw sa Digital na Burukrasya?",
+    "body": "Relaks lang, kahit ang pinakamahusay na sistema ay may mga sandaling parang maze. Mukhang naipit sa pagpoproseso ang pahinang ito... malamang naghihintay pa ng pag-apruba mula sa tatlo (o higit pang) magkakaibang departamento.",
+    "home": "Bumalik sa Homepage",
+    "back": "Bumalik"
+  },
+  "discord": {
+    "redirecting": "Inililipat ka sa Discord invite link ng {{portal}}..."
   }
 }

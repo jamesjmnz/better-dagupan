@@ -26,5 +26,68 @@
     "menu": "Menu",
     "expand": "Expand Menu",
     "hide": "Hide Menu"
+  },
+  "loading": {
+    "page": "Loading…",
+    "default": "Loading...",
+    "data": "Loading data...",
+    "weather": "Loading weather..."
+  },
+  "skipLink": "Skip to main content",
+  "weatherUnavailable": "Weather unavailable",
+  "pagination": {
+    "showing": "Showing <bold>{{start}}-{{end}}</bold> of <bold>{{total}}</bold>",
+    "rows": "Rows:",
+    "previous": "Previous page",
+    "next": "Next page"
+  },
+  "search": {
+    "placeholder": "Search...",
+    "clear": "Clear search"
+  },
+  "select": {
+    "placeholder": "Select...",
+    "clear": "Clear selection",
+    "search": "Search options...",
+    "noOptions": "No options found"
+  },
+  "dialog": {
+    "close": "Close"
+  },
+  "errorBoundary": {
+    "message": "Something went wrong loading this section.",
+    "retry": "Try again"
+  },
+  "breadcrumb": {
+    "label": "Breadcrumb",
+    "home": "Home",
+    "routes": {
+      "electedOfficials": "Elected Officials",
+      "departments": "Departments & Offices",
+      "barangays": "Barangays",
+      "services": "Services",
+      "openlgu": "OpenLGU Portal",
+      "transparency": "Transparency",
+      "statistics": "Statistics",
+      "about": "About",
+      "accessibility": "Accessibility"
+    }
+  },
+  "card": {
+    "officialWebsite": "Official Website",
+    "imageAlt": "Card visualization"
+  },
+  "chart": {
+    "year": "Year: {{year}}",
+    "rankedByValue": "Ranked by Value",
+    "regionLabel": "Statistical chart showing {{title}}"
+  },
+  "contact": {
+    "title": "Contact Information",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "website": "Website",
+    "hours": "Hours"
   }
 }

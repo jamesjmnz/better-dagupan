@@ -184,14 +184,14 @@ const Hero: FC = () => {
               className='sr-only'
             >
               {showResults
-                ? `${results.length} result${results.length === 1 ? '' : 's'}`
+                ? t('hero.resultCount', { count: results.length })
                 : ''}
             </div>
 
             {showResults && results.length > 0 && (
               <ul
                 role='listbox'
-                aria-label='Matching services'
+                aria-label={t('hero.matchingServices')}
                 className='overflow-y-auto max-h-80 rounded-lg shadow-md bg-kapwa-bg-surface/90 text-kapwa-text-strong'
               >
                 {visibleResults.map((hit, index) => (

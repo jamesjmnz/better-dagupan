@@ -9,6 +9,7 @@ import {
 import { lazy, Suspense } from 'react';
 
 import { NuqsAdapter } from 'nuqs/adapters/react-router/v6';
+import { useTranslation } from 'react-i18next';
 
 import { config } from '@/lib/lguConfig';
 import { Footer } from '@/components/layout/Footer';
@@ -131,9 +132,10 @@ import NotFound from '@/pages/NotFound';
 
 /** Minimal loading fallback for route transitions */
 function PageLoader() {
+  const { t } = useTranslation('ui');
   return (
     <div className='flex min-h-[40vh] items-center justify-center'>
-      <div className='text-kapwa-text-muted text-sm'>Loading…</div>
+      <div className='text-kapwa-text-muted text-sm'>{t('loading.page')}</div>
     </div>
   );
 }
