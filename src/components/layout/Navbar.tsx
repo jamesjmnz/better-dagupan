@@ -93,7 +93,7 @@ export const Navbar: FC = () => {
                 aria-label={t('navigation:topBar.selectLanguage')}
                 value={i18n.language}
                 onChange={e => changeLanguage(e.target.value as LanguageType)}
-                className='cursor-pointer bg-transparent text-[9px] font-bold tracking-widest text-kapwa-text-support uppercase outline-none sm:text-[10px] md:text-xs'
+                className='cursor-pointer bg-transparent text-[9px] font-bold tracking-widest text-kapwa-text-support uppercase rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kapwa-border-focus sm:text-[10px] md:text-xs'
               >
                 {getEnabledLanguages().map(lang => (
                   <option key={lang.code} value={lang.code}>
