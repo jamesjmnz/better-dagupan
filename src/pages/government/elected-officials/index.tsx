@@ -98,7 +98,7 @@ function ElectedLeaderCard({ leader }: { leader: ExecutiveOfficial }) {
             className={`flex h-20 w-20 items-center justify-center rounded-full border-4 shadow-sm ${
               isMayor
                 ? 'bg-kapwa-bg-surface border-kapwa-border-brand text-kapwa-text-brand'
-                : 'bg-kapwa-bg-surface text-kapwa-text-disabled border-kapwa-bg-accent-orange-default'
+                : 'bg-kapwa-bg-surface text-kapwa-text-support border-kapwa-bg-accent-orange-default'
             }`}
           >
             <Icon aria-hidden='true' className='h-10 w-10' />
@@ -247,7 +247,7 @@ function CouncilMemberCard({
               </p>
             )}
             {member.term && (
-              <p className='text-kapwa-text-disabled mt-1 text-[11px]'>
+              <p className='text-kapwa-text-support mt-1 text-[11px]'>
                 {t('electedOfficials.term', { term: member.term })}
               </p>
             )}
@@ -277,9 +277,9 @@ function CouncilMemberCard({
             <div className='mb-1 flex items-center gap-2'>
               <BookOpenIcon
                 aria-hidden='true'
-                className='text-kapwa-text-disabled h-3 w-3'
+                className='text-kapwa-text-support h-3 w-3'
               />
-              <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+              <span className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
                 {t('electedOfficials.committeeChair')}
               </span>
             </div>
@@ -304,7 +304,7 @@ function CouncilMemberCard({
         {/* Row 3: Social footer */}
         {member.website && (
           <div className='border-kapwa-border-weak mt-auto flex items-center justify-between border-t pt-3'>
-            <span className='text-kapwa-text-disabled text-[10px] font-medium tracking-wide uppercase'>
+            <span className='text-kapwa-text-support text-[10px] font-medium tracking-wide uppercase'>
               {t('electedOfficials.socialProfile')}
             </span>
             <a
@@ -406,7 +406,7 @@ export default function ElectedOfficialsPage() {
             <div className='mb-6 space-y-1'>
               {presidingOfficer?.name && (
                 <p className='text-kapwa-text-strong text-sm'>
-                  <span className='text-kapwa-text-disabled mr-2 text-[10px] font-bold tracking-widest uppercase'>
+                  <span className='text-kapwa-text-support mr-2 text-[10px] font-bold tracking-widest uppercase'>
                     {t('electedOfficials.presidingOfficer')}
                   </span>
                   {t('electedOfficials.presidingOfficerName', {
@@ -476,13 +476,13 @@ export default function ElectedOfficialsPage() {
               <div className='flex items-center gap-3'>
                 <BookOpenIcon
                   aria-hidden='true'
-                  className='text-kapwa-text-disabled h-5 w-5 shrink-0'
+                  className='text-kapwa-text-support h-5 w-5 shrink-0'
                 />
                 <div>
                   <p className='text-kapwa-text-strong text-sm font-bold'>
                     {t('electedOfficials.committeesTitle')}
                   </p>
-                  <p className='text-kapwa-text-disabled text-xs'>
+                  <p className='text-kapwa-text-support text-xs'>
                     {council.committees_status === 'published'
                       ? t('electedOfficials.committeesCount', {
                           count: committees.length,
@@ -520,7 +520,7 @@ export default function ElectedOfficialsPage() {
             <h2 className='text-kapwa-text-strong font-bold'>
               {t('electedOfficials.departmentsBridgeTitle')}
             </h2>
-            <p className='text-kapwa-text-disabled text-sm'>
+            <p className='text-kapwa-text-support text-sm'>
               {t('electedOfficials.departmentsBridgeBody', {
                 adjective: lguLabels.adjective,
               })}

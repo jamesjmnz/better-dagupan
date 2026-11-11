@@ -95,7 +95,7 @@ export default function SessionDetail() {
               <Badge variant={isRegular ? 'primary' : 'secondary'} dot>
                 {t('common.sessionType', { type: session.type })}
               </Badge>
-              <span className='text-kapwa-text-disabled font-mono text-[10px] font-bold tracking-widest uppercase'>
+              <span className='text-kapwa-text-support font-mono text-[10px] font-bold tracking-widest uppercase'>
                 {t('session.id', { id: session.id })}
               </span>
             </div>
@@ -109,7 +109,7 @@ export default function SessionDetail() {
           <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised flex items-center gap-4 rounded-xl border p-4'>
             <Calendar className='text-kapwa-text-brand h-5 w-5' />
             <div>
-              <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+              <p className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
                 {t('session.dateHeld')}
               </p>
               <p className='text-kapwa-text-support text-sm font-bold'>
@@ -164,7 +164,7 @@ export default function SessionDetail() {
                       {absentMembers.map((p: Person) => (
                         <li
                           key={p.id}
-                          className='text-kapwa-text-disabled block py-1 text-sm font-medium'
+                          className='text-kapwa-text-support block py-1 text-sm font-medium'
                         >
                           {getPersonName(p)}
                         </li>
@@ -197,7 +197,7 @@ export default function SessionDetail() {
                       <Badge variant={getDocTypeBadgeVariant(doc.type)}>
                         {doc.type}
                       </Badge>
-                      <span className='text-kapwa-text-disabled font-mono text-[10px] font-bold uppercase'>
+                      <span className='text-kapwa-text-support font-mono text-[10px] font-bold uppercase'>
                         {doc.number}
                       </span>
                     </div>

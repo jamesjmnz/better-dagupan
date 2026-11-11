@@ -69,7 +69,7 @@ export default function OfficialsFilterBar({
           className='focus:border-kapwa-border-brand focus:ring-kapwa-border-brand/20 border-kapwa-border-weak bg-kapwa-bg-surface w-full rounded-lg border px-4 py-2.5 pl-10 text-sm focus:ring-2 focus:outline-none'
         />
         <svg
-          className='text-kapwa-text-disabled absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2'
+          className='text-kapwa-text-support absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2'
           fill='none'
           stroke='currentColor'
           viewBox='0 0 24 24'
@@ -84,7 +84,7 @@ export default function OfficialsFilterBar({
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
-            className='text-kapwa-text-disabled hover:text-kapwa-text-support absolute top-1/2 right-3 -translate-y-1/2'
+            className='text-kapwa-text-support hover:text-kapwa-text-strong absolute top-1/2 right-3 -translate-y-1/2'
             aria-label={t('filters.clearSearch')}
           >
             <X className='h-4 w-4' />

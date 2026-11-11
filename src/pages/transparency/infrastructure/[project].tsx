@@ -235,7 +235,7 @@ export default function InfrastructureDetail() {
         className='flex justify-between items-center p-3 rounded-xl border transition-all group hover:border-kapwa-border-brand border-kapwa-border-weak bg-kapwa-bg-surface hover:bg-kapwa-bg-surface-raised'
       >
         <div className='flex gap-3 items-center'>
-          <div className='p-2 rounded-lg border transition-colors group-hover:text-kapwa-text-brand border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled'>
+          <div className='p-2 rounded-lg border transition-colors group-hover:text-kapwa-text-brand border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-support'>
             <FileText className='w-4 h-4' />
           </div>
           <span className='text-sm font-bold text-kapwa-text-support group-hover:text-kapwa-text-strong'>
@@ -255,7 +255,7 @@ export default function InfrastructureDetail() {
     value?: string | number | null;
   }) => (
     <div>
-      <label className='text-kapwa-text-disabled mb-1 block text-[10px] font-bold tracking-widest uppercase'>
+      <label className='text-kapwa-text-support mb-1 block text-[10px] font-bold tracking-widest uppercase'>
         {label}
       </label>
       <p className='text-sm font-bold text-kapwa-text-strong wrap-break-word'>
@@ -315,7 +315,7 @@ export default function InfrastructureDetail() {
       <div className='mb-8'>
         <Link
           to='/transparency/infrastructure'
-          className='inline-flex gap-2 items-center mb-6 text-xs font-bold tracking-widest uppercase transition-colors hover:text-kapwa-text-brand text-kapwa-text-disabled'
+          className='inline-flex gap-2 items-center mb-6 text-xs font-bold tracking-widest uppercase transition-colors hover:text-kapwa-text-brand text-kapwa-text-support'
         >
           <ArrowLeft className='w-4 h-4' /> {t('project.back')}
         </Link>
@@ -329,7 +329,7 @@ export default function InfrastructureDetail() {
               >
                 {project.status}
               </Badge>
-              <span className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled rounded border px-2 py-0.5 font-mono text-xs font-medium'>
+              <span className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-support rounded border px-2 py-0.5 font-mono text-xs font-medium'>
                 {project.contractId}
               </span>
               {project.isLive && (
@@ -353,10 +353,10 @@ export default function InfrastructureDetail() {
         <Card className='shadow-sm border-kapwa-border-weak'>
           <CardContent className='flex flex-col justify-between p-5 h-full'>
             <div className='flex gap-2 items-center mb-2'>
-              <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled rounded-md border p-1.5'>
+              <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-support rounded-md border p-1.5'>
                 <DollarSign className='w-4 h-4' />
               </div>
-              <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+              <span className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
                 {t('project.totalBudget')}
               </span>
             </div>
@@ -367,7 +367,7 @@ export default function InfrastructureDetail() {
               >
                 {formatPesoAdaptive(project.budget).fullString}
               </p>
-              <p className='text-kapwa-text-disabled mt-0.5 text-xs font-medium'>
+              <p className='text-kapwa-text-support mt-0.5 text-xs font-medium'>
                 {t('project.allocated')}
               </p>
             </div>
@@ -377,10 +377,10 @@ export default function InfrastructureDetail() {
         <Card className='shadow-sm border-kapwa-border-weak'>
           <CardContent className='flex flex-col justify-between p-5 h-full'>
             <div className='flex gap-2 items-center mb-2'>
-              <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled rounded-md border p-1.5'>
+              <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-support rounded-md border p-1.5'>
                 <Coins className='w-4 h-4' />
               </div>
-              <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+              <span className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
                 {t('project.paidAmount')}
               </span>
             </div>
@@ -391,7 +391,7 @@ export default function InfrastructureDetail() {
               >
                 {formatPesoAdaptive(project.amountPaid).fullString}
               </p>
-              <p className='text-kapwa-text-disabled mt-0.5 text-xs font-medium'>
+              <p className='text-kapwa-text-support mt-0.5 text-xs font-medium'>
                 {t('project.disbursed', {
                   percent:
                     project.budget > 0
@@ -406,10 +406,10 @@ export default function InfrastructureDetail() {
         <Card className='shadow-sm bg-kapwa-bg-surface-raised/50 border-kapwa-border-weak'>
           <CardContent className='flex flex-col justify-between p-5 h-full'>
             <div className='flex gap-2 items-center mb-2'>
-              <div className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-disabled rounded-md border p-1.5'>
+              <div className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support rounded-md border p-1.5'>
                 <TrendingUp className='w-4 h-4' />
               </div>
-              <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+              <span className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
                 {t('project.progress')}
               </span>
             </div>
@@ -430,10 +430,10 @@ export default function InfrastructureDetail() {
         <Card className='shadow-sm border-kapwa-border-weak'>
           <CardContent className='flex flex-col justify-between p-5 h-full'>
             <div className='flex gap-2 items-center mb-2'>
-              <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled rounded-md border p-1.5'>
+              <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-support rounded-md border p-1.5'>
                 <Calendar className='w-4 h-4' />
               </div>
-              <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+              <span className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
                 {t('project.fiscalYear')}
               </span>
             </div>
@@ -441,7 +441,7 @@ export default function InfrastructureDetail() {
               <p className='text-2xl font-black text-kapwa-text-strong'>
                 {project.infraYear}
               </p>
-              <p className='text-kapwa-text-disabled mt-0.5 truncate text-xs font-medium'>
+              <p className='text-kapwa-text-support mt-0.5 truncate text-xs font-medium'>
                 {project.programName}
               </p>
             </div>
@@ -520,7 +520,7 @@ export default function InfrastructureDetail() {
                   value={project.contractor}
                 />
                 {project.winnerNames && (
-                  <p className='mt-1 text-xs text-kapwa-text-disabled'>
+                  <p className='mt-1 text-xs text-kapwa-text-support'>
                     {t('project.winnerNames', { names: project.winnerNames })}
                   </p>
                 )}
@@ -528,7 +528,7 @@ export default function InfrastructureDetail() {
 
               {project.bidders && project.bidders.length > 0 && (
                 <div>
-                  <label className='text-kapwa-text-disabled mb-3 block text-[10px] font-bold tracking-widest uppercase'>
+                  <label className='text-kapwa-text-support mb-3 block text-[10px] font-bold tracking-widest uppercase'>
                     {t('project.fields.bidders')}
                   </label>
                   <div className='space-y-2'>
@@ -544,7 +544,7 @@ export default function InfrastructureDetail() {
                             {bidder.name}
                           </p>
                           {bidder.pcabId && (
-                            <p className='text-xs text-kapwa-text-disabled'>
+                            <p className='text-xs text-kapwa-text-support'>
                               PCAB: {bidder.pcabId}
                             </p>
                           )}
@@ -555,7 +555,7 @@ export default function InfrastructureDetail() {
                               {t('project.winner')}
                             </Badge>
                           )}
-                          <p className='font-mono text-xs text-kapwa-text-disabled'>
+                          <p className='font-mono text-xs text-kapwa-text-support'>
                             {bidder.participation}%
                           </p>
                         </div>
@@ -634,7 +634,7 @@ export default function InfrastructureDetail() {
                       <h4 className='text-sm font-bold text-kapwa-text-strong'>
                         {t('project.component', { number: idx + 1 })}
                       </h4>
-                      <span className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-disabled rounded border px-1.5 py-0.5 font-mono text-[10px]'>
+                      <span className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support rounded border px-1.5 py-0.5 font-mono text-[10px]'>
                         {comp.componentId}
                       </span>
                     </div>
@@ -643,7 +643,7 @@ export default function InfrastructureDetail() {
                     </p>
                     <div className='grid grid-cols-2 gap-2 text-xs'>
                       <p>
-                        <span className='text-kapwa-text-disabled'>
+                        <span className='text-kapwa-text-support'>
                           {t('project.componentType')}
                         </span>{' '}
                         <span className='font-medium text-kapwa-text-strong'>
@@ -651,7 +651,7 @@ export default function InfrastructureDetail() {
                         </span>
                       </p>
                       <p>
-                        <span className='text-kapwa-text-disabled'>
+                        <span className='text-kapwa-text-support'>
                           {t('project.componentWork')}
                         </span>{' '}
                         <span className='font-medium text-kapwa-text-strong'>
@@ -659,7 +659,7 @@ export default function InfrastructureDetail() {
                         </span>
                       </p>
                       <p>
-                        <span className='text-kapwa-text-disabled'>
+                        <span className='text-kapwa-text-support'>
                           {t('project.componentCoords')}
                         </span>{' '}
                         <span className='font-mono text-kapwa-text-support'>
@@ -711,7 +711,7 @@ export default function InfrastructureDetail() {
               </div>
             ) : (
               <div className='p-4 text-center rounded-xl border border-dashed border-kapwa-border-weak bg-kapwa-bg-surface-raised'>
-                <p className='text-xs font-medium text-kapwa-text-disabled'>
+                <p className='text-xs font-medium text-kapwa-text-support'>
                   {t('project.noDocuments')}
                 </p>
               </div>
@@ -730,7 +730,7 @@ export default function InfrastructureDetail() {
 
               {project.latitude && project.longitude ? (
                 <>
-                  <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled rounded border p-2 text-center font-mono text-[10px]'>
+                  <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-support rounded border p-2 text-center font-mono text-[10px]'>
                     {project.latitude.toFixed(6)},{' '}
                     {project.longitude.toFixed(6)}
                   </div>
@@ -747,7 +747,7 @@ export default function InfrastructureDetail() {
               ) : (
                 <div className='p-4 text-center rounded-xl border border-dashed border-kapwa-border-weak bg-kapwa-bg-surface-raised'>
                   <MapPin className='mx-auto mb-2 w-6 h-6 text-kapwa-text-support' />
-                  <p className='text-xs text-kapwa-text-disabled'>
+                  <p className='text-xs text-kapwa-text-support'>
                     {t('project.noCoordinates')}
                   </p>
                 </div>
@@ -771,7 +771,7 @@ export default function InfrastructureDetail() {
               </div>
               {project.imageSummary.latestImageDate && (
                 <div className='flex justify-between items-center pt-2 mt-2 border-t border-kapwa-border-weak'>
-                  <span className='text-xs text-kapwa-text-disabled'>
+                  <span className='text-xs text-kapwa-text-support'>
                     {t('project.latestImage')}
                   </span>
                   <span className='text-xs font-medium text-kapwa-text-support'>
@@ -802,7 +802,7 @@ export default function InfrastructureDetail() {
 
           {/* Bisto Link */}
           <div className='p-4 rounded-xl border border-kapwa-border-weak bg-kapwa-bg-surface-raised'>
-            <p className='mb-3 text-xs leading-relaxed text-kapwa-text-disabled'>
+            <p className='mb-3 text-xs leading-relaxed text-kapwa-text-support'>
               {t('project.verifyNational')}
             </p>
             <a
@@ -818,7 +818,7 @@ export default function InfrastructureDetail() {
       </div>
 
       <div className='pt-8 text-center'>
-        <p className='text-xs text-kapwa-text-disabled'>
+        <p className='text-xs text-kapwa-text-support'>
           {t('project.source')}{' '}
           <a
             href='https://transparency.bettergov.ph/dpwh/'

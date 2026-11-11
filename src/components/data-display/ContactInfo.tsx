@@ -46,7 +46,7 @@ export function ContactItem({
     >
       {/* Icon Wrapper */}
       <div
-        className='group-hover:bg-kapwa-bg-surface-brand group-hover:text-kapwa-text-brand bg-kapwa-bg-surface-raised text-kapwa-text-disabled shrink-0 rounded-lg p-2 transition-colors'
+        className='group-hover:bg-kapwa-bg-surface-brand group-hover:text-kapwa-text-brand bg-kapwa-bg-surface-raised text-kapwa-text-support shrink-0 rounded-lg p-2 transition-colors'
         aria-hidden='true'
       >
         <Icon className='h-4 w-4' />
@@ -54,7 +54,7 @@ export function ContactItem({
 
       {/* Text Area */}
       <div className='min-w-0 flex-1'>
-        <p className='text-kapwa-text-disabled mb-1 text-[10px] leading-none font-bold tracking-widest uppercase'>
+        <p className='text-kapwa-text-support mb-1 text-[10px] leading-none font-bold tracking-widest uppercase'>
           {label}
         </p>
         <div className='text-kapwa-text-support group-hover:text-kapwa-text-strong truncate text-sm font-bold transition-colors'>

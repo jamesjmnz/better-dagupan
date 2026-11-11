@@ -64,9 +64,9 @@ export default function FilterBar({
           )}
         </div>
         {isExpanded ? (
-          <ChevronUp className='text-kapwa-text-disabled h-4 w-4' />
+          <ChevronUp className='text-kapwa-text-support h-4 w-4' />
         ) : (
-          <ChevronDown className='text-kapwa-text-disabled h-4 w-4' />
+          <ChevronDown className='text-kapwa-text-support h-4 w-4' />
         )}
       </button>
 
@@ -77,8 +77,8 @@ export default function FilterBar({
             {/* Data Source Filter */}
             <div className='flex-1'>
               <div className='mb-2 flex items-center gap-2'>
-                <CheckCircle2 className='text-kapwa-text-disabled h-3.5 w-3.5' />
-                <h4 className='text-kapwa-text-disabled text-[10px] font-bold uppercase tracking-wider'>
+                <CheckCircle2 className='text-kapwa-text-support h-3.5 w-3.5' />
+                <h4 className='text-kapwa-text-support text-[10px] font-bold uppercase tracking-wider'>
                   {t('filters.source')}
                 </h4>
               </div>
@@ -107,8 +107,8 @@ export default function FilterBar({
             {/* Classification Filter */}
             <div className='flex-1'>
               <div className='mb-2 flex items-center gap-2'>
-                <Layers className='text-kapwa-text-disabled h-3.5 w-3.5' />
-                <h4 className='text-kapwa-text-disabled text-[10px] font-bold uppercase tracking-wider'>
+                <Layers className='text-kapwa-text-support h-3.5 w-3.5' />
+                <h4 className='text-kapwa-text-support text-[10px] font-bold uppercase tracking-wider'>
                   {t('filters.type')}
                 </h4>
               </div>
@@ -137,8 +137,8 @@ export default function FilterBar({
             {/* Office Division Filter */}
             <div className='flex-1'>
               <div className='mb-2 flex items-center gap-2'>
-                <Building2 className='text-kapwa-text-disabled h-3.5 w-3.5' />
-                <h4 className='text-kapwa-text-disabled text-[10px] font-bold uppercase tracking-wider'>
+                <Building2 className='text-kapwa-text-support h-3.5 w-3.5' />
+                <h4 className='text-kapwa-text-support text-[10px] font-bold uppercase tracking-wider'>
                   {t('filters.office')}
                 </h4>
               </div>

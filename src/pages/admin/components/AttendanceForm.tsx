@@ -105,7 +105,7 @@ export default function AttendanceForm({
   if (loading) {
     return (
       <div className='flex items-center justify-center py-12'>
-        <RefreshCw className='text-kapwa-text-disabled h-8 w-8 animate-spin' />
+        <RefreshCw className='text-kapwa-text-support h-8 w-8 animate-spin' />
       </div>
     );
   }
@@ -133,21 +133,21 @@ export default function AttendanceForm({
         <CardContent>
           <div className='flex flex-wrap gap-4'>
             <div>
-              <p className='text-kapwa-text-disabled text-xs'>Session Type</p>
+              <p className='text-kapwa-text-support text-xs'>Session Type</p>
               <p className='text-kapwa-text-strong font-medium capitalize'>
                 {session.session_type}
               </p>
             </div>
             {session.ordinal && (
               <div>
-                <p className='text-kapwa-text-disabled text-xs'>Number</p>
+                <p className='text-kapwa-text-support text-xs'>Number</p>
                 <p className='text-kapwa-text-strong font-medium'>
                   {session.ordinal}
                 </p>
               </div>
             )}
             <div>
-              <p className='text-kapwa-text-disabled text-xs'>Date</p>
+              <p className='text-kapwa-text-support text-xs'>Date</p>
               <p className='text-kapwa-text-strong font-medium'>
                 {new Date(session.date).toLocaleDateString()}
               </p>
@@ -169,21 +169,19 @@ export default function AttendanceForm({
           <div className='bg-kapwa-bg-surface-raised flex items-center justify-between rounded-md p-4'>
             <div className='flex gap-4'>
               <div>
-                <p className='text-kapwa-text-disabled text-xs'>
-                  Total Members
-                </p>
+                <p className='text-kapwa-text-support text-xs'>Total Members</p>
                 <p className='text-kapwa-text-strong text-lg font-bold'>
                   {members.length}
                 </p>
               </div>
               <div>
-                <p className='text-kapwa-text-disabled text-xs'>Present</p>
+                <p className='text-kapwa-text-support text-xs'>Present</p>
                 <p className='text-lg font-bold text-emerald-600'>
                   {presentCount}
                 </p>
               </div>
               <div>
-                <p className='text-kapwa-text-disabled text-xs'>Absent</p>
+                <p className='text-kapwa-text-support text-xs'>Absent</p>
                 <p className='text-lg font-bold text-amber-600'>
                   {absentCount}
                 </p>
@@ -238,7 +236,7 @@ export default function AttendanceForm({
                           {member.last_name}
                         </p>
                         {member.role && (
-                          <p className='text-kapwa-text-disabled text-xs'>
+                          <p className='text-kapwa-text-support text-xs'>
                             {member.role}
                           </p>
                         )}

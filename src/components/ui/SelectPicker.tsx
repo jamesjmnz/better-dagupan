@@ -165,7 +165,7 @@ const SelectPicker = <T extends string = string>({
             'truncate',
             selectedOptions.length > 0
               ? 'text-kapwa-text-strong'
-              : 'text-kapwa-text-disabled'
+              : 'text-kapwa-text-support'
           )}
         >
           {selectedOptions.length > 0
@@ -180,12 +180,12 @@ const SelectPicker = <T extends string = string>({
               onClick={handleClear}
               aria-label={t('select.clear')}
             >
-              <XIcon className='text-kapwa-text-disabled h-4 w-4' />
+              <XIcon className='text-kapwa-text-support h-4 w-4' />
             </button>
           )}
           <ChevronDownIcon
             className={cn(
-              'text-kapwa-text-disabled h-4 w-4 transition-transform duration-200',
+              'text-kapwa-text-support h-4 w-4 transition-transform duration-200',
               isOpen && 'rotate-180'
             )}
           />
@@ -202,7 +202,7 @@ const SelectPicker = <T extends string = string>({
           {searchable && (
             <div className='border-kapwa-border-weak border-b p-2'>
               <div className='relative'>
-                <SearchIcon className='text-kapwa-text-disabled absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
+                <SearchIcon className='text-kapwa-text-support absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
                 <input
                   ref={searchInputRef}
                   type='text'
@@ -239,7 +239,7 @@ const SelectPicker = <T extends string = string>({
                 ))}
               </ul>
             ) : (
-              <div className='text-kapwa-text-disabled px-3 py-2 text-center text-sm'>
+              <div className='text-kapwa-text-support px-3 py-2 text-center text-sm'>
                 {t('select.noOptions')}
               </div>
             )}

@@ -162,7 +162,7 @@ export function AdminAuthProvider({ children }: AdminAuthProviderProps) {
                 <p className='text-kapwa-text-strong text-sm font-bold'>
                   {user.name || user.login}
                 </p>
-                <p className='text-kapwa-text-disabled text-xs'>
+                <p className='text-kapwa-text-support text-xs'>
                   {user.email || user.login}
                 </p>
               </div>

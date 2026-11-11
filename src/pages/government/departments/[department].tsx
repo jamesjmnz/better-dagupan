@@ -61,7 +61,7 @@ export default function DepartmentDetail() {
   if (!dept)
     return (
       <div
-        className='text-kapwa-text-disabled p-20 text-center font-bold tracking-widest uppercase'
+        className='text-kapwa-text-support p-20 text-center font-bold tracking-widest uppercase'
         role='alert'
       >
         {t('departments.notFound')}
@@ -195,7 +195,7 @@ export default function DepartmentDetail() {
           aria-label={t('departments.leadershipTitle')}
         >
           <p className='sr-only'>{t('departments.leadershipTitle')}</p>
-          <p className='text-kapwa-text-disabled pl-1 text-[10px] font-bold tracking-widest uppercase'>
+          <p className='text-kapwa-text-support pl-1 text-[10px] font-bold tracking-widest uppercase'>
             {t('departments.leadershipTitle')}
           </p>
           {dept.department_head ? (
@@ -249,7 +249,7 @@ export default function DepartmentDetail() {
             aria-label={t('departments.servicesTitle')}
           >
             <p className='sr-only'>{t('departments.servicesTitle')}</p>
-            <p className='text-kapwa-text-disabled pl-1 text-[10px] font-bold tracking-widest uppercase'>
+            <p className='text-kapwa-text-support pl-1 text-[10px] font-bold tracking-widest uppercase'>
               {t('departments.servicesTitle')}
             </p>
             <div className='grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3'>

@@ -165,9 +165,9 @@ export default function OfficialCard({
           </div>
 
           {/* Expand/collapse indicator */}
-          <div className='text-kapwa-text-disabled flex items-center gap-2'>
+          <div className='text-kapwa-text-support flex items-center gap-2'>
             {!isExpanded && (
-              <span className='text-kapwa-text-disabled hidden text-xs sm:inline'>
+              <span className='text-kapwa-text-support hidden text-xs sm:inline'>
                 {totalTermsServed > 1
                   ? t('officials.servedInTerms', { count: totalTermsServed })
                   : t('officials.viewDetails')}
@@ -185,7 +185,7 @@ export default function OfficialCard({
       {/* Expanded Service Timeline */}
       {isExpanded && (
         <CardContent className='animate-in fade-in slide-in-from-top-2 border-kapwa-border-weak bg-kapwa-bg-surface-raised/50 border-t p-4 duration-200'>
-          <div className='text-kapwa-text-disabled mb-3 text-xs font-semibold tracking-wide uppercase'>
+          <div className='text-kapwa-text-support mb-3 text-xs font-semibold tracking-wide uppercase'>
             {t('officials.serviceHistory')}
           </div>
           <ServiceTimeline

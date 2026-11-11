@@ -170,7 +170,7 @@ export default function LegislationDocument() {
                   </Link>
                 ))
               ) : (
-                <span className='text-kapwa-text-disabled text-sm font-bold italic'>
+                <span className='text-kapwa-text-support text-sm font-bold italic'>
                   {t('common.officeOfTheMayor')}
                 </span>
               )}
@@ -188,7 +188,7 @@ export default function LegislationDocument() {
                 <p className='text-kapwa-text-strong font-bold'>
                   {t('document.officialDocument')}
                 </p>
-                <p className='text-kapwa-text-disabled mt-1 text-[10px] font-bold tracking-widest uppercase'>
+                <p className='text-kapwa-text-support mt-1 text-[10px] font-bold tracking-widest uppercase'>
                   {t('document.pdf')}
                 </p>
               </div>
@@ -209,7 +209,7 @@ export default function LegislationDocument() {
             <dl className='space-y-6'>
               {/* Restored: Term Link */}
               <div>
-                <dt className='text-kapwa-text-disabled mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
+                <dt className='text-kapwa-text-support mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
                   <Landmark className='h-3.5 w-3.5' />{' '}
                   {t('document.legislativeTerm')}
                 </dt>
@@ -221,7 +221,7 @@ export default function LegislationDocument() {
                     <span className='group-hover:text-kapwa-text-brand text-kapwa-text-support block text-sm leading-tight font-bold'>
                       {term?.name || lguLabels.body}
                     </span>
-                    <span className='text-kapwa-text-disabled mt-1 block font-mono text-[10px]'>
+                    <span className='text-kapwa-text-support mt-1 block font-mono text-[10px]'>
                       {term?.year_range || '2022-2025'}
                     </span>
                   </Link>
@@ -230,7 +230,7 @@ export default function LegislationDocument() {
 
               {/* Restored: Session Link */}
               <div className='border-kapwa-border-weak border-t pt-4'>
-                <dt className='text-kapwa-text-disabled mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
+                <dt className='text-kapwa-text-support mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
                   <Gavel className='h-3.5 w-3.5' />{' '}
                   {t('document.approvedDuring')}
                 </dt>
@@ -246,12 +246,12 @@ export default function LegislationDocument() {
                           type: session.type,
                         })}
                       </span>
-                      <span className='text-kapwa-text-disabled mt-1 block font-mono text-[10px]'>
+                      <span className='text-kapwa-text-support mt-1 block font-mono text-[10px]'>
                         {t('document.heldOn', { date: session.date })}
                       </span>
                     </Link>
                   ) : (
-                    <span className='text-kapwa-text-disabled text-sm font-bold italic'>
+                    <span className='text-kapwa-text-support text-sm font-bold italic'>
                       {t('document.noSession')}
                     </span>
                   )}
@@ -259,7 +259,7 @@ export default function LegislationDocument() {
               </div>
 
               <div className='border-kapwa-border-weak border-t pt-4'>
-                <dt className='text-kapwa-text-disabled mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
+                <dt className='text-kapwa-text-support mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
                   <Calendar className='h-3.5 w-3.5' />{' '}
                   {t('document.enactedDate')}
                 </dt>
@@ -269,7 +269,7 @@ export default function LegislationDocument() {
               </div>
 
               <div className='border-kapwa-border-weak border-t pt-4'>
-                <dt className='text-kapwa-text-disabled mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
+                <dt className='text-kapwa-text-support mb-2 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
                   <Activity className='h-3.5 w-3.5' /> {t('document.status')}
                 </dt>
                 <dd className='mt-1 pl-5.5'>

@@ -39,7 +39,7 @@ export function SupportingDocumentsDetail({
             <h3 className='text-kapwa-text-strong text-sm font-bold'>
               {t('supporting.title')}
             </h3>
-            <p className='text-kapwa-text-disabled text-[10px] font-medium'>
+            <p className='text-kapwa-text-support text-[10px] font-medium'>
               {isExpanded ? t('supporting.collapse') : t('supporting.expand')}
             </p>
           </div>
@@ -88,7 +88,7 @@ export function SupportingDocumentsDetail({
                         </p>
                       )}
                       {doc.note && (
-                        <p className='text-kapwa-text-disabled mt-1 text-[10px] italic'>
+                        <p className='text-kapwa-text-support mt-1 text-[10px] italic'>
                           {doc.note}
                         </p>
                       )}
@@ -121,7 +121,7 @@ export function SupportingDocumentsDetail({
                     key={idx}
                     className='border-kapwa-border-weak bg-kapwa-bg-surface flex items-start gap-3 rounded-lg border p-3'
                   >
-                    <div className='text-kapwa-text-disabled bg-kapwa-bg-surface-raised flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold'>
+                    <div className='text-kapwa-text-support bg-kapwa-bg-surface-raised flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold'>
                       {idx + 1}
                     </div>
                     <div className='flex-1'>
@@ -140,7 +140,7 @@ export function SupportingDocumentsDetail({
                         </p>
                       )}
                       {doc.note && (
-                        <p className='text-kapwa-text-disabled mt-1 text-[10px] italic'>
+                        <p className='text-kapwa-text-support mt-1 text-[10px] italic'>
                           {doc.note}
                         </p>
                       )}
@@ -183,14 +183,14 @@ export function SupportingDocumentsDetail({
                         key={idx}
                         className='border-kapwa-border-weak bg-kapwa-bg-surface flex items-start gap-3 rounded-lg border p-3'
                       >
-                        <div className='text-kapwa-text-disabled bg-kapwa-bg-surface-raised flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold'>
+                        <div className='text-kapwa-text-support bg-kapwa-bg-surface-raised flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold'>
                           {idx + 1}
                         </div>
                         <div className='flex-1'>
                           <p className='text-kapwa-text-support text-xs font-medium'>
                             {doc.document}
                           </p>
-                          <p className='text-kapwa-text-disabled mt-0.5 text-[11px]'>
+                          <p className='text-kapwa-text-support mt-0.5 text-[11px]'>
                             {t('supporting.from')} {doc.where_to_secure}
                           </p>
                           {doc.copies && (
@@ -199,7 +199,7 @@ export function SupportingDocumentsDetail({
                             </p>
                           )}
                           {doc.note && (
-                            <p className='text-kapwa-text-disabled mt-1 text-[10px] italic'>
+                            <p className='text-kapwa-text-support mt-1 text-[10px] italic'>
                               {doc.note}
                             </p>
                           )}
@@ -263,14 +263,14 @@ export function SupportingDocumentsDetail({
                                 </p>
                               )}
                               {option.note && (
-                                <p className='text-kapwa-text-disabled mt-1 text-[10px] italic'>
+                                <p className='text-kapwa-text-support mt-1 text-[10px] italic'>
                                   {option.note}
                                 </p>
                               )}
                               {option.if_unavailable &&
                                 option.if_unavailable.length > 0 && (
                                   <div className='mt-2 border-t border-kapwa-border-weak pt-2'>
-                                    <p className='text-kapwa-text-disabled mb-1 text-[10px] font-semibold uppercase'>
+                                    <p className='text-kapwa-text-support mb-1 text-[10px] font-semibold uppercase'>
                                       {t('supporting.ifUnavailable')}
                                     </p>
                                     {option.if_unavailable.map(

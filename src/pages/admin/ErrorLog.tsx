@@ -106,7 +106,7 @@ export default function ErrorLog() {
   if (loading) {
     return (
       <div className='flex items-center justify-center py-12'>
-        <RefreshCw className='text-kapwa-text-disabled h-8 w-8 animate-spin' />
+        <RefreshCw className='text-kapwa-text-support h-8 w-8 animate-spin' />
       </div>
     );
   }
@@ -180,7 +180,7 @@ export default function ErrorLog() {
                   {/* Header */}
                   <div className='flex items-center gap-3'>
                     {getStageBadge(error.stage)}
-                    <span className='text-kapwa-text-disabled text-xs'>
+                    <span className='text-kapwa-text-support text-xs'>
                       {new Date(error.timestamp).toLocaleString()}
                     </span>
                   </div>

@@ -150,7 +150,7 @@ export default function SessionAttendanceQuickEdit({
 
   if (members.length === 0) {
     return (
-      <div className='text-kapwa-text-disabled py-8 text-center text-sm'>
+      <div className='text-kapwa-text-support py-8 text-center text-sm'>
         No members found for this term.
       </div>
     );
@@ -231,7 +231,7 @@ export default function SessionAttendanceQuickEdit({
                     {member.suffix && ` ${member.suffix}`}
                   </div>
                   {member.role && (
-                    <div className='text-kapwa-text-disabled text-xs'>
+                    <div className='text-kapwa-text-support text-xs'>
                       {member.role}
                     </div>
                   )}
@@ -260,7 +260,7 @@ export default function SessionAttendanceQuickEdit({
       </div>
 
       {disabled && (
-        <p className='text-kapwa-text-disabled text-center text-xs'>
+        <p className='text-kapwa-text-support text-center text-xs'>
           Save the document to enable attendance editing.
         </p>
       )}

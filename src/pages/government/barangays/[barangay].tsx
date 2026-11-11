@@ -102,7 +102,7 @@ export default function BarangayDetail() {
           <div className='border-kapwa-border-weak flex items-center gap-2 border-b pb-3'>
             <UsersIcon
               aria-hidden='true'
-              className='text-kapwa-text-disabled h-4 w-4'
+              className='text-kapwa-text-support h-4 w-4'
             />
             <h2
               id='officials-heading'
@@ -167,7 +167,7 @@ export default function BarangayDetail() {
           <div className='border-kapwa-border-weak flex items-center gap-2 border-b pb-3'>
             <PhoneIcon
               aria-hidden='true'
-              className='text-kapwa-text-disabled h-4 w-4'
+              className='text-kapwa-text-support h-4 w-4'
             />
             <h2
               id='contact-heading'

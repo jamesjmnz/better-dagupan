@@ -154,7 +154,7 @@ export default function AdminDocuments() {
   if (loading && documents.length === 0) {
     return (
       <div className='flex items-center justify-center py-12'>
-        <RefreshCw className='text-kapwa-text-disabled h-8 w-8 animate-spin' />
+        <RefreshCw className='text-kapwa-text-support h-8 w-8 animate-spin' />
       </div>
     );
   }
@@ -203,7 +203,7 @@ export default function AdminDocuments() {
         <div className='flex flex-wrap gap-4'>
           <div className='min-w-[200px] flex-1'>
             <div className='relative'>
-              <Search className='text-kapwa-text-disabled absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
+              <Search className='text-kapwa-text-support absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2' />
               <input
                 type='text'
                 placeholder='Search by number or title...'

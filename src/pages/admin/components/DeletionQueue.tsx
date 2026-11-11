@@ -255,7 +255,7 @@ export default function DeletionQueue() {
   if (loading) {
     return (
       <div className='flex items-center justify-center py-12'>
-        <RefreshCw className='text-kapwa-text-disabled h-8 w-8 animate-spin' />
+        <RefreshCw className='text-kapwa-text-support h-8 w-8 animate-spin' />
       </div>
     );
   }
@@ -403,7 +403,7 @@ export default function DeletionQueue() {
                     <h3 className='text-kapwa-text-strong font-medium'>
                       {person.full_name}
                     </h3>
-                    <div className='text-kapwa-text-disabled mt-1 flex flex-wrap gap-3 text-xs'>
+                    <div className='text-kapwa-text-support mt-1 flex flex-wrap gap-3 text-xs'>
                       <span>ID: {person.id}</span>
                       <span>•</span>
                       <span>

@@ -196,7 +196,7 @@ export default function PersonSearchAutocomplete({
           placeholder={placeholder}
           className='focus:border-kapwa-border-brand focus:ring-kapwa-border-brand/20 border-kapwa-border-weak w-full rounded-md border px-3 py-2 pr-10 text-sm focus:ring-2 focus:outline-none'
         />
-        <div className='text-kapwa-text-disabled absolute top-1/2 right-3 -translate-y-1/2'>
+        <div className='text-kapwa-text-support absolute top-1/2 right-3 -translate-y-1/2'>
           {loading ? (
             <div className='border-t-primary-500 border-kapwa-border-weak h-4 w-4 animate-spin rounded-full border-2' />
           ) : (
@@ -223,10 +223,10 @@ export default function PersonSearchAutocomplete({
                   }`}
                 >
                   <div className='flex items-center gap-2'>
-                    <User className='text-kapwa-text-disabled h-4 w-4' />
+                    <User className='text-kapwa-text-support h-4 w-4' />
                     <span>{person.full_name}</span>
                   </div>
-                  <div className='text-kapwa-text-disabled ml-6 text-xs'>
+                  <div className='text-kapwa-text-support ml-6 text-xs'>
                     {person.first_name} {person.middle_name} {person.last_name}
                     {person.suffix && `, ${person.suffix}`}
                   </div>
@@ -235,7 +235,7 @@ export default function PersonSearchAutocomplete({
             </ul>
           ) : hasNoResults ? (
             <div className='py-1'>
-              <div className='text-kapwa-text-disabled px-3 py-2 text-sm'>
+              <div className='text-kapwa-text-support px-3 py-2 text-sm'>
                 No existing persons found
               </div>
               <button
@@ -247,7 +247,7 @@ export default function PersonSearchAutocomplete({
               </button>
             </div>
           ) : (
-            <div className='text-kapwa-text-disabled px-3 py-2 text-center text-sm'>
+            <div className='text-kapwa-text-support px-3 py-2 text-center text-sm'>
               {query.length < 2
                 ? 'Type at least 2 characters to search'
                 : 'No results'}

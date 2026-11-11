@@ -422,7 +422,7 @@ export default function ReviewQueue() {
   if (loading && items.length === 0) {
     return (
       <div className='flex items-center justify-center py-12'>
-        <RefreshCw className='text-kapwa-text-disabled h-8 w-8 animate-spin' />
+        <RefreshCw className='text-kapwa-text-support h-8 w-8 animate-spin' />
       </div>
     );
   }
@@ -576,7 +576,7 @@ export default function ReviewQueue() {
                   <div className='flex flex-wrap items-center gap-3'>
                     <button
                       onClick={() => toggleItemSelection(item.id)}
-                      className='hover:text-kapwa-text-brand text-kapwa-text-disabled flex-shrink-0'
+                      className='hover:text-kapwa-text-brand text-kapwa-text-support flex-shrink-0'
                     >
                       {selectedItems.has(item.id) ? (
                         <CheckSquare className='text-kapwa-text-brand h-5 w-5' />
@@ -589,7 +589,7 @@ export default function ReviewQueue() {
                     </Badge>
                     <Badge variant='slate'>{item.item_type}</Badge>
                     <Badge variant='outline'>{item.source_type}</Badge>
-                    <span className='text-kapwa-text-disabled text-xs'>
+                    <span className='text-kapwa-text-support text-xs'>
                       ID: {item.item_id}
                     </span>
                   </div>
@@ -641,7 +641,7 @@ export default function ReviewQueue() {
                   )}
 
                   {/* Metadata */}
-                  <div className='text-kapwa-text-disabled flex flex-wrap gap-4 text-xs'>
+                  <div className='text-kapwa-text-support flex flex-wrap gap-4 text-xs'>
                     <div className='flex items-center gap-1'>
                       <Calendar className='h-3 w-3' />
                       Created {new Date(item.created_at).toLocaleString()}

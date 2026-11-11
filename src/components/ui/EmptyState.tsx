@@ -43,7 +43,7 @@ export function EmptyState({
       {isContribution ? (
         <PlusCircle className='text-kapwa-text-brand h-4 w-4' />
       ) : (
-        <ArrowLeft className='text-kapwa-text-disabled h-4 w-4' />
+        <ArrowLeft className='text-kapwa-text-support h-4 w-4' />
       )}
       {actionLabel}
     </>

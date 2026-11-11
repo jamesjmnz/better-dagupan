@@ -116,7 +116,7 @@ export default function DepartmentsIndex() {
                     {/* Middle Row: Leadership */}
                     {dept.department_head ? (
                       <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised/50 flex items-center gap-2 rounded-xl border px-3 py-2'>
-                        <div className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-disabled shrink-0 rounded-full border p-1 shadow-sm'>
+                        <div className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support shrink-0 rounded-full border p-1 shadow-sm'>
                           <User2 className='h-3.5 w-3.5' />
                         </div>
                         <div className='min-w-0'>

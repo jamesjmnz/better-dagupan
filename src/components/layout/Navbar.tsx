@@ -250,7 +250,7 @@ export const Navbar: FC = () => {
                           setActiveMobileSubmenu(isSubOpen ? null : item.label);
                         }}
                         variant='ghost'
-                        className='p-3 w-12 h-12 text-kapwa-text-disabled'
+                        className='p-3 w-12 h-12 text-kapwa-text-support'
                       >
                         <ChevronDownIcon
                           className={cn(

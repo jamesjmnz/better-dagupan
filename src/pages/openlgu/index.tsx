@@ -235,7 +235,7 @@ export default function LegislationIndex() {
                     {doc.type}
                   </Badge>
                   <span
-                    className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'
+                    className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'
                     aria-label={t('index.enactedOn', {
                       date: doc.date_enacted,
                     })}
@@ -246,7 +246,7 @@ export default function LegislationIndex() {
                 <h3 className='group-hover:text-kapwa-text-brand text-kapwa-text-strong line-clamp-2 text-base leading-snug font-bold transition-colors'>
                   {doc.title}
                 </h3>
-                <div className='text-kapwa-text-disabled flex items-center gap-2 text-[11px] font-medium'>
+                <div className='text-kapwa-text-support flex items-center gap-2 text-[11px] font-medium'>
                   <span className='bg-kapwa-bg-hover text-kapwa-text-support rounded px-1.5 py-0.5 font-mono font-bold'>
                     {doc.number}
                   </span>
@@ -267,7 +267,7 @@ export default function LegislationIndex() {
       {/* Bottom Pagination */}
       {totalPages > 1 && (
         <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised flex flex-wrap items-center justify-between gap-4 rounded-xl border-t p-4'>
-          <span className='text-kapwa-text-disabled text-xs font-medium'>
+          <span className='text-kapwa-text-support text-xs font-medium'>
             {t('index.showing', {
               from: (currentPage - 1) * itemsPerPage + 1,
               to: Math.min(currentPage * itemsPerPage, filteredDocs.length),
@@ -282,7 +282,7 @@ export default function LegislationIndex() {
             >
               {t('index.previous')}
             </button>
-            <span className='text-kapwa-text-disabled text-xs font-medium'>
+            <span className='text-kapwa-text-support text-xs font-medium'>
               {t('index.page', { page: currentPage, total: totalPages })}
             </span>
             <button

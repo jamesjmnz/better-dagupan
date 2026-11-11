@@ -204,7 +204,7 @@ export default function WeatherMapSection() {
                       {weather.humidity}%
                     </div>
                     <div className='flex items-center gap-2'>
-                      <Wind className='text-kapwa-text-disabled h-4 w-4' />
+                      <Wind className='text-kapwa-text-support h-4 w-4' />
                       {weather.windSpeed} m/s
                     </div>
                   </div>

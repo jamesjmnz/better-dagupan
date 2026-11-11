@@ -129,7 +129,7 @@ export default function TermDetail() {
 
   if (!term) {
     return (
-      <div className='text-kapwa-text-disabled p-20 text-center font-bold uppercase'>
+      <div className='text-kapwa-text-support p-20 text-center font-bold uppercase'>
         {t('term.notFound')}
       </div>
     );
@@ -190,7 +190,7 @@ export default function TermDetail() {
         <h1 className='text-kapwa-text-strong mt-3 kapwa-heading-xl font-extrabold'>
           {term.name}
         </h1>
-        <p className='text-kapwa-text-disabled mt-2 flex items-center gap-2 text-xs font-bold'>
+        <p className='text-kapwa-text-support mt-2 flex items-center gap-2 text-xs font-bold'>
           <Calendar className='h-4 w-4' /> {term.start_date} — {term.end_date}
         </p>
       </header>
@@ -307,7 +307,7 @@ export default function TermDetail() {
                           <p className='text-kapwa-text-strong text-sm font-bold'>
                             {getPersonName(person)}
                           </p>
-                          <p className='text-kapwa-text-disabled text-xs font-medium'>
+                          <p className='text-kapwa-text-support text-xs font-medium'>
                             {membership?.role}
                           </p>
                         </div>
@@ -317,8 +317,8 @@ export default function TermDetail() {
                       {totalCommittees > 0 && (
                         <div className='mt-3 space-y-2'>
                           <div className='border-kapwa-border-weak flex items-center gap-2 border-t pt-2'>
-                            <Users className='text-kapwa-text-disabled h-3 w-3' />
-                            <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+                            <Users className='text-kapwa-text-support h-3 w-3' />
+                            <span className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
                               {t('term.committeeCount', {
                                 count: totalCommittees,
                               })}
@@ -357,7 +357,7 @@ export default function TermDetail() {
                                   key={`member-${c.id}`}
                                   className='border-kapwa-border-weak bg-kapwa-bg-hover flex items-center gap-1.5 rounded-md border px-2 py-1'
                                 >
-                                  <User className='text-kapwa-text-disabled h-3 w-3' />
+                                  <User className='text-kapwa-text-support h-3 w-3' />
                                   <span className='text-kapwa-text-support max-w-[120px] truncate text-[10px] font-medium'>
                                     {c.name}
                                   </span>
@@ -448,7 +448,7 @@ export default function TermDetail() {
                               type: session.type,
                             })}
                           </p>
-                          <p className='text-kapwa-text-disabled text-sm'>
+                          <p className='text-kapwa-text-support text-sm'>
                             {session.date}
                           </p>
                         </div>
@@ -490,7 +490,7 @@ export default function TermDetail() {
                         <Badge variant={getDocTypeBadgeVariant(doc.type)}>
                           {doc.type}
                         </Badge>
-                        <span className='text-kapwa-text-disabled font-mono text-[10px] font-bold uppercase'>
+                        <span className='text-kapwa-text-support font-mono text-[10px] font-bold uppercase'>
                           {doc.date_enacted}
                         </span>
                       </div>

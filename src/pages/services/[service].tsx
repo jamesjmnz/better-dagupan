@@ -275,7 +275,7 @@ export default function ServiceDetail() {
                     <info.icon className='h-4 w-4' />
                   </div>
                   <div>
-                    <p className='text-kapwa-text-disabled mb-1 text-[10px] font-bold tracking-widest uppercase'>
+                    <p className='text-kapwa-text-support mb-1 text-[10px] font-bold tracking-widest uppercase'>
                       {info.label}
                     </p>
                     <p className='text-kapwa-text-strong text-xs font-bold'>
@@ -417,7 +417,7 @@ export default function ServiceDetail() {
                     <info.icon className='h-4 w-4' />
                   </div>
                   <div>
-                    <p className='text-kapwa-text-disabled mb-1 text-[10px] font-bold tracking-widest uppercase'>
+                    <p className='text-kapwa-text-support mb-1 text-[10px] font-bold tracking-widest uppercase'>
                       {info.label}
                     </p>
                     <p className='text-kapwa-text-strong text-xs font-bold'>
@@ -465,7 +465,7 @@ export default function ServiceDetail() {
             }`}
           >
             <div className='flex items-center justify-between'>
-              <p className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
+              <p className='text-kapwa-text-support text-[10px] font-bold tracking-widest uppercase'>
                 {t('detail.dataIntegrity')}
               </p>
               {isOfficialSource || isVerified ? (
@@ -496,7 +496,7 @@ export default function ServiceDetail() {
                       ? t('detail.verifiedInformation')
                       : t('detail.unverifiedData')}
                 </p>
-                <p className='text-kapwa-text-disabled text-[11px] font-medium'>
+                <p className='text-kapwa-text-support text-[11px] font-medium'>
                   {isOfficialSource
                     ? t('detail.fromCharter')
                     : isVerified
@@ -558,7 +558,7 @@ export default function ServiceDetail() {
                 {t('detail.helpTitle')}
               </h4>
             </div>
-            <p className='text-kapwa-text-disabled text-xs leading-relaxed'>
+            <p className='text-kapwa-text-support text-xs leading-relaxed'>
               {t('detail.helpBody')}
             </p>
             <a
@@ -567,7 +567,7 @@ export default function ServiceDetail() {
               rel='noopener noreferrer'
               className='group border-kapwa-border-weak text-kapwa-text-support hover:border-kapwa-border-weak hover:bg-kapwa-bg-surface-raised flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl border-2 px-4 py-2.5 text-xs font-bold transition-all'
             >
-              <Edit3 className='group-hover:text-kapwa-text-accent-orange text-kapwa-text-disabled h-3.5 w-3.5 transition-colors' />
+              <Edit3 className='group-hover:text-kapwa-text-accent-orange text-kapwa-text-support h-3.5 w-3.5 transition-colors' />
               {t('detail.suggestEdit')}
             </a>
           </Card>

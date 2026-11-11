@@ -243,7 +243,7 @@ export default function AdminDashboard() {
                     <CardTitle level='h3' className='mb-1'>
                       {stat.title}
                     </CardTitle>
-                    <p className='text-kapwa-text-disabled text-sm'>
+                    <p className='text-kapwa-text-support text-sm'>
                       {stat.description}
                     </p>
                   </CardContent>
@@ -271,12 +271,12 @@ export default function AdminDashboard() {
                 <h3 className='text-kapwa-text-strong font-bold'>
                   {action.title}
                 </h3>
-                <p className='text-kapwa-text-disabled text-sm'>
+                <p className='text-kapwa-text-support text-sm'>
                   {action.description}
                 </p>
               </CardContent>
               <Link to={action.link} className='px-4'>
-                <ArrowRight className='text-kapwa-text-disabled h-5 w-5' />
+                <ArrowRight className='text-kapwa-text-support h-5 w-5' />
               </Link>
             </Card>
           ))}
@@ -307,11 +307,11 @@ export default function AdminDashboard() {
           <CardContent className='p-0'>
             {activityLoading ? (
               <div className='flex items-center justify-center py-6'>
-                <RefreshCw className='text-kapwa-text-disabled h-6 w-6 animate-spin' />
+                <RefreshCw className='text-kapwa-text-support h-6 w-6 animate-spin' />
               </div>
             ) : recentActivity.length === 0 ? (
-              <div className='text-kapwa-text-disabled py-6 text-center'>
-                <CheckCircle className='text-kapwa-text-disabled mx-auto mb-2 h-8 w-8' />
+              <div className='text-kapwa-text-support py-6 text-center'>
+                <CheckCircle className='text-kapwa-text-support mx-auto mb-2 h-8 w-8' />
                 <p className='text-sm'>No recent activity to display</p>
               </div>
             ) : (
@@ -354,11 +354,11 @@ export default function AdminDashboard() {
                         </Link>
                       )}
                       {item.resolution && (
-                        <p className='text-kapwa-text-disabled text-sm italic'>
+                        <p className='text-kapwa-text-support text-sm italic'>
                           &quot;{item.resolution}&quot;
                         </p>
                       )}
-                      <div className='text-kapwa-text-disabled mt-1 flex flex-wrap items-center gap-3 text-xs'>
+                      <div className='text-kapwa-text-support mt-1 flex flex-wrap items-center gap-3 text-xs'>
                         <div className='flex items-center gap-1'>
                           <Calendar className='h-3 w-3' />
                           {new Date(item.resolved_at).toLocaleDateString()}

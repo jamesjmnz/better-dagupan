@@ -127,7 +127,7 @@ export default function MunicipalCommitteesPage() {
                     <h3 className='text-kapwa-text-strong text-base leading-tight font-bold'>
                       {committee.committee}
                     </h3>
-                    <p className='text-kapwa-text-disabled mt-0.5 text-[10px] font-bold tracking-widest uppercase'>
+                    <p className='text-kapwa-text-support mt-0.5 text-[10px] font-bold tracking-widest uppercase'>
                       {t('electedOfficials.committees.standingCommittee')}
                     </p>
                   </div>
@@ -135,11 +135,11 @@ export default function MunicipalCommitteesPage() {
 
                 {/* Chairperson Highlight Box */}
                 <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised/50 flex items-center gap-2 rounded-xl border px-3 py-2.5'>
-                  <div className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-disabled shrink-0 rounded-full border p-1 shadow-sm'>
+                  <div className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support shrink-0 rounded-full border p-1 shadow-sm'>
                     <User2 aria-hidden='true' className='h-3.5 w-3.5' />
                   </div>
                   <div className='min-w-0'>
-                    <p className='text-kapwa-text-disabled mb-0.5 text-[9px] font-bold tracking-tighter uppercase'>
+                    <p className='text-kapwa-text-support mb-0.5 text-[9px] font-bold tracking-tighter uppercase'>
                       {t('electedOfficials.committees.chairperson')}
                     </p>
                     <p className='text-kapwa-text-strong truncate text-xs leading-tight font-bold'>
@@ -156,7 +156,7 @@ export default function MunicipalCommitteesPage() {
                         aria-hidden='true'
                         className='text-kapwa-text-accent-orange h-3 w-3'
                       />
-                      <p className='text-kapwa-text-disabled text-[9px] font-bold tracking-widest uppercase'>
+                      <p className='text-kapwa-text-support text-[9px] font-bold tracking-widest uppercase'>
                         {t('electedOfficials.committees.members', {
                           count: committee.members.length,
                         })}
@@ -172,7 +172,7 @@ export default function MunicipalCommitteesPage() {
                             {member.name}
                           </p>
                           {member.role && (
-                            <span className='text-kapwa-text-disabled bg-kapwa-bg-surface-raised shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold uppercase'>
+                            <span className='text-kapwa-text-support bg-kapwa-bg-surface-raised shrink-0 rounded px-1.5 py-0.5 text-[9px] font-bold uppercase'>
                               {member.role}
                             </span>
                           )}
@@ -190,7 +190,7 @@ export default function MunicipalCommitteesPage() {
       {/* Summary footer and citations, once there is something to cite. */}
       {isPublished && filteredCommittees.length > 0 && (
         <>
-          <p className='text-kapwa-text-disabled text-center text-xs'>
+          <p className='text-kapwa-text-support text-center text-xs'>
             {t('electedOfficials.committees.showing', {
               shown: filteredCommittees.length,
               total: committees.length,

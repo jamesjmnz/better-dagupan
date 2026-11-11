@@ -166,7 +166,7 @@ const ForexPage: FC = () => {
                     </h2>
                     <button
                       onClick={() => setIsSearchOpen(true)}
-                      className='text-kapwa-text-disabled hover:bg-kapwa-bg-hover hover:text-kapwa-text-support rounded-md p-2 transition-colors'
+                      className='text-kapwa-text-support hover:bg-kapwa-bg-hover hover:text-kapwa-text-support rounded-md p-2 transition-colors'
                     >
                       <LucideIcons.Search className='h-5 w-5' />
                     </button>
@@ -174,7 +174,7 @@ const ForexPage: FC = () => {
                 ) : (
                   <div className='relative'>
                     <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'>
-                      <LucideIcons.Search className='text-kapwa-text-disabled h-5 w-5' />
+                      <LucideIcons.Search className='text-kapwa-text-support h-5 w-5' />
                     </div>
                     <input
                       type='text'
@@ -195,7 +195,7 @@ const ForexPage: FC = () => {
                           setSearchTerm('');
                           setIsSearchOpen(false);
                         }}
-                        className='hover:text-kapwa-text-support text-kapwa-text-disabled'
+                        className='hover:text-kapwa-text-support text-kapwa-text-support'
                       >
                         <LucideIcons.X className='h-4 w-4' />
                       </button>
@@ -237,11 +237,11 @@ const ForexPage: FC = () => {
                   </div>
                 ) : (
                   <div className='flex h-full flex-col items-center justify-center pt-8 text-center'>
-                    <LucideIcons.SearchX className='text-kapwa-text-disabled mb-4 h-12 w-12' />
+                    <LucideIcons.SearchX className='text-kapwa-text-support mb-4 h-12 w-12' />
                     <h3 className='text-kapwa-text-support mb-2 text-lg font-medium'>
                       {t('forex.noneFound')}
                     </h3>
-                    <p className='text-kapwa-text-disabled mb-4 text-sm'>
+                    <p className='text-kapwa-text-support mb-4 text-sm'>
                       {searchTerm
                         ? t('forex.noMatch', { term: searchTerm })
                         : t('forex.noneAvailable')}

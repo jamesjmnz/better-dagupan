@@ -68,8 +68,8 @@ export default function FinancialPage() {
             <Badge variant='slate'>
               {t('financial.fiscalYear', { year: selectedYear })}
             </Badge>
-            <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase'>
-              <Info className='text-kapwa-text-disabled h-3.5 w-3.5' />
+            <div className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-support flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-[10px] font-bold tracking-widest uppercase'>
+              <Info className='text-kapwa-text-support h-3.5 w-3.5' />
               <span>{t('financial.pesos')}</span>
             </div>
           </div>
@@ -77,7 +77,7 @@ export default function FinancialPage() {
             <BarChart2Icon className='h-8 w-8 text-kapwa-text-success' />
             {t('financial.title')}
           </h1>
-          <p className='text-kapwa-text-disabled max-w-xl text-sm leading-relaxed font-medium'>
+          <p className='text-kapwa-text-support max-w-xl text-sm leading-relaxed font-medium'>
             {t('financial.description', terms)}
           </p>
         </div>
