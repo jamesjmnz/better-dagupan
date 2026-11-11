@@ -223,6 +223,14 @@ async function main() {
             : lguType === 'province'
               ? 'Provincial'
               : 'Municipal',
+        // Sanggunian and subdivision labels, as in src/lib/lguLabels.ts
+        '{{lgu.body}}':
+          {
+            city: 'Sangguniang Panlungsod',
+            province: 'Sangguniang Panlalawigan',
+          }[lguType] || 'Sangguniang Bayan',
+        '{{lgu.subdivisions}}':
+          lguType === 'province' ? 'Municipalities & Cities' : 'Barangays',
       };
       for (const [token, value] of Object.entries(tokens)) {
         seo = seo.replaceAll(token, value);

@@ -5,8 +5,9 @@
  * Replaces template tokens in seo-metadata.json with values from lgu.config.json.
  * Run: node scripts/generate-seo.js
  *
- * Template tokens: {{portal.name}}, {{portal.domain}}, {{lgu.name}}, {{lgu.fullName}},
- *                  {{lgu.province}}, {{lgu.type}}, {{lgu.adjective}}
+ * Template tokens: {{portal.name}}, {{portal.domain}}, {{portal.baseUrl}},
+ *                  {{lgu.name}}, {{lgu.fullName}}, {{lgu.province}}, {{lgu.type}},
+ *                  {{lgu.adjective}}, {{lgu.body}}, {{lgu.subdivisions}}
  */
 
 const fs = require('fs');
@@ -33,6 +34,14 @@ const tokens = {
       : config.lgu.type === 'province'
         ? 'Provincial'
         : 'Municipal',
+  // Sanggunian and subdivision labels, as in src/lib/lguLabels.ts
+  '{{lgu.body}}':
+    {
+      city: 'Sangguniang Panlungsod',
+      province: 'Sangguniang Panlalawigan',
+    }[config.lgu.type] || 'Sangguniang Bayan',
+  '{{lgu.subdivisions}}':
+    config.lgu.type === 'province' ? 'Municipalities & Cities' : 'Barangays',
 };
 
 let replacements = 0;
