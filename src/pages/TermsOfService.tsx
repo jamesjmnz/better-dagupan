@@ -310,10 +310,10 @@ const TermsOfService: FC = () => {
               </p>
               <p className='text-kapwa-text-brand-bold text-xl font-semibold'>
                 <a
-                  href='mailto:volunteers@bettergov.ph'
+                  href={`mailto:${config.portal.contactEmail}`}
                   className='hover:text-kapwa-text-brand transition-colors'
                 >
-                  volunteers@bettergov.ph
+                  {config.portal.contactEmail}
                 </a>
               </p>
               <p className='text-kapwa-text-brand-bold mt-4 italic'>
