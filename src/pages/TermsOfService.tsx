@@ -90,10 +90,10 @@ const TermsOfService: FC = () => {
               </h2>
             </div>
             <div className='mb-4 border-l-4 border-kapwa-border-warning bg-kapwa-bg-warning-weak p-4'>
-              <p className='mb-2 font-semibold text-kapwa-text-warning'>
+              <p className='mb-2 font-semibold text-kapwa-orange-800'>
                 {t('terms.asIsLead')}
               </p>
-              <ul className='list-inside list-disc space-y-1 text-kapwa-text-warning'>
+              <ul className='list-inside list-disc space-y-1 text-kapwa-orange-800'>
                 {list('asIsList').map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
@@ -285,7 +285,7 @@ const TermsOfService: FC = () => {
               </div>
 
               <div className='bg-kapwa-bg-danger-weak rounded-lg border border-kapwa-border-danger p-4'>
-                <p className='text-kapwa-text-danger'>
+                <p className='text-kapwa-red-800'>
                   <Trans
                     t={t}
                     i18nKey='terms.frivolous'

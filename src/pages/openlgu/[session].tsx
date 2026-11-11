@@ -154,7 +154,7 @@ export default function SessionDetail() {
 
                 {absentMembers.length > 0 && (
                   <div className='border-kapwa-border-weak border-t pt-4'>
-                    <h3 className='text-kapwa-text-accent-orange mb-3 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
+                    <h3 className='text-kapwa-orange-800 mb-3 flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase'>
                       <XCircle className='h-3.5 w-3.5' />{' '}
                       {t('session.absentCount', {
                         count: absentMembers.length,

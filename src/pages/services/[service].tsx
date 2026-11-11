@@ -391,7 +391,7 @@ export default function ServiceDetail() {
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border text-sm font-bold transition-colors ${
                         isTransaction
                           ? 'bg-kapwa-bg-surface text-kapwa-text-brand border-kapwa-border-brand'
-                          : 'text-kapwa-text-accent-orange bg-kapwa-bg-accent-orange-weak border-kapwa-border-weak'
+                          : 'text-kapwa-orange-800 bg-kapwa-bg-accent-orange-weak border-kapwa-border-weak'
                       }`}
                     >
                       {idx + 1}
