@@ -57,7 +57,13 @@ describe('Better Dagupan public identity', () => {
     ]) {
       expect(path).toMatch(/^\/logos\/svg\/better-dagupan-/);
     }
-    // No OG image while there is no absolute base URL to serve one from.
-    expect(config.portal.defaultOgImagePath).toBe('');
+    // Raster assets rendered from the SVG logo by
+    // scripts/render-brand-images.ts.
+    for (const path of [
+      config.portal.defaultOgImagePath,
+      config.portal.appleTouchIconPath,
+    ]) {
+      expect(path).toMatch(/^\/logos\/png\/better-dagupan-.+\.png$/);
+    }
   });
 });
