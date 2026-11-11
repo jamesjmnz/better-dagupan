@@ -207,7 +207,7 @@ test.describe('Barangays Pages', () => {
   test('barangay detail page has breadcrumbs', async ({ page }) => {
     await gotoDetail(page, 'bonuan-gueset');
 
-    const breadcrumb = page.locator('nav[aria-label="breadcrumb"]');
+    const breadcrumb = page.getByRole('navigation', { name: /breadcrumb/i });
     await expect(breadcrumb).toBeVisible();
     // BreadcrumbHome renders an icon with no text, so match on the href.
     await expect(breadcrumb.locator('a[href="/"]')).toBeVisible();
