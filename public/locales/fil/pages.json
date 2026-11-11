@@ -1,57 +1,9 @@
 {
-  "shared": {
-    "readyTitle": "Handa Ka Na Bang Gumawa ng Pagbabago?",
-    "or": "o",
-    "civictechBefore": "Ang BetterGov ay isang <strong>tech na inisyatibang pinamumunuan ng mga boluntaryo</strong> na nakatuon sa paglikha ng mga proyektong",
-    "civictechAfter": "na naglalayong gawing mas bukas, mahusay, at abot-kamay ng mamamayan ang pamahalaan.",
-    "provideTitle": "Ang Aming Ibinibigay",
-    "provide": {
-      "infrastructure": {
-        "title": "Imprastraktura at mga Kagamitan",
-        "desc": "Mga server, AI credit, development tool, at marami pa!"
-      },
-      "hackathons": {
-        "title": "Mga Tech Hackathon",
-        "desc": "Regular na mga kaganapan para magtulungan at bumuo nang sama-sama"
-      },
-      "data": {
-        "title": "Datos at mga API",
-        "desc": "Access sa datos ng pamahalaan at mga API endpoint"
-      },
-      "team": {
-        "title": "Hanapin ang Iyong Koponan",
-        "desc": "Makipag-ugnayan sa mga tamang tao at resource person"
-      },
-      "mentorship": {
-        "title": "Mentorship mula sa Industriya",
-        "desc": "Gabay mula sa mga beteranong eksperto sa tech at startup"
-      },
-      "office": {
-        "title": "Espasyo ng Opisina",
-        "desc": "Pisikal na lugar para sa pagtutulungan at mga pulong"
-      }
-    },
-    "lookingFor": "NAGHAHANAP KAMI NG MGA TAONG MAS MAGALING SA AMIN!"
-  },
-  "about": {
-    "seoTitle": "Tungkol",
-    "seoDescription": "Isang tech na inisyatibang pinamumunuan ng mga boluntaryo na nakatuon sa paglikha ng mga proyektong #civictech na naglalayong gawing mas bukas, mahusay, at abot-kamay ng mamamayan ang pamahalaan.",
-    "goal": "Ang aming layunin ay <strong>suportahan, itaguyod, pagbuklurin, at bigyang-kakayahan</strong> ang mga mamamayang tagabuo!",
-    "provideIntro": "Para suportahan ang mga mamamayang tagabuo sa paggawa ng makabuluhang mga proyektong civic tech:",
-    "commitmentTitle": "Ang Aming Paninindigan",
-    "doneWaiting": "TAPOS NA KAMI SA PAGHIHINTAY.",
-    "angry": "Galit kami. Galit ka. Pero makakapag-ambag tayo sa sarili nating paraan — <strong>gaano man ito kaliit</strong>.",
-    "together": "Makakagawa tayo ng <strong>mga kahanga-hangang bagay</strong> nang sama-sama. <highlight>Mula sa ugat. Open source. Hindi kailangan ng pahintulot.</highlight>",
-    "committed": "Nakatuon kaming maglaan ng <strong>oras, rekurso, at pera</strong> sa inisyatibang ito. Patuloy kaming bubuo nang <strong>walang humpay</strong> nang hindi naghihintay ng pahintulot ninuman. Mga site na open source, pampubliko, at <strong>de-kalidad</strong>.",
-    "ctaBody": "Sumali sa aming komunidad ng mga tagabuo, mapangarapin, at tagapagdala ng pagbabago.",
-    "contacts": "Makipag-ugnayan",
-    "joinUs": "Sumali sa Amin"
-  },
   "contact": {
     "seoTitle": "Makipag-ugnayan sa Amin",
-    "seoDescription": "Makipag-ugnayan sa aming mga boluntaryo, mag-ulat ng isyu, o sumali sa aming komunidad.",
+    "seoDescription": "Magtanong, mag-report ng mali, o humanap ng paraan para tumulong sa {{portal}}.",
     "title": "Makipag-ugnayan sa Amin",
-    "intro": "Kami ay isang masigasig na komunidad ng mga boluntaryo, developer, at designer na nakatuon sa pagpapabuti ng mga digital na serbisyong pampubliko sa Pilipinas. May tanong ka man, mungkahi, o gustong sumali sa aming misyon, ikagagalak naming marinig mula sa iyo.",
+    "intro": "Mga boluntaryo ang nagpapatakbo sa {{portal}}. Ang pinakamainam na paraan para makipag-ugnayan sa amin ay sa GitHub, kung saan bukas na sinusubaybayan ang mga tanong, pagwawasto at mungkahi.",
     "methods": {
       "email": {
         "title": "Mag-email sa Amin",
@@ -64,13 +16,18 @@
       },
       "volunteer": {
         "title": "Magboluntaryo sa Amin",
-        "description": "Tulungan kaming bumuo ng mas mahusay na digital na serbisyo para sa mga Pilipino",
-        "contact": "Maging Boluntaryo"
+        "description": "Mag-report ng mali, magbahagi ng opisyal na sanggunian, magsalin, o magsulat ng code",
+        "contact": "Mga paraan para tumulong"
       },
       "issues": {
         "title": "Mag-ulat ng Isyu",
         "description": "May nakitang bug o may mungkahi? Magbukas ng issue sa GitHub",
         "contact": "GitHub Issues"
+      },
+      "report": {
+        "title": "Mag-report ng Mali",
+        "description": "May nakita ka bang mali o luma nang impormasyon sa site? Sabihin sa amin kung ano at saan.",
+        "contact": "Mag-report ng mali"
       }
     },
     "faqTitle": "Mga Madalas Itanong",
@@ -78,8 +35,8 @@
     "faqs": {
       "volunteer": {
         "question": "Paano ako makakapagboluntaryo sa {{portal}}?",
-        "answer": "Tinatanggap namin ang mga boluntaryong may iba't ibang kasanayan! Tingnan ang aming Join Us page para makita ang mga kasalukuyang pagkakataon at sagutan ang aming volunteer form.",
-        "link": "Join Us page"
+        "answer": "Tingnan ang pahinang Sumali sa Amin para sa mga paraan ng pagtulong, mula sa pag-report ng mali at pagbabahagi ng opisyal na sanggunian hanggang sa pagsasalin at pagsusulat ng code.",
+        "link": "pahinang Sumali sa Amin"
       },
       "affiliation": {
         "question": "Kaanib ba ng pamahalaan ang {{portal}}?",
@@ -96,86 +53,80 @@
       },
       "data": {
         "question": "Saan nagmumula ang datos sa {{portal}}?",
-        "answer": "Tinitipon ang aming datos mula sa iba't ibang pampublikong pinagkukunan ng pamahalaan. Gumagamit kami ng sariling mga script at kagamitan para kolektahin, iproseso, at ipakita ang impormasyong ito sa paraang madaling ma-access at maunawaan ng mamamayan."
+        "answer": "Bawat rekord ay may binabanggit na opisyal na sanggunian, gaya ng website ng Pamahalaang Lungsod, PSA, BLGF, DTI o COMELEC, kasama ang petsa ng huling pagsusuri. Minamarkahang hindi pa beripikado ang anumang hindi sinusuportahan ng opisyal na sanggunian."
       }
     },
-    "ctaBody": "Sumali sa aming komunidad ng mga boluntaryong bumubuo ng mas mahusay na digital na serbisyo para sa Pilipinas.",
-    "ctaButton": "Maging Boluntaryo"
+    "ctaBody": "Malugod na tinatanggap ang mga pagwawasto, opisyal na sanggunian, salin at code.",
+    "ctaButton": "Mga paraan para tumulong",
+    "ctaTitle": "Gusto mo bang tumulong?"
   },
   "joinUs": {
     "seoTitle": "Sumali sa Amin",
-    "seoDescription": "Isang civic tech na inisyatibang pinamumunuan ng mga boluntaryo na bumubuo ng mga open-source na kagamitan para gawing mas bukas, mahusay, at abot-kamay ang pamahalaan.",
-    "heroTitle": "Sumali sa <highlight>#CivicTech</highlight> Revolution",
-    "heroBody": "Kasama ang mga beterano ng industriya, binubuo namin ang <strong>{{portal}}</strong> — para gawing bukas, mahusay, at abot-kamay ng bawat Pilipino ang pamahalaan.",
-    "joinDiscord": "Sumali sa Aming Discord",
-    "learnMore": "Alamin Pa",
-    "missionTitle": "Ang Aming Misyon",
-    "missionLead": "Hindi lang kami gumagawa ng mga website — binubuo namin ang kinabukasan ng pamamahala sa Pilipinas.",
-    "goal": "Nakita namin ang pagdami ng mahuhusay at kahanga-hangang ideyang tech na inilulunsad kamakailan. Ang aming layunin ay <strong>suportahan, itaguyod, pagbuklurin, at bigyang-kakayahan</strong> ang mga tagabuong ito!",
-    "provideIntro": "Lahat ng kailangan mo para bumuo ng makabuluhang mga proyektong civic tech",
-    "doneWaiting": "TAPOS NA KAMI SA PAGHIHINTAY",
-    "angry": "“GALIT KAMI. GALIT KA.”",
-    "contribute": "Pero makakapag-ambag tayo sa sarili nating paraan — <accent>GAANO MAN ITO KALIIT.</accent>",
-    "amazing": "Makakagawa tayo ng <highlight>MGA KAHANGA-HANGANG BAGAY</highlight> nang sama-sama.",
-    "grassroots": "MULA SA UGAT. OPEN SOURCE. HINDI KAILANGAN NG PAHINTULOT.",
-    "committed": "Nakatuon kaming maglaan ng <strong>ORAS, REKURSO, AT PERA</strong> sa inisyatibang ito.",
-    "relentless": "Patuloy kaming bubuo nang <accent>WALANG HUMPAY</accent> nang hindi naghihintay ng pahintulot ninuman. Mga site na open source, pampubliko, at <strong>DE-KALIDAD</strong>.",
-    "ctaBody": "Sumali sa aming komunidad ng mga tagabuo, mapangarapin, at tagapagdala ng pagbabago. Sama-sama nating likhain ang teknolohiyang pampamahalaan na nararapat sa Pilipinas.",
-    "joinDiscordCommunity": "Sumali sa Aming Komunidad sa Discord",
-    "exploreIdeas": "Tuklasin ang mga Ideya ng Proyekto",
-    "footerLine": "Open source • Pinapatakbo ng komunidad • Binuo nang may ❤️ para sa Pilipinas"
-  },
-  "ideas": {
-    "seoTitle": "Mga Ideya ng Proyekto",
-    "seoDescription": "Tuklasin ang mga makabagong ideya ng proyekto para mapabuti ang transparency ng pamahalaan, pananagutan, at pakikilahok ng mamamayan.",
-    "title": "Mga Ideya ng Proyekto",
-    "intro": "Mga makabagong konsepto para mapahusay ang transparency ng pamahalaan, pananagutan, at pakikilahok ng mamamayan. Layunin ng mga ideyang ito na paglapitin ang mamamayan at pamahalaan sa pamamagitan ng teknolohiya at mas mahusay na disenyo.",
-    "stats": {
-      "total": "Kabuuang Ideya",
-      "highPriority": "Mataas na Prayoridad",
-      "categories": "Mga Kategorya",
-      "simple": "Mga Simpleng Proyekto",
-      "votes": "Kabuuang Boto"
-    },
-    "submitIdea": "Magsumite ng Ideya",
-    "contributePr": "Mag-ambag ng Pull Request",
-    "allIdeas": "Lahat ng Ideya ng Proyekto",
-    "priority": {
-      "high": "Mataas na Prayoridad",
-      "medium": "Katamtamang Prayoridad",
-      "low": "Mababang Prayoridad"
-    },
-    "complexity": {
-      "simple": "Simpleng Gawin",
-      "moderate": "Katamtamang Hirap",
-      "complex": "Masalimuot"
-    },
-    "items": {
-      "1": {
-        "title": "App na gumagamit ng blockchain para sa pag-uulat ng komunidad sa mga proyekto ng pamahalaan",
-        "description": "Isang bukas at hindi nababagong plataporma kung saan maaaring mag-ulat at sumubaybay ang mamamayan sa mga proyekto ng pamahalaan sa kanilang komunidad. Gumagamit ng teknolohiyang blockchain para matiyak ang integridad ng datos at maiwasan ang pagbabago sa mga ulat at update ng proyekto.",
-        "category": "Transparency at Pananagutan"
+    "seoDescription": "Mga paraan para mapanatiling tumpak at kapaki-pakinabang ang {{portal}}, mula sa pag-report ng mali hanggang sa pagsasalin at pagsusulat ng code.",
+    "title": "Tumulong sa pagbuo ng {{portal}}",
+    "intro": "Mga boluntaryo ang nagpapanatili sa {{portal}}. Hindi mo kailangang maging developer para makatulong: karamihan ng gawain ay ang paghahanap at pagsusuri ng opisyal na impormasyon tungkol sa {{lgu}}.",
+    "ways": {
+      "report": {
+        "title": "Mag-report ng maling impormasyon",
+        "description": "Sabihin sa amin kapag may mali o luma nang impormasyon sa site. Mas mabilis namin itong maaayos kung may link sa opisyal na sanggunian.",
+        "action": "Mag-report ng mali"
       },
-      "2": {
-        "title": "Glassdoor para sa mga ahensya ng pamahalaan",
-        "description": "Isang anonimong plataporma ng pagsusuri kung saan maaaring mag-rate at magsuri ang mga kawani ng pamahalaan at mamamayan sa mga ahensya, departamento, at serbisyo ng pamahalaan. Nagbibigay ng kaalaman tungkol sa kultura sa trabaho, kalidad ng serbisyo, at mga bahaging dapat pagbutihin.",
-        "category": "Puna ng Publiko"
+      "sources": {
+        "title": "Ituro sa amin ang mga opisyal na sanggunian",
+        "description": "Alam mo ba kung saan inilalathala ng Pamahalaang Lungsod ang isang bagay na wala pa sa site? Ibahagi ang link sa isang GitHub issue.",
+        "action": "Magbukas ng issue"
       },
-      "3": {
-        "title": "Mga gabay sa disenyo para sa {{portal}}",
-        "description": "Kumpletong design system at mga gabay para sa plataporma ng {{portal}}. Kasama ang mga UI component, color scheme, typography, pamantayan sa accessibility, at pinakamahusay na mga kasanayan para sa mga web service ng pamahalaan.",
-        "category": "Pagbuo ng Plataporma"
+      "translate": {
+        "title": "Magsalin",
+        "description": "Suriin ang tekstong Filipino, o tumulong na isalin ang site sa Pangasinan. Inilalathala lang ang mga salin kapag naisulat o nasuri na ng isang mahusay magsalita ng wika.",
+        "action": "Mag-alok na magsalin"
       },
-      "4": {
-        "title": "I-rate ang mga pulitiko",
-        "description": "Isang platapormang pinapatakbo ng mamamayan para i-rate at suriin ang mga halal na opisyal batay sa kanilang pagganap, mga pangako noong kampanya, rekord ng pagboto, at paghahatid ng serbisyong pampubliko. May kasamang fact-checking at mga feature para sa transparency.",
-        "category": "Pananagutang Pampulitika"
+      "code": {
+        "title": "Magsulat ng code o magdisenyo",
+        "description": "Open source ang code sa GitHub. Pumili ng bukas na issue o magmungkahi ng pagpapabuti.",
+        "action": "Tingnan ang code"
       }
     },
-    "ctaTitle": "May Ideya Ka Ba?",
-    "ctaBody": "Lagi kaming naghahanap ng mga makabagong paraan para mapabuti ang mga serbisyo ng pamahalaan at pakikilahok ng mamamayan. Isumite ang iyong mga ideya sa GitHub o alamin pa ang tungkol sa aming misyon.",
-    "submitGithub": "Isumite sa GitHub",
-    "learnMore": "Alamin Pa ang Tungkol sa Amin"
+    "ideasBody": "Gusto mo bang malaman kung ano ang susunod na plano, at kung ano ang hinihintay ng bawat isa?",
+    "ideasAction": "Tingnan ang mga ideya at plano"
+  },
+  "ideas": {
+    "seoTitle": "Mga Ideya at Plano",
+    "seoDescription": "Ano ang maaaring susunod para sa {{portal}}, at ano ang kailangan ng bawat plano bago ito mangyari.",
+    "title": "Mga ideya at plano",
+    "intro": "Ano ang maaaring susunod para sa {{portal}}. Mga plano ang mga ito, hindi pangako: may hinihintay pa ang bawat isa bago ito mangyari.",
+    "needs": {
+      "database": "Kailangan ng database",
+      "volunteer": "Kailangan ng boluntaryo",
+      "source": "Kailangan ng opisyal na sanggunian",
+      "key": "Kailangan ng service key"
+    },
+    "plans": {
+      "legislation": {
+        "title": "Mga ordinansa at resolusyon sa portal",
+        "description": "Ilagay ang mga ordinansa, resolusyon at sesyon ng Sangguniang Panlungsod sa sariling mahahanap na rekord ng portal. Habang wala pa, inililista ng portal ang mga ordinansang inilalathala ng konseho sa sarili nitong website."
+      },
+      "pangasinan": {
+        "title": "Wikang Pangasinan",
+        "description": "Ialok ang site sa Pangasinan. Kailangan nito ng mahusay magsalita ng wika para isulat o suriin ang mga salin; walang salin na gawa ng makina."
+      },
+      "barangayCouncils": {
+        "title": "Mga konseho at kontak ng barangay",
+        "description": "Idagdag ang mga kagawad, address ng bulwagan at numero ng telepono ng barangay kapag nailista na ng isang opisyal na sanggunian."
+      },
+      "moreServices": {
+        "title": "Higit pang serbisyo ng lungsod",
+        "description": "Idagdag ang mga serbisyo ng iba pang tanggapan ng lungsod habang inilalathala ang kanilang mga pahina ng Citizen's Charter, at suriing muli ang mga kasalukuyan laban sa live na website ng lungsod."
+      },
+      "weather": {
+        "title": "Live na lagay ng panahon",
+        "description": "Ipakita ang kasalukuyang lagay ng panahon sa {{lgu}} kapag nakakonekta na ang serbisyo ng panahon."
+      }
+    },
+    "ctaTitle": "May ideya ka ba?",
+    "ctaBody": "Imungkahi ito bilang isang issue sa GitHub, kung saan masusundan at mapag-uusapan ito ng sinuman.",
+    "suggest": "Magmungkahi ng ideya",
+    "help": "Mga paraan para tumulong"
   },
   "contribute": {
     "breadcrumb": "Mag-ambag",
@@ -217,9 +168,18 @@
       "community": "Datos at Komunidad"
     },
     "links": {
-      "home": { "title": "Home", "description": "Pangunahing pahina" },
-      "about": { "title": "Tungkol", "description": "Tungkol sa {{portal}}" },
-      "search": { "title": "Maghanap", "description": "Maghanap sa portal" },
+      "home": {
+        "title": "Home",
+        "description": "Pangunahing pahina"
+      },
+      "about": {
+        "title": "Tungkol",
+        "description": "Tungkol sa {{portal}}"
+      },
+      "search": {
+        "title": "Maghanap",
+        "description": "Maghanap sa portal"
+      },
       "contact": {
         "title": "Makipag-ugnayan",
         "description": "Mga paraan para maabot ang mga boluntaryo ng proyekto"
@@ -248,7 +208,9 @@
         "title": "Mga Departamento",
         "description": "Mga tanggapan ng {{fullName}}"
       },
-      "barangays": { "description": "Ang mga barangay ng {{lgu}}" },
+      "barangays": {
+        "description": "Ang mga barangay ng {{lgu}}"
+      },
       "statsOverview": {
         "title": "Pangkalahatang Tingin",
         "description": "Mahahalagang bilang tungkol sa {{lgu}}"
@@ -309,7 +271,10 @@
         "title": "Sumali sa Amin",
         "description": "Magboluntaryo sa proyekto"
       },
-      "ideas": { "title": "Mga Ideya", "description": "Magmungkahi ng mga pagpapabuti" }
+      "ideas": {
+        "title": "Mga Ideya",
+        "description": "Magmungkahi ng mga pagpapabuti"
+      }
     }
   },
   "search": {
@@ -476,7 +441,10 @@
     "emailTitle": "Email",
     "emailBody": "Puna sa accessibility at mga kahilingan para sa akomodasyon.",
     "lastUpdated": "Huling na-update ang pahayag na ito noong <time>Hulyo 27, 2026</time>.",
-    "revise": "Binabago namin ito kapag nagbago ang mga sinusuportahang feature o mga alam na kakulangan."
+    "revise": "Binabago namin ito kapag nagbago ang mga sinusuportahang feature o mga alam na kakulangan.",
+    "githubTitle": "Puna",
+    "githubBody": "Mag-report ng problema sa accessibility o humiling ng akomodasyon sa pamamagitan ng pagbubukas ng issue sa GitHub.",
+    "githubLink": "Magbukas ng GitHub issue"
   },
   "terms": {
     "seoTitle": "Mga Tuntunin ng Serbisyo",
@@ -584,7 +552,8 @@
     "contactTitle": "Impormasyon sa Pakikipag-ugnayan",
     "contactLead": "Para sa mga tanong tungkol sa mga tuntuning ito o mga alalahanin sa nilalaman, makipag-ugnayan sa:",
     "educational": "Nagbibigay ang website na ito ng impormasyong nasa public domain para lamang sa layuning pang-edukasyon at pang-impormasyon.",
-    "effective": "Epektibo simula Setyembre 23, 2025"
+    "effective": "Epektibo simula Setyembre 23, 2025",
+    "contactGithub": "ang mga GitHub issue ng proyekto"
   },
   "notFound": {
     "seoTitle": "Hindi Nahanap ang Pahina!",

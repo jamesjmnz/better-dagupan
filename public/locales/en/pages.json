@@ -1,57 +1,9 @@
 {
-  "shared": {
-    "readyTitle": "Ready to Make a Difference?",
-    "or": "or",
-    "civictechBefore": "BetterGov is a <strong>volunteer-led tech initiative</strong> committed to creating",
-    "civictechAfter": "projects aimed at making government more transparent, efficient, and accessible to citizens.",
-    "provideTitle": "What We Provide",
-    "provide": {
-      "infrastructure": {
-        "title": "Infrastructure & Tools",
-        "desc": "Servers, AI credits, development tools, and more!"
-      },
-      "hackathons": {
-        "title": "Tech Hackathons",
-        "desc": "Regular events to collaborate and build together"
-      },
-      "data": {
-        "title": "Data & APIs",
-        "desc": "Access to government data and API endpoints"
-      },
-      "team": {
-        "title": "Find Your Team",
-        "desc": "Connect with the right people and resource persons"
-      },
-      "mentorship": {
-        "title": "Industry Mentorship",
-        "desc": "Guidance from seasoned tech and startup veterans"
-      },
-      "office": {
-        "title": "Office Space",
-        "desc": "Physical workspace for collaboration and meetings"
-      }
-    },
-    "lookingFor": "WE'RE LOOKING FOR PEOPLE SMARTER THAN US!"
-  },
-  "about": {
-    "seoTitle": "About",
-    "seoDescription": "A volunteer-led tech initiative committed to creating #civictech projects aimed at making government more transparent, efficient, and accessible to citizens.",
-    "goal": "Our goal is to <strong>support, promote, consolidate, and empower</strong> citizen builders!",
-    "provideIntro": "To support citizen builders in building impactful civic tech projects:",
-    "commitmentTitle": "Our Commitment",
-    "doneWaiting": "WE'RE DONE WAITING.",
-    "angry": "We're angry. You're angry. But we can contribute in our own ways — <strong>no matter how little it is</strong>.",
-    "together": "We can do <strong>amazing things</strong> together. <highlight>Grassroots style. Open source. No permission needed.</highlight>",
-    "committed": "We are committed to putting <strong>time, resources, and money</strong> into this initiative. We will keep building <strong>relentlessly</strong> without anyone's permission. Open source, public, <strong>high quality</strong> sites.",
-    "ctaBody": "Join our community of builders, dreamers, and changemakers.",
-    "contacts": "Contacts",
-    "joinUs": "Join Us"
-  },
   "contact": {
     "seoTitle": "Contact Us",
-    "seoDescription": "Get in touch with our volunteers, report issues, or join our community.",
+    "seoDescription": "Ask a question, report an error, or find ways to help {{portal}}.",
     "title": "Connect with Us",
-    "intro": "We're a passionate community of volunteers, developers, and designers dedicated to improving digital public services in the Philippines. Whether you have a question, a suggestion, or want to join our mission, we'd love to hear from you.",
+    "intro": "{{portal}} is run by volunteers. The best way to reach us is on GitHub, where questions, corrections and suggestions are tracked in the open.",
     "methods": {
       "email": {
         "title": "Email Us",
@@ -64,13 +16,18 @@
       },
       "volunteer": {
         "title": "Volunteer With Us",
-        "description": "Help us build better digital services for Filipinos",
-        "contact": "Become a Volunteer"
+        "description": "Report errors, share official sources, translate, or write code",
+        "contact": "Ways to help"
       },
       "issues": {
         "title": "Report Issues",
         "description": "Found a bug or have a suggestion? Open an issue on GitHub",
         "contact": "GitHub Issues"
+      },
+      "report": {
+        "title": "Report an Error",
+        "description": "Spotted something wrong or out of date on the site? Tell us what and where.",
+        "contact": "Report an error"
       }
     },
     "faqTitle": "Frequently Asked Questions",
@@ -78,7 +35,7 @@
     "faqs": {
       "volunteer": {
         "question": "How can I volunteer for {{portal}}?",
-        "answer": "We welcome volunteers with various skills! Check out our Join Us page to see current opportunities and fill out our volunteer form.",
+        "answer": "See the Join Us page for ways to help, from reporting errors and sharing official sources to translating and writing code.",
         "link": "Join Us page"
       },
       "affiliation": {
@@ -96,86 +53,80 @@
       },
       "data": {
         "question": "Where does the data on {{portal}} come from?",
-        "answer": "Our data is aggregated from various publicly available government sources. We use custom scripts and tools to collect, process, and display this information in a way that is easy for citizens to access and understand."
+        "answer": "Each record cites an official source, such as the City Government's website, the PSA, BLGF, DTI or COMELEC, with the date it was last checked. Anything no official source supports is marked as not verified."
       }
     },
-    "ctaBody": "Join our community of volunteers building better digital services for the Philippines.",
-    "ctaButton": "Become a Volunteer"
+    "ctaBody": "Corrections, official sources, translations and code are all welcome.",
+    "ctaButton": "Ways to help",
+    "ctaTitle": "Want to help?"
   },
   "joinUs": {
     "seoTitle": "Join Us",
-    "seoDescription": "A volunteer-led civic tech initiative building open-source tools to make government more transparent, efficient, and accessible.",
-    "heroTitle": "Join the <highlight>#CivicTech</highlight> Revolution",
-    "heroBody": "Together with industry veterans, we're building <strong>{{portal}}</strong> — making government transparent, efficient, and accessible to every Filipino.",
-    "joinDiscord": "Join Our Discord",
-    "learnMore": "Learn More",
-    "missionTitle": "Our Mission",
-    "missionLead": "We're not just building websites — we're building the future of governance in the Philippines.",
-    "goal": "We've seen a surge of wonderful and impressive tech ideas being launched recently. Our goal is to <strong>support, promote, consolidate, and empower</strong> these builders!",
-    "provideIntro": "Everything you need to build impactful civic tech projects",
-    "doneWaiting": "WE'RE DONE WAITING",
-    "angry": "“WE'RE ANGRY. YOU'RE ANGRY.”",
-    "contribute": "But we can contribute in our own ways — <accent>NO MATTER HOW LITTLE IT IS.</accent>",
-    "amazing": "We can do <highlight>AMAZING THINGS</highlight> together.",
-    "grassroots": "GRASSROOTS STYLE. OPEN SOURCE. NO PERMISSION NEEDED.",
-    "committed": "We are committed to putting <strong>TIME, RESOURCES, AND MONEY</strong> into this initiative.",
-    "relentless": "We will keep building <accent>RELENTLESSLY</accent> without anyone's permission. Open source, public, <strong>HIGH QUALITY</strong> sites.",
-    "ctaBody": "Join our community of builders, dreamers, and changemakers. Together, we'll create the government technology the Philippines deserves.",
-    "joinDiscordCommunity": "Join Our Discord Community",
-    "exploreIdeas": "Explore Project Ideas",
-    "footerLine": "Open source • Community-driven • Built with ❤️ for the Philippines"
-  },
-  "ideas": {
-    "seoTitle": "Project Ideas",
-    "seoDescription": "Explore innovative project ideas to improve government transparency, accountability, and citizen engagement.",
-    "title": "Project Ideas",
-    "intro": "Innovative concepts to enhance government transparency, accountability, and citizen engagement. These ideas aim to bridge the gap between citizens and government through technology and better design.",
-    "stats": {
-      "total": "Total Ideas",
-      "highPriority": "High Priority",
-      "categories": "Categories",
-      "simple": "Simple Projects",
-      "votes": "Total Votes"
-    },
-    "submitIdea": "Submit Idea",
-    "contributePr": "Contribute a Pull Request",
-    "allIdeas": "All Project Ideas",
-    "priority": {
-      "high": "High Priority",
-      "medium": "Medium Priority",
-      "low": "Low Priority"
-    },
-    "complexity": {
-      "simple": "Simple Complexity",
-      "moderate": "Moderate Complexity",
-      "complex": "Complex Complexity"
-    },
-    "items": {
-      "1": {
-        "title": "Blockchain powered community government project reporting app",
-        "description": "A transparent, immutable platform where citizens can report and track government projects in their communities. Uses blockchain technology to ensure data integrity and prevent tampering with project reports and progress updates.",
-        "category": "Transparency & Accountability"
+    "seoDescription": "Ways to help keep {{portal}} accurate and useful, from reporting errors to translating and writing code.",
+    "title": "Help build {{portal}}",
+    "intro": "{{portal}} is kept up by volunteers. You don't need to be a developer to help: most of the work is finding and checking official information about the {{lgu}}.",
+    "ways": {
+      "report": {
+        "title": "Report incorrect information",
+        "description": "Tell us when something on the site is wrong or out of date. A link to an official source helps us fix it faster.",
+        "action": "Report an error"
       },
-      "2": {
-        "title": "Glassdoor for government agencies",
-        "description": "An anonymous review platform where government employees and citizens can rate and review government agencies, departments, and services. Provides insights into workplace culture, service quality, and areas for improvement.",
-        "category": "Public Feedback"
+      "sources": {
+        "title": "Point us to official sources",
+        "description": "Know where the City Government publishes something the site doesn't have yet? Share the link in a GitHub issue.",
+        "action": "Open an issue"
       },
-      "3": {
-        "title": "Design guidelines for {{portal}}",
-        "description": "Comprehensive design system and guidelines for the {{portal}} platform. Includes UI components, color schemes, typography, accessibility standards, and best practices for government web services.",
-        "category": "Platform Development"
+      "translate": {
+        "title": "Translate",
+        "description": "Review the Filipino text, or help translate the site into Pangasinan. Translations are only published once a fluent speaker has written or checked them.",
+        "action": "Offer to translate"
       },
-      "4": {
-        "title": "Rate the politicians",
-        "description": "A citizen-driven platform to rate and review elected officials based on their performance, campaign promises, voting records, and public service delivery. Includes fact-checking and transparency features.",
-        "category": "Political Accountability"
+      "code": {
+        "title": "Write code or design",
+        "description": "The code is open source on GitHub. Pick an open issue or suggest an improvement.",
+        "action": "See the code"
       }
     },
-    "ctaTitle": "Have an Idea?",
-    "ctaBody": "We're always looking for innovative ways to improve government services and citizen engagement. Submit your ideas via GitHub or learn more about our mission.",
-    "submitGithub": "Submit via GitHub",
-    "learnMore": "Learn More About Us"
+    "ideasBody": "Curious what is planned next, and what each plan is waiting on?",
+    "ideasAction": "See ideas and plans"
+  },
+  "ideas": {
+    "seoTitle": "Ideas and Plans",
+    "seoDescription": "What could come next for {{portal}}, and what each plan needs before it can happen.",
+    "title": "Ideas and plans",
+    "intro": "What could come next for {{portal}}. These are plans, not promises: each one is waiting on something before it can happen.",
+    "needs": {
+      "database": "Needs a database",
+      "volunteer": "Needs a volunteer",
+      "source": "Needs an official source",
+      "key": "Needs a service key"
+    },
+    "plans": {
+      "legislation": {
+        "title": "Ordinances and resolutions in the portal",
+        "description": "Load the Sangguniang Panlungsod's ordinances, resolutions and sessions into the portal's own searchable records. Until then, the portal lists the ordinances the council posts on its own website."
+      },
+      "pangasinan": {
+        "title": "Pangasinan language",
+        "description": "Offer the site in Pangasinan. This needs a fluent speaker to write or review the translations; none are machine-made."
+      },
+      "barangayCouncils": {
+        "title": "Barangay councils and contacts",
+        "description": "Add barangay kagawad, hall addresses and phone numbers once an official source lists them."
+      },
+      "moreServices": {
+        "title": "More city services",
+        "description": "Add services from other city offices as their Citizen's Charter pages are published, and re-check the current ones against the live city website."
+      },
+      "weather": {
+        "title": "Live weather",
+        "description": "Show current conditions for the {{lgu}} once the weather service is connected."
+      }
+    },
+    "ctaTitle": "Have an idea?",
+    "ctaBody": "Suggest it as an issue on GitHub, where anyone can follow and discuss it.",
+    "suggest": "Suggest an idea",
+    "help": "Ways to help"
   },
   "contribute": {
     "breadcrumb": "Contribute",
@@ -217,9 +168,18 @@
       "community": "Data and Community"
     },
     "links": {
-      "home": { "title": "Home", "description": "Main landing page" },
-      "about": { "title": "About", "description": "About {{portal}}" },
-      "search": { "title": "Search", "description": "Search the portal" },
+      "home": {
+        "title": "Home",
+        "description": "Main landing page"
+      },
+      "about": {
+        "title": "About",
+        "description": "About {{portal}}"
+      },
+      "search": {
+        "title": "Search",
+        "description": "Search the portal"
+      },
       "contact": {
         "title": "Contact",
         "description": "Ways to reach the project volunteers"
@@ -248,7 +208,9 @@
         "title": "Departments",
         "description": "Offices of the {{fullName}}"
       },
-      "barangays": { "description": "The barangays of {{lgu}}" },
+      "barangays": {
+        "description": "The barangays of {{lgu}}"
+      },
       "statsOverview": {
         "title": "Overview",
         "description": "Key figures about {{lgu}}"
@@ -309,7 +271,10 @@
         "title": "Join Us",
         "description": "Volunteer with the project"
       },
-      "ideas": { "title": "Ideas", "description": "Suggest improvements" }
+      "ideas": {
+        "title": "Ideas",
+        "description": "Suggest improvements"
+      }
     }
   },
   "search": {
@@ -476,7 +441,10 @@
     "emailTitle": "Email",
     "emailBody": "Accessibility feedback and accommodation requests.",
     "lastUpdated": "This accessibility statement was last updated on <time>July 27, 2026</time>.",
-    "revise": "We revise it when supported features or known gaps change."
+    "revise": "We revise it when supported features or known gaps change.",
+    "githubTitle": "Feedback",
+    "githubBody": "Report an accessibility problem or ask for an accommodation by opening an issue on GitHub.",
+    "githubLink": "Open a GitHub issue"
   },
   "terms": {
     "seoTitle": "Terms of Service",
@@ -584,7 +552,8 @@
     "contactTitle": "Contact Information",
     "contactLead": "For questions about these terms or content concerns, contact:",
     "educational": "This website provides public domain information for educational and informational purposes only.",
-    "effective": "Effective as of September 23, 2025"
+    "effective": "Effective as of September 23, 2025",
+    "contactGithub": "the project's GitHub issues"
   },
   "notFound": {
     "seoTitle": "Page Not Found!",
