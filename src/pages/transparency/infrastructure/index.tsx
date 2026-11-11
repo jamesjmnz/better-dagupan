@@ -14,6 +14,7 @@ import {
   TrendingUp,
   Wallet,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { StatCard } from '@/components/ui/StatCard';
 import { ModuleHeader } from '@/components/layout/PageLayouts';
@@ -31,6 +32,7 @@ import { DPWHProject, INDICES, client } from '@/lib/meilisearch';
 
 export default function InfrastructurePage() {
   const navigate = useNavigate();
+  const { t } = useTranslation('transparency');
 
   // External URLs constructed from config
   const dpwhDashboardUrl = useMemo(
@@ -53,11 +55,27 @@ export default function InfrastructurePage() {
   const [error, setError] = useState(false);
 
   const STATUS_OPTIONS = [
-    { label: 'Active', value: 'On-Going' },
-    { label: 'Completed', value: 'Completed' },
-    { label: 'For Procurement', value: 'For Procurement' },
-    { label: 'Not Yet Started', value: 'Not Yet Started' },
-    { label: 'Terminated', value: 'Terminated' },
+    // Values are the DPWH status strings the filter matches exactly.
+    {
+      label: t('infrastructure.statusOptions.active'),
+      value: 'On-Going',
+    },
+    {
+      label: t('infrastructure.statusOptions.completed'),
+      value: 'Completed',
+    },
+    {
+      label: t('infrastructure.statusOptions.forProcurement'),
+      value: 'For Procurement',
+    },
+    {
+      label: t('infrastructure.statusOptions.notYetStarted'),
+      value: 'Not Yet Started',
+    },
+    {
+      label: t('infrastructure.statusOptions.terminated'),
+      value: 'Terminated',
+    },
   ];
 
   // Helper function to get badge variant based on status
@@ -201,14 +219,14 @@ export default function InfrastructurePage() {
     <div className='animate-in fade-in mx-auto max-w-full space-y-8 px-4 pb-20 duration-500 md:px-8'>
       {/* Header + Search + Status Toggle  */}
       <ModuleHeader
-        title='Infrastructure Projects'
-        description={`Monitoring of national DPWH infrastructure projects within ${lguLabels.name}.`}
+        title={t('infrastructure.title')}
+        description={t('infrastructure.description', { lgu: lguLabels.name })}
       >
         <div className='flex w-full flex-col items-center gap-4 md:w-auto md:flex-row'>
           <SearchInput
             value={query}
             onChangeValue={setQuery}
-            placeholder='Search projects...'
+            placeholder={t('infrastructure.searchPlaceholder')}
             className='md:w-72'
           />
           <SelectPicker
@@ -217,7 +235,7 @@ export default function InfrastructurePage() {
             onSelect={selected =>
               setSelectedStatuses(selected.map(opt => opt.value))
             }
-            placeholder='Select status...'
+            placeholder={t('infrastructure.statusPlaceholder')}
             className='md:w-56'
             searchable={false}
             clearable={true}
@@ -228,33 +246,37 @@ export default function InfrastructurePage() {
       {/* Stats Grid  */}
       <CardGrid columns={4}>
         <StatCard
-          label='Total Allocation'
+          label={t('infrastructure.stats.totalAllocation')}
           value={formatPesoAdaptive(stats.totalBudget).fullString}
-          subtext='Current List'
+          subtext={t('infrastructure.stats.currentList')}
           icon={Wallet}
           iconBg='bg-kapwa-green-50 text-kapwa-green-600'
         />
 
         <StatCard
-          label='Avg Progress'
+          label={t('infrastructure.stats.avgProgress')}
           value={`${stats.avgProgress.toFixed(1)}%`}
-          subtext='Completion Rate'
+          subtext={t('infrastructure.stats.completionRate')}
           icon={TrendingUp}
           iconBg='bg-kapwa-bg-brand-weak text-kapwa-text-brand'
         />
 
         <StatCard
-          label='Project Count'
+          label={t('infrastructure.stats.projectCount')}
           value={stats.count}
-          subtext='Projects Found'
+          subtext={t('infrastructure.stats.projectsFound')}
           icon={FileText}
           iconBg='bg-kapwa-bg-surface-raised text-kapwa-text-strong'
         />
 
         <StatCard
-          label='Fiscal Year'
-          value={stats.infraYear ? String(stats.infraYear) : 'N/A'}
-          subtext='Most Recent'
+          label={t('infrastructure.stats.fiscalYear')}
+          value={
+            stats.infraYear
+              ? String(stats.infraYear)
+              : t('infrastructure.notAvailable')
+          }
+          subtext={t('infrastructure.stats.mostRecent')}
           icon={CalendarCheck}
           iconBg='bg-kapwa-orange-50 text-kapwa-orange-600'
         />
@@ -272,21 +294,21 @@ export default function InfrastructurePage() {
         </div>
       ) : error ? (
         <EmptyState
-          title='Unavailable'
-          message='Could not connect to transparency engine.'
+          title={t('infrastructure.unavailableTitle')}
+          message={t('infrastructure.unavailableMessage')}
           icon={AlertCircle}
         />
       ) : results.length === 0 ? (
         <EmptyState
           title={
             selectedStatuses[0] === 'On-Going'
-              ? 'No Active Projects'
-              : 'No Records Found'
+              ? t('infrastructure.noActiveTitle')
+              : t('infrastructure.noRecordsTitle')
           }
           message={
             selectedStatuses[0] === 'On-Going'
-              ? 'There are no reported on-going DPWH projects in this area.'
-              : 'Try adjusting your search.'
+              ? t('infrastructure.noActiveMessage')
+              : t('infrastructure.noRecordsMessage')
           }
           icon={HardHat}
         />
@@ -297,17 +319,19 @@ export default function InfrastructurePage() {
               <thead className='border-kapwa-border-weak bg-kapwa-bg-surface-raised text-kapwa-text-disabled border-b text-xs font-bold tracking-wider uppercase'>
                 <tr>
                   <th className='hidden w-32 px-3 py-3 md:table-cell md:px-6 md:py-4'>
-                    Contract ID
+                    {t('infrastructure.table.contractId')}
                   </th>
-                  <th className='px-3 py-3 sm:px-6 sm:py-4'>Description</th>
+                  <th className='px-3 py-3 sm:px-6 sm:py-4'>
+                    {t('infrastructure.table.description')}
+                  </th>
                   <th className='px-3 py-3 text-right sm:px-6 sm:py-4'>
-                    Budget
+                    {t('infrastructure.table.budget')}
                   </th>
                   <th className='hidden px-3 py-3 text-center md:table-cell md:px-6 md:py-4'>
-                    Progress
+                    {t('infrastructure.table.progress')}
                   </th>
                   <th className='px-3 py-3 text-center sm:px-6 sm:py-4'>
-                    Status
+                    {t('infrastructure.table.status')}
                   </th>
                 </tr>
               </thead>
@@ -409,12 +433,10 @@ export default function InfrastructurePage() {
             </div>
             <div>
               <h4 className='text-kapwa-text-strong mb-1 font-bold'>
-                Data & Analytics
+                {t('infrastructure.analyticsTitle')}
               </h4>
               <p className='text-kapwa-text-disabled text-xs leading-relaxed'>
-                View detailed budget breakdowns, regional comparisons, and
-                contractor performance charts on BetterGov Transparency
-                Dashboard.
+                {t('infrastructure.analyticsBody')}
               </p>
             </div>
           </div>
@@ -424,7 +446,8 @@ export default function InfrastructurePage() {
             rel='noreferrer'
             className='text-kapwa-text-inverse bg-kapwa-brand-600 hover:bg-kapwa-brand-700 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold transition-colors'
           >
-            Open Transparency Dashboard <ExternalLink className='h-3 w-3' />
+            {t('infrastructure.analyticsAction')}{' '}
+            <ExternalLink className='h-3 w-3' />
           </a>
         </div>
 
@@ -435,12 +458,10 @@ export default function InfrastructurePage() {
             </div>
             <div>
               <h4 className='text-kapwa-text-strong mb-1 font-bold'>
-                Citizen Verification
+                {t('infrastructure.verifyTitle')}
               </h4>
               <p className='text-kapwa-text-disabled text-xs leading-relaxed'>
-                Report issues, upload photos, and verify actual physical
-                progress of infrastructure projects in your barangay on
-                Bisto.ph.
+                {t('infrastructure.verifyBody')}
               </p>
             </div>
           </div>
@@ -450,7 +471,8 @@ export default function InfrastructurePage() {
             rel='noreferrer'
             className='text-kapwa-text-inverse bg-kapwa-brand-600 hover:bg-kapwa-brand-700 inline-flex w-full items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-xs font-bold transition-colors'
           >
-            Visit Bisto.ph <ExternalLink className='h-3 w-3' />
+            {t('infrastructure.verifyAction')}{' '}
+            <ExternalLink className='h-3 w-3' />
           </a>
         </div>
       </div>

@@ -20,6 +20,7 @@ import {
   Users,
   Video,
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 // --- Components ---
 import { DetailSection } from '@/components/layout/PageLayouts';
@@ -126,23 +127,31 @@ interface DPWHProjectDetail {
 }
 
 // --- Helpers ---
-const formatDate = (dateString?: string | null) => {
-  if (!dateString) return 'N/A';
+const formatDate = (
+  dateString: string | null | undefined,
+  locale: string,
+  fallback: string
+) => {
+  if (!dateString) return fallback;
   try {
-    return new Date(dateString).toLocaleDateString('en-PH', {
+    return new Date(dateString).toLocaleDateString(locale, {
       year: 'numeric',
       month: 'long',
       day: 'numeric',
     });
   } catch {
-    return 'N/A';
+    return fallback;
   }
 };
 
-const formatDateTime = (dateString?: string | null) => {
-  if (!dateString) return 'N/A';
+const formatDateTime = (
+  dateString: string | null | undefined,
+  locale: string,
+  fallback: string
+) => {
+  if (!dateString) return fallback;
   try {
-    return new Date(dateString).toLocaleString('en-PH', {
+    return new Date(dateString).toLocaleString(locale, {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -150,7 +159,7 @@ const formatDateTime = (dateString?: string | null) => {
       minute: '2-digit',
     });
   } catch {
-    return 'N/A';
+    return fallback;
   }
 };
 
@@ -175,15 +184,22 @@ const getStatusVariant = (
 
 export default function InfrastructureDetail() {
   const { contractId } = useParams<{ contractId: string }>();
+  const { t, i18n } = useTranslation('transparency');
   const [project, setProject] = useState<DPWHProjectDetail | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
+
+  const notAvailable = t('infrastructure.notAvailable');
+  const showDate = (value?: string | null) =>
+    formatDate(value, i18n.language, notAvailable);
+  const showDateTime = (value?: string | null) =>
+    formatDateTime(value, i18n.language, notAvailable);
 
   useEffect(() => {
     const loadProjectDetail = async () => {
       if (!contractId) return;
       setLoading(true);
-      setError(null);
+      setError(false);
 
       try {
         // USE API DIRECTLY FOR FULL DETAILS
@@ -199,7 +215,7 @@ export default function InfrastructureDetail() {
         setProject(result.data);
       } catch (err) {
         console.error('Error loading project detail:', err);
-        setError('Project not found or service unavailable.');
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -243,7 +259,7 @@ export default function InfrastructureDetail() {
         {label}
       </label>
       <p className='text-sm font-bold text-kapwa-text-strong wrap-break-word'>
-        {value || 'N/A'}
+        {value || notAvailable}
       </p>
     </div>
   );
@@ -260,10 +276,12 @@ export default function InfrastructureDetail() {
     return (
       <div className='container px-4 pt-20 mx-auto min-h-screen animate-in fade-in'>
         <EmptyState
-          title='Project Unavailable'
-          message={error || 'Project not found'}
+          title={t('project.unavailableTitle')}
+          message={
+            error ? t('project.unavailableMessage') : t('project.notFound')
+          }
           actionHref='/transparency/infrastructure'
-          actionLabel='Return to List'
+          actionLabel={t('project.back')}
           icon={AlertCircle}
         />
       </div>
@@ -283,7 +301,7 @@ export default function InfrastructureDetail() {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink href='/transparency/infrastructure'>
-              Infrastructure
+              {t('project.breadcrumb')}
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -299,7 +317,7 @@ export default function InfrastructureDetail() {
           to='/transparency/infrastructure'
           className='inline-flex gap-2 items-center mb-6 text-xs font-bold tracking-widest uppercase transition-colors hover:text-kapwa-text-brand text-kapwa-text-disabled'
         >
-          <ArrowLeft className='w-4 h-4' /> Return to List
+          <ArrowLeft className='w-4 h-4' /> {t('project.back')}
         </Link>
 
         <div className='flex flex-col gap-6'>
@@ -316,11 +334,11 @@ export default function InfrastructureDetail() {
               </span>
               {project.isLive && (
                 <Badge variant='error' className='animate-pulse'>
-                  Live Stream
+                  {t('project.liveStream')}
                 </Badge>
               )}
               {project.isVerifiedByDpwh && (
-                <Badge variant='success'>DPWH Verified</Badge>
+                <Badge variant='success'>{t('project.dpwhVerified')}</Badge>
               )}
             </div>
             <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold leading-tight'>
@@ -339,7 +357,7 @@ export default function InfrastructureDetail() {
                 <DollarSign className='w-4 h-4' />
               </div>
               <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-                Total Budget
+                {t('project.totalBudget')}
               </span>
             </div>
             <div>
@@ -350,7 +368,7 @@ export default function InfrastructureDetail() {
                 {formatPesoAdaptive(project.budget).fullString}
               </p>
               <p className='text-kapwa-text-disabled mt-0.5 text-xs font-medium'>
-                Allocated
+                {t('project.allocated')}
               </p>
             </div>
           </CardContent>
@@ -363,7 +381,7 @@ export default function InfrastructureDetail() {
                 <Coins className='w-4 h-4' />
               </div>
               <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-                Paid Amount
+                {t('project.paidAmount')}
               </span>
             </div>
             <div>
@@ -374,10 +392,12 @@ export default function InfrastructureDetail() {
                 {formatPesoAdaptive(project.amountPaid).fullString}
               </p>
               <p className='text-kapwa-text-disabled mt-0.5 text-xs font-medium'>
-                {project.budget > 0
-                  ? ((project.amountPaid / project.budget) * 100).toFixed(1)
-                  : 0}
-                % disbursed
+                {t('project.disbursed', {
+                  percent:
+                    project.budget > 0
+                      ? ((project.amountPaid / project.budget) * 100).toFixed(1)
+                      : 0,
+                })}
               </p>
             </div>
           </CardContent>
@@ -390,7 +410,7 @@ export default function InfrastructureDetail() {
                 <TrendingUp className='w-4 h-4' />
               </div>
               <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-                Progress
+                {t('project.progress')}
               </span>
             </div>
             <div>
@@ -414,7 +434,7 @@ export default function InfrastructureDetail() {
                 <Calendar className='w-4 h-4' />
               </div>
               <span className='text-kapwa-text-disabled text-[10px] font-bold tracking-widest uppercase'>
-                Fiscal Year
+                {t('project.fiscalYear')}
               </span>
             </div>
             <div>
@@ -434,15 +454,27 @@ export default function InfrastructureDetail() {
         {/* LEFT: MAIN INFO */}
         <div className='space-y-8 lg:col-span-2'>
           {/* Project Information */}
-          <DetailSection title='Project Information' icon={FileText}>
+          <DetailSection title={t('project.sections.info')} icon={FileText}>
             <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
-              <InfoRow label='Contract ID' value={project.contractId} />
-              <InfoRow label='Category' value={project.category} />
-              <InfoRow label='Infra Type' value={project.location.infraType} />
-              <InfoRow label='Program' value={project.programName} />
+              <InfoRow
+                label={t('project.fields.contractId')}
+                value={project.contractId}
+              />
+              <InfoRow
+                label={t('project.fields.category')}
+                value={project.category}
+              />
+              <InfoRow
+                label={t('project.fields.infraType')}
+                value={project.location.infraType}
+              />
+              <InfoRow
+                label={t('project.fields.program')}
+                value={project.programName}
+              />
               <div className='sm:col-span-2'>
                 <InfoRow
-                  label='Source of Funds'
+                  label={t('project.fields.sourceOfFunds')}
                   value={project.sourceOfFunds}
                 />
               </div>
@@ -450,28 +482,28 @@ export default function InfrastructureDetail() {
           </DetailSection>
 
           {/* Timeline */}
-          <DetailSection title='Timeline' icon={Calendar}>
+          <DetailSection title={t('project.sections.timeline')} icon={Calendar}>
             <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
               <InfoRow
-                label='Start Date'
-                value={formatDate(project.startDate)}
+                label={t('project.fields.startDate')}
+                value={showDate(project.startDate)}
               />
               <InfoRow
-                label='Completion Date'
-                value={formatDate(project.completionDate)}
+                label={t('project.fields.completionDate')}
+                value={showDate(project.completionDate)}
               />
               <InfoRow
-                label='Contract Effectivity'
-                value={formatDate(project.contractEffectivityDate)}
+                label={t('project.fields.contractEffectivity')}
+                value={showDate(project.contractEffectivityDate)}
               />
               <InfoRow
-                label='Expiry Date'
-                value={formatDate(project.expiryDate)}
+                label={t('project.fields.expiryDate')}
+                value={showDate(project.expiryDate)}
               />
               {project.nysReason && (
                 <div className='p-3 rounded-lg border border-kapwa-border-weak bg-kapwa-bg-surface-raised sm:col-span-2'>
                   <InfoRow
-                    label='Reason for Delay (NYS)'
+                    label={t('project.fields.delayReason')}
                     value={project.nysReason}
                   />
                 </div>
@@ -480,16 +512,16 @@ export default function InfrastructureDetail() {
           </DetailSection>
 
           {/* Contractor & Bidders (New Section!) */}
-          <DetailSection title='Contractor Information' icon={Users}>
+          <DetailSection title={t('project.sections.contractor')} icon={Users}>
             <div className='space-y-6'>
               <div>
                 <InfoRow
-                  label='Primary Contractor'
+                  label={t('project.fields.primaryContractor')}
                   value={project.contractor}
                 />
                 {project.winnerNames && (
                   <p className='mt-1 text-xs text-kapwa-text-disabled'>
-                    Winner: {project.winnerNames}
+                    {t('project.winnerNames', { names: project.winnerNames })}
                   </p>
                 )}
               </div>
@@ -497,7 +529,7 @@ export default function InfrastructureDetail() {
               {project.bidders && project.bidders.length > 0 && (
                 <div>
                   <label className='text-kapwa-text-disabled mb-3 block text-[10px] font-bold tracking-widest uppercase'>
-                    Participating Bidders
+                    {t('project.fields.bidders')}
                   </label>
                   <div className='space-y-2'>
                     {project.bidders.map((bidder, i) => (
@@ -520,7 +552,7 @@ export default function InfrastructureDetail() {
                         <div className='text-right'>
                           {bidder.isWinner && (
                             <Badge variant='success' className='mb-1'>
-                              Winner
+                              {t('project.winner')}
                             </Badge>
                           )}
                           <p className='font-mono text-xs text-kapwa-text-disabled'>
@@ -537,43 +569,47 @@ export default function InfrastructureDetail() {
 
           {/* Procurement Details (New Section!) */}
           {project.procurement && (
-            <DetailSection title='Procurement Details' icon={Gavel}>
+            <DetailSection
+              title={t('project.sections.procurement')}
+              icon={Gavel}
+            >
               <div className='space-y-6'>
                 <InfoRow
-                  label='Contract Name'
+                  label={t('project.fields.contractName')}
                   value={project.procurement.contractName}
                 />
                 <div className='grid grid-cols-1 gap-6 sm:grid-cols-2'>
-                  <InfoRow label='ABC' value={project.procurement.abc} />
                   <InfoRow
-                    label='Award Amount'
+                    label={t('project.fields.abc')}
+                    value={project.procurement.abc}
+                  />
+                  <InfoRow
+                    label={t('project.fields.awardAmount')}
                     value={project.procurement.awardAmount}
                   />
                   <InfoRow
-                    label='Status Code'
+                    label={t('project.fields.statusCode')}
                     value={project.procurement.status}
                   />
                   <InfoRow
-                    label='Funding Instrument'
+                    label={t('project.fields.fundingInstrument')}
                     value={project.procurement.fundingInstrument}
                   />
                 </div>
                 <div className='grid grid-cols-1 gap-4 pt-4 border-t border-kapwa-border-weak sm:grid-cols-3'>
                   <InfoRow
-                    label='Advertisement'
-                    value={formatDateTime(
-                      project.procurement.advertisementDate
-                    )}
+                    label={t('project.fields.advertisement')}
+                    value={showDateTime(project.procurement.advertisementDate)}
                   />
                   <InfoRow
-                    label='Bid Submission'
-                    value={formatDateTime(
+                    label={t('project.fields.bidSubmission')}
+                    value={showDateTime(
                       project.procurement.bidSubmissionDeadline
                     )}
                   />
                   <InfoRow
-                    label='Award Date'
-                    value={formatDateTime(project.procurement.dateOfAward)}
+                    label={t('project.fields.awardDate')}
+                    value={showDateTime(project.procurement.dateOfAward)}
                   />
                 </div>
               </div>
@@ -583,7 +619,9 @@ export default function InfrastructureDetail() {
           {/* Project Components (New Section!) */}
           {project.components && project.components.length > 0 && (
             <DetailSection
-              title={`Components (${project.components.length})`}
+              title={t('project.sections.components', {
+                count: project.components.length,
+              })}
               icon={Layers}
             >
               <div className='space-y-3'>
@@ -594,7 +632,7 @@ export default function InfrastructureDetail() {
                   >
                     <div className='flex justify-between items-start mb-2'>
                       <h4 className='text-sm font-bold text-kapwa-text-strong'>
-                        Component {idx + 1}
+                        {t('project.component', { number: idx + 1 })}
                       </h4>
                       <span className='border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-disabled rounded border px-1.5 py-0.5 font-mono text-[10px]'>
                         {comp.componentId}
@@ -605,20 +643,24 @@ export default function InfrastructureDetail() {
                     </p>
                     <div className='grid grid-cols-2 gap-2 text-xs'>
                       <p>
-                        <span className='text-kapwa-text-disabled'>Type:</span>{' '}
+                        <span className='text-kapwa-text-disabled'>
+                          {t('project.componentType')}
+                        </span>{' '}
                         <span className='font-medium text-kapwa-text-strong'>
                           {comp.infraType}
                         </span>
                       </p>
                       <p>
-                        <span className='text-kapwa-text-disabled'>Work:</span>{' '}
+                        <span className='text-kapwa-text-disabled'>
+                          {t('project.componentWork')}
+                        </span>{' '}
                         <span className='font-medium text-kapwa-text-strong'>
                           {comp.typeOfWork}
                         </span>
                       </p>
                       <p>
                         <span className='text-kapwa-text-disabled'>
-                          Coords:
+                          {t('project.componentCoords')}
                         </span>{' '}
                         <span className='font-mono text-kapwa-text-support'>
                           {comp.coordinates?.latitude.toFixed(5)},{' '}
@@ -636,49 +678,52 @@ export default function InfrastructureDetail() {
         {/* RIGHT: ACTIONS & MEDIA */}
         <div className='space-y-6'>
           {/* Documents */}
-          <DetailSection title='Documents' icon={Download}>
+          <DetailSection
+            title={t('project.sections.documents')}
+            icon={Download}
+          >
             {hasDocuments ? (
               <div className='space-y-2'>
                 <DocumentRow
-                  label='Advertisement'
+                  label={t('project.documents.advertisement')}
                   url={project.links?.advertisement}
                 />
                 <DocumentRow
-                  label='Notice of Award'
+                  label={t('project.documents.noticeOfAward')}
                   url={project.links?.noticeOfAward}
                 />
                 <DocumentRow
-                  label='Contract Agreement'
+                  label={t('project.documents.contractAgreement')}
                   url={project.links?.contractAgreement}
                 />
                 <DocumentRow
-                  label='Notice to Proceed'
+                  label={t('project.documents.noticeToProceed')}
                   url={project.links?.noticeToProceed}
                 />
                 <DocumentRow
-                  label='Program of Work'
+                  label={t('project.documents.programOfWork')}
                   url={project.links?.programOfWork}
                 />
                 <DocumentRow
-                  label='Engineering Design'
+                  label={t('project.documents.engineeringDesign')}
                   url={project.links?.engineeringDesign}
                 />
               </div>
             ) : (
               <div className='p-4 text-center rounded-xl border border-dashed border-kapwa-border-weak bg-kapwa-bg-surface-raised'>
                 <p className='text-xs font-medium text-kapwa-text-disabled'>
-                  No public documents available.
+                  {t('project.noDocuments')}
                 </p>
               </div>
             )}
           </DetailSection>
 
           {/* Location */}
-          <DetailSection title='Location' icon={MapPin}>
+          <DetailSection title={t('project.sections.location')} icon={MapPin}>
             <div className='space-y-4'>
               <div>
                 <InfoRow
-                  label='Region / Province'
+                  label={t('project.fields.regionProvince')}
                   value={`${project.location.region}, ${project.location.province}`}
                 />
               </div>
@@ -695,14 +740,15 @@ export default function InfrastructureDetail() {
                     rel='noopener noreferrer'
                     className='hover:border-kapwa-border-brand hover:text-kapwa-text-brand border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support flex w-full items-center justify-center gap-2 rounded-xl border py-2.5 text-xs font-bold shadow-sm transition-all'
                   >
-                    View on Google Maps <ExternalLink className='w-3 h-3' />
+                    {t('project.viewOnMaps')}{' '}
+                    <ExternalLink className='w-3 h-3' />
                   </a>
                 </>
               ) : (
                 <div className='p-4 text-center rounded-xl border border-dashed border-kapwa-border-weak bg-kapwa-bg-surface-raised'>
                   <MapPin className='mx-auto mb-2 w-6 h-6 text-kapwa-text-support' />
                   <p className='text-xs text-kapwa-text-disabled'>
-                    No coordinates available
+                    {t('project.noCoordinates')}
                   </p>
                 </div>
               )}
@@ -711,10 +757,13 @@ export default function InfrastructureDetail() {
 
           {/* Images */}
           {project.imageSummary && (
-            <DetailSection title='Images' icon={ImageIcon}>
+            <DetailSection
+              title={t('project.sections.images')}
+              icon={ImageIcon}
+            >
               <div className='flex justify-between items-center'>
                 <span className='text-sm text-kapwa-text-support'>
-                  Total Images
+                  {t('project.totalImages')}
                 </span>
                 <span className='font-bold text-kapwa-text-strong'>
                   {project.imageSummary.totalImages}
@@ -723,10 +772,10 @@ export default function InfrastructureDetail() {
               {project.imageSummary.latestImageDate && (
                 <div className='flex justify-between items-center pt-2 mt-2 border-t border-kapwa-border-weak'>
                   <span className='text-xs text-kapwa-text-disabled'>
-                    Latest
+                    {t('project.latestImage')}
                   </span>
                   <span className='text-xs font-medium text-kapwa-text-support'>
-                    {formatDate(project.imageSummary.latestImageDate)}
+                    {showDate(project.imageSummary.latestImageDate)}
                   </span>
                 </div>
               )}
@@ -738,7 +787,7 @@ export default function InfrastructureDetail() {
             <div className='p-5 rounded-2xl border-2 border-kapwa-border-danger bg-kapwa-bg-danger-weak'>
               <div className='flex gap-2 items-center mb-3 text-kapwa-text-danger'>
                 <Video className='w-5 h-5 animate-pulse' />
-                <span className='font-bold'>Live Feed</span>
+                <span className='font-bold'>{t('project.liveFeed')}</span>
               </div>
               <a
                 href={project.livestreamUrl}
@@ -746,7 +795,7 @@ export default function InfrastructureDetail() {
                 rel='noreferrer'
                 className='flex gap-2 justify-center items-center py-3 w-full font-bold rounded-xl shadow-lg transition-colors bg-kapwa-bg-danger-default text-kapwa-text-inverse hover:bg-kapwa-bg-danger-default'
               >
-                Watch Stream <ExternalLink className='w-4 h-4' />
+                {t('project.watchStream')} <ExternalLink className='w-4 h-4' />
               </a>
             </div>
           )}
@@ -754,7 +803,7 @@ export default function InfrastructureDetail() {
           {/* Bisto Link */}
           <div className='p-4 rounded-xl border border-kapwa-border-weak bg-kapwa-bg-surface-raised'>
             <p className='mb-3 text-xs leading-relaxed text-kapwa-text-disabled'>
-              Verify status on national platform.
+              {t('project.verifyNational')}
             </p>
             <a
               href={`https://bisto.ph/project/${encodeURIComponent(project.contractId)}`} //waiting for bisto.ph PR
@@ -762,7 +811,7 @@ export default function InfrastructureDetail() {
               rel='noreferrer'
               className='hover:border-kapwa-border-brand hover:text-kapwa-text-brand border-kapwa-border-weak bg-kapwa-bg-surface text-kapwa-text-support flex w-full items-center justify-center gap-2 rounded-xl border py-2.5 text-xs font-bold shadow-sm transition-all'
             >
-              Search on Bisto.ph <Search className='w-3 h-3' />
+              {t('project.searchBisto')} <Search className='w-3 h-3' />
             </a>
           </div>
         </div>
@@ -770,14 +819,14 @@ export default function InfrastructureDetail() {
 
       <div className='pt-8 text-center'>
         <p className='text-xs text-kapwa-text-disabled'>
-          Source:{' '}
+          {t('project.source')}{' '}
           <a
             href='https://transparency.bettergov.ph/dpwh/'
             target='_blank'
             rel='noopener noreferrer'
             className='inline-flex gap-1 items-center font-bold transition-colors text-kapwa-text-brand hover:text-kapwa-text-brand-bold hover:underline'
           >
-            DPWH Infrastructure Transparency Interface via {config.portal.name}
+            {t('project.sourceLink', { portal: config.portal.name })}
             <ExternalLink className='w-3 h-3' />
           </a>
         </p>
