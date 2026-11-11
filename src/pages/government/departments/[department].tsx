@@ -165,6 +165,13 @@ export default function DepartmentDetail() {
               <span>{dept.email}</span>
             </a>
           )}
+          {/* null means not verified, not "has none": say so instead of leaving a gap. */}
+          {!dept.website && !dept.email && (
+            <NotVerified label={t('departments.onlineContactNotVerified')} />
+          )}
+          {dept.website && !dept.email && (
+            <NotVerified label={t('departments.emailNotVerified')} />
+          )}
         </div>
       </Card>
 
