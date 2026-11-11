@@ -177,6 +177,7 @@ export default function FinancialPieChart({
     }
     return data.filter(d => d.value > 0);
   }, [drillDownItem, data]);
+  const activeTotal = activeData.reduce((acc, curr) => acc + curr.value, 0);
 
   // Handlers
   const onSliceClick = (entry: ChartDataPoint) => {
@@ -273,6 +274,16 @@ export default function FinancialPieChart({
                   return (
                     <Cell
                       key={`cell-${index}`}
+                      // Recharts renders each slice as role="img"; give it
+                      // the name, amount and share as its text alternative.
+                      aria-label={t('chart.sliceLabel', {
+                        name: entry.name,
+                        amount: formatPesoAdaptive(entry.value).fullString,
+                        percent: (activeTotal > 0
+                          ? (entry.value / activeTotal) * 100
+                          : 0
+                        ).toFixed(1),
+                      })}
                       fill={getFillColor(index)}
                       className={`transition-all duration-300 outline-none ${
                         hasDetails ? 'hover:opacity-80' : ''
