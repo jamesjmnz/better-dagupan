@@ -133,19 +133,106 @@ test.describe('Barangays Pages', () => {
         name: /PSGC — Barangays in the City of Dagupan/,
       })
     ).toHaveAttribute('href', /^https:\/\/psa\.gov\.ph\//);
-    await expect(page.getByText(/Last verified/)).toBeVisible();
+    await expect(page.getByText(/Last verified/).first()).toBeVisible();
   });
 
-  test('barangay detail page states that officials are not verified', async ({
+  test('barangay detail page names a corroborated Punong Barangay with the term', async ({
+    page,
+  }) => {
+    await gotoDetail(page, 'lucao');
+
+    const officials = page.locator(
+      'section[aria-labelledby="officials-heading"]'
+    );
+    await expect(
+      officials.getByText('Punong Barangay', { exact: true })
+    ).toBeVisible();
+    await expect(
+      officials.getByText('Marcelino D. Fernandez', { exact: true })
+    ).toBeVisible();
+    await expect(officials.getByText('Term 2023–2028').first()).toBeVisible();
+
+    // Why the 2023 officials are still the incumbents.
+    await expect(
+      officials.getByText(/elected on 30 October 2023 remain in office/)
+    ).toBeVisible();
+  });
+
+  test('barangay detail page says why a withheld name is withheld', async ({
     page,
   }) => {
     await gotoDetail(page, 'bonuan-gueset');
 
+    const officials = page.locator(
+      'section[aria-labelledby="officials-heading"]'
+    );
+
+    // The Punong Barangay is withheld: the roster and the city's articles give
+    // different given names. The SK chair is corroborated and published.
     await expect(
-      page.getByText(/officials of this barangay are not published here yet/i)
+      officials.getByText('The holder of this seat is not published here yet.')
+    ).toHaveCount(1);
+    await expect(
+      officials.getByText(/different given names for this seat's holder/)
     ).toBeVisible();
-    // The reason is given, so an empty section does not read as neglect.
-    await expect(page.getByText(/2018–2020 term/)).toBeVisible();
+    await expect(
+      officials.getByText('Jomar Vidal Abalos', { exact: true })
+    ).toBeVisible();
+
+    // Neither of the names the sources disagree about reaches the page.
+    await expect(officials).not.toContainText('Bumanglag');
+
+    // Kagawad are not listed, and the page says so rather than omitting them.
+    await expect(
+      officials.getByText(/Sangguniang Barangay members \(kagawad\)/)
+    ).toBeVisible();
+  });
+
+  test('a roster-only name is not published', async ({ page }) => {
+    await gotoDetail(page, 'tebeng');
+
+    const officials = page.locator(
+      'section[aria-labelledby="officials-heading"]'
+    );
+
+    // Only the city's roster names anyone here, so both seats are withheld,
+    // each with its reason, and the seat and term still show.
+    await expect(
+      officials.getByText('The holder of this seat is not published here yet.')
+    ).toHaveCount(2);
+    await expect(
+      officials.getByText(/Only the city government's roster names anyone/)
+    ).toHaveCount(2);
+    await expect(officials.getByText('Term 2023–2028')).toHaveCount(2);
+    await expect(officials).not.toContainText('Gomez');
+    await expect(officials).not.toContainText('Calimlim');
+
+    // The superseded explanation must not come back.
+    await expect(page.getByText(/2018–2020 term/)).toHaveCount(0);
+  });
+
+  test('the officials section cites the laws behind the term', async ({
+    page,
+  }) => {
+    await gotoDetail(page, 'lucao');
+
+    const officials = page.locator(
+      'section[aria-labelledby="officials-heading"]'
+    );
+    const sources = officials.getByRole('region', { name: 'Sources' });
+
+    await expect(
+      sources.getByRole('link', { name: /^Republic Act No\. 12326/ })
+    ).toHaveAttribute('href', /elibrary\.judiciary\.gov\.ph/);
+    await expect(
+      sources.getByRole('link', { name: /Minute Resolution No\. 26-0842/ })
+    ).toHaveAttribute('href', /comelec\.gov\.ph/);
+    await expect(
+      sources.getByRole('link', { name: 'Barangay Captains' })
+    ).toHaveAttribute('href', /dagupan\.gov\.ph\/officials\/barangay-captains/);
+    await expect(
+      sources.getByRole('link', { name: 'Hon. Marcelino D. Fernandez' })
+    ).toHaveAttribute('href', /sp\.dagupan\.gov\.ph/);
   });
 
   test('unknown details are not presented as established absences', async ({
@@ -193,7 +280,8 @@ test.describe('Barangays Pages', () => {
 
     // Only the PSA backs the published fields. Listing the 2018-2020 page
     // among the sources would imply a superseded document supports the data.
-    const sources = page.getByRole('region', { name: 'Source' });
+    // Exact, because the officials section has its own "Sources" region.
+    const sources = page.getByRole('region', { name: 'Source', exact: true });
     await expect(sources).toContainText('Philippine Statistics Authority');
     await expect(sources).not.toContainText('Barangay Captains');
   });
