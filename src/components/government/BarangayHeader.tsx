@@ -28,7 +28,7 @@ export function BarangayHeader({ barangay }: BarangayHeaderProps) {
     <header
       className='bg-kapwa-bg-surface border-kapwa-border-weak rounded-xl border p-6 shadow-sm'
       role='banner'
-      aria-label='Barangay information header'
+      aria-label={t('barangays.headerLabel')}
     >
       {/* Top Row: Name + Classification */}
       <div className='mb-4 flex items-center justify-between gap-4'>

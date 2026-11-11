@@ -155,7 +155,8 @@
     "addressNotVerified": "No verified address",
     "punongBarangay": "Punong Barangay",
     "viewProfile": "View profile",
-    "profileOf": "View the profile of {{name}}"
+    "profileOf": "View the profile of {{name}}",
+    "headerLabel": "Barangay information header"
   },
   "departments": {
     "title": "City Departments",

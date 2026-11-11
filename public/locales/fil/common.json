@@ -155,7 +155,8 @@
     "addressNotVerified": "Walang beripikadong address",
     "punongBarangay": "Punong Barangay",
     "viewProfile": "Tingnan ang profile",
-    "profileOf": "Tingnan ang profile ng {{name}}"
+    "profileOf": "Tingnan ang profile ng {{name}}",
+    "headerLabel": "Panimulang impormasyon ng barangay"
   },
   "departments": {
     "title": "Mga Kagawaran ng Lungsod",
