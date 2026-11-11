@@ -2,7 +2,7 @@
 
 This guide documents how Better Dagupan integrates with [BetterGov's Meilisearch instance](https://search2.bettergov.ph) to display filtered transparency data for the City of Dagupan. The pattern comes from the [BetterLB](https://github.com/BetterLosBanos/betterlb) template. The key insight is that we leverage BetterGov.ph's existing Meilisearch infrastructure and national datasets—filtering and searching only for data relevant to our specific LGU.
 
-**Current state on `main`:** infrastructure (DPWH) is live, filtered by `Region I`, `Pangasinan 2nd DEO`, and the name "Dagupan". Procurement (PhilGEPS) shows a "source pending" state because `transparency.procurement.organizationName` is empty; the entity names, checked against the live index, are in review in [#9](https://github.com/jamesjmnz/better-dagupan/pull/9). Financial data (SRE) is empty.
+**Current state on `main`:** infrastructure (DPWH) is live, filtered by `Region I`, `Pangasinan 2nd DEO`, and the name "Dagupan". Procurement (PhilGEPS) is live, filtered by the two exact entity names in `transparency.procurement.organizationNames`. The procurement page also lists the city's own bid and award notices from its WordPress feed (`/api/city-procurement`), which is not part of Meilisearch. Financial data (SRE) is not in Meilisearch either: it is a local JSON file published from BLGF's own workbooks (see [Financial Transparency](#financial-transparency)).
 
 Other LGUs can follow this same pattern to implement their own transparency portals without setting up their own Meilisearch instances or scraping data.
 
@@ -26,7 +26,7 @@ Better Dagupan leverages **BetterGov.ph's existing Meilisearch infrastructure** 
 |---------|-------------|------------------|
 | **Procurement** | PhilGEPS (all national contracts) | Filter by `organization_name` |
 | **Infrastructure** | DPWH (all national projects) | Filter by `region`, `province`, `municipality` |
-| **Financial** | SRE (local LGU financial reports) | Download from data.bettergov.ph |
+| **Financial** | SRE and ARI (BLGF fiscal data) | Local JSON, not Meilisearch |
 
 ### Requirements
 
@@ -61,7 +61,7 @@ Better Dagupan leverages **BetterGov.ph's existing Meilisearch infrastructure** 
 |----------|-------|
 | `https://search2.bettergov.ph` | Meilisearch host (public search-only key) |
 | `https://api.dpwh.bettergov.ph/projects/{id}` | DPWH project detail API |
-| `https://data.bettergov.ph` | SRE/ARI financial data downloads |
+| `https://blgf.gov.ph/lgu-fiscal-data/` | BLGF SRE/ARI workbooks (read when publishing, not at runtime) |
 
 ---
 
@@ -170,19 +170,20 @@ VITE_MEILISEARCH_API_KEY=
 
 ### Key Implementation Details
 
-1. **Organization Filter**: Filter by the LGU's exact PhilGEPS entity name, read from config
+1. **Organization Filter**: Filter by the LGU's exact PhilGEPS entity names, read from config
    ```typescript
-   const ORG_NAME = config.transparency.procurement.organizationName;
-   // Every query and outbound link is gated on a configured name, so an empty
-   // value shows "source pending" instead of another entity's records.
-   const ORG_CONFIGURED = ORG_NAME.trim().length > 0;
-   const ORG_FILTER = `organization_name = "${ORG_NAME}"`;
+   const ORG_NAMES = config.transparency.procurement.organizationNames.filter(
+     name => name.trim().length > 0
+   );
+   // Every query and outbound link is gated on at least one configured name,
+   // so an empty list shows "source pending" instead of another entity's records.
+   const ORG_CONFIGURED = ORG_NAMES.length > 0;
+   const ORG_FILTER = `organization_name IN [${ORG_NAMES.map(name => JSON.stringify(name)).join(', ')}]`;
    ```
 
    PhilGEPS lists the City Government of Dagupan under two exact names,
    `CITY OF DAGUPAN  - PANGASINAN` (note the double space) and
-   `CITY OF DAGUPAN, PANGASINAN`. The change in review in #9 turns the field into
-   an `organizationNames` array and filters with `organization_name IN [...]`.
+   `CITY OF DAGUPAN, PANGASINAN`, so the config holds both, current name first.
 
 2. **Search Query**: With debouncing (400ms) and pagination
    ```typescript
@@ -195,11 +196,15 @@ VITE_MEILISEARCH_API_KEY=
    });
    ```
 
-3. **Statistics**: Pre-computed stats from organization index
+3. **Statistics**: Pre-computed stats from the organization index, summed over the exact names
    ```typescript
    const orgIndex = client.index(INDICES.PHILGEPS_ORGS);
-   const statsRes = await orgIndex.search(ORG_NAME, { limit: 1 });
-   // Returns: { count: total, total: sum of contract_amount }
+   // The organizations search is fuzzy, so keep only the hit whose
+   // organization_name equals each configured name, then add them up.
+   const responses = await Promise.all(
+     ORG_NAMES.map(name => orgIndex.search(name, { limit: 20 }))
+   );
+   // Each matching hit: { count, total } for that entity name
    ```
 
 4. **CSV Export**: Client-side CSV generation from search results
@@ -281,26 +286,40 @@ console.log(orgs);
 
 ### Data Source
 
-Financial data comes from the **SRE (Statement of Receipts and Expenditures)** files:
+Financial data is not in Meilisearch. Better Dagupan publishes it as local JSON,
+read from the **Bureau of Local Government Finance (BLGF)** workbooks at
+`https://blgf.gov.ph/lgu-fiscal-data/`:
 
-- **SRE Data**: `https://data.bettergov.ph/datasets/9/resources/30`
-- **ARI Data**: `https://data.bettergov.ph/datasets/9/resources/31`
+- **Statements of Receipts and Expenditures (SRE)**: quarterly and full-year,
+  in `src/data/transparency/sre.json`
+- **Annual Regular Income (ARI)**: in `src/data/statistics/ari.json`
+
+Each statement cites its BLGF workbook in `src/data/sources/civic-sources.json`.
+The extraction rules, cross-checks, and withheld lines are recorded in
+[`docs/civic-data-verification.md`](./civic-data-verification.md).
 
 ### Data Processing Pipeline
 
-1. **Download JSON** from data.bettergov.ph
-2. **Save to** `src/data/transparency/sre.json`
+1. **Read the LGU's row** from the BLGF quarterly and by-LGU workbooks
+2. **Save to** `src/data/transparency/sre.json`, with `sources` on every statement
 3. **Transform** using `src/data/transparency/budgetData.ts`
 
 ### Key Data Structure
 
 ```typescript
-interface FinancialQuarter {
-  period: string;              // e.g., "Q1-2024"
+// Abridged from src/types/budgetTypes.ts
+interface FinancialStatement {
+  period: string;              // "Q3-2025" (year to date) or "FY-2025" (full year)
+  fiscal_year: number;
+  quarter: 1 | 2 | 3 | 4 | null;
+  basis: 'year_to_date' | 'annual';
+  blgf_label: string;          // the period heading as BLGF prints it
+  status: 'final' | 'preliminary' | null;
   location_info: {
-    lgu: string;
-    province: string;
     region: string;
+    province: string;
+    lgu_name: string;
+    lgu_type: string;
   };
   current_operating_income: {
     local_sources: { ... };
@@ -311,14 +330,21 @@ interface FinancialQuarter {
     general_public_services: number;
     social_services: { ... };
     economic_services: number;
+    debt_service_interest_expense: number;
     total_current_operating_expenditures: number;
   };
-  fund_summary?: {
-    fund_cash_balance_end: number;
-    net_increase_decrease_in_funds: number;
-  };
+  net_operating_income_loss_from_current_operations: number;
+  non_income_receipts: { ... };
+  non_operating_expenditures: { ... };
+  fund_summary: { ... };
+  withheld: { field: string; reason: 'conflicting_sources' }[];
+  sources: string[];           // civic-source ids
 }
 ```
+
+BLGF's quarterly statements are year to date, so a Q3 statement covers January
+to September. Quarters are never added together; the full year is its own
+`annual` statement.
 
 ### Data Access Pattern
 
@@ -327,9 +353,9 @@ interface FinancialQuarter {
 import budgetData from '@/data/transparency/budgetData';
 
 // The data is processed locally with:
-// - Year/quarter selection
-// - Year-over-year comparison
-// - Aggregation functions (aggregateIncome, aggregateExpenditures)
+// - Year and quarter selection
+// - A quarter view (year-to-date statements) and a year view (the annual statement)
+// - A comparison baseline from the previous year
 ```
 
 ---
@@ -447,9 +473,9 @@ from there. If you copy the pages into another project, the equivalent code is:
 #### Procurement Page (`src/pages/transparency/procurement/index.tsx`)
 
 ```typescript
-// The exact PhilGEPS entity name, confirmed against the index
-const ORG_NAME = '[EXACT PHILGEPS ENTITY NAME]';
-const ORG_FILTER = `organization_name = "${ORG_NAME}"`;
+// The exact PhilGEPS entity names, each confirmed against the index
+const ORG_NAMES = ['[EXACT PHILGEPS ENTITY NAME]'];
+const ORG_FILTER = `organization_name IN [${ORG_NAMES.map(name => JSON.stringify(name)).join(', ')}]`;
 
 // Search query (rest of code remains the same)
 const index = client.index(INDICES.PHILGEPS);
@@ -495,11 +521,11 @@ const exactMatches = hits.filter(h => {
 
 Financial data (SRE) is not in Meilisearch. You have two options:
 
-**Option A: Use data.bettergov.ph (Recommended)**
-1. Visit https://data.bettergov.ph
-2. Search for your LGU
-3. Download SRE/ARI JSON files
-4. Process with existing `budgetData.ts`
+**Option A: Use BLGF's published fiscal data (what Better Dagupan does)**
+1. Download the SRE and ARI workbooks from https://blgf.gov.ph/lgu-fiscal-data/
+2. Read your LGU's row and cite each workbook in `src/data/sources/civic-sources.json`
+3. Save the statements in the shape `budgetData.ts` expects
+4. Follow [`docs/civic-data-verification.md`](./civic-data-verification.md) for the cross-checks
 
 **Option B: Skip It**
 - Focus on Procurement and Infrastructure (both work out-of-the-box)
@@ -511,7 +537,7 @@ Always attribute BetterGov.ph as the data source:
 
 ```jsx
 <footer>
-  <p className='text-xs text-slate-400'>
+  <p className='text-xs text-kapwa-text-support'>
     Data provided by{' '}
     <a href='https://transparency.bettergov.ph' target='_blank'>
       BetterGov.ph Transparency Portal
@@ -825,7 +851,8 @@ interface DPWHProject {
 - **PhilGEPS Official**: https://philgeps.gov.ph
 - **DPWH Official**: https://dpwh.gov.ph
 - **Bisto.ph (Citizen Verification)**: https://bisto.ph
-- **data.bettergov.ph (SRE/ARI Data)**: https://data.bettergov.ph
+- **BLGF LGU Fiscal Data (SRE/ARI)**: https://blgf.gov.ph/lgu-fiscal-data/
+- **data.bettergov.ph**: https://data.bettergov.ph
 
 ---
 
