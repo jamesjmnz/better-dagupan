@@ -67,12 +67,29 @@ Most LGU-specific values live here. This is Better Dagupan's file, abridged:
   },
   "transparency": {
     "procurement": {
-      "organizationName": "",
-      "externalDashboard": "https://transparency.bettergov.ph/organizations/"
+      "organizationNames": [
+        "CITY OF DAGUPAN  - PANGASINAN",
+        "CITY OF DAGUPAN, PANGASINAN"
+      ],
+      "externalDashboard": "https://transparency.bettergov.ph/organizations/",
+      "cityNotices": {
+        "api": "https://www.dagupan.gov.ph/wp-json/wp/v2",
+        "postType": "bac",
+        "typeTaxonomy": "bac-type",
+        "pageUrl": "https://www.dagupan.gov.ph/bac/"
+      }
     },
     "infrastructure": {
       "searchString": "Dagupan",
       "exactMatchTargets": ["dagupan", "dagupan city"]
+    }
+  },
+  "openlgu": {
+    "councilFeed": {
+      "api": "https://sp.dagupan.gov.ph/wp-json/wp/v2",
+      "postType": "ordinance",
+      "taxonomy": "classification",
+      "pageUrl": "https://sp.dagupan.gov.ph/ordinance/"
     }
   },
   "features": {
@@ -96,14 +113,22 @@ Notes on individual fields:
 - **`lgu.districtEngineeringOffice`** is the DPWH `location.province` value for
   your district office, such as `Pangasinan 2nd DEO`. Check it against the live
   index rather than guessing it.
-- **`transparency.procurement.organizationName`** is the exact PhilGEPS entity
-  name. Leave it empty until you have confirmed it against the
-  `philgeps_organizations` index; with an empty value the procurement page shows
-  a "source pending" state instead of another entity's records. Better Dagupan's
-  value is still empty on `main`. A change in review
-  ([#9](https://github.com/jamesjmnz/better-dagupan/pull/9)) replaces the field
-  with an `organizationNames` array, because PhilGEPS lists the city under two
-  exact names.
+- **`transparency.procurement.organizationNames`** lists the exact PhilGEPS
+  entity names, current name first. PhilGEPS can list one LGU under several
+  names over time; Dagupan has two, one of them with a double space. Leave the
+  array empty until each name is confirmed against the `philgeps_organizations`
+  index; while it is empty the procurement page shows a "source pending" state
+  instead of another entity's records.
+- **`transparency.procurement.cityNotices`** points at the WordPress REST API
+  where the LGU posts its own bid and award notices (`api`, the custom
+  `postType`, the `typeTaxonomy` for procurement modes, and the public
+  `pageUrl`). Leave it out if your LGU has no such feed; the section is then
+  hidden.
+- **`openlgu.councilFeed`** does the same for the ordinances the local council
+  posts (`api`, `postType`, the classification `taxonomy`, and `pageUrl`). The
+  OpenLGU page lists them only while no legislative database is bound. Without
+  it, `/api/council-ordinances` answers `404` and the page shows its empty
+  state.
 - **`portal.domain`** and **`portal.baseUrl`** can stay empty until you have a
   domain. SEO canonical URLs are then root-relative.
 
@@ -218,7 +243,8 @@ functions/utils/lgu.ts           ← Council name and official website for the A
 The LGU's name, full name, province, type, and official website; the portal's
 name, logos, links, and contact email; the labels for the executive and the
 Sanggunian; SEO titles; the home map and weather coordinates on the frontend;
-the procurement and infrastructure filters; and which sections are enabled.
+the procurement and infrastructure filters; the city notices and council
+ordinance feeds; and which sections are enabled.
 
 ### What still is not
 
@@ -227,7 +253,7 @@ Search for these when you fork, because changing the config does not change them
 | Place | What is hardcoded |
 |---|---|
 | `functions/api/weather.ts` | `DEFAULT_CITY` name and coordinates for the weather endpoint |
-| `functions/index.ts`, `functions/api/weather.ts` | CORS allow-lists of portal origins |
+| `functions/utils/origins.ts`, `functions/weather.ts` | CORS allow-lists of portal origins |
 | `wrangler.jsonc` | Pages project name, `GITHUB_REPO`, and the KV/D1 bindings |
 | `.github/workflows/deploy.yml` | `--project-name` for the Pages deploy |
 | `scripts/openlgu/` | Collector URLs, source keys, and term data — still the template's `losbanos.gov.ph` and Sangguniang Bayan values |
@@ -250,8 +276,11 @@ it, check by hand that:
   set; the wizard writes `lat`/`lng` with zeros and `weather.enabled`
 - `lgu.region` holds the DPWH region value and `lgu.districtEngineeringOffice` is
   present; the wizard does not ask for the district office
-- `transparency.procurement.organizationName` is empty unless you have verified
-  it; the wizard proposes the uppercased full name, which is a guess
+- `transparency.procurement.organizationNames` is empty unless you have
+  verified each name; the wizard proposes the uppercased full name, which is a
+  guess
+- `transparency.procurement.cityNotices` and `openlgu.councilFeed` are set only
+  if your LGU publishes such feeds; the wizard does not ask for them
 
 ---
 
@@ -262,8 +291,8 @@ npm run build
 # Deploy dist/ to Cloudflare Pages
 ```
 
-The Pages Functions in `functions/` (weather, the OpenLGU API, and the admin
-API) need Cloudflare Pages. `.github/workflows/deploy.yml` deploys there when the
+The Pages Functions in `functions/` (weather, the city procurement and council
+ordinance feeds, the OpenLGU API, and the admin API) need Cloudflare Pages. `.github/workflows/deploy.yml` deploys there when the
 `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` secrets are set. See the
 Deployment section of [`README.md`](./README.md#-deployment) for the bindings and
 secrets the functions expect.
