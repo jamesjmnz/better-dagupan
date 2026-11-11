@@ -4,7 +4,7 @@ import { assertKapwaTokens } from '../utils/kapwa';
 /**
  * The office directory is published from three official city rosters that
  * contradict each other, so these tests cover two things at once: that the 34
- * verified offices reach the screen intact, and that the eleven heads the
+ * verified offices reach the screen intact, and that the seven heads the
  * portal deliberately withholds are presented as withheld rather than as
  * offices that simply have no leader.
  *
@@ -15,7 +15,9 @@ import { assertKapwaTokens } from '../utils/kapwa';
 const DEPARTMENT_COUNT = 34;
 
 /** Official pages name a different person for this office, so none is shown. */
-const CONFLICTING_HEAD_SLUG = 'city-health-office';
+const CONFLICTING_HEAD_SLUG = 'one-stop-business-center';
+/** The rosters disagreed here until a dated city article settled it. */
+const SETTLED_HEAD_SLUG = 'city-health-office';
 /** Only one page family names anyone here. */
 const UNCORROBORATED_HEAD_SLUG = 'bids-and-awards-committee';
 /** Both page families agree on this one, so the name is published. */
@@ -128,14 +130,58 @@ test.describe('Departments Pages', () => {
     ).toBeVisible();
 
     // Neither contested name may appear anywhere on the page.
-    await expect(page.getByText(/De Venecia/)).toHaveCount(0);
-    await expect(page.getByText(/Ophelia/)).toHaveCount(0);
+    await expect(page.getByText(/Ngilay/)).toHaveCount(0);
 
     // The office itself is still published, with its corroborated numbers.
     await expect(
-      page.getByRole('heading', { name: 'City Health Office' })
+      page.getByRole('heading', { name: 'One-Stop Business Center' })
     ).toBeVisible();
+    await expect(page.getByText('(075) 649-6951')).toBeVisible();
+  });
+
+  test('a conflict settled by a dated article names the head and cites it', async ({
+    page,
+  }) => {
+    await gotoDetail(page, SETTLED_HEAD_SLUG);
+
+    await expect(
+      page.getByRole('heading', { name: 'Ma. Julita P. De Venecia' })
+    ).toBeVisible();
+
+    // The head carries its own citation, which includes the dated article.
+    const citations = page.getByRole('region', { name: /Sources|Source/ });
+    await expect(citations).toHaveCount(2);
+    await expect(
+      citations.last().getByRole('link', { name: /World Teachers/ })
+    ).toHaveAttribute('href', /dagupan\.gov\.ph/);
+
+    // The older roster's name is not shown.
+    await expect(page.getByText(/Ophelia/)).toHaveCount(0);
     await expect(page.getByText('(075) 522-8206')).toBeVisible();
+  });
+
+  test('the committee shows the address and number its own notices give', async ({
+    page,
+  }) => {
+    await gotoDetail(page, UNCORROBORATED_HEAD_SLUG);
+
+    await expect(
+      page.getByText(/BAC Office, 2nd Floor, City Hall Complex/)
+    ).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: '0917-855-3267' })
+    ).toHaveAttribute('href', 'tel:+639178553267');
+    // Its two published emails disagree, so neither is shown.
+    await expect(page.getByText(/bacdagupan|asi_aaron/)).toHaveCount(0);
+  });
+
+  test('the council office links to the council website', async ({ page }) => {
+    await gotoDetail(page, 'sangguniang-panlungsod');
+
+    await expect(
+      page.getByRole('link', { name: 'Website', exact: true })
+    ).toHaveAttribute('href', 'https://sp.dagupan.gov.ph/');
+    await expect(page.getByText('No verified address').first()).toBeVisible();
   });
 
   test('an office named by only one source says why the head is withheld', async ({
@@ -238,7 +284,7 @@ test.describe('Departments Pages', () => {
     await expect(
       page.getByText(/Hindi pa inilalathala rito ang pinuno/)
     ).toBeVisible();
-    await expect(page.getByText(/De Venecia/)).toHaveCount(0);
+    await expect(page.getByText(/Ngilay/)).toHaveCount(0);
   });
 
   test('departments index page visual snapshot @visual', async ({ page }) => {
