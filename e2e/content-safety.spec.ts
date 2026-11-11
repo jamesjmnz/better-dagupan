@@ -62,21 +62,19 @@ test.describe('Honest empty states', () => {
     });
   }
 
-  test('the empty state does not claim a search came up empty', async ({
-    page,
-  }) => {
-    // Any page still waiting for verified records will do; the services
-    // directory is one.
-    await page.goto('/services');
+  // Every empty route also must not read as a search that found nothing.
+  for (const path of emptyRoutes) {
+    test(`${path} does not claim a search came up empty`, async ({ page }) => {
+      await page.goto(path);
 
-    // Routes are lazy-loaded, so wait for the empty state to mount before
-    // reading the document text.
-    await expect(page.getByText(/not been added yet/i).first()).toBeVisible();
+      // Routes are lazy-loaded, so wait for the empty state to mount before
+      // reading the document text.
+      await expect(page.getByText(/not been added yet/i).first()).toBeVisible();
 
-    const body = await page.locator('body').innerText();
-    expect(body).not.toMatch(/no results found/i);
-    expect(body).toMatch(/not been added yet/i);
-  });
+      const body = await page.locator('body').innerText();
+      expect(body).not.toMatch(/no results found/i);
+    });
+  }
 });
 
 test.describe('Homepage history', () => {
