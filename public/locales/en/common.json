@@ -18,7 +18,10 @@
     "government": "Government",
     "governmentDesc": "Officials & departments",
     "statistics": "Statistics",
-    "statisticsDesc": "Population & demographics"
+    "statisticsDesc": "Population & demographics",
+    "resultCount_one": "{{count}} result",
+    "resultCount_other": "{{count}} results",
+    "matchingServices": "Matching services"
   },
   "services": {
     "title": "Popular Services",
@@ -103,7 +106,12 @@
     "learnMore": "Learn More",
     "directoryTitle": "Official Directory",
     "directoryDescription": "Find contact information for government officials, agencies, and offices at national and local levels.",
-    "viewDirectory": "View Directory"
+    "viewDirectory": "View Directory",
+    "barangayCount_one": "{{count}} Barangay",
+    "barangayCount_other": "{{count}} Barangays",
+    "departmentCount_one": "{{count}} Department",
+    "departmentCount_other": "{{count}} Departments",
+    "electedOfficialsBadge": "Elected Officials"
   },
   "disclaimer": {
     "short": "{{portal}} is an independent, community-led project. It is not the official website of the City Government of {{lgu}}.",
@@ -328,5 +336,19 @@
     "showLess": "Show less",
     "earlierNotVerified": "Earlier history not yet verified",
     "earlierNotVerifiedHint": "This timeline begins with the 1947 city charter because that is where Better Dagupan has found official texts. Accounts of the town's earlier history and of its name have not yet been matched to an authoritative source. It is not a statement that that history is unknown."
+  },
+  "weatherMap": {
+    "title": "Weather and Map of {{lgu}}",
+    "loading": "Loading weather...",
+    "unavailable": "Weather data is temporarily unavailable.",
+    "noData": "No weather data available.",
+    "hall": "{{lgu}} Hall",
+    "hall_city": "{{lgu}} City Hall",
+    "hall_municipality": "{{lgu}} Municipal Hall",
+    "hall_province": "{{lgu}} Provincial Capitol",
+    "location": "{{province}}, Philippines",
+    "mapLabel": "Interactive map of {{hall}}",
+    "noscript": "JavaScript is required to view the interactive map.",
+    "viewOnMap": "View {{hall}} on OpenStreetMap"
   }
 }

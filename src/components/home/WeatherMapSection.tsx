@@ -7,11 +7,11 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/leaflet.css';
 import { Droplet, LoaderIcon, MapPin, Sun, Wind } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { Card, CardContent } from '@/components/ui/Card';
 
 import { config } from '@/lib/lguConfig';
-import { lguLabels } from '@/lib/lguLabels';
 import { fetchWeatherData, weatherIcons } from '@/lib/weather';
 
 const DefaultIcon = L.icon({
@@ -28,9 +28,18 @@ interface LeafletHTMLElement extends HTMLElement {
 }
 
 export default function WeatherMapSection() {
+  const { t } = useTranslation('common');
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
+
+  const hall = t('weatherMap.hall', {
+    context: config.lgu.type,
+    lgu: config.lgu.name,
+  });
+  const hallLocation = t('weatherMap.location', {
+    province: config.lgu.province,
+  });
 
   // Fetch weather data
   useEffect(() => {
@@ -40,17 +49,9 @@ export default function WeatherMapSection() {
         const data = await fetchWeatherData(); // WeatherData[]
         setWeather(data[0] ?? null);
       } catch (err: unknown) {
-        const message =
-          err instanceof Error ? err.message : 'Failed to fetch weather data';
-        if (
-          message.includes('503') ||
-          message.includes('API unavailable') ||
-          message.toLowerCase().includes('offline')
-        ) {
-          setError('Weather data is temporarily unavailable.');
-        } else {
-          setError(message);
-        }
+        // The reader sees one translated notice; the cause stays in the console.
+        console.error('Weather data unavailable:', err);
+        setError(true);
       } finally {
         setLoading(false);
       }
@@ -110,9 +111,9 @@ export default function WeatherMapSection() {
         config.location.coordinates.lon,
       ]).addTo(mapInstance);
       const popupContent = document.createElement('div');
-      popupContent.textContent = `${config.lgu.fullName} ${lguLabels.adjective} Hall`;
+      popupContent.textContent = hall;
       const popupSub = document.createElement('div');
-      popupSub.textContent = `${config.lgu.province}, Philippines`;
+      popupSub.textContent = hallLocation;
       popupContent.appendChild(popupSub);
       marker.bindPopup(popupContent);
 
@@ -147,7 +148,7 @@ export default function WeatherMapSection() {
         }
       }
     };
-  }, []);
+  }, [hall, hallLocation]);
 
   // Safe hourly forecast
   const hourlyForecast: HourlyForecast[] =
@@ -167,7 +168,7 @@ export default function WeatherMapSection() {
         {/* Header - restored */}
         <div className='mb-12 text-center'>
           <h2 className='text-2xl font-bold md:text-3xl text-kapwa-text-strong'>
-            Weather and Map of {config.lgu.name}
+            {t('weatherMap.title', { lgu: config.lgu.name })}
           </h2>
         </div>
 
@@ -178,10 +179,12 @@ export default function WeatherMapSection() {
               {loading ? (
                 <div className='text-kapwa-text-support flex items-center gap-2'>
                   <LoaderIcon className='h-5 w-5 animate-spin' />
-                  Loading weather...
+                  {t('weatherMap.loading')}
                 </div>
               ) : error ? (
-                <p className='text-kapwa-text-danger'>{error}</p>
+                <p className='text-kapwa-text-danger'>
+                  {t('weatherMap.unavailable')}
+                </p>
               ) : weather ? (
                 <>
                   {/* Top: Temp & Condition */}
@@ -236,7 +239,7 @@ export default function WeatherMapSection() {
                 </>
               ) : (
                 <p className='text-kapwa-text-strong'>
-                  No weather data available.
+                  {t('weatherMap.noData')}
                 </p>
               )}
             </CardContent>
@@ -248,19 +251,18 @@ export default function WeatherMapSection() {
               id='map-container'
               className='h-64 w-full md:flex-1'
               role='application'
-              aria-label={`Interactive map of ${config.lgu.fullName} ${lguLabels.adjective} Hall`}
+              aria-label={t('weatherMap.mapLabel', { hall })}
             >
               <noscript>
                 <div className='text-kapwa-text-support p-4 text-sm'>
-                  JavaScript is required to view the interactive map.
+                  {t('weatherMap.noscript')}
                   <a
                     href={`https://www.openstreetmap.org/?mlat=${config.location.coordinates.lat}&mlon=${config.location.coordinates.lon}#map=15/${config.location.coordinates.lat}/${config.location.coordinates.lon}`}
                     target='_blank'
                     rel='noopener noreferrer'
                     className='text-kapwa-text-brand ml-1 underline'
                   >
-                    View {config.lgu.fullName} {lguLabels.adjective} Hall on
-                    OpenStreetMap
+                    {t('weatherMap.viewOnMap', { hall })}
                   </a>
                 </div>
               </noscript>
@@ -268,7 +270,7 @@ export default function WeatherMapSection() {
             <div className='border-kapwa-border-weak bg-kapwa-bg-surface flex items-center gap-2 border-t p-3'>
               <MapPin className='text-kapwa-text-brand h-5 w-5' />
               <span className='text-kapwa-text-support text-sm font-medium'>
-                {config.lgu.fullName} {lguLabels.adjective} Hall
+                {hall}
               </span>
             </div>
           </div>
