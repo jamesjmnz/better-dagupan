@@ -86,6 +86,13 @@ const routes: Route[] = [
   { name: 'about', path: '/about' },
   { name: 'report an error', path: '/report-an-error' },
   { name: 'sitemap', path: '/sitemap' },
+  { name: 'contact', path: '/contact' },
+  { name: 'accessibility statement', path: '/accessibility' },
+  { name: 'terms of service', path: '/terms-of-service' },
+  { name: 'ideas', path: '/ideas' },
+  { name: 'join us', path: '/join-us' },
+  { name: 'contribute', path: '/contribute' },
+  { name: 'exchange rates', path: '/data/forex' },
 ];
 
 test.describe('Accessibility', () => {
