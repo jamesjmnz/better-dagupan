@@ -14,11 +14,11 @@ import { config } from '@/lib/lguConfig';
 import { SEO } from '@/components/layout/SEO';
 
 const TermsOfService: FC = () => {
-  const { t } = useTranslation('pages');
+  const { t, i18n } = useTranslation('pages');
   const list = (key: string) =>
     t(`terms.${key}`, { returnObjects: true }) as string[];
   const publicDomain = list('publicDomain');
-  const currentDate = new Date().toLocaleDateString('en-US', {
+  const currentDate = new Date().toLocaleDateString(i18n.language, {
     year: 'numeric',
     month: 'long',
     day: 'numeric',

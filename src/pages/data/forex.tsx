@@ -18,7 +18,7 @@ import { ForexRate } from '../../types';
 import { getCurrencyFlag } from '../../data/currencyFlags';
 
 const ForexPage: FC = () => {
-  const { t } = useTranslation('pages');
+  const { t, i18n } = useTranslation('pages');
   const [forexRates, setForexRates] = useState<ForexRate[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -325,7 +325,7 @@ const ForexPage: FC = () => {
                           tick={{ fontSize: 12 }}
                           tickFormatter={value => {
                             const date = new Date(value);
-                            return date.toLocaleDateString('en-US', {
+                            return date.toLocaleDateString(i18n.language, {
                               month: 'short',
                               day: 'numeric',
                             });
@@ -343,7 +343,7 @@ const ForexPage: FC = () => {
                           ]}
                           labelFormatter={label => {
                             const date = new Date(label);
-                            return date.toLocaleDateString('en-US', {
+                            return date.toLocaleDateString(i18n.language, {
                               weekday: 'long',
                               year: 'numeric',
                               month: 'long',
@@ -430,7 +430,7 @@ const ForexPage: FC = () => {
                   </div>
                   <p className='text-kapwa-text-support mt-4 text-sm'>
                     {t('forex.providedBy', {
-                      date: new Date().toLocaleDateString('en-US', {
+                      date: new Date().toLocaleDateString(i18n.language, {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric',
