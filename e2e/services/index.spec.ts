@@ -164,6 +164,20 @@ test.describe('Services Index Page with published services', () => {
     await expect.poll(() => cards.count()).toBeLessThanOrEqual(initialCount);
   });
 
+  test('an active filter can be removed by its named button', async ({
+    page,
+  }) => {
+    await page.locator('[data-testid="filter-bar-toggle"]').click();
+    await page.locator('[data-testid="filter-source-official"]').click();
+
+    const remove = page.getByRole('button', {
+      name: 'Remove filter: Official',
+    });
+    await expect(remove).toBeVisible();
+    await remove.click();
+    await expect(remove).toHaveCount(0);
+  });
+
   test('filter by classification never adds results', async ({ page }) => {
     const cards = page.locator(serviceCards);
     const initialCount = await cards.count();

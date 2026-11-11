@@ -26,6 +26,7 @@
     "suggest": "Suggest New Service"
   },
   "index": {
+    "removeFilter": "Remove filter: {{filter}}",
     "emptyTitle": "No services found",
     "emptyMessage": "We couldn't find any services matching your filters. Try adjusting your search or filters.",
     "results": "{{total}} Results"
