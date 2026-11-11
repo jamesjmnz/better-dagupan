@@ -157,6 +157,7 @@ export const Navbar: FC = () => {
                     {t(`navbar.${item.label.toLowerCase()}`)}
                     {hasChildren && (
                       <ChevronDownIcon
+                        aria-hidden='true'
                         className={cn(
                           'h-3 w-3 transition-transform',
                           hoveredDropdown === item.label && 'rotate-180'
@@ -205,12 +206,14 @@ export const Navbar: FC = () => {
               onClick={toggleMenu}
               variant='ghost'
               aria-label={t('navigation:toggleMenu')}
+              aria-expanded={isOpen}
+              aria-controls='mobile-menu'
               className='p-3 w-12 h-12 rounded-xl bg-kapwa-bg-surface-raised text-kapwa-text-strong'
             >
               {isOpen ? (
-                <XIcon className='w-6 h-6' />
+                <XIcon className='w-6 h-6' aria-hidden='true' />
               ) : (
-                <MenuIcon className='w-6 h-6' />
+                <MenuIcon className='w-6 h-6' aria-hidden='true' />
               )}
             </Button>
           </div>
@@ -219,11 +222,16 @@ export const Navbar: FC = () => {
 
       {/* 3. MOBILE MENU OVERLAY: RESTORED NESTING */}
       {isOpen && (
-        <div className='animate-in slide-in-from-right fixed inset-0 top-[104px] z-40 overflow-y-auto bg-kapwa-bg-surface duration-300 lg:hidden'>
+        <div
+          id='mobile-menu'
+          className='animate-in slide-in-from-right fixed inset-0 top-[104px] z-40 overflow-y-auto bg-kapwa-bg-surface duration-300 lg:hidden'
+        >
           <div className='flex flex-col p-4 pb-20'>
             {mainNavigation.map(item => {
               const hasChildren = item.children && item.children.length > 0;
               const isSubOpen = activeMobileSubmenu === item.label;
+              const sectionLabel = t(`navbar.${item.label.toLowerCase()}`);
+              const submenuId = `mobile-submenu-${item.label.toLowerCase()}`;
 
               return (
                 <div
@@ -241,7 +249,7 @@ export const Navbar: FC = () => {
                           : 'text-kapwa-text-strong'
                       )}
                     >
-                      {t(`navbar.${item.label.toLowerCase()}`)}
+                      {sectionLabel}
                     </Link>
                     {hasChildren && (
                       <Button
@@ -250,9 +258,15 @@ export const Navbar: FC = () => {
                           setActiveMobileSubmenu(isSubOpen ? null : item.label);
                         }}
                         variant='ghost'
+                        aria-label={t('navigation:toggleSubmenu', {
+                          section: sectionLabel,
+                        })}
+                        aria-expanded={isSubOpen}
+                        aria-controls={submenuId}
                         className='p-3 w-12 h-12 text-kapwa-text-support'
                       >
                         <ChevronDownIcon
+                          aria-hidden='true'
                           className={cn(
                             'h-6 w-6 transition-transform',
                             isSubOpen && 'rotate-180'
@@ -264,7 +278,10 @@ export const Navbar: FC = () => {
 
                   {/* Mobile Submenu Items */}
                   {hasChildren && isSubOpen && (
-                    <div className='overflow-hidden mx-2 mb-2 rounded-2xl animate-in slide-in-from-top-2 bg-kapwa-bg-surface-raised'>
+                    <div
+                      id={submenuId}
+                      className='overflow-hidden mx-2 mb-2 rounded-2xl animate-in slide-in-from-top-2 bg-kapwa-bg-surface-raised'
+                    >
                       {item.children?.map(child => (
                         <Link
                           key={child.label}

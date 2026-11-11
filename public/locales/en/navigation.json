@@ -13,6 +13,7 @@
   },
   "search": "Search",
   "toggleMenu": "Toggle Menu",
+  "toggleSubmenu": "{{section}} submenu",
   "mobile": {
     "joinUs": "🚀 Join the Revolution",
     "about": "About {{portal}}",
