@@ -47,6 +47,18 @@ const SOURCE_FAMILY: Record<string, string> = {
   'dagupan-lgu-department-heads-the-city': 'city-the-city-roster',
   'dagupan-lgu-contact-us': 'city-contact-page',
   'dagupan-lgu-2025-local-election-results': 'city-election-report',
+  // Dated city articles come from one newsroom, so they are one family
+  // however many of them agree.
+  'dagupan-lgu-2026-world-teachers-day': 'city-news',
+  'dagupan-lgu-2025-agriculture-palay-seeds': 'city-news',
+  'dagupan-lgu-2026-csc-prime-hrm': 'city-news',
+  'dagupan-lgu-2025-history-wall': 'city-news',
+  // The committee's own procurement issuances.
+  'dagupan-lgu-bac-itb-goods-113cb-2026': 'bac-issuance',
+  // The site-wide navigation of dagupan.gov.ph.
+  'dagupan-lgu-home': 'city-site-navigation',
+  // The council's own website, published by the Sangguniang Panlungsod.
+  'dagupan-sp-councilors': 'council-site',
 };
 
 /**
@@ -54,14 +66,132 @@ const SOURCE_FAMILY: Record<string, string> = {
  * quietly publishing one later fails here rather than passing unnoticed.
  */
 const CONFLICTING_HEADS = [
-  'City Agriculture Office',
-  'City Health Office',
-  'City Human Resource Management Office',
   'City Information Office',
-  'City Tourism Office',
   'Office of Senior Citizens Affairs',
   'One-Stop Business Center',
 ];
+
+/**
+ * Heads once withheld because the two roster families named different people,
+ * now published because a dated city article names the same person as the
+ * Directory-family rosters. Every name is recorded exactly as each cited source
+ * prints it, and the older roster's name is kept so the test can assert it is
+ * never published.
+ */
+const SETTLED_BY_DATED_NEWS: Record<
+  string,
+  { surname: string; namedAs: Record<string, string>; superseded: string }
+> = {
+  'city-health-office': {
+    surname: 'De Venecia',
+    namedAs: {
+      'dagupan-lgu-directories': 'Dr. Ma. Julita P. De Venecia',
+      'dagupan-lgu-department-heads-officials': 'Dr. Ma. Julita P. De Venecia',
+      'dagupan-lgu-2026-world-teachers-day': 'Dra. Julita De Venecia',
+    },
+    superseded: 'Ophelia',
+  },
+  'city-agriculture-office': {
+    surname: 'Salomon',
+    namedAs: {
+      'dagupan-lgu-directories': 'Ms. Mary Ann A. Salomon',
+      'dagupan-lgu-department-heads-officials': 'Ms. Mary Ann A. Salomon',
+      'dagupan-lgu-2025-agriculture-palay-seeds': 'Chief Mary Ann Salomon',
+    },
+    superseded: 'Dizon',
+  },
+  'city-human-resource-management-office': {
+    surname: 'Fermill',
+    namedAs: {
+      'dagupan-lgu-directories': 'Atty. Froiland Jover F. Fermill',
+      'dagupan-lgu-department-heads-officials':
+        'Atty. Froiland Jover F. Fermill',
+      'dagupan-lgu-2026-csc-prime-hrm': 'Atty. Froiland Fermill',
+    },
+    superseded: 'Balolong',
+  },
+  'city-tourism-office': {
+    surname: 'Maramba',
+    namedAs: {
+      'dagupan-lgu-directories': 'Ms. Sharon M. Maramba',
+      'dagupan-lgu-department-heads-officials': 'Ms. Sharon M. Maramba',
+      'dagupan-lgu-2025-history-wall':
+        'Tourism Officer-in-Charge Sharon Maramba',
+    },
+    superseded: 'Reyna',
+  },
+};
+
+/**
+ * Every published address and website, and the numbers added after the first
+ * edition, with the sources that state each one. A value is published only where two source families state it,
+ * except an address, which may also rest on the office's own dated issuance:
+ * the committee's Invitations to Bid name the room bids must be delivered to.
+ */
+const CONTACT_EVIDENCE: Record<
+  string,
+  {
+    trunkline?: Record<string, string[]>;
+    website?: { value: string; sources: string[] };
+    address?: {
+      value: string;
+      sources: string[];
+      basis: 'two-families' | 'own-dated-issuance';
+    };
+  }
+> = {
+  'office-of-the-city-mayor': {
+    address: {
+      value: '2F Dagupan City Hall Complex, AB Fernandez Ave., Dagupan City',
+      sources: ['dagupan-lgu-directories', 'dagupan-lgu-contact-us'],
+      basis: 'two-families',
+    },
+  },
+  'bids-and-awards-committee': {
+    trunkline: {
+      '0917-855-3267': [
+        'dagupan-lgu-department-heads-officials',
+        'dagupan-lgu-bac-itb-goods-113cb-2026',
+      ],
+    },
+    address: {
+      value:
+        'BAC Office, 2nd Floor, City Hall Complex, A.B. Fernandez Ave., Dagupan City',
+      sources: ['dagupan-lgu-bac-itb-goods-113cb-2026'],
+      basis: 'own-dated-issuance',
+    },
+  },
+  'sangguniang-panlungsod': {
+    website: {
+      value: 'https://sp.dagupan.gov.ph/',
+      sources: ['dagupan-lgu-home', 'dagupan-sp-councilors'],
+    },
+  },
+};
+
+/**
+ * Values an official source states but this portal withholds, each because the
+ * sources disagree or only one undated page states it. Asserted absent so a
+ * later edit cannot slip one in without revisiting the reason.
+ */
+const WITHHELD_CONTACTS = [
+  // BAC email: the roster and the committee's own Invitations to Bid differ.
+  'bacdagupan@gmail.com',
+  'asi_aaron@yahoo.com',
+  // Sangguniang Panlungsod address: the council site's footer only.
+  'SP Building',
+  // Single-page emails for the General Services Office and the sports program.
+  'officegsodagupan2016@gmail.com',
+  '2022dcsc@gmail.com',
+];
+
+/**
+ * The council publishes its own website. It is a city body, but a different
+ * publisher from the city government, so only the council's own office record
+ * may cite it.
+ */
+const COUNCIL_AGENCY = 'Sangguniang Panlungsod, Dagupan City';
+const COUNCIL_OFFICE = 'sangguniang-panlungsod';
 
 /** Offices only one page family names anyone for. */
 const UNCORROBORATED_HEADS = [
@@ -70,9 +200,6 @@ const UNCORROBORATED_HEADS = [
   'Dagupan City Public Library & Information Center',
   'Youth and Sports Development Program',
 ];
-
-/** The one office the city publishes an address for on two separate pages. */
-const OFFICE_WITH_ADDRESS = 'Office of the City Mayor';
 
 /**
  * Listed on the city's directory page but not part of the city government:
@@ -171,7 +298,13 @@ describe('department records', () => {
           `${department.office_name} cites historical source "${id}"`
         ).toBeNull();
 
-        expect(source.agency).toBe('City Government of Dagupan');
+        if (department.slug === COUNCIL_OFFICE) {
+          expect(['City Government of Dagupan', COUNCIL_AGENCY]).toContain(
+            source.agency
+          );
+        } else {
+          expect(source.agency).toBe('City Government of Dagupan');
+        }
       }
     }
   });
@@ -236,6 +369,69 @@ describe('department records', () => {
     }
   });
 
+  it('settles a roster conflict only with a dated article naming the same person', () => {
+    // The rosters are undated, so a disagreement between them cannot be
+    // settled by preferring one. A dated city article can settle it, but only
+    // when it names the person one roster family names, matched on surname
+    // and a given name, and the head is then cited to those sources alone.
+    const tokens = (name: string) =>
+      name
+        .replace(/[.,]/g, ' ')
+        .split(/\s+/)
+        .filter(Boolean)
+        .map(t => t.toLowerCase());
+
+    for (const [slug, evidence] of Object.entries(SETTLED_BY_DATED_NEWS)) {
+      const department = departments.find(d => d.slug === slug);
+      const head = department?.department_head;
+
+      expect(head, `${slug} should publish its settled head`).toBeTruthy();
+      expect(department!.department_head_status).toBe('published');
+
+      // Every cited source has its rendering recorded, and nothing else is cited.
+      expect([...head!.sources].sort()).toEqual(
+        Object.keys(evidence.namedAs).sort()
+      );
+
+      const surname = tokens(evidence.surname).join(' ');
+      expect(tokens(head!.name).join(' ').endsWith(surname)).toBe(true);
+      // Given names, without initials or the abbreviation "Ma.".
+      const givenNames = tokens(
+        head!.name.slice(0, head!.name.length - evidence.surname.length)
+      ).filter(t => t.length > 2);
+      expect(givenNames.length, slug).toBeGreaterThan(0);
+
+      for (const [id, rendering] of Object.entries(evidence.namedAs)) {
+        const rendered = tokens(rendering);
+        expect(
+          rendered.join(' '),
+          `${slug}: ${id} does not print the surname`
+        ).toContain(surname);
+
+        expect(
+          givenNames.some(name => rendered.includes(name)),
+          `${slug}: ${id} shares no given name with "${head!.name}"`
+        ).toBe(true);
+      }
+
+      // One of the two families is a dated city article.
+      const dated = head!.sources.filter(
+        id => SOURCE_FAMILY[id] === 'city-news'
+      );
+      expect(dated.length, slug).toBeGreaterThan(0);
+      for (const id of dated) {
+        expect(getCivicSource(id).published, id).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      }
+
+      // The roster that names someone else is never cited for the head, and
+      // its name never reaches the record.
+      expect(head!.sources).not.toContain(
+        'dagupan-lgu-department-heads-the-city'
+      );
+      expect(JSON.stringify(department)).not.toContain(evidence.superseded);
+    }
+  });
+
   it('withholds the head of every office only one family names', () => {
     const uncorroborated = departments
       .filter(d => d.department_head_status === 'uncorroborated')
@@ -281,22 +477,107 @@ describe('department records', () => {
     }
   });
 
-  it('invents no address, website or office hours', () => {
+  it('publishes an address only with recorded evidence for that office', () => {
+    // An address is a claim about one office. It is never copied from city
+    // hall's address, or from another office in the same building.
     for (const department of departments) {
-      expect(department.website).toBeNull();
+      const evidence = CONTACT_EVIDENCE[department.slug]?.address;
 
-      if (department.office_name !== OFFICE_WITH_ADDRESS) {
+      if (!evidence) {
         expect(
           department.address,
           `${department.office_name} publishes an unsourced address`
         ).toBeNull();
+        continue;
+      }
+
+      expect(department.address).toBe(evidence.value);
+
+      for (const id of evidence.sources) {
+        expect(department.sources, `${department.slug}: ${id}`).toContain(id);
+      }
+
+      const families = new Set(evidence.sources.map(id => SOURCE_FAMILY[id]));
+      if (evidence.basis === 'two-families') {
+        expect(families.size, department.slug).toBeGreaterThanOrEqual(2);
+      } else {
+        // The office's own dated issuance: one source, from that office.
+        expect(evidence.sources, department.slug).toHaveLength(1);
+        expect(SOURCE_FAMILY[evidence.sources[0]]).toBe('bac-issuance');
+        expect(department.slug).toBe('bids-and-awards-committee');
       }
     }
 
-    const withAddress = departments.filter(d => d.address !== null);
+    expect(
+      departments
+        .filter(d => d.address !== null)
+        .map(d => d.slug)
+        .sort()
+    ).toEqual(
+      Object.entries(CONTACT_EVIDENCE)
+        .filter(([, evidence]) => evidence.address)
+        .map(([slug]) => slug)
+        .sort()
+    );
+  });
 
-    expect(withAddress.map(d => d.office_name)).toEqual([OFFICE_WITH_ADDRESS]);
+  it('publishes a website only where two families point to it', () => {
+    for (const department of departments) {
+      const evidence = CONTACT_EVIDENCE[department.slug]?.website;
 
+      if (!evidence) {
+        expect(
+          department.website,
+          `${department.office_name} publishes an unsourced website`
+        ).toBeNull();
+        continue;
+      }
+
+      expect(department.website).toBe(evidence.value);
+      expect(department.website).toMatch(/^https:\/\/([a-z0-9-]+\.)+gov\.ph\//);
+
+      for (const id of evidence.sources) {
+        expect(department.sources, `${department.slug}: ${id}`).toContain(id);
+      }
+      expect(
+        new Set(evidence.sources.map(id => SOURCE_FAMILY[id])).size
+      ).toBeGreaterThanOrEqual(2);
+    }
+  });
+
+  it('corroborates every added contact number with two families', () => {
+    for (const [slug, evidence] of Object.entries(CONTACT_EVIDENCE)) {
+      const department = departments.find(d => d.slug === slug)!;
+
+      for (const [number, sources] of Object.entries(
+        evidence.trunkline ?? {}
+      )) {
+        expect(department.trunkline, slug).toContain(number);
+        for (const id of sources) {
+          expect(department.sources, `${slug}: ${id}`).toContain(id);
+        }
+        expect(
+          new Set(sources.map(id => SOURCE_FAMILY[id])).size,
+          `${slug} ${number}`
+        ).toBeGreaterThanOrEqual(2);
+      }
+    }
+  });
+
+  it('keeps out the contact details the sources disagree about', () => {
+    const serialised = JSON.stringify(departments);
+
+    for (const value of WITHHELD_CONTACTS) {
+      expect(serialised, `${value} is withheld`).not.toContain(value);
+    }
+
+    // The committee has two published emails and they differ, so it has none.
+    expect(
+      departments.find(d => d.slug === 'bids-and-awards-committee')!.email
+    ).toBeNull();
+  });
+
+  it('invents no office hours', () => {
     // The city publishes opening hours for city hall as a whole and for the
     // mayor's office, never per office. Applying them to individual offices
     // would be inference, so no record carries them at all.
