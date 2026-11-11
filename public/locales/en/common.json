@@ -175,6 +175,8 @@
     "headNotVerifiedUncorroborated": "Only one official city page names anyone for this office, which is not enough to establish that the appointment is current. A name will appear once a second source confirms it.",
     "contactNotVerified": "No verified contact number",
     "addressNotVerified": "No verified address",
+    "onlineContactNotVerified": "No verified email or website",
+    "emailNotVerified": "No verified email",
     "website": "Website",
     "websiteAvailable": "Website available",
     "viewProfile": "View profile",

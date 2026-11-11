@@ -175,6 +175,8 @@
     "headNotVerifiedUncorroborated": "Iisang opisyal na pahina ng lungsod lamang ang nagbibigay ng pangalan para sa opisinang ito, na hindi sapat upang matiyak na kasalukuyan ang paghirang. Lalabas ang pangalan kapag may pangalawang pinagkunan na nagpapatunay nito.",
     "contactNotVerified": "Walang beripikadong numero ng kontak",
     "addressNotVerified": "Walang beripikadong address",
+    "onlineContactNotVerified": "Walang beripikadong email o website",
+    "emailNotVerified": "Walang beripikadong email",
     "website": "Website",
     "websiteAvailable": "May website",
     "viewProfile": "Tingnan ang profile",

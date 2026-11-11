@@ -160,6 +160,9 @@ test.describe('Departments Pages', () => {
       page.getByText('No verified contact number').first()
     ).toBeVisible();
     await expect(page.getByText('No verified address').first()).toBeVisible();
+    await expect(
+      page.getByText('No verified email or website').first()
+    ).toBeVisible();
     // Never the bare "No contact", which would assert the office has none.
     await expect(page.getByText(/^No contact$/)).toHaveCount(0);
   });
