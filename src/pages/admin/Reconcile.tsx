@@ -251,11 +251,10 @@ export default function Reconcile() {
             options={conflictTypeOptions}
             selectedValues={[conflictTypeFilter]}
             onSelect={selected => {
-              setConflictTypeFilter(
-                selected[selected.length - 1]?.value ?? 'all'
-              );
+              setConflictTypeFilter(selected[0]?.value ?? 'all');
               setPage(0);
             }}
+            multiple={false}
             searchable={false}
             className='w-40'
           />
@@ -263,9 +262,10 @@ export default function Reconcile() {
             options={statusOptions}
             selectedValues={[statusFilter]}
             onSelect={selected => {
-              setStatusFilter(selected[selected.length - 1]?.value ?? 'all');
+              setStatusFilter(selected[0]?.value ?? 'all');
               setPage(0);
             }}
+            multiple={false}
             searchable={false}
             className='w-40'
           />

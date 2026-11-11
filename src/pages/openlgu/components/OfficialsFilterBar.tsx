@@ -100,6 +100,7 @@ export default function OfficialsFilterBar({
             options={localizedRoleOptions}
             selectedValues={roleFilter ? [roleFilter] : []}
             onSelect={selected => setRoleFilter(selected[0]?.value || '')}
+            multiple={false}
             placeholder={t('filters.role')}
             size='md'
             searchable={false}
@@ -113,6 +114,7 @@ export default function OfficialsFilterBar({
             options={termOptions}
             selectedValues={termFilter ? [termFilter] : []}
             onSelect={selected => setTermFilter(selected[0]?.value || '')}
+            multiple={false}
             placeholder={t('filters.term')}
             size='md'
             searchable={true}

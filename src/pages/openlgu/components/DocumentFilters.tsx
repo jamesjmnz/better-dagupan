@@ -60,6 +60,7 @@ export default function DocumentFilters({
             options={localizedTypeOptions}
             selectedValues={[filterType]}
             onSelect={selected => setFilterType(selected[0]?.value || 'all')}
+            multiple={false}
             placeholder={t('filters.type')}
             size='md'
             searchable={false}
@@ -86,6 +87,7 @@ export default function DocumentFilters({
             options={yearOptions}
             selectedValues={year ? [year] : []}
             onSelect={selected => setYear(selected[0]?.value || '')}
+            multiple={false}
             placeholder={t('filters.year')}
             size='md'
             searchable={true}
