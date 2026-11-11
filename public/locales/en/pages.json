@@ -315,7 +315,7 @@
     "aboutTitle": "About Weather Data",
     "aboutBody": "The weather shown on this page comes from OpenWeatherMap, a commercial weather service, and is refreshed about once an hour. It is not an official PAGASA forecast.",
     "understandingTitle": "Understanding the Data",
-    "understandingBody": "Temperature is displayed in Celsius (°C). Weather conditions are categorized based on current atmospheric observations. The forecast provides a 5-day outlook to help you plan ahead.",
+    "understandingBody": "Temperature is displayed in Celsius (°C). Conditions are the latest observation for the city, not a forecast.",
     "advisoriesTitle": "Weather Advisories",
     "advisoriesBody": "For official weather advisories, warnings, and detailed forecasts, please visit the <anchor>PAGASA official website</anchor> or follow their social media channels for real-time updates.",
     "providedBy": "Weather data provided by <anchor>OpenWeather</anchor>"

@@ -315,7 +315,7 @@
     "aboutTitle": "Tungkol sa Datos ng Panahon",
     "aboutBody": "Ang lagay ng panahon sa pahinang ito ay mula sa OpenWeatherMap, isang komersyal na serbisyo sa panahon, at ina-update humigit-kumulang isang beses bawat oras. Hindi ito opisyal na taya ng PAGASA.",
     "understandingTitle": "Pag-unawa sa Datos",
-    "understandingBody": "Ipinapakita ang temperatura sa Celsius (°C). Inuuri ang lagay ng panahon batay sa kasalukuyang obserbasyon sa atmospera. Nagbibigay ang taya ng panahon ng tanaw sa loob ng 5 araw para makatulong sa iyong pagpaplano.",
+    "understandingBody": "Ipinapakita ang temperatura sa Celsius (°C). Ang lagay ng panahon ay ang pinakahuling obserbasyon para sa lungsod, hindi taya ng panahon.",
     "advisoriesTitle": "Mga Abiso sa Panahon",
     "advisoriesBody": "Para sa mga opisyal na abiso, babala, at detalyadong taya ng panahon, bisitahin ang <anchor>opisyal na website ng PAGASA</anchor> o sundan ang kanilang mga social media channel para sa real-time na update.",
     "providedBy": "Ang datos ng panahon ay mula sa <anchor>OpenWeather</anchor>"
