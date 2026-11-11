@@ -175,17 +175,14 @@ export default function ServicesPage() {
           .map(service => (
             <ServiceCard key={service.slug} service={service} />
           ))}
-
-        {/* Infinite Scroll Loader */}
-        {filteredServices.length > currentPage * ITEMS_PER_PAGE && (
-          <div
-            ref={loadMoreRef}
-            className='flex justify-center py-12 col-span-full'
-          >
-            <div className='border-kapwa-border-brand h-6 w-6 animate-spin rounded-full border-2 border-t-transparent' />
-          </div>
-        )}
       </CardGrid>
+
+      {/* Infinite Scroll Loader: outside the grid, which only holds cards */}
+      {filteredServices.length > currentPage * ITEMS_PER_PAGE && (
+        <div ref={loadMoreRef} className='flex justify-center py-12'>
+          <div className='border-kapwa-border-brand h-6 w-6 animate-spin rounded-full border-2 border-t-transparent' />
+        </div>
+      )}
     </div>
   );
 }

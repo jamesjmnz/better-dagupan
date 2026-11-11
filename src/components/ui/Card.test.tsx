@@ -315,6 +315,20 @@ describe('Card Component', () => {
       const grid = screen.getByRole('list');
       expect(grid).toBeInTheDocument();
     });
+
+    it('wraps each child in a list item', () => {
+      render(
+        <CardGrid>
+          <Card>Card 1</Card>
+          {null}
+          <Card>Card 2</Card>
+        </CardGrid>
+      );
+      const items = screen.getAllByRole('listitem');
+      expect(items).toHaveLength(2);
+      expect(items[0]).toHaveTextContent('Card 1');
+      expect(screen.getByRole('list').children).toHaveLength(2);
+    });
   });
 
   describe('CardList', () => {
@@ -337,6 +351,7 @@ describe('Card Component', () => {
       );
       const list = container.querySelector('[role="list"]');
       expect(list).toBeInTheDocument();
+      expect(screen.getByRole('listitem')).toHaveTextContent('Card');
     });
   });
 

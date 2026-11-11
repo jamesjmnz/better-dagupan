@@ -1,8 +1,10 @@
 import {
+  Children,
   HTMLAttributes,
   ImgHTMLAttributes,
   ReactNode,
   forwardRef,
+  isValidElement,
 } from 'react';
 
 import {
@@ -449,6 +451,33 @@ export const CardContactInfo = ({
 };
 
 /**
+ * Wrap each child in a `role='listitem'` element, so a `role='list'`
+ * container only owns list items (axe: aria-required-children). Callers pass
+ * plain cards or links; the wrapper is what the list owns. `grid` on the
+ * wrapper keeps a single child stretched to the cell, as it was when the
+ * child itself was the grid item.
+ */
+const ListItems = ({
+  children,
+  itemClassName,
+}: {
+  children: ReactNode;
+  itemClassName?: string;
+}) => (
+  <>
+    {Children.toArray(children).map((child, index) => (
+      <div
+        key={isValidElement(child) && child.key != null ? child.key : index}
+        role='listitem'
+        className={itemClassName}
+      >
+        {child}
+      </div>
+    ))}
+  </>
+);
+
+/**
  * CardGrid - Responsive Grid Layout
  *
  * Creates a responsive grid for displaying multiple cards.
@@ -483,7 +512,7 @@ export const CardGrid = ({
       )}
       role='list'
     >
-      {children}
+      <ListItems itemClassName='grid'>{children}</ListItems>
     </div>
   );
 };
@@ -504,7 +533,7 @@ export const CardList = ({
   className?: string;
 }) => (
   <div className={cn('space-y-4', className)} role='list'>
-    {children}
+    <ListItems>{children}</ListItems>
   </div>
 );
 

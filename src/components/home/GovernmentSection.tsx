@@ -84,7 +84,7 @@ const GovernmentSection: FC = () => {
         {/* Using documented CardGrid pattern */}
         <CardGrid columns={3}>
           {branches.map(branch => (
-            <div key={branch.id} role='listitem'>
+            <div key={branch.id}>
               <Card hover className='h-full text-center'>
                 <CardContent className='p-6'>
                   <div className='mb-4 flex justify-center'>{branch.icon}</div>
