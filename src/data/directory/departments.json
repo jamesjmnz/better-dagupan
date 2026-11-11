@@ -57,8 +57,18 @@
     "trunkline": ["(075) 523-1228"],
     "website": null,
     "email": null,
-    "department_head_status": "conflicting_sources",
-    "department_head": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Mary Ann A. Salomon",
+      "title": "City Agriculturist",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-2025-agriculture-palay-seeds"
+      ]
+    },
     "sources": [
       "dagupan-lgu-directories",
       "dagupan-lgu-department-heads-officials",
@@ -188,8 +198,18 @@
     ],
     "website": null,
     "email": null,
-    "department_head_status": "conflicting_sources",
-    "department_head": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Ma. Julita P. De Venecia",
+      "title": "City Health Officer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-2026-world-teachers-day"
+      ]
+    },
     "sources": [
       "dagupan-lgu-directories",
       "dagupan-lgu-department-heads-officials",
@@ -210,8 +230,18 @@
     "trunkline": ["(075) 600-5644"],
     "website": null,
     "email": null,
-    "department_head_status": "conflicting_sources",
-    "department_head": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Froiland Jover F. Fermill",
+      "title": "City Human Resource Management Officer",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-2026-csc-prime-hrm"
+      ]
+    },
     "sources": [
       "dagupan-lgu-directories",
       "dagupan-lgu-department-heads-officials",
@@ -424,8 +454,18 @@
     "trunkline": ["(075) 656-5056"],
     "website": null,
     "email": null,
-    "department_head_status": "conflicting_sources",
-    "department_head": null,
+    "department_head_status": "published",
+    "department_head": {
+      "name": "Sharon M. Maramba",
+      "title": "Officer-in-charge",
+      "contact": null,
+      "email": null,
+      "sources": [
+        "dagupan-lgu-directories",
+        "dagupan-lgu-department-heads-officials",
+        "dagupan-lgu-2025-history-wall"
+      ]
+    },
     "sources": [
       "dagupan-lgu-directories",
       "dagupan-lgu-department-heads-officials",
