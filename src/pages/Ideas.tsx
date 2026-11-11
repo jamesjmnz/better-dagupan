@@ -1,309 +1,101 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { Button } from '@bettergov/kapwa/button';
-import {
-  GithubIcon,
-  LightbulbIcon,
-  PlusIcon,
-  StarIcon,
-  TrendingUpIcon,
-  UsersIcon,
-} from 'lucide-react';
+import { ArrowRightIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-import { config } from '@/lib/lguConfig';
 import { SEO } from '@/components/layout/SEO';
-import { Card, CardContent } from '../components/ui/Card';
+import { config } from '@/lib/lguConfig';
 
-interface ProjectIdea {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  icon: ReactNode;
-  priority: 'high' | 'medium' | 'low';
-  complexity: 'simple' | 'moderate' | 'complex';
-  upvotes: number;
-  downvotes: number;
-}
+/*
+  The project's open plans. Each one says what it is waiting on, so no
+  status here is a promise of when it will ship.
+*/
+type Need = 'database' | 'volunteer' | 'source';
 
-const initialProjectIdeas: ProjectIdea[] = [
-  {
-    id: '1',
-    title: 'Blockchain powered community government project reporting app',
-    description:
-      'A transparent, immutable platform where citizens can report and track government projects in their communities. Uses blockchain technology to ensure data integrity and prevent tampering with project reports and progress updates.',
-    category: 'Transparency & Accountability',
-    icon: <TrendingUpIcon className='h-6 w-6' />,
-    priority: 'high',
-    complexity: 'complex',
-    upvotes: 42,
-    downvotes: 3,
-  },
-  {
-    id: '2',
-    title: 'Glassdoor for government agencies',
-    description:
-      'An anonymous review platform where government employees and citizens can rate and review government agencies, departments, and services. Provides insights into workplace culture, service quality, and areas for improvement.',
-    category: 'Public Feedback',
-    icon: <StarIcon className='h-6 w-6' />,
-    priority: 'high',
-    complexity: 'moderate',
-    upvotes: 38,
-    downvotes: 7,
-  },
-  {
-    id: '3',
-    title: `Design guidelines for ${config.portal.name}`,
-    description: `Comprehensive design system and guidelines for the ${config.portal.name} platform. Includes UI components, color schemes, typography, accessibility standards, and best practices for government web services.`,
-    category: 'Platform Development',
-    icon: <LightbulbIcon className='h-6 w-6' />,
-    priority: 'medium',
-    complexity: 'simple',
-    upvotes: 25,
-    downvotes: 2,
-  },
-  {
-    id: '4',
-    title: 'Rate the politicians',
-    description:
-      'A citizen-driven platform to rate and review elected officials based on their performance, campaign promises, voting records, and public service delivery. Includes fact-checking and transparency features.',
-    category: 'Political Accountability',
-    icon: <UsersIcon className='h-6 w-6' />,
-    priority: 'high',
-    complexity: 'moderate',
-    upvotes: 56,
-    downvotes: 12,
-  },
+const PLANS: { key: string; need: Need }[] = [
+  { key: 'legislation', need: 'database' },
+  { key: 'pangasinan', need: 'volunteer' },
+  { key: 'barangayCouncils', need: 'source' },
+  { key: 'moreServices', need: 'source' },
 ];
 
-const getPriorityColor = (priority: string) => {
-  switch (priority) {
-    case 'high':
-      return 'bg-kapwa-bg-danger-weak text-kapwa-red-800';
-    case 'medium':
-      return 'bg-kapwa-bg-warning-weak text-kapwa-orange-800';
-    case 'low':
-      return 'bg-kapwa-bg-success-weak text-kapwa-text-success';
-    default:
-      return 'bg-kapwa-bg-surface-raised text-kapwa-text-strong';
-  }
-};
-
-const getComplexityColor = (complexity: string) => {
-  switch (complexity) {
-    case 'simple':
-      return 'bg-kapwa-bg-info-weak text-kapwa-text-info';
-    case 'moderate':
-      return 'bg-kapwa-bg-accent-purple-weak text-kapwa-text-accent-purple';
-    case 'complex':
-      return 'bg-kapwa-bg-accent-orange-weak text-kapwa-orange-800';
-    default:
-      return 'bg-kapwa-bg-surface-raised text-kapwa-text-strong';
-  }
+const NEED_STYLES: Record<Need, string> = {
+  database: 'bg-kapwa-bg-info-weak text-kapwa-text-info',
+  volunteer: 'bg-kapwa-bg-accent-purple-weak text-kapwa-text-accent-purple',
+  source: 'bg-kapwa-bg-warning-weak text-kapwa-orange-800',
 };
 
 const Ideas: FC = () => {
   const { t } = useTranslation('pages');
-  const [projectIdeas] = useState<ProjectIdea[]>(initialProjectIdeas);
-  const navigate = useNavigate();
+  const values = { portal: config.portal.name, lgu: config.lgu.fullName };
+  const newIssue = `${config.portal.githubUrl}/issues/new`;
 
-  const handleSubmitIdea = () => {
-    const githubUrl = `${config.portal.githubUrl}/issues/new?assignees=&labels=enhancement%2Cidea&projects=&template=idea-submission.md&title=%5BIDEA%5D+`;
-    window.open(githubUrl, '_blank');
-  };
-
-  const handleSubmitPR = () => {
-    const githubUrl = `${config.portal.githubUrl}/contribute`;
-    window.open(githubUrl, '_blank');
-  };
   return (
     <div className='bg-kapwa-bg-surface-raised min-h-screen'>
       <SEO
         title={t('ideas.seoTitle')}
-        description={t('ideas.seoDescription')}
-        keywords={[
-          'government projects',
-          'civic tech',
-          'transparency',
-          'innovation',
-        ]}
+        description={t('ideas.seoDescription', values)}
       />
-
       <div className='container mx-auto px-4 py-8 md:py-12'>
-        {/* Header */}
-        <header className='mb-8 text-center md:mb-12'>
-          <div className='mb-4 flex items-center justify-center'>
-            <div className='bg-kapwa-bg-surface text-kapwa-text-brand mr-4 rounded-full p-3'>
-              <LightbulbIcon className='h-8 w-8' />
-            </div>
-            <h1 className='text-kapwa-text-strong kapwa-heading-xl font-extrabold'>
+        <div className='bg-kapwa-bg-surface border-kapwa-border-weak mt-4 rounded-lg border p-6 shadow-xs md:p-8 md:py-16'>
+          <div className='mx-auto max-w-3xl text-center'>
+            <h1 className='text-kapwa-text-strong kapwa-heading-xl mb-4 font-extrabold'>
               {t('ideas.title')}
             </h1>
-          </div>
-          <p className='text-kapwa-text-support mx-auto max-w-3xl text-sm md:text-lg'>
-            {t('ideas.intro')}
-          </p>
-        </header>
-
-        {/* Stats */}
-        <div className='mb-8 grid grid-cols-2 gap-4 md:mb-12 md:grid-cols-5'>
-          <div className='bg-kapwa-bg-surface rounded-lg p-4 text-center shadow-xs'>
-            <div className='text-kapwa-text-brand text-2xl font-bold'>
-              {projectIdeas.length}
-            </div>
-            <div className='text-kapwa-text-support text-sm'>
-              {t('ideas.stats.total')}
-            </div>
-          </div>
-          <div className='bg-kapwa-bg-surface rounded-lg p-4 text-center shadow-xs'>
-            <div className='text-kapwa-red-800 text-2xl font-bold'>
-              {projectIdeas.filter(idea => idea.priority === 'high').length}
-            </div>
-            <div className='text-kapwa-text-support text-sm'>
-              {t('ideas.stats.highPriority')}
-            </div>
-          </div>
-          <div className='bg-kapwa-bg-surface rounded-lg p-4 text-center shadow-xs'>
-            <div className='text-kapwa-text-info text-2xl font-bold'>
-              {new Set(projectIdeas.map(idea => idea.category)).size}
-            </div>
-            <div className='text-kapwa-text-support text-sm'>
-              {t('ideas.stats.categories')}
-            </div>
-          </div>
-          <div className='bg-kapwa-bg-surface rounded-lg p-4 text-center shadow-xs'>
-            <div className='text-kapwa-text-success text-2xl font-bold'>
-              {projectIdeas.filter(idea => idea.complexity === 'simple').length}
-            </div>
-            <div className='text-kapwa-text-support text-sm'>
-              {t('ideas.stats.simple')}
-            </div>
-          </div>
-          <div className='bg-kapwa-bg-surface rounded-lg p-4 text-center shadow-xs'>
-            <div className='text-kapwa-text-accent-purple text-2xl font-bold'>
-              {projectIdeas.reduce((sum, idea) => sum + idea.upvotes, 0)}
-            </div>
-            <div className='text-kapwa-text-support text-sm'>
-              {t('ideas.stats.votes')}
-            </div>
+            <p className='text-kapwa-text-support text-lg leading-relaxed'>
+              {t('ideas.intro', values)}
+            </p>
           </div>
         </div>
 
-        {/* Submit New Idea Button */}
-        <div className='mb-8 flex justify-center'>
-          <div className='flex flex-col gap-3 sm:flex-row'>
-            <Button
-              onClick={handleSubmitIdea}
-              variant='primary'
-              leftIcon={<GithubIcon className='h-5 w-5' />}
+        <ul className='mt-8 space-y-4'>
+          {PLANS.map(plan => (
+            <li
+              key={plan.key}
+              className='bg-kapwa-bg-surface border-kapwa-border-weak rounded-lg border p-6 shadow-xs'
             >
-              {t('ideas.submitIdea')}
-            </Button>
-            <Button
-              onClick={handleSubmitPR}
-              variant='outline'
-              leftIcon={<PlusIcon className='h-5 w-5' />}
-            >
-              {t('ideas.contributePr')}
-            </Button>
-          </div>
-        </div>
-
-        {/* Project Ideas List */}
-        <main>
-          <h2 className='text-kapwa-text-strong mb-6 text-2xl font-bold'>
-            {t('ideas.allIdeas')}
-          </h2>
-          <div className='grid grid-cols-1 gap-6 lg:grid-cols-2'>
-            {projectIdeas
-              .sort(
-                (a, b) => b.upvotes - b.downvotes - (a.upvotes - a.downvotes)
-              )
-              .map(idea => (
-                <Card
-                  key={idea.id}
-                  hover
-                  className='bg-kapwa-bg-surface h-full'
+              <div className='mb-2 flex flex-wrap items-center justify-between gap-3'>
+                <h2 className='text-kapwa-text-strong text-lg font-semibold'>
+                  {t(`ideas.plans.${plan.key}.title`)}
+                </h2>
+                <span
+                  className={`rounded-full px-3 py-1 text-xs font-semibold ${NEED_STYLES[plan.need]}`}
                 >
-                  <CardContent className='p-6'>
-                    <div className='mb-4 flex items-start justify-between'>
-                      <div className='flex flex-1 items-center'>
-                        <div className='bg-kapwa-bg-surface text-kapwa-text-brand mr-3 rounded-lg p-2'>
-                          {idea.icon}
-                        </div>
-                        <div className='flex-1'>
-                          <h3 className='text-kapwa-text-strong mb-1 text-xl font-semibold'>
-                            {t(`ideas.items.${idea.id}.title`, {
-                              defaultValue: idea.title,
-                              portal: config.portal.name,
-                            })}
-                          </h3>
-                          <span className='bg-kapwa-bg-hover text-kapwa-text-support inline-block rounded-sm px-2 py-1 text-xs font-medium'>
-                            {t(`ideas.items.${idea.id}.category`, {
-                              defaultValue: idea.category,
-                            })}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+                  {t(`ideas.needs.${plan.need}`)}
+                </span>
+              </div>
+              <p className='text-kapwa-text-support leading-relaxed'>
+                {t(`ideas.plans.${plan.key}.description`, values)}
+              </p>
+            </li>
+          ))}
+        </ul>
 
-                    <p className='text-kapwa-text-support mb-4 leading-relaxed'>
-                      {t(`ideas.items.${idea.id}.description`, {
-                        defaultValue: idea.description,
-                        portal: config.portal.name,
-                      })}
-                    </p>
-
-                    <div className='mb-3 flex flex-wrap gap-2'>
-                      <span
-                        className={`inline-block rounded px-2 py-1 text-xs font-medium ${getPriorityColor(
-                          idea.priority
-                        )}`}
-                      >
-                        {t(`ideas.priority.${idea.priority}`)}
-                      </span>
-                      <span
-                        className={`inline-block rounded px-2 py-1 text-xs font-medium ${getComplexityColor(
-                          idea.complexity
-                        )}`}
-                      >
-                        {t(`ideas.complexity.${idea.complexity}`)}
-                      </span>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-          </div>
-        </main>
-
-        {/* Call to Action */}
-        <section className='bg-kapwa-bg-surface mt-12 rounded-lg p-8 text-center shadow-xs'>
-          <h2 className='text-kapwa-text-strong mb-4 text-2xl font-bold'>
+        <div className='bg-kapwa-bg-surface border-kapwa-border-weak mt-8 rounded-lg border p-6 text-center shadow-xs'>
+          <h2 className='text-kapwa-text-strong mb-2 text-xl font-bold'>
             {t('ideas.ctaTitle')}
           </h2>
-          <p className='text-kapwa-text-support mx-auto mb-6 max-w-2xl'>
-            {t('ideas.ctaBody')}
-          </p>
-          <div className='flex flex-col justify-center gap-4 sm:flex-row'>
-            <Button
-              onClick={handleSubmitIdea}
-              variant='primary'
-              leftIcon={<GithubIcon className='h-5 w-5' />}
+          <p className='text-kapwa-text-support mb-4'>{t('ideas.ctaBody')}</p>
+          <div className='flex flex-wrap justify-center gap-3'>
+            <a
+              href={newIssue}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='bg-kapwa-bg-brand-default text-kapwa-text-inverse inline-flex min-h-11 items-center gap-2 rounded-lg px-5 py-2.5 font-semibold hover:opacity-90'
             >
-              {t('ideas.submitGithub')}
-            </Button>
-            <Button
-              onClick={() => navigate('/about')}
-              variant='outline'
-              size='md'
+              {t('ideas.suggest')}
+              <ArrowRightIcon aria-hidden='true' className='h-4 w-4' />
+            </a>
+            <Link
+              to='/join-us'
+              className='border-kapwa-border-brand text-kapwa-text-brand inline-flex min-h-11 items-center rounded-lg border px-5 py-2.5 font-semibold hover:bg-kapwa-bg-surface-raised'
             >
-              {t('ideas.learnMore')}
-            </Button>
+              {t('ideas.help')}
+            </Link>
           </div>
-        </section>
+        </div>
       </div>
     </div>
   );

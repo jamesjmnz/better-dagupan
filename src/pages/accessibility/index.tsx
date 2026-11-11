@@ -262,19 +262,31 @@ const AccessibilityPage: FC = () => {
 
             <div className='border-kapwa-border-weak bg-kapwa-bg-surface rounded-lg border p-6 max-w-lg'>
               <div className='mb-4 flex items-center'>
-                <MailIcon className='text-kapwa-text-brand mr-3 h-6 w-6' />
+                <MailIcon
+                  aria-hidden='true'
+                  className='text-kapwa-text-brand mr-3 h-6 w-6'
+                />
                 <h3 className='text-kapwa-text-strong text-lg font-semibold'>
-                  {t('accessibility.emailTitle')}
+                  {config.portal.contactEmail
+                    ? t('accessibility.emailTitle')
+                    : t('accessibility.githubTitle')}
                 </h3>
               </div>
               <p className='text-kapwa-text-support mb-3'>
-                {t('accessibility.emailBody')}
+                {config.portal.contactEmail
+                  ? t('accessibility.emailBody')
+                  : t('accessibility.githubBody')}
               </p>
+              {/* Without a configured address, feedback goes to GitHub issues. */}
               <a
-                href={`mailto:${config.portal.contactEmail}`}
-                className='text-kapwa-text-brand hover:text-kapwa-text-brand font-medium'
+                href={
+                  config.portal.contactEmail
+                    ? `mailto:${config.portal.contactEmail}`
+                    : `${config.portal.githubUrl}/issues`
+                }
+                className='text-kapwa-text-brand font-medium underline hover:no-underline'
               >
-                {config.portal.contactEmail}
+                {config.portal.contactEmail || t('accessibility.githubLink')}
               </a>
             </div>
           </div>

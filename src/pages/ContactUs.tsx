@@ -7,6 +7,7 @@ import {
   ArrowRightIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  FlagIcon,
   GlobeIcon,
   HeartHandshakeIcon,
   MailIcon,
@@ -28,7 +29,10 @@ const ContactUs: FC = () => {
       title: t('contact.methods.email.title'),
       description: t('contact.methods.email.description'),
       contact: config.portal.contactEmail,
-      action: `mailto:${config.portal.contactEmail}`,
+      // Shown only when the deployment configures a contact address.
+      action: config.portal.contactEmail
+        ? `mailto:${config.portal.contactEmail}`
+        : '',
       color: 'bg-kapwa-bg-brand-weak text-kapwa-text-brand',
     },
     {
@@ -37,6 +41,14 @@ const ContactUs: FC = () => {
       description: t('contact.methods.discord.description'),
       contact: t('contact.methods.discord.contact'),
       action: config.portal.discordUrl,
+      color: 'bg-kapwa-bg-brand-weak text-kapwa-text-brand',
+    },
+    {
+      icon: <FlagIcon className='h-8 w-8' />,
+      title: t('contact.methods.report.title'),
+      description: t('contact.methods.report.description'),
+      contact: t('contact.methods.report.contact'),
+      action: '/report-an-error',
       color: 'bg-kapwa-bg-brand-weak text-kapwa-text-brand',
     },
     {
@@ -91,7 +103,7 @@ const ContactUs: FC = () => {
     <div className='bg-kapwa-bg-surface-raised min-h-screen'>
       <SEO
         title={t('contact.seoTitle')}
-        description={t('contact.seoDescription')}
+        description={t('contact.seoDescription', terms)}
         keywords={['contact', 'volunteer', 'feedback', 'support']}
       />
 
@@ -108,7 +120,7 @@ const ContactUs: FC = () => {
               {t('contact.title')}
             </h1>
             <p className='text-kapwa-text-support mx-auto mb-8 max-w-3xl text-lg md:text-xl'>
-              {t('contact.intro')}
+              {t('contact.intro', terms)}
             </p>
           </div>
         </div>
@@ -217,7 +229,7 @@ const ContactUs: FC = () => {
         {/* Call to Action */}
         <div className='from-kapwa-brand-600 to-kapwa-purple-600 bg-linear-to-r mt-8 rounded-lg p-8 text-center'>
           <h3 className='text-kapwa-text-inverse mb-4 kapwa-heading-md font-bold'>
-            {t('shared.readyTitle')}
+            {t('contact.ctaTitle')}
           </h3>
           <p className='text-kapwa-text-inverse/80 mx-auto mb-6 max-w-2xl'>
             {t('contact.ctaBody')}

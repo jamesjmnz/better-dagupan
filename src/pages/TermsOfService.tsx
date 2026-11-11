@@ -15,6 +15,11 @@ import { SEO } from '@/components/layout/SEO';
 
 const TermsOfService: FC = () => {
   const { t, i18n } = useTranslation('pages');
+  // Without a configured address, concerns go to the project's GitHub issues.
+  const contactHref = config.portal.contactEmail
+    ? `mailto:${config.portal.contactEmail}`
+    : `${config.portal.githubUrl}/issues`;
+  const contactLabel = config.portal.contactEmail || t('terms.contactGithub');
   const list = (key: string) =>
     t(`terms.${key}`, { returnObjects: true }) as string[];
   const publicDomain = list('publicDomain');
@@ -257,10 +262,10 @@ const TermsOfService: FC = () => {
                   <p className='font-semibold'>
                     {t('terms.contactUs')}{' '}
                     <a
-                      href={`mailto:${config.portal.contactEmail}`}
-                      className='text-kapwa-text-brand hover:text-kapwa-text-brand'
+                      href={contactHref}
+                      className='text-kapwa-text-brand underline hover:no-underline'
                     >
-                      {config.portal.contactEmail}
+                      {contactLabel}
                     </a>
                   </p>
                 </div>
@@ -310,10 +315,10 @@ const TermsOfService: FC = () => {
               </p>
               <p className='text-kapwa-text-brand-bold text-xl font-semibold'>
                 <a
-                  href={`mailto:${config.portal.contactEmail}`}
-                  className='hover:text-kapwa-text-brand transition-colors'
+                  href={contactHref}
+                  className='hover:text-kapwa-text-brand underline transition-colors hover:no-underline'
                 >
-                  {config.portal.contactEmail}
+                  {contactLabel}
                 </a>
               </p>
               <p className='text-kapwa-text-brand-bold mt-4 italic'>
